@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Black Hole Simulator v9 | Biswajit Jana — Quantum Edition</title>
+  <title>Black Hole Lab v10 | Biswajit Jana — Parallax Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -78,17 +78,18 @@
 
 <div class="topbar">
   <a href="../posts/black-hole-extreme-lab.html">← article</a>
-  <span><span class="badge">v9 · DP45 · Vol Disk · Sub-rings</span></span>
+  <span><span class="badge">v10 · BL Geodesics · Multi-λ</span></span>
   <button id="btnSpec">Fe K-α</button>
+  <button id="btnExport">Export PNG</button>
   <button id="btnUI">Hide UI</button>
   <span id="statusEl">standby</span>
 </div>
 
 <section class="loading" id="loadingEl">
   <div class="lcard">
-    <div class="lkicker">Black Hole Lab v9 · Quantum Edition</div>
-    <h1>Four photon rings.<br/>Volumetric plasma.</h1>
-    <p>Dormand-Prince RK4(5) geodesic integration · Novikov-Thorne thermodynamics · Volumetric accretion disk · 4 photon sub-rings · Hot corona · Blandford-Znajek B-field · TDE light echo · ESO Milky Way panorama.</p>
+    <div class="lkicker">Black Hole Lab v10 · Parallax Edition</div>
+    <h1>Exact Kerr geodesics.<br/>Boyer-Lindquist.</h1>
+    <p>Full 3D Boyer-Lindquist Kerr geodesic integration with Carter constant · Novikov-Thorne disk · 4 photon sub-rings · Hot corona · Blandford-Znajek B-field · Multi-wavelength rendering · Doppler redshift map · Sgr A* / M87* presets · ESO Milky Way panorama.</p>
     <div class="pwrap"><div class="pbar" id="pbar"></div></div>
     <div class="pmsg" id="pmsg">Ready to initialise.</div>
     <button class="sbtn" id="startBtn">Launch Simulator</button>
@@ -97,7 +98,7 @@
 
 <section class="panel">
   <h2>Command Centre</h2>
-  <p>v9 · Drag to orbit · Scroll to zoom</p>
+  <p>v10 · Drag to orbit · Scroll to zoom</p>
   <div class="brow">
     <button class="chip on" id="mCin">Cinematic</button>
     <button class="chip"    id="mSci">Scientific</button>
@@ -107,7 +108,8 @@
     <button class="chip" id="pCalm">Calm</button>
     <button class="chip" id="pEdge">Edge-on</button>
     <button class="chip" id="pXtreme">Extreme</button>
-    <button class="chip" id="pEHT">EHT Mode</button>
+    <button class="chip" id="pEHT">M87*</button>
+    <button class="chip" id="pSgr">Sgr A*</button>
     <button class="chip" id="pAGN">AGN jet</button>
     <button class="chip" id="pReset">Reset</button>
   </div>
@@ -125,13 +127,23 @@
     <div class="ctrl"><label><span>Doppler strength</span><strong id="o_dop">1.00</strong></label><input id="i_dop" type="range" min="0" max="2.5" step="0.05" value="1.0"/></div>
     <div class="ctrl"><label><span>Brightness</span><strong id="o_bright">1.20</strong></label><input id="i_bright" type="range" min="0.1" max="3.0" step="0.05" value="1.2"/></div>
     <div class="ctrl"><label><span>Disk outer radius (rₛ)</span><strong id="o_rout">16.0</strong></label><input id="i_rout" type="range" min="6" max="50" step="0.5" value="16"/></div>
-    <div class="ctrl"><label><span>Disk scale height</span><strong id="o_diskH">0.06</strong></label><input id="i_diskH" type="range" min="0.02" max="0.20" step="0.01" value="0.06"/></div>
-    <div class="ctrl"><label><span>Volumetric glow</span><strong id="o_volStr">0.55</strong></label><input id="i_volStr" type="range" min="0" max="2.0" step="0.05" value="0.55"/></div>
+    <div class="ctrl"><label><span>Disk scale height H/r</span><strong id="o_diskH">0.06</strong></label><input id="i_diskH" type="range" min="0.01" max="0.40" step="0.01" value="0.06"/></div>
+    <div class="ctrl"><label><span>Volumetric glow</span><strong id="o_volStr">0.55</strong></label><input id="i_volStr" type="range" min="0" max="2.5" step="0.05" value="0.55"/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Wavelength &amp; Visualization</h3>
+    <div class="brow" id="waveRow">
+      <button class="chip on" id="wOpt">Optical</button>
+      <button class="chip"    id="wRad">Radio</button>
+      <button class="chip"    id="wXry">X-ray</button>
+    </div>
+    <div class="togrow"><span>Doppler redshift map</span><input id="i_rshift" type="checkbox"/></div>
   </div>
 
   <div class="grp">
     <h3>Physics</h3>
-    <div class="togrow"><span>Hot corona (X-ray)</span><input id="i_corona" type="checkbox"/></div>
+    <div class="togrow"><span>Hot corona (X-ray plasma)</span><input id="i_corona" type="checkbox"/></div>
     <div class="ctrl"><label><span>Corona strength</span><strong id="o_coronaStr">0.80</strong></label><input id="i_coronaStr" type="range" min="0" max="2.0" step="0.05" value="0.8"/></div>
     <div class="togrow"><span>B-field lines (BZ)</span><input id="i_bfield" type="checkbox"/></div>
     <div class="ctrl"><label><span>B-field strength</span><strong id="o_bfStr">0.60</strong></label><input id="i_bfStr" type="range" min="0" max="2.0" step="0.05" value="0.6"/></div>
@@ -148,7 +160,7 @@
     <div class="ctrl"><label><span>Steps</span><strong id="o_steps">320</strong></label><input id="i_steps" type="range" min="60" max="500" step="20" value="320"/></div>
     <div class="ctrl"><label><span>Max revolutions</span><strong id="o_revs">4.5</strong></label><input id="i_revs" type="range" min="1" max="6" step="0.5" value="4.5"/></div>
     <div class="togrow"><span>Temporal AA</span><input id="i_taa" type="checkbox" checked/></div>
-    <div class="togrow"><span>Photon sub-rings</span><input id="i_sec" type="checkbox" checked/></div>
+    <div class="togrow"><span>Photon sub-rings (n=0–3)</span><input id="i_sec" type="checkbox" checked/></div>
   </div>
 
   <div class="grp">
@@ -166,7 +178,8 @@
 <section class="feed" id="feedEl">
   <h2>Live telemetry</h2>
   <div class="frow"><span>Schwarzschild r_s</span><strong id="f_rs">—</strong></div>
-  <div class="frow"><span>Photon sphere (1.5 rₛ)</span><strong id="f_ph">—</strong></div>
+  <div class="frow"><span>Photon sphere r_ph</span><strong id="f_ph">—</strong></div>
+  <div class="frow"><span>Ergosphere r_ergo</span><strong id="f_ergo">—</strong></div>
   <div class="frow"><span>ISCO — Kerr Z₁Z₂</span><strong id="f_isco">—</strong></div>
   <div class="frow"><span>g_grav at ISCO</span><strong id="f_gg">—</strong></div>
   <div class="frow"><span>Hawking T</span><strong id="f_hw">—</strong></div>
@@ -196,6 +209,7 @@ const P = {
   diskH:0.06, volStr:0.55,
   corona:false, coronaStr:0.8,
   bfield:false, bfStr:0.6,
+  wavelength:0, redshiftViz:false,
   gal:1.0, useTex:true,
   steps:320, revs:4.5, taa:true, sec:true,
   jets:false, jpow:0.55,
@@ -318,14 +332,16 @@ function bakeGalaxyTexture(W=2048, H=1024){
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   GLSL SHADERS — v9 QUANTUM EDITION
-   Upgrades over v8:
-   1. Four photon sub-rings (n=0,1,2,3) — each e^{-π} demagnified
-   2. Volumetric disk glow — Gaussian vertical density profile
-   3. Hot corona — X-ray plasma above/below ISCO
-   4. Blandford-Znajek B-field lines — parabolic r=r0/sin²θ topology
-   5. TDE light echo — expanding brightness ring after disruption
-   6. Sharper photon ring with sub-ring structure
+   GLSL SHADERS — v10 PARALLAX EDITION
+   Upgrades over v9:
+   1. Full Boyer-Lindquist Kerr geodesics with Carter constant
+      — replaces the Binet equation 2D approximation
+      — correct 3D photon trajectories, proper frame-dragging
+      — exact equatorial AND off-equatorial orbits
+   2. Multi-wavelength rendering (Optical / Radio / X-ray)
+   3. Doppler redshift false-color visualization mode
+   4. Spine-sheath AGN jet model
+   5. Improved photon sphere & ergosphere physics
    ═══════════════════════════════════════════════════════════════════ */
 const VERT = `varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
 
@@ -337,15 +353,16 @@ uniform vec3  uCamPos, uCamX, uCamY, uCamZ;
 uniform vec2  uRes;
 uniform float uTime, uSpin, uISCO, uTemp, uDop, uBright, uRout;
 uniform float uGal, uMode, uJets, uJpow, uStarShow, uStarDist;
+uniform float uSteps, uRevs, uSec, uJitter;
 uniform float uTde, uEchoR;
 uniform float uCorona, uCoronaStr;
 uniform float uBfield, uBfStr;
 uniform float uDiskH, uVolStr;
-uniform int   uSteps;
-uniform float uRevs, uSec;
-uniform vec2  uJitter;
+uniform float uWavelength;    /* 0=optical  1=radio  2=xray          */
+uniform float uRedshiftViz;   /* 1=show Doppler false-colour map      */
 uniform sampler2D uGalTex;
 uniform float uUseTex;
+uniform vec2  uJitterV;
 
 /* ══════════════════════════════════════════════════════════════════
    NOISE PRIMITIVES
@@ -400,9 +417,97 @@ vec3 blackbodyColor(float t){
   return col;
 }
 
+/* ── Synchrotron radio colour — power-law ν^{-0.6} ──────────────── */
+vec3 radioColor(float t, float g){
+  float nu=clamp(t*g*0.7,0.,1.);
+  /* Purple core → blue ring → dim outer             */
+  vec3 cInner=vec3(1.2,0.5,3.0);
+  vec3 cMid  =vec3(0.4,0.7,2.5);
+  vec3 cOuter=vec3(0.1,0.2,0.7);
+  if(nu<0.45) return mix(cOuter,cMid,nu/0.45);
+  return mix(cMid,cInner,(nu-0.45)/0.55);
+}
+
+/* ── Hard X-ray thermal bremsstrahlung + Compton ─────────────────── */
+vec3 xrayColor(float t, float g){
+  float x=clamp(pow(t*g*1.8,0.65),0.,1.);
+  vec3 cCool=vec3(0.08,0.18,0.45);
+  vec3 cHot =vec3(2.5,2.8,5.5);
+  return mix(cCool,cHot,x);
+}
+
+/* ── Doppler false-colour: red=recede  white=zero  blue=approach ─── */
+vec3 dopColorMap(float D){
+  float t=clamp(log2(D)/1.6+0.5,0.,1.);
+  if(t<0.5) return mix(vec3(2.2,0.08,0.05),vec3(1.8,1.8,1.8),t*2.);
+  return mix(vec3(1.8,1.8,1.8),vec3(0.08,0.55,3.5),(t-0.5)*2.);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FULL BOYER-LINDQUIST KERR NULL GEODESICS
+   ─────────────────────────────────────────────────────────────────
+   State: (r, cosθ, φ)   signed momenta: σᵣ = ±1, σ_θ = ±1
+   Constants: b = L/E (impact param)  η = Q/E² (Carter constant)
+   Integration variable: Mino time λ  (Σ dλ = dτ_affine)
+
+   Potentials (M=1, E=1):
+     Σ = r² + a² cos²θ
+     Δ = r² − 2r + a²
+     P(r) = (r²+a²) − ab
+     R(r) = P² − Δ[(b−a)² + η]        radial effective potential
+     Θ(θ) = η + a²cos²θ − b²cos²θ/sin²θ   polar effective potential
+
+   Equations (Mino time):
+     Σ ṙ   = σᵣ √R                 →  dr/dλ = σᵣ √R / Σ
+     Σ θ̇  = σ_θ √Θ                →  d(cosθ)/dλ = −sinθ σ_θ √Θ / Σ
+     Σ φ̇  = b/sin²θ − a + aP/Δ   →  dφ/dλ = (b/sin²θ−a+aP/Δ)/Σ
+   ═══════════════════════════════════════════════════════════════════ */
+
+float blR(float r, float ct, float a, float b, float eta){
+  float ct2=ct*ct, Sig=r*r+a*a*ct2;
+  float Del=r*r-2.*r+a*a;
+  float P=(r*r+a*a)-a*b;
+  return P*P-Del*((b-a)*(b-a)+eta);
+}
+
+float blTh(float ct, float a, float b, float eta){
+  float ct2=ct*ct, st2=max(1.-ct2,1e-8);
+  return eta+ct2*(a*a-b*b/st2);
+}
+
+/* RHS of the BL equations: returns (dr/dλ, d(cosθ)/dλ, dφ/dλ) */
+vec3 blRHS(float r, float ct, float a, float b, float eta,
+           float sr, float st_s){
+  float ct2=ct*ct, st2=max(1.-ct2,1e-8);
+  float Sig=r*r+a*a*ct2;
+  float Del=r*r-2.*r+a*a;
+  float P  =(r*r+a*a)-a*b;
+  float R_ =P*P-Del*((b-a)*(b-a)+eta);
+  float Th_=eta+ct2*(a*a-b*b/st2);
+  float dr  =sr  *sqrt(max(R_ ,0.))/Sig;
+  float dct =-sqrt(st2)*st_s*sqrt(max(Th_,0.))/Sig;
+  float dphi=(b/st2-a+a*P/max(Del,1e-8))/Sig;
+  return vec3(dr,dct,dphi);
+}
+
+/* RK4 step in Mino time h */
+void blStep(inout float r, inout float ct, inout float phi,
+            float a, float b, float eta,
+            float sr, float st_s, float h){
+  vec3 s=vec3(r,ct,phi);
+  vec3 k1=blRHS(s.x,s.y,a,b,eta,sr,st_s);
+  vec3 s2=s+0.5*h*k1;
+  vec3 k2=blRHS(s2.x,s2.y,a,b,eta,sr,st_s);
+  vec3 s3=s+0.5*h*k2;
+  vec3 k3=blRHS(s3.x,s3.y,a,b,eta,sr,st_s);
+  vec3 s4=s+h*k3;
+  vec3 k4=blRHS(s4.x,s4.y,a,b,eta,sr,st_s);
+  s+=h/6.*(k1+2.*k2+2.*k3+k4);
+  r=s.x; ct=s.y; phi=s.z;
+}
+
 /* ══════════════════════════════════════════════════════════════════
-   ACCRETION DISK EMISSION — Novikov-Thorne physics
-   Full relativistic Doppler + gravitational redshift + blackbody
+   ACCRETION DISK EMISSION — Novikov-Thorne + multi-wavelength
    ══════════════════════════════════════════════════════════════════ */
 vec3 diskEmit(float r, float az, float spin, float isco,
               float diskT, float dop, float bright, float rout){
@@ -414,10 +519,10 @@ vec3 diskEmit(float r, float az, float spin, float isco,
   float D     = 1./max(gamma*(1.-vlos),0.04);
   float gGrav = sqrt(max(0.001,1.-1./r));
   float g     = D*gGrav;
-  float rawBeam = pow(max(g,0.03),4.);
-  float beam    = mix(1.,rawBeam,clamp(dop,0.,1.));
-  beam          = clamp(beam,0.008,28.);
-  float dopplerTempShift = clamp((g-1.)*0.55,-0.28,0.38);
+  float rawBeam=pow(max(g,0.03),4.);
+  float beam  = mix(1.,rawBeam,clamp(dop,0.,1.));
+  beam        = clamp(beam,0.008,28.);
+  float dTShift=clamp((g-1.)*0.55,-0.28,0.38);
 
   /* Novikov-Thorne temperature */
   float rr      = max(r/isco,1.0002);
@@ -425,131 +530,137 @@ vec3 diskEmit(float r, float az, float spin, float isco,
   float NT_ramp = smoothstep(0.,0.18,NT);
   float t_phys  = NT_ramp*pow(max(NT/(rr*rr*rr),0.),0.25);
   float t_rad   = clamp(t_phys*2.8,0.,1.);
-  float t_obs   = clamp(t_rad*diskT*g*0.52+dopplerTempShift,0.,1.);
-  vec3 col      = blackbodyColor(t_obs);
+  float t_obs   = clamp(t_rad*diskT*g*0.52+dTShift,0.,1.);
 
   /* NT surface density */
   float sigma   = NT_ramp*NT/pow(rr,0.75);
   float density = clamp(sigma/0.20,0.,1.25);
 
   /* Kerr Keplerian shear noise */
-  float OmegaKerr = 1.0/(pow(max(rM,3.0),1.5)+spin);
-  float keplPhase = az+OmegaKerr*uTime*12.0;
-  float logR      = log(max(r/isco,1.001))*2.2;
-  float arcAz     = keplPhase*r*0.10;
-  float gentle    = ns2(vec2(logR,arcAz));
-  density        *= (0.96+0.04*gentle);
+  float OmegaK  = 1.0/(pow(max(rM,3.0),1.5)+spin);
+  float keplPh  = az+OmegaK*uTime*12.0;
+  float logR    = log(max(r/isco,1.001))*2.2;
+  float arcAz   = keplPh*r*0.10;
+  float gentle  = ns2(vec2(logR,arcAz));
+  density      *= (0.96+0.04*gentle);
 
   /* Radial masks */
-  float inner = smoothstep(isco,isco*1.08,r);
-  float outer = 1.-smoothstep(rout*0.18,rout*0.62,r);
+  float inner   = smoothstep(isco,isco*1.08,r);
+  float outer   = 1.-smoothstep(rout*0.18,rout*0.62,r);
 
-  /* ── UPGRADED PHOTON RINGS ────────────────────────────────────────
-     n=0 photon ring: sharper, brighter                              */
-  float photonRim = exp(-pow((r-isco*1.04)/0.055,2.))*5.0;
-  col += blackbodyColor(1.0)*photonRim*inner;
-
-  /* Bright inner ring — just outside ISCO */
-  float ring1 = exp(-pow((r-isco*1.18)/0.065,2.))*2.2;
-  col += blackbodyColor(0.95)*ring1*inner;
-
-  /* Secondary ring */
-  float ring2 = exp(-pow((r-isco*1.45)/0.095,2.))*1.1;
-  col += blackbodyColor(0.88)*ring2*inner;
-
-  /* Third ring — subtle */
-  float ring3 = exp(-pow((r-isco*1.85)/0.13,2.))*0.45;
-  col += blackbodyColor(0.75)*ring3*inner;
+  /* ── Photon ring structure (4 Gaussians near ISCO) ─────────────── */
+  float photonRim=exp(-pow((r-isco*1.04)/0.055,2.))*5.0;
+  float ring1    =exp(-pow((r-isco*1.18)/0.065,2.))*2.2;
+  float ring2    =exp(-pow((r-isco*1.45)/0.095,2.))*1.1;
+  float ring3    =exp(-pow((r-isco*1.85)/0.13 ,2.))*0.45;
 
   /* TDE light echo: expanding brightness ring */
-  if(uEchoR > 0.5){
-    float dr = abs(r-uEchoR);
-    float echo = exp(-dr*dr*0.8)*0.9;
-    col += blackbodyColor(0.65)*echo*outer;
+  float echoAdd=0.;
+  if(uEchoR>0.5){
+    float dr=abs(r-uEchoR);
+    echoAdd=exp(-dr*dr*0.8)*0.9*outer;
+  }
+
+  vec3 col;
+
+  /* ── Redshift false-colour visualization mode ───────────────────── */
+  if(uRedshiftViz>0.5){
+    col=dopColorMap(D)*(inner*outer*density+0.15)*beam*bright;
+    col+=dopColorMap(D)*echoAdd;
+    return col;
+  }
+
+  /* ── Multi-wavelength emission ──────────────────────────────────── */
+  if(uWavelength<0.5){
+    /* Optical: blackbody colour */
+    col=blackbodyColor(t_obs);
+    col+=blackbodyColor(1.0)*photonRim*inner;
+    col+=blackbodyColor(0.95)*ring1*inner;
+    col+=blackbodyColor(0.88)*ring2*inner;
+    col+=blackbodyColor(0.75)*ring3*inner;
+    col+=blackbodyColor(0.65)*echoAdd;
+  } else if(uWavelength<1.5){
+    /* Radio: synchrotron power-law, inner disk bright */
+    col=radioColor(t_obs,g)*1.4;
+    col+=radioColor(1.,1.)*photonRim*inner*0.8;
+    col+=radioColor(0.9,1.)*ring1*inner*0.5;
+    col+=radioColor(0.7,1.)*ring2*inner*0.25;
+    col+=mix(vec3(0.2,0.3,0.8),vec3(0.5,0.6,1.5),clamp(echoAdd,0.,1.))*echoAdd;
+  } else {
+    /* X-ray: corona dominates, hot inner disk */
+    col=xrayColor(t_obs,g)*1.2;
+    col+=xrayColor(1.,2.)*photonRim*inner*1.4;
+    col+=xrayColor(0.95,1.8)*ring1*inner*0.9;
+    col+=xrayColor(0.85,1.5)*ring2*inner*0.45;
+    col+=vec3(1.2,1.4,3.0)*echoAdd;
   }
 
   return col*beam*bright*density*inner*outer;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   VOLUMETRIC DISK GLOW — cheap, no noise, Gaussian vertical profile
-   Called during loop integration for soft plasma thickness effect.
+   VOLUMETRIC DISK GLOW — Gaussian vertical density profile
    ══════════════════════════════════════════════════════════════════ */
 vec3 diskGlow(float r, float az, float isco, float diskT, float dop,
               float bright, float rout, float heightFrac){
-  float rM    = max(r*2.,3.);
-  float vOrb  = clamp(sqrt(1./rM),0.,0.7071);
-  float gamma = 1./sqrt(max(1e-6,1.-vOrb*vOrb));
-  float vlos  = vOrb*sin(az);
-  float D     = 1./max(gamma*(1.-vlos),0.04);
-  float gGrav = sqrt(max(0.001,1.-1./r));
-  float g     = D*gGrav;
-  float beam  = mix(1.,clamp(pow(max(g,0.03),4.),0.008,28.),clamp(dop,0.,1.));
+  float rM    =max(r*2.,3.);
+  float vOrb  =clamp(sqrt(1./rM),0.,0.7071);
+  float gamma =1./sqrt(max(1e-6,1.-vOrb*vOrb));
+  float vlos  =vOrb*sin(az);
+  float D     =1./max(gamma*(1.-vlos),0.04);
+  float gGrav =sqrt(max(0.001,1.-1./r));
+  float g     =D*gGrav;
+  float beam  =mix(1.,clamp(pow(max(g,0.03),4.),0.008,28.),clamp(dop,0.,1.));
+  float rr    =max(r/isco,1.0002);
+  float NT    =max(1.0-1.0/sqrt(rr),0.);
+  float NT_r  =smoothstep(0.,0.22,NT);
+  float t_phys=NT_r*pow(max(NT/(rr*rr*rr),0.),0.25);
+  float t_obs =clamp(t_phys*2.8*diskT*g*0.45,0.,1.);
+  float outer =1.-smoothstep(rout*0.18,rout*0.62,r);
+  float inner =smoothstep(isco,isco*1.12,r);
+  float vertG =exp(-heightFrac*heightFrac*2.2);
 
-  float rr      = max(r/isco,1.0002);
-  float NT      = max(1.0-1.0/sqrt(rr),0.);
-  float NT_ramp = smoothstep(0.,0.22,NT);
-  float t_phys  = NT_ramp*pow(max(NT/(rr*rr*rr),0.),0.25);
-  float t_obs   = clamp(t_phys*2.8*diskT*g*0.45,0.,1.);
+  vec3 baseCol;
+  if(uWavelength<0.5)      baseCol=blackbodyColor(t_obs);
+  else if(uWavelength<1.5) baseCol=radioColor(t_obs,g);
+  else                     baseCol=xrayColor(t_obs,g);
 
-  float outer = 1.-smoothstep(rout*0.18,rout*0.62,r);
-  float inner = smoothstep(isco,isco*1.12,r);
-
-  /* Gaussian vertical density profile */
-  float vertGauss = exp(-heightFrac*heightFrac*2.2);
-
-  return blackbodyColor(t_obs)*beam*bright*outer*inner*vertGauss;
+  return baseCol*beam*bright*outer*inner*vertG;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   HOT CORONA — X-ray plasma above/below ISCO
-   Modelled as a lamppost + extended corona in the BZ/MAD picture
+   HOT CORONA — X-ray plasma above ISCO
    ══════════════════════════════════════════════════════════════════ */
 vec3 coronaEmit(float r, vec3 pos, float isco, float t){
-  float rM = max(r*2.,3.);
-  /* Corona concentrated at r ≈ 1.5–3× ISCO, vertical extent ~15% r */
-  float rCoronaM = isco*1.8*2.0;
-  float dr = (rM-rCoronaM)/max(isco*1.5,1.0);
-  float radDens = exp(-dr*dr*1.8);
-
-  /* Vertical: above and below disk plane, NOT AT equator */
-  float diskH = uDiskH*r;
-  float hAbs  = abs(pos.y);
-  float vertFrac = hAbs/max(diskH,0.001);
-  /* Donut shape: peaks at ~1.5 scale heights, not at midplane */
-  float vertDens = exp(-pow(max(vertFrac-1.5,0.),2.)*1.2)*(1.-exp(-vertFrac*vertFrac*4.0));
-  vertDens = clamp(vertDens,0.,1.);
-
-  /* X-ray flicker (simulates magnetic reconnection flares) */
-  float flick1 = sin(t*13.7+r*5.3+pos.z*2.1);
-  float flick2 = sin(t*7.1+r*3.2-pos.x*1.8);
-  float flicker = 0.65+0.35*flick1*flick2;
-
-  /* Hot X-ray plasma: UV/blue-white */
-  vec3 cInner = vec3(2.2,1.4,4.8);
-  vec3 cOuter = vec3(1.0,0.6,2.2);
-  vec3 coronaCol = mix(cOuter,cInner,radDens);
-
+  float rM=max(r*2.,3.);
+  float rCoronaM=isco*1.8*2.0;
+  float dr=(rM-rCoronaM)/max(isco*1.5,1.0);
+  float radDens=exp(-dr*dr*1.8);
+  float diskH=uDiskH*r;
+  float hAbs=abs(pos.y);
+  float vertFrac=hAbs/max(diskH,0.001);
+  float vertDens=exp(-pow(max(vertFrac-1.5,0.),2.)*1.2)*(1.-exp(-vertFrac*vertFrac*4.0));
+  vertDens=clamp(vertDens,0.,1.);
+  float flick1=sin(t*13.7+r*5.3+pos.z*2.1);
+  float flick2=sin(t*7.1+r*3.2-pos.x*1.8);
+  float flicker=0.65+0.35*flick1*flick2;
+  vec3 cInner=vec3(2.2,1.4,4.8);
+  vec3 cOuter=vec3(1.0,0.6,2.2);
+  if(uWavelength>1.5){cInner=vec3(3.5,3.8,6.5);cOuter=vec3(1.8,2.0,4.5);}
+  vec3 coronaCol=mix(cOuter,cInner,radDens);
   return coronaCol*radDens*vertDens*flicker*uCoronaStr;
 }
 
 /* ══════════════════════════════════════════════════════════════════
    BLANDFORD-ZNAJEK MAGNETIC FIELD LINES
-   Parabolic topology: r = r0 / sin²(θ)
-   Twisted by frame-dragging near the ISCO
    ══════════════════════════════════════════════════════════════════ */
 float bfieldGlow(vec3 pos, float isco, float spin){
-  float r = length(pos);
-  if(r < isco*0.7 || r > isco*5.5) return 0.;
-
-  float cosTheta = pos.y/max(r,0.001);
-  float sinTheta = sqrt(max(1.0-cosTheta*cosTheta,0.0005));
-
-  /* r0 = r * sin²(θ) is the "anchor" of this field line */
-  float r0_here = r*sinTheta*sinTheta;
-
-  /* Four nested field lines at different ISCO multiples */
-  float glow = 0.;
+  float r=length(pos);
+  if(r<isco*0.7||r>isco*5.5) return 0.;
+  float cosT=pos.y/max(r,0.001);
+  float sinT=sqrt(max(1.-cosT*cosT,0.0005));
+  float r0_here=r*sinT*sinT;
+  float glow=0.;
   float r0s[4];
   r0s[0]=isco;    r0s[1]=isco*1.5;
   r0s[2]=isco*2.2;r0s[3]=isco*3.0;
@@ -557,48 +668,19 @@ float bfieldGlow(vec3 pos, float isco, float spin){
   wts[0]=1.0; wts[1]=0.80; wts[2]=0.55; wts[3]=0.35;
   for(int k=0;k<4;k++){
     float drel=(r0_here-r0s[k])/(isco*0.14);
-    glow += wts[k]*exp(-drel*drel);
+    glow+=wts[k]*exp(-drel*drel);
   }
-
-  /* Only above/below disk (avoid equatorial confusion) */
-  glow *= smoothstep(0.06,0.30,abs(cosTheta));
-  glow *= smoothstep(isco*5.5,isco*1.2,r); /* fade at large r */
-
-  /* Frame-drag twist: field lines wind in φ direction */
-  float twist = spin*0.45*log(max(r/isco,1.001));
-  float phi = atan(pos.z,pos.x)+twist;
-  float phiMod = 0.55+0.45*sin(phi*2.0+uTime*0.4);
-
+  glow*=smoothstep(0.06,0.30,abs(cosT));
+  glow*=smoothstep(isco*5.5,isco*1.2,r);
+  float twist=spin*0.45*log(max(r/isco,1.001));
+  float phi=atan(pos.z,pos.x)+twist;
+  float phiMod=0.55+0.45*sin(phi*2.0+uTime*0.4);
   return glow*phiMod*uBfStr;
 }
 
-/* ── Binet equation RHS ──────────────────────────────────────────── */
-float binetF(float u, float spin){
-  return -u+(1.5+spin*0.10)*u*u;
-}
-
-/* ── Dormand-Prince RK4(5) ───────────────────────────────────────── */
-void dp45Step(inout float u, inout float up, float h, float spin){
-  float k1u=up,             k1f=binetF(u,spin);
-  float u2=u+h*0.2*k1u,    up2=up+h*0.2*k1f;
-  float k2u=up2,            k2f=binetF(u2,spin);
-  float u3=u+h*(0.075*k1u+0.225*k2u),
-        up3=up+h*(0.075*k1f+0.225*k2f);
-  float k3u=up3,            k3f=binetF(u3,spin);
-  float u4=u+h*(44./45.*k1u-56./15.*k2u+32./9.*k3u),
-        up4=up+h*(44./45.*k1f-56./15.*k2f+32./9.*k3f);
-  float k4u=up4,            k4f=binetF(u4,spin);
-  float u5_=u+h*(19372./6561.*k1u-25360./2187.*k2u+64448./6561.*k3u-212./729.*k4u),
-        up5_=up+h*(19372./6561.*k1f-25360./2187.*k2f+64448./6561.*k3f-212./729.*k4f);
-  float k5u=up5_,           k5f=binetF(u5_,spin);
-  float u6=u+h*(9017./3168.*k1u-355./33.*k2u+46732./5247.*k3u+49./176.*k4u-5103./18656.*k5u),
-        up6=up+h*(9017./3168.*k1f-355./33.*k2f+46732./5247.*k3f+49./176.*k4f-5103./18656.*k5f);
-  float k6u=up6,            k6f=binetF(u6,spin);
-  u  += h*(35./384.*k1u+500./1113.*k3u+125./192.*k4u-2187./6784.*k5u+11./84.*k6u);
-  up += h*(35./384.*k1f+500./1113.*k3f+125./192.*k4f-2187./6784.*k5f+11./84.*k6f);
-}
-
-/* ── AGX tonemapper ──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   AGX TONEMAPPER
+   ══════════════════════════════════════════════════════════════════ */
 vec3 agxC(vec3 x){vec3 x2=x*x,x4=x2*x2;return 15.5*x4*x2-40.14*x4*x+31.96*x4-6.868*x2*x+0.4298*x2+0.1191*x-0.00232;}
 vec3 agx(vec3 v){
   const mat3 M=mat3(0.842479,0.042328,0.042376,0.078434,0.878469,0.078434,0.079224,0.079166,0.879143);
@@ -611,115 +693,177 @@ vec3 tonemap(vec3 c){
   return clamp(c,0.,1.);
 }
 
-/* ── AGN jet ─────────────────────────────────────────────────────── */
-vec3 jetEmit(vec3 d,float jp,float t){
-  float y=abs(d.y),r=length(d.xz);
-  float on=smoothstep(0.13+jp*0.04,0.02,atan(r,y));
-  float pulse=0.5+0.5*sin(t*3.1+y*7.);
-  return mix(vec3(0.08,0.45,0.82),vec3(0.18,0.82,1.0),pulse)*on*jp*0.72;
+/* ══════════════════════════════════════════════════════════════════
+   SPINE-SHEATH AGN JET
+   Spine: fast, narrow, bright core (Blandford-Znajek driven)
+   Sheath: slower, broader, particle acceleration at boundary
+   ══════════════════════════════════════════════════════════════════ */
+vec3 jetEmit(vec3 d, float jp, float t){
+  float y=abs(d.y), r=length(d.xz);
+  float halfAng=atan(r,y);
+  /* Spine: very narrow, fast, bright blue */
+  float spineHalf=0.028+jp*0.012;
+  float spineOn=smoothstep(spineHalf*1.4,spineHalf*0.2,halfAng);
+  float spinePulse=0.5+0.5*sin(t*4.8+y*11.+jp*3.);
+  vec3 spineCol=mix(vec3(0.3,0.7,2.0),vec3(0.6,1.2,3.5),spinePulse)*spineOn*jp*1.1;
+  /* Sheath: wider, slower, dimmer, warmer colour */
+  float sheathHalf=0.10+jp*0.05;
+  float sheathOn=smoothstep(sheathHalf*1.5,sheathHalf*0.6,halfAng)*(1.-spineOn*0.7);
+  float sheathPulse=0.4+0.6*sin(t*2.3+y*6.5-jp*1.2);
+  vec3 sheathCol=mix(vec3(0.05,0.25,0.70),vec3(0.12,0.55,1.2),sheathPulse)*sheathOn*jp*0.45;
+  /* Reconfinement shock rings (every ~15% of jet height) */
+  float shock=exp(-pow(fract(y*6.5)*4.-2.,2.)*2.2)*0.18*jp*(spineOn+sheathOn*0.5);
+  return spineCol+sheathCol+vec3(0.4,0.6,1.2)*shock;
 }
 
-/* ── Star sprite — TDE sequence ──────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   STAR SPRITE — TDE sequence
+   ══════════════════════════════════════════════════════════════════ */
 vec3 starSprite(vec3 rd, float dist, float t){
-  if(uTde > 2.5) return vec3(0.);
-  float rSc  = max(dist,0.5)*0.040;
-  float ang  = -0.55+sin(t*0.11)*0.09;
-  vec3  sPos = vec3(cos(ang)*rSc,sin(ang)*rSc*0.45+0.22,-0.28);
-  vec3  sDir = normalize(sPos);
-  float cosA = dot(rd,sDir);
-  float sz   = clamp(0.022+1.8/max(dist,2.),0.014,0.055);
-  float starDot = smoothstep(cos(sz),cos(sz*0.22),cosA);
-  float corona  = smoothstep(cos(sz*6.),cos(sz*1.1),cosA)*0.22;
-  float halo    = smoothstep(cos(sz*18.),cos(sz*1.4),cosA)*0.06;
-  vec3 col = vec3(2.4,2.2,3.1)*starDot+vec3(0.9,0.85,1.4)*corona+vec3(0.3,0.28,0.5)*halo;
+  if(uTde>2.5) return vec3(0.);
+  float rSc  =max(dist,0.5)*0.040;
+  float ang  =-0.55+sin(t*0.11)*0.09;
+  vec3  sPos =vec3(cos(ang)*rSc,sin(ang)*rSc*0.45+0.22,-0.28);
+  vec3  sDir =normalize(sPos);
+  float cosA =dot(rd,sDir);
+  float sz   =clamp(0.022+1.8/max(dist,2.),0.014,0.055);
+  float starDot=smoothstep(cos(sz),cos(sz*0.22),cosA);
+  float corona =smoothstep(cos(sz*6.),cos(sz*1.1),cosA)*0.22;
+  float halo   =smoothstep(cos(sz*18.),cos(sz*1.4),cosA)*0.06;
+  vec3 col=vec3(2.4,2.2,3.1)*starDot+vec3(0.9,0.85,1.4)*corona+vec3(0.3,0.28,0.5)*halo;
   if(uTde>0.5){
     float tidalStr=clamp(uTde-1.,0.,1.);
     float streamCos=dot(rd,normalize(-sDir+vec3(0.,-.05,0.3)));
     float stream=smoothstep(cos(0.08+tidalStr*0.06),cos(0.005),streamCos)*tidalStr*1.2;
-    col += vec3(1.0,0.6,0.2)*stream;
+    col+=vec3(1.0,0.6,0.2)*stream;
   }
   if(uTde>1.5){
     float flashPulse=clamp(3.-uTde*1.5,0.,1.);
     float flashHalo =smoothstep(cos(sz*30.),cos(sz*1.6),cosA);
-    col += vec3(4.0,3.5,5.0)*flashHalo*flashPulse;
+    col+=vec3(4.0,3.5,5.0)*flashHalo*flashPulse;
   }
   return col;
 }
 
-/* ═════════════════════════════════════════════════════════════════
-   MAIN — v9 Quantum Edition
-   ═════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   MAIN — v10 Parallax Edition
+   Full Boyer-Lindquist Kerr Geodesics
+   ══════════════════════════════════════════════════════════════════ */
 void main(){
-  vec2 uv  = vUv+uJitter/uRes;
+  vec2 uv  = vUv + uJitterV/uRes;
   vec2 ndc = uv*2.-1.;
   ndc.x   *= uRes.x/max(uRes.y,1.);
   float fov= 1./tan(0.6981);
   vec3 rd  = normalize(ndc.x*uCamX+ndc.y*uCamY+fov*uCamZ);
 
-  vec3  eR    = normalize(uCamPos);
-  float r0    = length(uCamPos);
-  vec3  ePhiR = rd-dot(rd,eR)*eR;
-  float eLen  = length(ePhiR);
+  /* ── BL initial conditions ──────────────────────────────────────
+     Spin axis = Y.  Camera at uCamPos.
+     BL angles: θ from +Y, φ in XZ plane.                          */
+  float a    = uSpin;
+  float r0   = length(uCamPos);
+  float rxy0 = sqrt(max(uCamPos.x*uCamPos.x+uCamPos.z*uCamPos.z,1e-6));
+  float ct0  = uCamPos.y/r0;
+  float st0  = rxy0/r0;
+  float phi0 = atan(uCamPos.z,uCamPos.x);
 
-  if(eLen<1e-4){
-    bool cap=dot(rd,eR)<0.;
+  /* Degenerate case: camera on spin axis */
+  if(rxy0 < 1e-3){
+    bool cap=dot(rd,uCamPos/r0)<0.;
     vec3 col=cap?vec3(0.):sampleGalaxy(rd);
     gl_FragColor=vec4(tonemap(col*0.85),1.);return;
   }
 
-  vec3 ePhi=ePhiR/eLen;
-  float kd=uSpin*0.032/(r0*r0);
-  ePhi=normalize(ePhi+kd*cross(eR,ePhi));
+  /* Orthonormal BL basis at camera */
+  vec3 er  = uCamPos/r0;
+  vec3 ef  = vec3(-uCamPos.z,0.,uCamPos.x)/rxy0;
+  vec3 eth = vec3(ct0*uCamPos.x/rxy0,-st0,ct0*uCamPos.z/rxy0);
 
-  float b  =max(length(cross(uCamPos,rd)),1e-4);
-  float u0 =1./r0;
-  float disc=1./(b*b)-u0*u0*(1.-u0);
-  if(disc<0.){gl_FragColor=vec4(0.,0.,0.,1.);return;}
+  /* Ray BL components */
+  float pr0  = dot(rd,er);
+  float pth0 = dot(rd,eth);
+  float pf0  = dot(rd,ef);
 
-  float u  =u0;
-  float up =(dot(rd,-eR)>0.?1.:-1.)*sqrt(max(disc,0.));
+  /* Impact parameters (conserved along geodesic) */
+  float b    = rxy0*pf0;                              /* L/E              */
+  float rp0  = r0*pth0;                               /* r₀ × dθ/dτ_phys */
+  float ct02 = ct0*ct0, st02=max(st0*st0,1e-8);
+  /* Carter constant  η = (r₀ pθ)² − a²cos²θ₀ + b²cos²θ₀/sin²θ₀ */
+  float eta  = max(rp0*rp0 - a*a*ct02 + b*b*ct02/st02, 0.);
+
+  /* Initial sign factors (dr/dλ sign, dθ/dλ sign) */
+  float sr = pr0  >= 0. ? 1. : -1.;
+  float st_s = pth0 >= 0. ? 1. : -1.;
+
+  /* Event horizon */
+  float rh = 1.+sqrt(max(1.-a*a,0.));
+
+  /* Integration state */
+  float r   = r0;
+  float ct  = ct0;
+  float phi = phi0;
+
+  /* Reconstruct initial 3D position */
+  float sinT0=sqrt(max(1.-ct0*ct0,0.));
+  float prevH   = r0*ct0;
+  vec3  prevPos = vec3(r0*sinT0*cos(phi0),r0*ct0,r0*sinT0*sin(phi0));
+
+  /* Accumulation */
+  vec3  diskCol = vec3(0.);
+  vec3  volCol  = vec3(0.);
+  vec3  bfCol   = vec3(0.);
+  bool  hitDisk=false, hitSec=false, hitTer=false, hitQua=false;
+  bool  captured=false;
+  vec3  bgDir   = rd;
+
   float phiTarget = uRevs*6.2832;
-  float dPhiBase  = phiTarget/float(uSteps);
+  float dPhiBase  = phiTarget/max(float(uSteps),1.);
   float phiAcc    = 0.;
-  float phi       = 0.;
-  float prevH     = eR.y*r0;
-  vec3 prevPos    = r0*eR;
 
-  /* Accumulation buffers */
-  vec3  diskCol    = vec3(0.);  /* sharp zero-crossing hits        */
-  vec3  volCol     = vec3(0.);  /* volumetric glow accumulation    */
-  vec3  bfCol      = vec3(0.);  /* B-field line glow               */
-
-  /* Sub-ring hit flags (n=0,1,2,3) */
-  bool hitDisk=false, hitSec=false, hitTer=false, hitQua=false;
-  bool captured=false;
-  vec3 bgDir=rd;
-
-  /* ── Integration (adaptive DP45) ───────────────────────────── */
+  /* ── Integration loop (BL RK4, φ-stepping adaptive) ───────────── */
   for(int i=0;i<500;i++){
     if(phiAcc>=phiTarget) break;
 
-    float proximity = u*3.8;
-    float r_cur     = 1./max(u,1e-5);
-    float diskNear  = smoothstep(r_cur*0.35,0.,abs(prevH));
+    float ct2  = ct*ct, st2=max(1.-ct2,1e-8);
+    float Sig  = r*r+a*a*ct2;
+    float Del  = r*r-2.*r+a*a;
+    float P_   = (r*r+a*a)-a*b;
 
+    /* dφ/dλ — used to convert azimuthal step to Mino time */
+    float phiDot = (b/st2-a+a*P_/max(Del,1e-8))/Sig;
+
+    /* Adaptive azimuthal step */
+    float proximity = 3.8/max(r,0.1);
+    float diskNear  = smoothstep(r*0.35,0.,abs(prevH));
     float dPhi = clamp(
-      dPhiBase/(proximity*proximity+abs(up)*0.4+0.35+diskNear*4.0),
+      dPhiBase/(proximity*proximity+0.35+diskNear*4.0),
       dPhiBase*0.04, dPhiBase*2.5);
-    dPhi = min(dPhi,phiTarget-phiAcc);
-    dp45Step(u,up,dPhi,uSpin);
-    phiAcc+=dPhi; phi=phiAcc;
-    if(u>0.98){captured=true;break;}
+    dPhi = min(dPhi, phiTarget-phiAcc);
 
-    float r=1./max(u,1e-5);
-    float cp=cos(phi),sp=sin(phi);
-    vec3  pos=r*(cp*eR+sp*ePhi);
-    float h=pos.y;
+    /* Mino time step from desired azimuthal advance */
+    float h_lam = dPhi/max(abs(phiDot),1e-6);
 
-    /* ── Volumetric disk glow ─────────────────────────────────────
-       Accumulate soft emission while inside ±3 scale heights.
-       Cheap: no noise, just blackbody + Doppler.                  */
-    if(uVolStr>0.01 && r>=uISCO && r<=uRout*0.72){
+    /* BL RK4 step */
+    blStep(r,ct,phi,a,b,eta,sr,st_s,h_lam);
+
+    /* Accumulate azimuthal travel */
+    phiAcc += abs(phiDot)*h_lam;
+
+    /* Sign flip: check potentials, flip sign if negative */
+    float R_new=blR(r,ct,a,b,eta);
+    float T_new=blTh(ct,a,b,eta);
+    if(R_new<0.) sr=-sr;
+    if(T_new<0.) st_s=-st_s;
+
+    /* Horizon capture */
+    if(r<rh*1.02){captured=true;break;}
+
+    /* 3D Cartesian position from BL state */
+    float sinT=sqrt(max(1.-ct*ct,0.));
+    vec3 pos=vec3(r*sinT*cos(phi),r*ct,r*sinT*sin(phi));
+    float h=pos.y;  /* height above equatorial plane */
+
+    /* ── Volumetric disk glow ───────────────────────────────────── */
+    if(uVolStr>0.01&&r>=uISCO&&r<=uRout*0.72){
       float diskHv  = uDiskH*r;
       float vertFrac= h/max(diskHv,0.001);
       if(abs(vertFrac)<3.2){
@@ -730,60 +874,52 @@ void main(){
       }
     }
 
-    /* ── Hot corona ───────────────────────────────────────────────*/
-    if(uCorona>0.5 && r>=uISCO*0.8 && r<=uISCO*4.5){
-      float diskHc = uDiskH*r;
-      if(abs(h)>diskHc*0.3 && abs(h)<r*0.35){
-        vec3 cE = coronaEmit(r,pos,uISCO,uTime);
-        volCol += cE*r*dPhi*0.05;
+    /* ── Hot corona ─────────────────────────────────────────────── */
+    if(uCorona>0.5&&r>=uISCO*0.8&&r<=uISCO*4.5){
+      float diskHc=uDiskH*r;
+      if(abs(h)>diskHc*0.3&&abs(h)<r*0.35){
+        vec3 cE=coronaEmit(r,pos,uISCO,uTime);
+        volCol+=cE*r*dPhi*0.05;
       }
     }
 
-    /* ── B-field lines ───────────────────────────────────────────*/
-    if(uBfield>0.5 && r>=uISCO*0.8 && r<=uISCO*5.5){
-      float bf = bfieldGlow(pos,uISCO,uSpin);
+    /* ── B-field lines (BZ) ─────────────────────────────────────── */
+    if(uBfield>0.5&&r>=uISCO*0.8&&r<=uISCO*5.5){
+      float bf=bfieldGlow(pos,uISCO,a);
       if(bf>0.005){
-        vec3 bfC = mix(vec3(0.3,0.8,2.2),vec3(0.8,1.8,4.5),bf);
-        bfCol += bfC*bf*r*dPhi*0.018;
+        vec3 bfC=mix(vec3(0.3,0.8,2.2),vec3(0.8,1.8,4.5),bf);
+        bfCol+=bfC*bf*r*dPhi*0.018;
       }
     }
 
-    /* ── Zero-crossing disk hits — 4 sub-rings ───────────────────
-       Each successive ring is demagnified by ~e^{-π} ≈ 0.043
-       (theoretical GR prediction). We use larger weights for
-       visual impact while preserving the decreasing sequence.    */
-    if(prevH*h<0. && r>=uISCO && r<=uRout*0.68){
-      float t      = prevH/(prevH-h);
-      vec3 hitPos  = mix(prevPos,pos,t);
-      float r_hit  = length(hitPos);
-      float az_hit = atan(hitPos.z,hitPos.x);
+    /* ── Zero-crossing disk hits (4 sub-rings) ──────────────────── */
+    if(prevH*h<0.&&r>=uISCO&&r<=uRout*0.68){
+      float t_cross = prevH/(prevH-h);
+      vec3 hitPos   = mix(prevPos,pos,t_cross);
+      float r_hit   = length(hitPos);
+      float az_hit  = atan(hitPos.z,hitPos.x);
 
       if(!hitDisk){
-        /* n=0 direct image — full brightness */
-        diskCol  = diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright,uRout);
+        diskCol  = diskEmit(r_hit,az_hit,a,uISCO,uTemp,uDop,uBright,uRout);
         hitDisk  = true;
       } else if(uSec>0.5&&!hitSec){
-        /* n=1 first orbit — 22% */
-        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.22,uRout);
+        diskCol += diskEmit(r_hit,az_hit,a,uISCO,uTemp,uDop,uBright*0.22,uRout);
         hitSec   = true;
       } else if(uSec>0.5&&!hitTer){
-        /* n=2 second orbit — ~5% (e^{-2π} × boost for visibility) */
-        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.06,uRout);
+        diskCol += diskEmit(r_hit,az_hit,a,uISCO,uTemp,uDop,uBright*0.06,uRout);
         hitTer   = true;
       } else if(uSec>0.5&&!hitQua){
-        /* n=3 third orbit — ~1.5% */
-        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.018,uRout);
+        diskCol += diskEmit(r_hit,az_hit,a,uISCO,uTemp,uDop,uBright*0.018,uRout);
         hitQua   = true;
       }
     }
 
-    if(r>44.&&up<0.){
-      float phi2=phi+0.004;
-      float r2=1./max(u+up*0.004,1e-5);
-      vec3 pos2=r2*(cos(phi2)*eR+sin(phi2)*ePhi);
-      bgDir=normalize(pos2-pos);
+    /* ── Background escape ──────────────────────────────────────── */
+    if(r>44.){
+      bgDir=normalize(pos-prevPos);
       break;
     }
+
     prevH   = h;
     prevPos = pos;
   }
@@ -793,13 +929,13 @@ void main(){
   if(captured){
     col=vec3(0.);
   } else if(hitDisk){
-    col = diskCol + volCol + bfCol + sampleGalaxy(bgDir)*0.32;
+    col=diskCol+volCol+bfCol+sampleGalaxy(bgDir)*0.32;
   } else {
-    col = sampleGalaxy(bgDir) + volCol + bfCol;
+    col=sampleGalaxy(bgDir)+volCol+bfCol;
   }
 
-  if(uJets>0.5)      col += jetEmit(rd,uJpow,uTime);
-  if(uStarShow>0.5)  col += starSprite(rd,uStarDist,uTime);
+  if(uJets>0.5)     col+=jetEmit(rd,uJpow,uTime);
+  if(uStarShow>0.5) col+=starSprite(rd,uStarDist,uTime);
 
   gl_FragColor=vec4(tonemap(col*0.88),1.);
 }
@@ -823,11 +959,20 @@ const FRAG_COPY=`precision highp float;varying vec2 vUv;uniform sampler2D tSrc;v
 
 function halton(i,b){let f=1,r=0;while(i>0){f/=b;r+=f*(i%b);i=Math.floor(i/b);}return r;}
 
+/* ── Kerr radii formulae ─────────────────────────────────────────── */
 function kerrISCO(a){
   const a2=a*a,cbr=Math.pow(Math.max(1-a2,0),1/3);
   const Z1=1+cbr*(Math.pow(Math.max(1+a,0),1/3)+Math.pow(Math.max(1-a,0),1/3));
   const Z2=Math.sqrt(Math.max(3*a2+Z1*Z1,0));
   return 3+Z2-Math.sqrt(Math.max((3-Z1)*(3+Z1+2*Z2),0));
+}
+function kerrPhoton(a){
+  /* Prograde photon orbit: r_ph = 2M[1+cos(2/3 arccos(-a/M))] */
+  return 2.*(1.+Math.cos(2./3.*Math.acos(-Math.min(a,0.998))));
+}
+function kerrErgo(){
+  /* Ergosphere at equator (θ=π/2): r_ergo = 2M always */
+  return 2.0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -855,8 +1000,9 @@ const UNI={
   uCorona:{value:0},uCoronaStr:{value:P.coronaStr},
   uBfield:{value:0},uBfStr:{value:P.bfStr},
   uDiskH:{value:P.diskH},uVolStr:{value:P.volStr},
+  uWavelength:{value:0},uRedshiftViz:{value:0},
   uSteps:{value:P.steps},uRevs:{value:P.revs},uSec:{value:1},
-  uJitter:{value:new THREE.Vector2()},
+  uJitterV:{value:new THREE.Vector2()},
   uGalTex:{value:null},uUseTex:{value:1}
 };
 
@@ -946,6 +1092,8 @@ function syncUniforms(){
   UNI.uDiskH.value=P.diskH;UNI.uVolStr.value=P.volStr;
   UNI.uCorona.value=P.corona?1:0;UNI.uCoronaStr.value=P.coronaStr;
   UNI.uBfield.value=P.bfield?1:0;UNI.uBfStr.value=P.bfStr;
+  UNI.uWavelength.value=P.wavelength;
+  UNI.uRedshiftViz.value=P.redshiftViz?1:0;
   UNI.uGal.value=P.gal;UNI.uMode.value=P.mode;
   UNI.uJets.value=P.jets?1:0;UNI.uJpow.value=P.jpow;
   UNI.uStarShow.value=P.star?1:0;
@@ -953,7 +1101,7 @@ function syncUniforms(){
   UNI.uTde.value=0;UNI.uEchoR.value=0;
   UNI.uSteps.value=P.steps;UNI.uRevs.value=P.revs;UNI.uSec.value=P.sec?1:0;
   UNI.uUseTex.value=P.useTex?1:0;
-  St.taaHist=false;St.taaIdx=0;UNI.uJitter.value.set(0,0);
+  St.taaHist=false;St.taaIdx=0;UNI.uJitterV.value.set(0,0);
   camSpeed=0;
 }
 
@@ -1062,7 +1210,7 @@ function animate(){
       const flare=Math.max(0,1-St.tdeFlashT/25);
       UNI.uJpow.value=P.jpow+flare*1.4;
     }
-    /* TDE light echo — expands at 0.25c */
+    /* TDE light echo — expands at ~4 rₛ/s */
     if(St.tdePhase==='flash'||St.tdePhase==='eaten'){
       const echoR=St.tdeFlashT*4.0;
       UNI.uEchoR.value=Math.min(echoR,P.rout*0.8);
@@ -1080,10 +1228,10 @@ function animate(){
 
   if(P.taa){
     const idx=(St.taaIdx%8)+1;
-    UNI.uJitter.value.set((halton(idx,2)-.5),(halton(idx,3)-.5));
+    UNI.uJitterV.value.set((halton(idx,2)-.5),(halton(idx,3)-.5));
     St.taaIdx++;
   } else {
-    UNI.uJitter.value.set(0,0);
+    UNI.uJitterV.value.set(0,0);
   }
 
   UNI.uTime.value=St.time;
@@ -1113,16 +1261,16 @@ function onResize(){
 
 async function fakeLoad(){
   const steps=[
-    [8, "Compiling Dormand-Prince RK4(5) geodesic integrator…"],
-    [18,"Loading Kerr frame-drag kernel…"],
+    [8, "Compiling Boyer-Lindquist Kerr geodesic integrator…"],
+    [18,"Deriving Carter constants from initial conditions…"],
     [28,"Baking galaxy texture (26k point stars)…"],
     [40,"Building volumetric disk opacity tables…"],
-    [52,"Initialising hot corona (X-ray plasma)…"],
+    [52,"Initialising hot corona X-ray plasma…"],
     [62,"Threading Blandford-Znajek magnetic field lines…"],
-    [72,"Linking 4-ring photon sub-ring system…"],
-    [82,"Computing ISCO Z₁Z₂ (Bardeen 1972)…"],
-    [90,"Calibrating Fe K-α spectrograph…"],
-    [97,"Arming TDE light echo propagation…"],
+    [72,"Linking 4-ring photon sub-ring system (n=0–3)…"],
+    [82,"Computing Kerr ISCO Z₁Z₂ (Bardeen 1972)…"],
+    [88,"Calibrating multi-wavelength colour maps…"],
+    [94,"Arming spine-sheath jet model…"],
     [100,"All systems nominal."]
   ];
   return new Promise(res=>{
@@ -1181,6 +1329,9 @@ function updateLabels(){
   [["mCin",0],["mSci",1],["mLab",2]].forEach(([id,m])=>{
     const b=document.getElementById(id);if(b)b.classList.toggle("on",P.mode===m);
   });
+  [["wOpt",0],["wRad",1],["wXry",2]].forEach(([id,w])=>{
+    const b=document.getElementById(id);if(b)b.classList.toggle("on",P.wavelength===w);
+  });
 }
 
 function updateFeed(){
@@ -1189,16 +1340,22 @@ function updateFeed(){
   const a=Math.min(P.spin,0.998);
   const rIM=kerrISCO(a),iscoKm=rIM*(rsKm/2),rIRs=rIM/2;
   const gg=Math.sqrt(Math.max(0,1-1/rIRs));
+  const rPh=kerrPhoton(a),rPhKm=rPh*(rsKm/2);
+  const rEg=kerrErgo(),rEgKm=rEg*(rsKm/2);
   const d=P.sdist;
   let out="safe fly-by";
   if(d<2.3)out="captured";else if(d<4.5)out="strong tidal shredding";
   else if(d<8)out="tidal disruption";else if(d<12)out="dangerously close";
-  sel("f_rs",fmtKm(rsKm));sel("f_ph",fmtKm(1.5*rsKm));
+  sel("f_rs",fmtKm(rsKm));
+  sel("f_ph",fmtKm(rPhKm)+" (r="+rPh.toFixed(3)+"M)");
+  sel("f_ergo",fmtKm(rEgKm)+" (r=2M, equatorial)");
   sel("f_isco",fmtKm(iscoKm)+" (r="+rIM.toFixed(3)+"M)");
   sel("f_gg",gg.toFixed(4));sel("f_hw",(HawkK/bh).toExponential(2)+" K");
   sel("f_out",out);sel("f_fps",Math.round(St.fps));
   const col=out.includes("safe")?"var(--good)":out.includes("cap")?"var(--danger)":"var(--warn)";
   sel("scenarioEl",`At <strong>${d.toFixed(1)} rₛ</strong>: <strong style="color:${col}">${out}</strong>`);
+  const si=document.getElementById("specInfo");
+  if(si)si.textContent=`a=${P.spin.toFixed(2)} · i=${Math.round(P.incl)}°`;
 }
 
 /* ── Fe K-α Spectrograph ─────────────────────────────────────────── */
@@ -1242,27 +1399,42 @@ function updateSpec(){
   ctx.fillText("6.4 keV",rx,PAD.t-3);
   const g=ctx.createLinearGradient(PAD.l,0,W-PAD.r,0);
   g.addColorStop(0,"rgba(248,80,80,0.75)");g.addColorStop(0.42,"rgba(116,242,200,0.55)");
-  g.addColorStop(0.70,"rgba(90,150,255,0.72)");g.addColorStop(1,"rgba(180,100,255,0.45)");
-  ctx.beginPath();ctx.moveTo(PAD.l,PAD.t+pH);
-  for(let x=0;x<Nb;x++)ctx.lineTo(PAD.l+x,PAD.t+pH-sm[x]*pH*0.90);
-  ctx.lineTo(W-PAD.r,PAD.t+pH);ctx.closePath();
-  ctx.fillStyle=g;ctx.globalAlpha=0.52;ctx.fill();ctx.globalAlpha=1;
-  const lg=ctx.createLinearGradient(PAD.l,0,W-PAD.r,0);
-  lg.addColorStop(0,"#f85050");lg.addColorStop(0.42,"#74f2c8");lg.addColorStop(0.70,"#6496ff");lg.addColorStop(1,"#b464ff");
-  ctx.beginPath();for(let x=0;x<Nb;x++){const py=PAD.t+pH-sm[x]*pH*0.90;x===0?ctx.moveTo(PAD.l+x,py):ctx.lineTo(PAD.l+x,py);}
-  ctx.strokeStyle=lg;ctx.lineWidth=1.8;ctx.stroke();
-  ctx.strokeStyle="rgba(90,120,160,0.5)";ctx.lineWidth=1.3;
-  ctx.beginPath();ctx.moveTo(PAD.l,PAD.t);ctx.lineTo(PAD.l,PAD.t+pH);ctx.lineTo(W-PAD.r,PAD.t+pH);ctx.stroke();
-  ctx.fillStyle="rgba(100,140,180,0.75)";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
-  [2,3,4,5,6,7,8,9].forEach(E=>{ctx.fillText(E+" keV",PAD.l+((E-Emin)/(Emax-Emin))*pW,PAD.t+pH+12);});
-  ctx.fillStyle="rgba(116,242,200,0.55)";ctx.font="9px 'JetBrains Mono',monospace";ctx.textAlign="left";
-  ctx.fillText("g_grav(r_isco)="+gg.toFixed(3),PAD.l,H-2);
-  const si=document.getElementById("specInfo");
-  if(si)si.textContent="a="+a.toFixed(2)+" · i="+Math.round(inc)+"° · r_isco="+rIM.toFixed(2)+"M";
+  g.addColorStop(1,"rgba(80,140,255,0.75)");
+  ctx.strokeStyle=g;ctx.lineWidth=1.5;
+  ctx.beginPath();
+  for(let x=0;x<Nb;x++){
+    const px=PAD.l+x, py=PAD.t+pH*(1-sm[x]);
+    if(x===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+  }
+  ctx.stroke();
+  ctx.font="9px 'JetBrains Mono',monospace";ctx.fillStyle="rgba(180,220,255,0.55)";
+  ctx.textAlign="left";
+  for(let e=2;e<=9;e+=1){
+    const px=PAD.l+((e-Emin)/(Emax-Emin))*pW;
+    ctx.fillText(e+"",px,PAD.t+pH+PAD.b-4);
+  }
+  ctx.fillStyle="rgba(140,180,220,0.55)";ctx.textAlign="left";
+  ctx.fillText("keV",PAD.l+pW+2,PAD.t+pH+PAD.b-4);
+  ctx.fillStyle="rgba(150,200,255,0.40)";ctx.textAlign="left";
+  ctx.fillText("norm",4,PAD.t+4);
 }
 
-/* ── Presets ──────────────────────────────────────────────────────── */
-function applyP(obj){Object.assign(P,obj);syncInputs();syncUniforms();updateLabels();updateFeed();}
+/* ── Preset helpers ──────────────────────────────────────────────── */
+function incrPitch(incl){
+  /* Convert inclination (angle from equatorial plane) to orbit.tp
+     For face-on (incl≈0°): pitch large (camera near pole)
+     For edge-on (incl≈90°): pitch small (camera in equatorial plane)
+     Mapping: tp = (90° - incl) × π/180  so sin(tp) gives cosθ = cos(incl×π/180)
+     This ensures the camera's polar angle θ = incl (astrophysical inclination).   */
+  return (90-incl)*Math.PI/180;
+}
+
+function applyP(obj){
+  Object.assign(P,obj);
+  /* Sync camera pitch with inclination when preset changes it */
+  if(obj.incl!==undefined) orbit.tp=incrPitch(P.incl);
+  syncInputs();syncUniforms();updateLabels();updateFeed();
+}
 function setMode(m){
   if(m===0)applyP({mode:0,spin:0.92,incl:72,temp:1.8,dop:1.0,bright:1.2,gal:1.0,rout:16,diskH:0.06,volStr:0.55,corona:false,bfield:false,jets:false,star:false,steps:320,revs:4.5,sec:true,taa:true});
   else if(m===1)applyP({mode:1,spin:0.95,incl:78,temp:2.0,dop:0.9,bright:1.1,gal:0.9,rout:18,diskH:0.05,volStr:0.40,corona:false,bfield:false,jets:false,star:false,steps:380,revs:5.0,sec:true,taa:true});
@@ -1282,6 +1454,7 @@ function syncInputs(){
   sr("i_jpow",P.jpow);sr("i_sdist",P.sdist);sr("i_sspd",P.sspd);
   sc("i_taa",P.taa);sc("i_sec",P.sec);sc("i_jets",P.jets);sc("i_star",P.star);
   sc("i_tex",P.useTex);sc("i_corona",P.corona);sc("i_bfield",P.bfield);
+  sc("i_rshift",P.redshiftViz);
 }
 
 [["i_mass","mass",Number],["i_spin","spin",Number],["i_incl","incl",Number],
@@ -1293,7 +1466,12 @@ function syncInputs(){
  ["i_jpow","jpow",Number],["i_sdist","sdist",Number],["i_sspd","sspd",Number]
 ].forEach(([id,key,conv])=>{
   const el=document.getElementById(id);
-  if(el)el.addEventListener("input",()=>{P[key]=conv(el.value);syncUniforms();updateLabels();updateFeed();});
+  if(el)el.addEventListener("input",()=>{
+    P[key]=conv(el.value);
+    /* Inclination slider directly drives camera pitch */
+    if(key==="incl") orbit.tp=incrPitch(P.incl);
+    syncUniforms();updateLabels();updateFeed();
+  });
 });
 
 [["i_taa","taa"],["i_sec","sec"],["i_jets","jets"],["i_star","star"],
@@ -1303,29 +1481,55 @@ function syncInputs(){
   if(el)el.addEventListener("change",()=>{P[key]=el.checked;syncUniforms();});
 });
 
+/* Redshift viz toggle */
+document.getElementById("i_rshift").addEventListener("change",function(){
+  P.redshiftViz=this.checked;syncUniforms();
+});
+
+/* Mode buttons */
 document.getElementById("mCin").addEventListener("click",()=>setMode(0));
 document.getElementById("mSci").addEventListener("click",()=>setMode(1));
 document.getElementById("mLab").addEventListener("click",()=>setMode(2));
 
+/* Preset buttons */
 document.getElementById("pCalm").addEventListener("click",()=>
   applyP({spin:0.30,incl:62,temp:1.2,dop:0.6,bright:0.9,gal:0.9,diskH:0.05,volStr:0.30,corona:false,bfield:false,steps:200,revs:2.5,rout:12}));
 document.getElementById("pEdge").addEventListener("click",()=>
   applyP({spin:0.72,incl:84,temp:1.9,dop:1.0,bright:1.2,gal:1.0,diskH:0.06,volStr:0.55,corona:false,bfield:false,steps:320,revs:4.0,rout:18}));
 document.getElementById("pXtreme").addEventListener("click",()=>
   applyP({spin:0.97,incl:76,temp:2.5,dop:1.5,bright:1.5,gal:1.1,diskH:0.08,volStr:0.80,corona:true,bfield:true,steps:400,revs:5.0,rout:20}));
+
+/* ── EHT M87* Mode ────────────────────────────────────────────────── */
 document.getElementById("pEHT").addEventListener("click",()=>
-  /* EHT Mode: mimics M87* Event Horizon Telescope image aesthetics
-     High spin, low inclination, bright photon ring, corona on       */
-  applyP({spin:0.94,incl:17,temp:2.2,dop:1.2,bright:1.8,gal:0.7,diskH:0.10,volStr:1.20,
-          corona:true,coronaStr:1.2,bfield:false,jets:true,jpow:0.8,
-          star:false,steps:420,revs:5.5,rout:22,sec:true,taa:true}));
+  /* M87*: mass 6.5×10⁹ M☉ · spin ~0.94 · inclination ~17°
+     EHT 2019 image: bright asymmetric ring, strong corona          */
+  applyP({spin:0.94,mass:6500000000,incl:17,temp:2.2,dop:1.2,bright:1.8,gal:0.7,
+          diskH:0.10,volStr:1.20,corona:true,coronaStr:1.2,bfield:false,
+          jets:true,jpow:0.8,star:false,steps:420,revs:5.5,rout:22,sec:true,taa:true}));
+
+/* ── Sgr A* preset ────────────────────────────────────────────────── */
+document.getElementById("pSgr").addEventListener("click",()=>
+  /* Sgr A*: mass 4.15×10⁶ M☉ · spin ~0.94 (EHT 2022–2024)
+     Inclination ~50° · thick turbulent disk · rapid X-ray flares
+     Characteristic hot corona dominates near-IR/X-ray             */
+  applyP({spin:0.94,mass:4150000,incl:50,temp:2.8,dop:1.3,bright:2.0,gal:0.6,
+          diskH:0.12,volStr:1.5,corona:true,coronaStr:1.8,bfield:true,bfStr:0.9,
+          jets:false,star:false,steps:440,revs:5.5,rout:20,sec:true,taa:true,
+          wavelength:0}));
+
 document.getElementById("pAGN").addEventListener("click",()=>
   applyP({mode:2,spin:0.92,incl:50,temp:1.8,bright:1.0,gal:1.2,diskH:0.07,volStr:0.60,
           corona:true,coronaStr:1.0,bfield:true,bfStr:0.8,jets:true,jpow:1.3,star:false,steps:280,rout:16}));
 document.getElementById("pReset").addEventListener("click",()=>{
-  applyP(structuredClone(DEF));orbit.ty=0;orbit.tp=0.22;orbit.dist=9;
+  applyP(structuredClone(DEF));orbit.ty=0;orbit.tp=incrPitch(DEF.incl);orbit.dist=9;
 });
 
+/* ── Wavelength mode buttons ─────────────────────────────────────── */
+document.getElementById("wOpt").addEventListener("click",()=>{P.wavelength=0;syncUniforms();updateLabels();});
+document.getElementById("wRad").addEventListener("click",()=>{P.wavelength=1;syncUniforms();updateLabels();});
+document.getElementById("wXry").addEventListener("click",()=>{P.wavelength=2;syncUniforms();updateLabels();});
+
+/* ── Reset star ──────────────────────────────────────────────────── */
 document.getElementById("resetStar").addEventListener("click",()=>{
   St.starPhase=0;St.tdePhase='approach';St.tdeFlashT=0;
   P.sdist=55;
@@ -1335,11 +1539,27 @@ document.getElementById("resetStar").addEventListener("click",()=>{
   syncInputs();syncUniforms();updateLabels();
 });
 
+/* ── Toggle UI ───────────────────────────────────────────────────── */
 document.getElementById("btnUI").addEventListener("click",function(){
   document.body.classList.toggle("uih");
   this.textContent=document.body.classList.contains("uih")?"Show UI":"Hide UI";
 });
 
+/* ── Export PNG ──────────────────────────────────────────────────── */
+document.getElementById("btnExport").addEventListener("click",()=>{
+  if(!renderer)return;
+  /* Force render without TAA jitter for a clean frame */
+  UNI.uJitterV.value.set(0,0);
+  renderer.setRenderTarget(null);
+  renderer.render(scene,camera);
+  const dataURL=renderer.domElement.toDataURL("image/png");
+  const a=document.createElement("a");
+  a.href=dataURL;
+  a.download=`blackhole-v10-a${P.spin.toFixed(2)}-i${Math.round(P.incl)}deg.png`;
+  a.click();
+});
+
+/* ── Fe K-α spectrograph toggle ─────────────────────────────────── */
 const specEl=document.getElementById("specEl"),feedEl=document.getElementById("feedEl");
 document.getElementById("btnSpec").addEventListener("click",function(){
   const show=specEl.style.display!=="block";
