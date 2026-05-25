@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>To bridge the gap, I found instrumentation | Biswajit Jana</title>
+<meta name="description" content="A flagship personal research-life essay on how electronics, optics, instrumentation, and astrophysics became one language." />
+<meta property="og:title" content="To bridge the gap, I found instrumentation | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A flagship personal research-life essay on how electronics, optics, instrumentation, and astrophysics became one language." />
+<meta property="og:image" content="../../images/10_blog_bridge_instrumentation.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(","\\)"]], displayMath: [["\\[","\\]"]], processEscapes: true },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root{
+  --bg:#03060c;--bg2:#07101c;--surface:rgba(10,17,31,.82);--surface2:rgba(255,255,255,.045);
+  --text:#edf4ff;--muted:#a9b8d2;--dim:#697d9d;--line:rgba(255,255,255,.10);
+  --accent:#4af0c8;--accent2:#83ddff;--accent3:#c493ff;--gold:#ffbc73;--danger:#ff7d90;
+  --display:"Playfair Display",Georgia,serif;--serif:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--nav-h:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;font-family:var(--serif);color:var(--text);line-height:1.78;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),
+    radial-gradient(circle at 48% 42%,rgba(196,147,255,.05),transparent 32%),
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+  radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%),
+  linear-gradient(120deg,rgba(74,240,200,.04),transparent 30%,rgba(131,221,255,.035) 72%,transparent)}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{height:var(--nav-h);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);
+  background:rgba(3,6,12,.84);backdrop-filter:blur(18px) saturate(1.25)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--accent)}
+.hero{padding:58px 0 28px}.hero-grid{display:grid;grid-template-columns:minmax(330px,.76fr) minmax(520px,1.24fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(3rem,6vw,6.4rem);line-height:.94;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.08rem,1.5vw,1.36rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.05rem;line-height:1.7}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{position:relative;min-height:540px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:0 26px 80px rgba(0,0,0,.42)}
+.hero-card img{width:100%;height:100%;min-height:540px;object-fit:cover;opacity:.95}.hero-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.50)),radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%)}
+.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}
+.feature{padding:24px 0 48px}.feature-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.feature-frame img{width:100%;height:620px;object-fit:cover;opacity:.92}.feature-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.70),transparent 34%,rgba(0,0,0,.45)),linear-gradient(180deg,rgba(255,255,255,.04),transparent 45%,rgba(0,0,0,.60));pointer-events:none}
+.feature-caption{position:absolute;left:24px;bottom:24px;right:24px;z-index:2;display:grid;gap:8px;max-width:780px}.feature-caption strong{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.feature-caption span{font-size:1.05rem;color:#dce9ff;line-height:1.65}
+.sim-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.sim-frame canvas{width:100%;height:620px;display:block;background:transparent}
+.sim-panel{position:absolute;right:18px;top:18px;width:min(360px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(8,14,26,.64);backdrop-filter:blur(18px);padding:16px}
+.sim-panel h2{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:8px}.sim-panel p{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.control{margin:10px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:6px}.control strong{color:var(--accent)}input[type=range]{width:100%;accent-color:var(--gold)}
+.data-feed{position:absolute;left:18px;bottom:18px;width:min(440px,calc(100% - 36px));border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(5,10,20,.62);backdrop-filter:blur(16px);padding:14px 16px;font-family:var(--mono)}
+.data-feed h3{font-size:.70rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}.feed-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:6px;margin-bottom:6px;font-size:.70rem;color:var(--muted)}.feed-line:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.feed-line strong{color:var(--text);white-space:nowrap;text-align:right}
+.journal{padding:10px 0 78px}.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(275px,.82fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:0 26px 80px rgba(0,0,0,.32);margin-bottom:16px}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}
+.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}.story-header h2{font-family:var(--display);font-size:clamp(2.5rem,4.8vw,4.45rem);line-height:.98;letter-spacing:-.05em;margin-bottom:12px}.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}
+.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}.chapter h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.chapter h3{font-family:var(--display);font-size:clamp(1.35rem,2vw,1.9rem);margin:28px 0 10px;line-height:1.15}
+.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}
+.equation{margin:24px 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.28);overflow-x:auto}.equation-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.equation p{font-size:.94rem;margin:10px 0 0}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}
+.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer a{color:var(--muted)}.footer a:hover{color:var(--gold)}
+@media(max-width:1180px){.hero-grid{grid-template-columns:1fr}.hero-card,.hero-card img{min-height:460px}.journal-grid{grid-template-columns:220px minmax(0,1fr)}.right-rail{grid-column:1/-1;position:static}.sim-panel{position:relative;right:auto;top:auto;width:auto;margin:16px}.data-feed{position:relative;left:auto;bottom:auto;width:auto;margin:16px}.sim-frame canvas,.feature-frame img{height:520px}.feature-frame{min-height:520px}}
+@media(max-width:900px){.nav{height:auto}.nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}.journal-grid{grid-template-columns:1fr}.left-rail,.right-rail{position:static}.fact-grid{grid-template-columns:1fr}.hero{padding-top:34px}}
+@media(max-width:760px){.wide,.nav-inner{width:min(94vw,100%)}.hero-card,.hero-card img{min-height:340px}.sim-frame canvas,.feature-frame img{height:420px}.feature-frame{min-height:420px}h1{font-size:clamp(2.4rem,14vw,4.2rem)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner wide">
+  <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li>
+    <li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Research life · instrumentation · personal route</div>
+      <h1>To Bridge the Gap, I Found Instrumentation</h1>
+      <p class="hero-sub">I started between electronics and astrophysics, and eventually realised the bridge was not a metaphor. It was made of optics, sensors, circuits, code, and imperfect lab data.</p>
+      <div class="hook">Welcome to instrumentation: the place where astronomy stops being only beautiful images and becomes alignment screws, noisy sensors, and plots that do not care about your feelings.</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08 · Hertford, London, UK</span>
+        <span class="meta-pill">9 min read</span>
+        <span class="meta-pill">Cinematic editorial feature frame</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="../../images/10_blog_bridge_instrumentation.png" alt="Astrophysics instrumentation bridge hero image" onerror="this.onerror=null;this.src='../../images/07_blog_lab_notebook.png';" />
+      <figcaption class="hero-caption">Instrumentation became the bridge: electronics gave the hands, astrophysics gave the question, and the lab gave the reality check.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="feature wide">
+
+<div class="feature-frame">
+  <img src="../../images/10_blog_bridge_instrumentation.png" alt="Instrumentation bridge visual" onerror="this.onerror=null;this.src='../../images/07_blog_lab_notebook.png';" />
+  <div class="feature-caption">
+    <strong>Visual Feature Frame · Electronics, optics, and astrophysics</strong>
+    <span>A personal route into instrumentation: not a detour from astrophysics, but one of the ways astrophysics becomes measurable.</span>
+  </div>
+</div>
+
+</section>
+
+<section class="journal wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li><li><a href="#engineering">Engineering</a></li><li><a href="#astrophysics">Astrophysics</a></li><li><a href="#instrumentation">Instrumentation</a></li><li><a href="#lab">Lab reality</a></li><li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>Astrophysics instrumentation route</strong></div>
+          <div><span>Status</span><strong>Extreme</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>Personal Essay</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      
+<div class="story-header" id="overview"><div class="eyebrow">Personal route · research identity · instrumentation</div><h2>I did not leave engineering behind. I carried it into astrophysics.</h2><p>For a long time, electronics and astrophysics felt like two separate languages. One was circuits, signals, devices, and code. The other was stars, spectra, planets, and the large-scale universe. Instrumentation made them one language.</p></div>
+<article>
+<section class="chapter" id="engineering"><div class="chapter-label">Chapter 01 · Engineering</div><h2>Electronics taught me to respect signals.</h2><p>Engineering gives you a practical relationship with measurement. A signal is not just a number. It has noise, drift, bandwidth, calibration, grounding, resolution, and failure modes. That mindset matters deeply in astrophysics, because astronomical data also arrive through instruments that must be understood.</p><div class="quote">A measurement is never just what the universe did. It is also what the instrument allowed you to see.</div></section>
+<section class="chapter" id="astrophysics"><div class="chapter-label">Chapter 02 · Astrophysics</div><h2>Astrophysics gave the questions scale.</h2><p>Astrophysics asks enormous questions: planets around other stars, brown dwarfs, stellar spectra, galaxies, pulsars, and cosmic history. But those questions reach us through photons, detectors, optics, calibration, and data pipelines.</p><p>The beauty of the universe is real. So is the spreadsheet.</p></section>
+<section class="chapter" id="instrumentation"><div class="chapter-label">Chapter 03 · Instrumentation</div><h2>The bridge was not abstract. It was physical.</h2><p>Instrumentation connects the question to the measurement. It includes optical design, detector behaviour, environmental control, feedback loops, calibration sources, mechanical stability, and software. It is where physics becomes hardware and hardware becomes evidence.</p><div class="fact-grid"><div class="fact"><strong>Optics</strong><span>Guides, disperses, focuses, and sometimes humbles the beam.</span></div><div class="fact"><strong>Electronics</strong><span>Reads sensors, drives actuators, logs data, and occasionally invents new problems.</span></div><div class="fact"><strong>Software</strong><span>Turns messy measurements into analysis, plots, and sometimes bad assumptions.</span></div><div class="fact"><strong>Control</strong><span>Uses feedback to make systems behave less like the surrounding environment.</span></div></div></section>
+<section class="chapter" id="lab"><div class="chapter-label">Chapter 04 · Lab reality</div><h2>The lab teaches the part textbooks politely skip.</h2><p>Real instruments drift. Sensors disagree. Cables fail. Temperatures change. Humidity does not care about your schedule. A lab experiment makes theory practical by forcing every assumption to pass through hardware.</p><p>That is why instrumentation changed how I see astrophysics. It made the field more physical, more technical, and more honest.</p></section>
+<section class="chapter" id="takeaway"><div class="chapter-label">Takeaway</div><h2>Instrumentation became my research language.</h2><p>I still care about the big questions. But I am most drawn to the systems that let us measure them: spectrographs, optics, detectors, feedback control, environmental monitoring, and scientific computing. That is the bridge I found.</p></section>
+</article>
+
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Instrumentation</strong><span>The machinery between a cosmic question and a usable measurement. Glamorous? Sometimes. Dusty? Often.</span></div><div class="glossary-item"><strong>Optics</strong><span>The art of making light go where you want, which it treats as a suggestion.</span></div><div class="glossary-item"><strong>Detector</strong><span>The part that converts photons into data and then asks you to calibrate everything.</span></div><div class="glossary-item"><strong>Feedback</strong><span>Measurement plus correction. Also a life lesson, unfortunately.</span></div><div class="glossary-item"><strong>Lab data</strong><span>The version of theory that has met cables, temperature drift, and loose screws.</span></div>
+        </div>
+      </div>
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+<a class="post-card" href="control-system.html"><div class="post-card-kicker">Related exploration</div><h4>Control Systems</h4><p>Feedback loops: because pretending errors do not exist is not engineering.</p><div class="tiny-meta">Instrumentation · feedback</div></a>
+<a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related exploration</div><h4>Radial Velocity</h4><p>Planets hiding by making their stars wobble. Adorable, but detectable.</p><div class="tiny-meta">Exoplanets · spectroscopy</div></a>
+<a class="post-card" href="spectra-confession.html"><div class="post-card-kicker">Related exploration</div><h4>Spectra Confession</h4><p>Light travels across space, then a spectrograph makes it talk.</p><div class="tiny-meta">Spectroscopy · light</div></a>
+<a class="post-card" href="noise-and-discovery.html"><div class="post-card-kicker">Related exploration</div><h4>Noise and Discovery</h4><p>Where the universe whispers and your detector coughs.</p><div class="tiny-meta">Data · uncertainty</div></a>
+</div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics & Instrumentation Lab.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters & Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+function trackEvent(name){
+  if(window.plausible) window.plausible(name);
+  if(window.gtag) window.gtag("event",name,{event_category:"engagement",event_label:document.title});
+}
+</script>
+
+
+</body>
+</html>

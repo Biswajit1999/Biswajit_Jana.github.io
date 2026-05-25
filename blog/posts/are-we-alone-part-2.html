@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Are We Alone? Part II — The Numbers, the Searches, and the Silence | Biswajit Jana</title>
+
+  <meta name="description" content="A flagship astrobiology and instrumentation essay by Biswajit Jana on exoplanet statistics, JWST spectroscopy, biosignatures, technosignatures, the Great Filter, SETI signal detection, and future missions searching for life beyond Earth." />
+  <meta name="keywords" content="Are we alone part 2, astrobiology, exoplanet census, biosignatures, JWST spectroscopy, technosignatures, SETI, signal-to-noise ratio, Great Filter, Habitable Worlds Observatory, ELT, SKA, Biswajit Jana" />
+  <meta name="author" content="Biswajit Jana" />
+  <meta name="robots" content="index, follow" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone-part-2.html" />
+
+  <meta property="og:title" content="Are We Alone? Part II — The Numbers, the Searches, and the Silence | Biswajit Jana" />
+  <meta property="og:description" content="A technical, visual, and slightly sarcastic guide to exoplanet statistics, biosignatures, technosignatures, SETI detection limits, and why cosmic silence is not yet cosmic emptiness." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone-part-2.html" />
+  <meta property="og:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/images/blog2_11_are_we_alone_part2_hero.png" />
+  <meta property="og:image:alt" content="Future observatories searching the Milky Way for biosignatures and technosignatures" />
+  <meta property="og:site_name" content="Biswajit Jana" />
+  <meta property="article:author" content="Biswajit Jana" />
+  <meta property="article:section" content="Astrobiology" />
+  <meta property="article:published_time" content="2026-05-10T00:00:00+01:00" />
+  <meta property="article:modified_time" content="2026-05-10T00:00:00+01:00" />
+  <meta property="article:tag" content="Biosignatures" />
+  <meta property="article:tag" content="JWST Spectroscopy" />
+  <meta property="article:tag" content="Technosignatures" />
+  <meta property="article:tag" content="The Great Filter" />
+  <meta property="article:tag" content="SETI" />
+  <meta property="article:tag" content="Astrobiology" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Are We Alone? Part II — The Numbers, the Searches, and the Silence" />
+  <meta name="twitter:description" content="A definitive technical guide to the search for life: exoplanets, biosignatures, technosignatures, SETI, signal-to-noise, and future observatories." />
+  <meta name="twitter:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/images/blog2_11_are_we_alone_part2_hero.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        processEscapes: true
+      },
+      svg: { fontCache: "global" },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Are We Alone? Part II — The Numbers, the Searches, and the Silence",
+    "description": "A flagship astrobiology and instrumentation essay by Biswajit Jana on exoplanet statistics, JWST spectroscopy, biosignatures, technosignatures, the Great Filter, SETI signal detection, and future missions searching for life beyond Earth.",
+    "image": "https://biswajit1999.github.io/Biswajit_Jana.github.io/images/blog2_11_are_we_alone_part2_hero.png",
+    "author": {
+      "@type": "Person",
+      "name": "Biswajit Jana",
+      "url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Biswajit Jana"
+    },
+    "datePublished": "2026-05-10",
+    "dateModified": "2026-05-10",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone-part-2.html"
+    },
+    "keywords": [
+      "Biosignatures",
+      "JWST Spectroscopy",
+      "Technosignatures",
+      "The Great Filter",
+      "SETI",
+      "Exoplanet Census",
+      "Astrobiology",
+      "Habitable Worlds Observatory",
+      "Signal-to-Noise Ratio"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #03060c;
+      --bg2: #07101c;
+      --surface: rgba(10, 17, 31, 0.84);
+      --surface-strong: rgba(8, 14, 26, 0.96);
+      --surface-soft: rgba(255, 255, 255, 0.045);
+      --text: #edf4ff;
+      --muted: #a9b8d2;
+      --dim: #6f83a2;
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --accent: #4af0c8;
+      --accent2: #83ddff;
+      --accent3: #c493ff;
+      --gold: #ffbc73;
+      --danger: #ff7b7b;
+      --warning: #ffd166;
+      --success: #4af0c8;
+      --display: "Playfair Display", Georgia, serif;
+      --serif: "Lora", Georgia, serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --nav-h: 72px;
+      --shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--serif);
+      color: var(--text);
+      line-height: 1.82;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(74, 240, 200, 0.10), transparent 28%),
+        radial-gradient(circle at 88% 6%, rgba(131, 221, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 54% 38%, rgba(196, 147, 255, 0.07), transparent 35%),
+        linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+      background-size: auto, auto, auto, 76px 76px, 76px 76px, auto;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 58%, transparent 0 18%, rgba(0,0,0,0.18) 36%, rgba(0,0,0,0.76) 100%),
+        linear-gradient(120deg, rgba(74,240,200,0.045), transparent 32%, rgba(131,221,255,0.035) 74%, transparent);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.28) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(131,221,255,0.18) 0 1px, transparent 1.6px);
+      background-size: 155px 155px, 245px 245px;
+      background-position: 0 0, 80px 120px;
+      opacity: 0.24;
+    }
+
+    body.light {
+      --bg: #f3f7ff;
+      --bg2: #eef4ff;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --surface-soft: rgba(10, 30, 70, 0.06);
+      --text: #102039;
+      --muted: #435a78;
+      --dim: #687c98;
+      --line: rgba(10, 30, 70, 0.14);
+      --line-strong: rgba(10, 30, 70, 0.24);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(0,140,120,0.08), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(30,90,180,0.08), transparent 27%),
+        linear-gradient(rgba(10,30,70,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10,30,70,0.045) 1px, transparent 1px),
+        linear-gradient(180deg, #f8fbff, #edf3ff 52%, #f8fbff);
+      background-size: auto, auto, 76px 76px, 76px 76px, auto;
+    }
+
+    body.light::before {
+      background:
+        radial-gradient(circle at 50% 54%, transparent 0 26%, rgba(255,255,255,0.28) 54%, rgba(255,255,255,0.75) 100%),
+        linear-gradient(120deg, rgba(0,140,120,0.035), transparent 42%, rgba(30,90,180,0.035));
+    }
+
+    body.light::after {
+      opacity: 0.10;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .wide {
+      width: min(1600px, 96vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      height: var(--nav-h);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background: rgba(3, 6, 12, 0.84);
+      backdrop-filter: blur(18px) saturate(1.25);
+    }
+
+    body.light .nav {
+      background: rgba(246,249,255,0.88);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 1.16rem;
+      letter-spacing: -0.035em;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      width: 42px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.055);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: rgba(255,188,115,0.35);
+      background: rgba(255,188,115,0.08);
+    }
+
+    .progress-shell {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      height: 2px;
+      z-index: 101;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent3));
+      box-shadow: 0 0 16px rgba(74,240,200,0.55);
+    }
+
+    .hero {
+      padding: 60px 0 30px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.76fr) minmax(580px, 1.24fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.75rem, 5.2vw, 6.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.5vw, 1.36rem);
+      font-style: italic;
+      line-height: 1.62;
+      margin-bottom: 18px;
+      max-width: 790px;
+    }
+
+    .hook {
+      margin: 18px 0 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,188,115,0.25);
+      background: rgba(255,188,115,0.06);
+      color: #ffe6c8;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    body.light .hook {
+      color: #5e3c17;
+      background: rgba(255,188,115,0.14);
+    }
+
+    .meta-row {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .meta-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 540px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #050a12;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.94;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 30%, rgba(0,0,0,0.50)),
+        radial-gradient(circle at 50% 50%, transparent 0 30%, rgba(0,0,0,0.62) 100%);
+    }
+
+    .hero-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 3;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(5,10,20,0.58);
+      backdrop-filter: blur(14px);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: #d9e8ff;
+      line-height: 1.55;
+    }
+
+    body.light .hero-caption {
+      background: rgba(255,255,255,0.72);
+      color: #20314f;
+    }
+
+    .feature {
+      padding: 24px 0 48px;
+    }
+
+    .feature-frame {
+      position: relative;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(3,6,12,0.78);
+      box-shadow: 0 28px 100px rgba(0,0,0,0.48);
+    }
+
+    .feature-frame img {
+      width: 100%;
+      height: 620px;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.94;
+    }
+
+    .feature-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.72), transparent 34%, rgba(0,0,0,0.45)),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 45%, rgba(0,0,0,0.60));
+      pointer-events: none;
+    }
+
+    .feature-caption {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      max-width: 900px;
+    }
+
+    .feature-caption strong {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .feature-caption span {
+      font-size: 1.05rem;
+      color: #dce9ff;
+      line-height: 1.65;
+    }
+
+    .journal {
+      padding: 10px 0 78px;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.62fr) minmax(0, 820px) minmax(290px, 0.85fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .left-rail,
+    .right-rail {
+      position: sticky;
+      top: calc(var(--nav-h) + 28px);
+    }
+
+    .rail-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 26px 80px rgba(0,0,0,0.32);
+      margin-bottom: 16px;
+    }
+
+    .rail-card h3 {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-nav {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .section-nav a {
+      display: inline-block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      line-height: 1.45;
+      transition: 0.2s ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a.active {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .section-progress-card {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+    }
+
+    .section-progress-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .section-progress-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.07);
+      overflow: hidden;
+    }
+
+    .section-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      border-radius: inherit;
+    }
+
+    .telemetry {
+      display: grid;
+      gap: 8px;
+    }
+
+    .telemetry div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 7px;
+    }
+
+    .telemetry strong {
+      color: var(--text);
+      text-align: right;
+    }
+
+    .status-detected {
+      color: var(--success) !important;
+    }
+
+    .status-marginal {
+      color: var(--warning) !important;
+    }
+
+    .status-lost {
+      color: var(--danger) !important;
+    }
+
+    .glossary {
+      display: grid;
+      gap: 12px;
+    }
+
+    .glossary-item {
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .glossary-item strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      margin-bottom: 4px;
+    }
+
+    .glossary-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .post-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .post-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: 0.22s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,188,115,0.28);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .post-card-kicker {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 7px;
+    }
+
+    .post-card h4 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      margin-bottom: 7px;
+    }
+
+    .post-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .tiny-meta {
+      font-family: var(--mono);
+      font-size: 0.67rem;
+      color: var(--dim);
+      margin-top: 8px;
+    }
+
+    .story-header {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+    }
+
+    .story-header h2 {
+      font-family: var(--display);
+      font-size: clamp(2.35rem, 4.5vw, 4.15rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .story-header p,
+    .chapter p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.88;
+      margin-bottom: 18px;
+    }
+
+    .chapter {
+      margin: 42px 0;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 110px;
+    }
+
+    .chapter:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .chapter-label {
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .chapter h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      margin-bottom: 16px;
+    }
+
+    .chapter h3 {
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
+      margin: 28px 0 10px;
+      line-height: 1.15;
+    }
+
+    .quote {
+      margin: 26px 0;
+      padding: 14px 0 14px 20px;
+      border-left: 3px solid var(--gold);
+      font-size: 1.14rem;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .math-card {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.26);
+      overflow-x: auto;
+    }
+
+    .math-label {
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .math-card p {
+      font-size: 0.94rem;
+      margin: 10px 0 0;
+    }
+
+    .parameter-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .parameter-list div {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.035);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .parameter-list strong {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .fact {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.24);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      margin-bottom: 7px;
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .figure-note {
+      margin: 26px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.25);
+    }
+
+    .figure-note img {
+      width: 100%;
+      height: auto;
+      max-height: 580px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #020817;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .figure-note figcaption {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--dim);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .visual-prompt-card {
+      margin: 26px 0;
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(196,147,255,0.22);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(196,147,255,0.10), transparent 26%),
+        rgba(196,147,255,0.04);
+    }
+
+    .visual-prompt-card h3 {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent3);
+      margin-bottom: 10px;
+    }
+
+    .visual-prompt-card p {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .lab-module {
+      margin: 30px 0;
+      border-radius: 28px;
+      border: 1px solid var(--line-strong);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(74,240,200,0.10), transparent 30%),
+        radial-gradient(circle at 96% 0%, rgba(255,188,115,0.11), transparent 30%),
+        rgba(7,13,25,0.82);
+      backdrop-filter: blur(18px) saturate(1.15);
+      box-shadow: 0 30px 110px rgba(0,0,0,0.34);
+      overflow: hidden;
+    }
+
+    body.light .lab-module {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(0,140,120,0.08), transparent 30%),
+        radial-gradient(circle at 96% 0%, rgba(255,188,115,0.16), transparent 30%),
+        rgba(255,255,255,0.84);
+    }
+
+    .lab-head {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .lab-head h3 {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .lab-head p {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      margin: 6px 0 0;
+      line-height: 1.55;
+      max-width: 720px;
+    }
+
+    .lab-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .lab-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+    }
+
+    .lab-badge.active {
+      color: var(--accent);
+      border-color: rgba(74,240,200,0.28);
+      background: rgba(74,240,200,0.06);
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(280px, 0.98fr);
+    }
+
+    .lab-controls,
+    .lab-output {
+      padding: 22px;
+    }
+
+    .lab-controls {
+      border-right: 1px solid var(--line);
+    }
+
+    .control-row {
+      margin-bottom: 16px;
+    }
+
+    .control-row label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      margin-bottom: 7px;
+    }
+
+    .control-row label strong {
+      color: var(--accent);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--gold);
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      margin-bottom: 18px;
+    }
+
+    .switch-row span {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .switch {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider-switch {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid var(--line);
+      transition: 0.2s ease;
+    }
+
+    .slider-switch::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 4px;
+      top: 3px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: 0.2s ease;
+    }
+
+    .switch input:checked + .slider-switch {
+      background: rgba(74,240,200,0.17);
+      border-color: rgba(74,240,200,0.35);
+    }
+
+    .switch input:checked + .slider-switch::before {
+      transform: translateX(24px);
+      background: var(--accent);
+    }
+
+    .output-number {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .output-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .output-note {
+      font-size: 0.98rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+
+    .lab-meter {
+      margin-top: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .lab-meter-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .meter-track {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      width: 30%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--danger), var(--warning), var(--accent));
+      transition: width 0.2s ease;
+    }
+
+    .mini-readout {
+      display: grid;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .mini-readout div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 7px;
+    }
+
+    .mini-readout strong {
+      color: var(--text);
+      text-align: right;
+    }
+
+    .canvas-panel {
+      margin-top: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(2,6,15,0.82);
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+    }
+
+    body.light .canvas-panel {
+      background: rgba(12,25,50,0.88);
+    }
+
+    canvas {
+      width: 100%;
+      height: 340px;
+      display: block;
+    }
+
+    .canvas-caption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 9px 11px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(12px);
+      color: #d9e8ff;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.45;
+    }
+
+    .scenario-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .scenario-button {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .scenario-button:hover,
+    .scenario-button.active {
+      border-color: rgba(255,188,115,0.35);
+      color: var(--gold);
+      background: rgba(255,188,115,0.08);
+    }
+
+    .source-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .source-list a {
+      display: block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.5;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      transition: 0.2s ease;
+    }
+
+    .source-list a:hover {
+      color: var(--accent);
+      border-color: rgba(74,240,200,0.22);
+    }
+
+    .comments-section {
+      margin-top: 42px;
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.24);
+    }
+
+    .comments-section h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    .comments-section p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+
+    .footer {
+      background: #010308;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 38px 0;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: var(--muted);
+    }
+
+    .footer a:hover {
+      color: var(--gold);
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .hero-card img {
+        min-height: 460px;
+      }
+
+      .journal-grid {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .right-rail {
+        grid-column: 1 / -1;
+        position: static;
+      }
+
+      .feature-frame,
+      .feature-frame img {
+        min-height: 520px;
+        height: 520px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        height: auto;
+      }
+
+      .nav-inner {
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .progress-shell {
+        top: 0;
+      }
+
+      .journal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .left-rail,
+      .right-rail {
+        position: static;
+      }
+
+      .fact-grid,
+      .lab-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lab-controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .wide,
+      .nav-inner {
+        width: min(94vw, 100%);
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .hero-card,
+      .hero-card img {
+        min-height: 340px;
+      }
+
+      .feature-frame,
+      .feature-frame img {
+        min-height: 420px;
+        height: 420px;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 14vw, 4.2rem);
+      }
+
+      .chapter h2,
+      .story-header h2 {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-shell" aria-hidden="true">
+    <div class="progress-bar" id="pageProgress"></div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-inner wide">
+      <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../index.html">Blog</a></li>
+        <li><a href="../../index.html#current-research">Research</a></li>
+        <li><a href="../../publications.html">Publications</a></li>
+        <li><a href="../../cv.html">CV</a></li>
+        <li><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">☾</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero wide" id="top">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Astrobiology · signals · future observatories</div>
+        <h1>Are We Alone? Part II — The Numbers, the Searches, and the Silence</h1>
+        <p class="hero-sub">
+          Part I asked why the question is so large. Part II asks what the numbers, spectra, detectors,
+          false positives, and future instruments actually allow us to say.
+        </p>
+        <div class="hook">
+          Welcome to the search for life: where the universe may be full of neighbours, but the signal-to-noise ratio is still personally offensive.
+        </div>
+        <div class="meta-row">
+          <span class="meta-pill">2026-05-10 · Hertford, London, UK</span>
+          <span class="meta-pill">Part II · constraints, spectra, and detection</span>
+          <span class="meta-pill">Includes SETI Signal Analyzer Lab</span>
+          <span class="meta-pill">Astrophysics × Instrumentation</span>
+        </div>
+      </div>
+
+      <figure class="hero-card">
+        <img
+          src="../../images/blog2_11_are_we_alone_part2_hero.png"
+          alt="Future observatories and radio telescopes searching the Milky Way for life"
+          onerror="this.onerror=null;this.src='../../images/blog2_10_future_life_search.png';"
+        />
+        <figcaption class="hero-caption">
+          The search for life is no longer only a philosophical question. It is becoming a measurement problem:
+          photons, spectra, detector stability, calibration, noise, and patience.
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="feature wide" aria-label="Future observatories feature">
+    <div class="feature-frame">
+      <img
+        src="../../images/blog2_10_future_life_search.png"
+        alt="Future observatories searching for biosignatures and technosignatures"
+        onerror="this.onerror=null;this.style.display='none';"
+      />
+      <div class="feature-caption">
+        <strong>Visual Feature Frame · From wonder to instrumentation</strong>
+        <span>
+          The next phase of astrobiology is not only about discovering planets. It is about extracting fragile
+          chemical and technological information from very small signals buried inside enormous cosmic noise.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal wide">
+    <div class="journal-grid">
+      <aside class="left-rail">
+        <div class="rail-card">
+          <h3>Navigation &amp; Progress</h3>
+          <ul class="section-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#exoplanet-census">Exoplanet Census</a></li>
+            <li><a href="#spectroscopy">Atmosphere Reading</a></li>
+            <li><a href="#biosignatures">Biosignatures</a></li>
+            <li><a href="#technosignatures">Technosignatures</a></li>
+            <li><a href="#seti-lab">SETI Signal Analyzer</a></li>
+            <li><a href="#great-filter">The Great Filter</a></li>
+            <li><a href="#future-missions">Future Missions</a></li>
+            <li><a href="#interpretation">How Not to Fool Ourselves</a></li>
+            <li><a href="#sources">Sources</a></li>
+            <li><a href="#comments">Comments</a></li>
+          </ul>
+
+          <div class="section-progress-card">
+            <div class="section-progress-label">Reading Progress</div>
+            <div class="section-progress-track">
+              <div class="section-progress-fill" id="railProgress"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>Quick Controls</h3>
+          <div class="telemetry">
+            <div><span>Theme</span><strong id="themeState">Dark</strong></div>
+            <div><span>Mode</span><strong>Part II Extreme</strong></div>
+            <div><span>Math</span><strong>MathJax</strong></div>
+            <div><span>Lab</span><strong>Canvas SNR</strong></div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="story">
+        <div class="story-header" id="overview">
+          <div class="eyebrow">Part II · from scale to evidence</div>
+          <h2>The honest answer is not “yes” or “no”. It is “show me the data pipeline”.</h2>
+          <p>
+            Part I treated the question as a problem of scale: billions of stars, billions of years, and a Galaxy
+            that has not yet bothered to send a clear message. Part II moves into the harder territory: constraints.
+            We now know planets are common. That is not the same as knowing life is common. And it is definitely not
+            the same as knowing technological civilisations are detectable.
+          </p>
+          <p>
+            This is where astrobiology becomes instrumentation. A biosignature is not a poetic smell of alien grass.
+            It is a tiny spectral feature fighting clouds, stellar activity, calibration drift, detector noise, model
+            degeneracy, and human overexcitement. A technosignature is not “aliens confirmed”. It is a candidate signal
+            that must survive radio-frequency interference, instrumental artefacts, natural astrophysical sources, and
+            the most dangerous phrase in science communication: “this looks weird”.
+          </p>
+          <p>
+            My own background sits between astrophysics, optical instrumentation, feedback control, and signal processing,
+            so I do not see the search for life as just a romantic question. I see it as a measurement chain. Source,
+            propagation, optics, detector, calibration, algorithm, statistical threshold, interpretation. At any stage,
+            the universe can hide the answer, or we can hide it from ourselves by doing the measurement badly.
+          </p>
+        </div>
+
+        <article>
+          <section class="chapter" id="exoplanet-census">
+            <div class="chapter-label">Chapter 01 · Exoplanet Census</div>
+            <h2>The first revolution is already over: planets are normal.</h2>
+            <p>
+              The old pessimistic possibility that planetary systems might be rare is no longer very persuasive.
+              Kepler changed the landscape by showing that planets are common across the Galaxy, TESS continues to
+              expand the nearby planet sample, and radial velocity surveys keep measuring planetary masses and orbital
+              architectures. The NASA-confirmed exoplanet count passed 6,000 in 2025, and the archive continues to be
+              updated as new planets are confirmed.
+            </p>
+            <p>
+              That sounds like a victory, and in one sense it is. But it also moves the question into a more uncomfortable
+              form. If planets are common, then the next filters matter more: how often are planets temperate, rocky,
+              chemically active, atmospherically stable, biologically productive, and observationally accessible?
+              The discovery of a planet is only the first paragraph of a very long argument.
+            </p>
+            <div class="fact-grid">
+              <div class="fact">
+                <strong>Exoplanet count</strong>
+                <span>Thousands of confirmed planets now exist in public catalogues. This tells us planet formation is common, not that life is confirmed.</span>
+              </div>
+              <div class="fact">
+                <strong>Candidate gap</strong>
+                <span>Many candidates still need validation. Astronomy enjoys making lists and then asking spectroscopy to do the hard part.</span>
+              </div>
+              <div class="fact">
+                <strong>Transit bias</strong>
+                <span>Transit surveys prefer systems aligned with our line of sight. The universe does not arrange itself for our convenience.</span>
+              </div>
+              <div class="fact">
+                <strong>Radial velocity role</strong>
+                <span>RV measurements help constrain mass. Without mass, radius alone can be a beautiful but suspiciously incomplete story.</span>
+              </div>
+            </div>
+            <p>
+              The phrase “habitable zone” also needs discipline. A planet in the habitable zone is not automatically
+              habitable. It only means the stellar flux might allow liquid water on a suitable surface under suitable
+              atmospheric conditions. That sentence contains enough caveats to make a press release visibly nervous.
+            </p>
+            <div class="math-card">
+              <div class="math-label">Incident flux approximation</div>
+              \[
+                S_p \approx \frac{L_\star}{4\pi a^2}
+              \]
+              <p>
+                Here \(S_p\) is the stellar flux received by the planet, \(L_\star\) is stellar luminosity, and \(a\)
+                is orbital distance. The habitable-zone argument begins with flux, but real habitability also depends
+                on atmosphere, geology, rotation, magnetic environment, stellar activity, and time.
+              </p>
+            </div>
+          </section>
+
+          <section class="chapter" id="spectroscopy">
+            <div class="chapter-label">Chapter 02 · Exoplanet Atmosphere Reading</div>
+            <h2>Atmospheres are read by stealing tiny wavelength-dependent clues from starlight.</h2>
+            <p>
+              The modern search for life depends heavily on spectroscopy. If a planet transits its star, a small fraction
+              of the starlight filters through the planet’s atmosphere before reaching us. Molecules in that atmosphere
+              absorb specific wavelengths. In the data, this appears as a tiny wavelength-dependent change in transit depth.
+              The planet is not shouting its composition. It is whispering through a star.
+            </p>
+            <p>
+              JWST demonstrated the power of this method with WASP-39b, where observations using NIRSpec produced a
+              clear carbon dioxide feature between about 4.1 and 4.6 microns. That detection was not a biosignature,
+              but it was a very important instrumentation moment: it showed that detailed atmospheric chemistry can be
+              extracted from planets outside the Solar System when the target and instrument are favourable.
+            </p>
+
+            <figure class="figure-note">
+              <img
+                src="../../images/blog2_07_exoplanet_spectroscopy.png"
+                alt="Exoplanet transit spectroscopy visual showing atmospheric absorption features"
+                onerror="this.onerror=null;this.style.display='none';"
+              />
+              <figcaption>
+                Exoplanet spectroscopy visual: the atmospheric signal is a small modulation on top of a much brighter stellar signal.
+                This is why calibration, stability, and model discipline matter.
+              </figcaption>
+            </figure>
+
+            <div class="math-card">
+              <div class="math-label">Transmission spectrum idea</div>
+              \[
+                \Delta F(\lambda) \approx \left(\frac{R_p + h(\lambda)}{R_\star}\right)^2 - \left(\frac{R_p}{R_\star}\right)^2
+              \]
+              <p>
+                \(R_p\) is the planet radius, \(R_\star\) is the stellar radius, and \(h(\lambda)\) is the effective
+                atmospheric height at wavelength \(\lambda\). The molecular information is hidden in \(h(\lambda)\),
+                which is usually very small compared with the stellar disk.
+              </p>
+            </div>
+
+            <p>
+              For high-resolution spectroscopy, the problem changes shape. Instead of looking only for broad molecular
+              features at low or moderate resolving power, high-resolution spectrographs can separate many narrow lines
+              and use cross-correlation techniques to detect a molecular template moving at the planet’s orbital velocity.
+              A resolving power of \(R \sim 100{,}000\) means:
+            </p>
+
+            <div class="math-card">
+              <div class="math-label">Resolving power</div>
+              \[
+                R = \frac{\lambda}{\Delta \lambda} \sim 100{,}000
+              \]
+              <p>
+                At this resolution, tiny Doppler shifts and dense molecular line forests become measurable in principle.
+                In practice, they fight the atmosphere, instrumental profile changes, detector behaviour, thermal drift,
+                fibre stability, and the delightful chaos of real hardware.
+              </p>
+            </div>
+
+            <p>
+              This is exactly why detector-plane stability and spectrograph stabilisation matter. If a spectral line shifts
+              because the planet moved, that is astrophysics. If it shifts because the instrument warmed by a small amount,
+              that is a calibration problem wearing an astrophysics costume. Precision spectroscopy is not only about large
+              telescopes; it is about making the instrument boring enough that the universe becomes the interesting part.
+            </p>
+            <p>
+              In extreme-precision radial velocity and high-resolution exoplanet spectroscopy, thermal control, optical-path
+              stability, detector alignment, fibre scrambling, wavelength calibration, and environmental monitoring become
+              scientific requirements rather than engineering decorations. This connects directly to my own interest in
+              feedback-controlled instrumentation: if the spectrograph drifts, the signal extraction inherits that drift.
+              A planet does not care that the lab temperature changed. The data certainly does.
+            </p>
+          </section>
+
+          <section class="chapter" id="biosignatures">
+            <div class="chapter-label">Chapter 03 · Biosignatures</div>
+            <h2>A biosignature is not proof of life. It is a suspect with a complicated alibi.</h2>
+            <p>
+              A biosignature is an observable feature that may indicate biological activity. In exoplanet atmospheres,
+              candidates often include oxygen, ozone, methane, nitrous oxide, water vapour, carbon dioxide, and chemical
+              disequilibrium. But no single molecule is a magical alien stamp. Oxygen can have abiotic pathways. Methane
+              can be geological. Carbon dioxide is common and not impressed by our excitement.
+            </p>
+            <p>
+              The strongest case would not be “we found molecule X”. It would be a coherent planetary context: a rocky
+              planet, in a plausible climate regime, around a well-characterised star, with atmospheric gases in a combination
+              that is difficult to sustain without biology, and with false positives carefully eliminated. That last part is
+              where the science becomes slow, careful, and much less fun for headlines.
+            </p>
+
+            <figure class="figure-note">
+              <img
+                src="../../images/blog2_09_biosignature_false_positive.png"
+                alt="Biosignature false-positive visual comparing biological and abiotic atmospheric chemistry"
+                onerror="this.onerror=null;this.style.display='none';"
+              />
+              <figcaption>
+                Biosignature false-positive visual: life is not the only process that can alter an atmosphere.
+                Rocks, radiation, photochemistry, and volcanic history also enjoy causing confusion.
+              </figcaption>
+            </figure>
+
+            <div class="math-card">
+              <div class="math-label">Bayesian caution</div>
+              \[
+                P(\mathrm{life}\mid D) =
+                \frac{P(D\mid \mathrm{life})P(\mathrm{life})}
+                {P(D\mid \mathrm{life})P(\mathrm{life}) + P(D\mid \mathrm{abiotic})P(\mathrm{abiotic})}
+              \]
+              <p>
+                \(D\) is the observed data. A strong detection requires not only that life explains the data well,
+                but that abiotic alternatives explain it poorly. The denominator is where overconfident claims go to suffer.
+              </p>
+            </div>
+
+            <p>
+              Stellar context matters enormously. M dwarfs are attractive because small stars make transit signals larger
+              for Earth-sized planets, but they can also be magnetically active, flare, strip atmospheres, and complicate
+              atmospheric interpretation. Sun-like stars may offer more familiar contexts, but the signals are smaller.
+              Observational convenience and biological convenience are not always friends.
+            </p>
+            <p>
+              Therefore, a serious biosignature claim will probably require repeated observations, multiple wavelengths,
+              atmospheric retrieval modelling, stellar activity monitoring, and independent confirmation. If that sounds
+              slow, good. Life beyond Earth would be one of the most important discoveries in human history. It should not
+              be announced with the evidential standard of a viral tweet.
+            </p>
+          </section>
+
+          <section class="chapter" id="technosignatures">
+            <div class="chapter-label">Chapter 04 · Technosignatures</div>
+            <h2>Technosignatures are evidence that someone else may also be making engineering decisions under budget constraints.</h2>
+            <p>
+              A technosignature is an observable sign of technology. It might be a narrowband radio signal, a laser pulse,
+              industrial atmospheric chemistry, artificial illumination, unusual waste heat, or large-scale engineering.
+              NASA’s technosignature framing includes possibilities such as radio or laser pulses, artificial chemicals
+              in exoplanet atmospheres, and Dyson-sphere-like structures that alter stellar light or infrared emission.
+            </p>
+            <p>
+              The reason technosignatures are attractive is that technology can be more obvious than biology. A civilisation
+              that intentionally transmits, or unintentionally leaks energy, might produce signals far from thermodynamic or
+              astrophysical equilibrium. The problem is that “weird” is not equal to “alien”. Weird can mean calibration error,
+              terrestrial interference, satellites, plasma physics, dust, natural transients, or an instrument doing something
+              deeply unhelpful at 3 a.m.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <strong>Radio technosignature</strong>
+                <span>Narrowband signals can stand out because natural astrophysical emission is usually broader. Unfortunately, Earth also produces radio garbage.</span>
+              </div>
+              <div class="fact">
+                <strong>Laser technosignature</strong>
+                <span>Short optical pulses could be detectable if aimed at us. That “if” is doing enough work to need a salary.</span>
+              </div>
+              <div class="fact">
+                <strong>Atmospheric technosignature</strong>
+                <span>Industrial pollutants could reveal technology, but retrieval degeneracies and stellar context still matter.</span>
+              </div>
+              <div class="fact">
+                <strong>Waste heat</strong>
+                <span>Large-scale energy use may produce infrared excess. The challenge is separating engineering from dust and astrophysical processes.</span>
+              </div>
+            </div>
+
+            <div class="math-card">
+              <div class="math-label">Beaming factor</div>
+              \[
+                f_b \approx \frac{\Omega}{4\pi}
+              \]
+              <p>
+                \(f_b\) is the fraction of the sky covered by the transmitted beam and \(\Omega\) is the beam solid angle.
+                A tightly beamed signal is efficient if aimed correctly and almost invisible if it is not. The universe,
+                as usual, is not obliged to aim things at us.
+              </p>
+            </div>
+
+            <p>
+              From an instrumentation point of view, SETI is a classification problem sitting on top of a detection problem.
+              First, the receiver has to see a candidate above the noise. Then the pipeline has to decide whether the candidate
+              is terrestrial interference, satellite contamination, natural astrophysics, or something genuinely anomalous.
+              The failure modes are not philosophical; they are technical.
+            </p>
+          </section>
+
+          <section class="chapter" id="seti-lab">
+            <div class="chapter-label">Extreme Lab Module · SETI Signal Analyzer</div>
+            <h2>Build a cosmic link budget and watch the signal fight the noise floor.</h2>
+            <p>
+              This module is a simplified educational model, not a full observatory-grade radiometer simulation. The goal is
+              to show how distance, transmitter power, antenna diameter, frequency, bandwidth, integration time, and beaming
+              combine into a signal-to-noise problem. It is deliberately written like an instrumentation lab because that is
+              what SETI becomes when the poetry is removed.
+            </p>
+
+            <div class="math-card">
+              <div class="math-label">Signal model used in the module</div>
+              \[
+                A_{\mathrm{eff}} = \eta\frac{\pi D^2}{4}
+              \]
+              \[
+                G_b \approx \eta\left(\frac{\pi D}{\lambda}\right)^2,\qquad \lambda = \frac{c}{\nu}
+              \]
+              \[
+                P_r \approx \frac{P_t G_b A_{\mathrm{eff}}}{4\pi d^2}
+              \]
+              \[
+                P_n = k_B T_{\mathrm{sys}} B
+              \]
+              \[
+                \mathrm{SNR} \approx \frac{P_r}{k_B T_{\mathrm{sys}}B}\sqrt{B\tau}
+              \]
+              <p>
+                \(A_{\mathrm{eff}}\) is effective collecting area, \(D\) is antenna diameter, \(G_b\) is the simplified
+                beaming gain, \(P_t\) is transmitter power, \(d\) is distance, \(B\) is bandwidth, \(\tau\) is integration time,
+                \(T_{\mathrm{sys}}\) is system temperature, and \(k_B\) is Boltzmann’s constant.
+              </p>
+            </div>
+
+            <div class="lab-module" id="setiLab">
+              <div class="lab-head">
+                <div>
+                  <h3>SETI Signal Analyzer Lab</h3>
+                  <p>
+                    Adjust the transmission and receiver assumptions. The graph shows a synthetic narrowband signal
+                    buried inside noise. Detected means the toy SNR crosses a threshold; it does not mean aliens are
+                    waiting in the GitHub issues tab.
+                  </p>
+                </div>
+                <div class="lab-badges">
+                  <span class="lab-badge active">Canvas SNR</span>
+                  <span class="lab-badge">Signal Processing</span>
+                  <span class="lab-badge">Instrumentation</span>
+                </div>
+              </div>
+
+              <div class="lab-grid">
+                <div class="lab-controls">
+                  <div class="scenario-buttons" aria-label="SETI signal presets">
+                    <button class="scenario-button active" type="button" data-seti-preset="nearby">Nearby Beacon</button>
+                    <button class="scenario-button" type="button" data-seti-preset="weak">Weak Leakage</button>
+                    <button class="scenario-button" type="button" data-seti-preset="deep">Deep Galaxy</button>
+                    <button class="scenario-button" type="button" data-seti-preset="heroic">Heroic Telescope</button>
+                  </div>
+
+                  <div class="switch-row">
+                    <span>Scientific Mode: include beaming gain from dish diameter and frequency</span>
+                    <label class="switch">
+                      <input type="checkbox" id="scientificMode" checked />
+                      <span class="slider-switch"></span>
+                    </label>
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Distance \(d\)</span><strong><span id="distanceVal">120</span> ly</strong></label>
+                    <input id="distanceLy" type="range" min="1" max="5000" step="1" value="120" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Transmitter power \(P_t\)</span><strong><span id="powerVal">10.0</span> TW</strong></label>
+                    <input id="transmitterPower" type="range" min="-3" max="5" step="0.01" value="1" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Antenna diameter \(D\)</span><strong><span id="diameterVal">70</span> m</strong></label>
+                    <input id="antennaDiameter" type="range" min="1" max="500" step="1" value="70" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Frequency \(\nu\)</span><strong><span id="frequencyVal">1.42</span> GHz</strong></label>
+                    <input id="frequencyGhz" type="range" min="0.1" max="30" step="0.01" value="1.42" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Bandwidth \(B\)</span><strong><span id="bandwidthVal">1.0</span> Hz</strong></label>
+                    <input id="bandwidthHz" type="range" min="0" max="6" step="0.01" value="0" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>Integration time \(\tau\)</span><strong><span id="integrationVal">300</span> s</strong></label>
+                    <input id="integrationTime" type="range" min="10" max="7200" step="10" value="300" />
+                  </div>
+
+                  <div class="control-row">
+                    <label><span>System temperature \(T_{\mathrm{sys}}\)</span><strong><span id="tempVal">25</span> K</strong></label>
+                    <input id="systemTemp" type="range" min="5" max="120" step="1" value="25" />
+                  </div>
+                </div>
+
+                <div class="lab-output">
+                  <div class="output-label">Detection State</div>
+                  <div class="output-number" id="detectionState">Marginal</div>
+                  <p class="output-note" id="detectionNote">
+                    The signal is flirting with the threshold. It may be real, or it may be the universe clearing its throat.
+                  </p>
+
+                  <div class="lab-meter">
+                    <div class="lab-meter-title">Signal-to-Noise Ratio</div>
+                    <div class="meter-track">
+                      <div class="meter-fill" id="snrMeter"></div>
+                    </div>
+                  </div>
+
+                  <div class="mini-readout">
+                    <div><span>SNR</span><strong id="snrVal">—</strong></div>
+                    <div><span>Received power</span><strong id="receivedPowerVal">—</strong></div>
+                    <div><span>Noise power</span><strong id="noisePowerVal">—</strong></div>
+                    <div><span>Beaming gain</span><strong id="beamGainVal">—</strong></div>
+                    <div><span>Effective area</span><strong id="areaVal">—</strong></div>
+                  </div>
+
+                  <div class="canvas-panel">
+                    <canvas id="snrCanvas" width="720" height="340" aria-label="Synthetic SETI signal-to-noise graph"></canvas>
+                    <div class="canvas-caption">
+                      Synthetic frequency-channel graph: the narrow spike is the candidate signal. If it cannot rise
+                      above the noise, the civilisation may exist and still look like nothing.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="chapter" id="great-filter">
+            <div class="chapter-label">Chapter 05 · The Great Filter</div>
+            <h2>Some step may be brutally difficult. The bad news is we do not know which one.</h2>
+            <p>
+              The Great Filter is the idea that somewhere between dead chemistry and long-lived technological civilisation,
+              one or more transitions may be extremely unlikely. The filter could be behind us: perhaps life itself is rare,
+              or complex cells are rare, or intelligence is rare. Or it could be ahead of us: perhaps technological species
+              tend to destroy their own stability before they become visible across the Galaxy.
+            </p>
+            <p>
+              This is the part of astrobiology where the numbers start to feel personal. If we discover simple life is common,
+              that is scientifically thrilling. It may also imply that the hard filter lies later. If we discover complex life
+              is common but technological civilisation is absent, the interpretation becomes even more uncomfortable. The
+              universe might not be empty; it might be full of evolutionary experiments that never build telescopes.
+            </p>
+
+            <figure class="figure-note">
+              <img
+                src="../../images/blog2_08_great_filter.png"
+                alt="Great Filter astrobiology timeline from chemistry to long-lived civilisation"
+                onerror="this.onerror=null;this.style.display='none';"
+              />
+              <figcaption>
+                Great Filter visual: chemistry, life, complexity, intelligence, technology, and long-term survival are not guaranteed stages.
+                Evolution does not owe us a sequel.
+              </figcaption>
+            </figure>
+
+            <div class="math-card">
+              <div class="math-label">Filter-chain framing</div>
+              \[
+                P(\mathrm{visible\ civilization}) =
+                P_l P_c P_i P_t P_s P_d
+              \]
+              <p>
+                \(P_l\) is the probability that life begins, \(P_c\) that complex life develops, \(P_i\) that intelligence appears,
+                \(P_t\) that technology becomes detectable, \(P_s\) that the civilisation survives long enough, and \(P_d\)
+                that our instruments actually detect it. A small value in any one term can crush the final probability.
+              </p>
+            </div>
+
+            <p>
+              The Great Filter is not one hypothesis. It is a family of uncomfortable possibilities. The proper response is not panic;
+              it is measurement. The more we learn about exoplanet atmospheres, planetary habitability, Solar System ocean worlds,
+              and technosignature search limits, the more we can locate where the uncertainty actually lives.
+            </p>
+          </section>
+
+          <section class="chapter" id="future-missions">
+            <div class="chapter-label">Chapter 06 · Future Missions</div>
+            <h2>The next generation will not answer everything. It will make bad answers harder to hide.</h2>
+            <p>
+              JWST is already transforming atmosphere studies for favourable exoplanets, but it was not designed as a dedicated
+              Earth-twin biosignature survey machine. The future will require a layered approach: space telescopes that can
+              directly image nearby terrestrial planets, ground-based extremely large telescopes for high-resolution spectroscopy,
+              radio arrays for technosignature and transient searches, and better statistical tools to combine incomplete evidence.
+            </p>
+            <p>
+              NASA’s Habitable Worlds Observatory concept is particularly important because its stated objective is to identify
+              and directly image potentially habitable planets around other stars, with spectroscopy searching for atmospheric
+              biosignatures such as oxygen and methane. That is the shift from “finding planets” to “interrogating planets”.
+              The planets should be nervous.
+            </p>
+
+            <figure class="figure-note">
+              <img
+                src="../../images/blog2_10_future_life_search.png"
+                alt="Future observatories including large telescopes, radio arrays, space telescopes and exoplanet spectra"
+                onerror="this.onerror=null;this.style.display='none';"
+              />
+              <figcaption>
+                Future observatories visual: the search will be multi-instrument, multi-wavelength, and painfully dependent on calibration.
+              </figcaption>
+            </figure>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <strong>JWST</strong>
+                <span>Powerful infrared spectroscopy for favourable transiting planets, especially large or close-in targets.</span>
+              </div>
+              <div class="fact">
+                <strong>ELT-class telescopes</strong>
+                <span>Large collecting area and high-resolution spectroscopy from the ground, with adaptive optics doing the heavy lifting.</span>
+              </div>
+              <div class="fact">
+                <strong>Roman Space Telescope</strong>
+                <span>Wide-field surveys and microlensing demographics that improve our statistical map of planetary systems.</span>
+              </div>
+              <div class="fact">
+                <strong>Habitable Worlds Observatory</strong>
+                <span>A future direct-imaging mission concept explicitly connected to searching for biosignatures on nearby habitable worlds.</span>
+              </div>
+            </div>
+
+            <p>
+              The most realistic future is not one heroic telescope finding “the alien planet”. It is a network of instruments
+              slowly reducing ambiguity: photometry to find worlds, radial velocities to measure masses, spectroscopy to probe
+              atmospheres, direct imaging to separate planets from stars, radio searches to test technosignatures, and theory
+              to stop us from confusing noise with destiny.
+            </p>
+          </section>
+
+          <section class="chapter" id="interpretation">
+            <div class="chapter-label">Chapter 07 · How Not to Fool Ourselves</div>
+            <h2>The most dangerous phrase in this field is “therefore aliens”.</h2>
+            <p>
+              A credible life detection will need to survive the boring questions. Is the signal repeatable? Is the instrument stable?
+              Is the star active? Are there clouds? Are the spectral features model-dependent? Could geology explain the chemistry?
+              Could the radio signal be terrestrial interference? Could the apparent anomaly be a data reduction artefact?
+            </p>
+            <p>
+              This is not pessimism. It is the quality-control system that makes a discovery trustworthy. The stronger the claim,
+              the more aggressively it must be tested. A weak claim that becomes viral is not stronger; it is merely louder.
+            </p>
+
+            <div class="math-card">
+              <div class="math-label">Discovery discipline</div>
+              \[
+                \mathrm{Confidence} \neq \mathrm{Excitement}
+              \]
+              \[
+                \mathrm{Evidence} = \mathrm{signal} - \mathrm{instrumental\ artefacts} - \mathrm{natural\ false\ positives}
+              \]
+              <p>
+                This is not a formal equation. It is a survival rule. If the instrumental and natural explanations have not
+                been seriously attacked, the claim is not ready.
+              </p>
+            </div>
+
+            <div class="quote">
+              The universe does not owe us loneliness, but it also does not owe us company. Our job is to build instruments good enough
+              to tell the difference.
+            </div>
+
+            <p>
+              So, are we alone? Part II does not answer that. It makes the question sharper. Planets are common. Atmospheres are measurable.
+              Biosignatures are possible but ambiguous. Technosignatures are exciting but treacherous. Future observatories may finally
+              turn the question from philosophical discomfort into a statistical and spectroscopic programme. That is progress.
+              It is not closure, but it is better than staring dramatically at the sky and hoping the Galaxy replies.
+            </p>
+          </section>
+
+          <section class="chapter" id="sources">
+            <div class="chapter-label">Sources &amp; Further Reading</div>
+            <h2>Selected sources used for this post.</h2>
+            <p>
+              The style can be sarcastic; the science should remain traceable. These sources support the main factual anchors:
+              exoplanet counts, JWST spectroscopy, technosignature framing, and future life-detection mission concepts.
+            </p>
+
+            <div class="source-list">
+              <a href="https://www.nasa.gov/universe/exoplanets/nasas-tally-of-planets-outside-our-solar-system-reaches-6000/" target="_blank" rel="noopener">
+                NASA/JPL — NASA’s tally of planets outside our Solar System reaches 6,000.
+              </a>
+              <a href="https://science.nasa.gov/missions/webb/nasas-webb-detects-carbon-dioxide-in-exoplanet-atmosphere/" target="_blank" rel="noopener">
+                NASA Webb — JWST detects carbon dioxide in WASP-39b’s atmosphere.
+              </a>
+              <a href="https://science.nasa.gov/universe/search-for-life/searching-for-signs-of-intelligent-life-technosignatures/" target="_blank" rel="noopener">
+                NASA Science — Searching for signs of intelligent life: technosignatures.
+              </a>
+              <a href="https://science.nasa.gov/astrophysics/programs/habitable-worlds-observatory/" target="_blank" rel="noopener">
+                NASA Science — Habitable Worlds Observatory.
+              </a>
+              <a href="https://astrobiology.nasa.gov/research/astrobiology-at-nasa/habitable-worlds/" target="_blank" rel="noopener">
+                NASA Astrobiology — Habitable Worlds research programme.
+              </a>
+              <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener">
+                NASA Exoplanet Archive — confirmed planets, candidates, and exoplanet data services.
+              </a>
+            </div>
+          </section>
+        </article>
+
+        <section class="comments-section" id="comments">
+          <h2>Comments &amp; reactions</h2>
+          <p>
+            Powered by GitHub Discussions via giscus. Leave a question, correction, or your favourite explanation for why the Galaxy is ghosting us.
+          </p>
+          <script src="https://giscus.app/client.js"
+                  data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                  data-repo-id="R_kgDOST2kXQ"
+                  data-category="General"
+                  data-category-id="DIC_kwDOST2kXc4C8UVe"
+                  data-mapping="pathname"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="0"
+                  data-input-position="bottom"
+                  data-theme="preferred_color_scheme"
+                  data-lang="en"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </section>
+      </main>
+
+      <aside class="right-rail">
+        <div class="rail-card">
+          <h3>Detection Probability</h3>
+          <div class="telemetry">
+            <div><span>Object</span><strong>SETI Signal</strong></div>
+            <div><span>Status</span><strong id="railDetectionState" class="status-marginal">Marginal</strong></div>
+            <div><span>SNR</span><strong id="railSnr">—</strong></div>
+            <div><span>Distance</span><strong id="railDistance">120 ly</strong></div>
+            <div><span>Receiver</span><strong id="railReceiver">70 m</strong></div>
+            <div><span>Probability Mood</span><strong id="railMood">Technically rude</strong></div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>Glossary, but less boring</h3>
+          <div class="glossary">
+            <div class="glossary-item">
+              <strong>Biosignature</strong>
+              <span>Possible evidence of biology. Also possible evidence that geology is trolling us.</span>
+            </div>
+            <div class="glossary-item">
+              <strong>Technosignature</strong>
+              <span>Evidence that someone else may currently be making the same engineering mistakes we are.</span>
+            </div>
+            <div class="glossary-item">
+              <strong>False positive</strong>
+              <span>The universe saying “gotcha” through chemistry, dust, flares, or calibration drift.</span>
+            </div>
+            <div class="glossary-item">
+              <strong>High-resolution spectroscopy</strong>
+              <span>Splitting light so finely that both molecules and instrument drift start confessing.</span>
+            </div>
+            <div class="glossary-item">
+              <strong>The Great Filter</strong>
+              <span>The possibility that some step toward civilisation is brutally unlikely. Comforting? Absolutely not.</span>
+            </div>
+            <div class="glossary-item">
+              <strong>SNR</strong>
+              <span>Signal-to-noise ratio. Also known as “is that aliens or is the detector having a bad day?”</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>Related Labs</h3>
+          <div class="post-list">
+            <a class="post-card" href="are-we-alone.html">
+              <div class="post-card-kicker">Previous Article</div>
+              <h4>Are We Alone? Part I</h4>
+              <p>The scale problem, Drake equation, Fermi paradox, and cosmic silence.</p>
+              <div class="tiny-meta">Astrobiology · scale</div>
+            </a>
+
+            <a class="post-card" href="spectra-confession.html">
+              <div class="post-card-kicker">Related Exploration</div>
+              <h4>Spectra</h4>
+              <p>How light becomes evidence after passing through matter.</p>
+              <div class="tiny-meta">Spectroscopy · light</div>
+            </a>
+
+            <a class="post-card" href="radial-velocity-method.html">
+              <div class="post-card-kicker">Related Exploration</div>
+              <h4>Radial Velocity</h4>
+              <p>Finding planets by watching stars panic slightly.</p>
+              <div class="tiny-meta">Exoplanets · precision</div>
+            </a>
+
+            <a class="post-card" href="control-system.html">
+              <div class="post-card-kicker">Related Exploration</div>
+              <h4>Control Systems</h4>
+              <p>Because every serious instrument eventually needs feedback.</p>
+              <div class="tiny-meta">Instrumentation · feedback</div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner wide">
+      <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics &amp; Instrumentation Lab.</div>
+      <div>
+        <a href="../../index.html">Home Page</a>
+        ·
+        <a href="../../publications.html">Publications</a>
+        ·
+        <a href="../index.html">Blog Archive</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const themeButton = document.getElementById("themeToggle");
+    const themeState = document.getElementById("themeState");
+
+    function applyThemeFromStorage() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        document.body.classList.add("light");
+        if (themeButton) themeButton.textContent = "☀";
+        if (themeState) themeState.textContent = "Light";
+      } else {
+        document.body.classList.remove("light");
+        if (themeButton) themeButton.textContent = "☾";
+        if (themeState) themeState.textContent = "Dark";
+      }
+    }
+
+    applyThemeFromStorage();
+
+    if (themeButton) {
+      themeButton.addEventListener("click", () => {
+        document.body.classList.toggle("light");
+        const isLight = document.body.classList.contains("light");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        themeButton.textContent = isLight ? "☀" : "☾";
+        if (themeState) themeState.textContent = isLight ? "Light" : "Dark";
+      });
+    }
+
+    const pageProgress = document.getElementById("pageProgress");
+    const railProgress = document.getElementById("railProgress");
+
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+      if (pageProgress) pageProgress.style.width = progress + "%";
+      if (railProgress) railProgress.style.width = progress + "%";
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+
+    const sections = [...document.querySelectorAll("main [id], article [id]")];
+    const navLinks = [...document.querySelectorAll(".section-nav a")];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+          });
+        }
+      });
+    }, {
+      rootMargin: "-20% 0px -65% 0px",
+      threshold: 0.1
+    });
+
+    sections.forEach((section) => observer.observe(section));
+
+    const constants = {
+      c: 299792458,
+      ly: 9.4607304725808e15,
+      kB: 1.380649e-23,
+      eta: 0.62,
+      pi: Math.PI
+    };
+
+    const seti = {
+      distanceLy: document.getElementById("distanceLy"),
+      transmitterPower: document.getElementById("transmitterPower"),
+      antennaDiameter: document.getElementById("antennaDiameter"),
+      frequencyGhz: document.getElementById("frequencyGhz"),
+      bandwidthHz: document.getElementById("bandwidthHz"),
+      integrationTime: document.getElementById("integrationTime"),
+      systemTemp: document.getElementById("systemTemp"),
+      scientificMode: document.getElementById("scientificMode")
+    };
+
+    const labels = {
+      distanceVal: document.getElementById("distanceVal"),
+      powerVal: document.getElementById("powerVal"),
+      diameterVal: document.getElementById("diameterVal"),
+      frequencyVal: document.getElementById("frequencyVal"),
+      bandwidthVal: document.getElementById("bandwidthVal"),
+      integrationVal: document.getElementById("integrationVal"),
+      tempVal: document.getElementById("tempVal"),
+      detectionState: document.getElementById("detectionState"),
+      detectionNote: document.getElementById("detectionNote"),
+      snrMeter: document.getElementById("snrMeter"),
+      snrVal: document.getElementById("snrVal"),
+      receivedPowerVal: document.getElementById("receivedPowerVal"),
+      noisePowerVal: document.getElementById("noisePowerVal"),
+      beamGainVal: document.getElementById("beamGainVal"),
+      areaVal: document.getElementById("areaVal"),
+      railDetectionState: document.getElementById("railDetectionState"),
+      railSnr: document.getElementById("railSnr"),
+      railDistance: document.getElementById("railDistance"),
+      railReceiver: document.getElementById("railReceiver"),
+      railMood: document.getElementById("railMood")
+    };
+
+    const canvas = document.getElementById("snrCanvas");
+    const ctx = canvas ? canvas.getContext("2d") : null;
+
+    const setiPresets = {
+      nearby: {
+        distanceLy: 120,
+        transmitterPower: 1.0,
+        antennaDiameter: 70,
+        frequencyGhz: 1.42,
+        bandwidthHz: 0,
+        integrationTime: 300,
+        systemTemp: 25,
+        scientificMode: true
+      },
+      weak: {
+        distanceLy: 80,
+        transmitterPower: -2.2,
+        antennaDiameter: 35,
+        frequencyGhz: 1.42,
+        bandwidthHz: 2.2,
+        integrationTime: 180,
+        systemTemp: 45,
+        scientificMode: false
+      },
+      deep: {
+        distanceLy: 3000,
+        transmitterPower: 2.5,
+        antennaDiameter: 100,
+        frequencyGhz: 5.0,
+        bandwidthHz: 1.0,
+        integrationTime: 1200,
+        systemTemp: 30,
+        scientificMode: true
+      },
+      heroic: {
+        distanceLy: 400,
+        transmitterPower: 3.2,
+        antennaDiameter: 300,
+        frequencyGhz: 8.4,
+        bandwidthHz: 0,
+        integrationTime: 3600,
+        systemTemp: 15,
+        scientificMode: true
+      }
+    };
+
+    function setPreset(name) {
+      const preset = setiPresets[name];
+      if (!preset) return;
+      seti.distanceLy.value = preset.distanceLy;
+      seti.transmitterPower.value = preset.transmitterPower;
+      seti.antennaDiameter.value = preset.antennaDiameter;
+      seti.frequencyGhz.value = preset.frequencyGhz;
+      seti.bandwidthHz.value = preset.bandwidthHz;
+      seti.integrationTime.value = preset.integrationTime;
+      seti.systemTemp.value = preset.systemTemp;
+      seti.scientificMode.checked = preset.scientificMode;
+
+      document.querySelectorAll("[data-seti-preset]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.setiPreset === name);
+      });
+
+      updateSeti();
+    }
+
+    document.querySelectorAll("[data-seti-preset]").forEach((button) => {
+      button.addEventListener("click", () => setPreset(button.dataset.setiPreset));
+    });
+
+    function formatSci(value, unit) {
+      if (!isFinite(value) || value === 0) return "—";
+      const exp = Math.floor(Math.log10(Math.abs(value)));
+      const mant = value / Math.pow(10, exp);
+      return mant.toFixed(2) + "e" + exp + (unit ? " " + unit : "");
+    }
+
+    function formatCompact(value, digits = 2) {
+      if (!isFinite(value)) return "—";
+      if (Math.abs(value) >= 10000) return value.toExponential(2);
+      if (Math.abs(value) >= 1000) return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      if (Math.abs(value) >= 10) return value.toFixed(1);
+      return value.toFixed(digits);
+    }
+
+    function computeSeti() {
+      const distanceLy = +seti.distanceLy.value;
+      const distanceM = distanceLy * constants.ly;
+      const powerTW = Math.pow(10, +seti.transmitterPower.value);
+      const powerW = powerTW * 1e12;
+      const diameter = +seti.antennaDiameter.value;
+      const frequencyGhz = +seti.frequencyGhz.value;
+      const frequencyHz = frequencyGhz * 1e9;
+      const wavelength = constants.c / frequencyHz;
+      const bandwidthHz = Math.pow(10, +seti.bandwidthHz.value);
+      const integrationTime = +seti.integrationTime.value;
+      const systemTemp = +seti.systemTemp.value;
+      const scientificMode = seti.scientificMode.checked;
+
+      const areaEff = constants.eta * constants.pi * diameter * diameter / 4;
+      let beamGain = 1;
+
+      if (scientificMode) {
+        beamGain = Math.max(1, constants.eta * Math.pow(constants.pi * diameter / wavelength, 2));
+      }
+
+      const receivedPower = powerW * beamGain * areaEff / (4 * constants.pi * distanceM * distanceM);
+      const noisePower = constants.kB * systemTemp * bandwidthHz;
+      const snr = receivedPower / noisePower * Math.sqrt(bandwidthHz * integrationTime);
+      const snrDb = 10 * Math.log10(Math.max(snr, 1e-30));
+      const flux = powerW * beamGain / (4 * constants.pi * distanceM * distanceM);
+
+      return {
+        distanceLy,
+        distanceM,
+        powerTW,
+        powerW,
+        diameter,
+        frequencyGhz,
+        frequencyHz,
+        wavelength,
+        bandwidthHz,
+        integrationTime,
+        systemTemp,
+        areaEff,
+        beamGain,
+        receivedPower,
+        noisePower,
+        snr,
+        snrDb,
+        flux,
+        scientificMode
+      };
+    }
+
+    function updateSeti() {
+      const r = computeSeti();
+
+      labels.distanceVal.textContent = formatCompact(r.distanceLy, 0);
+      labels.powerVal.textContent = formatCompact(r.powerTW, 2);
+      labels.diameterVal.textContent = formatCompact(r.diameter, 0);
+      labels.frequencyVal.textContent = formatCompact(r.frequencyGhz, 2);
+      labels.bandwidthVal.textContent = formatCompact(r.bandwidthHz, 2);
+      labels.integrationVal.textContent = formatCompact(r.integrationTime, 0);
+      labels.tempVal.textContent = formatCompact(r.systemTemp, 0);
+
+      labels.snrVal.textContent = formatCompact(r.snr, 2) + " (" + formatCompact(r.snrDb, 1) + " dB)";
+      labels.receivedPowerVal.textContent = formatSci(r.receivedPower, "W");
+      labels.noisePowerVal.textContent = formatSci(r.noisePower, "W");
+      labels.beamGainVal.textContent = r.scientificMode ? formatSci(r.beamGain, "×") : "1.00 ×";
+      labels.areaVal.textContent = formatCompact(r.areaEff, 1) + " m²";
+
+      let state = "Lost";
+      let stateClass = "status-lost";
+      let note = "The signal is buried below the noise. This is not proof of absence; it is proof that distance and weak signals are professionally annoying.";
+
+      if (r.snr >= 7) {
+        state = "Detected";
+        stateClass = "status-detected";
+        note = "The synthetic signal clears the detection threshold. Real life would still demand RFI rejection, repeatability, and a calm press office.";
+      } else if (r.snr >= 2) {
+        state = "Marginal";
+        stateClass = "status-marginal";
+        note = "The signal is flirting with the threshold. It may be real, or it may be the universe clearing its throat.";
+      }
+
+      labels.detectionState.textContent = state;
+      labels.detectionState.className = "output-number " + stateClass;
+      labels.detectionNote.textContent = note;
+
+      const meterWidth = Math.max(2, Math.min(100, (Math.log10(Math.max(r.snr, 0.001)) + 3) / 5 * 100));
+      labels.snrMeter.style.width = meterWidth + "%";
+
+      labels.railDetectionState.textContent = state;
+      labels.railDetectionState.className = stateClass;
+      labels.railSnr.textContent = formatCompact(r.snr, 2);
+      labels.railDistance.textContent = formatCompact(r.distanceLy, 0) + " ly";
+      labels.railReceiver.textContent = formatCompact(r.diameter, 0) + " m";
+
+      if (state === "Detected") {
+        labels.railMood.textContent = "Do not tweet yet";
+      } else if (state === "Marginal") {
+        labels.railMood.textContent = "Technically rude";
+      } else {
+        labels.railMood.textContent = "Noise wins again";
+      }
+
+      drawSNR(r);
+    }
+
+    function pseudoNoise(i, phase) {
+      const a = Math.sin(i * 12.9898 + phase * 0.017) * 43758.5453;
+      const b = Math.sin(i * 78.233 + phase * 0.031) * 19341.123;
+      return ((a - Math.floor(a)) + (b - Math.floor(b)) - 1);
+    }
+
+    function drawSNR(result) {
+      if (!ctx || !canvas) return;
+
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, "rgba(4,10,22,1)");
+      bg.addColorStop(1, "rgba(2,5,14,1)");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      const left = 52;
+      const right = w - 22;
+      const top = 34;
+      const bottom = h - 58;
+      const mid = (top + bottom) / 2;
+      const plotW = right - left;
+      const plotH = bottom - top;
+
+      ctx.strokeStyle = "rgba(255,255,255,0.08)";
+      ctx.lineWidth = 1;
+
+      for (let i = 0; i <= 5; i++) {
+        const y = top + i * plotH / 5;
+        ctx.beginPath();
+        ctx.moveTo(left, y);
+        ctx.lineTo(right, y);
+        ctx.stroke();
+      }
+
+      for (let i = 0; i <= 8; i++) {
+        const x = left + i * plotW / 8;
+        ctx.beginPath();
+        ctx.moveTo(x, top);
+        ctx.lineTo(x, bottom);
+        ctx.stroke();
+      }
+
+      const phase = performance.now();
+      const snrClamped = Math.min(18, Math.max(0, result.snr));
+      const signalAmp = snrClamped * 7.5;
+      const noiseAmp = 36;
+      const signalCenter = left + plotW * 0.53;
+      const sigma = plotW * 0.022;
+
+      ctx.beginPath();
+
+      for (let i = 0; i <= 520; i++) {
+        const x = left + (i / 520) * plotW;
+        const noise = pseudoNoise(i, phase) * noiseAmp + pseudoNoise(i * 2.31, phase) * 10;
+        const gauss = Math.exp(-0.5 * Math.pow((x - signalCenter) / sigma, 2));
+        const signal = gauss * signalAmp;
+        const y = mid - noise - signal;
+
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      const lineGradient = ctx.createLinearGradient(left, 0, right, 0);
+      lineGradient.addColorStop(0, "rgba(131,221,255,0.45)");
+      lineGradient.addColorStop(0.48, "rgba(74,240,200,0.75)");
+      lineGradient.addColorStop(0.56, "rgba(255,188,115,0.95)");
+      lineGradient.addColorStop(1, "rgba(196,147,255,0.55)");
+      ctx.strokeStyle = lineGradient;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      const thresholdY = mid - 7 * 7.5;
+      ctx.setLineDash([6, 6]);
+      ctx.strokeStyle = "rgba(255,188,115,0.55)";
+      ctx.beginPath();
+      ctx.moveTo(left, thresholdY);
+      ctx.lineTo(right, thresholdY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "rgba(255,188,115,0.90)";
+      ctx.font = "12px JetBrains Mono, monospace";
+      ctx.fillText("SNR threshold ≈ 7", left + 8, thresholdY - 8);
+
+      ctx.fillStyle = "rgba(255,255,255,0.78)";
+      ctx.font = "12px JetBrains Mono, monospace";
+      ctx.fillText("frequency channels", left, h - 24);
+      ctx.save();
+      ctx.translate(18, mid + 45);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText("relative intensity", 0, 0);
+      ctx.restore();
+
+      ctx.fillStyle = result.snr >= 7 ? "rgba(74,240,200,0.95)" : result.snr >= 2 ? "rgba(255,209,102,0.95)" : "rgba(255,123,123,0.95)";
+      ctx.font = "bold 14px JetBrains Mono, monospace";
+      ctx.fillText("SNR ≈ " + formatCompact(result.snr, 2) + " / " + formatCompact(result.snrDb, 1) + " dB", left, 24);
+
+      ctx.fillStyle = "rgba(255,255,255,0.52)";
+      ctx.font = "11px JetBrains Mono, monospace";
+      ctx.fillText("d = " + formatCompact(result.distanceLy, 0) + " ly  ·  D = " + formatCompact(result.diameter, 0) + " m  ·  ν = " + formatCompact(result.frequencyGhz, 2) + " GHz", left + 220, 24);
+    }
+
+    Object.values(seti).forEach((input) => {
+      if (!input) return;
+      input.addEventListener("input", updateSeti);
+      input.addEventListener("change", updateSeti);
+    });
+
+    function animationLoop() {
+      updateSeti();
+      requestAnimationFrame(animationLoop);
+    }
+
+    updateSeti();
+    requestAnimationFrame(animationLoop);
+
+    function trackEvent(name) {
+      if (window.plausible) window.plausible(name);
+      if (window.gtag) {
+        window.gtag("event", name, {
+          event_category: "engagement",
+          event_label: document.title
+        });
+      }
+    }
+
+    document.querySelectorAll("a[href], button").forEach((el) => {
+      el.addEventListener("click", () => {
+        const label = el.dataset.trackEvent || el.textContent.trim().slice(0, 60) || "interaction";
+        trackEvent(label);
+      });
+    });
+  </script>
+</body>
+</html>

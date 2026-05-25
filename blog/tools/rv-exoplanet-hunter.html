@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Stellar RV Exoplanet Hunter | Biswajit Jana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#020508;--panel:rgba(4,9,18,0.90);--panel2:rgba(255,255,255,0.04);
+  --text:#dff0ff;--muted:#8aaccc;--dim:#4d6882;--line:rgba(255,255,255,0.10);
+  --accent:#74f2c8;--accent2:#83ddff;--warn:#ffbc73;--danger:#ff7d90;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --display:"Playfair Display",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:var(--mono);color:var(--text);background:var(--bg)}
+button,input,select{font:inherit;cursor:pointer}
+
+/* ── Loading ────────────────────────────────────────── */
+#loading{position:fixed;inset:0;z-index:99;display:grid;place-items:center;
+  background:radial-gradient(ellipse at 50% 40%,rgba(116,242,200,.08),transparent 55%),var(--bg);
+  transition:opacity .6s,visibility .6s}
+#loading.gone{opacity:0;visibility:hidden;pointer-events:none}
+.lcard{width:min(680px,94vw);border-radius:26px;border:1px solid var(--line);
+  background:rgba(5,10,22,.92);backdrop-filter:blur(20px);
+  box-shadow:0 30px 100px rgba(0,0,0,.6);padding:36px;text-align:center}
+.lkicker{color:var(--accent);letter-spacing:.18em;text-transform:uppercase;font-size:.68rem;margin-bottom:14px}
+.lcard h1{font-family:var(--display);font-size:clamp(2.2rem,6vw,4.6rem);
+  letter-spacing:-.05em;line-height:.95;margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 30%,var(--accent) 70%);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.lcard p{color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:20px;font-family:sans-serif;max-width:520px;margin-left:auto;margin-right:auto}
+.sbtn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;
+  border:1px solid rgba(116,242,200,.38);background:rgba(116,242,200,.10);
+  color:var(--accent);padding:12px 28px;font-size:.82rem;
+  transition:background .2s,transform .15s;margin-top:8px}
+.sbtn:hover{background:rgba(116,242,200,.20);transform:translateY(-2px)}
+
+/* ── App layout ─────────────────────────────────────── */
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+
+.topbar{height:46px;display:flex;align-items:center;gap:6px;padding:0 14px;flex-shrink:0;
+  border-bottom:1px solid var(--line);background:rgba(2,5,12,.94);backdrop-filter:blur(16px);z-index:20}
+.topbar a{color:var(--muted);font-size:.68rem;text-decoration:none;padding:4px 8px;
+  border-radius:6px;border:1px solid transparent;transition:color .15s,border-color .15s}
+.topbar a:hover{color:var(--accent);border-color:rgba(116,242,200,.25)}
+.tb-title{font-size:.75rem;font-weight:700;color:var(--text);margin-right:4px}
+.tb-badge{font-size:.60rem;background:rgba(116,242,200,.12);color:var(--accent);
+  border:1px solid rgba(116,242,200,.28);padding:2px 8px;border-radius:999px}
+.tb-sep{flex:1}
+.tb-btn{font-size:.66rem;color:var(--muted);border:1px solid var(--line);
+  background:transparent;border-radius:6px;padding:4px 10px;transition:color .15s,border-color .15s}
+.tb-btn:hover,.tb-btn.on{color:var(--accent);border-color:rgba(116,242,200,.35)}
+.tb-time{font-size:.66rem;color:var(--warn);padding:0 6px;min-width:100px;text-align:right}
+
+.grid{flex:1;display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;overflow:hidden}
+.cpanel{position:fixed;right:0;top:46px;bottom:0;width:270px;
+  background:var(--panel);backdrop-filter:blur(20px);
+  border-left:1px solid var(--line);overflow-y:auto;padding:12px;
+  z-index:15;transform:translateX(0);transition:transform .3s}
+.cpanel.hidden{transform:translateX(100%)}
+body.panel-open .grid{margin-right:270px}
+
+/* Canvas panels */
+.cv-wrap{position:relative;border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);overflow:hidden}
+.cv-wrap canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+.cv-label{position:absolute;top:8px;left:10px;font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);pointer-events:none;z-index:3;
+  background:rgba(2,5,10,.55);padding:2px 6px;border-radius:4px}
+.cv-sub{position:absolute;top:8px;right:10px;font-size:.58rem;color:var(--muted);
+  pointer-events:none;z-index:3}
+
+/* Observe button overlay on RV panel */
+#obsBtn{position:absolute;bottom:10px;right:10px;z-index:5;
+  font-size:.65rem;color:var(--accent);border:1px solid rgba(116,242,200,.35);
+  background:rgba(116,242,200,.08);border-radius:8px;padding:5px 12px;
+  backdrop-filter:blur(8px);transition:background .2s}
+#obsBtn:hover{background:rgba(116,242,200,.18)}
+#obsBtn:disabled{opacity:.4;cursor:default}
+
+/* Discover mode result overlay */
+#resultPanel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:50;width:min(500px,92vw);border-radius:20px;border:1px solid rgba(116,242,200,.35);
+  background:rgba(4,10,22,.95);backdrop-filter:blur(24px);padding:24px;
+  box-shadow:0 20px 80px rgba(0,0,0,.6);display:none}
+#resultPanel h3{color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
+  font-size:.75rem;margin-bottom:12px}
+.res-row{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);
+  padding:5px 0;font-size:.68rem;color:var(--muted)}
+.res-row strong{color:var(--text)}
+.res-match{color:var(--accent)}
+
+/* Controls panel internals */
+.cp-h{color:var(--accent);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.grp{border-radius:12px;border:1px solid rgba(255,255,255,.07);
+  background:var(--panel2);padding:10px;margin-bottom:10px}
+.grp h3{color:var(--accent2);letter-spacing:.13em;text-transform:uppercase;
+  font-size:.60rem;margin-bottom:8px}
+.ctrl{margin-bottom:8px}.ctrl:last-child{margin-bottom:0}
+.ctrl label{display:flex;justify-content:space-between;align-items:baseline;
+  gap:8px;color:var(--muted);font-size:.63rem;margin-bottom:3px}
+.ctrl label strong{color:var(--warn);white-space:nowrap}
+input[type="range"]{width:100%;accent-color:var(--accent);height:3px}
+.row2{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.chip{border-radius:999px;border:1px solid rgba(116,242,200,.22);
+  background:rgba(116,242,200,.05);color:var(--accent);padding:4px 10px;font-size:.62rem;
+  transition:background .15s}
+.chip:hover,.chip.on{background:rgba(116,242,200,.18);border-color:rgba(116,242,200,.45)}
+.chip.warn{border-color:rgba(255,188,115,.3);color:var(--warn);background:rgba(255,188,115,.05)}
+.chip.warn:hover,.chip.warn.on{background:rgba(255,188,115,.15)}
+.status-line{font-size:.62rem;color:var(--muted);line-height:1.6;padding:4px 0}
+.status-line strong{color:var(--accent2)}
+.discover-info{background:rgba(131,221,255,.06);border:1px solid rgba(131,221,255,.18);
+  border-radius:8px;padding:8px;margin-bottom:8px;font-size:.62rem;color:var(--accent2);
+  line-height:1.6}
+</style>
+</head>
+<body>
+
+<!-- Loading splash -->
+<div id="loading">
+  <div class="lcard">
+    <div class="lkicker">Spectroscopic Exoplanet Detection · Keplerian Dynamics</div>
+    <h1>Hunt Worlds<br/>by Starlight</h1>
+    <p>Full Keplerian orbital mechanics, real-time Doppler-shifted stellar spectra, cross-correlation functions, and Lomb–Scargle periodogram analysis — the exact pipeline used by HARPS, HIRES, and ESPRESSO.</p>
+    <button class="sbtn" id="startBtn">▶ Launch Simulator</button>
+  </div>
+</div>
+
+<!-- Main app -->
+<div id="app" style="display:none">
+  <div class="topbar">
+    <a href="../posts/radial-velocity-method.html">← article</a>
+    <span class="tb-title">RV Exoplanet Hunter</span>
+    <span class="tb-badge">Keplerian · Doppler · LS</span>
+    <div class="tb-sep"></div>
+    <button class="tb-btn on" id="btnExplore">Explore</button>
+    <button class="tb-btn" id="btnDiscover">Discover</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" id="btnSpeed1">1×</button>
+    <button class="tb-btn" id="btnSpeed10">10×</button>
+    <button class="tb-btn on" id="btnSpeed50">50×</button>
+    <button class="tb-btn" id="btnSpeed200">200×</button>
+    <div class="tb-sep"></div>
+    <div class="tb-time" id="tbTime">t = 0.0 d</div>
+    <button class="tb-btn" id="btnPanel">Controls</button>
+  </div>
+
+  <div class="grid">
+    <!-- Orbit 3D view -->
+    <div class="cv-wrap" id="orbitWrap">
+      <canvas id="orbitCanvas"></canvas>
+      <div class="cv-label">Orbit · Barycentre</div>
+      <div class="cv-sub" id="orbitSub">i = 60°</div>
+    </div>
+    <!-- Spectrum -->
+    <div class="cv-wrap" id="specWrap">
+      <canvas id="specCanvas"></canvas>
+      <div class="cv-label">Stellar Spectrum · CCF</div>
+      <div class="cv-sub" id="specSub">vᵣ = 0.0 m/s</div>
+    </div>
+    <!-- RV curve -->
+    <div class="cv-wrap" id="rvWrap">
+      <canvas id="rvCanvas"></canvas>
+      <div class="cv-label">Radial Velocity Curve</div>
+      <div class="cv-sub" id="rvSub">K = — m/s</div>
+      <button id="obsBtn">⊕ Observe</button>
+    </div>
+    <!-- Lomb-Scargle -->
+    <div class="cv-wrap" id="lsWrap">
+      <canvas id="lsCanvas"></canvas>
+      <div class="cv-label">Lomb–Scargle Periodogram</div>
+      <div class="cv-sub" id="lsSub">N = 0 obs</div>
+    </div>
+  </div>
+</div>
+
+<!-- Controls panel -->
+<div class="cpanel hidden" id="ctrlPanel">
+  <div class="cp-h">System Parameters</div>
+
+  <div class="grp">
+    <h3>Star</h3>
+    <div class="ctrl"><label><span>Mass M★</span><strong id="o_smass">1.00 M☉</strong></label>
+      <input type="range" id="i_smass" min="0.4" max="2.5" step="0.05" value="1.0"/></div>
+    <div class="ctrl"><label><span>Inclination i</span><strong id="o_incl">60°</strong></label>
+      <input type="range" id="i_incl" min="5" max="90" step="1" value="60"/></div>
+    <div class="ctrl"><label><span>Systemic γ</span><strong id="o_gamma">0 m/s</strong></label>
+      <input type="range" id="i_gamma" min="-50" max="50" step="1" value="0"/></div>
+  </div>
+
+  <div class="grp" id="p1grp">
+    <h3>Planet 1</h3>
+    <div class="row2">
+      <button class="chip on" id="p1en">Enabled</button>
+      <button class="chip" id="p1dis">Disable</button>
+    </div>
+    <div class="ctrl"><label><span>Period P</span><strong id="o_p1p">3.52 d</strong></label>
+      <input type="range" id="i_p1p" min="0.5" max="1000" step="0.1" value="3.52"/></div>
+    <div class="ctrl"><label><span>Mass m sin i</span><strong id="o_p1m">1.00 MJ</strong></label>
+      <input type="range" id="i_p1m" min="0.01" max="13" step="0.01" value="1.0"/></div>
+    <div class="ctrl"><label><span>Eccentricity e</span><strong id="o_p1e">0.00</strong></label>
+      <input type="range" id="i_p1e" min="0" max="0.95" step="0.01" value="0.0"/></div>
+    <div class="ctrl"><label><span>ω (arg. periapsis)</span><strong id="o_p1w">0°</strong></label>
+      <input type="range" id="i_p1w" min="0" max="360" step="1" value="0"/></div>
+  </div>
+
+  <div class="grp" id="p2grp">
+    <h3>Planet 2</h3>
+    <div class="row2">
+      <button class="chip" id="p2en">Enable</button>
+      <button class="chip on" id="p2dis">Disabled</button>
+    </div>
+    <div class="ctrl"><label><span>Period P</span><strong id="o_p2p">14.2 d</strong></label>
+      <input type="range" id="i_p2p" min="0.5" max="1000" step="0.1" value="14.2"/></div>
+    <div class="ctrl"><label><span>Mass m sin i</span><strong id="o_p2m">0.30 MJ</strong></label>
+      <input type="range" id="i_p2m" min="0.01" max="13" step="0.01" value="0.3"/></div>
+    <div class="ctrl"><label><span>Eccentricity e</span><strong id="o_p2e">0.10</strong></label>
+      <input type="range" id="i_p2e" min="0" max="0.95" step="0.01" value="0.1"/></div>
+    <div class="ctrl"><label><span>ω (arg. periapsis)</span><strong id="o_p2w">45°</strong></label>
+      <input type="range" id="i_p2w" min="0" max="360" step="1" value="45"/></div>
+  </div>
+
+  <div class="grp" id="p3grp">
+    <h3>Planet 3</h3>
+    <div class="row2">
+      <button class="chip" id="p3en">Enable</button>
+      <button class="chip on" id="p3dis">Disabled</button>
+    </div>
+    <div class="ctrl"><label><span>Period P</span><strong id="o_p3p">365 d</strong></label>
+      <input type="range" id="i_p3p" min="0.5" max="1000" step="0.5" value="365"/></div>
+    <div class="ctrl"><label><span>Mass m sin i</span><strong id="o_p3m">1.00 MJ</strong></label>
+      <input type="range" id="i_p3m" min="0.01" max="13" step="0.01" value="1.0"/></div>
+    <div class="ctrl"><label><span>Eccentricity e</span><strong id="o_p3e">0.05</strong></label>
+      <input type="range" id="i_p3e" min="0" max="0.95" step="0.01" value="0.05"/></div>
+    <div class="ctrl"><label><span>ω (arg. periapsis)</span><strong id="o_p3w">270°</strong></label>
+      <input type="range" id="i_p3w" min="0" max="360" step="1" value="270"/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Observations</h3>
+    <div class="ctrl"><label><span>Noise σ</span><strong id="o_noise">3.0 m/s</strong></label>
+      <input type="range" id="i_noise" min="0.5" max="30" step="0.5" value="3.0"/></div>
+    <div class="ctrl"><label><span>Jitter</span><strong id="o_jitter">1.0 m/s</strong></label>
+      <input type="range" id="i_jitter" min="0" max="20" step="0.5" value="1.0"/></div>
+    <div class="row2">
+      <button class="chip warn" id="btnClearObs">Clear All</button>
+      <button class="chip" id="btnAutoObs">Auto-Obs</button>
+    </div>
+    <div class="status-line" id="obsStatus">No observations yet</div>
+  </div>
+
+  <div class="grp" id="discoverGrp" style="display:none">
+    <h3>Discovery Mode</h3>
+    <div class="discover-info" id="discoverInfo">Accumulate RV observations.<br/>Find the period(s) in the periodogram.</div>
+    <div class="row2">
+      <button class="chip" id="btnNewSystem">New System</button>
+      <button class="chip" id="btnReveal">Reveal</button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <h3>Presets</h3>
+    <div class="row2">
+      <button class="chip" id="prHJ">Hot Jupiter</button>
+      <button class="chip" id="prSE">Super-Earth</button>
+      <button class="chip" id="prMult">Multi-planet</button>
+      <button class="chip" id="prEcc">Eccentric</button>
+    </div>
+  </div>
+
+  <div class="grp">
+    <h3>Phase fold</h3>
+    <div class="ctrl"><label><span>Fold period</span><strong id="o_fold">—</strong></label>
+      <input type="range" id="i_fold" min="0.5" max="1000" step="0.1" value="3.52" disabled/></div>
+    <div class="row2"><button class="chip" id="btnFold">Show folded</button><button class="chip" id="btnUnfold">Show time</button></div>
+  </div>
+</div>
+
+<div id="resultPanel">
+  <h3>System Revealed</h3>
+  <div id="resultContent"></div>
+  <div class="row2" style="margin-top:12px">
+    <button class="chip" id="closeResult">Close</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════
+const C_LIGHT = 299792458;
+const M_JUP   = 1.898e27;
+const M_SUN   = 1.989e30;
+const TWO_PI  = Math.PI * 2;
+
+// ═══════════════════════════════════════════════════════════
+// PHYSICS ENGINE
+// ═══════════════════════════════════════════════════════════
+function keplerE(M, e) {
+  // Newton-Raphson to solve M = E - e*sin(E)
+  let E = M + e * Math.sin(M) * (1 + e * Math.cos(M));
+  for (let i = 0; i < 50; i++) {
+    const dE = (M - E + e * Math.sin(E)) / (1 - e * Math.cos(E));
+    E += dE;
+    if (Math.abs(dE) < 1e-12) break;
+  }
+  return E;
+}
+
+function trueAnomaly(E, e) {
+  // tan(ν/2) = sqrt((1+e)/(1-e)) * tan(E/2)
+  return 2 * Math.atan2(
+    Math.sqrt(1 + e) * Math.sin(E / 2),
+    Math.sqrt(1 - e) * Math.cos(E / 2)
+  );
+}
+
+function calcK(P_days, mp_mj, e, Mstar_msun) {
+  // K in m/s, using analytical formula
+  // K = 28.435 / sqrt(1-e^2) * (mp*sini/MJ) * (Mstar/Msun)^(-2/3) * (P/yr)^(-1/3)
+  const P_yr = P_days / 365.25;
+  return 28.435 / Math.sqrt(1 - e * e) * mp_mj
+    * Math.pow(Mstar_msun, -2/3)
+    * Math.pow(P_yr, -1/3);
+}
+
+function rvAtTime(t, planet) {
+  if (!planet.enabled) return 0;
+  const { P, K, e, omega, gamma, t0 } = planet;
+  const n = TWO_PI / P;            // mean motion (rad/day)
+  const M = n * ((t - t0) % P);   // mean anomaly
+  const E = keplerE(((M % TWO_PI) + TWO_PI) % TWO_PI, e);
+  const nu = trueAnomaly(E, e);
+  return K * (Math.cos(omega + nu) + e * Math.cos(omega)) + gamma;
+}
+
+function totalRV(t, planets) {
+  return planets.reduce((s, p) => s + rvAtTime(t, p), 0);
+}
+
+// Semi-major axis from Kepler's 3rd law (in AU)
+function semiMajorAxis(P_days, Mstar_msun) {
+  return Math.pow(Mstar_msun * (P_days / 365.25) * (P_days / 365.25), 1/3);
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOMB-SCARGLE
+// ═══════════════════════════════════════════════════════════
+function lombScargle(times, rvs, freqs) {
+  const N = times.length;
+  if (N < 3) return new Float32Array(freqs.length);
+  const mean = rvs.reduce((a,b)=>a+b,0)/N;
+  const h = rvs.map(v => v - mean);
+  const varH = h.reduce((s,v) => s + v*v, 0) / N;
+  const power = new Float32Array(freqs.length);
+  if (varH < 1e-30) return power;
+
+  for (let fi = 0; fi < freqs.length; fi++) {
+    const omega = TWO_PI * freqs[fi];
+    let S2=0, C2=0;
+    for (let i=0;i<N;i++){S2+=Math.sin(2*omega*times[i]);C2+=Math.cos(2*omega*times[i]);}
+    const tau = Math.atan2(S2, C2) / (2 * omega);
+    let Cc=0,Ss=0,Ch=0,Sh=0;
+    for(let i=0;i<N;i++){
+      const c=Math.cos(omega*(times[i]-tau));
+      const s=Math.sin(omega*(times[i]-tau));
+      Cc+=c*c; Ss+=s*s; Ch+=h[i]*c; Sh+=h[i]*s;
+    }
+    const pwr = 0.5/varH * (Ch*Ch/(Cc||1e-30) + Sh*Sh/(Ss||1e-30));
+    power[fi] = Math.min(pwr, 1);
+  }
+  return power;
+}
+
+// ═══════════════════════════════════════════════════════════
+// SIMULATION STATE
+// ═══════════════════════════════════════════════════════════
+const state = {
+  simTime:  0,
+  speed:    50,         // days per real second
+  mode:     'explore',  // 'explore' | 'discover'
+
+  star: { mass: 1.0, incl: 60 * Math.PI/180, gamma: 0 },
+
+  planets: [
+    { id:1, enabled:true,  P:3.52,  K:0, e:0.00, omega:0,              t0:0, label:'b' },
+    { id:2, enabled:false, P:14.2,  K:0, e:0.10, omega:45*Math.PI/180, t0:0, label:'c' },
+    { id:3, enabled:false, P:365.0, K:0, e:0.05, omega:270*Math.PI/180,t0:0, label:'d' },
+  ],
+  planetMasses: [1.0, 0.30, 1.0],  // MJ
+
+  observations: [],   // {t, rv, err}
+  autoObs: false,
+  nextAutoObs: 0,
+
+  discoverSystem: null,   // hidden system in discover mode
+  foldPeriod: 3.52,
+  showFolded: false,
+
+  // LS cache
+  lsFreqs: null,
+  lsPower: null,
+  lsDirty: true,
+
+  // camera azimuth for orbit view
+  camAz: 0.4,
+  camEl: 30 * Math.PI/180,
+
+  // for fps
+  lastFrame: 0,
+  fps: 0,
+  frameCount: 0,
+};
+
+function rebuildPlanetK() {
+  state.planets.forEach((p, i) => {
+    const mp = state.planetMasses[i];
+    p.K = calcK(p.P, mp, p.e, state.star.mass);
+  });
+}
+
+function buildLSFreqs() {
+  // Frequency grid: from 1/(10*T_baseline) to 2/P_min
+  const N = 800;
+  const freqs = new Float32Array(N);
+  const logMin = Math.log10(1/2000);   // min 0.0005 c/d => P=2000d
+  const logMax = Math.log10(2/0.5);    // max 4 c/d => P=0.25d
+  for (let i=0;i<N;i++) freqs[i] = Math.pow(10, logMin + (logMax-logMin)*i/(N-1));
+  state.lsFreqs = freqs;
+}
+
+function updateLS() {
+  if (!state.lsFreqs) buildLSFreqs();
+  const obs = state.observations;
+  if (obs.length < 3) { state.lsPower = null; return; }
+  const times = obs.map(o=>o.t);
+  const rvs   = obs.map(o=>o.rv);
+  state.lsPower = lombScargle(times, rvs, state.lsFreqs);
+  state.lsDirty = false;
+}
+
+function addObservation(t) {
+  const rv_true = totalRV(t, state.discoverSystem || state.planets);
+  const noise = state.observations.length;  // suppress unused
+  const sigma = parseFloat(document.getElementById('i_noise').value);
+  const jitter = parseFloat(document.getElementById('i_jitter').value);
+  const err = sigma + jitter * Math.random();
+  const rv_meas = rv_true + (Math.random()*2-1) * err * 1.5;
+  state.observations.push({ t, rv: rv_meas, err });
+  state.lsDirty = true;
+  document.getElementById('i_fold').disabled = false;
+  updateObsStatus();
+}
+
+function updateObsStatus() {
+  const n = state.observations.length;
+  document.getElementById('obsStatus').textContent =
+    n === 0 ? 'No observations yet' : `${n} observation${n>1?'s':''} recorded`;
+  document.getElementById('lsSub').textContent = `N = ${n} obs`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// WEBGL SPECTRUM RENDERER
+// ═══════════════════════════════════════════════════════════
+const VERT_SRC = `#version 300 es
+in vec2 a_pos;
+out vec2 v_uv;
+void main(){v_uv=a_pos*.5+.5;gl_Position=vec4(a_pos,0.,1.);}`;
+
+const FRAG_SRC = `#version 300 es
+precision highp float;
+in vec2 v_uv;
+out vec4 fragColor;
+uniform float u_vr;
+uniform float u_time;
+uniform int u_mode; // 0=spectrum+ccf, 1=waterfall strip
+
+const float C = 299792458.0;
+const float NM0 = 385.0;
+const float NM1 = 715.0;
+
+float gauss(float x,float mu,float s){float d=(x-mu)/s;return exp(-.5*d*d);}
+
+vec3 nm2rgb(float nm){
+  vec3 c=vec3(0.);
+  if(nm<380.)return c;
+  if(nm<440.){c.r=(440.-nm)/60.;c.b=1.;}
+  else if(nm<490.){c.g=(nm-440.)/50.;c.b=1.;}
+  else if(nm<510.){c.g=1.;c.b=(510.-nm)/20.;}
+  else if(nm<580.){c.r=(nm-510.)/70.;c.g=1.;}
+  else if(nm<645.){c.r=1.;c.g=(645.-nm)/65.;}
+  else if(nm<=780.){c.r=1.;}
+  float f=1.;
+  if(nm<420.)f=.25+.75*(nm-380.)/40.;
+  else if(nm>680.)f=.25+.75*(780.-nm)/100.;
+  return c*f;
+}
+
+// Solar-type absorption spectrum — rest frame wavelength input
+float getFlux(float lam){
+  float f=1.;
+  // Ca II H&K
+  f-=.88*gauss(lam,393.37,.32);
+  f-=.82*gauss(lam,396.85,.32);
+  // H-delta
+  f-=.36*gauss(lam,410.17,.24);
+  // H-gamma
+  f-=.43*gauss(lam,434.05,.24);
+  // Fe I scatter
+  f-=.20*gauss(lam,438.36,.12);
+  f-=.17*gauss(lam,440.48,.10);
+  f-=.15*gauss(lam,448.11,.10);
+  f-=.22*gauss(lam,452.86,.12);
+  f-=.16*gauss(lam,466.81,.10);
+  f-=.18*gauss(lam,471.25,.10);
+  f-=.15*gauss(lam,479.33,.10);
+  // H-beta
+  f-=.46*gauss(lam,486.13,.24);
+  // Fe/Cr lines
+  f-=.17*gauss(lam,491.50,.10);
+  f-=.14*gauss(lam,495.76,.10);
+  f-=.15*gauss(lam,501.84,.10);
+  f-=.12*gauss(lam,506.90,.09);
+  // Mg b triplet
+  f-=.38*gauss(lam,516.73,.13);
+  f-=.36*gauss(lam,517.27,.13);
+  f-=.43*gauss(lam,518.36,.15);
+  // more Fe
+  f-=.19*gauss(lam,522.65,.10);
+  f-=.15*gauss(lam,527.04,.10);
+  f-=.13*gauss(lam,532.80,.09);
+  f-=.16*gauss(lam,537.15,.10);
+  f-=.13*gauss(lam,543.45,.09);
+  f-=.11*gauss(lam,557.61,.08);
+  f-=.14*gauss(lam,561.84,.09);
+  // Na D doublet
+  f-=.54*gauss(lam,588.995,.15);
+  f-=.50*gauss(lam,589.592,.15);
+  // more Fe
+  f-=.16*gauss(lam,597.12,.09);
+  f-=.14*gauss(lam,603.06,.09);
+  f-=.17*gauss(lam,612.45,.10);
+  f-=.12*gauss(lam,617.33,.08);
+  f-=.22*gauss(lam,630.15,.11);
+  f-=.18*gauss(lam,636.57,.10);
+  f-=.14*gauss(lam,645.40,.09);
+  // H-alpha
+  f-=.67*gauss(lam,656.28,.30);
+  // Ca I
+  f-=.21*gauss(lam,657.28,.10);
+  return clamp(f,.0,1.);
+}
+
+void main(){
+  float x=v_uv.x, y=v_uv.y;
+  float nm=NM0+x*(NM1-NM0);
+
+  if(u_mode==0){
+    // Doppler shift: observed nm -> rest frame
+    float beta=u_vr/C;
+    float lamRest=nm*(1.-beta);
+    float flux=getFlux(lamRest);
+    vec3 col=nm2rgb(nm);
+
+    // Upper 38%: rainbow dispersion strip
+    if(y>0.62){
+      // Star limb-darkening tint toward edges
+      float edge=abs(x-.5)*2.; // 0=centre, 1=edge
+      float ld=1.-.15*edge*edge;
+      fragColor=vec4(col*flux*ld,1.);
+      return;
+    }
+
+    // Divider line
+    if(y>0.595 && y<0.625){
+      fragColor=vec4(.15,.35,.28,1.);return;
+    }
+
+    // Lower 59%: flux profile curve + CCF
+    // Remap y in [0,0.595]
+    float py=y/0.595; // 0=bottom, 1=top of curve area
+
+    // CCF sub-panel occupies right 28% of x
+    if(x>0.72){
+      // CCF: velocity axis -80..+80 km/s
+      float vax=(x-0.72)/0.28; // 0..1
+      float vkms=(vax-.5)*160.; // km/s
+      float vCentre=-u_vr/1000.; // km/s
+      float sigma_ccf=8.;
+      float ccf=.10+.85*gauss(vkms,vCentre,sigma_ccf);
+      float dist=abs(py-ccf);
+      vec3 bg=vec3(.01,.015,.03);
+      vec3 lc=vec3(.42,.92,.72);
+      float lw=.025;
+      float lf=smoothstep(lw,0.,dist);
+      float fill=smoothstep(ccf+.01,ccf,py)*.22;
+      // Centre tick at v=0
+      float vtick=abs(vax-.5);
+      float tick=smoothstep(.006,.0,vtick)*.18;
+      // CCF label area
+      fragColor=vec4(bg+lc*lf+lc*fill+vec3(.1,.25,.2)*tick,1.);
+      // Divider between flux & CCF
+    } else if(x>0.715&&x<0.722){
+      fragColor=vec4(.15,.35,.28,1.);
+    } else {
+      // Flux curve
+      float dist=abs(py-flux);
+      float lw=.018;
+      float lf=smoothstep(lw,0.,dist);
+      // Fill under curve
+      float fill=smoothstep(flux+.01,flux,py)*.18;
+      // Grid lines (faint horizontal)
+      float gridY=fract(py*4.);
+      float grid=smoothstep(.04,.0,min(gridY,1.-gridY))*.06;
+      // Wavelength tick marks
+      float gridX=fract(x*13.);
+      float tickX=smoothstep(.03,.0,min(gridX,1.-gridX))*.04;
+      vec3 bg=vec3(.008,.016,.032);
+      vec3 lc=mix(vec3(.3,.88,.65),col*1.6,.35);
+      fragColor=vec4(bg+lc*lf+lc*fill+vec3(grid+tickX),1.);
+    }
+
+  } else {
+    // Waterfall strip row (called repeatedly from JS, u_time encodes row index 0..1)
+    float beta=u_vr/C;
+    float lamRest=nm*(1.-beta);
+    float flux=getFlux(lamRest);
+    vec3 col=nm2rgb(nm);
+    // Render as a thin horizontal slice
+    fragColor=vec4(col*flux,1.);
+  }
+}`;
+
+let gl, glProg, glBuf, glLoc_vr, glLoc_time, glLoc_mode;
+
+function initGL(canvas) {
+  gl = canvas.getContext('webgl2', { antialias: false });
+  if (!gl) return false;
+
+  function compile(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+      console.error(gl.getShaderInfoLog(s));
+    return s;
+  }
+
+  glProg = gl.createProgram();
+  gl.attachShader(glProg, compile(gl.VERTEX_SHADER, VERT_SRC));
+  gl.attachShader(glProg, compile(gl.FRAGMENT_SHADER, FRAG_SRC));
+  gl.linkProgram(glProg);
+
+  glBuf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, glBuf);
+  gl.bufferData(gl.ARRAY_BUFFER,
+    new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+  const aPos = gl.getAttribLocation(glProg, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  glLoc_vr   = gl.getUniformLocation(glProg, 'u_vr');
+  glLoc_time = gl.getUniformLocation(glProg, 'u_time');
+  glLoc_mode = gl.getUniformLocation(glProg, 'u_mode');
+  return true;
+}
+
+function renderSpectrum(vr, time) {
+  if (!gl) return;
+  const c = document.getElementById('specCanvas');
+  gl.viewport(0, 0, c.width, c.height);
+  gl.useProgram(glProg);
+  gl.uniform1f(glLoc_vr, vr);
+  gl.uniform1f(glLoc_time, time);
+  gl.uniform1i(glLoc_mode, 0);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+  // Overlay: draw line labels with canvas 2D on top
+  drawSpecLabels(c, vr);
+}
+
+// Separate overlay canvas for spectrum labels
+let specOverlay2D = null;
+function drawSpecLabels(glCanvas, vr) {
+  if (!specOverlay2D) {
+    const ov = document.createElement('canvas');
+    ov.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2';
+    glCanvas.parentElement.appendChild(ov);
+    specOverlay2D = ov;
+  }
+  const ov = specOverlay2D;
+  const W = glCanvas.width, H = glCanvas.height;
+  ov.width = W; ov.height = H;
+  const ctx = ov.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+
+  // Label prominent lines in the strip area (top 38% = y > 0.62 → pixel y < H*0.38)
+  const NM0=385, NM1=715;
+  const beta = vr / C_LIGHT;
+  const lines = [
+    {nm:393.37,name:'Ca K'},{nm:396.85,name:'Ca H'},
+    {nm:434.05,name:'Hγ'},{nm:486.13,name:'Hβ'},
+    {nm:517.27,name:'Mg b'},{nm:588.995,name:'Na D'},
+    {nm:656.28,name:'Hα'},
+  ];
+  ctx.font = '600 9px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  lines.forEach(l => {
+    const nmObs = l.nm * (1 + beta);  // where this line appears on screen
+    if (nmObs < NM0 || nmObs > NM1) return;
+    const px = (nmObs - NM0) / (NM1 - NM0) * W;
+    const stripY = H * 0.38;  // strip is top 38%
+    // Tick mark
+    ctx.strokeStyle = 'rgba(116,242,200,0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px, 2);
+    ctx.lineTo(px, 12);
+    ctx.stroke();
+    // Label
+    ctx.fillStyle = 'rgba(116,242,200,0.80)';
+    ctx.fillText(l.name, px, 22);
+  });
+
+  // VR readout
+  ctx.textAlign = 'right';
+  ctx.font = '700 10px JetBrains Mono, monospace';
+  ctx.fillStyle = vr > 0 ? '#ff8888' : vr < 0 ? '#88ccff' : '#74f2c8';
+  const vrStr = (vr >= 0 ? '+' : '') + vr.toFixed(1) + ' m/s';
+  ctx.fillText(vrStr, W - 10, H * 0.57);
+
+  ctx.fillStyle = 'rgba(131,221,255,0.6)';
+  ctx.font = '9px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('CCF', W * 0.86, H * 0.57);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ORBIT CANVAS RENDERER
+// ═══════════════════════════════════════════════════════════
+function project(x, y, z, az, el, W, H, scale) {
+  const cosA=Math.cos(az),sinA=Math.sin(az);
+  const x1= cosA*x+sinA*y;
+  const y1=-sinA*x+cosA*y;
+  const z1= z;
+  const cosE=Math.cos(el),sinE=Math.sin(el);
+  const x2= x1;
+  const y2= cosE*y1-sinE*z1;
+  const z2= sinE*y1+cosE*z1;
+  const fov=2.5;
+  const D=6;
+  const px=W/2+scale*x2*fov*D/(D+z2);
+  const py=H/2-scale*y2*fov*D/(D+z2);
+  return {px,py,depth:z2};
+}
+
+function drawOrbit(canvas) {
+  const W=canvas.width, H=canvas.height;
+  if (!W||!H) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+
+  // Background
+  ctx.fillStyle='#020810';
+  ctx.fillRect(0,0,W,H);
+
+  const scale = Math.min(W,H)*0.22;
+  const az = state.camAz;
+  const el = state.camEl;
+  const t  = state.simTime;
+  const planets = state.discoverSystem || state.planets;
+
+  function proj(x,y,z){return project(x,y,z,az,el,W,H,scale);}
+
+  // Grid circles
+  ctx.setLineDash([2,4]);
+  ctx.strokeStyle='rgba(131,221,255,0.06)';
+  ctx.lineWidth=1;
+  [0.3,0.6,1.0,1.5].forEach(r=>{
+    ctx.beginPath();
+    for(let a=0;a<=64;a++){
+      const {px,py}=proj(r*Math.cos(a/64*TWO_PI),r*Math.sin(a/64*TWO_PI),0);
+      a===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  // Planet orbits and positions
+  const cols=['#ffbc73','#83ddff','#ff7d90','#c0a0ff'];
+  planets.forEach((p,i)=>{
+    if (!p.enabled) return;
+    const a_au = semiMajorAxis(p.P, state.star.mass);
+    const b_au = a_au * Math.sqrt(1-p.e*p.e);
+    const {e,omega} = p;
+    // Orbit ellipse
+    ctx.beginPath();
+    ctx.strokeStyle=cols[i]+'44';
+    ctx.lineWidth=1;
+    for(let k=0;k<=128;k++){
+      const nu=k/128*TWO_PI;
+      const r=a_au*(1-e*e)/(1+e*Math.cos(nu));
+      const x_orb=r*Math.cos(nu+omega);
+      const y_orb=r*Math.sin(nu+omega);
+      const {px,py}=proj(x_orb,y_orb,0);
+      k===0?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.stroke();
+
+    // Planet position
+    const n=TWO_PI/p.P;
+    const M=((n*((t-p.t0)%p.P))%(TWO_PI)+TWO_PI)%TWO_PI;
+    const E=keplerE(M,e);
+    const nu=trueAnomaly(E,e);
+    const r=a_au*(1-e*e)/(1+e*Math.cos(nu));
+    const xp=r*Math.cos(nu+omega);
+    const yp=r*Math.sin(nu+omega);
+    const {px:ppx,py:ppy}=proj(xp,yp,0);
+
+    // Planet glow
+    const grd=ctx.createRadialGradient(ppx,ppy,0,ppx,ppy,8);
+    grd.addColorStop(0,cols[i]+'cc');
+    grd.addColorStop(1,cols[i]+'00');
+    ctx.fillStyle=grd;
+    ctx.beginPath();ctx.arc(ppx,ppy,8,0,TWO_PI);ctx.fill();
+    ctx.fillStyle=cols[i];
+    ctx.beginPath();ctx.arc(ppx,ppy,3,0,TWO_PI);ctx.fill();
+
+    // Planet label
+    if(state.mode==='explore'){
+      ctx.fillStyle=cols[i]+'cc';
+      ctx.font='700 10px JetBrains Mono, monospace';
+      ctx.fillText(p.label||('p'+(i+1)),ppx+6,ppy-6);
+    }
+  });
+
+  // Star wobble (amplified for visibility)
+  // Compute actual stellar reflex position
+  const ampFactor = 80;  // visual exaggeration
+  let sx=0, sy=0;
+  planets.forEach((p,i)=>{
+    if(!p.enabled) return;
+    const a_au = semiMajorAxis(p.P, state.star.mass);
+    const mp = state.planetMasses[i] * M_JUP / M_SUN;
+    const a_star = a_au * mp / state.star.mass * ampFactor;
+    const n=TWO_PI/p.P;
+    const M=((n*((t-p.t0)%p.P))%(TWO_PI)+TWO_PI)%TWO_PI;
+    const E=keplerE(M,p.e);
+    const nu=trueAnomaly(E,p.e);
+    const r=a_star*(1-p.e*p.e)/(1+p.e*Math.cos(nu));
+    sx -= r*Math.cos(nu+p.omega);
+    sy -= r*Math.sin(nu+p.omega);
+  });
+
+  const {px:spx,py:spy}=proj(sx,sy,0);
+  const {px:bpx,py:bpy}=proj(0,0,0);
+
+  // Barycentre cross
+  ctx.strokeStyle='rgba(116,242,200,0.35)';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(bpx-8,bpy);ctx.lineTo(bpx+8,bpy);
+  ctx.moveTo(bpx,bpy-8);ctx.lineTo(bpx,bpy+8);
+  ctx.stroke();
+
+  // Star wobble trail
+  const trailLen = 40;
+  const trailPts = [];
+  for(let j=trailLen;j>=0;j--){
+    const tt=t - j*0.5;
+    let tx=0,ty=0;
+    planets.forEach((p,i)=>{
+      if(!p.enabled) return;
+      const a_au=semiMajorAxis(p.P,state.star.mass);
+      const mp=state.planetMasses[i]*M_JUP/M_SUN;
+      const a_star=a_au*mp/state.star.mass*ampFactor;
+      const n=TWO_PI/p.P;
+      const M=((n*((tt-p.t0)%p.P))%(TWO_PI)+TWO_PI)%TWO_PI;
+      const E=keplerE(M,p.e);
+      const nu=trueAnomaly(E,p.e);
+      const r=a_star*(1-p.e*p.e)/(1+p.e*Math.cos(nu));
+      tx -= r*Math.cos(nu+p.omega);
+      ty -= r*Math.sin(nu+p.omega);
+    });
+    trailPts.push(proj(tx,ty,0));
+  }
+  ctx.beginPath();
+  trailPts.forEach(({px:px2,py:py2},j)=>{
+    if(j===0) ctx.moveTo(px2,py2);
+    else ctx.lineTo(px2,py2);
+  });
+  ctx.strokeStyle='rgba(116,242,200,0.20)';
+  ctx.lineWidth=1.5;
+  ctx.setLineDash([3,3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Star
+  const starR = Math.max(10, Math.min(18, scale*0.04));
+  const grdStar = ctx.createRadialGradient(spx,spy,0,spx,spy,starR*2.5);
+  grdStar.addColorStop(0,'rgba(255,245,200,1)');
+  grdStar.addColorStop(0.3,'rgba(255,220,120,0.8)');
+  grdStar.addColorStop(1,'rgba(255,180,60,0)');
+  ctx.fillStyle=grdStar;
+  ctx.beginPath();ctx.arc(spx,spy,starR*2.5,0,TWO_PI);ctx.fill();
+  // Limb darkening
+  const grdLD = ctx.createRadialGradient(spx-starR*0.15,spy-starR*0.15,0,spx,spy,starR);
+  grdLD.addColorStop(0,'#fff9e8');
+  grdLD.addColorStop(0.6,'#ffe880');
+  grdLD.addColorStop(1,'#cc7020');
+  ctx.fillStyle=grdLD;
+  ctx.beginPath();ctx.arc(spx,spy,starR,0,TWO_PI);ctx.fill();
+
+  // Labels
+  ctx.font='9px JetBrains Mono, monospace';
+  ctx.fillStyle='rgba(116,242,200,0.5)';
+  ctx.fillText('⊕ barycentre',bpx+10,bpy+4);
+  ctx.fillStyle='rgba(255,200,80,0.6)';
+  ctx.fillText('★ wobble ×'+ampFactor,spx+12,spy+4);
+
+  // Inclination arc indicator
+  const incl_deg = Math.round(state.star.incl*180/Math.PI);
+  ctx.fillStyle='rgba(131,221,255,0.45)';
+  ctx.font='9px JetBrains Mono, monospace';
+  ctx.fillText(`i = ${incl_deg}°`, 10, H-10);
+}
+
+// ═══════════════════════════════════════════════════════════
+// RV CURVE RENDERER
+// ═══════════════════════════════════════════════════════════
+function drawRVCurve(canvas) {
+  const W=canvas.width, H=canvas.height;
+  if(!W||!H) return;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#010812';
+  ctx.fillRect(0,0,W,H);
+
+  const PAD = {l:46,r:12,t:10,b:30};
+  const IW=W-PAD.l-PAD.r, IH=H-PAD.t-PAD.b;
+  const planets=state.discoverSystem||state.planets;
+
+  // Determine time range and RV range
+  const tNow=state.simTime;
+  let tSpan=Math.max(20, state.observations.length>1
+    ? (state.observations[state.observations.length-1].t - state.observations[0].t)*1.3
+    : 100);
+  // Snap to show current time nicely
+  const tMax = tNow + tSpan*0.05;
+  const tMin = tMax - tSpan;
+
+  // Model curve
+  const nPts=400;
+  let rvMin=Infinity, rvMax=-Infinity;
+  const modelPts=[];
+  for(let i=0;i<=nPts;i++){
+    const tt=tMin+i/nPts*tSpan;
+    const rv=totalRV(tt,planets)+(state.mode==='explore'?state.star.gamma:0);
+    modelPts.push({t:tt,rv});
+    rvMin=Math.min(rvMin,rv);
+    rvMax=Math.max(rvMax,rv);
+  }
+  // Include observations
+  state.observations.forEach(o=>{rvMin=Math.min(rvMin,o.rv-o.err);rvMax=Math.max(rvMax,o.rv+o.err);});
+  const rvPad=(rvMax-rvMin)*0.18||20;
+  rvMin-=rvPad; rvMax+=rvPad;
+  if(rvMin===rvMax){rvMin=-30;rvMax=30;}
+
+  function tx(t){return PAD.l+(t-tMin)/tSpan*IW;}
+  function ty(rv){return PAD.t+(1-(rv-rvMin)/(rvMax-rvMin))*IH;}
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.05)';
+  ctx.lineWidth=1;
+  ctx.setLineDash([2,4]);
+  const nGridY=4;
+  for(let i=0;i<=nGridY;i++){
+    const rv=rvMin+(rvMax-rvMin)*i/nGridY;
+    const y=ty(rv);
+    ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
+    ctx.fillStyle='rgba(138,172,204,0.6)';
+    ctx.font='8px JetBrains Mono,monospace';
+    ctx.textAlign='right';
+    ctx.fillText(rv.toFixed(0),PAD.l-4,y+3);
+  }
+  ctx.setLineDash([]);
+
+  // Zero line
+  const y0=ty(state.mode==='explore'?state.star.gamma:0);
+  ctx.strokeStyle='rgba(116,242,200,0.18)';
+  ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(PAD.l,y0);ctx.lineTo(W-PAD.r,y0);ctx.stroke();
+
+  // Model curve
+  ctx.beginPath();
+  modelPts.forEach(({t,rv},i)=>{
+    const x=tx(t),y=ty(rv);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  if(state.mode==='explore'){
+    ctx.strokeStyle='rgba(116,242,200,0.70)';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+  } else {
+    // In discover mode: faint true model for reference
+    ctx.strokeStyle='rgba(116,242,200,0.15)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+  }
+
+  // Observations
+  state.observations.forEach(o=>{
+    if(o.t<tMin||o.t>tMax) return;
+    const x=tx(o.t), y=ty(o.rv);
+    // Error bar
+    ctx.strokeStyle='rgba(131,221,255,0.55)';
+    ctx.lineWidth=1.2;
+    ctx.beginPath();
+    ctx.moveTo(x,ty(o.rv-o.err));ctx.lineTo(x,ty(o.rv+o.err));
+    ctx.moveTo(x-3,ty(o.rv-o.err));ctx.lineTo(x+3,ty(o.rv-o.err));
+    ctx.moveTo(x-3,ty(o.rv+o.err));ctx.lineTo(x+3,ty(o.rv+o.err));
+    ctx.stroke();
+    // Point
+    ctx.fillStyle='#83ddff';
+    ctx.beginPath();ctx.arc(x,y,3,0,TWO_PI);ctx.fill();
+  });
+
+  // Current time line
+  const xcur=tx(tNow);
+  if(xcur>=PAD.l && xcur<=W-PAD.r){
+    ctx.strokeStyle='rgba(255,188,115,0.55)';
+    ctx.lineWidth=1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(xcur,PAD.t);ctx.lineTo(xcur,H-PAD.b);ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Axes labels
+  ctx.fillStyle='rgba(138,172,204,0.7)';
+  ctx.font='9px JetBrains Mono,monospace';
+  ctx.textAlign='center';
+  ctx.fillText('Time (days)', PAD.l+IW/2, H-6);
+  ctx.save();
+  ctx.translate(11,PAD.t+IH/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('RV (m/s)',0,0);ctx.restore();
+
+  // K amplitude readout (explore mode)
+  if(state.mode==='explore'){
+    const Ktot=planets.filter(p=>p.enabled).reduce((s,p)=>Math.max(s,p.K),0);
+    document.getElementById('rvSub').textContent='K = '+Ktot.toFixed(1)+' m/s';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOMB-SCARGLE RENDERER
+// ═══════════════════════════════════════════════════════════
+function drawPeriodogram(canvas) {
+  const W=canvas.width,H=canvas.height;
+  if(!W||!H) return;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#01080f';
+  ctx.fillRect(0,0,W,H);
+
+  const PAD={l:46,r:12,t:10,b:30};
+  const IW=W-PAD.l-PAD.r, IH=H-PAD.t-PAD.b;
+
+  if(state.lsDirty) updateLS();
+  const freqs=state.lsFreqs, power=state.lsPower;
+
+  // Axes
+  ctx.fillStyle='rgba(138,172,204,0.6)';
+  ctx.font='8px JetBrains Mono,monospace';
+  ctx.textAlign='center';
+
+  // Log period axis (periods in days)
+  const pMin=0.25,pMax=2000;
+  function px_from_p(P){return PAD.l+(Math.log10(P)-Math.log10(pMin))/(Math.log10(pMax)-Math.log10(pMin))*IW;}
+  function py_from_pow(pow){return PAD.t+(1-pow)*IH;}
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.05)';
+  ctx.lineWidth=1;
+  ctx.setLineDash([2,4]);
+  [0.25,0.50,0.75].forEach(p=>{
+    const y=py_from_pow(p);
+    ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
+    ctx.fillStyle='rgba(138,172,204,0.55)';
+    ctx.textAlign='right';
+    ctx.fillText(p.toFixed(2),PAD.l-4,y+3);
+  });
+  [1,2,3,5,10,20,50,100,200,500,1000].forEach(P=>{
+    const x=px_from_p(P);
+    if(x<PAD.l||x>W-PAD.r) return;
+    ctx.beginPath();ctx.moveTo(x,PAD.t);ctx.lineTo(x,H-PAD.b);ctx.stroke();
+    ctx.fillStyle='rgba(138,172,204,0.45)';
+    ctx.textAlign='center';
+    ctx.fillText(P+'d',x,H-PAD.b+10);
+  });
+  ctx.setLineDash([]);
+
+  if(!power || freqs.length<2){
+    ctx.fillStyle='rgba(116,242,200,0.25)';
+    ctx.font='11px JetBrains Mono,monospace';
+    ctx.textAlign='center';
+    ctx.fillText('Take observations to compute periodogram',W/2,H/2);
+    return;
+  }
+
+  // LS spectrum
+  ctx.beginPath();
+  let first=true;
+  for(let i=0;i<freqs.length;i++){
+    const P=1/freqs[i];
+    if(P<pMin||P>pMax) continue;
+    const x=px_from_p(P);
+    const y=py_from_pow(power[i]);
+    if(first){ctx.moveTo(x,y);first=false;}
+    else ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle='rgba(116,242,200,0.80)';
+  ctx.lineWidth=1.2;
+  ctx.stroke();
+
+  // Fill
+  ctx.lineTo(px_from_p(pMax),py_from_pow(0));
+  ctx.lineTo(px_from_p(pMin),py_from_pow(0));
+  ctx.closePath();
+  const grad=ctx.createLinearGradient(0,PAD.t,0,H-PAD.b);
+  grad.addColorStop(0,'rgba(116,242,200,0.25)');
+  grad.addColorStop(1,'rgba(116,242,200,0.02)');
+  ctx.fillStyle=grad;
+  ctx.fill();
+
+  // Mark known planet periods (explore mode only)
+  if(state.mode==='explore'){
+    const planets=state.planets;
+    const pcols=['#ffbc73','#83ddff','#ff7d90'];
+    planets.forEach((p,i)=>{
+      if(!p.enabled) return;
+      const x=px_from_p(p.P);
+      if(x<PAD.l||x>W-PAD.r) return;
+      ctx.strokeStyle=pcols[i]+'99';
+      ctx.lineWidth=1;
+      ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(x,PAD.t);ctx.lineTo(x,H-PAD.b);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle=pcols[i]+'cc';
+      ctx.font='700 9px JetBrains Mono,monospace';
+      ctx.textAlign='center';
+      ctx.fillText('P'+p.label,x,PAD.t+12);
+    });
+  }
+
+  // FAP lines
+  const n=state.observations.length;
+  if(n>3){
+    const fap01=1-Math.pow(1-0.01,n);  // rough
+    const pwr_fap=-Math.log(fap01)/n*2; // very rough threshold
+    const thresh=Math.min(0.9,pwr_fap||0.7);
+    const y=py_from_pow(thresh);
+    ctx.strokeStyle='rgba(255,125,144,0.4)';
+    ctx.lineWidth=1;
+    ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(255,125,144,0.55)';
+    ctx.font='8px JetBrains Mono,monospace';
+    ctx.textAlign='right';
+    ctx.fillText('FAP 1%',W-PAD.r-2,y-3);
+  }
+
+  // Axis label
+  ctx.fillStyle='rgba(138,172,204,0.6)';
+  ctx.font='9px JetBrains Mono,monospace';
+  ctx.textAlign='center';
+  ctx.fillText('Period (days)', PAD.l+IW/2, H-5);
+  ctx.save();
+  ctx.translate(11,PAD.t+IH/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('LS Power',0,0);ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════
+// CANVAS RESIZE
+// ═══════════════════════════════════════════════════════════
+function resizeCanvas(id) {
+  const wrap = document.getElementById(id).parentElement;
+  const c    = document.getElementById(id);
+  const dpr  = window.devicePixelRatio || 1;
+  const W    = wrap.clientWidth;
+  const H    = wrap.clientHeight;
+  if (!W || !H) return;
+  if (id === 'specCanvas') {
+    if (c.width !== Math.round(W*dpr) || c.height !== Math.round(H*dpr)) {
+      c.width  = Math.round(W * dpr);
+      c.height = Math.round(H * dpr);
+      if (specOverlay2D) {
+        specOverlay2D.width  = c.width;
+        specOverlay2D.height = c.height;
+      }
+    }
+  } else {
+    c.width  = Math.round(W * dpr);
+    c.height = Math.round(H * dpr);
+  }
+}
+
+function resizeAll() {
+  ['orbitCanvas','specCanvas','rvCanvas','lsCanvas'].forEach(resizeCanvas);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATION LOOP
+// ═══════════════════════════════════════════════════════════
+let lastTs = 0;
+
+function frame(ts) {
+  const dt = Math.min((ts - lastTs) / 1000, 0.1);
+  lastTs = ts;
+
+  state.simTime += dt * state.speed;
+  state.camAz   += dt * 0.04;  // slow auto-rotate
+
+  // Rebuild K every frame (cheap)
+  rebuildPlanetK();
+
+  const planets = state.discoverSystem || state.planets;
+  const vr = totalRV(state.simTime, planets) + (state.mode==='explore'?state.star.gamma:0);
+
+  // Spectrum
+  renderSpectrum(vr, ts * 0.001);
+  document.getElementById('specSub').textContent = 'vᵣ = ' + (vr>=0?'+':'') + vr.toFixed(2) + ' m/s';
+
+  // Orbit
+  resizeCanvas('orbitCanvas');
+  drawOrbit(document.getElementById('orbitCanvas'));
+
+  // RV curve
+  resizeCanvas('rvCanvas');
+  drawRVCurve(document.getElementById('rvCanvas'));
+
+  // Periodogram (expensive, only redraw every ~0.5s or when dirty)
+  resizeCanvas('lsCanvas');
+  if (state.lsDirty || (ts|0) % 30 < 2) drawPeriodogram(document.getElementById('lsCanvas'));
+
+  // Time display
+  document.getElementById('tbTime').textContent =
+    't = ' + state.simTime.toFixed(1) + ' d';
+
+  // Auto-observe
+  if (state.autoObs && state.simTime >= state.nextAutoObs) {
+    addObservation(state.simTime);
+    const interval = 1 + Math.random() * 3;
+    state.nextAutoObs = state.simTime + interval;
+    if (state.lsDirty) updateLS();
+  }
+
+  requestAnimationFrame(frame);
+}
+
+// ═══════════════════════════════════════════════════════════
+// DISCOVER MODE
+// ═══════════════════════════════════════════════════════════
+const DISCOVER_SYSTEMS = [
+  { name:'51 Peg analogue',
+    planets:[{P:4.23,mp:0.47,e:0.01,omega:0,t0:1.1}] },
+  { name:'HD 209458 analogue',
+    planets:[{P:3.52,mp:0.69,e:0.00,omega:0,t0:0.5}] },
+  { name:'Upsilon And inner',
+    planets:[{P:4.62,mp:0.71,e:0.01,omega:0,t0:0},
+             {P:241.3,mp:1.98,e:0.24,omega:0.94,t0:0}] },
+  { name:'GJ 876 analogue',
+    planets:[{P:30.1,mp:0.56,e:0.27,omega:1.4,t0:0},
+             {P:60.9,mp:1.89,e:0.03,omega:0.5,t0:0}] },
+  { name:'55 Cnc inner',
+    planets:[{P:2.82,mp:0.027,e:0.07,omega:1.1,t0:0},
+             {P:14.65,mp:0.17,e:0.01,omega:0,t0:0},
+             {P:44.4,mp:0.14,e:0.02,omega:0.6,t0:0}] },
+  { name:'Warm Saturn',
+    planets:[{P:22.7,mp:0.31,e:0.12,omega:1.8,t0:0.8}] },
+  { name:'Eccentric Jupiter',
+    planets:[{P:437,mp:4.1,e:0.68,omega:2.3,t0:0}] },
+];
+
+function generateDiscoverSystem() {
+  const sys = DISCOVER_SYSTEMS[Math.floor(Math.random()*DISCOVER_SYSTEMS.length)];
+  const result = [];
+  sys.planets.forEach((pd,i)=>{
+    const e=pd.e;
+    const K=calcK(pd.P,pd.mp,e,1.0);
+    result.push({
+      id:i+1,enabled:true,
+      P:pd.P, K, e,
+      omega:pd.omega, t0:pd.t0, label:['b','c','d'][i],
+      _mp:pd.mp, _name:sys.name
+    });
+  });
+  return result;
+}
+
+function revealSystem() {
+  if (!state.discoverSystem) return;
+  let html='<div style="font-size:.65rem;color:var(--muted);margin-bottom:6px">'
+    +(state.discoverSystem[0]._name||'Unknown system')+'</div>';
+  state.discoverSystem.forEach((p,i)=>{
+    html+=`<div class="res-row"><span>Planet ${p.label||i+1} — Period</span><strong>${p.P.toFixed(2)} d</strong></div>`;
+    html+=`<div class="res-row"><span>K amplitude</span><strong>${p.K.toFixed(1)} m/s</strong></div>`;
+    html+=`<div class="res-row"><span>m sin i</span><strong>${p._mp.toFixed(3)} MJ</strong></div>`;
+    html+=`<div class="res-row"><span>Eccentricity</span><strong>${p.e.toFixed(2)}</strong></div>`;
+    if(i<state.discoverSystem.length-1) html+='<hr style="border-color:rgba(255,255,255,.07);margin:6px 0">';
+  });
+  document.getElementById('resultContent').innerHTML=html;
+  document.getElementById('resultPanel').style.display='block';
+}
+
+// ═══════════════════════════════════════════════════════════
+// UI WIRING
+// ═══════════════════════════════════════════════════════════
+function setMode(m) {
+  state.mode = m;
+  document.getElementById('btnExplore').classList.toggle('on', m==='explore');
+  document.getElementById('btnDiscover').classList.toggle('on', m==='discover');
+  document.getElementById('discoverGrp').style.display = m==='discover'?'block':'none';
+  // Show/hide planet controls
+  ['p1grp','p2grp','p3grp'].forEach(id=>{
+    document.getElementById(id).style.display = m==='explore'?'block':'none';
+  });
+  if(m==='discover'){
+    if(!state.discoverSystem) {
+      state.discoverSystem=generateDiscoverSystem();
+    }
+    const n=state.discoverSystem.length;
+    document.getElementById('discoverInfo').innerHTML=
+      `${n} planet${n>1?'s':''} hidden.<br/>Accumulate RV observations, find the period${n>1?'s':''} in the Lomb–Scargle periodogram.`;
+  } else {
+    state.discoverSystem=null;
+  }
+  state.observations=[];
+  state.lsDirty=true;
+  updateObsStatus();
+}
+
+function setSpeed(s) {
+  state.speed=s;
+  ['1','10','50','200'].forEach(v=>{
+    document.getElementById('btnSpeed'+v).classList.toggle('on',s===Number(v));
+  });
+}
+
+function loadPreset(name) {
+  const presets = {
+    'HJ': { p:[{P:3.52,m:0.69,e:0,w:0},{P:0,m:0,e:0,w:0},{P:0,m:0,e:0,w:0}], p2:false, p3:false },
+    'SE': { p:[{P:20.4,m:0.053,e:0.06,w:90},{P:0,m:0,e:0,w:0},{P:0,m:0,e:0,w:0}], p2:false, p3:false },
+    'Mult':{ p:[{P:3.52,m:0.69,e:0,w:0},{P:14.2,m:0.30,e:0.10,w:45},{P:0,m:0,e:0,w:0}], p2:true, p3:false },
+    'Ecc': { p:[{P:35.0,m:2.1,e:0.65,w:120},{P:0,m:0,e:0,w:0},{P:0,m:0,e:0,w:0}], p2:false, p3:false },
+  };
+  const pr=presets[name];
+  if(!pr) return;
+  pr.p.forEach((pd,i)=>{
+    const idx=i+1;
+    if(pd.P>0){
+      document.getElementById(`i_p${idx}p`).value=pd.P;
+      document.getElementById(`i_p${idx}m`).value=pd.m;
+      document.getElementById(`i_p${idx}e`).value=pd.e;
+      document.getElementById(`i_p${idx}w`).value=pd.w;
+    }
+  });
+  setPlanetEnabled(2, pr.p2);
+  setPlanetEnabled(3, pr.p3);
+  syncAllSliders();
+  state.observations=[];
+  state.lsDirty=true;
+}
+
+function setPlanetEnabled(idx, enabled) {
+  state.planets[idx-1].enabled=enabled;
+  document.getElementById(`p${idx}en`).classList.toggle('on', enabled);
+  document.getElementById(`p${idx}dis`).classList.toggle('on', !enabled);
+}
+
+function syncAllSliders() {
+  const s=state.star;
+  s.mass=parseFloat(document.getElementById('i_smass').value);
+  s.incl=parseFloat(document.getElementById('i_incl').value)*Math.PI/180;
+  s.gamma=parseFloat(document.getElementById('i_gamma').value);
+
+  document.getElementById('o_smass').textContent=s.mass.toFixed(2)+' M☉';
+  document.getElementById('o_incl').textContent=Math.round(s.incl*180/Math.PI)+'°';
+  document.getElementById('o_gamma').textContent=s.gamma.toFixed(0)+' m/s';
+  document.getElementById('orbitSub').textContent='i = '+Math.round(s.incl*180/Math.PI)+'°';
+
+  state.planets.forEach((p,i)=>{
+    const idx=i+1;
+    p.P      = parseFloat(document.getElementById(`i_p${idx}p`).value);
+    const mp = parseFloat(document.getElementById(`i_p${idx}m`).value);
+    state.planetMasses[i]=mp;
+    p.e      = parseFloat(document.getElementById(`i_p${idx}e`).value);
+    p.omega  = parseFloat(document.getElementById(`i_p${idx}w`).value)*Math.PI/180;
+
+    document.getElementById(`o_p${idx}p`).textContent=p.P.toFixed(2)+' d';
+    document.getElementById(`o_p${idx}m`).textContent=mp.toFixed(3)+' MJ';
+    document.getElementById(`o_p${idx}e`).textContent=p.e.toFixed(2);
+    document.getElementById(`o_p${idx}w`).textContent=Math.round(p.omega*180/Math.PI)+'°';
+  });
+
+  document.getElementById('o_noise').textContent=
+    parseFloat(document.getElementById('i_noise').value).toFixed(1)+' m/s';
+  document.getElementById('o_jitter').textContent=
+    parseFloat(document.getElementById('i_jitter').value).toFixed(1)+' m/s';
+
+  const fv=parseFloat(document.getElementById('i_fold').value);
+  state.foldPeriod=fv;
+  document.getElementById('o_fold').textContent=fv.toFixed(2)+' d';
+
+  rebuildPlanetK();
+}
+
+// ═══════════════════════════════════════════════════════════
+// ORBIT VIEW — DRAG TO ROTATE
+// ═══════════════════════════════════════════════════════════
+(function(){
+  let dragging=false, lastX=0, lastY=0;
+  const oc=document.getElementById('orbitCanvas');
+  function onDown(e){dragging=true;lastX=e.clientX||e.touches?.[0]?.clientX||0;lastY=e.clientY||e.touches?.[0]?.clientY||0;}
+  function onMove(e){
+    if(!dragging)return;
+    const x=e.clientX||(e.touches?.[0]?.clientX||0);
+    const y=e.clientY||(e.touches?.[0]?.clientY||0);
+    state.camAz+=(x-lastX)*0.006;
+    state.camEl=Math.max(-0.1,Math.min(Math.PI/2-0.05,state.camEl-(y-lastY)*0.006));
+    lastX=x;lastY=y;
+  }
+  function onUp(){dragging=false;}
+  oc.addEventListener('mousedown',onDown);
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('mouseup',onUp);
+  oc.addEventListener('touchstart',e=>{e.preventDefault();onDown(e);},{passive:false});
+  document.addEventListener('touchmove',e=>{onMove(e);},{passive:false});
+  document.addEventListener('touchend',onUp);
+})();
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  document.getElementById('loading').classList.add('gone');
+  document.getElementById('app').style.display='flex';
+
+  resizeAll();
+  const specCanvas = document.getElementById('specCanvas');
+  initGL(specCanvas);
+  buildLSFreqs();
+  rebuildPlanetK();
+  syncAllSliders();
+
+  // Open controls panel by default
+  document.getElementById('ctrlPanel').classList.remove('hidden');
+  document.body.classList.add('panel-open');
+
+  requestAnimationFrame(ts=>{lastTs=ts;frame(ts);});
+});
+
+// Controls toggle
+document.getElementById('btnPanel').addEventListener('click',()=>{
+  const p=document.getElementById('ctrlPanel');
+  const open=!p.classList.contains('hidden');
+  p.classList.toggle('hidden',open);
+  document.body.classList.toggle('panel-open',!open);
+  document.getElementById('btnPanel').classList.toggle('on',!open);
+});
+
+// Mode buttons
+document.getElementById('btnExplore').addEventListener('click',()=>setMode('explore'));
+document.getElementById('btnDiscover').addEventListener('click',()=>setMode('discover'));
+
+// Speed buttons
+['1','10','50','200'].forEach(v=>{
+  document.getElementById('btnSpeed'+v).addEventListener('click',()=>setSpeed(Number(v)));
+});
+
+// Observe button
+document.getElementById('obsBtn').addEventListener('click',()=>{
+  addObservation(state.simTime);
+  updateLS();
+});
+
+// All sliders
+document.querySelectorAll('input[type="range"]').forEach(el=>{
+  el.addEventListener('input',syncAllSliders);
+});
+
+// Planet enable/disable
+[1,2,3].forEach(i=>{
+  document.getElementById(`p${i}en`).addEventListener('click',()=>{setPlanetEnabled(i,true);});
+  document.getElementById(`p${i}dis`).addEventListener('click',()=>{setPlanetEnabled(i,false);});
+});
+
+// Presets
+document.getElementById('prHJ').addEventListener('click',()=>loadPreset('HJ'));
+document.getElementById('prSE').addEventListener('click',()=>loadPreset('SE'));
+document.getElementById('prMult').addEventListener('click',()=>loadPreset('Mult'));
+document.getElementById('prEcc').addEventListener('click',()=>loadPreset('Ecc'));
+
+// Clear observations
+document.getElementById('btnClearObs').addEventListener('click',()=>{
+  state.observations=[];state.lsDirty=true;updateObsStatus();
+});
+
+// Auto-observe toggle
+document.getElementById('btnAutoObs').addEventListener('click',function(){
+  state.autoObs=!state.autoObs;
+  this.classList.toggle('on',state.autoObs);
+  if(state.autoObs) state.nextAutoObs=state.simTime;
+});
+
+// Discover mode controls
+document.getElementById('btnNewSystem').addEventListener('click',()=>{
+  state.discoverSystem=generateDiscoverSystem();
+  state.observations=[];state.lsDirty=true;updateObsStatus();
+  const n=state.discoverSystem.length;
+  document.getElementById('discoverInfo').innerHTML=
+    `New system generated! ${n} planet${n>1?'s':''} hidden.<br/>Take observations and find the period${n>1?'s':''}.`;
+});
+document.getElementById('btnReveal').addEventListener('click',revealSystem);
+document.getElementById('closeResult').addEventListener('click',()=>{
+  document.getElementById('resultPanel').style.display='none';
+});
+
+// Phase fold
+document.getElementById('btnFold').addEventListener('click',()=>{state.showFolded=true;});
+document.getElementById('btnUnfold').addEventListener('click',()=>{state.showFolded=false;});
+
+// Resize
+window.addEventListener('resize',resizeAll);
+</script>
+</body></html>

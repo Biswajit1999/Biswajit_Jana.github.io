@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Exoplanet Detection: The Transit Method | Biswajit Jana</title>
+  <meta name="description" content="A research-grade public guide to exoplanet transit photometry: light-curve physics, mission numbers, Kepler, TESS, candidates, false positives, atmospheric spectroscopy, and an interactive transit demonstration." />
+  <meta property="og:title" content="Exoplanet Detection: The Transit Method | Biswajit Jana" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="A detailed astrophysics article on transit photometry: from dips in starlight to planetary radius, orbital geometry, candidates, false positives, and atmospheric follow-up." />
+  <meta property="og:image" content="../../images/blog15_01_transit_method_hero.png" />
+  <meta name="author" content="Biswajit Jana" />
+  <meta name="theme-color" content="#071225" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        processEscapes: true
+      },
+      svg: { fontCache: "global" },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    :root {
+      --bg: #03111f;
+      --bg2: #071a2e;
+      --surface: rgba(10, 25, 45, 0.82);
+      --surface-strong: rgba(12, 30, 54, 0.95);
+      --surface-soft: rgba(255, 255, 255, 0.055);
+      --text: #eef7ff;
+      --muted: #a9bdd4;
+      --dim: #71869f;
+      --line: rgba(219, 233, 255, 0.13);
+      --accent: #56d8ff;
+      --accent2: #ffb657;
+      --accent3: #88e0b6;
+      --rose: #ff7b9c;
+      --shadow: 0 28px 86px rgba(0, 0, 0, 0.42);
+      --display: "Playfair Display", Georgia, serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --nav-h: 74px;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f4f7fb;
+      --bg2: #eaf1f8;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --surface-soft: rgba(10, 40, 70, 0.045);
+      --text: #102033;
+      --muted: #526478;
+      --dim: #738196;
+      --line: rgba(16, 32, 51, 0.13);
+      --accent: #1267b3;
+      --accent2: #c77700;
+      --accent3: #0b7f61;
+      --rose: #af3055;
+      --shadow: 0 24px 64px rgba(16, 32, 51, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--serif);
+      color: var(--text);
+      line-height: 1.84;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 13% -3%, rgba(86,216,255,0.16), transparent 27%),
+        radial-gradient(circle at 88% 2%, rgba(255,182,87,0.13), transparent 30%),
+        radial-gradient(circle at 50% 43%, rgba(136,224,182,0.06), transparent 34%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+      background-size: auto, auto, auto, 86px 86px, 86px 86px, auto;
+    }
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 13% -3%, rgba(18,103,179,0.12), transparent 27%),
+        radial-gradient(circle at 88% 2%, rgba(199,119,0,0.10), transparent 30%),
+        radial-gradient(circle at 50% 43%, rgba(11,127,97,0.06), transparent 34%),
+        linear-gradient(rgba(16,32,51,0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,32,51,0.032) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+      background-size: auto, auto, auto, 86px 86px, 86px 86px, auto;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.08;
+      background:
+        repeating-linear-gradient(to bottom, rgba(255,255,255,0.08) 0 1px, transparent 1px 5px),
+        radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.30) 92%);
+      mix-blend-mode: screen;
+    }
+
+    html[data-theme="light"] body::after { opacity: 0.025; }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wide { width: min(1500px, 94vw); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid var(--line);
+      background: rgba(3, 17, 31, 0.82);
+      backdrop-filter: blur(20px) saturate(1.25);
+    }
+
+    html[data-theme="light"] .nav { background: rgba(244,247,251,0.84); }
+
+    .nav-inner {
+      width: min(1500px, 94vw);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.12rem;
+      white-space: nowrap;
+    }
+
+    .brand-orb {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 35%, #ffe6ad 0 11%, #ffb657 30%, #e36b20 58%, #2c1208 100%);
+      box-shadow: 0 0 28px rgba(255,182,87,.34);
+      position: relative;
+    }
+    .brand-orb::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #051120;
+      right: 4px;
+      top: 12px;
+      box-shadow: 0 0 0 1px rgba(86,216,255,.45);
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a, .theme-toggle, .small-button {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      letter-spacing: -0.02em;
+      transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .theme-toggle, .small-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .theme-toggle:hover, .small-button:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    .hero { padding: 58px 0 28px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.74fr) minmax(520px, 1.26fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-bottom: 18px;
+    }
+    .eyebrow::before { content:""; width:34px; height:1px; background: currentColor; display:block; }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 6.6rem);
+      line-height: .94;
+      letter-spacing: -.058em;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.45vw, 1.34rem);
+      font-style: italic;
+      line-height: 1.58;
+      margin-bottom: 18px;
+      max-width: 790px;
+    }
+    .hero-text { color: var(--muted); font-size: 1.03rem; max-width: 790px; }
+
+    .meta-row { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .meta-pill {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .72rem;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 560px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 52% 42%, rgba(255,182,87,.28), transparent 13%),
+        radial-gradient(circle at 50% 45%, rgba(86,216,255,.14), transparent 27%),
+        linear-gradient(180deg, #071426, #020610);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .hero-card img { width:100%; height:100%; min-height:560px; object-fit:cover; opacity:.94; }
+    .hero-card::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:2;
+      background:
+        radial-gradient(circle at 52% 46%, transparent 0 15%, rgba(0,0,0,.08) 32%, rgba(0,0,0,.56) 100%),
+        linear-gradient(180deg, rgba(255,255,255,.045), transparent 28%, rgba(0,0,0,.32));
+    }
+
+    .hero-visual-fallback {
+      width:100%; height:100%; min-height:560px; display:grid; place-items:center; position:relative; overflow:hidden;
+    }
+    .orbit-line { position:absolute; width:78%; height:1px; top:50%; left:11%; background:linear-gradient(90deg, transparent, rgba(86,216,255,.55), transparent); box-shadow:0 0 18px rgba(86,216,255,.32); }
+    .star-disc { width:min(330px, 46vw); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 38% 32%, rgba(255,255,255,.95), transparent 0 8%), radial-gradient(circle at 43% 36%, #fff6b4 0 4%, #ffce62 34%, #f18f2d 68%, #6f2b16 100%); box-shadow:0 0 90px rgba(255,182,87,.46), 0 0 210px rgba(255,182,87,.20); position:relative; }
+    .planet-dot { width:54px; height:54px; border-radius:50%; background:radial-gradient(circle at 32% 28%, #1b2535, #020510 60%); box-shadow:0 0 20px rgba(0,0,0,.8); position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); animation: transit 7s ease-in-out infinite; z-index:3; }
+    @keyframes transit { 0%,100%{transform:translate(-460%, -50%) scale(.82);opacity:.35} 22%{transform:translate(-190%, -50%) scale(.92);opacity:.65} 50%{transform:translate(-50%, -50%) scale(1);opacity:1} 78%{transform:translate(92%, -50%) scale(.92);opacity:.65} }
+    .curve-strip { position:absolute; left:32px; right:32px; bottom:98px; height:92px; border:1px solid rgba(86,216,255,.16); border-radius:18px; background:rgba(2,6,18,.52); backdrop-filter:blur(10px); z-index:4; }
+    .curve-strip svg { width:100%; height:100%; }
+    .hero-caption { position:absolute; left:18px; right:18px; bottom:18px; z-index:6; padding:14px 16px; border-radius:18px; border:1px solid rgba(255,255,255,.14); background:rgba(5,10,20,.56); backdrop-filter:blur(14px); color:#d9e8ff; font-family:var(--mono); font-size:.72rem; line-height:1.55; }
+
+    .launch-strip { padding: 24px 0 44px; }
+    .launch-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(86,216,255,.25);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(86,216,255,.14), transparent 30%),
+        radial-gradient(circle at 82% 20%, rgba(255,182,87,.12), transparent 32%),
+        var(--surface);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .launch-card h2 { font-family:var(--display); font-size:clamp(2rem,4vw,3.4rem); line-height:1.03; letter-spacing:-.045em; margin-bottom:10px; }
+    .launch-card p { color:var(--muted); max-width:900px; font-size:1rem; }
+    .launch-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .launch-button { display:inline-flex; align-items:center; justify-content:center; min-width:230px; border-radius:999px; border:1px solid rgba(86,216,255,.38); background:rgba(86,216,255,.10); color:var(--accent); font-family:var(--mono); font-size:.8rem; padding:14px 18px; transition:background .2s ease, transform .2s ease; box-shadow:0 18px 45px rgba(86,216,255,.10); }
+    .launch-button.gold { border-color:rgba(255,182,87,.46); background:rgba(255,182,87,.11); color:var(--accent2); }
+    .launch-button:hover { background:rgba(86,216,255,.18); transform:translateY(-2px); }
+    .launch-button.gold:hover { background:rgba(255,182,87,.20); }
+
+    .journal { padding: 10px 0 80px; }
+    .journal-grid { display:grid; grid-template-columns:minmax(160px,.60fr) minmax(0,850px) minmax(285px,.82fr); gap:34px; align-items:start; }
+    .left-rail,.right-rail { position:sticky; top:calc(var(--nav-h) + 22px); }
+    .rail-card { padding:18px; border-radius:20px; border:1px solid var(--line); background:var(--surface); backdrop-filter:blur(12px); box-shadow:var(--shadow); margin-bottom:16px; }
+    .rail-card h3 { color:var(--accent); font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:12px; }
+    .section-nav { list-style:none; display:grid; gap:9px; }
+    .section-nav a { color:var(--muted); font-family:var(--mono); font-size:.75rem; line-height:1.45; transition:color .2s ease, transform .2s ease; display:inline-block; }
+    .section-nav a:hover { color:var(--accent); transform:translateX(2px); }
+    .mini-links { display:grid; gap:10px; }
+    .mini-links a { display:inline-flex; justify-content:space-between; align-items:center; gap:10px; color:var(--muted); font-family:var(--mono); font-size:.72rem; border-bottom:1px solid var(--line); padding-bottom:8px; }
+
+    .story-header { margin-bottom:22px; padding-bottom:20px; border-bottom:1px solid var(--line); }
+    .story-header h2 { font-family:var(--display); font-size:clamp(2.55rem,4.7vw,4.7rem); line-height:.99; letter-spacing:-.052em; margin-bottom:12px; }
+    .story-header p, .chapter p { color:var(--muted); font-size:1.055rem; line-height:1.88; margin-bottom:18px; }
+    .chapter { margin:42px 0; padding-top:35px; border-top:1px solid var(--line); }
+    .chapter:first-of-type { margin-top:0; padding-top:0; border-top:0; }
+    .chapter-label { color:var(--accent); font-family:var(--mono); font-size:.72rem; letter-spacing:.17em; text-transform:uppercase; margin-bottom:10px; }
+    .chapter h2 { font-family:var(--display); font-size:clamp(2rem,4vw,3.35rem); line-height:1.04; letter-spacing:-.046em; margin-bottom:16px; }
+    .chapter h3 { font-family:var(--display); font-size:clamp(1.32rem,2vw,1.84rem); line-height:1.16; letter-spacing:-.02em; margin:28px 0 10px; }
+
+    .quote { margin:26px 0; padding:14px 0 14px 20px; border-left:3px solid var(--accent); font-size:1.14rem; line-height:1.7; color:var(--text); font-style:italic; }
+    .equation { margin:24px 0; padding:20px 22px; border-radius:18px; border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--surface); box-shadow:var(--shadow); overflow-x:auto; }
+    .equation-label { color:var(--accent); font-family:var(--mono); font-size:.70rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; }
+    .equation p { font-size:.94rem; margin:10px 0 0; }
+    .callout { margin:26px 0; padding:18px 20px; border-radius:18px; border:1px solid rgba(86,216,255,.18); border-left:3px solid var(--accent3); background:rgba(136,224,182,.07); color:var(--muted); font-size:.97rem; line-height:1.72; }
+
+    .stat-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:24px 0; }
+    .stat, .fact { padding:16px; border-radius:18px; border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow); }
+    .stat strong { display:block; color:var(--accent2); font-family:var(--mono); font-size:1.18rem; margin-bottom:5px; }
+    .stat span { display:block; color:var(--muted); font-size:.88rem; line-height:1.48; }
+    .fact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:24px 0; }
+    .fact strong { display:block; color:var(--accent); font-family:var(--mono); font-size:.76rem; margin-bottom:7px; text-transform:uppercase; letter-spacing:.08em; }
+    .fact span { display:block; color:var(--muted); font-size:.92rem; line-height:1.56; }
+
+    .demo-card { margin:28px 0; border:1px solid rgba(86,216,255,.18); border-radius:24px; background:rgba(3,9,20,.72); box-shadow:var(--shadow); overflow:hidden; }
+    html[data-theme="light"] .demo-card { background:rgba(255,255,255,.82); }
+    .demo-head { padding:16px 18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:14px; align-items:center; color:var(--accent); font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+    .demo-grid { display:grid; grid-template-columns:1fr 1fr; min-height:310px; }
+    .demo-grid canvas { width:100%; min-height:310px; display:block; background:rgba(0,0,0,.18); }
+
+    .mission-table { width:100%; border-collapse:collapse; margin:24px 0; overflow:hidden; border-radius:18px; box-shadow:var(--shadow); }
+    .mission-table th, .mission-table td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+    .mission-table th { background:var(--surface-strong); color:var(--accent); font-family:var(--mono); font-size:.72rem; letter-spacing:.10em; text-transform:uppercase; }
+    .mission-table td { background:var(--surface); color:var(--muted); font-size:.94rem; }
+    .mission-table td:first-child { color:var(--text); font-weight:700; font-family:var(--sans); }
+
+    .references { margin-top:18px; padding-top:34px; border-top:1px solid var(--line); }
+    .references h3 { font-family:var(--display); font-size:1.9rem; letter-spacing:-.03em; margin-bottom:14px; }
+    .references ol { list-style:none; counter-reset:ref; }
+    .references li { counter-increment:ref; display:flex; gap:12px; color:var(--muted); font-size:.95rem; line-height:1.65; margin-bottom:10px; }
+    .references li::before { content:"[" counter(ref) "]"; color:var(--accent); font-family:var(--mono); flex-shrink:0; }
+    .references a { color:var(--accent); text-decoration:underline; text-decoration-thickness:.08em; text-underline-offset:.16em; }
+
+    .post-list { display:grid; gap:12px; }
+    .post-card { padding:16px; border-radius:18px; border:1px solid var(--line); background:var(--surface-soft); transition:transform .22s ease, border-color .22s ease, background .22s ease; }
+    .post-card:hover { transform:translateY(-2px); border-color:rgba(86,216,255,.36); background:rgba(255,255,255,.08); }
+    .post-card-kicker { color:var(--accent); font-family:var(--mono); font-size:.66rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; }
+    .post-card h4 { font-family:var(--display); font-size:1.18rem; line-height:1.16; letter-spacing:-.02em; margin-bottom:8px; }
+    .post-card p { color:var(--muted); font-size:.9rem; line-height:1.6; }
+    .tiny-meta { color:var(--dim); font-family:var(--mono); font-size:.68rem; margin-top:10px; }
+
+    .comments-section { margin-top:46px; padding:24px; border-radius:22px; border:1px solid var(--line); background:var(--surface); box-shadow:var(--shadow); }
+    .comments-section h3 { font-family:var(--display); font-size:1.8rem; letter-spacing:-.03em; margin-bottom:8px; }
+    .comments-section p { color:var(--muted); font-size:.95rem; margin-bottom:16px; }
+
+    footer { border-top:1px solid var(--line); padding:26px 0 42px; color:var(--dim); font-family:var(--mono); font-size:.72rem; text-align:center; }
+
+    @media (max-width:1180px) {
+      .hero-grid { grid-template-columns:1fr; }
+      .hero-card, .hero-card img, .hero-visual-fallback { min-height:460px; }
+      .launch-card { grid-template-columns:1fr; }
+      .launch-actions { justify-content:flex-start; }
+      .journal-grid { grid-template-columns:220px minmax(0,1fr); }
+      .right-rail { grid-column:1 / -1; position:static; }
+      .stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:900px) {
+      .nav { height:auto; }
+      .nav-inner { padding:14px 0; flex-direction:column; align-items:flex-start; }
+      .hero { padding-top:34px; }
+      .journal-grid { grid-template-columns:1fr; }
+      .left-rail,.right-rail { position:static; }
+      .fact-grid,.demo-grid { grid-template-columns:1fr; }
+      .nav-links { justify-content:flex-start; }
+    }
+    @media (max-width:760px) {
+      .wide,.nav-inner { width:min(94vw,100%); }
+      .hero-card,.hero-card img,.hero-visual-fallback { min-height:360px; }
+      .launch-card { padding:22px; }
+      .launch-button { width:100%; }
+      .stat-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../../index.html"><span class="brand-orb" aria-hidden="true"></span>Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../index.html">Blog</a></li>
+        <li><a href="../../index.html#current-research">Research</a></li>
+        <li><a href="../../publications.html">Publications</a></li>
+        <li><a href="../../cv.html">CV</a></li>
+        <li><a href="https://biswajit1999.github.io/exolight-transit-lab/">Transit Lab</a></li>
+        <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle day and night mode">☀︎ / ☾</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero wide">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Exoplanets · Transit photometry · Detection methods</div>
+        <h1>Exoplanet Detection: The Transit Method</h1>
+        <p class="hero-sub">
+          The transit method is beautifully simple in concept: wait for a planet to cross in front of its star, then measure a tiny loss of starlight. The difficult part is that the universe hides the signal inside noise, geometry, stellar activity, and instrumental systematics.
+        </p>
+        <p class="hero-text">
+          This revised guide expands the physics, mission context, and practical interpretation behind transit photometry. It connects the basic dip equation to real survey numbers from Kepler, K2, and TESS, then shows why candidates require careful vetting before they become confirmed planets.
+        </p>
+        <div class="meta-row">
+          <span class="meta-pill">17 May 2026 · Hertford, UK</span>
+          <span class="meta-pill">Expanded research edition</span>
+          <span class="meta-pill">Transit depth · geometry · candidates</span>
+          <span class="meta-pill">Day / night mode</span>
+        </div>
+      </div>
+
+      <figure class="hero-card">
+        <img src="../../images/blog15_01_transit_method_hero.png" alt="Cinematic exoplanet transit visual with star, planet, and light curve" onerror="this.style.display='none';this.parentElement.querySelector('.hero-visual-fallback').style.display='grid';" />
+        <div class="hero-visual-fallback" style="display:none;">
+          <div class="orbit-line"></div>
+          <div class="star-disc"><div class="planet-dot"></div></div>
+          <div class="curve-strip">
+            <svg viewBox="0 0 900 120" preserveAspectRatio="none" aria-hidden="true">
+              <defs><linearGradient id="curveG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#56d8ff" stop-opacity="0.2"/><stop offset="0.5" stop-color="#ffb657" stop-opacity="1"/><stop offset="1" stop-color="#56d8ff" stop-opacity="0.2"/></linearGradient></defs>
+              <path d="M0,42 C120,42 220,42 300,42 C345,42 350,86 390,90 C460,98 555,98 610,90 C650,84 650,42 700,42 C770,42 840,42 900,42" fill="none" stroke="url(#curveG)" stroke-width="4" />
+              <line x1="0" y1="42" x2="900" y2="42" stroke="rgba(255,255,255,.18)" stroke-dasharray="8 10" />
+            </svg>
+          </div>
+        </div>
+        <figcaption class="hero-caption">
+          A transit is a geometrical accident we can exploit: a planet temporarily blocks part of the stellar disk, producing a repeatable, modelable dip in brightness.
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="launch-strip wide">
+    <div class="launch-card">
+      <div>
+        <div class="eyebrow">Interactive continuation</div>
+        <h2>Read the physics, then test it in the lab.</h2>
+        <p>
+          ExoIntel-Prime lets you change planet radius, impact parameter, limb darkening, starspots, and moon-like occultors, then compare the resulting theoretical model with archival light-curve points.
+        </p>
+      </div>
+      <div class="launch-actions">
+        <a class="launch-button" href="https://biswajit1999.github.io/exolight-transit-lab/" data-track-event="exolight_lab_launch">Launch Transit Lab →</a>
+        <a class="launch-button gold" href="#mission-numbers">See mission numbers ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="journal wide">
+    <div class="journal-grid">
+      <aside class="left-rail">
+        <div class="rail-card">
+          <h3>Navigate</h3>
+          <ul class="section-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#mission-numbers">Mission numbers</a></li>
+            <li><a href="#principle">Basic principle</a></li>
+            <li><a href="#geometry">Transit geometry</a></li>
+            <li><a href="#lightcurve">Light curve anatomy</a></li>
+            <li><a href="#measurements">What we measure</a></li>
+            <li><a href="#reality">Noise and false positives</a></li>
+            <li><a href="#atmospheres">Atmospheres</a></li>
+            <li><a href="#limitations">Limits and biases</a></li>
+            <li><a href="#lab">Interactive lab</a></li>
+            <li><a href="#comments">Comments</a></li>
+          </ul>
+        </div>
+        <div class="rail-card">
+          <h3>Elsewhere</h3>
+          <div class="mini-links">
+            <a href="../index.html"><span>All blog posts</span><span>↗</span></a>
+            <a href="https://biswajit1999.github.io/exolight-transit-lab/"><span>ExoIntel-Prime</span><span>↗</span></a>
+            <a href="../../index.html#projects"><span>Projects</span><span>↗</span></a>
+            <a href="../../cv.html"><span>CV</span><span>↗</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="story">
+        <div class="story-header" id="overview">
+          <div class="eyebrow">Photometry · Geometry · Planet detection</div>
+          <h2>A planet can reveal itself by removing light, not by producing it.</h2>
+          <p>
+            Most exoplanets are too faint and too close to their host stars to image directly. The transit method uses a different strategy: it watches the star itself. If a planet passes between the star and the telescope, the measured stellar flux drops by a small amount. If that dip repeats with the same period, duration, and shape, it becomes evidence for an orbiting body.
+          </p>
+          <p>
+            The elegance of the method is that the first measurement is almost embarrassingly simple: a little missing starlight. The power of the method comes from how much physics is encoded in that missing light: planet radius, orbital period, inclination, stellar density, limb darkening, possible starspots, and in favourable cases atmospheric absorption.
+          </p>
+        </div>
+
+        <article>
+          <section class="chapter" id="mission-numbers">
+            <div class="chapter-label">Chapter 00 · Where the field stands</div>
+            <h2>Transit photometry now dominates the confirmed exoplanet census.</h2>
+            <p>
+              The scale of the field is now enormous. As of the NASA Exoplanet Archive update used for this article, the archive listed 6,287 confirmed exoplanets. Of these, 4,648 were attributed to the transit discovery method, and 4,690 were listed as transiting exoplanets. That means the transit method is not a niche technique; it is the main engine behind the modern planet census.
+            </p>
+            <div class="stat-grid">
+              <div class="stat"><strong>6,287</strong><span>confirmed exoplanets in the NASA Exoplanet Archive.</span></div>
+              <div class="stat"><strong>4,648</strong><span>confirmed planets attributed to the transit discovery method.</span></div>
+              <div class="stat"><strong>2,784</strong><span>confirmed planets discovered by Kepler observations.</span></div>
+              <div class="stat"><strong>893</strong><span>confirmed planets discovered by TESS observations.</span></div>
+            </div>
+            <p>
+              The candidate numbers are just as important. A candidate is not a confirmed planet; it is a signal that looks planet-like enough to deserve further vetting. The archive listed 1,978 Kepler project candidates still awaiting confirmation, 976 K2 candidates still awaiting confirmation, and 7,931 TESS project candidates integrated into the archive. TESS candidates that had not yet been dispositioned as confirmed planets or false positives numbered 4,783.
+            </p>
+            <table class="mission-table" aria-label="Mission candidate and confirmed planet numbers">
+              <thead><tr><th>Survey / category</th><th>Count</th><th>Interpretation</th></tr></thead>
+              <tbody>
+                <tr><td>Kepler confirmed planets</td><td>2,784</td><td>Planets discovered using Kepler observations and published/validated as confirmed.</td></tr>
+                <tr><td>Kepler candidates yet to confirm</td><td>1,978</td><td>KOI signals still awaiting confirmation or rejection.</td></tr>
+                <tr><td>K2 confirmed planets</td><td>549</td><td>Confirmed planets from the extended Kepler/K2 mission.</td></tr>
+                <tr><td>K2 candidates yet to confirm</td><td>976</td><td>Candidate signals from K2 still needing disposition.</td></tr>
+                <tr><td>TESS confirmed planets</td><td>893</td><td>TESS planets published in refereed literature and counted by the archive.</td></tr>
+                <tr><td>TESS project candidates</td><td>7,931</td><td>Transit-like events identified by the TESS project, including false positives.</td></tr>
+                <tr><td>TESS candidates yet to confirm</td><td>4,783</td><td>TESS project candidates not yet confirmed or labelled as false positives.</td></tr>
+              </tbody>
+            </table>
+            <div class="callout">
+              These numbers change regularly. The lesson is not the exact value on one day, but the scale: modern transit surveys generate thousands of signals, and most candidate lists are scientific work queues rather than final planet catalogues.
+            </div>
+          </section>
+
+          <section class="chapter" id="principle">
+            <div class="chapter-label">Chapter 01 · The signal</div>
+            <h2>What is the transit method?</h2>
+            <p>
+              The transit method detects planets by measuring tiny, periodic decreases in a star's brightness. The star is not physically turning off. A planet is temporarily blocking a fraction of the visible stellar disk. To a telescope, the planet appears as a moving mask across a luminous surface.
+            </p>
+            <p>
+              The signal is usually shallow. A Jupiter-sized planet crossing a Sun-sized star blocks about one percent of the light. An Earth-sized planet crossing a Sun-sized star blocks only about 84 parts per million. That is why space telescopes, careful detrending, and repeated events matter.
+            </p>
+            <div class="equation">
+              <div class="equation-label">Transit depth, first approximation</div>
+              \[
+                \Delta F \simeq \left(\frac{R_p}{R_\star}\right)^2
+              \]
+              <p>
+                If the stellar disk were uniformly bright and the planet were fully in front of it, the fractional loss of light would be roughly the area ratio between the planet and the star.
+              </p>
+            </div>
+            <div class="fact-grid">
+              <div class="fact"><strong>Hot Jupiter around Sun</strong><span>\(R_p/R_\star \approx 0.1\), so the depth is about 1%, or 10,000 ppm.</span></div>
+              <div class="fact"><strong>Earth around Sun</strong><span>\(R_p/R_\star \approx 0.0092\), so the depth is about 84 ppm.</span></div>
+            </div>
+            <div class="quote">Transit photometry is not a photograph of a planet. It is a measurement of missing starlight.</div>
+          </section>
+
+          <section class="chapter" id="geometry">
+            <div class="chapter-label">Chapter 02 · Alignment</div>
+            <h2>The geometry has to be lucky.</h2>
+            <p>
+              A planet can orbit a star without ever transiting from our point of view. A transit requires the orbital plane to line up with our line of sight so the planet crosses the stellar disk. The closer the orbit is to edge-on, the more likely we are to see a transit.
+            </p>
+            <p>
+              The impact parameter describes how far the transit chord passes from the stellar centre. A central transit crosses the bright central region and usually has a longer, deeper, more symmetric shape. A grazing transit skims the limb and can be shallow, V-shaped, and harder to distinguish from an eclipsing binary.
+            </p>
+            <div class="equation">
+              <div class="equation-label">Impact parameter, circular approximation</div>
+              \[
+                b = \frac{a\cos i}{R_\star}
+              \]
+              <p>
+                Here \(a\) is the orbital semi-major axis, \(i\) is inclination, and \(R_\star\) is stellar radius. For eccentric orbits, \(e\) and \(\omega\) also enter the geometry.
+              </p>
+            </div>
+            <div class="fact-grid">
+              <div class="fact"><strong>Transit probability</strong><span>For a circular orbit, the probability is approximately \((R_\star+R_p)/a\). Close-in planets are therefore strongly favoured.</span></div>
+              <div class="fact"><strong>Period bias</strong><span>Short-period planets transit more often, so surveys confirm them faster than long-period analogues of Earth.</span></div>
+              <div class="fact"><strong>Grazing ambiguity</strong><span>A grazing planet and a grazing stellar binary can both produce V-shaped dips, so follow-up is essential.</span></div>
+              <div class="fact"><strong>Stellar density</strong><span>The duration and period encode information about \(a/R_\star\), and therefore the host-star density under suitable assumptions.</span></div>
+            </div>
+          </section>
+
+          <section class="chapter" id="lightcurve">
+            <div class="chapter-label">Chapter 03 · Anatomy</div>
+            <h2>The light curve is the fingerprint.</h2>
+            <p>
+              A clean transit has four contact points: first contact when the planet touches the stellar limb, second contact when the full planet disk is inside the stellar disk, third contact when egress begins, and fourth contact when the planet leaves. The time between first and fourth contact is the total transit duration.
+            </p>
+            <p>
+              The light curve is not a perfect box. Stars are limb-darkened: their apparent disks are brighter at the centre and fainter near the edge. This changes the slope of ingress and egress and can shift the relationship between depth and \(R_p/R_\star\).
+            </p>
+            <div class="demo-card" aria-label="Transit light-curve demonstration">
+              <div class="demo-head"><span>Live article figure · simplified transit geometry</span><span>Educational canvas model</span></div>
+              <div class="demo-grid"><canvas id="transitCanvas" width="700" height="360"></canvas><canvas id="curveCanvas" width="700" height="360"></canvas></div>
+            </div>
+            <div class="equation">
+              <div class="equation-label">Quadratic limb darkening</div>
+              \[
+                I(\mu)=1-u_1(1-\mu)-u_2(1-\mu)^2
+              \]
+              <p>
+                In detailed modelling, limb-darkening coefficients depend on stellar effective temperature, surface gravity, metallicity, and observing bandpass.
+              </p>
+            </div>
+          </section>
+
+          <section class="chapter" id="measurements">
+            <div class="chapter-label">Chapter 04 · Inference</div>
+            <h2>What can we learn from a transit?</h2>
+            <p>
+              The most direct measurement is the planet's size relative to the star. If the stellar radius is known, the transit depth gives an estimate of the planet radius. The repeated timing gives the orbital period. Combining the period with stellar mass gives the orbital scale through Kepler's third law.
+            </p>
+            <p>
+              A transit alone normally does not give mass. For that, we usually need radial velocity measurements, transit timing variations in multi-planet systems, or other dynamical constraints. Once mass and radius are both known, the bulk density tells us whether a planet is likely rocky, gaseous, icy, or intermediate.
+            </p>
+            <div class="equation">
+              <div class="equation-label">Kepler scale, simplified two-body form</div>
+              \[
+                P^2 = \frac{4\pi^2a^3}{G(M_\star+M_p)}
+              \]
+              <p>
+                Since \(M_p\ll M_\star\) for most planets, the stellar mass dominates the orbital solution.
+              </p>
+            </div>
+            <div class="callout">
+              The transit method is strongest when combined with other techniques. Transit photometry gives radius and geometry; radial velocity gives mass; spectroscopy can probe atmospheric composition.
+            </div>
+          </section>
+
+          <section class="chapter" id="reality">
+            <div class="chapter-label">Chapter 05 · Real data</div>
+            <h2>Real light curves are not polite.</h2>
+            <p>
+              A textbook transit is clean. Real data rarely are. Stars rotate, pulsate, flare, and carry spots across their surfaces. Instruments drift. Detectors have systematics. Spacecraft momentum dumps, scattered light, cosmic rays, and background stars can all complicate the signal.
+            </p>
+            <p>
+              A candidate becomes convincing when the signal repeats with a consistent period, duration, and depth, and when the false-positive tests do not reveal a better explanation. Astronomers check odd-even transit depths, secondary eclipses, centroid motion, nearby contaminating stars, colour dependence, high-resolution imaging, and spectroscopic follow-up.
+            </p>
+            <div class="fact-grid">
+              <div class="fact"><strong>Phase folding</strong><span>Stacking repeated transits at the same orbital phase increases the signal-to-noise ratio.</span></div>
+              <div class="fact"><strong>Centroid motion</strong><span>If the image centre shifts during the dip, the source may be a nearby eclipsing binary rather than the target star.</span></div>
+              <div class="fact"><strong>Odd-even test</strong><span>Alternating deep and shallow eclipses can reveal a stellar binary with primary and secondary eclipses.</span></div>
+              <div class="fact"><strong>Dilution</strong><span>Nearby stars reduce the apparent depth, making a planet appear smaller than it really is.</span></div>
+            </div>
+          </section>
+
+          <section class="chapter" id="atmospheres">
+            <div class="chapter-label">Chapter 06 · Atmospheres</div>
+            <h2>From detection to atmospheric physics.</h2>
+            <p>
+              During a transit, a small fraction of starlight passes through the planet's atmosphere before reaching us. Atoms and molecules absorb specific wavelengths, so the apparent transit depth can change with wavelength. This is transmission spectroscopy.
+            </p>
+            <p>
+              The signal is tiny, but it can reveal atmospheric species, clouds, hazes, atmospheric escape, and temperature structure. Transit detections therefore do more than find planets: they identify targets for JWST and future observatories to study as physical worlds.
+            </p>
+            <div class="equation">
+              <div class="equation-label">Wavelength-dependent transit depth</div>
+              \[
+                \Delta F(\lambda) \simeq \left(\frac{R_p(\lambda)}{R_\star}\right)^2
+              \]
+              <p>
+                Atmospheric absorption can make the planet appear slightly larger at wavelengths where the atmosphere is more opaque.
+              </p>
+            </div>
+          </section>
+
+          <section class="chapter" id="limitations">
+            <div class="chapter-label">Chapter 07 · Limits</div>
+            <h2>The method is powerful, but not universal.</h2>
+            <p>
+              Transit surveys are biased toward planets that are large, close to their stars, and frequently transiting. Small long-period planets are harder because they produce shallower dips and require long observing baselines to detect multiple events.
+            </p>
+            <p>
+              The method also depends on alignment. Most planetary systems are not oriented so that every planet transits from Earth. This does not make the method weak; it means transit detections are geometrically selected samples that must be interpreted carefully.
+            </p>
+            <div class="quote">The transit method turns a limitation into a strength: because only aligned systems transit, every detection comes with a well-defined geometry we can model.</div>
+          </section>
+
+          <section class="chapter" id="lab">
+            <div class="chapter-label">Interactive continuation</div>
+            <h2>Why I built a transit lab.</h2>
+            <p>
+              Static figures explain the idea, but they hide the sensitivity of the method. Change \(R_p/R_\star\), and the depth changes. Increase the impact parameter, and the shape changes. Add limb darkening, and the curve becomes less box-like. Add a moon-like body or a starspot, and the residuals start telling a more complicated story.
+            </p>
+            <p>
+              That is the motivation behind ExoIntel-Prime: to make the geometry visible, the light curve responsive, and the physics less abstract. It is not a replacement for professional fitting pipelines, but it is a bridge between textbook formulas and live scientific modelling.
+            </p>
+            <p><a class="launch-button" href="https://biswajit1999.github.io/exolight-transit-lab/" data-track-event="exolight_lab_launch_inline">Open ExoIntel-Prime →</a></p>
+          </section>
+
+          <section class="references">
+            <h3>References and data sources</h3>
+            <ol>
+              <li>NASA Exoplanet Archive. Exoplanet and Candidate Statistics. <a href="https://exoplanetarchive.ipac.caltech.edu/docs/counts_detail.html">Archive statistics page</a>.</li>
+              <li>NASA Exoplanet Archive. Homepage count summary. <a href="https://exoplanetarchive.ipac.caltech.edu/">NASA Exoplanet Archive</a>.</li>
+              <li>Seager, S. and Mallén-Ornelas, G. (2003). A unique solution of planet and star parameters from an extrasolar planet transit light curve.</li>
+              <li>Mandel, K. and Agol, E. (2002). Analytic light curves for planetary transit searches.</li>
+              <li>Charbonneau, D. et al. (2000). Detection of planetary transits across a Sun-like star.</li>
+              <li>Brown, T. M. et al. (2001). Hubble Space Telescope time-series photometry of the transiting planet of HD 209458.</li>
+              <li>Borucki, W. J. et al. (2010). Kepler Planet-Detection Mission: Introduction and first results.</li>
+              <li>Ricker, G. R. et al. (2015). Transiting Exoplanet Survey Satellite.</li>
+              <li>Winn, J. N. (2010). Exoplanet transits and occultations.</li>
+            </ol>
+          </section>
+
+          <section class="comments-section" id="comments">
+            <h3>Comments and reactions</h3>
+            <p>
+              Comments are powered by GitHub Discussions through giscus. You can leave a question, correction, or reaction below.
+            </p>
+            <script src="https://giscus.app/client.js"
+                    data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                    data-repo-id="R_kgDOST2kXQ"
+                    data-category="General"
+                    data-category-id="DIC_kwDOST2kXc4C8UVe"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+          </section>
+        </article>
+      </main>
+
+      <aside class="right-rail">
+        <div class="rail-card">
+          <h3>More from the Lab</h3>
+          <div class="post-list">
+            <a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related detection method</div><h4>The Radial Velocity Method</h4><p>How stellar wobble and Doppler shifts reveal planets that do not necessarily transit.</p><div class="tiny-meta">Exoplanets · Doppler spectroscopy</div></a>
+            <a class="post-card" href="exoplanet-spectroscopy.html"><div class="post-card-kicker">Follow-up physics</div><h4>Exoplanet Spectroscopy</h4><p>How atmospheres leave molecular fingerprints in wavelength-dependent transit depths.</p><div class="tiny-meta">Atmospheres · Spectroscopy</div></a>
+            <a class="post-card" href="control-system.html"><div class="post-card-kicker">Instrumentation</div><h4>What is a Control System?</h4><p>Why precision measurements often depend on feedback, stability, and careful instrumentation.</p><div class="tiny-meta">Controls · Instrumentation</div></a>
+          </div>
+        </div>
+        <div class="rail-card">
+          <h3>Quick equations</h3>
+          <div class="mini-links">
+            <a href="#principle"><span>Depth ≈ (Rp/Rs)²</span><span>↗</span></a>
+            <a href="#geometry"><span>b = a cos i / Rs</span><span>↗</span></a>
+            <a href="#lightcurve"><span>Limb darkening</span><span>↗</span></a>
+            <a href="#atmospheres"><span>Rp(λ) transmission</span><span>↗</span></a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer>© 2026 Biswajit Jana · Exoplanet detection article and ExoIntel-Prime companion</footer>
+
+  <script>
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem("bj-transit-blog-theme");
+    if (savedTheme === "light" || savedTheme === "dark") root.dataset.theme = savedTheme;
+    document.getElementById("themeToggle")?.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      localStorage.setItem("bj-transit-blog-theme", next);
+      if (window.giscus) {
+        window.postMessage({ giscus: { setConfig: { theme: next === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+      }
+    });
+
+    function trackEvent(name) {
+      if (window.plausible) window.plausible(name);
+      if (window.gtag) window.gtag("event", name, { event_category: "engagement", event_label: "exoplanet_transit_method_blog" });
+    }
+    document.querySelectorAll("[data-track-event]").forEach(el => el.addEventListener("click", () => trackEvent(el.getAttribute("data-track-event"))));
+
+    const transitCanvas = document.getElementById("transitCanvas");
+    const curveCanvas = document.getElementById("curveCanvas");
+
+    function resizeCanvas(canvas) {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx, w: rect.width, h: rect.height };
+    }
+
+    function transitFlux(x, starR, planetR) {
+      let total = 0, visible = 0;
+      const N = 66;
+      for (let i = 0; i < N; i++) {
+        for (let j = 0; j < N; j++) {
+          const px = -starR + (2 * starR) * (i + 0.5) / N;
+          const py = -starR + (2 * starR) * (j + 0.5) / N;
+          const r = Math.hypot(px, py);
+          if (r <= starR) {
+            const mu = Math.sqrt(Math.max(0, 1 - (r / starR) ** 2));
+            const intensity = 0.38 + 0.62 * mu;
+            total += intensity;
+            if (Math.hypot(px - x, py) > planetR) visible += intensity;
+          }
+        }
+      }
+      return visible / total;
+    }
+
+    function drawTransitDemo(time) {
+      if (!transitCanvas || !curveCanvas) return;
+      const t = (time / 7200) % 1;
+      const phase = 0.5 - 0.5 * Math.cos(t * Math.PI * 2);
+      const xNorm = -1.55 + 3.1 * phase;
+      const isLight = root.dataset.theme === "light";
+
+      let a = resizeCanvas(transitCanvas);
+      let ctx = a.ctx, w = a.w, h = a.h;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = isLight ? "rgba(236,243,251,0.92)" : "rgba(1,6,18,0.86)";
+      ctx.fillRect(0, 0, w, h);
+
+      const cx = w * 0.5, cy = h * 0.50;
+      const R = Math.min(w, h) * 0.29, pr = R * 0.145, px = cx + xNorm * R;
+      const grad = ctx.createRadialGradient(cx - R*.28, cy - R*.25, R*.05, cx, cy, R);
+      grad.addColorStop(0, "#fff7bf"); grad.addColorStop(.35, "#ffcb63"); grad.addColorStop(.72, "#f19135"); grad.addColorStop(1, "#5c2818");
+      ctx.shadowColor = "rgba(255,182,87,.45)"; ctx.shadowBlur = 42;
+      ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
+      ctx.strokeStyle = isLight ? "rgba(18,103,179,.45)" : "rgba(86,216,255,.45)";
+      ctx.setLineDash([8, 8]); ctx.beginPath(); ctx.moveTo(w*.1, cy); ctx.lineTo(w*.9, cy); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = "#020612"; ctx.shadowColor = "rgba(0,0,0,.75)"; ctx.shadowBlur = 12; ctx.beginPath(); ctx.arc(px, cy, pr, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
+      ctx.font = "700 11px JetBrains Mono";
+      ctx.fillStyle = isLight ? "#1267b3" : "#56d8ff"; ctx.fillText("planet path", w*.1, cy - 15);
+      ctx.fillStyle = isLight ? "#c77700" : "#ffb657"; ctx.fillText("limb-darkened stellar disk", cx - R, cy + R + 25);
+
+      a = resizeCanvas(curveCanvas); ctx = a.ctx; w = a.w; h = a.h;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = isLight ? "rgba(236,243,251,0.92)" : "rgba(1,6,18,0.86)"; ctx.fillRect(0, 0, w, h);
+      const pad = { l: 48, r: 22, t: 34, b: 42 };
+      ctx.strokeStyle = isLight ? "rgba(16,32,51,.13)" : "rgba(255,255,255,.11)";
+      for (let i=0; i<=5; i++) { const yy = pad.t + i/5*(h-pad.t-pad.b); ctx.beginPath(); ctx.moveTo(pad.l, yy); ctx.lineTo(w-pad.r, yy); ctx.stroke(); }
+      const values = [];
+      for (let i=0; i<280; i++) { const ph = i/279; const xn = -1.55 + 3.1 * ph; values.push(transitFlux(xn*R, R, pr)); }
+      const fmin = Math.min(...values);
+      const y = f => pad.t + (1 - (f - (fmin - .002)) / (1.002 - (fmin - .002))) * (h-pad.t-pad.b);
+      const x = i => pad.l + i/279*(w-pad.l-pad.r);
+      ctx.strokeStyle = isLight ? "rgba(199,119,0,.96)" : "rgba(255,182,87,.96)"; ctx.lineWidth = 2; ctx.beginPath();
+      values.forEach((f,i) => i ? ctx.lineTo(x(i), y(f)) : ctx.moveTo(x(i), y(f))); ctx.stroke();
+      const idx = Math.floor(phase*279);
+      ctx.strokeStyle = isLight ? "rgba(18,103,179,.65)" : "rgba(86,216,255,.65)"; ctx.setLineDash([5,7]); ctx.beginPath(); ctx.moveTo(x(idx), pad.t); ctx.lineTo(x(idx), h-pad.b); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = isLight ? "rgba(18,103,179,.9)" : "rgba(86,216,255,.9)"; ctx.beginPath(); ctx.arc(x(idx), y(values[idx]), 4, 0, Math.PI*2); ctx.fill();
+      ctx.font = "700 11px JetBrains Mono";
+      ctx.fillStyle = isLight ? "#102033" : "#eef7ff"; ctx.fillText("normalised flux", pad.l, 20);
+      ctx.fillStyle = isLight ? "#1267b3" : "#56d8ff"; ctx.textAlign = "right"; ctx.fillText("depth ≈ " + ((1-fmin)*1e6).toFixed(0) + " ppm", w-pad.r, 20); ctx.textAlign = "left";
+    }
+
+    function loopTransitDemo(t) { drawTransitDemo(t); requestAnimationFrame(loopTransitDemo); }
+    requestAnimationFrame(loopTransitDemo);
+    window.addEventListener("resize", () => drawTransitDemo(performance.now()));
+  </script>
+</body>
+</html>

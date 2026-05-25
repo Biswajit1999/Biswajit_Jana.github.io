@@ -1,0 +1,172 @@
+[
+  {
+    "title": "Gravitational Waves: When Spacetime Itself Starts Ringing",
+    "subtitle": "Black holes, neutron stars, chirp signals, LIGO, and a small interactive lab for hearing spacetime misbehave.",
+    "date": "2026-05-20",
+    "category": "Relativity",
+    "readTime": "13 min read",
+    "image": "../images/blog13_01_gravitational_waves_hero.png",
+    "url": "posts/gravitational-waves.html",
+    "tags": ["Gravitational Waves", "LIGO", "Black Holes", "Neutron Stars", "Relativity"]
+  },
+  {
+    "title": "Exoplanet Detection: The Transit Method",
+    "subtitle": "How tiny dips in starlight reveal planetary size, orbital geometry, false positives, and atmospheric signatures.",
+    "date": "2026-05-17",
+    "category": "Exoplanets",
+    "readTime": "15 min read",
+    "image": "../images/blog15_01_transit_method_hero.png",
+    "url": "posts/exoplanet-transit-method.html",
+    "tags": ["Exoplanets", "Transit Method", "Photometry", "Light Curves", "TESS", "Kepler"]
+  },
+  {
+    "title": "Are We Alone? Part II — The Numbers, the Searches, and the Silence",
+    "subtitle": "A quantitative follow-up on exoplanet statistics, SETI limits, biosignatures, technosignatures, future observatories, and why cosmic silence is still scientifically uncomfortable.",
+    "date": "2026-05-10",
+    "category": "Astrobiology",
+    "readTime": "22 min read",
+    "image": "../images/blog2_04_seti_telescope.png",
+    "url": "posts/are-we-alone-part-2.html",
+    "tags": ["Astrobiology", "SETI", "Biosignatures", "Technosignatures", "Future Missions"]
+  },
+  {
+    "title": "Pulsars: The Cosmic Lighthouses of the Deep",
+    "subtitle": "Rotating neutron stars, magnetic beams, radio pulse profiles, and why pulsars are some of the best clocks in the Galaxy.",
+    "date": "2026-05-08",
+    "category": "Astrophysics",
+    "readTime": "15 min read",
+    "image": "../images/blog14_01_pulsar_hero.png",
+    "url": "posts/pulsars-cosmic-lighthouses.html",
+    "tags": ["Pulsars", "Neutron Stars", "Radio Astronomy", "Gravitational Waves"]
+  },
+  {
+    "title": "Black Holes: What Happens When Gravity Wins?",
+    "subtitle": "A digital-journalism astrophysics article on black holes, event horizons, singularities, time dilation, Hawking radiation, modern imaging, and a separate interactive visual lab.",
+    "date": "2026-05-08",
+    "category": "Relativity",
+    "readTime": "16 min read",
+    "image": "../images/blog13_01_blackhole_hero.png",
+    "url": "posts/black-hole-extreme-lab.html",
+    "tags": ["Black Holes", "General Relativity", "Hawking Radiation", "EHT", "Interactive"]
+  },
+  {
+    "title": "The Big Bang, Before the Big Bang, and Why It Still Scares Me",
+    "subtitle": "A personal astrophysics note on the early universe, what we know, what we do not, and why cosmic origin questions still feel unsettling.",
+    "date": "2026-05-07",
+    "category": "Cosmology",
+    "readTime": "14 min read",
+    "image": "../images/blog12_01_bigbang_hero.png",
+    "url": "posts/big-bang-part-1.html",
+    "tags": ["Big Bang", "Cosmology", "Observable Universe", "Multiverse", "Philosophy"]
+  },
+  {
+    "title": "The Three-Body Problem: When Gravity Refuses to Behave Politely",
+    "subtitle": "A reflective computational-physics post with an interactive simulation showing how three gravitational bodies become chaotic.",
+    "date": "2026-05-08",
+    "category": "Computational Physics",
+    "readTime": "12 min read",
+    "image": "../images/blog6_01_three_body_hero.png",
+    "url": "posts/three-body-problem.html",
+    "tags": ["Gravity", "Chaos", "Orbital Dynamics", "Simulation"]
+  },
+  {
+    "title": "The Radial Velocity Method: Finding Planets by Watching Stars Panic Slightly",
+    "subtitle": "A planet and star orbit their common centre of mass, causing the star’s spectrum to shift slightly.",
+    "date": "2026-04-29",
+    "category": "Exoplanets",
+    "readTime": "11 min read",
+    "image": "../images/blog11_01_radial_velocity_hero.png",
+    "url": "posts/radial-velocity-method.html",
+    "tags": ["Exoplanets", "Radial Velocity", "Doppler Shift", "Spectroscopy"]
+  },
+  {
+    "title": "Spectra: How Light Accidentally Becomes a Confession",
+    "subtitle": "A spectrum can reveal composition, temperature, motion, pressure, magnetic fields, and more.",
+    "date": "2026-04-18",
+    "category": "Astrophysics",
+    "readTime": "10 min read",
+    "image": "../images/blog10_01_spectra_hero.png",
+    "url": "posts/spectra-confession.html",
+    "tags": ["Spectroscopy", "Light", "Absorption Lines", "Astrophysics"]
+  },
+  {
+    "title": "Noise: The Thing Between You and a Discovery",
+    "subtitle": "A scientific signal is rarely alone. Noise decides what can and cannot be claimed.",
+    "date": "2026-04-06",
+    "category": "Scientific Computing",
+    "readTime": "11 min read",
+    "image": "../images/blog9_01_noise_signal_hero.png",
+    "url": "posts/noise-and-discovery.html",
+    "tags": ["Noise", "Signal Processing", "SNR", "Scientific Data"]
+  },
+  {
+    "title": "The Habitable Zone: Astronomy’s Most Misunderstood Comfort Zone",
+    "subtitle": "Being in the habitable zone does not automatically mean a planet is habitable.",
+    "date": "2026-03-24",
+    "category": "Exoplanets",
+    "readTime": "9 min read",
+    "image": "../images/blog8_01_habitable_zone_hero.png",
+    "url": "posts/habitable-zone.html",
+    "tags": ["Exoplanets", "Habitable Zone", "Astrobiology", "Planetary Science"]
+  },
+  {
+    "title": "Space Is Not Empty — It Is Just Very Bad at Keeping You Alive",
+    "subtitle": "Radiation, vacuum, microgravity, temperature extremes, micrometeoroids, and why surviving space is not the same thing as living there.",
+    "date": "2026-03-09",
+    "category": "Astrobiology",
+    "readTime": "14 min read",
+    "image": "../images/blog7_01_space_hostile_hero.png",
+    "url": "posts/space-is-hostile.html",
+    "tags": ["Space", "Astrobiology", "Extreme Environments", "Habitability", "Radiation", "Microgravity"]
+  },
+  {
+    "title": "Tardigrades: The Tiny Survivors of Extreme Worlds",
+    "subtitle": "A deeper astrobiology note on water bears, cryptobiosis, tun formation, radiation tolerance, space exposure, and the limits of survival.",
+    "date": "2026-02-23",
+    "category": "Astrobiology",
+    "readTime": "13 min read",
+    "image": "../images/blog5_01_tardigrade_hero.png",
+    "url": "posts/tardigrades.html",
+    "tags": ["Tardigrades", "Cryptobiosis", "Astrobiology", "Extreme Life", "Radiation", "Space Biology"]
+  },
+  {
+    "title": "What is PID Control?",
+    "subtitle": "Proportional, integral, and derivative control explained through precision instrumentation.",
+    "date": "2026-02-10",
+    "category": "Instrumentation",
+    "readTime": "12 min read",
+    "image": "../images/blog4_01_pid_hero.png",
+    "url": "posts/pid-control.html",
+    "tags": ["PID", "Control Theory"]
+  },
+  {
+    "title": "What is a Control System?",
+    "subtitle": "Open-loop, closed-loop, feedback, sensors, actuators, and stability explained from first principles.",
+    "date": "2026-01-28",
+    "category": "Instrumentation",
+    "readTime": "10 min read",
+    "image": "../images/blog3_01_control_hero.png",
+    "url": "posts/control-system.html",
+    "tags": ["Feedback", "Control Theory", "Instrumentation"]
+  },
+  {
+    "title": "Are We Alone? Part I — The Scale of the Question",
+    "subtitle": "From our Galactic address to the Great Silence: life, distance, signals, and the scale of the universe.",
+    "date": "2026-01-17",
+    "category": "Astrobiology",
+    "readTime": "12 min read",
+    "image": "../images/blog2_01_milkyway_hero.png",
+    "url": "posts/are-we-alone.html",
+    "tags": ["Astrobiology", "Fermi Paradox", "SETI", "JWST"]
+  },
+  {
+    "title": "To bridge the gap, I found instrumentation",
+    "subtitle": "A personal note on how electronics, optics, and astrophysics slowly became one language through instrumentation.",
+    "date": "2026-01-05",
+    "category": "Research Life",
+    "readTime": "8 min read",
+    "image": "../images/10_blog_bridge_instrumentation.png",
+    "url": "posts/instrumentation-bridge.html",
+    "tags": ["Instrumentation", "Optics", "Electronics", "Astrophysics"]
+  }
+]

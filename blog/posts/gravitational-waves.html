@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gravitational Waves: When Spacetime Itself Starts Ringing | Biswajit Jana</title>
+  <meta name="description" content="A reflective astrophysics blog by Biswajit Jana on gravitational waves, black holes, neutron stars, LIGO, chirps, and spacetime ripples — with an upgraded WebGL merger simulator." />
+  <meta property="og:title" content="Gravitational Waves: When Spacetime Itself Starts Ringing | Biswajit Jana" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="A thoughtful science blog with a WebGL compact-object merger simulator and gravitational-wave chirp visualisation." />
+  <meta property="og:image" content="../../images/blog13_01_gravitational_waves_hero.png" />
+  <meta name="author" content="Biswajit Jana" />
+  <meta name="theme-color" content="#071126" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #040914;
+      --bg2: #0a1633;
+      --surface: rgba(8, 16, 38, 0.88);
+      --surface-2: rgba(11, 22, 48, 0.94);
+      --surface-soft: rgba(255,255,255,0.05);
+      --text: #eef4ff;
+      --muted: #b2c0d9;
+      --dim: #7e90ac;
+      --line: rgba(221,233,255,0.11);
+      --accent: #79d8ff;
+      --accent2: #ff8ad8;
+      --accent3: #a392ff;
+      --accent4: #ffd268;
+      --good: #72f0c2;
+      --bad: #ff7d7d;
+      --shadow: 0 26px 80px rgba(0,0,0,0.46);
+      --display: "Playfair Display", Georgia, serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --nav-h: 74px;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f2f6fb;
+      --bg2: #e7eef8;
+      --surface: rgba(255,255,255,0.90);
+      --surface-2: rgba(255,255,255,0.97);
+      --surface-soft: rgba(14,25,48,0.05);
+      --text: #122038;
+      --muted: #556782;
+      --dim: #7a8ba4;
+      --line: rgba(16,32,54,0.12);
+      --accent: #0d71c0;
+      --accent2: #bb3d8a;
+      --accent3: #5f4bd7;
+      --accent4: #a26b00;
+      --good: #057e57;
+      --bad: #b72828;
+      --shadow: 0 20px 60px rgba(16,32,51,0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.86;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(121,216,255,0.14), transparent 22%),
+        radial-gradient(circle at 92% 6%, rgba(255,138,216,0.12), transparent 24%),
+        radial-gradient(circle at 55% 36%, rgba(163,146,255,0.08), transparent 26%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+      background-size: auto, auto, auto, 74px 74px, 74px 74px, auto;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .65;
+      background-image:
+        radial-gradient(2px 2px at 15% 12%, rgba(255,255,255,.75), transparent 65%),
+        radial-gradient(1.5px 1.5px at 35% 20%, rgba(121,216,255,.8), transparent 65%),
+        radial-gradient(1.5px 1.5px at 55% 15%, rgba(255,255,255,.7), transparent 65%),
+        radial-gradient(2px 2px at 75% 10%, rgba(255,138,216,.75), transparent 65%),
+        radial-gradient(1.5px 1.5px at 90% 18%, rgba(255,255,255,.8), transparent 65%),
+        radial-gradient(1.5px 1.5px at 20% 40%, rgba(163,146,255,.65), transparent 65%),
+        radial-gradient(2px 2px at 82% 42%, rgba(121,216,255,.7), transparent 65%),
+        radial-gradient(1px 1px at 10% 76%, rgba(255,255,255,.65), transparent 65%),
+        radial-gradient(1.5px 1.5px at 52% 72%, rgba(255,255,255,.7), transparent 65%),
+        radial-gradient(1px 1px at 88% 78%, rgba(255,138,216,.55), transparent 65%);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .08;
+      background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,.25) 88%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .wide { width: min(1500px, 94vw); margin: 0 auto; position: relative; z-index: 1; }
+    .content-wide { width: min(1680px, 97vw); margin: 0 auto; position: relative; z-index: 1; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid var(--line);
+      background: rgba(4,9,20,0.84);
+      backdrop-filter: blur(18px) saturate(1.22);
+    }
+    html[data-theme="light"] .nav { background: rgba(243,247,252,0.86); }
+    .nav-inner {
+      width: min(1500px, 94vw);
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--display);
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .brand-wave {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff 0 6%, #a9edff 20%, #79d8ff 46%, #2c1354 100%);
+      box-shadow: 0 0 28px rgba(121,216,255,.34);
+    }
+    .brand span { color: var(--accent); }
+    .nav-links { list-style: none; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .nav-links a, .theme-toggle {
+      font-family: var(--mono);
+      font-size: .73rem;
+      color: var(--muted);
+      transition: .2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-toggle {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      border-radius: 999px;
+      min-height: 34px;
+      padding: 0 12px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .theme-toggle:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    .hero { padding: 58px 0 22px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(360px, .75fr) minmax(520px, 1.25fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ""; display: block; width: 34px; height: 1px; background: currentColor; }
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 6.1rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+      margin-bottom: 18px;
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.52vw, 1.3rem);
+      line-height: 1.58;
+      font-style: italic;
+      margin-bottom: 16px;
+      max-width: 750px;
+    }
+    .hero-text { color: var(--muted); font-size: 1.02rem; max-width: 760px; }
+    .meta-row { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .meta-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .72rem;
+    }
+
+    .hero-card {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(4,8,18,.95), rgba(8,14,29,.98));
+      box-shadow: var(--shadow);
+      position: relative;
+      min-height: 550px;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,138,216,.15), transparent 17%),
+        radial-gradient(circle at 56% 44%, rgba(121,216,255,.12), transparent 23%),
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: auto, auto, 36px 36px, 36px 36px;
+      pointer-events: none;
+    }
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 550px;
+      object-fit: contain;
+      object-position: center;
+      padding: 18px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,.36));
+    }
+    .hero-card-note {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .mini-stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 13px;
+      background: rgba(6,12,24,.74);
+      backdrop-filter: blur(10px);
+    }
+    .mini-stat strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .73rem;
+      margin-bottom: 4px;
+    }
+    .mini-stat span { color: var(--muted); font-size: .81rem; line-height: 1.35; display: block; }
+
+    .article-shell { padding: 26px 0 80px; }
+    .article-topbar {
+      margin-bottom: 26px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .article-kicker {
+      color: var(--accent2);
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .article-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.6vw, 3.2rem);
+      line-height: 1.04;
+      letter-spacing: -.04em;
+      margin-bottom: 12px;
+    }
+    .article-desc { color: var(--muted); font-style: italic; max-width: 980px; }
+    .article-meta {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: .73rem;
+    }
+
+    .lead-visual {
+      margin-bottom: 28px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #050915;
+      box-shadow: var(--shadow);
+    }
+    .lead-visual img {
+      width: 100%;
+      min-height: 370px;
+      object-fit: contain;
+      object-position: center;
+      padding: 14px 18px 0;
+      background: radial-gradient(circle at 50% 30%, rgba(255,138,216,.1), transparent 32%), linear-gradient(180deg, #050915, #090d1d);
+    }
+    .figcap {
+      padding: 10px 18px 14px;
+      border-top: 1px solid var(--line);
+      color: var(--dim);
+      font-size: .8rem;
+      font-style: italic;
+      background: rgba(255,255,255,.025);
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0,1fr) 285px;
+      gap: 20px;
+      align-items: start;
+    }
+    .left-rail, .right-rail {
+      position: sticky;
+      top: calc(var(--nav-h) + 18px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel, article {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .panel {
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .panel-tag {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .66rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      margin-bottom: 10px;
+    }
+    .panel p { color: var(--muted); font-size: .88rem; line-height: 1.65; margin-bottom: 8px; }
+    .panel p:last-child { margin-bottom: 0; }
+    .toc a {
+      display: block;
+      color: var(--muted);
+      font-size: .88rem;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .toc a:last-child { border-bottom: none; }
+    .toc a:hover { color: var(--accent); }
+    .stat-line { display: flex; align-items: baseline; gap: 8px; margin-bottom: 9px; }
+    .stat-line strong { color: var(--accent2); font-family: var(--mono); font-size: .9rem; white-space: nowrap; }
+    .stat-line span { color: var(--muted); font-size: .84rem; line-height: 1.45; }
+
+    article {
+      border-radius: 24px;
+      padding: 34px 38px;
+    }
+    article h3 {
+      font-family: var(--display);
+      font-size: 1.48rem;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      margin: 32px 0 12px;
+    }
+    article h3:first-child { margin-top: 0; }
+    article p { color: var(--muted); font-size: 1rem; margin-bottom: 16px; line-height: 1.9; }
+    article ul { padding-left: 20px; margin: 12px 0 16px; }
+    article li { color: var(--muted); margin-bottom: 8px; }
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 34px 0 26px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .2em;
+    }
+    .section-divider::before, .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .pull-quote {
+      border-left: 3px solid var(--accent2);
+      padding: 12px 0 12px 18px;
+      margin: 22px 0;
+      font-style: italic;
+      color: var(--text);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      background: linear-gradient(90deg, rgba(255,138,216,.07), transparent 85%);
+    }
+    .eq-block {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 20px 0;
+    }
+    .eq-label {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .eq-math {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 1.04rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+    .eq-block p { margin-bottom: 0 !important; font-size: .92rem !important; }
+    .notice-box {
+      margin: 18px 0 22px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,138,216,.22);
+      background: linear-gradient(135deg, rgba(255,138,216,.08), rgba(121,216,255,.05));
+    }
+    .notice-box strong { color: var(--accent2); }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .fact-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      padding: 14px 15px;
+    }
+    .fact-box strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .84rem;
+      margin-bottom: 5px;
+    }
+    .fact-box span { color: var(--muted); font-size: .88rem; line-height: 1.52; }
+    .hl-red, .hl-green {
+      padding: 0 .22em;
+      border-radius: .28em;
+      font-weight: 600;
+    }
+    .hl-red { color: #fff; background: linear-gradient(90deg, rgba(183,40,40,.9), rgba(255,125,125,.78)); }
+    .hl-green { color: #001a12; background: linear-gradient(90deg, rgba(114,240,194,.88), rgba(168,255,232,.85)); }
+    .hl-ink { color: var(--accent2); font-weight: 600; }
+    .ref-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+    .sim-wrap {
+      margin: 24px 0;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #040916;
+      box-shadow: var(--shadow);
+    }
+    .sim-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(11,20,42,.98), rgba(8,13,28,.96));
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .sim-title {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .82rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .sim-header h4 {
+      margin-top: 6px;
+      font-family: var(--display);
+      font-size: 1.42rem;
+      line-height: 1.15;
+    }
+    .sim-header p { color: var(--muted); font-size: .9rem; line-height: 1.6; max-width: 860px; margin-top: 6px; }
+    .sim-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sim-buttons button {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .sim-buttons button:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .sim-main { padding: 14px; }
+    .webgl-stage {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(121,216,255,.10), transparent 28%),
+        radial-gradient(circle at 58% 42%, rgba(255,138,216,.06), transparent 28%),
+        linear-gradient(180deg, #030713 0%, #081123 100%);
+      position: relative;
+      min-height: 600px;
+    }
+    #webglMount {
+      width: 100%;
+      min-height: 600px;
+      height: min(72vh, 760px);
+      display: block;
+      position: relative;
+    }
+    #webglMount canvas { display: block; width: 100% !important; height: 100% !important; }
+    .renderer-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      background: #030814;
+      z-index: 6;
+    }
+    .renderer-fallback strong { color: var(--accent); }
+    .webgl-overlay {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      display: grid;
+      gap: 10px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .hud-pill {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(4,9,22,.64);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: rgba(238,244,255,.92);
+      font-family: var(--mono);
+      font-size: .72rem;
+      width: max-content;
+      max-width: 360px;
+    }
+    .webgl-bottom-label {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      max-width: 400px;
+      z-index: 4;
+      padding: 13px 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(4,9,22,.68);
+      backdrop-filter: blur(12px);
+      color: var(--muted);
+      font-size: .84rem;
+      line-height: 1.55;
+    }
+    .wave-panel {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: #040b18;
+    }
+    #waveCanvas {
+      width: 100%;
+      height: 190px;
+      display: block;
+      background: #040b18;
+    }
+    .control-deck {
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(9,14,30,.98), rgba(13,21,42,.98));
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 340px;
+      gap: 18px;
+      align-items: start;
+    }
+    .slider-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 14px;
+    }
+    .control-group {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+      padding: 12px 13px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .72rem;
+    }
+    .control-label strong { color: var(--accent); font-weight: 700; }
+    .control-group input[type="range"] { width: 100%; accent-color: var(--accent2); }
+    .telemetry {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      padding: 14px 15px;
+      display: grid;
+      gap: 7px;
+    }
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .telemetry-row strong { color: var(--accent2); font-weight: 700; }
+    .sim-note { grid-column: 1 / -1; color: var(--dim); font-size: .79rem; line-height: 1.55; margin: 0; }
+
+    .figure-card {
+      margin: 22px 0 12px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #050915;
+      box-shadow: var(--shadow);
+    }
+    .figure-card img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      background: radial-gradient(circle at 50% 30%, rgba(255,138,216,.08), transparent 32%), linear-gradient(180deg,#050915,#090d1d);
+      padding: 16px;
+    }
+
+    .table-wrap {
+      margin: 20px 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      background: rgba(255,255,255,.03);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    thead th {
+      background: rgba(255,255,255,.05);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: .9rem;
+      vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(255,255,255,.03); }
+
+    .share-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: .74rem;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .chip:hover { border-color: var(--accent); background: rgba(121,216,255,.10); transform: translateY(-1px); }
+
+    .comments-section {
+      margin-top: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px 28px;
+      box-shadow: var(--shadow);
+    }
+    .comments-section h3 { font-family: var(--display); font-size: 1.24rem; margin-bottom: 6px; }
+    .comments-section > p { color: var(--muted); font-size: .9rem; margin-bottom: 16px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    footer {
+      padding: 28px 0 38px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: .72rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 1320px) {
+      .story-layout { grid-template-columns: 1fr; }
+      .left-rail, .right-rail { position: static; }
+      .left-rail { order: 2; }
+      .right-rail { order: 3; }
+      article { order: 1; }
+    }
+    @media (max-width: 1080px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .control-deck { grid-template-columns: 1fr; }
+      .slider-grid { grid-template-columns: repeat(2, minmax(140px,1fr)); }
+      .hero-card-note { grid-template-columns: 1fr; }
+      .webgl-stage, #webglMount { min-height: 480px; height: 520px; }
+    }
+    @media (max-width: 880px) {
+      article { padding: 24px 18px; }
+      .facts-grid { grid-template-columns: 1fr; }
+      .slider-grid { grid-template-columns: 1fr; }
+      .webgl-stage, #webglMount { min-height: 430px; height: 430px; }
+      .lead-visual img, .hero-card img { min-height: 0; }
+      .hero-card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="brand"><span class="brand-wave" aria-hidden="true"></span>Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../index.html">Blog</a></li>
+        <li><a href="../../publications.html">Publications</a></li>
+        <li><a href="../../cv.html">CV</a></li>
+        <li><button class="theme-toggle" id="themeToggle" type="button">☾ Theme</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero wide">
+      <div class="hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Relativity · Compact Objects · WebGL Chirp Lab</div>
+          <h1>Gravitational Waves: When Spacetime Itself Starts Ringing</h1>
+          <p class="hero-sub">For most of astronomy, the universe was something we looked at. Then gravitational waves arrived and quietly ruined that simplicity.</p>
+          <p class="hero-text">This upgraded version leans harder into the visual side: cleaner wide layout, non-cropped figures, a more atmospheric compact-object simulator, richer numerical context, and clearer bridges to black holes, neutron stars, and the detector network actually listening to the universe misbehave.</p>
+          <div class="meta-row">
+            <span class="meta-pill">7 May 2026 · Hertford, London, UK</span>
+            <span class="meta-pill">~14 min read</span>
+            <span class="meta-pill">WebGL simulation</span>
+            <span class="meta-pill">Black-hole companion post linked below</span>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <img src="../../images/blog13_01_gravitational_waves_hero.png" alt="Conceptual illustration of a compact-object merger and a gravitational-wave chirp across the sky" onerror="this.onerror=null;this.src='../../images/blog13_02_ligo_chirp_banner.png';" />
+          <div class="hero-card-note">
+            <div class="mini-stat"><strong>Signal type</strong><span>A rising chirp: stronger and faster right before merger.</span></div>
+            <div class="mini-stat"><strong>Main actors</strong><span>Black holes and neutron stars — compact enough to seriously disturb spacetime.</span></div>
+            <div class="mini-stat"><strong>Why it matters</strong><span>This is astronomy by listening to geometry, not just by collecting light.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="article-shell content-wide">
+      <div class="article-topbar reveal">
+        <div class="article-kicker">Gravitational Waves · LIGO · Virgo · KAGRA · Compact-object mergers</div>
+        <div class="article-title">A science note on chirps, compact objects, and why measuring a tiny ripple in spacetime still feels slightly illegal</div>
+        <p class="article-desc">This version adds a better simulator, clearer figure captions, a detector comparison table, two extra illustration slots for the more number-driven examples, and a little more of the unease that gravitational-wave astronomy deserves.</p>
+        <div class="article-meta">
+          <span>Blog author: Biswajit Jana</span>
+          <span>Reading mode: reflective + technical</span>
+          <span>Simulation: Three.js WebGL + 2D waveform canvas</span>
+        </div>
+      </div>
+
+      <figure class="lead-visual reveal">
+        <img src="../../images/blog13_02_ligo_chirp_banner.png" alt="Conceptual illustration of a neutron-star merger producing a gravitational-wave chirp" onerror="this.onerror=null;this.src='../../images/blog13_01_gravitational_waves_hero.png';" />
+        <figcaption class="figcap"><strong>Figure 1.</strong> Conceptual illustration of a <span class="hl-ink">neutron-star merger</span> and its rising gravitational-wave chirp. This is an editorial science visual rather than an observational image, but the story it tells is physically the right one: tighter orbit, faster chirp, stronger strain, then merger.</figcaption>
+      </figure>
+
+      <div class="story-layout">
+        <aside class="left-rail reveal">
+          <div class="panel">
+            <span class="panel-tag">Article map</span>
+            <div class="toc">
+              <a href="#s1">1. The universe learned to send ripples</a>
+              <a href="#s2">2. What is actually waving?</a>
+              <a href="#s3">3. Why black holes and neutron stars?</a>
+              <a href="#s4">4. WebGL chirp lab</a>
+              <a href="#s5">5. Detector network and locations</a>
+              <a href="#s6">6. Why multi-messenger astronomy matters</a>
+              <a href="#s7">7. Fun facts and next steps</a>
+            </div>
+          </div>
+          <div class="panel">
+            <span class="panel-tag">At a glance</span>
+            <div class="stat-line"><strong>h ~ 10⁻²¹</strong><span>Order-of-magnitude strain for the first direct LIGO detection.</span></div>
+            <div class="stat-line"><strong>GW150914</strong><span>First direct black-hole merger detection.</span></div>
+            <div class="stat-line"><strong>GW170817</strong><span>Binary neutron-star merger seen in waves and light.</span></div>
+          </div>
+          <div class="panel">
+            <span class="panel-tag">Related reading</span>
+            <p>If you want the black-hole side in more detail, especially the visual side of horizons, accretion, and curved spacetime, read my companion post:</p>
+            <p><a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">Black Holes: What Happens When Gravity Wins?</a></p>
+          </div>
+        </aside>
+
+        <article class="reveal">
+          <section id="s1">
+            <h3>The universe learned to send ripples</h3>
+            <p>Light is not the only messenger in astronomy. For centuries, astronomy mostly meant collecting photons: visible light, radio waves, infrared, X-rays, gamma rays — different flavours of electromagnetic gossip. Gravitational waves changed the rules. They are not light. They are ripples in spacetime itself, produced when massive objects accelerate violently.</p>
+            <p>This still feels absurd to say out loud. Two compact objects can spiral into each other, shake the geometry of the universe, and more than a billion years later a detector on Earth can notice the faint stretching and squeezing. The universe does not need to be bright to be loud. Sometimes it rings in geometry.</p>
+            <div class="pull-quote">Gravitational waves are what happens when the universe stops sending pictures and starts sending vibrations.</div>
+          </section>
+
+          <div class="section-divider">§ 1 — WHAT IS ACTUALLY WAVING?</div>
+          <section id="s2">
+            <h3>Not air. Not sound. Spacetime.</h3>
+            <p>A sound wave travels through air by compressing and rarefying molecules. A water wave moves through water. A gravitational wave is stranger: it changes distances themselves, stretching space in one direction while squeezing it in the perpendicular direction. The effect is tiny by the time it reaches Earth, but not zero.</p>
+            <div class="eq-block">
+              <div class="eq-label">Strain</div>
+              <div class="eq-math">h = ΔL / L</div>
+              <p>Gravitational-wave detectors measure strain: the fractional change in length. If an interferometer arm length is <em>L</em> and the passing wave changes it by <em>ΔL</em>, the measured strain is <em>h</em>. The first LIGO detection, GW150914, had a peak strain of order 10<sup>−21</sup>.</p>
+            </div>
+            <p>That number is offensively small. It is the kind of number that makes ordinary precision measurement look almost carefree. Yet the signal matched general relativity extremely well, which is a deeply inconvenient result if you hoped spacetime might be easier to deal with.</p>
+          </section>
+
+          <div class="section-divider">§ 2 — THE SOURCES</div>
+          <section id="s3">
+            <h3>Why black holes and neutron stars do the heavy lifting</h3>
+            <p>Any accelerating mass produces gravitational waves in principle, but most sources are laughably weak. To make a detectable signal across cosmic distances, you need something extreme: compact objects orbiting fast in a tight binary. This is where <a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">black holes</a> and neutron stars enter the conversation.</p>
+            <p><a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">Black holes</a> are compact enough to orbit extremely close before merger. They can release staggering amounts of energy in gravitational waves while producing little or no light. Neutron stars are different: they are ultra-dense stellar remnants, formed when a massive star collapses after a supernova but does not quite go all the way to becoming a black hole. Unlike black-hole binaries, neutron-star mergers can also throw out matter, produce kilonova emission, and manufacture heavy elements.</p>
+            <div class="notice-box"><strong>Related note:</strong> this post only touches the black-hole side. For the dedicated visual deep dive, see my full <a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">black-hole lab post</a>. A separate neutron-star post is next on my list, because one cosmic absurdity at a time is apparently how this works.</div>
+
+            <div class="facts-grid">
+              <div class="fact-box"><strong>Binary black holes</strong><span>Mostly a pure gravitational-wave story: clean, violent, and often electromagnetically quiet.</span></div>
+              <div class="fact-box"><strong>Binary neutron stars</strong><span>Perfect for multi-messenger astronomy: you can get a chirp, a kilonova, and heavy-element production in one event.</span></div>
+              <div class="fact-box"><strong>Chirp</strong><span>The signal rises in amplitude and frequency as the orbit tightens and speeds up.</span></div>
+              <div class="fact-box"><strong>Teaspoon fact</strong><span>A spoonful of neutron-star material is often described as weighing roughly a <span class="hl-green">billion tons</span> on Earth. Entirely normal behaviour from a dead star, obviously.</span></div>
+            </div>
+
+            <figure class="figure-card">
+              <img src="../../images/blog13_04_black_hole_merger.png" alt="Conceptual illustration of a binary black-hole merger" onerror="this.onerror=null;this.src='../../images/blog13_01_gravitational_waves_hero.png';" />
+              <figcaption class="figcap"><strong>Figure 2.</strong> Conceptual illustration of a <span class="hl-ink">binary black-hole merger</span>. Use this as an explanatory visual for the part of the story where matter disappears from view but gravity absolutely does not.</figcaption>
+            </figure>
+
+            <figure class="figure-card">
+              <img src="../../images/blog13_05_neutron_star_density.png" alt="Conceptual illustration comparing a spoonful of neutron-star matter with Earth-scale weight" onerror="this.onerror=null;this.src='../../images/blog13_03_compact_objects.png';" />
+              <figcaption class="figcap"><strong>Figure 3.</strong> Conceptual density illustration: a spoonful of neutron-star matter compared with Earth-scale weight. This is exactly the sort of number people remember, which is unfair but useful.</figcaption>
+            </figure>
+          </section>
+
+          <div class="section-divider">§ 3 — WEBGL INTERACTIVE LAB</div>
+          <section id="s4">
+            <h3>WebGL neutron-star merger simulator</h3>
+            <p>The simulator below is still educational rather than numerical-relativity-grade, but the visual treatment is now more serious. The main window is a WebGL scene: a warped spacetime grid, a fuller background star field, two compact stars spiralling inward, glowing tidal trails, expanding ripple shells, a merger flash, ejecta-like particle bloom, and a LIGO-style detector response. The waveform below shows the chirp rising in amplitude and frequency.</p>
+
+            <div class="sim-wrap">
+              <div class="sim-header">
+                <div>
+                  <div class="sim-title">Interactive compact-object lab</div>
+                  <h4>Binary neutron-star inspiral → merger → spacetime ripples</h4>
+                  <p>Landscape WebGL view on top, controls underneath. Adjust the component masses, source distance, inclination, and flash strength. The visual is stylised, but the narrative is correct: tighter orbit, faster chirp, stronger strain, then merger and ringdown.</p>
+                </div>
+                <div class="sim-buttons">
+                  <button id="resetSim" type="button">Reset run</button>
+                  <button id="pauseSim" type="button">Pause</button>
+                  <button id="soundBtn" type="button">Play chirp</button>
+                  <button id="cameraBtn" type="button">Camera angle</button>
+                </div>
+              </div>
+
+              <div class="sim-main">
+                <div class="webgl-stage">
+                  <div id="webglMount"></div>
+                  <div class="renderer-fallback" id="rendererFallback"><div><strong>WebGL renderer did not load.</strong><br/>Check your internet connection because this simulation uses Three.js from a CDN.</div></div>
+                  <div class="webgl-overlay">
+                    <div class="hud-pill">WEBGL SPACETIME GRID · stylised curvature field</div>
+                    <div class="hud-pill">background star field + merger flash + expanding wave fronts</div>
+                    <div class="hud-pill">detector arms respond to simulated strain</div>
+                  </div>
+                  <div class="webgl-bottom-label">The grid is intentionally exaggerated. Real spacetime strain at Earth is tiny; the distortion is amplified here so the idea can be seen rather than only respected from a distance.</div>
+                </div>
+
+                <div class="wave-panel">
+                  <canvas id="waveCanvas" width="1280" height="190"></canvas>
+                </div>
+              </div>
+
+              <div class="control-deck">
+                <div class="slider-grid">
+                  <div class="control-group">
+                    <div class="control-label"><span>Mass 1</span><strong id="m1Read">1.40 M☉</strong></div>
+                    <input id="m1" type="range" min="1.1" max="2.4" step="0.01" value="1.40" />
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label"><span>Mass 2</span><strong id="m2Read">1.30 M☉</strong></div>
+                    <input id="m2" type="range" min="1.1" max="2.4" step="0.01" value="1.30" />
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label"><span>Distance</span><strong id="distRead">130 Mpc</strong></div>
+                    <input id="dist" type="range" min="20" max="300" step="1" value="130" />
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label"><span>Inclination</span><strong id="incRead">32°</strong></div>
+                    <input id="inc" type="range" min="0" max="90" step="1" value="32" />
+                  </div>
+                  <div class="control-group">
+                    <div class="control-label"><span>Kilonova flash</span><strong id="flashRead">0.72</strong></div>
+                    <input id="flash" type="range" min="0" max="1" step="0.01" value="0.72" />
+                  </div>
+                </div>
+
+                <div class="telemetry">
+                  <div class="telemetry-row"><span>Chirp mass</span><strong id="chirpRead">--</strong></div>
+                  <div class="telemetry-row"><span>GW frequency</span><strong id="freqRead">--</strong></div>
+                  <div class="telemetry-row"><span>Relative strain</span><strong id="strainRead">--</strong></div>
+                  <div class="telemetry-row"><span>Orbital separation</span><strong id="sepRead">--</strong></div>
+                  <div class="telemetry-row"><span>Stage</span><strong id="stageRead">Inspiral</strong></div>
+                </div>
+                <p class="sim-note">Educational visual model: this uses simplified chirp scaling and stylised spacetime deformation. It is designed to explain the physics visually, not to replace full numerical-relativity waveform modelling.</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="section-divider">§ 4 — DETECTOR NETWORK & LOCATIONS</div>
+          <section id="s5">
+            <h3>The current detector network, in real places on Earth</h3>
+            <p>People usually remember the word <span class="hl-ink">LIGO</span>, but gravitational-wave astronomy is bigger than one acronym. The active ground-based network is built around long-baseline laser interferometers in the United States, Europe, and Japan, with GEO600 still important as a technology and high-frequency test-bed instrument. A table makes this easier to remember than yet another paragraph pretending to be noble.</p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Detector</th>
+                    <th>Country / site</th>
+                    <th>Arm length</th>
+                    <th>Type / note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>LIGO Hanford</strong></td>
+                    <td>Hanford Site, Washington, USA</td>
+                    <td>4 km</td>
+                    <td>One of the twin NSF LIGO interferometers.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>LIGO Livingston</strong></td>
+                    <td>Livingston, Louisiana, USA</td>
+                    <td>4 km</td>
+                    <td>The sister LIGO interferometer used in joint detections.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Virgo</strong></td>
+                    <td>Cascina, near Pisa, Italy</td>
+                    <td>3 km</td>
+                    <td>European interferometer; improves sky localisation with the network.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>KAGRA</strong></td>
+                    <td>Kamioka, Hida, Gifu, Japan</td>
+                    <td>3 km</td>
+                    <td>Underground and cryogenic — the detector with the most introvert personality.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>GEO600</strong></td>
+                    <td>Near Sarstedt / Hannover, Germany</td>
+                    <td>600 m</td>
+                    <td>Smaller but scientifically valuable as a detector-development and observing partner.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Why does the network matter? Because more detectors improve <span class="hl-green">confidence</span>, <span class="hl-green">source localisation</span>, and the reconstruction of source properties. Two detectors can tell you a signal happened. More detectors start telling you where and how.</p>
+          </section>
+
+          <div class="section-divider">§ 5 — MULTI-MESSENGER ASTRONOMY</div>
+          <section id="s6">
+            <h3>Why neutron-star mergers are especially beautiful</h3>
+            <p>Black-hole mergers are brilliant for pure gravity, but neutron-star mergers add light to the story. The 2017 event GW170817 was seen in gravitational waves and across electromagnetic wavelengths, making it one of the landmark observations of modern astrophysics. It showed that these mergers help create heavy elements and that gravitational-wave astronomy is naturally part of a wider observational network.</p>
+            <p>That is why this upgraded post leans harder into neutron stars visually. They bridge two worlds: strong-field gravity and observable matter. You get the chirp, the merger, the ejecta, the afterglow, and a reminder that the periodic table has a much more violent backstory than school chemistry usually admits.</p>
+
+            <figure class="figure-card">
+              <img src="../../images/blog13_03_compact_objects.png" alt="Compact-object illustration showing neutron stars and black holes as gravitational-wave sources" onerror="this.onerror=null;this.src='../../images/blog13_02_ligo_chirp_banner.png';" />
+              <figcaption class="figcap"><strong>Figure 4.</strong> Compact objects as gravitational-wave sources: <span class="hl-ink">neutron-star mergers</span> bring matter and light into the story; <span class="hl-ink">black-hole mergers</span> often give you a cleaner gravity-only signal.</figcaption>
+            </figure>
+          </section>
+
+          <div class="section-divider">§ 6 — FUN FACTS & NEXT POST</div>
+          <section id="s7">
+            <h3>A few compact-object facts that still feel unreal</h3>
+            <ul>
+              <li>A spoonful of neutron-star material is commonly described as weighing around a <span class="hl-green">billion tons</span> on Earth.</li>
+              <li><a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">Black holes</a> can merge without producing much or any light, yet still broadcast one of the cleanest gravitational-wave signals in nature.</li>
+              <li>Neutron-star mergers help explain where some of the heaviest elements in the universe come from.</li>
+              <li>Human beings live, on average, well under a century — and yet we have managed to detect ripples from objects colliding hundreds of millions or billions of years ago. That is both <span class="hl-green">inspiring</span> and <span class="hl-red">slightly unnerving</span>.</li>
+            </ul>
+            <div class="pull-quote">Neutron stars are matter pushed to the edge of dignity. Black holes are what happens when gravity stops negotiating.</div>
+            <p>If you liked the compact-object side of this post, the natural next steps are obvious: revisit my <a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">black-hole blog</a> for the geometry-heavy side, and then keep an eye out for the dedicated neutron-star post, which deserves its own stage.</p>
+          </section>
+
+          <div class="share-strip">
+            <a class="chip" href="https://www.linkedin.com/sharing/share-offsite/?url=https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/gravitational-waves.html" target="_blank" rel="noopener">Share on LinkedIn</a>
+            <button class="chip" id="copyBtn" type="button">Copy post link</button>
+            <a class="chip" href="../index.html">← All posts</a>
+            <a class="chip" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">Black-hole post →</a>
+          </div>
+        </article>
+
+        <aside class="right-rail reveal">
+          <div class="panel">
+            <span class="panel-tag">Main idea</span>
+            <p>Gravitational waves are ripples in spacetime produced by accelerating masses, especially violent mergers of black holes and neutron stars.</p>
+          </div>
+          <div class="panel">
+            <span class="panel-tag">Black-hole reference</span>
+            <p>Whenever this post mentions black holes, the deeper visual companion is here:</p>
+            <p><a class="ref-link" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html" target="_blank" rel="noopener">Open the black-hole lab post</a></p>
+          </div>
+          <div class="panel">
+            <span class="panel-tag">Why this topic matters</span>
+            <p>Gravitational-wave astronomy lets us study systems that may be dark or hard to observe in light alone. It is not replacing traditional astronomy. It is making it less one-dimensional.</p>
+          </div>
+          <div class="panel">
+            <span class="panel-tag">Coming next</span>
+            <p>The neutron-star post will take the matter side more seriously: structure, density, magnetic fields, pulsars, mergers, and why a dead star can still be obnoxiously interesting.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div id="comments" class="comments-section reveal">
+        <h3>Comments &amp; reactions</h3>
+        <p>Powered by GitHub Discussions via giscus.</p>
+        <script src="https://giscus.app/client.js"
+                data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                data-repo-id="R_kgDOST2kXQ"
+                data-category="General"
+                data-category-id="DIC_kwDOST2kXc4C8UVe"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async></script>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wide">© 2026 Biswajit Jana · Gravitational Waves · WebGL compact-object visual edition</div></footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const storedTheme = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', storedTheme);
+    themeToggle.textContent = storedTheme === 'light' ? '☀ Theme' : '☾ Theme';
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.textContent = next === 'light' ? '☀ Theme' : '☾ Theme';
+    });
+
+    function onScrollReveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', onScrollReveal, { passive: true });
+    window.addEventListener('load', onScrollReveal);
+
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('copyBtn');
+      try {
+        await navigator.clipboard.writeText('https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/gravitational-waves.html');
+        const old = btn.textContent;
+        btn.textContent = 'Link copied ✓';
+        setTimeout(() => btn.textContent = old, 1800);
+      } catch (e) {
+        btn.textContent = 'Copy failed';
+      }
+    });
+
+    const waveCanvas = document.getElementById('waveCanvas');
+    const wctx = waveCanvas.getContext('2d');
+
+    const controls = {
+      m1: document.getElementById('m1'),
+      m2: document.getElementById('m2'),
+      dist: document.getElementById('dist'),
+      inc: document.getElementById('inc'),
+      flash: document.getElementById('flash')
+    };
+    const reads = {
+      m1: document.getElementById('m1Read'),
+      m2: document.getElementById('m2Read'),
+      dist: document.getElementById('distRead'),
+      inc: document.getElementById('incRead'),
+      flash: document.getElementById('flashRead'),
+      chirp: document.getElementById('chirpRead'),
+      freq: document.getElementById('freqRead'),
+      strain: document.getElementById('strainRead'),
+      sep: document.getElementById('sepRead'),
+      stage: document.getElementById('stageRead')
+    };
+    const simButtons = {
+      reset: document.getElementById('resetSim'),
+      pause: document.getElementById('pauseSim'),
+      sound: document.getElementById('soundBtn'),
+      camera: document.getElementById('cameraBtn')
+    };
+
+    let simT = 0;
+    let paused = false;
+    let holdFrames = 0;
+    let phase = 0;
+    let cameraMode = 0;
+
+    function chirpMass(m1, m2) {
+      return Math.pow(m1 * m2, 3/5) / Math.pow(m1 + m2, 1/5);
+    }
+
+    function getState() {
+      const m1 = parseFloat(controls.m1.value);
+      const m2 = parseFloat(controls.m2.value);
+      const dist = parseFloat(controls.dist.value);
+      const incDeg = parseFloat(controls.inc.value);
+      const flash = parseFloat(controls.flash.value);
+      const inc = incDeg * Math.PI / 180;
+      const mc = chirpMass(m1, m2);
+      const p = Math.min(simT, 1);
+      const sep = 7.6 * Math.pow(1 - p, 1.58) + 0.72;
+      const freq = 28 + 1080 * Math.pow(p, 2.35) * Math.pow(mc / 1.2, 0.35);
+      const amp = (mc / 1.2) ** (5/3) * (130 / dist) * (0.35 + 0.65 * Math.cos(inc) ** 2) * (0.09 + 1.25 * p * p);
+      const stage = p < 0.88 ? 'Inspiral' : (p < 1 ? 'Contact / merger' : 'Merger remnant');
+      return { m1, m2, dist, inc, incDeg, flash, mc, sep, freq, amp, p, stage };
+    }
+
+    function updateReadouts(s) {
+      reads.m1.textContent = s.m1.toFixed(2) + ' M☉';
+      reads.m2.textContent = s.m2.toFixed(2) + ' M☉';
+      reads.dist.textContent = Math.round(s.dist) + ' Mpc';
+      reads.inc.textContent = Math.round(s.incDeg) + '°';
+      reads.flash.textContent = s.flash.toFixed(2);
+      reads.chirp.textContent = s.mc.toFixed(3) + ' M☉';
+      reads.freq.textContent = Math.round(s.freq) + ' Hz';
+      reads.strain.textContent = (s.amp * 1e-21).toExponential(2);
+      reads.sep.textContent = (s.sep * 24).toFixed(0) + ' km (scaled)';
+      reads.stage.textContent = s.stage;
+    }
+
+    function drawWavePanel(s) {
+      const W = waveCanvas.width;
+      const H = waveCanvas.height;
+      wctx.clearRect(0, 0, W, H);
+      wctx.fillStyle = '#040b18';
+      wctx.fillRect(0, 0, W, H);
+
+      wctx.strokeStyle = 'rgba(255,255,255,.06)';
+      for (let x = 0; x <= W; x += 50) {
+        wctx.beginPath(); wctx.moveTo(x, 0); wctx.lineTo(x, H); wctx.stroke();
+      }
+      for (let y = 0; y <= H; y += 38) {
+        wctx.beginPath(); wctx.moveTo(0, y); wctx.lineTo(W, y); wctx.stroke();
+      }
+
+      const baseY = H * 0.62;
+      wctx.strokeStyle = 'rgba(255,255,255,.16)';
+      wctx.beginPath(); wctx.moveTo(0, baseY); wctx.lineTo(W, baseY); wctx.stroke();
+
+      const grad = wctx.createLinearGradient(0, 0, W, 0);
+      grad.addColorStop(0, '#76d7ff');
+      grad.addColorStop(0.65, '#ff87d7');
+      grad.addColorStop(1, '#ffd06b');
+
+      wctx.lineWidth = 2.3;
+      wctx.strokeStyle = grad;
+      wctx.beginPath();
+      for (let i = 0; i <= W; i++) {
+        const u = i / W;
+        const amp = 10 + 54 * Math.pow(u, 2.35);
+        const freq = 5 + 54 * Math.pow(u, 2.2);
+        let y;
+        if (u < s.p) {
+          y = baseY - Math.sin(u * freq * 6.283 + phase * 0.8) * amp;
+        } else if (s.p >= 1) {
+          const q = Math.max(0, (u - 0.78) / 0.22);
+          y = baseY - Math.sin(q * 24 + phase) * 52 * Math.exp(-4 * q);
+        } else {
+          y = baseY;
+        }
+        if (i === 0) wctx.moveTo(i, y); else wctx.lineTo(i, y);
+      }
+      wctx.stroke();
+
+      const markerX = Math.min(W - 10, W * Math.min(s.p, 1));
+      wctx.strokeStyle = '#ff87d7';
+      wctx.setLineDash([5, 6]);
+      wctx.beginPath(); wctx.moveTo(markerX, 10); wctx.lineTo(markerX, H - 10); wctx.stroke();
+      wctx.setLineDash([]);
+
+      wctx.fillStyle = 'rgba(236,244,255,.90)';
+      wctx.font = '600 12px "JetBrains Mono"';
+      wctx.fillText('strain h(t): inspiral chirp → merger → ringdown', 18, 24);
+      wctx.fillStyle = 'rgba(255,135,215,.95)';
+      wctx.fillText(s.stage, Math.max(18, markerX - 38), 44);
+    }
+
+    function resetSimulation() {
+      simT = 0;
+      holdFrames = 0;
+      phase = 0;
+    }
+    simButtons.reset.addEventListener('click', resetSimulation);
+    simButtons.pause.addEventListener('click', () => {
+      paused = !paused;
+      simButtons.pause.textContent = paused ? 'Resume' : 'Pause';
+    });
+    simButtons.camera.addEventListener('click', () => { cameraMode = (cameraMode + 1) % 3; });
+
+    async function playChirp() {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      const ctx = new AC();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      const now = ctx.currentTime;
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(90, now);
+      osc.frequency.exponentialRampToValueAtTime(850, now + 1.8);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + 1.45);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+      osc.start(now); osc.stop(now + 2.05);
+    }
+    simButtons.sound.addEventListener('click', playChirp);
+
+    let threeReady = false;
+    let scene, camera, renderer, gridMesh, starA, starB, remnant, ringGroup, trailA, trailB, detectorGroup, particleSystem, ejectaGroup, backgroundStars, light1, light2, clock;
+    const fallback = document.getElementById('rendererFallback');
+    const mount = document.getElementById('webglMount');
+
+    function createGlowSprite(color, size) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 128;
+      canvas.height = 128;
+      const ctx = canvas.getContext('2d');
+      const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+      g.addColorStop(0, 'rgba(255,255,255,1)');
+      g.addColorStop(0.18, color);
+      g.addColorStop(0.55, color.replace('1)', '.28)'));
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 128, 128);
+      const tex = new THREE.CanvasTexture(canvas);
+      const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+      const spr = new THREE.Sprite(mat);
+      spr.scale.set(size, size, 1);
+      return spr;
+    }
+
+    function makeStarfieldTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 1024;
+      const ctx = c.getContext('2d');
+      const grad = ctx.createRadialGradient(512, 460, 40, 512, 512, 520);
+      grad.addColorStop(0, 'rgba(71,95,176,.28)');
+      grad.addColorStop(0.35, 'rgba(17,29,64,.18)');
+      grad.addColorStop(1, 'rgba(0,0,0,1)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, c.width, c.height);
+      for (let i = 0; i < 1700; i++) {
+        const x = Math.random() * c.width;
+        const y = Math.random() * c.height;
+        const r = Math.random() * 1.4;
+        const a = 0.35 + Math.random() * 0.65;
+        const hue = Math.random() < 0.15 ? '121,216,255' : (Math.random() < 0.25 ? '255,138,216' : '255,255,255');
+        ctx.fillStyle = `rgba(${hue},${a})`;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      return tex;
+    }
+
+    function initWebGL() {
+      if (!window.THREE) {
+        fallback.style.display = 'grid';
+        return;
+      }
+
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x030814, 0.032);
+
+      camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+      camera.position.set(0, 11.6, 18.5);
+      camera.lookAt(0, 0, 0);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.3;
+      mount.appendChild(renderer.domElement);
+
+      const ambient = new THREE.AmbientLight(0x9abfff, 0.42);
+      scene.add(ambient);
+      light1 = new THREE.PointLight(0x76d7ff, 2.35, 60);
+      light1.position.set(-5, 6, 4);
+      scene.add(light1);
+      light2 = new THREE.PointLight(0xff87d7, 2.35, 60);
+      light2.position.set(5, 5, -4);
+      scene.add(light2);
+
+      const skyGeo = new THREE.SphereGeometry(180, 40, 40);
+      const skyMat = new THREE.MeshBasicMaterial({ map: makeStarfieldTexture(), side: THREE.BackSide, transparent: true, opacity: 0.95 });
+      const sky = new THREE.Mesh(skyGeo, skyMat);
+      scene.add(sky);
+
+      const bgCount = 2500;
+      const bgPos = new Float32Array(bgCount * 3);
+      for (let i = 0; i < bgCount; i++) {
+        const radius = 40 + Math.random() * 120;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        bgPos[i*3] = radius * Math.sin(phi) * Math.cos(theta);
+        bgPos[i*3+1] = radius * Math.cos(phi);
+        bgPos[i*3+2] = radius * Math.sin(phi) * Math.sin(theta);
+      }
+      const bgGeo = new THREE.BufferGeometry();
+      bgGeo.setAttribute('position', new THREE.BufferAttribute(bgPos, 3));
+      backgroundStars = new THREE.Points(bgGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.08, transparent: true, opacity: 0.75, sizeAttenuation: true }));
+      scene.add(backgroundStars);
+
+      const gridGeo = new THREE.PlaneGeometry(32, 32, 160, 160);
+      const pos = gridGeo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const y = pos.getY(i);
+        const r = Math.sqrt(x*x + y*y);
+        pos.setZ(i, -1.1 * Math.exp(-r * 0.33));
+      }
+      gridGeo.computeVertexNormals();
+      const gridMat = new THREE.MeshStandardMaterial({
+        color: 0x081328,
+        emissive: 0x0b4268,
+        emissiveIntensity: 0.34,
+        roughness: 0.66,
+        metalness: 0.06,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.58
+      });
+      gridMesh = new THREE.Mesh(gridGeo, gridMat);
+      gridMesh.rotation.x = -Math.PI / 2;
+      scene.add(gridMesh);
+
+      const sphereGeo = new THREE.SphereGeometry(0.62, 48, 48);
+      starA = new THREE.Mesh(sphereGeo, new THREE.MeshStandardMaterial({ color: 0xdff8ff, emissive: 0x76d7ff, emissiveIntensity: 1.2, roughness: 0.35, metalness: 0.08 }));
+      starB = new THREE.Mesh(sphereGeo, new THREE.MeshStandardMaterial({ color: 0xffe8fb, emissive: 0xff87d7, emissiveIntensity: 1.15, roughness: 0.35, metalness: 0.08 }));
+      starA.add(createGlowSprite('rgba(118,215,255,1)', 3.3));
+      starB.add(createGlowSprite('rgba(255,135,215,1)', 3.3));
+      scene.add(starA, starB);
+
+      remnant = new THREE.Mesh(new THREE.SphereGeometry(0.95, 64, 64), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffd06b, emissiveIntensity: 2.3, roughness: 0.2 }));
+      remnant.add(createGlowSprite('rgba(255,208,107,1)', 6.2));
+      remnant.visible = false;
+      scene.add(remnant);
+
+      ringGroup = new THREE.Group();
+      scene.add(ringGroup);
+      for (let i = 0; i < 14; i++) {
+        const ringGeo = new THREE.RingGeometry(1.0, 1.017, 200);
+        const ringMat = new THREE.MeshBasicMaterial({ color: i % 2 ? 0xff87d7 : 0x76d7ff, transparent: true, opacity: 0.20, side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = -Math.PI / 2;
+        ring.userData.offset = i / 14;
+        ringGroup.add(ring);
+      }
+
+      trailA = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x76d7ff, transparent: true, opacity: 0.58, blending: THREE.AdditiveBlending }));
+      trailB = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xff87d7, transparent: true, opacity: 0.58, blending: THREE.AdditiveBlending }));
+      scene.add(trailA, trailB);
+
+      detectorGroup = new THREE.Group();
+      const armMat = new THREE.MeshBasicMaterial({ color: 0xa9eaff, transparent: true, opacity: 0.55 });
+      const armX = new THREE.Mesh(new THREE.BoxGeometry(5.4, 0.045, 0.045), armMat);
+      const armY = new THREE.Mesh(new THREE.BoxGeometry(0.045, 5.4, 0.045), armMat.clone());
+      const hub = new THREE.Mesh(new THREE.SphereGeometry(0.13, 20, 20), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      detectorGroup.add(armX, armY, hub);
+      detectorGroup.position.set(8.8, 2.4, -2.6);
+      detectorGroup.rotation.x = -0.62;
+      scene.add(detectorGroup);
+
+      const pCount = 1500;
+      const pArr = new Float32Array(pCount * 3);
+      for (let i = 0; i < pCount; i++) {
+        const radius = 25 + Math.random() * 95;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        pArr[i*3] = radius * Math.sin(phi) * Math.cos(theta);
+        pArr[i*3+1] = radius * Math.cos(phi);
+        pArr[i*3+2] = radius * Math.sin(phi) * Math.sin(theta);
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pArr, 3));
+      particleSystem = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.055, transparent: true, opacity: 0.66, sizeAttenuation: true }));
+      scene.add(particleSystem);
+
+      ejectaGroup = new THREE.Group();
+      scene.add(ejectaGroup);
+      for (let i = 0; i < 180; i++) {
+        const geom = new THREE.SphereGeometry(0.035 + Math.random() * 0.03, 6, 6);
+        const mat = new THREE.MeshBasicMaterial({ color: i % 2 ? 0xffa36f : 0xffd06b, transparent: true, opacity: 0.65 });
+        const pt = new THREE.Mesh(geom, mat);
+        pt.userData.theta = Math.random() * Math.PI * 2;
+        pt.userData.phi = Math.random() * Math.PI;
+        pt.userData.speed = 1.5 + Math.random() * 2.8;
+        ejectaGroup.add(pt);
+      }
+      ejectaGroup.visible = false;
+
+      clock = new THREE.Clock();
+      threeReady = true;
+      window.addEventListener('resize', resizeRenderer);
+    }
+
+    function resizeRenderer() {
+      if (!renderer || !camera) return;
+      const w = mount.clientWidth;
+      const h = mount.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    function setTrail(line, points) {
+      const arr = new Float32Array(points.length * 3);
+      points.forEach((p, i) => {
+        arr[i*3] = p.x; arr[i*3+1] = p.y; arr[i*3+2] = p.z;
+      });
+      line.geometry.dispose();
+      line.geometry = new THREE.BufferGeometry();
+      line.geometry.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+    }
+
+    function drawWebGLScene(s) {
+      if (!threeReady) return;
+      const elapsed = clock.getElapsedTime();
+      const totalMass = s.m1 + s.m2;
+      const sep = s.sep;
+      const p = s.p;
+      if (!paused) phase += 0.018 + 0.20 * Math.pow(p, 1.75);
+
+      const incl = 0.28 + s.inc * 0.55;
+      const x1 = Math.cos(phase) * sep * (s.m2 / totalMass);
+      const z1 = Math.sin(phase) * sep * Math.cos(incl) * (s.m2 / totalMass);
+      const y1 = 0.35 + Math.sin(phase) * sep * Math.sin(incl) * 0.15;
+      const x2 = -Math.cos(phase) * sep * (s.m1 / totalMass);
+      const z2 = -Math.sin(phase) * sep * Math.cos(incl) * (s.m1 / totalMass);
+      const y2 = 0.35 - Math.sin(phase) * sep * Math.sin(incl) * 0.15;
+
+      starA.visible = p < 1;
+      starB.visible = p < 1;
+      remnant.visible = p >= 1;
+      ejectaGroup.visible = p >= 1;
+
+      if (p < 1) {
+        starA.position.set(x1, y1, z1);
+        starB.position.set(x2, y2, z2);
+        starA.scale.setScalar(0.72 + s.m1 * 0.17);
+        starB.scale.setScalar(0.72 + s.m2 * 0.17);
+        starA.rotation.y += 0.026 + p * 0.06;
+        starB.rotation.y -= 0.024 + p * 0.06;
+        light1.position.copy(starA.position).add(new THREE.Vector3(0, 2.2, 0));
+        light2.position.copy(starB.position).add(new THREE.Vector3(0, 2.2, 0));
+      } else {
+        const pulse = 1 + Math.exp(-holdFrames / 40) * s.flash * 1.3;
+        remnant.position.set(0, 0.45, 0);
+        remnant.scale.setScalar(pulse);
+        remnant.rotation.y += 0.05;
+        light1.position.set(-1.5, 2.5, 0.2);
+        light2.position.set(1.6, 2.4, -0.4);
+      }
+
+      const trailPtsA = [];
+      const trailPtsB = [];
+      for (let i = 0; i < 150; i++) {
+        const q = i / 149;
+        const ph = phase - q * (5.8 + p * 6.6);
+        const localSep = sep + q * (1.6 + 3.3 * (1 - p));
+        trailPtsA.push(new THREE.Vector3(Math.cos(ph) * localSep * (s.m2 / totalMass), 0.22 + q * 0.02, Math.sin(ph) * localSep * Math.cos(incl) * (s.m2 / totalMass)));
+        trailPtsB.push(new THREE.Vector3(-Math.cos(ph) * localSep * (s.m1 / totalMass), 0.22 + q * 0.02, -Math.sin(ph) * localSep * Math.cos(incl) * (s.m1 / totalMass)));
+      }
+      setTrail(trailA, trailPtsA);
+      setTrail(trailB, trailPtsB);
+
+      const pos = gridMesh.geometry.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i), y = pos.getY(i);
+        const r = Math.sqrt(x*x + y*y) + 0.001;
+        const well = -1.35 * Math.exp(-r * 0.30) * (1 + p * 1.25);
+        const rip = 0.44 * Math.sin(r * 2.25 - elapsed * (2.2 + p * 4.2)) * Math.exp(-r * 0.055) * (0.35 + s.amp * 0.2);
+        const spiral = 0.16 * Math.sin(Math.atan2(y, x) * 2.0 + r * 1.45 - elapsed * 3.1) * Math.exp(-r * 0.10);
+        pos.setZ(i, well + rip + spiral);
+      }
+      pos.needsUpdate = true;
+      gridMesh.geometry.computeVertexNormals();
+      gridMesh.rotation.z = elapsed * 0.025;
+
+      ringGroup.children.forEach((ring) => {
+        const raw = (elapsed * (0.20 + p * 0.40) + ring.userData.offset) % 1;
+        const radius = 0.55 + raw * (11.5 + 5.4 * p);
+        ring.scale.set(radius, radius, radius);
+        ring.material.opacity = (1 - raw) * (0.18 + 0.34 * p) * (p < 1 ? 0.9 : 1.3);
+      });
+
+      if (p >= 1) {
+        const t = Math.min(1, holdFrames / 55);
+        ejectaGroup.children.forEach((pt) => {
+          const radius = t * pt.userData.speed * 2.8;
+          pt.position.set(
+            Math.cos(pt.userData.theta) * Math.sin(pt.userData.phi) * radius,
+            0.4 + Math.cos(pt.userData.phi) * radius * 0.42,
+            Math.sin(pt.userData.theta) * Math.sin(pt.userData.phi) * radius
+          );
+          pt.material.opacity = Math.max(0, 0.68 - t * 0.52);
+        });
+      }
+
+      const strain = s.amp * Math.sin(phase * 2.0);
+      detectorGroup.children[0].scale.x = 1 + strain * 0.11;
+      detectorGroup.children[1].scale.y = 1 - strain * 0.11;
+      detectorGroup.rotation.z = 0.08 * Math.sin(elapsed * 0.8);
+
+      particleSystem.rotation.y += 0.0007;
+      particleSystem.rotation.x += 0.0002;
+      backgroundStars.rotation.y += 0.00015;
+
+      const targets = [
+        new THREE.Vector3(0, 11.6, 18.5),
+        new THREE.Vector3(0, 6.8, 22.2),
+        new THREE.Vector3(-12.0, 8.5, 12.2)
+      ];
+      camera.position.lerp(targets[cameraMode], 0.035);
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    function tick() {
+      const s = getState();
+      updateReadouts(s);
+      if (!paused) {
+        if (simT < 1) {
+          simT += 0.0023 + 0.00072 * Math.pow(s.mc / 1.2, 0.25);
+        } else {
+          holdFrames += 1;
+          if (holdFrames > 130) {
+            simT = 0;
+            holdFrames = 0;
+          }
+        }
+      }
+      drawWebGLScene(s);
+      drawWavePanel(s);
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('load', () => {
+      initWebGL();
+      tick();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Habitable Zone: Astronomy’s Most Misunderstood Comfort Zone | Biswajit Jana</title>
+<meta name="description" content="A flagship post on the habitable zone, liquid water, stellar type, atmosphere, orbital distance, and habitability limits." />
+<meta property="og:title" content="The Habitable Zone: Astronomy’s Most Misunderstood Comfort Zone | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A flagship post on the habitable zone, liquid water, stellar type, atmosphere, orbital distance, and habitability limits." />
+<meta property="og:image" content="../../images/blog8_01_habitable_zone_hero.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(","\\)"]], displayMath: [["\\[","\\]"]], processEscapes: true },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root{
+  --bg:#03060c;--bg2:#07101c;--surface:rgba(10,17,31,.82);--surface2:rgba(255,255,255,.045);
+  --text:#edf4ff;--muted:#a9b8d2;--dim:#697d9d;--line:rgba(255,255,255,.10);
+  --accent:#4af0c8;--accent2:#83ddff;--accent3:#c493ff;--gold:#ffbc73;--danger:#ff7d90;
+  --display:"Playfair Display",Georgia,serif;--serif:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--nav-h:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;font-family:var(--serif);color:var(--text);line-height:1.78;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),
+    radial-gradient(circle at 48% 42%,rgba(196,147,255,.05),transparent 32%),
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+  radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%),
+  linear-gradient(120deg,rgba(74,240,200,.04),transparent 30%,rgba(131,221,255,.035) 72%,transparent)}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{height:var(--nav-h);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);
+  background:rgba(3,6,12,.84);backdrop-filter:blur(18px) saturate(1.25)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--accent)}
+.hero{padding:58px 0 28px}.hero-grid{display:grid;grid-template-columns:minmax(330px,.76fr) minmax(520px,1.24fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(3rem,6vw,6.4rem);line-height:.94;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.08rem,1.5vw,1.36rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.05rem;line-height:1.7}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{position:relative;min-height:540px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:0 26px 80px rgba(0,0,0,.42)}
+.hero-card img{width:100%;height:100%;min-height:540px;object-fit:cover;opacity:.95}.hero-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.50)),radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%)}
+.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}
+.feature{padding:24px 0 48px}.feature-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.feature-frame img{width:100%;height:620px;object-fit:cover;opacity:.92}.feature-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.70),transparent 34%,rgba(0,0,0,.45)),linear-gradient(180deg,rgba(255,255,255,.04),transparent 45%,rgba(0,0,0,.60));pointer-events:none}
+.feature-caption{position:absolute;left:24px;bottom:24px;right:24px;z-index:2;display:grid;gap:8px;max-width:780px}.feature-caption strong{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.feature-caption span{font-size:1.05rem;color:#dce9ff;line-height:1.65}
+.sim-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.sim-frame canvas{width:100%;height:620px;display:block;background:transparent}
+.sim-panel{position:absolute;right:18px;top:18px;width:min(360px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(8,14,26,.64);backdrop-filter:blur(18px);padding:16px}
+.sim-panel h2{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:8px}.sim-panel p{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.control{margin:10px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:6px}.control strong{color:var(--accent)}input[type=range]{width:100%;accent-color:var(--gold)}
+.data-feed{position:absolute;left:18px;bottom:18px;width:min(440px,calc(100% - 36px));border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(5,10,20,.62);backdrop-filter:blur(16px);padding:14px 16px;font-family:var(--mono)}
+.data-feed h3{font-size:.70rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}.feed-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:6px;margin-bottom:6px;font-size:.70rem;color:var(--muted)}.feed-line:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.feed-line strong{color:var(--text);white-space:nowrap;text-align:right}
+.journal{padding:10px 0 78px}.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(275px,.82fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:0 26px 80px rgba(0,0,0,.32);margin-bottom:16px}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}
+.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}.story-header h2{font-family:var(--display);font-size:clamp(2.5rem,4.8vw,4.45rem);line-height:.98;letter-spacing:-.05em;margin-bottom:12px}.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}
+.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}.chapter h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.chapter h3{font-family:var(--display);font-size:clamp(1.35rem,2vw,1.9rem);margin:28px 0 10px;line-height:1.15}
+.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}
+.equation{margin:24px 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.28);overflow-x:auto}.equation-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.equation p{font-size:.94rem;margin:10px 0 0}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}
+.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer a{color:var(--muted)}.footer a:hover{color:var(--gold)}
+@media(max-width:1180px){.hero-grid{grid-template-columns:1fr}.hero-card,.hero-card img{min-height:460px}.journal-grid{grid-template-columns:220px minmax(0,1fr)}.right-rail{grid-column:1/-1;position:static}.sim-panel{position:relative;right:auto;top:auto;width:auto;margin:16px}.data-feed{position:relative;left:auto;bottom:auto;width:auto;margin:16px}.sim-frame canvas,.feature-frame img{height:520px}.feature-frame{min-height:520px}}
+@media(max-width:900px){.nav{height:auto}.nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}.journal-grid{grid-template-columns:1fr}.left-rail,.right-rail{position:static}.fact-grid{grid-template-columns:1fr}.hero{padding-top:34px}}
+@media(max-width:760px){.wide,.nav-inner{width:min(94vw,100%)}.hero-card,.hero-card img{min-height:340px}.sim-frame canvas,.feature-frame img{height:420px}.feature-frame{min-height:420px}h1{font-size:clamp(2.4rem,14vw,4.2rem)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner wide">
+  <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li>
+    <li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Astrobiology · exoplanets · orbital comfort zone</div>
+      <h1>The Habitable Zone: Astronomy’s Most Misunderstood Comfort Zone</h1>
+      <p class="hero-sub">The habitable zone is not a cosmic estate-agent brochure. It is a rough energy-balance idea, and life still has to do the hard part.</p>
+      <div class="hook">Welcome to the habitable zone: the region where liquid water might exist, assuming the planet is not being rude in twelve other ways.</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08 · Hertford, London, UK</span>
+        <span class="meta-pill">11 min read</span>
+        <span class="meta-pill">Interactive habitable-zone lab</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="../../images/blog8_01_habitable_zone_hero.png" alt="Habitable zone exoplanet diagram hero image" onerror="this.onerror=null;this.src='../../images/blog8_02_planet_zone_diagram.png';" />
+      <figcaption class="hero-caption">A planet in the habitable zone is not automatically habitable. Astronomy really said: terms and conditions apply.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="feature wide">
+
+<div class="sim-frame">
+  <canvas id="hzCanvas"></canvas>
+  <div class="sim-panel">
+    <h2>Habitable Zone Lab</h2>
+    <p>Change star luminosity, orbit, and greenhouse strength. The green band moves because stars are not identical lamps.</p>
+    <div class="control"><label><span>Stellar luminosity</span><strong id="lumOut">1.00 L☉</strong></label><input id="lum" type="range" min="0.05" max="5" step="0.01" value="1"></div>
+    <div class="control"><label><span>Orbital distance</span><strong id="distOut">1.00 AU</strong></label><input id="dist" type="range" min="0.05" max="5" step="0.01" value="1"></div>
+    <div class="control"><label><span>Greenhouse strength</span><strong id="greenOut">0.30</strong></label><input id="green" type="range" min="0" max="1.2" step="0.01" value="0.30"></div>
+    <div class="control"><label><span>Albedo</span><strong id="albedoOut">0.30</strong></label><input id="albedo" type="range" min="0.05" max="0.8" step="0.01" value="0.30"></div>
+  </div>
+  <div class="data-feed">
+    <h3>Climate Readout</h3>
+    <div class="feed-line"><span>Inner HZ estimate</span><strong id="innerOut">--</strong></div>
+    <div class="feed-line"><span>Outer HZ estimate</span><strong id="outerOut">--</strong></div>
+    <div class="feed-line"><span>Equilibrium temperature</span><strong id="eqTempOut">--</strong></div>
+    <div class="feed-line"><span>Habitability mood</span><strong id="hzMood">--</strong></div>
+  </div>
+</div>
+
+</section>
+
+<section class="journal wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li><li><a href="#zone">The zone</a></li><li><a href="#star">Stellar type</a></li><li><a href="#atmosphere">Atmosphere</a></li><li><a href="#limits">Limits</a></li><li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>Star–planet climate zone</strong></div>
+          <div><span>Status</span><strong>Extreme</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>Orbit Lab</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      
+<div class="story-header" id="overview"><div class="eyebrow">Exoplanets · water · climate</div><h2>The habitable zone is useful, but it is not destiny.</h2><p>The habitable zone is often described as the region around a star where liquid water could exist on a planet’s surface. That is a good start. It is also where the oversimplification usually begins.</p></div>
+<article>
+<section class="chapter" id="zone"><div class="chapter-label">Chapter 01 · The zone</div><h2>Distance matters because energy matters.</h2><p>Move a planet too close to its star and it receives too much energy. Move it too far away and it receives too little. Somewhere in between is the rough region where surface liquid water becomes plausible.</p><div class="equation"><div class="equation-label">Simple flux scaling</div>\[F=\frac{L}{4\pi d^2}\]<p>The flux \(F\) received by a planet depends on stellar luminosity \(L\) and orbital distance \(d\).</p></div></section>
+<section class="chapter" id="star"><div class="chapter-label">Chapter 02 · Stellar type</div><h2>Not all stars host the same comfort zone.</h2><p>A dim red dwarf has a habitable zone close in. A hotter, brighter star pushes the zone farther out. This sounds simple until stellar activity, flares, ultraviolet radiation, and lifetime enter the chat.</p><div class="fact-grid"><div class="fact"><strong>Red dwarfs</strong><span>Long-lived but often active. The habitable zone may be close enough for tidal locking.</span></div><div class="fact"><strong>Sun-like stars</strong><span>Comfortably familiar, because our sample size of confirmed life is embarrassingly one.</span></div></div></section>
+<section class="chapter" id="atmosphere"><div class="chapter-label">Chapter 03 · Atmosphere</div><h2>The atmosphere can rescue or ruin everything.</h2><p>A planet’s atmosphere controls greenhouse warming, pressure, heat redistribution, chemistry, and surface stability. A planet can sit inside the habitable zone and still be sterile, frozen, roasted, stripped, or just generally unpleasant.</p><div class="equation"><div class="equation-label">Equilibrium temperature idea</div>\[T_{\mathrm{eq}}\propto\left(\frac{L(1-A)}{d^2}\right)^{1/4}\]<p>Albedo \(A\), luminosity, and distance all affect the approximate equilibrium temperature.</p></div></section>
+<section class="chapter" id="limits"><div class="chapter-label">Chapter 04 · Limits</div><h2>The phrase “Earth-like” is doing too much unpaid labour.</h2><p>Mass, atmosphere, magnetic field, geology, ocean inventory, rotation, stellar activity, and history all matter. The habitable zone is a filter, not a verdict.</p></section>
+<section class="chapter" id="takeaway"><div class="chapter-label">Takeaway</div><h2>The habitable zone is where questions begin.</h2><p>It helps identify promising planets, but habitability is a planetary systems problem, not a single distance label. The zone is useful. The hype around it needs supervision.</p></section>
+</article>
+
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Habitable zone</strong><span>Where liquid water could exist on a surface. Not a guarantee of beaches, forests, or polite weather.</span></div><div class="glossary-item"><strong>Luminosity</strong><span>How much energy the star emits. The thermostat setting, but stellar.</span></div><div class="glossary-item"><strong>Atmosphere</strong><span>The planet’s climate negotiator. Without it, the habitable zone is basically a guess wearing a lab coat.</span></div><div class="glossary-item"><strong>Tidal locking</strong><span>One side always faces the star. Romantic for the star, inconvenient for climate.</span></div><div class="glossary-item"><strong>Runaway greenhouse</strong><span>When warming stops being a feature and becomes Venus sending a warning letter.</span></div>
+        </div>
+      </div>
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+<a class="post-card" href="three-body-problem.html"><div class="post-card-kicker">Related exploration</div><h4>The Three-Body Problem</h4><p>Gravity, chaos, and the universe refusing to be solved neatly.</p><div class="tiny-meta">Dynamics · simulation</div></a>
+<a class="post-card" href="black-hole-extreme-lab.html"><div class="post-card-kicker">Related exploration</div><h4>Black Holes</h4><p>When gravity stops negotiating and starts rewriting causality.</p><div class="tiny-meta">Relativity · visual lab</div></a>
+<a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related exploration</div><h4>Radial Velocity</h4><p>Planets hiding by making their stars wobble. Adorable, but detectable.</p><div class="tiny-meta">Exoplanets · spectroscopy</div></a>
+<a class="post-card" href="noise-and-discovery.html"><div class="post-card-kicker">Related exploration</div><h4>Noise and Discovery</h4><p>Where the universe whispers and your detector coughs.</p><div class="tiny-meta">Data · uncertainty</div></a>
+</div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics & Instrumentation Lab.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters & Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+function trackEvent(name){
+  if(window.plausible) window.plausible(name);
+  if(window.gtag) window.gtag("event",name,{event_category:"engagement",event_label:document.title});
+}
+</script>
+
+
+<script>
+(function(){
+const c=document.getElementById("hzCanvas"),ctx=c.getContext("2d");let t=0,last=performance.now();
+function resize(){const d=Math.min(devicePixelRatio||1,2);c.width=c.clientWidth*d;c.height=c.clientHeight*d;ctx.setTransform(d,0,0,d,0,0)}resize();addEventListener("resize",resize,{passive:true});
+["lum","dist","green","albedo"].forEach(id=>document.getElementById(id).addEventListener("input",draw));
+function draw(){
+ const now=performance.now();t+=(now-last)/1000;last=now;const W=c.clientWidth,H=c.clientHeight;const L=+lum.value,d=+dist.value,g=+green.value,A=+albedo.value;
+ lumOut.textContent=L.toFixed(2)+" L☉";distOut.textContent=d.toFixed(2)+" AU";greenOut.textContent=g.toFixed(2);albedoOut.textContent=A.toFixed(2);
+ const inner=Math.sqrt(L/1.10),outer=Math.sqrt(L/0.35);const Teq=278*Math.pow(L*(1-A)/(d*d*0.7),.25)+g*38;
+ innerOut.textContent=inner.toFixed(2)+" AU";outerOut.textContent=outer.toFixed(2)+" AU";eqTempOut.textContent=Teq.toFixed(0)+" K";
+ let mood=d>=inner&&d<=outer ? (Teq>250&&Teq<330?"promising, not proven":"in zone, climate questionable") : "not in the comfort band"; hzMood.textContent=mood;
+ ctx.clearRect(0,0,W,H);let bg=ctx.createRadialGradient(W*.35,H*.45,20,W*.5,H*.5,Math.max(W,H)*.75);bg.addColorStop(0,"#17243d");bg.addColorStop(1,"#02040a");ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ for(let i=0;i<160;i++){ctx.fillStyle=`rgba(255,255,255,${Math.random()*.35})`;ctx.fillRect(Math.random()*W,Math.random()*H,1,1)}
+ const cx=W*.36,cy=H*.52,scale=Math.min(W,H)*.105;
+ let starR=scale*(.9+Math.pow(L,.25)*.55);let sg=ctx.createRadialGradient(cx,cy,0,cx,cy,starR*3.2);sg.addColorStop(0,"rgba(255,245,200,1)");sg.addColorStop(.2,"rgba(255,188,115,.75)");sg.addColorStop(1,"rgba(255,188,115,0)");ctx.fillStyle=sg;ctx.beginPath();ctx.arc(cx,cy,starR*3.2,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#ffdc9b";ctx.beginPath();ctx.arc(cx,cy,starR,0,Math.PI*2);ctx.fill();
+ function orbit(r,color,width,alpha){ctx.strokeStyle=color.replace("ALPHA",alpha);ctx.lineWidth=width;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke()}
+ const hzIn=inner*scale*2.2,hzOut=outer*scale*2.2,planetR=d*scale*2.2;
+ ctx.fillStyle="rgba(74,240,200,.10)";ctx.beginPath();ctx.arc(cx,cy,hzOut,0,Math.PI*2);ctx.arc(cx,cy,hzIn,0,Math.PI*2,true);ctx.fill("evenodd");
+ orbit(hzIn,"rgba(74,240,200,ALPHA)",2,.45);orbit(hzOut,"rgba(74,240,200,ALPHA)",2,.45);orbit(planetR,"rgba(255,255,255,ALPHA)",1,.22);
+ const px=cx+Math.cos(t*.35)*planetR,py=cy+Math.sin(t*.35)*planetR;let pg=ctx.createRadialGradient(px,py,0,px,py,18);pg.addColorStop(0,"rgba(180,230,255,1)");pg.addColorStop(1,"rgba(40,120,255,.1)");ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,14,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="rgba(237,244,255,.9)";ctx.font="12px JetBrains Mono";ctx.fillText("green annulus: simplified liquid-water zone",W*.55,H*.18);
+ requestAnimationFrame(draw)
+}draw();
+})();
+</script>
+
+</body>
+</html>

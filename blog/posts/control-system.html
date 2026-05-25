@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What is a Control System? | Biswajit Jana</title>
+<meta name="description" content="A blog post on control systems, open-loop and closed-loop behaviour, feedback, tuning, noise, delay, and why measurement matters." />
+<meta property="og:title" content="What is a Control System? | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A blog post on feedback, correction, tuning, and control logic written from an instrumentation point of view." />
+<meta property="og:image" content="../../images/blog3_01_control_hero.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(","\\)"],["$","$"]], displayMath: [["\\[","\\]"],["$$","$$"]], processEscapes: true },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#04070d;
+  --bg2:#08111d;
+  --surface:rgba(9,16,28,.82);
+  --surface-2:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.10);
+  --line-2:rgba(255,255,255,.06);
+  --text:#edf4ff;
+  --muted:#a9b8d2;
+  --dim:#6d7f9f;
+  --accent:#4af0c8;
+  --accent2:#81dfff;
+  --accent3:#c493ff;
+  --gold:#ffbc73;
+  --danger:#ff8f9a;
+  --display:"Playfair Display", Georgia, serif;
+  --serif:"Source Serif 4", Georgia, serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --nav-h:72px;
+  --shadow:0 24px 80px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:var(--serif);
+  color:var(--text);
+  line-height:1.78;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(74,240,200,.09), transparent 28%),
+    radial-gradient(circle at 88% 8%, rgba(129,223,255,.08), transparent 27%),
+    radial-gradient(circle at 50% 44%, rgba(196,147,255,.05), transparent 32%),
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 54%, transparent 0 18%, rgba(0,0,0,.16) 32%, rgba(0,0,0,.72) 100%),
+    linear-gradient(120deg, rgba(74,240,200,.03), transparent 30%, rgba(129,223,255,.03) 72%, transparent);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{
+  height:var(--nav-h);
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid var(--line);
+  background:rgba(4,7,13,.84);
+  backdrop-filter:blur(18px) saturate(1.2);
+}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.03em}
+.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}
+.nav-links a:hover{color:var(--accent)}
+.hero{padding:54px 0 26px}
+.hero-grid{display:grid;grid-template-columns:minmax(340px,.86fr) minmax(500px,1.14fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(3rem,5.4vw,6.1rem);line-height:.94;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.06rem,1.44vw,1.34rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.05rem;line-height:1.7}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{position:relative;min-height:520px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:var(--shadow)}
+.hero-card img{width:100%;height:100%;min-height:520px;object-fit:cover;opacity:.96}
+.hero-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 32%,rgba(0,0,0,.48)),radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%)}
+.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}
+.simulation{padding:20px 0 50px}
+.sim-lab{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:18px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:18px;
+  background:rgba(4,9,18,.82);
+  box-shadow:0 30px 100px rgba(0,0,0,.42);
+  overflow:hidden;
+}
+.sim-stage{
+  position:relative;
+  min-height:520px;
+  border-radius:24px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg, rgba(10,22,42,.95), rgba(3,8,15,.94));
+  overflow:hidden;
+}
+.sim-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border-bottom:1px solid var(--line-2);background:rgba(255,255,255,.02)}
+.sim-toolbar-left{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.badge{padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.legend{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px;margin-right:10px}
+.legend i{display:inline-block;width:14px;height:2px;border-radius:999px}
+.sim-canvas-wrap{padding:12px 16px 16px}
+#controlCanvas{width:100%;height:360px;display:block;border-radius:18px;border:1px solid rgba(255,255,255,.06);background:transparent}
+.telemetry-panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 16px 16px}
+.telemetry-box{padding:12px 14px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.telemetry-box strong{display:block;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:4px}
+.telemetry-box span{display:block;color:var(--muted);font-size:.92rem}
+.sim-controls{
+  border-radius:24px;
+  border:1px solid var(--line-2);
+  background:rgba(8,14,26,.78);
+  padding:18px;
+  backdrop-filter:blur(14px);
+  min-height:520px;
+}
+.sim-controls h2{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:8px}
+.sim-controls p{font-size:.84rem;color:var(--muted);line-height:1.58;margin-bottom:14px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px}
+.ctrl-btn{appearance:none;border:1px solid rgba(255,188,115,.28);background:rgba(255,188,115,.06);color:#ffd9ae;padding:9px 12px;border-radius:999px;font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:.2s}
+.ctrl-btn:hover{background:rgba(255,188,115,.12);transform:translateY(-1px)}
+.ctrl-btn.active{border-color:rgba(74,240,200,.45);background:rgba(74,240,200,.12);color:#cafff5}
+.group{padding:14px 14px 12px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);margin-bottom:12px}
+.group h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.control{margin:10px 0}
+.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:6px}
+.control strong{color:var(--gold)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.mini-note{font-family:var(--mono);font-size:.66rem;color:var(--dim);line-height:1.65;margin-top:6px}
+.story-wrap{padding:10px 0 74px}
+.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(280px,.84fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}
+.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:var(--shadow);margin-bottom:16px}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}
+.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}
+.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}
+.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}
+.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}
+.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}
+.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}
+.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}
+.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}
+.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}
+.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}
+.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55;margin-bottom:8px}
+.tiny-meta{font-family:var(--mono);font-size:.66rem;color:var(--dim)}
+.story-header{margin-bottom:22px}
+.story-header h2,.chapter h2,.comments-section h2{font-family:var(--display);font-size:clamp(2.2rem,4vw,4rem);line-height:.98;letter-spacing:-.045em;margin-bottom:12px}
+.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.85}
+.chapter{padding:26px 0;border-top:1px solid rgba(255,255,255,.08)}
+.chapter-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.chapter p + p{margin-top:14px}
+.callout{padding:18px 20px;border-radius:20px;border:1px solid rgba(74,240,200,.18);background:rgba(74,240,200,.06);margin:16px 0;color:#dffdf8}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.fact{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.fact strong{display:block;font-family:var(--mono);font-size:.72rem;color:var(--gold);margin-bottom:6px}
+.fact span{color:var(--muted);font-size:.95rem;line-height:1.6}
+.equation{margin-top:18px;padding:18px 20px;border-radius:20px;border:1px solid rgba(74,240,200,.18);background:rgba(8,20,37,.62)}
+.equation-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.equation p{margin-top:10px;font-size:.97rem;color:var(--muted)}
+.compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.compare-card{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.compare-card h4{font-family:var(--display);font-size:1.38rem;letter-spacing:-.03em;margin-bottom:8px}
+.compare-card p{font-size:.98rem}
+.comments-section{margin-top:32px;padding:26px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.comments-sub{color:var(--muted);margin-bottom:18px;font-size:1rem}
+.comment-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.comment-form .full{grid-column:1/-1}
+.input-wrap{display:grid;gap:7px}
+.input-wrap label{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.input-wrap input,.input-wrap textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(4,9,18,.82);color:var(--text);font-family:var(--serif);font-size:1rem}
+.input-wrap textarea{min-height:130px;resize:vertical}
+.comment-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.comment-note{color:var(--dim);font-size:.9rem}
+.submit-btn{appearance:none;border:1px solid rgba(255,188,115,.28);background:rgba(255,188,115,.08);color:#ffe2bf;padding:11px 16px;border-radius:999px;font-family:var(--mono);font-size:.76rem;cursor:pointer}
+.comment-list{margin-top:22px;display:grid;gap:12px}
+.comment-item{padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.comment-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px}
+.comment-head strong{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+.comment-head span{font-family:var(--mono);font-size:.68rem;color:var(--dim)}
+.comment-body{color:var(--muted);line-height:1.7}
+.footer{border-top:1px solid var(--line);padding:22px 0 30px;background:rgba(0,0,0,.18)}
+.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--dim);font-family:var(--mono);font-size:.72rem}
+.footer-inner a{color:var(--muted)}
+.footer-inner a:hover{color:var(--accent)}
+@media (max-width:1180px){
+  .hero-grid,.sim-lab,.journal-grid{grid-template-columns:1fr}
+  .left-rail,.right-rail{position:relative;top:auto}
+}
+@media (max-width:780px){
+  .wide{width:min(94vw,94vw)}
+  .hero{padding-top:36px}
+  .telemetry-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact-grid,.compare-grid,.comment-form{grid-template-columns:1fr}
+  .hero-card,.hero-card img{min-height:360px}
+  .sim-stage{min-height:480px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wide nav-inner">
+    <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../blog.html">Blog</a></li>
+      <li><a href="../../research.html">Research</a></li>
+      <li><a href="../../publications.html">Publications</a></li>
+      <li><a href="../../cv.html">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Instrumentation · feedback · control systems</div>
+      <h1>What is a Control System?</h1>
+      <p class="hero-sub">A control system is what happens when an instrument stops hoping the world behaves and starts correcting it in real time.</p>
+      <div class="hook">Welcome to feedback control: the engineering version of “I saw what happened, and I am not letting that happen again.”</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08</span>
+        <span class="meta-pill">Hertford, London, UK</span>
+        <span class="meta-pill">14 min read</span>
+        <span class="meta-pill">Interactive feedback loop lab</span>
+      </div>
+    </div>
+
+    <figure class="hero-card">
+      <img src="../../images/blog3_01_control_hero.png" alt="Conceptual control-system illustration">
+      <figcaption class="hero-caption">Current hero image placeholder for the control-system block diagram. I am replacing this with a cleaner visual prompt, because the old reference-error-controller-actuator-plant flow needs to look less misleading and more physically honest.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="simulation wide" aria-labelledby="sim-title">
+  <div class="sim-lab">
+    <div class="sim-stage">
+      <div class="sim-toolbar">
+        <div class="sim-toolbar-left">
+          <span class="badge">Interactive loop demo</span>
+          <span class="badge" id="simStateBadge">running</span>
+        </div>
+        <div class="legend">
+          <span><i style="background:#ffbc73"></i> setpoint</span>
+          <span><i style="background:#4af0c8"></i> output</span>
+          <span><i style="background:#81dfff"></i> measured</span>
+          <span><i style="background:#c493ff"></i> control effort</span>
+        </div>
+      </div>
+      <div class="sim-canvas-wrap">
+        <canvas id="controlCanvas"></canvas>
+      </div>
+      <div class="telemetry-panel">
+        <div class="telemetry-box"><strong>Current error</strong><span id="errOut">--</span></div>
+        <div class="telemetry-box"><strong>Control effort</strong><span id="effortOut">--</span></div>
+        <div class="telemetry-box"><strong>Measured state</strong><span id="measuredOut">--</span></div>
+        <div class="telemetry-box"><strong>Loop mood</strong><span id="loopMood">--</span></div>
+      </div>
+    </div>
+
+    <aside class="sim-controls">
+      <h2 id="sim-title">Feedback Loop Lab</h2>
+      <p>Adjust controller gain, damping, disturbance, and sensor noise. The purpose is not to build a perfect industrial simulator. The purpose is to see, visually, why a control loop can be calm, sluggish, or embarrassingly unstable.</p>
+
+      <div class="btn-row">
+        <button class="ctrl-btn" id="playPauseBtn" type="button">Pause</button>
+        <button class="ctrl-btn" id="resetBtn" type="button">Reset</button>
+        <button class="ctrl-btn preset-btn" data-preset="best" type="button">Best tuned</button>
+        <button class="ctrl-btn preset-btn" data-preset="slow" type="button">Too gentle</button>
+        <button class="ctrl-btn preset-btn" data-preset="wild" type="button">Worst case</button>
+      </div>
+
+      <div class="group">
+        <h3>Primary controls</h3>
+        <div class="control">
+          <label><span>Controller gain</span><strong id="gainOut">1.20</strong></label>
+          <input id="gain" type="range" min="0" max="4" step="0.01" value="1.20">
+        </div>
+        <div class="control">
+          <label><span>System damping</span><strong id="dampOut">0.55</strong></label>
+          <input id="damp" type="range" min="0.05" max="1.6" step="0.01" value="0.55">
+        </div>
+        <div class="control">
+          <label><span>Disturbance level</span><strong id="disturbOut">0.35</strong></label>
+          <input id="disturbance" type="range" min="0" max="1.4" step="0.01" value="0.35">
+        </div>
+        <div class="control">
+          <label><span>Sensor noise</span><strong id="sensorNoiseOut">0.08</strong></label>
+          <input id="sensorNoise" type="range" min="0" max="0.5" step="0.01" value="0.08">
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>Preset logic</h3>
+        <p class="mini-note">Best tuned keeps the correction firm but sane. Too gentle responds slowly. Worst case deliberately pushes the system into an overshoot-and-oscillation audition.</p>
+      </div>
+
+      <div class="group">
+        <h3>What this is showing</h3>
+        <p class="mini-note">Setpoint = what you want. Output = what the plant is actually doing. Measured = what the sensor reports after a little noise. Control effort = what the controller tries next. If the loop is stable, the teal curve settles toward the amber line. If not, congratulations, you have invented frustration.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="story-wrap wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#open-loop">Open loop</a></li>
+          <li><a href="#closed-loop">Closed loop</a></li>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#tuning">Tuning</a></li>
+          <li><a href="#delay-noise">Delay & noise</a></li>
+          <li><a href="#astro-applications">Astronomy use</a></li>
+          <li><a href="#advantages">Advantages & limits</a></li>
+          <li><a href="#takeaway">Takeaway</a></li>
+          <li><a href="#comments">Comments</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>Closed-loop system</strong></div>
+          <div><span>Status</span><strong>Active</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>Feedback note</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      <div class="story-header" id="overview">
+        <div class="eyebrow">Feedback · sensors · correction</div>
+        <h2>A control system turns measurement into action.</h2>
+        <p>If I had to explain a control system without sounding like a textbook that has lost its will to live, I would say this: a control system is a disciplined way of noticing that reality has drifted away from what you wanted, and then doing something about it. It measures, compares, decides, and corrects. That is the heart of it.</p>
+        <p>In engineering, this idea appears everywhere. It shows up in room thermostats, aircraft autopilots, telescope tracking, industrial robotics, and the quiet little loops that keep scientific instruments stable enough to produce trustworthy data. Without control, many systems would still operate, but they would do so badly, inconsistently, or with a truly impressive ability to embarrass their designer.</p>
+        <div class="callout">The important shift is this: a control system is not just a command chain. It is a measurement-driven decision loop.</div>
+      </div>
+
+      <article>
+        <section class="chapter" id="open-loop">
+          <div class="chapter-label">Chapter 01 · Open loop</div>
+          <h2>Open-loop control acts without checking.</h2>
+          <p>An open-loop system sends a command but does not verify whether the desired result was achieved. It simply assumes the world will cooperate. Sometimes this is perfectly acceptable. A toaster heats for a fixed time. A timed irrigation system waters for a fixed duration. A motor may be driven for a known interval when the load is predictable. The appeal of open-loop control is that it is simple, cheap, and easy to implement.</p>
+          <p>The weakness is equally obvious: if the environment changes, or if the system behaves differently from expected, the controller does not know. If your toaster is old, your bread is thick, or the voltage fluctuates, the result may drift from excellent to tragic with no mechanism for correction.</p>
+          <div class="equation">
+            <div class="equation-label">Open-loop command</div>
+            \[
+            u(t)=f(r(t))
+            \]
+            <p>The command $u(t)$ depends on the reference $r(t)$, but not on the measured result.</p>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h4>Why people like it</h4>
+              <p>Cheap, fast, and structurally uncomplicated. If the system is well known and disturbances are small, open-loop control can be perfectly reasonable.</p>
+            </div>
+            <div class="compare-card">
+              <h4>Why it fails</h4>
+              <p>It cannot compensate for drift, disturbances, ageing hardware, or the deeply inconvenient fact that the real world does not read specifications before behaving.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="closed-loop">
+          <div class="chapter-label">Chapter 02 · Closed loop</div>
+          <h2>Closed-loop control listens before acting again.</h2>
+          <p>Closed-loop control, usually called feedback control, measures the output, compares it with the target, computes an error, and uses that error to decide the next correction. This single idea is what makes feedback systems so powerful. They do not merely act; they react. That means they can reject disturbances, adapt to modest changes, and actively push the system back toward the desired state.</p>
+          <p>A thermostat is a familiar example. It measures room temperature, compares it with the setpoint, and switches heating on or off accordingly. In more advanced systems, the control law is continuous rather than on-off. Instead of simply declaring “too cold” or “too warm,” the controller may determine how large the error is, how fast it is changing, and how long it has been present.</p>
+          <div class="equation">
+            <div class="equation-label">Error signal</div>
+            \[
+            e(t)=r(t)-y(t)
+            \]
+            <p>The controller acts on the difference between the desired output $r(t)$ and the measured output $y(t)$.</p>
+          </div>
+          <p>This is the key philosophical difference between open-loop and closed-loop design. Open-loop says, “I issued the command, so my job is done.” Closed-loop says, “I issued the command, but I am going to verify whether anything sensible actually happened.”</p>
+        </section>
+
+        <section class="chapter" id="components">
+          <div class="chapter-label">Chapter 03 · Components</div>
+          <h2>Every loop has a cast of characters.</h2>
+          <p>Most feedback systems can be described with the same small group of components. There is a reference or setpoint, which defines the desired state. There is a plant, which is the physical system being controlled. There is a sensor, which measures what the plant is doing. There is a controller, which decides what correction should be applied. And there is an actuator, which physically applies that correction.</p>
+          <p>There is also one more participant, and it is usually the most irritating one: the disturbance. Disturbances are everything the environment throws at the system while pretending not to be involved. In a telescope, that may be wind or vibration. In an optical instrument, that may be temperature drift. In a spectrograph, it may be pressure change, thermal expansion, refractive-index variation, or mechanical motion. In life, it is usually Monday.</p>
+          <div class="fact-grid">
+            <div class="fact"><strong>Sensor</strong><span>Measures the output. Useful, essential, and never perfectly clean.</span></div>
+            <div class="fact"><strong>Actuator</strong><span>Applies correction. Powerful, limited, and sometimes slower than your patience.</span></div>
+            <div class="fact"><strong>Plant</strong><span>The physical system itself. It contains the dynamics you wish were simpler.</span></div>
+            <div class="fact"><strong>Disturbance</strong><span>The outside influence that proves your controller does not live in a laboratory fantasy.</span></div>
+          </div>
+        </section>
+
+        <section class="chapter" id="tuning">
+          <div class="chapter-label">Chapter 04 · Tuning</div>
+          <h2>A strong correction is not automatically a good correction.</h2>
+          <p>People new to control often imagine that if a system is not correcting fast enough, the obvious solution is to apply more correction. Unfortunately, control systems are not impressed by enthusiasm alone. If the gain is too low, the system responds sluggishly. If the gain is too high, the response overshoots and may oscillate. If there is delay in the plant or the measurement, the problem becomes even worse, because the controller may react to a state that has already changed.</p>
+          <p>This is why tuning matters. You are balancing speed, stability, smoothness, robustness, and noise sensitivity. A very aggressive controller may correct quickly in a quiet environment but become unstable in a noisy one. A very cautious controller may be stable but too slow to be useful. In practice, good tuning is often an exercise in engineering humility: you do not ask for perfection, you ask for reliable behaviour under realistic conditions.</p>
+          <div class="equation">
+            <div class="equation-label">Closed-loop idea</div>
+            \[
+            T(s)=\frac{C(s)G(s)}{1+C(s)G(s)}
+            \]
+            <p>The controller $C(s)$ and plant $G(s)$ together determine the overall closed-loop behaviour.</p>
+          </div>
+        </section>
+
+        <section class="chapter" id="delay-noise">
+          <div class="chapter-label">Chapter 05 · Delay & noise</div>
+          <h2>Reality adds delay, noise, and other delightful complications.</h2>
+          <p>In an ideal classroom model, the sensor tells the truth instantly, the actuator responds immediately, and the plant behaves exactly as predicted. In the real world, sensors are noisy, actuators have limits, and physical systems have inertia. Delay is particularly dangerous because it makes the controller act on information from the past. A loop that would have been stable with no delay may become oscillatory once latency is introduced.</p>
+          <p>Noise causes a different problem. If the controller reacts too strongly to noisy measurements, it may correct fluctuations that are not actually meaningful. That is why filtering, averaging, appropriate sampling, and sensible controller design matter. The goal is not to ignore measurement; the goal is to avoid mistaking noise for signal.</p>
+          <div class="callout">This is one reason control engineering feels honest. It forces you to admit that your measurements are imperfect and your system has memory.</div>
+        </section>
+
+        <section class="chapter" id="astro-applications">
+          <div class="chapter-label">Chapter 06 · Astronomy & instrumentation</div>
+          <h2>Control systems matter a great deal in astrophysics, even when they stay invisible.</h2>
+          <p>Scientific instruments only look elegant in papers. In practice, they survive by continuous correction. Telescope mounts use feedback to track celestial objects accurately. Adaptive optics systems sense wavefront distortion and command mirrors to compensate. Thermal-control systems keep detectors, optics, or spectrograph benches stable enough that the instrument does not quietly drift away from calibration. Guiding software measures position errors and corrects them before the star image walks away across the detector like it owns the place.</p>
+          <p>This is one reason I find control systems deeply interesting. They sit at the point where physics, measurement, software, electronics, and hardware all have to cooperate. In exoplanet instrumentation, for example, you do not get to say, “The environment was difficult.” The instrument still has to remain stable. Feedback is often the mechanism that turns that demand from impossible into merely difficult.</p>
+          <p>Even outside astronomy, the same philosophy applies. If a system matters, someone eventually builds a loop around it.</p>
+        </section>
+
+        <section class="chapter" id="advantages">
+          <div class="chapter-label">Chapter 07 · Advantages & limits</div>
+          <h2>Feedback is powerful, but it is not magic.</h2>
+          <p>The great advantage of feedback control is robustness. A well-designed closed-loop system can reject disturbances, compensate for moderate modelling errors, and remain useful even when conditions are imperfect. It does not need the world to behave exactly as expected. That is a remarkably practical quality.</p>
+          <p>But feedback does not solve everything. A controller cannot compensate for an actuator with no authority, a sensor with no useful information, or a plant whose dynamics are fundamentally too fast or too unstable for the chosen hardware. Poorly designed feedback can also create its own problems: oscillation, chatter, excessive wear, amplified noise, or spectacularly confident instability.</p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h4>Advantages</h4>
+              <p>Handles disturbances, corrects drift, improves accuracy, and makes systems more reliable under changing conditions.</p>
+            </div>
+            <div class="compare-card">
+              <h4>Limitations</h4>
+              <p>Needs good measurements, reasonable modelling, actuator authority, and careful tuning. Otherwise it becomes an expensive way to generate oscillations.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="takeaway">
+          <div class="chapter-label">Takeaway</div>
+          <h2>Feedback is disciplined correction.</h2>
+          <p>At its core, control engineering is not about domination. It is about response. A control system measures what is happening, compares that reality with an intended state, and applies corrections in a structured way. That sounds almost modest, but it is one of the most powerful ideas in engineering.</p>
+          <p>When it works well, it becomes easy to forget it is there. The telescope tracks smoothly. The room stays near its setpoint. The instrument remains stable. The signal does not drift off into nonsense. In other words, success in control systems often looks boring, and that is exactly the point.</p>
+        </section>
+      </article>
+
+      <section class="comments-section" id="comments">
+        <h2>Comments</h2>
+        <p class="comments-sub">If this post was useful, confusing, or made you reconsider your relationship with oscillations, you can leave a note below. This comment section is lightweight for the static site version.</p>
+        <form class="comment-form" id="commentForm">
+          <div class="input-wrap">
+            <label for="commentName">Name</label>
+            <input id="commentName" type="text" placeholder="Your name" required>
+          </div>
+          <div class="input-wrap">
+            <label for="commentEmail">Email (optional)</label>
+            <input id="commentEmail" type="email" placeholder="only if you want to share it">
+          </div>
+          <div class="input-wrap full">
+            <label for="commentText">Comment</label>
+            <textarea id="commentText" placeholder="Write your thought here..." required></textarea>
+          </div>
+          <div class="full comment-actions">
+            <div class="comment-note">Stored locally in this browser for now. Later this can be connected to Giscus or another hosted comment system if needed.</div>
+            <button class="submit-btn" type="submit">Post comment</button>
+          </div>
+        </form>
+        <div class="comment-list" id="commentList"></div>
+      </section>
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Plant</strong><span>The thing being controlled. It has dynamics and refuses to instantly obey.</span></div>
+          <div class="glossary-item"><strong>Sensor</strong><span>The device that tells you what actually happened. Useful, noisy, and occasionally rude.</span></div>
+          <div class="glossary-item"><strong>Actuator</strong><span>The part that applies correction. Strong enough to help, limited enough to be realistic.</span></div>
+          <div class="glossary-item"><strong>Error signal</strong><span>The difference between what you wanted and what reality delivered. Engineers call it error. Reality calls it a personality trait.</span></div>
+          <div class="glossary-item"><strong>Stability</strong><span>The system settles instead of doing interpretive dance forever.</span></div>
+          <div class="glossary-item"><strong>Disturbance</strong><span>Any outside influence trying to prove your controller is too optimistic.</span></div>
+        </div>
+      </div>
+
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+          <a class="post-card" href="three-body-problem.html"><div class="post-card-kicker">Related exploration</div><h4>The Three-Body Problem</h4><p>Gravity, chaos, and the universe refusing to be solved neatly.</p><div class="tiny-meta">Dynamics · simulation</div></a>
+          <a class="post-card" href="black-hole-extreme-lab.html"><div class="post-card-kicker">Related exploration</div><h4>Black Holes</h4><p>When gravity stops negotiating and starts rewriting causality.</p><div class="tiny-meta">Relativity · visual lab</div></a>
+          <a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related exploration</div><h4>Radial Velocity</h4><p>Planets hiding by making their stars wobble. Adorable, but detectable.</p><div class="tiny-meta">Exoplanets · spectroscopy</div></a>
+          <a class="post-card" href="noise-and-discovery.html"><div class="post-card-kicker">Related exploration</div><h4>Noise and Discovery</h4><p>Where the universe whispers and your detector coughs.</p><div class="tiny-meta">Data · uncertainty</div></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters &amp; Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active", a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+</script>
+
+<script>
+(function(){
+  const canvas=document.getElementById('controlCanvas');
+  const ctx=canvas.getContext('2d');
+  const gain=document.getElementById('gain');
+  const damp=document.getElementById('damp');
+  const disturbance=document.getElementById('disturbance');
+  const sensorNoise=document.getElementById('sensorNoise');
+  const gainOut=document.getElementById('gainOut');
+  const dampOut=document.getElementById('dampOut');
+  const disturbOut=document.getElementById('disturbOut');
+  const sensorNoiseOut=document.getElementById('sensorNoiseOut');
+  const errOut=document.getElementById('errOut');
+  const effortOut=document.getElementById('effortOut');
+  const measuredOut=document.getElementById('measuredOut');
+  const loopMood=document.getElementById('loopMood');
+  const simStateBadge=document.getElementById('simStateBadge');
+  const playPauseBtn=document.getElementById('playPauseBtn');
+  const resetBtn=document.getElementById('resetBtn');
+  const presetButtons=[...document.querySelectorAll('.preset-btn')];
+
+  let running=true;
+  let t=0;
+  let y=0;
+  let v=0;
+  let last=performance.now();
+  let history=[];
+  const HISTORY_MAX=420;
+  const setpoint=1;
+
+  function resize(){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const rect=canvas.getBoundingClientRect();
+    canvas.width=Math.max(320,Math.round(rect.width*dpr));
+    canvas.height=Math.max(240,Math.round(rect.height*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();
+  window.addEventListener('resize', resize, {passive:true});
+
+  function syncLabels(){
+    gainOut.textContent=(+gain.value).toFixed(2);
+    dampOut.textContent=(+damp.value).toFixed(2);
+    disturbOut.textContent=(+disturbance.value).toFixed(2);
+    sensorNoiseOut.textContent=(+sensorNoise.value).toFixed(2);
+  }
+  [gain,damp,disturbance,sensorNoise].forEach(el=>el.addEventListener('input', syncLabels));
+  syncLabels();
+
+  function applyPreset(name){
+    presetButtons.forEach(btn=>btn.classList.toggle('active', btn.dataset.preset===name));
+    if(name==='best'){
+      gain.value='1.35';
+      damp.value='0.78';
+      disturbance.value='0.22';
+      sensorNoise.value='0.05';
+    }else if(name==='slow'){
+      gain.value='0.45';
+      damp.value='1.10';
+      disturbance.value='0.28';
+      sensorNoise.value='0.04';
+    }else if(name==='wild'){
+      gain.value='3.40';
+      damp.value='0.14';
+      disturbance.value='0.55';
+      sensorNoise.value='0.12';
+    }
+    syncLabels();
+  }
+  applyPreset('best');
+  presetButtons.forEach(btn=>btn.addEventListener('click', ()=>applyPreset(btn.dataset.preset)));
+
+  function resetState(){
+    t=0; y=0; v=0; history=[]; last=performance.now();
+  }
+  resetBtn.addEventListener('click', ()=>{ resetState(); drawFrame(true); });
+
+  playPauseBtn.addEventListener('click', ()=>{
+    running=!running;
+    playPauseBtn.textContent=running?'Pause':'Play';
+    simStateBadge.textContent=running?'running':'paused';
+    if(running){
+      last=performance.now();
+      requestAnimationFrame(loop);
+    }
+  });
+
+  function py(value, y0, hh){
+    const min=-1.65, max=1.75;
+    const f=(value-min)/(max-min);
+    return y0+hh*(1-f);
+  }
+
+  function drawFrame(forceOnly=false){
+    const now=performance.now();
+    let dt=Math.min(.04,(now-last)/1000);
+    if(forceOnly) dt=0;
+    last=now;
+
+    const K=+gain.value;
+    const D=+damp.value;
+    const dist=+disturbance.value;
+    const noise=+sensorNoise.value;
+
+    if(!forceOnly && running){
+      t+=dt;
+      const measurementNoise=Math.sin(t*17.2)*noise + Math.sin(t*4.4+0.8)*noise*0.35;
+      const measured=y+measurementNoise;
+      const e=setpoint-measured;
+      const disturbanceForce=Math.sin(t*1.25)*dist + Math.sin(t*0.38+1.4)*dist*0.4;
+      const u=K*e;
+      v += (u + disturbanceForce - y*0.22 - D*v) * dt * 1.8;
+      y += v*dt;
+      history.push({y, measured, set:setpoint, u, e});
+      if(history.length>HISTORY_MAX) history.shift();
+    }
+
+    const W=canvas.clientWidth;
+    const H=canvas.clientHeight;
+    ctx.clearRect(0,0,W,H);
+
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#10213b');
+    bg.addColorStop(.55,'#081220');
+    bg.addColorStop(1,'#04070d');
+    ctx.fillStyle=bg;
+    ctx.fillRect(0,0,W,H);
+
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,.04)';
+    ctx.lineWidth=1;
+    for(let x=0;x<=W;x+=Math.max(48,W/12)){
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+    }
+    for(let yy=0;yy<=H;yy+=Math.max(42,H/8)){
+      ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(W,yy); ctx.stroke();
+    }
+    ctx.restore();
+
+    const topPad=24;
+    const leftPad=56;
+    const rightPad=18;
+    const mainH=H*0.68;
+    const lowerY=topPad+mainH+16;
+    const lowerH=H-lowerY-22;
+    const plotW=W-leftPad-rightPad;
+
+    ctx.strokeStyle='rgba(255,255,255,.13)';
+    ctx.strokeRect(leftPad, topPad, plotW, mainH);
+    ctx.strokeRect(leftPad, lowerY, plotW, lowerH);
+
+    const zeroY=py(0, topPad, mainH);
+    ctx.strokeStyle='rgba(255,255,255,.08)';
+    ctx.beginPath(); ctx.moveTo(leftPad, zeroY); ctx.lineTo(leftPad+plotW, zeroY); ctx.stroke();
+
+    ctx.strokeStyle='rgba(255,188,115,.72)';
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(leftPad, py(setpoint, topPad, mainH));
+    ctx.lineTo(leftPad+plotW, py(setpoint, topPad, mainH));
+    ctx.stroke();
+
+    if(history.length>1){
+      const drawSeries=(getter, color, lineWidth, y0, hh, alpha=1)=>{
+        ctx.save();
+        ctx.globalAlpha=alpha;
+        ctx.strokeStyle=color;
+        ctx.lineWidth=lineWidth;
+        ctx.beginPath();
+        history.forEach((p,i)=>{
+          const x=leftPad + (i/(history.length-1))*plotW;
+          const yy=py(getter(p), y0, hh);
+          if(i===0) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
+        });
+        ctx.stroke();
+        ctx.restore();
+      };
+      drawSeries(p=>p.y, '#4af0c8', 2.8, topPad, mainH);
+      drawSeries(p=>p.measured, '#81dfff', 1.7, topPad, mainH, .85);
+      drawSeries(p=>Math.max(-1.4,Math.min(1.4,p.u/2.5)), '#c493ff', 2.0, lowerY, lowerH, .92);
+    }
+
+    ctx.fillStyle='rgba(237,244,255,.84)';
+    ctx.font='12px JetBrains Mono';
+    ctx.fillText('main response', leftPad+8, topPad+16);
+    ctx.fillText('control effort', leftPad+8, lowerY+16);
+
+    const lastPoint=history[history.length-1] || {y:0, measured:0, u:0, e:1};
+    errOut.textContent=lastPoint.e.toFixed(3);
+    effortOut.textContent=lastPoint.u.toFixed(3);
+    measuredOut.textContent=lastPoint.measured.toFixed(3);
+    loopMood.textContent=Math.abs(lastPoint.e)<.06 && Math.abs(v)<.05 ? 'settled-ish' : K>2.6 && D<.25 ? 'oscillation audition' : K<0.6 ? 'too polite' : 'correcting';
+  }
+
+  function loop(){
+    if(!running) return;
+    drawFrame(false);
+    requestAnimationFrame(loop);
+  }
+
+  resetState();
+  drawFrame(true);
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+(function(){
+  const form=document.getElementById('commentForm');
+  const list=document.getElementById('commentList');
+  const STORAGE_KEY='biswajit_control_system_comments';
+
+  function escapeHtml(str){
+    return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  }
+
+  function loadComments(){
+    try{return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');}catch(e){return [];}
+  }
+
+  function saveComments(data){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function renderComments(){
+    const comments=loadComments();
+    if(!comments.length){
+      list.innerHTML='<div class="comment-item"><div class="comment-body">No comments yet. You can be the first person to say something sensible — or at least enthusiastic.</div></div>';
+      return;
+    }
+    list.innerHTML=comments.slice().reverse().map(c=>`
+      <div class="comment-item">
+        <div class="comment-head"><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.date)}</span></div>
+        <div class="comment-body">${escapeHtml(c.text)}</div>
+      </div>
+    `).join('');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name=document.getElementById('commentName').value.trim();
+    const text=document.getElementById('commentText').value.trim();
+    if(!name || !text) return;
+    const comments=loadComments();
+    comments.push({
+      name,
+      email:document.getElementById('commentEmail').value.trim(),
+      text,
+      date:new Date().toLocaleString()
+    });
+    saveComments(comments);
+    form.reset();
+    renderComments();
+  });
+
+  renderComments();
+})();
+</script>
+</body>
+</html>

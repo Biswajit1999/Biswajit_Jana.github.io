@@ -1,0 +1,2346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The Three-Body Problem: When Gravity Refuses to Behave Politely | Biswajit Jana</title>
+  <meta name="description" content="A flagship digital-journalism feature by Biswajit Jana on the three-body problem, Newtonian gravity, numerical integration, chaos, and an interactive Three.js gravitational simulation." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/three-body-problem.html" />
+
+  <meta property="og:title" content="The Three-Body Problem: When Gravity Refuses to Behave Politely | Biswajit Jana" />
+  <meta property="og:description" content="A cinematic computational-physics article with an interactive Three.js simulation showing why three gravitating bodies become chaotic." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/three-body-problem.html" />
+  <meta property="og:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/images/blog6_01_three_body_hero.png" />
+  <meta property="article:published_time" content="2026-05-07T00:00:00+01:00" />
+  <meta property="article:author" content="Biswajit Jana" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The Three-Body Problem: When Gravity Refuses to Behave Politely",
+    "description": "A flagship computational physics feature on the three-body problem, Newtonian gravity, numerical integration, chaos, and an interactive browser simulation.",
+    "image": "https://biswajit1999.github.io/Biswajit_Jana.github.io/images/blog6_01_three_body_hero.png",
+    "author": {
+      "@type": "Person",
+      "name": "Biswajit Jana",
+      "url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Biswajit Jana"
+    },
+    "datePublished": "2026-05-07T00:00:00+01:00",
+    "dateModified": "2026-05-09T00:00:00+01:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/three-body-problem.html"
+    },
+    "keywords": [
+      "three-body problem",
+      "chaos",
+      "computational physics",
+      "Newtonian gravity",
+      "numerical simulation",
+      "astrophysics"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        processEscapes: true
+      },
+      svg: { fontCache: "global" },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #030712;
+      --bg2: #071121;
+      --surface: rgba(11, 19, 38, 0.84);
+      --surface-solid: #0b1326;
+      --surface2: rgba(255, 255, 255, 0.045);
+      --surface3: rgba(125, 211, 252, 0.055);
+      --text: #edf4ff;
+      --muted: #a8b8d3;
+      --dim: #6b7f9f;
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --accent3: #fb7185;
+      --gold: #fbbf24;
+      --green: #4ade80;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.44);
+      --display: "Playfair Display", Georgia, serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --nav-h: 72px;
+      --max-wide: 94vw;
+      --reading: 800px;
+    }
+
+    body.light {
+      --bg: #f4f7ff;
+      --bg2: #eaf2ff;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-solid: #ffffff;
+      --surface2: rgba(15, 40, 80, 0.055);
+      --surface3: rgba(0, 110, 180, 0.07);
+      --text: #12213a;
+      --muted: #536881;
+      --dim: #8091a9;
+      --line: rgba(10, 30, 70, 0.11);
+      --line-strong: rgba(10, 30, 70, 0.18);
+      --accent: #006fa8;
+      --accent2: #5a35c8;
+      --accent3: #b02655;
+      --gold: #946200;
+      --green: #147d3a;
+      --shadow: 0 18px 45px rgba(40, 70, 120, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + 24px);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--serif);
+      color: var(--text);
+      line-height: 1.82;
+      background:
+        radial-gradient(ellipse 70% 45% at 13% 8%, rgba(125, 211, 252, 0.11), transparent 60%),
+        radial-gradient(ellipse 56% 38% at 86% 16%, rgba(167, 139, 250, 0.10), transparent 60%),
+        radial-gradient(ellipse 46% 32% at 52% 88%, rgba(251, 113, 133, 0.055), transparent 65%),
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 54%, var(--bg));
+      background-size: auto, auto, auto, 64px 64px, 64px 64px, auto;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.light {
+      background:
+        radial-gradient(ellipse 70% 45% at 13% 8%, rgba(0, 110, 180, 0.10), transparent 60%),
+        radial-gradient(ellipse 56% 38% at 86% 16%, rgba(90, 53, 200, 0.08), transparent 60%),
+        linear-gradient(rgba(10, 30, 70, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 30, 70, 0.045) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      background-size: auto, auto, 64px 64px, 64px 64px, auto;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 44%, transparent 0 18%, rgba(0,0,0,0.12) 32%, rgba(0,0,0,0.56) 100%),
+        linear-gradient(120deg, rgba(125, 211, 252, 0.045), transparent 30%, rgba(167, 139, 250, 0.045) 72%, transparent);
+    }
+
+    body.light::before {
+      background: linear-gradient(120deg, rgba(0, 110, 180, 0.04), transparent 35%, rgba(90, 53, 200, 0.035) 72%, transparent);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .wide {
+      width: min(1560px, var(--max-wide));
+      margin: 0 auto;
+    }
+
+    .reading {
+      max-width: var(--reading);
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      min-height: var(--nav-h);
+      border-bottom: 1px solid var(--line);
+      background: rgba(3, 7, 18, 0.82);
+      backdrop-filter: blur(18px) saturate(1.25);
+    }
+
+    body.light .nav {
+      background: rgba(244, 247, 255, 0.90);
+    }
+
+    .nav-inner {
+      min-height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.18rem;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: -0.015em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      position: relative;
+      width: 52px;
+      height: 28px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle input {
+      display: none;
+    }
+
+    .theme-pill {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      cursor: pointer;
+    }
+
+    .theme-pill::before {
+      content: "🌙";
+      position: absolute;
+      left: 3px;
+      top: 2px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 0.72rem;
+      transition: transform 0.26s ease;
+    }
+
+    .theme-toggle input:checked + .theme-pill::before {
+      transform: translateX(24px);
+      content: "☀️";
+    }
+
+    .hero {
+      padding: 64px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.84fr) minmax(520px, 1.16fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3.2rem, 7.8vw, 7.5rem);
+      line-height: 0.91;
+      letter-spacing: -0.064em;
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    .hero-sub {
+      color: var(--text);
+      font-size: clamp(1.10rem, 1.7vw, 1.42rem);
+      font-style: italic;
+      line-height: 1.55;
+      margin-bottom: 16px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--accent);
+      background: linear-gradient(90deg, rgba(125, 211, 252, 0.10), transparent);
+      border-radius: 0 18px 18px 0;
+      max-width: 800px;
+    }
+
+    .hero-body {
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.78;
+      max-width: 760px;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .meta-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+    }
+
+    .hero-frame {
+      position: relative;
+      min-height: 560px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(125, 211, 252, 0.16), transparent 18%),
+        radial-gradient(circle at 60% 42%, rgba(167, 139, 250, 0.10), transparent 30%),
+        #050914;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .hero-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 48%, transparent 0 20%, rgba(0,0,0,0.12) 36%, rgba(0,0,0,0.62) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 30%, rgba(0,0,0,0.38));
+      z-index: 2;
+    }
+
+    .hero-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 4;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(5, 9, 20, 0.62);
+      backdrop-filter: blur(14px);
+      padding: 14px 16px;
+      border-radius: 18px;
+      color: #d9e8ff;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.55;
+    }
+
+    .simulation-band {
+      padding: 26px 0 54px;
+    }
+
+    .sim-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(125,211,252,0.12), transparent 28%),
+        radial-gradient(circle at 75% 36%, rgba(167,139,250,0.11), transparent 34%),
+        rgba(2, 6, 16, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .sim-topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(3, 7, 18, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .sim-topbar h2 {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3vw, 2.8rem);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .sim-topbar p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      max-width: 820px;
+    }
+
+    .sim-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .sim-button {
+      border-radius: 999px;
+      border: 1px solid rgba(125,211,252,0.26);
+      background: rgba(125,211,252,0.08);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      padding: 8px 12px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .sim-button:hover {
+      background: rgba(125,211,252,0.15);
+      transform: translateY(-1px);
+    }
+
+    .sim-area {
+      position: relative;
+      min-height: min(780px, 82vh);
+      display: grid;
+      grid-template-columns: 1fr minmax(300px, 360px);
+    }
+
+    #threeBodyCanvas {
+      position: absolute;
+      inset: 0;
+      width: calc(100% - 360px);
+      height: 100%;
+      display: block;
+      background: #020712;
+    }
+
+    .sim-overlay {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      width: min(440px, calc(100% - 420px));
+      z-index: 5;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(4, 9, 22, 0.62);
+      backdrop-filter: blur(16px);
+      padding: 16px;
+      font-family: var(--mono);
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .sim-overlay h3 {
+      color: var(--green);
+      font-size: 0.70rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .telemetry-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.70rem;
+    }
+
+    .telemetry-line:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .telemetry-line strong {
+      color: var(--text);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .sim-panel {
+      position: relative;
+      z-index: 6;
+      grid-column: 2;
+      border-left: 1px solid var(--line);
+      background: rgba(4, 9, 22, 0.74);
+      backdrop-filter: blur(20px) saturate(1.25);
+      padding: 18px;
+      max-height: min(780px, 82vh);
+      overflow: auto;
+    }
+
+    .panel-title {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .control-group {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface2);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .control-group h3 {
+      color: var(--accent2);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .control {
+      margin-bottom: 12px;
+    }
+
+    .control:last-child {
+      margin-bottom: 0;
+    }
+
+    .control label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      margin-bottom: 6px;
+    }
+
+    .control label strong {
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      padding: 7px 0;
+      gap: 12px;
+    }
+
+    .toggle-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+
+    .sim-note {
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.55;
+      margin-top: 12px;
+    }
+
+    .article-section {
+      padding: 18px 0 78px;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.58fr) minmax(0, 800px) minmax(280px, 0.8fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .toc,
+    .scientific-sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 22px);
+    }
+
+    .rail-card {
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .rail-card h3 {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .toc-link {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      line-height: 1.45;
+      display: inline-block;
+      padding-left: 10px;
+      border-left: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .toc-link:hover,
+    .toc-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .elsewhere {
+      display: grid;
+      gap: 10px;
+    }
+
+    .elsewhere a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .elsewhere a:hover {
+      color: var(--accent);
+    }
+
+    .story-header {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-header h2 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.056em;
+      text-wrap: balance;
+      margin-bottom: 16px;
+    }
+
+    .story-header p,
+    .chapter p {
+      color: var(--muted);
+      font-size: 1.065rem;
+      line-height: 1.86;
+      margin-bottom: 18px;
+    }
+
+    .chapter {
+      margin: 44px 0;
+      padding-top: 36px;
+      border-top: 1px solid var(--line);
+    }
+
+    .chapter:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .chapter-kicker {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .chapter h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.03;
+      letter-spacing: -0.046em;
+      margin-bottom: 16px;
+      text-wrap: balance;
+    }
+
+    .chapter h3 {
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin: 26px 0 10px;
+    }
+
+    .pull-quote {
+      margin: 28px 0;
+      padding: 16px 0 16px 20px;
+      border-left: 3px solid var(--accent);
+      color: var(--text);
+      font-style: italic;
+      font-size: 1.18rem;
+      line-height: 1.68;
+    }
+
+    .equation {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .equation-label {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .equation p {
+      font-size: 0.94rem;
+      margin: 10px 0 0;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .concept-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .concept-card strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      margin-bottom: 7px;
+    }
+
+    .concept-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.58;
+    }
+
+    .visual-feature {
+      margin: 28px 0;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .visual-feature img {
+      width: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      background: #040914;
+    }
+
+    .visual-caption {
+      padding: 12px 16px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      line-height: 1.55;
+      border-top: 1px solid var(--line);
+    }
+
+    .glossary-term {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .glossary-term:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .glossary-term strong {
+      display: block;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      margin-bottom: 6px;
+    }
+
+    .glossary-term span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.90rem;
+      line-height: 1.55;
+    }
+
+    .stat-box {
+      display: grid;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: var(--muted);
+    }
+
+    .stat-line:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .stat-line strong {
+      color: var(--text);
+      text-align: right;
+    }
+
+    .related-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .related-card {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .related-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(125,211,252,0.26);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .related-card .tag {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .related-card h4 {
+      font-family: var(--display);
+      font-size: 1.12rem;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+
+    .related-card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .mini-meta {
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      margin-top: 10px;
+    }
+
+    .comments-section {
+      margin-top: 46px;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .comments-section h3 {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .comments-section p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .references {
+      margin-top: 40px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .references h3 {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .references li::before {
+      content: "[" counter(ref) "]";
+      flex-shrink: 0;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+
+    .footer {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(125,211,252,0.08), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(167,139,250,0.08), transparent 28%),
+        #010308;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 42px 0 52px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+    }
+
+    .footer-inner {
+      width: min(1560px, 94vw);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1220px) {
+      .article-grid {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+
+      .scientific-sidebar {
+        grid-column: 1 / -1;
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .scientific-sidebar .rail-card {
+        margin-bottom: 0;
+      }
+
+      .sim-area {
+        grid-template-columns: 1fr;
+      }
+
+      #threeBodyCanvas {
+        position: relative;
+        width: 100%;
+        min-height: 620px;
+        display: block;
+      }
+
+      .sim-panel {
+        grid-column: auto;
+        max-height: none;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .sim-overlay {
+        width: min(440px, calc(100% - 48px));
+      }
+    }
+
+    @media (max-width: 940px) {
+      :root {
+        --max-wide: 92vw;
+      }
+
+      .hero-grid,
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .toc .rail-card {
+        display: none;
+      }
+
+      .scientific-sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-frame,
+      .hero-frame img {
+        min-height: 360px;
+      }
+
+      .sim-topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .sim-actions {
+        justify-content: flex-start;
+      }
+
+      #threeBodyCanvas {
+        min-height: 520px;
+      }
+
+      .sim-overlay {
+        position: static;
+        margin: 14px;
+        width: auto;
+      }
+
+      .concept-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 660px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      h1 {
+        letter-spacing: -0.04em;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-frame,
+      .hero-frame img {
+        min-height: 300px;
+      }
+
+      .sim-shell {
+        border-radius: 20px;
+      }
+
+      #threeBodyCanvas {
+        min-height: 440px;
+      }
+
+      .footer-inner {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner wide">
+      <a href="../../index.html" class="brand">Biswajit <span>Jana</span></a>
+
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../index.html">Blog</a></li>
+        <li><a href="../../index.html#projects">Projects</a></li>
+        <li><a href="../../publications.html">Publications</a></li>
+        <li><a href="../../cv.html">CV</a></li>
+        <li>
+          <label class="theme-toggle" title="Toggle day/night mode">
+            <input type="checkbox" id="themeSwitch" />
+            <span class="theme-pill"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero wide">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Computational physics · Chaos · Interactive lab</div>
+        <h1>The Three-Body Problem: When Gravity Refuses to Behave Politely</h1>
+        <p class="hero-sub">
+          Welcome to three-body dynamics: the part of gravity where the universe looks at your intuition,
+          smiles politely, and throws it into a numerical integrator.
+        </p>
+        <p class="hero-body">
+          Two gravitating bodies are elegant. Three bodies are a negotiation. This feature explains why a
+          simple Newtonian force law can produce chaotic motion, why closed-form answers usually abandon
+          us, and why simulation becomes less of a luxury and more of a survival strategy.
+        </p>
+        <div class="meta-row">
+          <span class="meta-pill">7 May 2026 · Hertford, London, UK</span>
+          <span class="meta-pill">~14 min read</span>
+          <span class="meta-pill">Three.js WebGL simulation</span>
+          <span class="meta-pill">MathJax equations</span>
+        </div>
+      </div>
+
+      <figure class="hero-frame reveal">
+        <img src="../../images/blog6_01_three_body_hero.png"
+             alt="Three glowing star-like bodies with chaotic orbital trails in deep space"
+             onerror="this.onerror=null;this.src='../../images/blog6_02_three_body_banner.png';" />
+        <figcaption class="hero-caption">
+          Visual feature frame — three bodies, mutual gravity, curved trails, and the tiny problem that the future
+          refuses to remain obvious.
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="simulation-band wide" id="simulation">
+    <div class="sim-shell reveal">
+      <div class="sim-topbar">
+        <div>
+          <div class="eyebrow">Live system · WebGL gravity lab</div>
+          <h2>Three bodies, one headache</h2>
+          <p>
+            A browser-friendly Newtonian simulation. Choose a preset, adjust the masses and gravity, add a tiny
+            perturbation, and watch the system punish overconfidence in real time.
+          </p>
+        </div>
+
+        <div class="sim-actions">
+          <button class="sim-button" data-preset="triangle">Triangle</button>
+          <button class="sim-button" data-preset="figure8">Figure-eight</button>
+          <button class="sim-button" data-preset="binary">Binary + intruder</button>
+          <button class="sim-button" data-preset="slingshot">Slingshot</button>
+          <button class="sim-button" id="pauseSim">Pause</button>
+          <button class="sim-button" id="resetSim">Reset</button>
+        </div>
+      </div>
+
+      <div class="sim-area">
+        <canvas id="threeBodyCanvas" aria-label="Interactive Three.js simulation of the three-body problem"></canvas>
+
+        <div class="sim-overlay" id="simTelemetry">
+          <h3>Real-time data feed</h3>
+          <div class="telemetry-line"><span>System energy</span><strong id="energyOut">--</strong></div>
+          <div class="telemetry-line"><span>Angular momentum</span><strong id="angMomOut">--</strong></div>
+          <div class="telemetry-line"><span>Closest pair</span><strong id="closestOut">--</strong></div>
+          <div class="telemetry-line"><span>Integrator</span><strong>Velocity-Verlet</strong></div>
+          <div class="telemetry-line"><span>Approx. FPS</span><strong id="fpsOut">--</strong></div>
+        </div>
+
+        <aside class="sim-panel" aria-label="Three-body simulation controls">
+          <div class="panel-title">Command Center</div>
+
+          <div class="control-group">
+            <h3>Physics</h3>
+            <div class="control">
+              <label><span>Gravity strength</span><strong id="gOut">1.00</strong></label>
+              <input id="gravity" type="range" min="0.20" max="2.50" step="0.01" value="1.00" />
+            </div>
+            <div class="control">
+              <label><span>Time scale</span><strong id="timeOut">1.00</strong></label>
+              <input id="timeScale" type="range" min="0.10" max="3.00" step="0.01" value="1.00" />
+            </div>
+            <div class="control">
+              <label><span>Softening length</span><strong id="softOut">0.035</strong></label>
+              <input id="softening" type="range" min="0.005" max="0.160" step="0.001" value="0.035" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Masses</h3>
+            <div class="control">
+              <label><span>Body A mass</span><strong id="m1Out">1.00</strong></label>
+              <input id="m1" type="range" min="0.20" max="3.00" step="0.01" value="1.00" />
+            </div>
+            <div class="control">
+              <label><span>Body B mass</span><strong id="m2Out">1.00</strong></label>
+              <input id="m2" type="range" min="0.20" max="3.00" step="0.01" value="1.00" />
+            </div>
+            <div class="control">
+              <label><span>Body C mass</span><strong id="m3Out">1.00</strong></label>
+              <input id="m3" type="range" min="0.20" max="3.00" step="0.01" value="1.00" />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Chaos controls</h3>
+            <div class="control">
+              <label><span>Tiny perturbation</span><strong id="kickOut">0.000</strong></label>
+              <input id="kick" type="range" min="0.000" max="0.060" step="0.001" value="0.000" />
+            </div>
+            <div class="control">
+              <label><span>Trail memory</span><strong id="trailOut">760</strong></label>
+              <input id="trailLength" type="range" min="180" max="1600" step="10" value="760" />
+            </div>
+            <div class="toggle-row">
+              <span>Lock centre of mass</span>
+              <input id="lockCOM" type="checkbox" checked />
+            </div>
+            <div class="toggle-row">
+              <span>Show phase-space ghost</span>
+              <input id="showGhost" type="checkbox" checked />
+            </div>
+          </div>
+
+          <p class="sim-note">
+            Scientific honesty: this is a qualitative educational renderer, not a high-precision celestial mechanics
+            package. The point is to see sensitivity, not to publish ephemerides and annoy mission planners.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-section wide">
+    <div class="article-grid">
+      <aside class="toc">
+        <div class="rail-card">
+          <h3>Navigation Map</h3>
+          <ul class="toc-list">
+            <li><a class="toc-link" href="#opening">Opening</a></li>
+            <li><a class="toc-link" href="#newtonian">Newtonian Setup</a></li>
+            <li><a class="toc-link" href="#chaos">Why Chaos Appears</a></li>
+            <li><a class="toc-link" href="#numerical">Numerical Methods</a></li>
+            <li><a class="toc-link" href="#astrophysics">Real Astrophysics</a></li>
+            <li><a class="toc-link" href="#honesty">Simulation Honesty</a></li>
+            <li><a class="toc-link" href="#comments">Comments</a></li>
+          </ul>
+        </div>
+
+        <div class="rail-card">
+          <h3>Elsewhere</h3>
+          <div class="elsewhere">
+            <a href="../index.html"><span>All blog posts</span><span>↗</span></a>
+            <a href="../../index.html#projects"><span>Projects</span><span>↗</span></a>
+            <a href="../../publications.html"><span>Posters / Seminars</span><span>↗</span></a>
+            <a href="../../cv.html"><span>CV</span><span>↗</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="story">
+        <header class="story-header reveal" id="opening">
+          <div class="eyebrow">Feature essay · Computational gravity</div>
+          <h2>The problem is not that Newton’s law is ugly. The problem is that it is too honest.</h2>
+          <p>
+            The three-body problem is one of those physics problems that sounds like it should be a tidy extension of
+            something already solved. Two bodies orbit each other. Add one more. How bad can it be? Apparently bad enough
+            that the universe decided to invent chaos before we invented the word.
+          </p>
+        </header>
+
+        <article>
+          <section class="chapter reveal">
+            <div class="chapter-kicker">Chapter 01 · The trap</div>
+            <h2>Why three bodies are annoying in the best possible way</h2>
+            <p>
+              In physics, some problems look innocent until you actually try to solve them. The three-body problem is one
+              of those. Put two massive bodies in empty space and Newton gives you beautiful conic sections: circles,
+              ellipses, parabolas, hyperbolas. Add a third body and suddenly the universe stops behaving like it is trying
+              to help with your homework.
+            </p>
+            <p>
+              The issue is not that Newton’s law fails. The issue is that it works too well. Every body pulls on every
+              other body at the same time. Each object changes the gravitational field that changes the motion of the
+              others, which then changes the field again. It is feedback, but written in gravity instead of electronics.
+            </p>
+
+            <div class="pull-quote">
+              The three-body problem is not difficult because the force law is complicated. It is difficult because the
+              consequences are.
+            </div>
+
+            <p>
+              That is the part I find beautiful. A simple rule can create behaviour that feels almost alive. Not alive in
+              the biological sense, obviously — the bodies are not making decisions. But their motion has enough structure,
+              instability, and surprise that it starts to feel less like a clockwork machine and more like a conversation
+              where everyone interrupts everyone else.
+            </p>
+          </section>
+
+          <section class="chapter reveal" id="newtonian">
+            <div class="chapter-kicker">Chapter 02 · Newtonian formulation</div>
+            <h2>The equation is simple. The behaviour is not.</h2>
+            <p>
+              For three point masses, the acceleration of each body is calculated by summing the gravitational pull from
+              the other two. In vector form, body \(i\) feels an acceleration:
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Newtonian N-body acceleration</div>
+              \[
+                \mathbf{a}_i
+                =
+                G\sum_{j\neq i}
+                m_j
+                \frac{\mathbf{r}_j-\mathbf{r}_i}
+                {\left(\left|\mathbf{r}_j-\mathbf{r}_i\right|^2+\epsilon^2\right)^{3/2}}
+              \]
+              <p>
+                Here \(\mathbf{r}_i\) is the position of body \(i\), \(m_j\) is the mass of body \(j\), \(G\) is the
+                gravitational constant, and \(\epsilon\) is a small softening length used in the browser simulation to
+                avoid numerical explosions during extremely close encounters.
+              </p>
+            </div>
+
+            <p>
+              This single expression hides the reason the problem becomes hard. Body A pulls B and C. Body B pulls A and
+              C. Body C pulls A and B. No object gets to move in a fixed gravitational field, because the field itself is
+              changing as all three objects move. The problem is coupled from the beginning.
+            </p>
+
+            <div class="concept-grid">
+              <div class="concept-card">
+                <strong>Two bodies</strong>
+                <span>Reduced to one effective body moving in a central potential. The maths is almost suspiciously elegant.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Three bodies</strong>
+                <span>No general closed-form solution. The system usually demands numerical integration, patience, and snacks.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Conserved quantities</strong>
+                <span>Total energy, momentum, and angular momentum still matter. They help, but they do not magically solve the motion.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Close encounters</strong>
+                <span>Small separations produce huge accelerations. This is where your time step starts quietly judging you.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="chapter reveal" id="chaos">
+            <div class="chapter-kicker">Chapter 03 · Chaos</div>
+            <h2>Sensitive dependence: the universe’s passive-aggressive footnote</h2>
+            <p>
+              Chaos does not mean random. This is important. A chaotic system can be fully deterministic and still become
+              practically unpredictable. If you know the exact initial conditions with infinite precision, the equations
+              determine the future. Unfortunately, real measurements do not come with infinite precision, because reality
+              is not a generous lab demonstrator.
+            </p>
+            <p>
+              In a chaotic three-body system, two nearly identical starting states can remain close for a while and then
+              diverge dramatically. The small difference is stretched by the dynamics. A body that almost gets ejected may
+              stay bound. A stable-looking configuration may become unstable. A tiny velocity kick can decide whether the
+              system behaves politely or starts throwing stars out like bad guests.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Exponential divergence, conceptually</div>
+              \[
+                \left|\delta \mathbf{x}(t)\right|
+                \approx
+                \left|\delta \mathbf{x}(0)\right|e^{\lambda t}
+              \]
+              <p>
+                The quantity \(\lambda\) is related to the Lyapunov exponent. If \(\lambda > 0\), nearby trajectories
+                separate exponentially for some interval. Translation: the system remembers your tiny error and makes it
+                everyone’s problem later.
+              </p>
+            </div>
+
+            <p>
+              This is why the phrase “we just need better initial conditions” is both true and not enough. Better
+              measurements extend the prediction window, but chaos can still limit long-term predictability. That does
+              not make the science useless. It tells us what kind of claim we are allowed to make.
+            </p>
+
+            <div class="visual-feature">
+              <img src="../../images/blog6_02_three_body_banner.png"
+                   alt="Chaotic curved trails from a three-body gravitational simulation"
+                   onerror="this.onerror=null;this.src='../../images/blog6_01_three_body_hero.png';" />
+              <div class="visual-caption">
+                Visual feature frame · Three bodies can remain bound, exchange energy, form temporary binaries, or eject one member.
+                The awkward part is that the initial conditions decide which story happens.
+              </div>
+            </div>
+          </section>
+
+          <section class="chapter reveal" id="numerical">
+            <div class="chapter-kicker">Chapter 04 · Numerical methods</div>
+            <h2>How a computer follows the motion without pretending to be a prophet</h2>
+            <p>
+              A browser simulation like the one above does not solve the three-body problem in some magical final sense.
+              It repeatedly estimates gravitational accelerations, updates velocities, then updates positions. That is
+              numerical integration: a controlled sequence of approximations.
+            </p>
+            <p>
+              In the simulation here, I use a velocity-Verlet style update. It is simple enough for a web page, but behaves
+              better than the most naive Euler method because it treats position and velocity updates more symmetrically.
+              For an educational visual, that is a sensible compromise: clear, fast, and not too embarrassing in front of
+              people who know what symplectic means.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Velocity-Verlet position update</div>
+              \[
+                \mathbf{r}(t+\Delta t)
+                \approx
+                \mathbf{r}(t)
+                +
+                \mathbf{v}(t)\Delta t
+                +
+                \frac{1}{2}\mathbf{a}(t)\Delta t^2
+              \]
+              <p>
+                After updating position, the acceleration is recalculated using the new positions.
+              </p>
+            </div>
+
+            <div class="equation">
+              <div class="equation-label">Velocity update</div>
+              \[
+                \mathbf{v}(t+\Delta t)
+                \approx
+                \mathbf{v}(t)
+                +
+                \frac{1}{2}
+                \left[\mathbf{a}(t)+\mathbf{a}(t+\Delta t)\right]\Delta t
+              \]
+              <p>
+                This still remains an approximation, so energy will not be perfectly conserved, especially if the time
+                step is too large or two bodies pass extremely close. That is not gravity failing. That is your browser
+                trying to solve celestial mechanics while also keeping fifteen tabs open.
+              </p>
+            </div>
+
+            <p>
+              In research-grade celestial mechanics, integrator choice matters deeply. Symplectic integrators, adaptive
+              time steps, regularisation schemes, and high-order methods all exist because the universe has no obligation
+              to make your numerical life convenient. But even a simplified simulation can teach the core lesson: local
+              rules, global complexity.
+            </p>
+          </section>
+
+          <section class="chapter reveal" id="astrophysics">
+            <div class="chapter-kicker">Chapter 05 · Real astrophysics</div>
+            <h2>This is not just a toy problem. Space actually does this.</h2>
+            <p>
+              The three-body problem appears across astrophysics. Triple-star systems, star clusters, planet–moon–star
+              interactions, compact-object encounters, and galaxy-scale gravitational interactions all contain the same
+              basic idea: several gravitating objects exchange energy and angular momentum over time.
+            </p>
+            <p>
+              In star clusters, repeated few-body encounters can harden binaries or eject stars. In planetary systems, an
+              additional massive planet can destabilise or reshape orbits. In compact-object dynamics, three-body
+              interactions can help form close binaries that later become gravitational-wave sources. In other words, the
+              three-body problem is not an abstract mathematical inconvenience. It is one of the universe’s favourite
+              ways of rearranging furniture.
+            </p>
+
+            <div class="concept-grid">
+              <div class="concept-card">
+                <strong>Triple stars</strong>
+                <span>Hierarchical triples can remain stable, but only if the configuration keeps one orbit much wider than the other.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Planetary systems</strong>
+                <span>Resonances and perturbations can stabilise or destabilise planets over long timescales.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Star clusters</strong>
+                <span>Close encounters transfer energy and can eject bodies at high speed.</span>
+              </div>
+              <div class="concept-card">
+                <strong>Compact objects</strong>
+                <span>Black holes and neutron stars can form tight binaries through dynamical interactions.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="chapter reveal" id="honesty">
+            <div class="chapter-kicker">Chapter 06 · Simulation honesty</div>
+            <h2>What the interactive lab is actually showing</h2>
+            <p>
+              The simulation above is designed to be educational, cinematic, and computationally honest enough for a blog
+              post. It is not a precision orbital dynamics code. It uses softened Newtonian gravity, a finite time step,
+              and a visual scale chosen for readability. The bodies are rendered as glowing spheres because glowing
+              spheres look better than three small dots pretending to be educational.
+            </p>
+            <p>
+              The important thing is the qualitative behaviour. The trails show sensitivity. The centre-of-mass lock makes
+              the system easier to read. The perturbation slider demonstrates how tiny changes can change the future. The
+              presets are not claims of exact astrophysical systems; they are visual experiments.
+            </p>
+
+            <div class="pull-quote">
+              The simulation is not the truth. It is a controlled lie designed to reveal the part of the truth your eyes
+              can follow.
+            </div>
+
+            <p>
+              That, to me, is what makes computational physics beautiful. It does not replace theory or observation. It
+              gives you a way to watch an idea move.
+            </p>
+          </section>
+
+          <section class="references reveal">
+            <h3>References & further reading</h3>
+            <ol>
+              <li>Newton, I. (1687). <em>Philosophiæ Naturalis Principia Mathematica</em>.</li>
+              <li>Poincaré, H. (1890). Sur le problème des trois corps et les équations de la dynamique.</li>
+              <li>Valtonen, M. and Karttunen, H. (2006). <em>The Three-Body Problem</em>. Cambridge University Press.</li>
+              <li>Heggie, D. and Hut, P. (2003). <em>The Gravitational Million-Body Problem</em>. Cambridge University Press.</li>
+              <li>Hairer, E., Lubich, C. and Wanner, G. (2006). <em>Geometric Numerical Integration</em>. Springer.</li>
+            </ol>
+          </section>
+
+          <section class="comments-section reveal" id="comments">
+            <h3>Comments &amp; reactions</h3>
+            <p>
+              Comments are powered by GitHub Discussions via giscus. Leave a question, correction, or a mildly chaotic thought.
+            </p>
+            <script src="https://giscus.app/client.js"
+                    data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                    data-repo-id="R_kgDOST2kXQ"
+                    data-category="General"
+                    data-category-id="DIC_kwDOST2kXc4C8UVe"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+          </section>
+        </article>
+      </main>
+
+      <aside class="scientific-sidebar">
+        <div class="rail-card">
+          <h3>Glossary, but less boring</h3>
+          <div class="glossary-term">
+            <strong>Three-body problem</strong>
+            <span>Three masses pulling on each other until your analytic solution quietly leaves the room.</span>
+          </div>
+          <div class="glossary-term">
+            <strong>Chaos</strong>
+            <span>Deterministic behaviour with trust issues. Not random, just extremely petty about initial conditions.</span>
+          </div>
+          <div class="glossary-term">
+            <strong>Integrator</strong>
+            <span>The numerical babysitter that moves the bodies forward one tiny time step at a time.</span>
+          </div>
+          <div class="glossary-term">
+            <strong>Softening</strong>
+            <span>A small mathematical cushion so close encounters do not turn your browser into a space heater.</span>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>System Telemetry</h3>
+          <div class="stat-box">
+            <div class="stat-line"><span>Object</span><strong>Three-Body Problem</strong></div>
+            <div class="stat-line"><span>Status</span><strong>Extreme</strong></div>
+            <div class="stat-line"><span>Observer</span><strong>Biswajit Jana</strong></div>
+            <div class="stat-line"><span>Mode</span><strong>Computational Physics</strong></div>
+            <div class="stat-line"><span>Warning</span><strong>Common sense not included</strong></div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>Related Labs</h3>
+          <div class="related-list">
+            <a class="related-card" href="black-hole-extreme-lab.html">
+              <div class="tag">Relativity lab</div>
+              <h4>Black Holes: What Happens When Gravity Wins?</h4>
+              <p>Event horizons, accretion disks, time dilation, and a visual lab for gravitational drama.</p>
+              <div class="mini-meta">Gravity · Relativity</div>
+            </a>
+
+            <a class="related-card" href="radial-velocity-method.html">
+              <div class="tag">Detection method</div>
+              <h4>The Radial Velocity Method</h4>
+              <p>Finding planets by watching stars panic slightly in wavelength space.</p>
+              <div class="mini-meta">Exoplanets · Spectroscopy</div>
+            </a>
+
+            <a class="related-card" href="noise-and-discovery.html">
+              <div class="tag">Scientific computing</div>
+              <h4>Noise: The Thing Between You and a Discovery</h4>
+              <p>The difference between a signal and wishful thinking, with fewer inspirational posters.</p>
+              <div class="mini-meta">Data · Uncertainty</div>
+            </a>
+
+            <a class="related-card" href="spectra-confession.html">
+              <div class="tag">Light analysis</div>
+              <h4>Spectra: How Light Becomes a Confession</h4>
+              <p>Composition, temperature, velocity, and the fact that light is terrible at keeping secrets.</p>
+              <div class="mini-meta">Spectroscopy · Astrophysics</div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics &amp; Instrumentation Lab.</div>
+      <div class="footer-links">
+        <a href="../../index.html">Home Page</a>
+        <a href="../../publications.html">Visual Archive / Posters / Seminars</a>
+        <a href="../index.html">Blog</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const themeSwitch = document.getElementById("themeSwitch");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+      themeSwitch.checked = true;
+    }
+
+    themeSwitch.addEventListener("change", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+
+    const revealEls = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+
+    const tocLinks = Array.from(document.querySelectorAll(".toc-link"));
+    const sectionIds = tocLinks.map(link => link.getAttribute("href")).filter(Boolean);
+    const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      tocLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + visible.target.id);
+      });
+    }, { rootMargin: "-18% 0px -62% 0px", threshold: [0.1, 0.2, 0.4, 0.6] });
+
+    sections.forEach(section => tocObserver.observe(section));
+  </script>
+
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+    import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+    import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+    import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+
+    const canvas = document.getElementById("threeBodyCanvas");
+
+    const params = {
+      gravity: 1.0,
+      timeScale: 1.0,
+      softening: 0.035,
+      masses: [1.0, 1.0, 1.0],
+      kick: 0.0,
+      trailLength: 760,
+      lockCOM: true,
+      showGhost: true,
+      paused: false,
+      preset: "triangle"
+    };
+
+    const state = {
+      renderer: null,
+      scene: null,
+      camera: null,
+      controls: null,
+      composer: null,
+      bloom: null,
+      bodies: [],
+      bodyMeshes: [],
+      ghostMeshes: [],
+      trailLines: [],
+      trailData: [[], [], []],
+      clock: null,
+      fps: 60,
+      timeAccumulator: 0,
+      initialized: false
+    };
+
+    const colours = [0x7dd3fc, 0xa78bfa, 0xfb7185];
+    const trailColours = [0x7dd3fc, 0xa78bfa, 0xfb7185];
+
+    const ui = {
+      gravity: document.getElementById("gravity"),
+      timeScale: document.getElementById("timeScale"),
+      softening: document.getElementById("softening"),
+      m1: document.getElementById("m1"),
+      m2: document.getElementById("m2"),
+      m3: document.getElementById("m3"),
+      kick: document.getElementById("kick"),
+      trailLength: document.getElementById("trailLength"),
+      lockCOM: document.getElementById("lockCOM"),
+      showGhost: document.getElementById("showGhost"),
+      gOut: document.getElementById("gOut"),
+      timeOut: document.getElementById("timeOut"),
+      softOut: document.getElementById("softOut"),
+      m1Out: document.getElementById("m1Out"),
+      m2Out: document.getElementById("m2Out"),
+      m3Out: document.getElementById("m3Out"),
+      kickOut: document.getElementById("kickOut"),
+      trailOut: document.getElementById("trailOut"),
+      energyOut: document.getElementById("energyOut"),
+      angMomOut: document.getElementById("angMomOut"),
+      closestOut: document.getElementById("closestOut"),
+      fpsOut: document.getElementById("fpsOut"),
+      pauseSim: document.getElementById("pauseSim"),
+      resetSim: document.getElementById("resetSim")
+    };
+
+    function updateLabels() {
+      ui.gOut.textContent = params.gravity.toFixed(2);
+      ui.timeOut.textContent = params.timeScale.toFixed(2);
+      ui.softOut.textContent = params.softening.toFixed(3);
+      ui.m1Out.textContent = params.masses[0].toFixed(2);
+      ui.m2Out.textContent = params.masses[1].toFixed(2);
+      ui.m3Out.textContent = params.masses[2].toFixed(2);
+      ui.kickOut.textContent = params.kick.toFixed(3);
+      ui.trailOut.textContent = String(params.trailLength);
+    }
+
+    function syncInputs() {
+      ui.gravity.value = params.gravity;
+      ui.timeScale.value = params.timeScale;
+      ui.softening.value = params.softening;
+      ui.m1.value = params.masses[0];
+      ui.m2.value = params.masses[1];
+      ui.m3.value = params.masses[2];
+      ui.kick.value = params.kick;
+      ui.trailLength.value = params.trailLength;
+      ui.lockCOM.checked = params.lockCOM;
+      ui.showGhost.checked = params.showGhost;
+      updateLabels();
+    }
+
+    function attachUI() {
+      ui.gravity.addEventListener("input", () => { params.gravity = Number(ui.gravity.value); updateLabels(); });
+      ui.timeScale.addEventListener("input", () => { params.timeScale = Number(ui.timeScale.value); updateLabels(); });
+      ui.softening.addEventListener("input", () => { params.softening = Number(ui.softening.value); updateLabels(); });
+      ui.m1.addEventListener("input", () => { params.masses[0] = Number(ui.m1.value); updateLabels(); applyMassVisuals(); });
+      ui.m2.addEventListener("input", () => { params.masses[1] = Number(ui.m2.value); updateLabels(); applyMassVisuals(); });
+      ui.m3.addEventListener("input", () => { params.masses[2] = Number(ui.m3.value); updateLabels(); applyMassVisuals(); });
+      ui.kick.addEventListener("input", () => { params.kick = Number(ui.kick.value); updateLabels(); });
+      ui.trailLength.addEventListener("input", () => { params.trailLength = Number(ui.trailLength.value); updateLabels(); trimTrails(); });
+      ui.lockCOM.addEventListener("change", () => { params.lockCOM = ui.lockCOM.checked; });
+      ui.showGhost.addEventListener("change", () => { params.showGhost = ui.showGhost.checked; setGhostVisibility(); });
+
+      ui.pauseSim.addEventListener("click", () => {
+        params.paused = !params.paused;
+        ui.pauseSim.textContent = params.paused ? "Resume" : "Pause";
+      });
+
+      ui.resetSim.addEventListener("click", () => resetPreset(params.preset));
+
+      document.querySelectorAll("[data-preset]").forEach(btn => {
+        btn.addEventListener("click", () => resetPreset(btn.dataset.preset));
+      });
+    }
+
+    function initThree() {
+      if (state.initialized) return;
+
+      state.scene = new THREE.Scene();
+      state.scene.fog = new THREE.FogExp2(0x030712, 0.018);
+
+      state.camera = new THREE.PerspectiveCamera(48, 1, 0.01, 200);
+      state.camera.position.set(0, 4.6, 10.5);
+      state.camera.lookAt(0, 0, 0);
+
+      state.renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance"
+      });
+
+      state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+      state.renderer.setClearColor(0x020712, 1);
+      state.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      state.renderer.toneMappingExposure = 0.85;
+
+      state.controls = new OrbitControls(state.camera, state.renderer.domElement);
+      state.controls.enableDamping = true;
+      state.controls.dampingFactor = 0.06;
+      state.controls.minDistance = 4.5;
+      state.controls.maxDistance = 28;
+      state.controls.autoRotate = true;
+      state.controls.autoRotateSpeed = 0.18;
+
+      state.bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.48, 0.65, 0.58);
+      state.composer = new EffectComposer(state.renderer);
+      state.composer.addPass(new RenderPass(state.scene, state.camera));
+      state.composer.addPass(state.bloom);
+      state.composer.addPass(new OutputPass());
+
+      state.clock = new THREE.Clock();
+
+      buildScene();
+      resetPreset("triangle");
+      resizeRenderer();
+      window.addEventListener("resize", resizeRenderer, { passive: true });
+
+      state.initialized = true;
+      animate();
+    }
+
+    function buildScene() {
+      const ambient = new THREE.AmbientLight(0x425068, 0.48);
+      state.scene.add(ambient);
+
+      const key = new THREE.PointLight(0x7dd3fc, 2.2, 30);
+      key.position.set(0, 4, 6);
+      state.scene.add(key);
+
+      const fill = new THREE.PointLight(0xfb7185, 1.8, 26);
+      fill.position.set(-4, -2, -5);
+      state.scene.add(fill);
+
+      const stars = makeStarfield(2200);
+      state.scene.add(stars);
+
+      const grid = new THREE.GridHelper(18, 36, 0x1a3552, 0x0d1c33);
+      grid.position.y = -1.8;
+      grid.material.transparent = true;
+      grid.material.opacity = 0.28;
+      state.scene.add(grid);
+
+      for (let i = 0; i < 3; i++) {
+        const bodyMat = new THREE.MeshStandardMaterial({
+          color: colours[i],
+          emissive: colours[i],
+          emissiveIntensity: 1.25,
+          roughness: 0.35,
+          metalness: 0.15
+        });
+
+        const bodyGeo = new THREE.SphereGeometry(0.20, 48, 32);
+        const mesh = new THREE.Mesh(bodyGeo, bodyMat);
+        mesh.userData.baseScale = 1.0;
+        state.scene.add(mesh);
+        state.bodyMeshes.push(mesh);
+
+        const glowGeo = new THREE.SphereGeometry(0.38, 48, 32);
+        const glowMat = new THREE.MeshBasicMaterial({
+          color: colours[i],
+          transparent: true,
+          opacity: 0.10,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const glow = new THREE.Mesh(glowGeo, glowMat);
+        mesh.add(glow);
+
+        const ghostGeo = new THREE.SphereGeometry(0.10, 24, 16);
+        const ghostMat = new THREE.MeshBasicMaterial({
+          color: colours[i],
+          transparent: true,
+          opacity: 0.22,
+          blending: THREE.AdditiveBlending
+        });
+        const ghost = new THREE.Mesh(ghostGeo, ghostMat);
+        state.scene.add(ghost);
+        state.ghostMeshes.push(ghost);
+
+        const trailMat = new THREE.LineBasicMaterial({
+          color: trailColours[i],
+          transparent: true,
+          opacity: 0.86,
+          blending: THREE.AdditiveBlending
+        });
+
+        const trailGeo = new THREE.BufferGeometry();
+        trailGeo.setAttribute("position", new THREE.Float32BufferAttribute(new Float32Array(params.trailLength * 3), 3));
+        const trailLine = new THREE.Line(trailGeo, trailMat);
+        state.scene.add(trailLine);
+        state.trailLines.push(trailLine);
+      }
+    }
+
+    function makeStarfield(count) {
+      const positions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+
+      for (let i = 0; i < count; i++) {
+        const radius = 25 + Math.random() * 55;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        positions[i * 3 + 0] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3 + 1] = radius * Math.cos(phi);
+        positions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+
+        const cool = Math.random();
+        colors[i * 3 + 0] = cool > 0.55 ? 0.95 : 0.55;
+        colors[i * 3 + 1] = cool > 0.55 ? 0.88 : 0.76;
+        colors[i * 3 + 2] = cool > 0.55 ? 0.72 : 1.00;
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+      const mat = new THREE.PointsMaterial({
+        size: 0.045,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.78,
+        depthWrite: false
+      });
+
+      return new THREE.Points(geo, mat);
+    }
+
+    function resetPreset(name) {
+      params.preset = name;
+      state.trailData = [[], [], []];
+
+      const presets = {
+        triangle: [
+          { m: params.masses[0], r: [-1.35, 0.22, 0], v: [0.12, 0.52 + params.kick, 0.03] },
+          { m: params.masses[1], r: [1.35, 0.22, 0], v: [0.12, -0.52, -0.03] },
+          { m: params.masses[2], r: [0, -1.48, 0], v: [-0.24, 0.00, 0.00] }
+        ],
+        figure8: [
+          { m: params.masses[0], r: [-0.97000436, 0.24308753, 0], v: [0.4662036850, 0.4323657300 + params.kick, 0] },
+          { m: params.masses[1], r: [0.97000436, -0.24308753, 0], v: [0.4662036850, 0.4323657300, 0] },
+          { m: params.masses[2], r: [0, 0, 0], v: [-0.93240737, -0.86473146, 0] }
+        ],
+        binary: [
+          { m: params.masses[0], r: [-0.85, 0, 0], v: [0, 0.78 + params.kick, 0] },
+          { m: params.masses[1], r: [0.85, 0, 0], v: [0, -0.78, 0] },
+          { m: params.masses[2], r: [0.12, 3.2, 0], v: [0.62, -0.34, 0] }
+        ],
+        slingshot: [
+          { m: params.masses[0], r: [-0.92, -0.18, 0], v: [0.05, 0.82, 0] },
+          { m: params.masses[1], r: [0.92, 0.18, 0], v: [0.05, -0.82, 0] },
+          { m: params.masses[2], r: [-3.4, 1.75, 0], v: [1.18, -0.30 + params.kick, 0] }
+        ]
+      };
+
+      state.bodies = presets[name] ? presets[name].map(cloneBody) : presets.triangle.map(cloneBody);
+
+      removeCOMDrift();
+      applyMassVisuals();
+      updateTrails(true);
+      updateMeshes();
+      updateLabels();
+    }
+
+    function cloneBody(b) {
+      return {
+        m: b.m,
+        r: new THREE.Vector3(b.r[0], b.r[1], b.r[2]),
+        v: new THREE.Vector3(b.v[0], b.v[1], b.v[2]),
+        a: new THREE.Vector3()
+      };
+    }
+
+    function applyMassVisuals() {
+      if (!state.bodyMeshes.length || !state.bodies.length) return;
+      for (let i = 0; i < 3; i++) {
+        state.bodies[i].m = params.masses[i];
+        const s = 0.75 + Math.pow(params.masses[i], 0.38) * 0.62;
+        state.bodyMeshes[i].scale.setScalar(s);
+      }
+    }
+
+    function setGhostVisibility() {
+      state.ghostMeshes.forEach(g => g.visible = params.showGhost);
+    }
+
+    function removeCOMDrift() {
+      if (!state.bodies.length) return;
+      const totalMass = state.bodies.reduce((s, b) => s + b.m, 0);
+      const com = new THREE.Vector3();
+      const cov = new THREE.Vector3();
+
+      state.bodies.forEach(b => {
+        com.addScaledVector(b.r, b.m);
+        cov.addScaledVector(b.v, b.m);
+      });
+
+      com.divideScalar(totalMass);
+      cov.divideScalar(totalMass);
+
+      state.bodies.forEach(b => {
+        b.r.sub(com);
+        b.v.sub(cov);
+      });
+    }
+
+    function computeAccelerations(bodies) {
+      bodies.forEach(b => b.a.set(0, 0, 0));
+
+      for (let i = 0; i < bodies.length; i++) {
+        for (let j = i + 1; j < bodies.length; j++) {
+          const bi = bodies[i];
+          const bj = bodies[j];
+
+          const delta = new THREE.Vector3().subVectors(bj.r, bi.r);
+          const dist2 = delta.lengthSq() + params.softening * params.softening;
+          const invDist3 = 1 / Math.pow(dist2, 1.5);
+          const factor = params.gravity * invDist3;
+
+          bi.a.addScaledVector(delta, factor * bj.m);
+          bj.a.addScaledVector(delta, -factor * bi.m);
+        }
+      }
+    }
+
+    function integrate(dt) {
+      const bodies = state.bodies;
+      if (!bodies.length) return;
+
+      computeAccelerations(bodies);
+
+      const oldA = bodies.map(b => b.a.clone());
+
+      bodies.forEach((b, i) => {
+        b.r.addScaledVector(b.v, dt);
+        b.r.addScaledVector(oldA[i], 0.5 * dt * dt);
+      });
+
+      computeAccelerations(bodies);
+
+      bodies.forEach((b, i) => {
+        const avgA = oldA[i].add(b.a).multiplyScalar(0.5);
+        b.v.addScaledVector(avgA, dt);
+      });
+
+      if (params.lockCOM) removeCOMDrift();
+    }
+
+    function updateMeshes() {
+      if (!state.bodies.length) return;
+
+      for (let i = 0; i < 3; i++) {
+        const b = state.bodies[i];
+        state.bodyMeshes[i].position.copy(b.r);
+
+        const ghost = state.ghostMeshes[i];
+        ghost.visible = params.showGhost;
+        ghost.position.set(b.r.x, b.r.z * 0.72 - 1.8, -b.r.y);
+      }
+    }
+
+    function updateTrails(force = false) {
+      for (let i = 0; i < 3; i++) {
+        const p = state.bodies[i].r.clone();
+        state.trailData[i].push(p);
+
+        if (state.trailData[i].length > params.trailLength) {
+          state.trailData[i].splice(0, state.trailData[i].length - params.trailLength);
+        }
+
+        const positions = new Float32Array(params.trailLength * 3);
+        const data = state.trailData[i];
+        const offset = Math.max(0, params.trailLength - data.length);
+
+        for (let j = 0; j < data.length; j++) {
+          const idx = (offset + j) * 3;
+          positions[idx] = data[j].x;
+          positions[idx + 1] = data[j].y;
+          positions[idx + 2] = data[j].z;
+        }
+
+        const geo = state.trailLines[i].geometry;
+        geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        geo.setDrawRange(offset, data.length);
+        geo.attributes.position.needsUpdate = true;
+
+        if (force) {
+          geo.computeBoundingSphere();
+        }
+      }
+    }
+
+    function trimTrails() {
+      state.trailData = state.trailData.map(data => data.slice(-params.trailLength));
+      updateTrails(true);
+    }
+
+    function computeDiagnostics() {
+      let kinetic = 0;
+      let potential = 0;
+      let angular = new THREE.Vector3();
+      let closest = Infinity;
+
+      const bodies = state.bodies;
+
+      for (let i = 0; i < bodies.length; i++) {
+        const b = bodies[i];
+        kinetic += 0.5 * b.m * b.v.lengthSq();
+
+        const p = b.r.clone().cross(b.v).multiplyScalar(b.m);
+        angular.add(p);
+
+        for (let j = i + 1; j < bodies.length; j++) {
+          const d = bodies[i].r.distanceTo(bodies[j].r);
+          closest = Math.min(closest, d);
+          potential -= params.gravity * bodies[i].m * bodies[j].m / Math.sqrt(d * d + params.softening * params.softening);
+        }
+      }
+
+      const energy = kinetic + potential;
+      ui.energyOut.textContent = energy.toFixed(3);
+      ui.angMomOut.textContent = angular.length().toFixed(3);
+      ui.closestOut.textContent = closest.toFixed(3);
+      ui.fpsOut.textContent = Math.round(state.fps);
+    }
+
+    function resizeRenderer() {
+      if (!state.renderer) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width));
+      const height = Math.max(1, Math.floor(rect.height));
+
+      state.camera.aspect = width / height;
+      state.camera.updateProjectionMatrix();
+
+      state.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+      state.renderer.setSize(width, height, false);
+      state.composer.setSize(width, height);
+      state.bloom.setSize(width, height);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const rawDt = Math.min(0.035, state.clock.getDelta());
+      state.fps = state.fps * 0.92 + (1 / Math.max(rawDt, 0.0001)) * 0.08;
+
+      if (!params.paused) {
+        const dt = rawDt * params.timeScale;
+        const maxStep = 0.006;
+        let remaining = dt;
+
+        while (remaining > 0) {
+          const step = Math.min(maxStep, remaining);
+          integrate(step);
+          remaining -= step;
+        }
+
+        state.timeAccumulator += dt;
+        if (state.timeAccumulator > 0.018) {
+          updateTrails();
+          state.timeAccumulator = 0;
+        }
+      }
+
+      updateMeshes();
+      computeDiagnostics();
+
+      if (state.controls) {
+        state.controls.update();
+      }
+
+      state.composer.render();
+    }
+
+    attachUI();
+    syncInputs();
+
+    const simObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          initThree();
+          simObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.10 });
+
+    simObserver.observe(document.getElementById("simulation"));
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        if (!state.initialized) initThree();
+      }, 900);
+    });
+  </script>
+</body>
+</html>

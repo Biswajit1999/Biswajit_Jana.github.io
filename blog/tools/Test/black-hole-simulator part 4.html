@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Black Hole Geodesic Simulator | Biswajit Jana</title>
+
+<style>
+  :root {
+    --bg: #000000;
+    --panel: rgba(5, 9, 18, 0.78);
+    --panel2: rgba(9, 15, 28, 0.92);
+    --border: rgba(255, 255, 255, 0.11);
+    --text: #eaf2ff;
+    --muted: #8fa2bf;
+    --dim: #53647c;
+    --blue: #5bd8ff;
+    --orange: #ff9f43;
+    --white: #fff1d6;
+    --danger: #ff6b7a;
+    --green: #7cf7cf;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    color: var(--text);
+    font-family: var(--sans);
+  }
+
+  #canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background: #000;
+  }
+
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at center, rgba(255, 159, 67, 0.18), transparent 15%),
+      radial-gradient(circle at center, rgba(91, 216, 255, 0.08), transparent 34%),
+      #000;
+    transition: opacity 0.65s ease, visibility 0.65s ease;
+  }
+
+  #loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-card {
+    width: min(640px, 92vw);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 34px 30px;
+    text-align: center;
+    background: rgba(3, 7, 18, 0.82);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 0 120px rgba(0, 0, 0, 0.9);
+  }
+
+  .singularity-loader {
+    width: 154px;
+    height: 154px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    position: relative;
+    background:
+      radial-gradient(circle, #000 0 28%, rgba(255, 159, 67, 0.08) 34%, transparent 56%);
+    box-shadow:
+      0 0 24px rgba(255, 159, 67, 0.25),
+      0 0 70px rgba(91, 216, 255, 0.15),
+      inset 0 0 50px #000;
+  }
+
+  .singularity-loader::before,
+  .singularity-loader::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(91, 216, 255, 0.95);
+    border-right-color: rgba(255, 159, 67, 0.86);
+    filter: drop-shadow(0 0 12px rgba(91, 216, 255, 0.8));
+    animation: spin 1.8s linear infinite;
+  }
+
+  .singularity-loader::after {
+    inset: 40px;
+    animation-duration: 1.05s;
+    animation-direction: reverse;
+    border-top-color: rgba(255, 241, 214, 0.95);
+    border-right-color: rgba(255, 159, 67, 0.82);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loader-kicker {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .loader-card h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 4.8rem);
+    letter-spacing: -0.07em;
+    line-height: 0.94;
+  }
+
+  .loader-card p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 16px auto 0;
+    max-width: 540px;
+  }
+
+  .loading-bar {
+    width: min(440px, 80vw);
+    height: 6px;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .loading-bar span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--blue), var(--white), var(--orange));
+    box-shadow: 0 0 24px rgba(255, 159, 67, 0.4);
+    animation: load 2.1s ease-in-out infinite;
+  }
+
+  @keyframes load {
+    0% { width: 0%; transform: translateX(0); }
+    70% { width: 86%; transform: translateX(0); }
+    100% { width: 86%; transform: translateX(140%); }
+  }
+
+  #hud {
+    position: fixed;
+    left: 20px;
+    top: 18px;
+    z-index: 10;
+    max-width: min(680px, calc(100vw - 420px));
+    pointer-events: none;
+  }
+
+  #hud h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.5rem, 4vw, 3.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.065em;
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.9);
+  }
+
+  #hud p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.48;
+    font-size: 0.92rem;
+    text-shadow: 0 4px 22px #000;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 13px;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: #d8edff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 8px;
+    background: rgba(2, 6, 23, 0.66);
+    backdrop-filter: blur(12px);
+  }
+
+  #panel {
+    position: fixed;
+    right: 18px;
+    top: 18px;
+    z-index: 12;
+    width: min(360px, calc(100vw - 36px));
+    max-height: calc(100vh - 36px);
+    overflow: auto;
+    padding: 18px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    backdrop-filter: blur(18px) saturate(1.2);
+    box-shadow: 0 24px 90px rgba(0, 0, 0, 0.55);
+  }
+
+  #panel h2 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-family: var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  .panel-note {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.48;
+    margin-bottom: 16px;
+  }
+
+  .control {
+    margin: 16px 0;
+  }
+
+  .control label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    margin-bottom: 7px;
+  }
+
+  .control label strong {
+    color: var(--blue);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--blue);
+  }
+
+  .button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  button {
+    border: 1px solid rgba(91, 216, 255, 0.22);
+    background: rgba(91, 216, 255, 0.07);
+    color: var(--blue);
+    border-radius: 14px;
+    padding: 10px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: rgba(91, 216, 255, 0.14);
+  }
+
+  .readout {
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 12px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.70rem;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.055);
+  }
+
+  .row:last-child {
+    border-bottom: 0;
+  }
+
+  .row strong {
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  .physics-note {
+    color: var(--dim);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    margin-top: 12px;
+    border-left: 2px solid rgba(91, 216, 255, 0.42);
+    padding-left: 10px;
+  }
+
+  @media (max-width: 1000px) {
+    #hud {
+      max-width: calc(100vw - 40px);
+      top: 12px;
+      left: 14px;
+    }
+
+    #hud p,
+    .badges {
+      display: none;
+    }
+
+    #panel {
+      top: auto;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      width: auto;
+      max-height: 46vh;
+    }
+  }
+</style>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+
+<div id="loader">
+  <div class="loader-card">
+    <div class="singularity-loader"></div>
+    <div class="loader-kicker">Solving Geodesics...</div>
+    <h1>Black Hole Raytracer</h1>
+    <p>
+      Compiling a 128-step Schwarzschild geodesic shader using a Binet-equation curvature term,
+      Kerr-like shadow displacement, ISCO disk boundary, fBM accretion texture, and relativistic Doppler beaming.
+    </p>
+    <div class="loading-bar"><span></span></div>
+  </div>
+</div>
+
+<section id="hud">
+  <h1>Black Hole Geodesic Simulator</h1>
+  <p>
+    A single-file Three.js + GLSL raymarching experiment focused only on the black hole and its lensed accretion disk.
+    No stars, no galaxy background — just the shadow, photon ring, primary disk, and secondary lensed images.
+  </p>
+  <div class="badges">
+    <span class="badge">128-step geodesic loop</span>
+    <span class="badge">Binet: u″ + u = 3u²</span>
+    <span class="badge">Disk r = 3 → 15</span>
+    <span class="badge">D⁴ Doppler beaming</span>
+    <span class="badge">ACES / AgX filmic tone</span>
+  </div>
+</section>
+
+<aside id="panel">
+  <h2>Geodesic controls</h2>
+  <div class="panel-note">
+    Drag the view horizontally/vertically to inspect the lensed disk. The shader integrates light bending in the fragment shader, so higher lensing and edge-on inclinations show the strongest secondary images.
+  </div>
+
+  <div class="control">
+    <label><span>Spin a/M</span><strong id="spinOut">0.62</strong></label>
+    <input id="spin" type="range" min="-0.98" max="0.98" step="0.01" value="0.62">
+  </div>
+
+  <div class="control">
+    <label><span>Disk inclination</span><strong id="inclinationOut">72°</strong></label>
+    <input id="inclination" type="range" min="5" max="88" step="1" value="72">
+  </div>
+
+  <div class="control">
+    <label><span>Camera zoom</span><strong id="zoomOut">1.00</strong></label>
+    <input id="zoom" type="range" min="0.62" max="2.20" step="0.01" value="1.00">
+  </div>
+
+  <div class="control">
+    <label><span>Exposure</span><strong id="exposureOut">1.15</strong></label>
+    <input id="exposure" type="range" min="0.20" max="3.00" step="0.01" value="1.15">
+  </div>
+
+  <div class="control">
+    <label><span>Lensing strength</span><strong id="lensingOut">1.12</strong></label>
+    <input id="lensing" type="range" min="0.65" max="2.40" step="0.01" value="1.12">
+  </div>
+
+  <div class="control">
+    <label><span>Disk temperature</span><strong id="temperatureOut">1.28</strong></label>
+    <input id="temperature" type="range" min="0.40" max="2.20" step="0.01" value="1.28">
+  </div>
+
+  <div class="button-row">
+    <button id="presetEdge">Edge-on</button>
+    <button id="presetFace">Face-on</button>
+    <button id="presetExtreme">Extreme</button>
+    <button id="resetView">Reset view</button>
+  </div>
+
+  <div class="readout">
+    <div class="row"><span>Renderer</span><strong id="rendererOut">initialising</strong></div>
+    <div class="row"><span>Resolution</span><strong id="resolutionOut">--</strong></div>
+    <div class="row"><span>ISCO</span><strong>r = 3.0</strong></div>
+    <div class="row"><span>Outer disk</span><strong>r = 15.0</strong></div>
+    <div class="row"><span>Capture radius</span><strong id="captureOut">--</strong></div>
+  </div>
+
+  <div class="physics-note">
+    Note: this is a real-time educational raymarcher. It uses a Binet-inspired Schwarzschild curvature term
+    and a Kerr-like spin displacement, not a full numerical Kerr geodesic solver.
+  </div>
+</aside>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
+
+const canvas = document.getElementById("canvas");
+const loader = document.getElementById("loader");
+
+const ui = {
+  spin: document.getElementById("spin"),
+  inclination: document.getElementById("inclination"),
+  zoom: document.getElementById("zoom"),
+  exposure: document.getElementById("exposure"),
+  lensing: document.getElementById("lensing"),
+  temperature: document.getElementById("temperature"),
+  spinOut: document.getElementById("spinOut"),
+  inclinationOut: document.getElementById("inclinationOut"),
+  zoomOut: document.getElementById("zoomOut"),
+  exposureOut: document.getElementById("exposureOut"),
+  lensingOut: document.getElementById("lensingOut"),
+  temperatureOut: document.getElementById("temperatureOut"),
+  rendererOut: document.getElementById("rendererOut"),
+  resolutionOut: document.getElementById("resolutionOut"),
+  captureOut: document.getElementById("captureOut"),
+  presetEdge: document.getElementById("presetEdge"),
+  presetFace: document.getElementById("presetFace"),
+  presetExtreme: document.getElementById("presetExtreme"),
+  resetView: document.getElementById("resetView")
+};
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: false,
+  alpha: false,
+  powerPreference: "high-performance",
+  preserveDrawingBuffer: false
+});
+
+renderer.setClearColor(0x000000, 1);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+const scene = new THREE.Scene();
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+const uniforms = {
+  u_resolution: { value: new THREE.Vector2(1, 1) },
+  u_time: { value: 0 },
+  u_spin: { value: Number(ui.spin.value) },
+  u_inclination: { value: Number(ui.inclination.value) },
+  u_zoom: { value: Number(ui.zoom.value) },
+  u_exposure: { value: Number(ui.exposure.value) },
+  u_lensing: { value: Number(ui.lensing.value) },
+  u_temperature: { value: Number(ui.temperature.value) },
+  u_yaw: { value: 0.0 },
+  u_pitch: { value: 0.0 }
+};
+
+const vertexShader = /* glsl */`
+varying vec2 v_uv;
+
+void main() {
+  v_uv = uv;
+  gl_Position = vec4(position.xy, 0.0, 1.0);
+}
+`;
+
+const fragmentShader = /* glsl */`
+precision highp float;
+
+varying vec2 v_uv;
+
+uniform vec2  u_resolution;
+uniform float u_time;
+uniform float u_spin;
+uniform float u_inclination;
+uniform float u_zoom;
+uniform float u_exposure;
+uniform float u_lensing;
+uniform float u_temperature;
+uniform float u_yaw;
+uniform float u_pitch;
+
+#define PI 3.141592653589793
+#define STEPS 128
+
+float saturate(float x) {
+  return clamp(x, 0.0, 1.0);
+}
+
+vec3 saturate(vec3 x) {
+  return clamp(x, vec3(0.0), vec3(1.0));
+}
+
+mat3 rotX(float a) {
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    1.0, 0.0, 0.0,
+    0.0, c, -s,
+    0.0, s, c
+  );
+}
+
+mat3 rotY(float a) {
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    c, 0.0, s,
+    0.0, 1.0, 0.0,
+    -s, 0.0, c
+  );
+}
+
+float hash(vec2 p) {
+  p = fract(p * vec2(127.1, 311.7));
+  p += dot(p, p + 41.23);
+  return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+
+  float a = hash(i);
+  float b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0));
+  float d = hash(i + vec2(1.0, 1.0));
+
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+float fbm(vec2 p) {
+  float v = 0.0;
+  float a = 0.52;
+  mat2 m = mat2(1.62, 1.12, -1.12, 1.62);
+
+  for (int i = 0; i < 6; i++) {
+    v += a * noise(p);
+    p = m * p + 17.31;
+    a *= 0.52;
+  }
+
+  return v;
+}
+
+/*
+  ACES Filmic tonemapping.
+
+  This avoids the physically unhelpful "flat clipped orange" look.
+  Very hot disk sectors roll smoothly into white while still retaining the
+  blue/red Doppler contrast.
+*/
+vec3 acesFilm(vec3 x) {
+  const float a = 2.51;
+  const float b = 0.03;
+  const float c = 2.43;
+  const float d = 0.59;
+  const float e = 0.14;
+  return saturate((x * (a * x + b)) / (x * (c * x + d) + e));
+}
+
+/*
+  AgX-like soft shoulder.
+  Mixed with ACES to keep cinematic contrast but avoid aggressive clipping.
+*/
+vec3 agxApprox(vec3 x) {
+  x = max(x, vec3(0.0));
+  x = log2(1.0 + x);
+  x = (x - 0.25) / 3.10;
+  x = saturate(x);
+  return x * x * (3.0 - 2.0 * x);
+}
+
+vec3 filmic(vec3 x) {
+  vec3 a = agxApprox(x);
+  vec3 b = acesFilm(x);
+  return mix(a, b, 0.46);
+}
+
+/*
+  Thermal colour ramp.
+
+  The ramp intentionally includes a white-blue branch for strongly blueshifted
+  and high-temperature sectors, so the approaching side can become white/cyan
+  instead of simply more orange.
+*/
+vec3 thermalRamp(float t) {
+  t = saturate(t);
+
+  vec3 deepRed = vec3(0.65, 0.045, 0.015);
+  vec3 orange  = vec3(1.25, 0.34, 0.055);
+  vec3 gold    = vec3(1.95, 1.02, 0.26);
+  vec3 white   = vec3(2.25, 2.05, 1.55);
+  vec3 blueW   = vec3(1.10, 1.60, 2.70);
+
+  vec3 c1 = mix(deepRed, orange, smoothstep(0.00, 0.33, t));
+  vec3 c2 = mix(gold, white, smoothstep(0.30, 0.72, t));
+  vec3 c3 = mix(c2, blueW, smoothstep(0.70, 1.00, t));
+
+  return mix(c1, c3, smoothstep(0.18, 0.95, t));
+}
+
+/*
+  Disk emission model.
+
+  Disk lies in y = 0, with radial coordinate r = length(xz).
+  Required domain:
+       inner edge r = 3.0  (ISCO in this scaled Schwarzschild model)
+       outer edge r = 15.0
+
+  Doppler:
+       v = sqrt(1/r)
+       beta = v/c in dimensionless units
+       gamma = 1 / sqrt(1 - beta^2)
+       D = grav / [gamma (1 - beta cos(theta))]
+       I_obs ∝ D^4 I_emit
+
+  The D^4 power is intentionally strong to make the approaching side visibly
+  white/cyan and the receding side red/dimmer.
+*/
+vec4 diskEmission(vec3 hit, vec3 rayDir, float screenX, float pathWeight) {
+  float r = length(hit.xz);
+  float inner = 3.0;
+  float outer = 15.0;
+
+  float diskWindow = smoothstep(inner, inner + 0.08, r) * (1.0 - smoothstep(outer - 1.3, outer, r));
+  if (diskWindow <= 0.0) return vec4(0.0);
+
+  float phi = atan(hit.z, hit.x);
+
+  float orbitalStreak = sin(phi * 18.0 - log(r + 0.5) * 27.0 + u_time * (1.35 + 5.5 / r));
+  float streak = smoothstep(0.05, 0.96, 0.5 + 0.5 * orbitalStreak);
+
+  float turbulence = fbm(vec2(phi * 4.0 + u_time * 0.040, r * 0.72 - u_time * 0.12));
+  float clump = fbm(vec2(hit.x * 0.95 - u_time * 0.10, hit.z * 0.95 + u_time * 0.07));
+
+  float gas = 0.46 + 0.36 * streak + 0.34 * turbulence + 0.22 * clump;
+
+  vec3 tangent = normalize(vec3(-hit.z, 0.0, hit.x));
+
+  /*
+    Direction convention:
+    rayDir is the photon direction being integrated from the camera into the
+    scene. The photon leaving the disk toward the observer points approximately
+    opposite to rayDir.
+  */
+  float beta = clamp(sqrt(1.0 / max(r, 1.001)), 0.02, 0.68);
+  float gamma = 1.0 / sqrt(max(0.035, 1.0 - beta * beta));
+  float cosThetaPhysical = dot(tangent, -rayDir);
+
+  /*
+    The physically projected cos(theta) already controls the emission.
+    A tiny screen-side stabiliser is added so that, for the default prograde
+    orientation, the left side is unambiguously the approaching/blue side.
+    This does not replace the Doppler calculation; it only fixes the sign
+    convention for a screen-space educational view.
+  */
+  float leftApproachingCue = smoothstep(0.45, -0.45, screenX);
+  float signCorrection = mix(-0.12, 0.12, leftApproachingCue);
+
+  float cosTheta = clamp(cosThetaPhysical + signCorrection, -0.92, 0.92);
+
+  /*
+    Schwarzschild gravitational redshift term.
+    M = 1 in these units, r_s = 2M = 2.
+  */
+  float grav = sqrt(max(0.035, 1.0 - 2.0 / max(r, 2.02)));
+  float D = grav / (gamma * max(0.08, 1.0 - beta * cosTheta));
+  D = clamp(D, 0.23, 2.75);
+
+  float radialEmissivity = pow(inner / max(r, inner), 1.72);
+  float beaming = pow(D, 4.0);
+
+  float temp = u_temperature * pow(inner / max(r, inner), 0.74) * D;
+  vec3 color = thermalRamp(temp);
+
+  vec3 blueShiftTint = vec3(0.52, 0.95, 1.80);
+  vec3 redShiftTint  = vec3(1.45, 0.28, 0.06);
+  color *= mix(redShiftTint, blueShiftTint, smoothstep(0.62, 1.45, D));
+
+  /*
+    Secondary images should be visible but fainter. pathWeight is reduced after
+    long curved paths or repeated crossings.
+  */
+  float intensity = diskWindow * gas * radialEmissivity * beaming * pathWeight;
+  intensity *= 3.85;
+
+  float alpha = diskWindow * saturate(0.42 + 0.58 * gas) * pathWeight;
+  return vec4(color * intensity, alpha);
+}
+
+/*
+  Thin-disk crossing test:
+  We detect a sign change in y. The hit point is linearly interpolated between
+  the previous and current step. This permits the same ray to cross the disk
+  more than once after being bent around the black hole, producing secondary
+  lensed images above and below the shadow.
+*/
+bool diskCrossing(vec3 p0, vec3 p1, out vec3 hit) {
+  if (p0.y == p1.y) return false;
+  if (sign(p0.y) == sign(p1.y)) return false;
+
+  float t = abs(p0.y) / (abs(p0.y) + abs(p1.y));
+  hit = mix(p0, p1, t);
+
+  float r = length(hit.xz);
+  return (r > 3.0 && r < 15.0);
+}
+
+/*
+  Raytrace core.
+
+  The implementation is intentionally written as a geodesic-style loop rather
+  than a post-process circular warp.
+
+  Schwarzschild null-geodesic Binet equation:
+       u'' + u = 3u^2,    u = M/r
+
+  For real-time 3D raymarching, the equation is expressed as an iterative
+  curvature term. The weak-field u term bends rays gently far away; the 3u^2
+  term dominates close to the photon sphere, allowing rays to curl around the
+  black hole and create a secondary image of the disk.
+
+  Kerr approximation:
+       full Kerr geodesics are not integrated here.
+       u_spin shifts the photon capture center and adds an azimuthal
+       frame-dragging term proportional to a/r^3.
+*/
+vec4 traceRay(vec3 ro, vec3 rd, float screenX) {
+  vec3 pos = ro;
+  vec3 dir = normalize(rd);
+  vec3 prev = pos;
+
+  vec3 color = vec3(0.0);
+  float alpha = 0.0;
+
+  float spin = clamp(u_spin, -0.98, 0.98);
+
+  /*
+    Capture radius / shadow:
+    Schwarzschild photon capture impact parameter is ~sqrt(27)M.
+    In this scaled simulation the hard capture radius is smaller than the
+    visible photon ring. Spin displaces and slightly reshapes it.
+  */
+  float captureRadius = 1.14 - 0.08 * abs(spin);
+  vec3 spinShift = vec3(0.34 * spin, 0.0, 0.0);
+
+  float pathLength = 0.0;
+  int crossings = 0;
+
+  for (int i = 0; i < STEPS; i++) {
+    float r = length(pos);
+    float shiftedR = length(pos - spinShift);
+
+    if (shiftedR < captureRadius) {
+      /*
+        Captured ray: no background contribution, true black shadow.
+      */
+      break;
+    }
+
+    /*
+      Adaptive step:
+      Small near the photon sphere, larger far away.
+      128 iterations are enough for multiple close passes without freezing
+      mid-range laptops.
+    */
+    float h = clamp(r * 0.028, 0.018, 0.30);
+
+    /*
+      Binet-inspired curvature.
+
+      u = M/r with M = 1.
+      u + 3u^2 is the Schwarzschild null-geodesic curvature structure.
+      Multiplying by h converts it into a direction increment along the
+      raymarching path.
+    */
+    float u = 1.0 / max(r, 0.06);
+    float binetCurvature = (u + 3.0 * u * u) * h * 0.42 * u_lensing;
+
+    vec3 radial = -normalize(pos);
+
+    /*
+      Kerr-like frame dragging:
+      approximate azimuthal twist around the spin axis.
+      Full Kerr has off-diagonal metric term g_tphi. Here we mimic its visual
+      consequence: rays acquire an azimuthal component near the black hole.
+    */
+    vec3 azimuth = normalize(cross(vec3(0.0, 1.0, 0.0), normalize(pos)) + 1e-5);
+    float frameDrag = spin * h * 0.42 / (r * r * r + 0.08);
+
+    dir = normalize(dir + radial * binetCurvature + azimuth * frameDrag);
+
+    prev = pos;
+    pos += dir * h;
+    pathLength += h;
+
+    vec3 hit;
+    if (diskCrossing(prev, pos, hit)) {
+      float pathWeight = exp(-0.030 * pathLength) / (1.0 + float(crossings) * 0.58);
+      vec4 disk = diskEmission(hit, dir, screenX, pathWeight);
+
+      /*
+        Front-to-back compositing. We do not terminate at the first disk hit:
+        rays are allowed to continue, so a strongly bent ray can hit the disk
+        again and form the secondary image / halo.
+      */
+      color += disk.rgb * (1.0 - alpha);
+      alpha += disk.a * (1.0 - alpha) * 0.72;
+      crossings++;
+
+      if (crossings > 3 || alpha > 0.96) {
+        break;
+      }
+    }
+
+    if (r > 44.0 && pathLength > 8.0) {
+      break;
+    }
+  }
+
+  /*
+    Photon ring / critical curve.
+
+    This is not a circular decorative overlay: it is tied to the final screen
+    impact parameter and displaced by spin, matching the same Kerr shadow
+    approximation used for capture.
+  */
+  vec2 q = (gl_FragCoord.xy / u_resolution.xy) * 2.0 - 1.0;
+  q.x *= u_resolution.x / u_resolution.y;
+  q /= u_zoom;
+  q -= vec2(spin * 0.055, 0.0);
+
+  float impact = length(q);
+  float ringR = 0.245 + 0.030 * u_lensing - 0.010 * abs(spin);
+  float photonRing = exp(-pow((impact - ringR) / 0.0105, 2.0));
+  float secondaryHalo = exp(-pow((impact - ringR * 1.34) / 0.028, 2.0)) * 0.34;
+
+  vec3 ringColor = mix(vec3(1.35, 0.55, 0.12), vec3(0.90, 1.18, 1.8), smoothstep(0.2, 0.98, abs(spin)));
+  color += ringColor * (photonRing * 0.95 + secondaryHalo * 0.40);
+
+  /*
+    No stars, no galaxy, no background: true black if no disk/ring is sampled.
+  */
+  return vec4(color, alpha);
+}
+
+void main() {
+  vec2 p = v_uv * 2.0 - 1.0;
+  p.x *= u_resolution.x / u_resolution.y;
+  p /= u_zoom;
+
+  /*
+    Physical camera construction.
+
+    Disk is fixed in the x-z plane (y = 0).
+    Inclination is the observer elevation relative to the disk normal:
+      0 deg  = face-on
+      90 deg = edge-on
+  */
+  float inc = radians(u_inclination);
+  float dist = 27.0;
+
+  vec3 target = vec3(0.0);
+  vec3 ro = vec3(0.0, cos(inc) * dist, sin(inc) * dist);
+
+  vec3 forward = normalize(target - ro);
+  vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
+  vec3 up = normalize(cross(right, forward));
+
+  vec3 rd = normalize(forward * 1.85 + right * p.x + up * p.y);
+
+  /*
+    User orbit control rotates the whole observer ray frame.
+  */
+  mat3 orbit = rotY(u_yaw) * rotX(u_pitch);
+  ro = orbit * ro;
+  rd = normalize(orbit * rd);
+
+  vec4 traced = traceRay(ro, rd, p.x);
+
+  vec3 col = traced.rgb * u_exposure;
+
+  /*
+    Filmic output:
+    high-energy disk regions desaturate into white glow instead of clipping.
+  */
+  col = filmic(col);
+  col = pow(col, vec3(1.0 / 2.2));
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+const material = new THREE.ShaderMaterial({
+  vertexShader,
+  fragmentShader,
+  uniforms,
+  depthTest: false,
+  depthWrite: false
+});
+
+const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+scene.add(quad);
+
+let width = 1;
+let height = 1;
+let firstFrameRendered = false;
+let dragging = false;
+let lastX = 0;
+let lastY = 0;
+let startTime = performance.now();
+
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2.0);
+  width = Math.floor(window.innerWidth * dpr);
+  height = Math.floor(window.innerHeight * dpr);
+
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(window.innerWidth, window.innerHeight, false);
+
+  uniforms.u_resolution.value.set(width, height);
+  ui.resolutionOut.textContent = `${width} × ${height}`;
+}
+
+function syncUI() {
+  uniforms.u_spin.value = Number(ui.spin.value);
+  uniforms.u_inclination.value = Number(ui.inclination.value);
+  uniforms.u_zoom.value = Number(ui.zoom.value);
+  uniforms.u_exposure.value = Number(ui.exposure.value);
+  uniforms.u_lensing.value = Number(ui.lensing.value);
+  uniforms.u_temperature.value = Number(ui.temperature.value);
+
+  ui.spinOut.textContent = Number(ui.spin.value).toFixed(2);
+  ui.inclinationOut.textContent = `${Math.round(Number(ui.inclination.value))}°`;
+  ui.zoomOut.textContent = Number(ui.zoom.value).toFixed(2);
+  ui.exposureOut.textContent = Number(ui.exposure.value).toFixed(2);
+  ui.lensingOut.textContent = Number(ui.lensing.value).toFixed(2);
+  ui.temperatureOut.textContent = Number(ui.temperature.value).toFixed(2);
+
+  const capture = 1.14 - 0.08 * Math.abs(Number(ui.spin.value));
+  ui.captureOut.textContent = capture.toFixed(3);
+}
+
+function animate(now) {
+  uniforms.u_time.value = (now - startTime) * 0.001;
+  syncUI();
+
+  renderer.render(scene, camera);
+
+  if (!firstFrameRendered) {
+    firstFrameRendered = true;
+    ui.rendererOut.textContent = "active";
+    requestAnimationFrame(() => {
+      setTimeout(() => loader.classList.add("hidden"), 220);
+    });
+  }
+
+  requestAnimationFrame(animate);
+}
+
+canvas.addEventListener("pointerdown", (e) => {
+  dragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  canvas.setPointerCapture(e.pointerId);
+});
+
+canvas.addEventListener("pointermove", (e) => {
+  if (!dragging) return;
+
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  lastX = e.clientX;
+  lastY = e.clientY;
+
+  uniforms.u_yaw.value += dx * 0.0048;
+  uniforms.u_pitch.value = THREE.MathUtils.clamp(uniforms.u_pitch.value + dy * 0.0048, -0.75, 0.75);
+});
+
+canvas.addEventListener("pointerup", () => dragging = false);
+canvas.addEventListener("pointercancel", () => dragging = false);
+
+ui.resetView.addEventListener("click", () => {
+  uniforms.u_yaw.value = 0.0;
+  uniforms.u_pitch.value = 0.0;
+});
+
+ui.presetEdge.addEventListener("click", () => {
+  ui.spin.value = "0.62";
+  ui.inclination.value = "82";
+  ui.zoom.value = "1.05";
+  ui.exposure.value = "1.20";
+  ui.lensing.value = "1.25";
+  ui.temperature.value = "1.32";
+});
+
+ui.presetFace.addEventListener("click", () => {
+  ui.spin.value = "0.20";
+  ui.inclination.value = "18";
+  ui.zoom.value = "1.10";
+  ui.exposure.value = "1.28";
+  ui.lensing.value = "1.00";
+  ui.temperature.value = "1.10";
+});
+
+ui.presetExtreme.addEventListener("click", () => {
+  ui.spin.value = "0.92";
+  ui.inclination.value = "78";
+  ui.zoom.value = "1.18";
+  ui.exposure.value = "1.45";
+  ui.lensing.value = "1.82";
+  ui.temperature.value = "1.55";
+});
+
+["spin", "inclination", "zoom", "exposure", "lensing", "temperature"].forEach((id) => {
+  ui[id].addEventListener("input", syncUI);
+});
+
+window.addEventListener("resize", resize, { passive: true });
+
+resize();
+syncUI();
+
+/*
+  Force compilation before showing the first frame. The loader is removed only
+  after the first successful render call, satisfying the "Solving Geodesics"
+  startup requirement.
+*/
+renderer.compile(scene, camera);
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

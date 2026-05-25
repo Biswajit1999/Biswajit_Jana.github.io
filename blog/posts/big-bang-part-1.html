@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Big Bang, Before the Big Bang, and Why It Still Scares Me | Biswajit Jana</title>
+<meta name="description" content="Part I of a personal astrophysics essay on the Big Bang, cosmic horizons, observable universe, inflation, multiverse questions, and why cosmic origins feel both frightening and beautiful." />
+<meta property="og:title" content="The Big Bang, Before the Big Bang, and Why It Still Scares Me | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A personal cosmology essay on beginnings, horizons, observable limits, and the uncomfortable curiosity of asking what came before the Big Bang." />
+<meta property="og:image" content="../../images/blog12_01_bigbang_hero.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#03060c;
+  --bg2:#07101c;
+  --surface:rgba(10,17,31,.82);
+  --surface-solid:#0b1424;
+  --surface2:rgba(255,255,255,.045);
+  --text:#edf4ff;
+  --muted:#a9b8d2;
+  --dim:#697d9d;
+  --line:rgba(255,255,255,.10);
+  --line2:rgba(255,255,255,.065);
+  --accent:#4af0c8;
+  --accent2:#83ddff;
+  --accent3:#c493ff;
+  --gold:#ffbc73;
+  --danger:#ff7d90;
+  --display:"Playfair Display",Georgia,serif;
+  --serif:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --nav-h:72px;
+  --shadow:0 26px 80px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:var(--serif);
+  color:var(--text);
+  line-height:1.78;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),
+    radial-gradient(circle at 48% 42%,rgba(196,147,255,.05),transparent 32%),
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%),
+    linear-gradient(120deg,rgba(74,240,200,.04),transparent 30%,rgba(131,221,255,.035) 72%,transparent);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{
+  height:var(--nav-h);
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid var(--line);
+  background:rgba(3,6,12,.84);
+  backdrop-filter:blur(18px) saturate(1.25);
+}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}
+.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}
+.nav-links a:hover{color:var(--accent)}
+.theme-toggle{
+  width:42px;
+  height:26px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.055);
+  color:var(--gold);
+  display:grid;
+  place-items:center;
+  font-family:var(--mono);
+  font-size:.78rem;
+  cursor:pointer;
+  transition:.2s;
+}
+.theme-toggle:hover{border-color:rgba(255,188,115,.35);background:rgba(255,188,115,.08)}
+.hero{padding:58px 0 28px}
+.hero-grid{display:grid;grid-template-columns:minmax(330px,.78fr) minmax(520px,1.22fr);gap:34px;align-items:center}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--gold);
+  font-family:var(--mono);
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(2.7rem,5.5vw,6rem);line-height:.96;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.08rem,1.5vw,1.36rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{
+  margin:18px 0 0;
+  padding:18px 20px;
+  border-radius:20px;
+  border:1px solid rgba(255,188,115,.25);
+  background:rgba(255,188,115,.06);
+  color:#ffe6c8;
+  font-size:1.05rem;
+  line-height:1.7;
+}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{
+  position:relative;
+  min-height:540px;
+  border-radius:28px;
+  border:1px solid var(--line);
+  overflow:hidden;
+  background:#050a12;
+  box-shadow:var(--shadow);
+}
+.hero-card img{width:100%;height:100%;min-height:540px;object-fit:cover;object-position:center;opacity:.95}
+.hero-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.50)),
+    radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%);
+}
+.hero-caption{
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:18px;
+  z-index:3;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(5,10,20,.58);
+  backdrop-filter:blur(14px);
+  font-family:var(--mono);
+  font-size:.72rem;
+  color:#d9e8ff;
+  line-height:1.55;
+}
+.feature{padding:24px 0 48px}
+.feature-frame{
+  position:relative;
+  min-height:620px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  overflow:hidden;
+  background:rgba(3,6,12,.78);
+  box-shadow:0 28px 100px rgba(0,0,0,.48);
+}
+.feature-frame img{width:100%;height:620px;object-fit:cover;object-position:center;opacity:.92}
+.feature-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.72),transparent 34%,rgba(0,0,0,.45)),
+    linear-gradient(180deg,rgba(255,255,255,.04),transparent 45%,rgba(0,0,0,.60));
+  pointer-events:none;
+}
+.feature-caption{
+  position:absolute;
+  left:24px;
+  bottom:24px;
+  right:24px;
+  z-index:2;
+  display:grid;
+  gap:8px;
+  max-width:760px;
+}
+.feature-caption strong{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.feature-caption span{font-size:1.05rem;color:#dce9ff;line-height:1.65}
+.journal{padding:10px 0 78px}
+.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(275px,.82fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}
+.rail-card{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--surface);
+  backdrop-filter:blur(12px);
+  box-shadow:0 26px 80px rgba(0,0,0,.32);
+  margin-bottom:16px;
+}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}
+.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}
+.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}
+.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}
+.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}
+.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}
+.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}
+.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}
+.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}
+.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}
+.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}
+.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}
+.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}
+.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.story-header h2{font-family:var(--display);font-size:clamp(2.35rem,4.5vw,4.1rem);line-height:1;letter-spacing:-.05em;margin-bottom:12px}
+.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}
+.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}
+.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}
+.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.chapter h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}
+.chapter h3{font-family:var(--display);font-size:clamp(1.35rem,2vw,1.9rem);margin:28px 0 10px;line-height:1.15}
+.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}
+.math-card{
+  margin:24px 0;
+  padding:20px 22px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  background:var(--surface);
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+  overflow-x:auto;
+}
+.math-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.math-display{font-family:var(--mono);font-size:1.02rem;color:var(--text);white-space:nowrap;margin-bottom:10px}
+.frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;margin:0 .14em}
+.frac span:first-child{border-bottom:1px solid currentColor;padding:0 .22em}
+.math-card p{font-size:.94rem;margin:10px 0 0}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
+.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}
+.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}
+.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}
+.figure-note{
+  margin:26px 0;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:var(--surface);
+  box-shadow:0 22px 70px rgba(0,0,0,.25);
+}
+.figure-note img{
+  width:100%;
+  height:auto;
+  max-height:520px;
+  object-fit:contain;
+  border-radius:16px;
+  background:#020817;
+  border:1px solid rgba(255,255,255,.08);
+}
+.figure-note figcaption{font-family:var(--mono);font-size:.72rem;color:var(--dim);line-height:1.6;margin-top:10px}
+.figure-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.figure-grid .figure-note{margin:0}
+.comments-section{
+  margin-top:42px;
+  padding:26px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  box-shadow:0 22px 70px rgba(0,0,0,.24);
+}
+.comments-section h2{font-family:var(--display);font-size:clamp(2rem,3vw,3rem);letter-spacing:-.04em;margin-bottom:10px}
+.comments-section p{color:var(--muted);font-size:1rem;margin-bottom:18px}
+.giscus-frame{margin-top:14px}
+.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}
+.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer a{color:var(--muted)}
+.footer a:hover{color:var(--gold)}
+body.light{
+  --bg:#f3f7ff;
+  --bg2:#eef4ff;
+  --surface:rgba(255,255,255,.88);
+  --surface-solid:#ffffff;
+  --surface2:rgba(10,30,70,.06);
+  --text:#102039;
+  --muted:#435a78;
+  --dim:#687c98;
+  --line:rgba(10,30,70,.14);
+  --line2:rgba(10,30,70,.10);
+  background:
+    radial-gradient(circle at 12% 0%,rgba(0,140,120,.08),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(30,90,180,.08),transparent 27%),
+    linear-gradient(rgba(10,30,70,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(10,30,70,.045) 1px,transparent 1px),
+    linear-gradient(180deg,#f8fbff,#edf3ff 52%,#f8fbff);
+  background-size:auto,auto,76px 76px,76px 76px,auto;
+}
+body.light::before{background:linear-gradient(120deg,rgba(0,140,120,.035),transparent 42%,rgba(30,90,180,.035))}
+body.light .nav{background:rgba(246,249,255,.88)}
+body.light .hero-card,body.light .feature-frame{background:#eaf1fb}
+body.light .hook{color:#5e3c17;background:rgba(255,188,115,.14)}
+body.light .hero-caption{background:rgba(255,255,255,.70);color:#20314f}
+body.light .feature-caption span{color:#eef4ff}
+body.light .post-card:hover{background:rgba(10,30,70,.055)}
+@media(max-width:1180px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-card,.hero-card img{min-height:460px}
+  .journal-grid{grid-template-columns:220px minmax(0,1fr)}
+  .right-rail{grid-column:1/-1;position:static}
+  .feature-frame img{height:520px}
+  .feature-frame{min-height:520px}
+}
+@media(max-width:900px){
+  .nav{height:auto}
+  .nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}
+  .journal-grid{grid-template-columns:1fr}
+  .left-rail,.right-rail{position:static}
+  .fact-grid,.figure-grid{grid-template-columns:1fr}
+  .hero{padding-top:34px}
+}
+@media(max-width:760px){
+  .wide,.nav-inner{width:min(94vw,100%)}
+  .hero-card,.hero-card img{min-height:340px}
+  .feature-frame img{height:420px}
+  .feature-frame{min-height:420px}
+  h1{font-size:clamp(2.4rem,14vw,4.2rem)}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner wide">
+    <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../index.html">Blog</a></li>
+      <li><a href="../../index.html#current-research">Research</a></li>
+      <li><a href="../../publications.html">Publications</a></li>
+      <li><a href="../../cv.html">CV</a></li>
+      <li><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">☾</button></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Cosmology · origins · uncomfortable curiosity</div>
+      <h1>The Big Bang, Before the Big Bang, and Why It Still Scares Me</h1>
+      <p class="hero-sub">The universe is about 13.8 billion years old, human life is embarrassingly short, and somehow we are still trying to ask what happened before time had the decency to behave.</p>
+      <div class="hook">Welcome to cosmology: where asking “what came before?” is either profound, meaningless, or the universe’s way of making your brain overheat.</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08 · Hertford, London, UK</span>
+        <span class="meta-pill">Part I of II</span>
+        <span class="meta-pill">18 min read</span>
+        <span class="meta-pill">No simulation · visual essay</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="../../images/blog12_01_bigbang_hero.png" alt="Big Bang and cosmic origin hero image" onerror="this.onerror=null;this.src='../../images/blog12_02_cosmic_timeline.png';" />
+      <figcaption class="hero-caption">A visual frame for a question that is technically about cosmology and emotionally about being tiny on a rock.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="feature wide">
+  <div class="feature-frame">
+    <img src="../../images/blog12_02_cosmic_timeline.png" alt="Cinematic cosmic timeline visual" onerror="this.onerror=null;this.src='../../images/blog12_03_observable_universe.png';" />
+    <div class="feature-caption">
+      <strong>Visual Feature Frame · Cosmic timeline</strong>
+      <span>The Big Bang is not simply a point in the past. It is the limit of what our current models can confidently rewind towards.</span>
+    </div>
+  </div>
+</section>
+
+<section class="journal wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#beginning">The beginning</a></li>
+          <li><a href="#evidence">Why we believe it</a></li>
+          <li><a href="#before">Before the Big Bang</a></li>
+          <li><a href="#horizon">Observable universe</a></li>
+          <li><a href="#multiverse">Cosmic bubbles</a></li>
+          <li><a href="#alone">Are we alone?</a></li>
+          <li><a href="#visuals">Visual notes</a></li>
+          <li><a href="#part-two">Part II bridge</a></li>
+          <li><a href="#comments">Comments</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>Observable universe</strong></div>
+          <div><span>Status</span><strong>Expanding</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>Part I essay</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      <div class="story-header" id="overview">
+        <div class="eyebrow">Cosmology · scale · human discomfort</div>
+        <h2>We are short-lived animals trying to reconstruct the first moments of everything.</h2>
+        <p>There is something absurd and beautiful about it. Human life rarely reaches a century, yet we study signals from billions of years ago and ask whether our universe is one bubble, one event, or one local chapter in something larger. That mismatch gives me goosebumps every time I think about it properly.</p>
+        <p>This is Part I. I am keeping this post focused on the Big Bang itself: what it actually means, what evidence supports it, what “before” may or may not mean, and why the observable universe is not the same thing as the whole universe. Part II can go deeper into multiverse ideas, cosmic inflation, and the more speculative side without pretending speculation is the same as measurement.</p>
+      </div>
+
+      <article>
+        <section class="chapter" id="beginning">
+          <div class="chapter-label">Chapter 01 · The beginning</div>
+          <h2>The Big Bang was not a bomb in a pre-existing room.</h2>
+          <p>The common picture is an explosion: something detonates in the middle of darkness, matter flies outward, galaxies scatter through empty space, and eventually we appear with telescopes, anxiety, and Wi-Fi. It is a dramatic image. It is also not what the Big Bang model means.</p>
+          <p>The Big Bang model says that the early universe was hot, dense, and expanding. It does not describe matter exploding into pre-existing empty space. It describes space itself expanding. The galaxies are not flying away from a central blast point in the ordinary sense; rather, the distance between widely separated regions grows because the metric of space changes with time.</p>
+          <p>A better image is not an explosion inside a room. It is the room itself changing scale. Even that analogy is imperfect, because the universe is not obliged to be a polite balloon or a rubber sheet. But it does help remove the biggest misconception: the Big Bang was not an explosion located somewhere. It was a state of the universe everywhere we can observe, rewound to much hotter and denser conditions.</p>
+          <div class="math-card">
+            <div class="math-label">Scale factor idea</div>
+            <div class="math-display">d(t) = a(t) d<sub>0</sub></div>
+            <p>The scale factor <strong>a(t)</strong> describes how distances between comoving points change with cosmic time. If <strong>a(t)</strong> grows, the universe expands.</p>
+          </div>
+          <p>This is why the language can feel strange. We say “the universe began,” but in a technical sense we are often describing the earliest state our current physics can trace. The Big Bang is not a cartoon fireball. It is a boundary where our tested models become extremely compressed, extremely hot, and eventually incomplete.</p>
+        </section>
+
+        <section class="chapter" id="evidence">
+          <div class="chapter-label">Chapter 02 · Evidence</div>
+          <h2>Why do we believe the Big Bang model at all?</h2>
+          <p>Cosmology is not just someone staring at the sky and deciding the universe had a dramatic childhood. The Big Bang model is supported by several independent lines of evidence, which is why it is taken seriously rather than filed under “interesting cosmic story.”</p>
+          <p>The first major clue is expansion. Distant galaxies show redshifts: their light is stretched to longer wavelengths. In the large-scale average, the farther away a galaxy is, the faster it appears to recede. This is not because Earth is special. It is because, in an expanding universe, every distant observer sees other distant galaxies moving away in a similar statistical sense.</p>
+          <p>The second clue is the cosmic microwave background, or CMB. This is the cooled remnant radiation from the early universe, released when the universe became transparent enough for photons to travel freely. It is almost uniform in every direction, with tiny fluctuations that later grew into the large-scale structure of galaxies and clusters.</p>
+          <p>The third clue is light-element abundance. The early hot universe produced hydrogen, helium, and small amounts of other light nuclei in proportions that broadly match what we observe. That matters because it connects a cosmological model to nuclear physics, not just to pretty galaxy pictures.</p>
+          <div class="fact-grid">
+            <div class="fact"><strong>Expansion</strong><span>Galaxy redshifts show that the universe is expanding on large scales.</span></div>
+            <div class="fact"><strong>CMB</strong><span>The cosmic microwave background is the cooled afterglow of the early hot universe.</span></div>
+            <div class="fact"><strong>Light elements</strong><span>Hydrogen and helium abundances match predictions from early-universe nucleosynthesis.</span></div>
+            <div class="fact"><strong>Structure</strong><span>Tiny early fluctuations grew into galaxies, clusters, filaments, and voids.</span></div>
+          </div>
+        </section>
+
+        <section class="chapter" id="before">
+          <div class="chapter-label">Chapter 03 · Before</div>
+          <h2>What happened before the Big Bang?</h2>
+          <p>This question is irresistible. It is also dangerous. In everyday life, “before” is simple. There is yesterday, then today. There is cause, then effect. There is a kettle, then tea. Cosmology is less considerate.</p>
+          <p>In standard cosmology, time as we understand it is part of the universe’s evolution. If time itself is tied to the geometry and physical state of the universe, asking what came “before” the Big Bang may be like asking what is north of the North Pole. The grammar survives, but the physical meaning may not.</p>
+          <p>That does not mean the question is stupid. It means it needs sharper physics. The earliest moments of the universe require regimes where general relativity and quantum mechanics are both important. We do not yet have a complete tested theory of quantum gravity. So the honest answer is not “nothing came before” and not “definitely another universe.” The honest answer is: our current models reach a limit, and beyond that limit we need better physics.</p>
+          <p>There are possible ideas: bouncing cosmologies, cyclic models, quantum creation scenarios, inflationary histories, and multiverse-like pictures. These are intellectually exciting, but excitement is not evidence. The universe does not become true just because it gives us goosebumps.</p>
+          <div class="quote">Curiosity is allowed. Overconfidence is not.</div>
+        </section>
+
+        <section class="chapter" id="horizon">
+          <div class="chapter-label">Chapter 04 · Horizons</div>
+          <h2>Maybe the universe has no edge. Maybe our view does.</h2>
+          <p>The observable universe is not the whole universe. It is the region from which light has had enough time to reach us since the early universe became transparent. Beyond that horizon, there may simply be more universe. Not a wall. Not a sign saying “end of map, please turn around.” Just regions whose light has not reached us, and may never reach us depending on cosmic expansion.</p>
+          <p>This is one of the most unsettling parts of cosmology. We can make precise measurements inside our observable patch, but the whole universe may be much larger than that patch. It could be finite but unbounded, infinite, or shaped in a way that is difficult to test from inside it.</p>
+          <p>When people ask whether the universe has an edge, they often imagine travelling far enough and reaching a boundary. But modern cosmology does not require an edge in that sense. A finite universe can be unbounded, and an infinite universe obviously has no edge. Either way, our observable limit is not necessarily a physical boundary; it is an observational boundary.</p>
+          <div class="fact-grid">
+            <div class="fact"><strong>Observable universe</strong><span>Limited by light travel time, cosmic expansion, and the age of the universe.</span></div>
+            <div class="fact"><strong>Entire universe</strong><span>Could be much larger than what we see, possibly infinite, and not directly observable in full.</span></div>
+          </div>
+        </section>
+
+        <section class="chapter" id="multiverse">
+          <div class="chapter-label">Chapter 05 · Cosmic bubbles</div>
+          <h2>Were there many Big Bang-like events?</h2>
+          <p>The idea is tempting: maybe our universe is one bubble, and maybe other bubbles exist beyond our horizon with different histories or even different physical conditions. It sounds like science fiction because, frankly, the universe has been rude enough to make some science-fiction-sounding ideas mathematically discussable.</p>
+          <p>Inflationary cosmology provides one route to such thinking. If inflation can continue in some regions while ending in others, one can imagine bubble-like universes forming within a larger inflating background. But this is exactly where the tone needs to become careful. A model can be mathematically interesting without being observationally confirmed.</p>
+          <p>For me, the multiverse question is less about declaring an answer and more about appreciating the scale of what we do not know. We already live inside a universe where the observable part contains hundreds of billions of galaxies. Asking whether even that is only a local patch is both thrilling and slightly offensive to human intuition.</p>
+        </section>
+
+        <section class="chapter" id="alone">
+          <div class="chapter-label">Chapter 06 · Silence</div>
+          <h2>The scale of the universe makes loneliness feel technical.</h2>
+          <p>Cosmology naturally leads to another question: where is everyone? If the universe is so large, if stars and planets are so common, and if chemistry has had billions of years to experiment, why does the sky look so quiet?</p>
+          <p>This is where cosmic scale becomes emotionally strange. We look back billions of years, detect ancient light, map galaxies, measure background radiation, and still we do not know whether technological civilizations are rare, short-lived, quiet, hidden, or simply too far away in space and time for our current instruments to notice.</p>
+          <p>The Big Bang gives us a universe with a history. Astrobiology asks whether that history produced other minds. SETI asks whether any of those minds are transmitting. Human anxiety asks whether we are alone. The telescope, as usual, remains professionally neutral.</p>
+          <div class="quote">Human life is shorter than a blink on cosmological timescales, but somehow that blink learned to measure the afterglow of the early universe.</div>
+        </section>
+
+        <section class="chapter" id="visuals">
+          <div class="chapter-label">Chapter 07 · Visual notes</div>
+          <h2>The images are not evidence. They are maps for imagination.</h2>
+          <p>For this post, I am using visual frames because the Big Bang is difficult to hold in the mind as a purely textual idea. The visuals are conceptual: useful for thinking, not substitutes for data. A galaxy image is not a proof of the Big Bang. A cosmic timeline is not a photograph of the beginning. But good visuals can keep the physics from turning into abstract fog.</p>
+          <figure class="figure-note">
+            <img src="../../images/blog12_03_observable_universe.png" alt="Conceptual image of the observable universe and cosmic horizon" onerror="this.onerror=null;this.src='../../images/blog12_02_cosmic_timeline.png';">
+            <figcaption>Observable universe concept: the edge of what we see is a horizon of information, not necessarily the edge of existence.</figcaption>
+          </figure>
+          <div class="figure-grid">
+            <figure class="figure-note">
+              <img src="../../images/blog12_04_multiverse_bubbles.png" alt="Conceptual multiverse bubble illustration" onerror="this.onerror=null;this.src='../../images/blog12_03_observable_universe.png';">
+              <figcaption>Bubble-universe concept: interesting, speculative, and not something I would sell as certainty over tea.</figcaption>
+            </figure>
+            <figure class="figure-note">
+              <img src="../../images/blog12_05_cosmic_loneliness.png" alt="Conceptual image about cosmic loneliness and deep space" onerror="this.onerror=null;this.src='../../images/blog12_01_bigbang_hero.png';">
+              <figcaption>Cosmic loneliness visual: the emotional side of studying a universe much older and larger than human life.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="chapter" id="part-two">
+          <div class="chapter-label">Part II bridge</div>
+          <h2>The next question is not smaller.</h2>
+          <p>This post is Part I because the Big Bang deserves a careful beginning before we jump into the wilder territory. Part II can focus more directly on inflation, the multiverse, cosmic bubbles, what “outside the universe” may or may not mean, and whether the question “before the Big Bang” is a physical question or a human sentence that physics has not agreed to answer.</p>
+          <p>I do not want Part II to become fantasy wearing a lab coat. The goal will be to keep the curiosity alive while separating what is measured, what is modelled, and what is still speculative.</p>
+        </section>
+
+        <section class="chapter" id="takeaway">
+          <div class="chapter-label">Takeaway</div>
+          <h2>The beginning is still not fully finished.</h2>
+          <p>The Big Bang model is one of the strongest frameworks in modern cosmology, but the earliest moments remain an active frontier. The honest answer to “what happened before?” is not a neat sentence. It is a research programme.</p>
+          <p>And maybe that is why it scares me in the right way. Not because it is meaningless, but because it is meaningful at a scale where human intuition starts to crack. We are temporary creatures trying to understand permanent-looking questions. That is terrifying. It is also the entire point.</p>
+        </section>
+      </article>
+
+      <section class="comments-section" id="comments">
+        <h2>Comments & reactions</h2>
+        <p>Powered by GitHub Discussions via giscus. Leave a question, correction, or thought below.</p>
+        <div class="giscus-frame">
+          <script src="https://giscus.app/client.js"
+                  data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                  data-repo-id="R_kgDOST2kXQ"
+                  data-category="General"
+                  data-category-id="DIC_kwDOST2kXc4C8UVe"
+                  data-mapping="pathname"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="0"
+                  data-input-position="bottom"
+                  data-theme="preferred_color_scheme"
+                  data-lang="en"
+                  crossorigin="anonymous"
+                  async></script>
+        </div>
+      </section>
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Big Bang</strong><span>Not an explosion in space. Space itself expanding. Yes, that ruins the simple firework picture.</span></div>
+          <div class="glossary-item"><strong>Observable universe</strong><span>The part whose light had time to reach us. Not the whole thing. Calm down, map-makers.</span></div>
+          <div class="glossary-item"><strong>Cosmic horizon</strong><span>The boundary between what we can see and what is currently none of our business.</span></div>
+          <div class="glossary-item"><strong>Inflation</strong><span>A very early rapid expansion. Physics hitting fast-forward before anyone asked.</span></div>
+          <div class="glossary-item"><strong>Multiverse</strong><span>Possible. Tempting. Hard to test. Excellent fuel for existential staring contests.</span></div>
+        </div>
+      </div>
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+          <a class="post-card" href="three-body-problem.html"><div class="post-card-kicker">Related exploration</div><h4>The Three-Body Problem</h4><p>Gravity, chaos, and the universe refusing to be solved neatly.</p><div class="tiny-meta">Dynamics · simulation</div></a>
+          <a class="post-card" href="black-hole-extreme-lab.html"><div class="post-card-kicker">Related exploration</div><h4>Black Holes</h4><p>When gravity stops negotiating and starts rewriting causality.</p><div class="tiny-meta">Relativity · visual lab</div></a>
+          <a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related exploration</div><h4>Radial Velocity</h4><p>Planets hiding by making their stars wobble. Adorable, but detectable.</p><div class="tiny-meta">Exoplanets · spectroscopy</div></a>
+          <a class="post-card" href="noise-and-discovery.html"><div class="post-card-kicker">Related exploration</div><h4>Noise and Discovery</h4><p>Where the universe whispers and your detector coughs.</p><div class="tiny-meta">Data · uncertainty</div></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters &amp; Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const themeButton = document.getElementById("themeToggle");
+if (themeButton) {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    themeButton.textContent = "☀";
+  }
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    themeButton.textContent = isLight ? "☀" : "☾";
+  });
+}
+
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+
+function trackEvent(name){
+  if(window.plausible) window.plausible(name);
+  if(window.gtag) window.gtag("event",name,{event_category:"engagement",event_label:document.title});
+}
+</script>
+</body>
+</html>

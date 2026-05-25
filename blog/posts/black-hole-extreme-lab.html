@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Black Holes: What Happens When Gravity Wins? | Biswajit Jana</title>
+  <meta name="description" content="A digital-journalism astrophysics article about black holes, event horizons, singularities, time dilation, Hawking radiation, modern imaging, and a separate interactive black-hole visual lab." />
+  <meta property="og:title" content="Black Holes: What Happens When Gravity Wins? | Biswajit Jana" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="A high-end black-hole article with a separate GPU-powered visual lab." />
+  <meta property="og:image" content="../../images/blog13_01_blackhole_hero.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        processEscapes: true
+      },
+      svg: { fontCache: "global" },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    :root {
+      --bg: #03060c;
+      --bg2: #070d18;
+      --surface: rgba(10, 17, 31, 0.82);
+      --surface2: rgba(255, 255, 255, 0.045);
+      --text: #edf4ff;
+      --muted: #a9b8d2;
+      --dim: #687b9a;
+      --line: rgba(255, 255, 255, 0.10);
+      --accent: #ffbc73;
+      --accent2: #83ddff;
+      --accent3: #c493ff;
+      --good: #74f2c8;
+      --shadow: 0 26px 80px rgba(0, 0, 0, 0.42);
+      --display: "Playfair Display", Georgia, serif;
+      --serif: "Source Serif 4", Georgia, serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --nav-h: 72px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--serif);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255,188,115,0.11), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(131,221,255,0.08), transparent 27%),
+        radial-gradient(circle at 48% 42%, rgba(196,147,255,0.055), transparent 32%),
+        linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(180deg, var(--bg), var(--bg2) 50%, var(--bg));
+      background-size: auto, auto, auto, 76px 76px, 76px 76px, auto;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 54%, transparent 0 18%, rgba(0,0,0,0.16) 32%, rgba(0,0,0,0.72) 100%),
+        linear-gradient(120deg, rgba(255,188,115,0.05), transparent 28%, rgba(131,221,255,0.04) 72%, transparent);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wide { width: min(1540px, 96vw); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid var(--line);
+      background: rgba(3,6,12,0.84);
+      backdrop-filter: blur(18px) saturate(1.25);
+    }
+
+    .nav-inner {
+      width: min(1540px, 96vw);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.16rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero { padding: 58px 0 26px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.78fr) minmax(520px, 1.22fr);
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 6vw, 6.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.5vw, 1.34rem);
+      font-style: italic;
+      line-height: 1.58;
+      margin-bottom: 18px;
+      max-width: 760px;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 1.03rem;
+      max-width: 740px;
+    }
+
+    .meta-row {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .meta-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 540px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 54% 46%, rgba(255,184,107,0.16), transparent 16%),
+        radial-gradient(circle at 52% 49%, rgba(131,221,255,0.08), transparent 28%),
+        linear-gradient(180deg, #05080f, #02050a);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      object-fit: cover;
+      opacity: 0.94;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 52% 48%, transparent 0 18%, rgba(0,0,0,0.10) 32%, rgba(0,0,0,0.58) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), transparent 28%, rgba(0,0,0,0.34));
+    }
+
+    .hero-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 3;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(5,10,20,0.54);
+      backdrop-filter: blur(14px);
+      color: #d9e8ff;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.55;
+    }
+
+    .launch-strip { padding: 26px 0 42px; }
+
+    .launch-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,188,115,0.24);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,188,115,0.16), transparent 30%),
+        radial-gradient(circle at 82% 20%, rgba(131,221,255,0.11), transparent 32%),
+        var(--surface);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .launch-card h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      margin-bottom: 10px;
+    }
+
+    .launch-card p {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 1rem;
+    }
+
+    .launch-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 230px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,188,115,0.36);
+      background: rgba(255,188,115,0.10);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 14px 18px;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 18px 45px rgba(255,188,115,0.10);
+    }
+
+    .launch-button:hover {
+      background: rgba(255,188,115,0.18);
+      transform: translateY(-2px);
+    }
+
+    .journal { padding: 10px 0 78px; }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.6fr) minmax(0, 800px) minmax(270px, 0.8fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .left-rail,
+    .right-rail {
+      position: sticky;
+      top: calc(var(--nav-h) + 22px);
+    }
+
+    .rail-card {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .rail-card h3 {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-nav {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .section-nav a {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      line-height: 1.45;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .section-nav a:hover {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .mini-links { display: grid; gap: 10px; }
+
+    .mini-links a {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 8px;
+    }
+
+    .story-header {
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-header h2 {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 4.7vw, 4.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .story-header p,
+    .chapter p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.86;
+      margin-bottom: 18px;
+    }
+
+    .chapter {
+      margin: 40px 0;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .chapter:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .chapter-label {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .chapter h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      margin-bottom: 16px;
+    }
+
+    .chapter h3 {
+      font-family: var(--display);
+      font-size: clamp(1.32rem, 2vw, 1.84rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 28px 0 10px;
+    }
+
+    .quote {
+      margin: 26px 0;
+      padding: 14px 0 14px 20px;
+      border-left: 3px solid var(--accent);
+      font-size: 1.14rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .equation {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .equation-label {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .equation p {
+      font-size: 0.94rem;
+      margin: 10px 0 0;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .fact {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      margin-bottom: 7px;
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .callout {
+      margin: 26px 0;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(131,221,255,0.18);
+      border-left: 3px solid var(--accent2);
+      background: rgba(131,221,255,0.05);
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.7;
+    }
+
+    .figure-shell {
+      margin: 26px 0 10px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .figure-img {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,188,115,0.22), transparent 14%),
+        radial-gradient(circle at 52% 50%, rgba(131,221,255,0.10), transparent 30%),
+        linear-gradient(180deg, #05080f, #02050a);
+      min-height: 320px;
+      position: relative;
+    }
+
+    .figure-img img {
+      width: 100%;
+      min-height: 320px;
+      object-fit: cover;
+    }
+
+    .figure-img:empty::before {
+      content: "Hawking radiation figure slot";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+
+    .figure-caption {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 12px;
+      line-height: 1.65;
+    }
+
+    .post-list { display: grid; gap: 12px; }
+
+    .post-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,188,115,0.26);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .post-card-kicker {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .post-card h4 {
+      font-family: var(--display);
+      font-size: 1.18rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .post-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .tiny-meta {
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      margin-top: 10px;
+    }
+
+    .comments-section {
+      margin-top: 46px;
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .comments-section h3 {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .comments-section p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .references {
+      margin-top: 18px;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .references h3 {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .references li::before {
+      content: "[" counter(ref) "]";
+      color: var(--accent);
+      font-family: var(--mono);
+      flex-shrink: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 26px 0 42px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-align: center;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card, .hero-card img { min-height: 460px; }
+      .launch-card { grid-template-columns: 1fr; }
+      .journal-grid { grid-template-columns: 220px minmax(0, 1fr); }
+      .right-rail { grid-column: 1 / -1; position: static; }
+    }
+
+    @media (max-width: 900px) {
+      .nav { height: auto; }
+      .nav-inner { padding: 14px 0; flex-direction: column; align-items: flex-start; }
+      .hero { padding-top: 34px; }
+      .journal-grid { grid-template-columns: 1fr; }
+      .left-rail, .right-rail { position: static; }
+      .left-rail { order: -1; }
+      .fact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .wide, .nav-inner { width: min(94vw, 100%); }
+      .hero-card, .hero-card img { min-height: 360px; }
+      .launch-card { padding: 22px; }
+      .launch-button { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../index.html">Blog</a></li>
+        <li><a href="../../index.html#current-research">Research</a></li>
+        <li><a href="../../publications.html">Publications</a></li>
+        <li><a href="../../cv.html">CV</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero wide">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Relativity · Digital journalism · Black-hole physics</div>
+        <h1>Black Holes: What Happens When Gravity Wins?</h1>
+        <p class="hero-sub">
+          A black hole is where mass, geometry, and causality stop behaving like friendly classroom diagrams and start
+          behaving like the universe never cared whether we were comfortable with the answer.
+        </p>
+        <p class="hero-text">
+          This post is the story page. The heavy GPU simulation now lives on a separate page, so the article stays fast,
+          readable, and stable while the interactive lab becomes a deliberate full-screen experience.
+        </p>
+        <div class="meta-row">
+          <span class="meta-pill">8 May 2026 · Hertford, London, UK</span>
+          <span class="meta-pill">16 min read</span>
+          <span class="meta-pill">Separate WebGL simulator</span>
+          <span class="meta-pill">MathJax formulas fixed</span>
+        </div>
+      </div>
+
+      <figure class="hero-card">
+        <img src="../../images/blog13_01_blackhole_hero.png"
+             alt="Cinematic black-hole visual with accretion disk and gravitational lensing"
+             onerror="this.onerror=null;this.src='../../images/blog13_02_blackhole_lab_banner.png';" />
+        <figcaption class="hero-caption">
+          Article page: lightweight, readable, and safe. The interactive simulation opens separately as a dedicated
+          experience so the blog post itself does not slow down.
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="launch-strip wide">
+    <div class="launch-card">
+      <div>
+        <div class="eyebrow">Interactive experience</div>
+        <h2>Enter the Black Hole Lab</h2>
+        <p>
+          Launch the separate GPU-powered visual lab with a loading screen, accretion disk controls, observer angle,
+          spin, lensing strength, optional AGN-style jets, and live physical readouts. The lab opens in its own page so
+          it does not damage the reading experience here.
+        </p>
+      </div>
+      <a class="launch-button" href="../tools/black-hole-v8.html" data-track-event="blackhole_lab_launch">
+        Tighten your seatbelt →
+      </a>
+    </div>
+  </section>
+
+  <section class="journal wide">
+    <div class="journal-grid">
+      <aside class="left-rail">
+        <div class="rail-card">
+          <h3>Navigate</h3>
+          <ul class="section-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#spacetime">Spacetime Curvature</a></li>
+            <li><a href="#horizon">Event Horizon</a></li>
+            <li><a href="#singularity">Singularity</a></li>
+            <li><a href="#ergosphere">Ergosphere</a></li>
+            <li><a href="#hawking">Hawking Radiation</a></li>
+            <li><a href="#eht">Modern Imaging</a></li>
+            <li><a href="#comments">Comments</a></li>
+          </ul>
+        </div>
+
+        <div class="rail-card">
+          <h3>Elsewhere</h3>
+          <div class="mini-links">
+            <a href="../index.html"><span>All blog posts</span><span>↗</span></a>
+            <a href="../tools/black-hole-v8.html"><span>Black Hole Lab v8</span><span>↗</span></a>
+            <a href="../../index.html#projects"><span>Projects</span><span>↗</span></a>
+            <a href="../../cv.html"><span>CV</span><span>↗</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="story">
+        <div class="story-header" id="overview">
+          <div class="eyebrow">Relativity · Black-hole physics · Simulation notes</div>
+          <h2>Black holes are not empty holes in space. They are geometry under pressure.</h2>
+          <p>
+            The phrase “black hole” is effective branding but slightly misleading physics. It makes the object sound
+            like a hole cut into a cosmic surface. That is not really what is happening. A black hole is better thought
+            of as a region of spacetime where the geometry has become so extreme that all future-directed paths inside a
+            certain boundary point inward.
+          </p>
+        </div>
+
+        <article>
+          <section class="chapter">
+            <div class="chapter-label">Chapter 01 · Definition</div>
+            <h2>What is a black hole?</h2>
+            <p>
+              A black hole is a region of spacetime where gravity is so strong that nothing, not even light, can escape
+              once it crosses a boundary called the event horizon. That sentence is correct, but it can still sound
+              too much like a cosmic drain. A more careful description is that a black hole is what happens when
+              mass-energy curves spacetime so intensely that the causal structure of the region changes.
+            </p>
+            <p>
+              If the Sun were somehow replaced by a black hole with the same mass, Earth would not suddenly get sucked
+              in. Earth would continue orbiting almost exactly as before, because what matters for the orbit at that
+              distance is the total mass. The real issue would be the disappearance of sunlight, heat, and most of the
+              conditions we normally associate with survival. Minor inconvenience.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Schwarzschild radius</div>
+              \[
+                r_s = \frac{2GM}{c^2}
+              \]
+              <p>
+                For a non-rotating black hole, \(r_s\) gives the event-horizon scale. Compress enough mass inside that
+                radius and the escape speed exceeds \(c\).
+              </p>
+            </div>
+
+            <div class="quote">
+              A black hole is not interesting because it is dark. It is interesting because it changes what “outward”
+              even means.
+            </div>
+          </section>
+
+          <section class="chapter" id="spacetime">
+            <div class="chapter-label">Chapter 02 · Geometry</div>
+            <h2>Spacetime curvature: gravity as architecture</h2>
+            <p>
+              In the Newtonian picture, gravity is a force pulling objects toward one another. That description works
+              brilliantly for many practical purposes. General relativity replaces it with something deeper: matter and
+              energy curve spacetime, and free-falling objects move along the natural paths allowed by that curved
+              geometry.
+            </p>
+            <p>
+              This is why black holes matter conceptually. They take the geometric view of gravity and turn the volume
+              up until the room starts shaking. Near a black hole, “straight” and “future” are no longer the comfortable
+              ideas they are in ordinary life.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Einstein field equation</div>
+              \[
+                G_{\mu\nu} + \Lambda g_{\mu\nu}
+                =
+                \frac{8\pi G}{c^4}T_{\mu\nu}
+              \]
+              <p>
+                Very loosely: geometry on the left, matter-energy on the right. Matter tells spacetime how to curve;
+                curved spacetime tells matter how to move.
+              </p>
+            </div>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <strong>Event horizon</strong>
+                <span>A causal boundary beyond which outward-directed light signals can no longer reach distant observers.</span>
+              </div>
+              <div class="fact">
+                <strong>Photon sphere</strong>
+                <span>A region where light can orbit a non-rotating black hole on unstable trajectories.</span>
+              </div>
+              <div class="fact">
+                <strong>Accretion disk</strong>
+                <span>Hot plasma orbiting outside the horizon, often the brightest visible structure around the black hole.</span>
+              </div>
+              <div class="fact">
+                <strong>Shadow</strong>
+                <span>The dark apparent central region enlarged by strong-field gravitational bending of surrounding light.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="chapter" id="horizon">
+            <div class="chapter-label">Chapter 03 · Boundary</div>
+            <h2>The event horizon and the weird honesty of time dilation</h2>
+            <p>
+              The event horizon is often called the point of no return. That phrase is memorable, but it can make the
+              horizon sound like a physical wall. It is not a wall. It is a causal boundary. Nothing dramatic needs to
+              happen locally at the horizon of a sufficiently massive black hole. What changes is the global structure of
+              possible futures.
+            </p>
+            <p>
+              To a distant observer, an object falling toward the horizon appears to slow down, redden, and fade,
+              because the light climbing out loses energy and takes longer to escape. To the infalling observer, their
+              own clock continues normally. They do not experience their heartbeat as suddenly becoming ceremonial.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Gravitational time dilation, Schwarzschild exterior</div>
+              \[
+                t_{\mathrm{far}}
+                =
+                \frac{t_{\mathrm{near}}}{\sqrt{1-r_s/r}}
+              \]
+              <p>
+                As \(r\) approaches \(r_s\), the delay seen by a distant observer grows dramatically. This simplified
+                form applies outside a non-rotating black hole.
+              </p>
+            </div>
+          </section>
+
+          <section class="chapter" id="singularity">
+            <div class="chapter-label">Chapter 04 · Limit of theory</div>
+            <h2>The singularity: where the equations stop pretending they are comfortable</h2>
+            <p>
+              In the classical description, the centre of a black hole contains a singularity: a place where curvature
+              becomes infinite and the known mathematical description breaks down. Many popular summaries say this as if
+              it were a photographed feature. It is not. A singularity is the place where the theory itself is telling
+              us that something important is missing.
+            </p>
+            <p>
+              General relativity handles gravity beautifully on large scales. Quantum mechanics handles the microscopic
+              world brilliantly. Near the singularity, both should matter, and we do not yet possess a complete,
+              experimentally confirmed theory of quantum gravity.
+            </p>
+            <div class="callout">
+              The singularity is best treated as a signal that classical general relativity has reached its domain limit,
+              not as a fully understood physical object that we have directly observed.
+            </div>
+          </section>
+
+          <section class="chapter" id="ergosphere">
+            <div class="chapter-label">Chapter 05 · Rotation</div>
+            <h2>The ergosphere and frame dragging: when spacetime itself gets dragged around</h2>
+            <p>
+              Real astrophysical black holes are expected to rotate. Once rotation enters the problem, the simple
+              Schwarzschild picture is no longer enough. The Kerr solution describes rotating black holes, and rotation
+              introduces frame dragging. In plain language: spacetime is not just curved, it is twisted by the black
+              hole’s angular momentum.
+            </p>
+            <p>
+              Outside the horizon of a rotating black hole lies the ergosphere, a region where no observer can remain
+              stationary with respect to distant stars. You can still escape the ergosphere if your trajectory is right,
+              but you cannot simply hover there as if the geometry were politely waiting for you to make up your mind.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Dimensionless spin parameter</div>
+              \[
+                a_{\ast} = \frac{Jc}{GM^2}, \qquad 0 \leq a_{\ast} < 1
+              \]
+              <p>
+                Here \(J\) is angular momentum. The parameter \(a_{\ast}\) expresses how rapidly the black hole rotates.
+              </p>
+            </div>
+          </section>
+
+          <section class="chapter" id="hawking">
+            <div class="chapter-label">Chapter 06 · Quantum edge</div>
+            <h2>Hawking radiation: black holes are not perfectly black after all</h2>
+            <p>
+              Classical black holes only absorb. Quantum theory complicates that. Hawking radiation emerges from quantum
+              field theory in curved spacetime and implies that black holes can emit thermal radiation. The common
+              particle-pair explanation near the horizon is simplified, but it is useful as a way of visualising how the
+              horizon and quantum vacuum fluctuations enter the story.
+            </p>
+            <p>
+              The remarkable part is that the temperature is inversely proportional to mass. Larger black holes are
+              colder. Supermassive black holes are extraordinarily cold by this measure, which is why Hawking radiation
+              is conceptually central but observationally elusive for ordinary astrophysical black holes.
+            </p>
+
+            <div class="equation">
+              <div class="equation-label">Hawking temperature</div>
+              \[
+                T_{\mathrm{H}} = \frac{\hbar c^3}{8\pi G M k_{\mathrm{B}}}
+              \]
+              <p>
+                Larger black holes are colder. For stellar-mass and supermassive black holes, this temperature is tiny.
+              </p>
+            </div>
+
+            <div class="figure-shell">
+              <div class="figure-img">
+                <img src="../../images/blog13_04_hawking_radiation.png"
+                     alt="Conceptual scientific illustration of Hawking radiation near a black hole event horizon"
+                     onerror="this.remove();" />
+              </div>
+              <p class="figure-caption">
+                Conceptual figure for Hawking radiation near the event horizon. This is an educational visual, not an
+                observational image.
+              </p>
+            </div>
+
+            <p>
+              Hawking radiation also leads to the information paradox. If matter falls into a black hole and the black
+              hole later evaporates into thermal-looking radiation, where does the information about the original state
+              go? Quantum mechanics is not enthusiastic about information simply vanishing. Black holes therefore force
+              gravity, thermodynamics, and quantum theory to argue in public.
+            </p>
+          </section>
+
+          <section class="chapter" id="eht">
+            <div class="chapter-label">Chapter 07 · Observation</div>
+            <h2>Modern black-hole imaging: EHT, M87*, and why the image mattered</h2>
+            <p>
+              The Event Horizon Telescope did not photograph a singularity. It did not take a direct portrait of the
+              horizon itself either. What it reconstructed was the emission structure around a supermassive black hole:
+              a bright ring-like structure surrounding a dark central shadow.
+            </p>
+            <p>
+              The image was a triumph not only of astrophysics, but of instrumentation, calibration, signal processing,
+              and global collaboration. Radio observatories across Earth were combined through very-long-baseline
+              interferometry to synthesise an Earth-sized aperture. The final image was therefore both a scientific
+              result and an engineering achievement.
+            </p>
+
+            <div class="quote">
+              The image of a black hole is not just a picture of an object. It is a picture of a theory surviving
+              contact with an instrument.
+            </div>
+          </section>
+
+          <section class="chapter">
+            <div class="chapter-label">Interactive continuation</div>
+            <h2>Now open the lab</h2>
+            <p>
+              The main article intentionally stays lightweight. The separate simulator page has its own loading sequence:
+              calibrating the event horizon, loading the accretion disk particles, applying lensing, enabling optional
+              AGN-style jets, and then entering the black-hole lab. That makes the waiting feel deliberate rather than
+              broken.
+            </p>
+            <p>
+              The simulator is educational rather than a full Kerr geodesic ray tracer, but it is designed to communicate
+              the correct relationships: stronger spin changes disk motion, inclination changes what the disk looks like,
+              lensing bends the visual field, and the photon sphere marks the ring-like structure around the shadow.
+            </p>
+            <p>
+              <a class="launch-button" href="../tools/black-hole-v8.html" data-track-event="blackhole_lab_launch_inline">
+                Enter the Black Hole Lab →
+              </a>
+            </p>
+          </section>
+
+          <section class="references">
+            <h3>References</h3>
+            <ol>
+              <li>Einstein, A. (1915). The field equations of gravitation.</li>
+              <li>Schwarzschild, K. (1916). On the gravitational field of a mass point according to Einstein’s theory.</li>
+              <li>Kerr, R. P. (1963). Gravitational field of a spinning mass as an example of algebraically special metrics.</li>
+              <li>Hawking, S. W. (1975). Particle creation by black holes.</li>
+              <li>Luminet, J.-P. (1979). Image of a spherical black hole with thin accretion disk.</li>
+              <li>Event Horizon Telescope Collaboration (2019). First M87* Event Horizon Telescope Results.</li>
+              <li>Event Horizon Telescope Collaboration (2022). First Sagittarius A* Event Horizon Telescope Results.</li>
+            </ol>
+          </section>
+
+          <section class="comments-section" id="comments">
+            <h3>Comments & reactions</h3>
+            <p>
+              Comments are powered by GitHub Discussions through giscus. You can leave a question, correction, or reaction
+              below.
+            </p>
+            <script src="https://giscus.app/client.js"
+                    data-repo="Biswajit1999/Biswajit_Jana.github.io"
+                    data-repo-id="R_kgDOST2kXQ"
+                    data-category="General"
+                    data-category-id="DIC_kwDOST2kXc4C8UVe"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+          </section>
+        </article>
+      </main>
+
+      <aside class="right-rail">
+        <div class="rail-card">
+          <h3>More from the Lab</h3>
+          <div class="post-list">
+            <a class="post-card" href="three-body-problem.html">
+              <div class="post-card-kicker">Related exploration</div>
+              <h4>The Three-Body Problem</h4>
+              <p>Chaos, sensitive dependence on initial conditions, and why gravitating systems enjoy humiliating intuition.</p>
+              <div class="tiny-meta">Dynamics · Computational physics</div>
+            </a>
+
+            <a class="post-card" href="pulsar-lighthouses.html">
+              <div class="post-card-kicker">Related exploration</div>
+              <h4>Pulsar Lighthouses</h4>
+              <p>Rotation, magnetic fields, beams, and how dead stars somehow keep showing off across the Galaxy.</p>
+              <div class="tiny-meta">Compact objects · Timing</div>
+            </a>
+
+            <a class="post-card" href="galactic-evolution.html">
+              <div class="post-card-kicker">Related exploration</div>
+              <h4>Galactic Evolution</h4>
+              <p>How galaxies assemble, collide, recycle gas, and turn cosmic history into visible structure.</p>
+              <div class="tiny-meta">Galaxies · Structure formation</div>
+            </a>
+
+            <a class="post-card" href="big-bang-part-1.html">
+              <div class="post-card-kicker">Related exploration</div>
+              <h4>The Big Bang, Before the Big Bang</h4>
+              <p>A more philosophical astrophysics note on beginnings, horizons, multiverse questions, and cosmic unease.</p>
+              <div class="tiny-meta">Cosmology · Origins</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h3>Recent Writing</h3>
+          <div class="mini-links">
+            <a href="control-system.html"><span>What is a Control System?</span><span>↗</span></a>
+            <a href="pid-control.html"><span>What is PID Control?</span><span>↗</span></a>
+            <a href="tardigrades.html"><span>Tardigrades: Tiny Survivors</span><span>↗</span></a>
+            <a href="instrumentation-bridge.html"><span>To bridge the gap, I found instrumentation</span><span>↗</span></a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Biswajit Jana · Black-hole article and interactive visual lab
+  </footer>
+
+  <script>
+    function trackEvent(name) {
+      if (window.plausible) {
+        window.plausible(name);
+      }
+      if (window.gtag) {
+        window.gtag("event", name, {
+          event_category: "engagement",
+          event_label: "black_hole_blog"
+        });
+      }
+    }
+
+    document.querySelectorAll("[data-track-event]").forEach(function(el) {
+      el.addEventListener("click", function() {
+        trackEvent(el.getAttribute("data-track-event"));
+      });
+    });
+  </script>
+</body>
+</html>

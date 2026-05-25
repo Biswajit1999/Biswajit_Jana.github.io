@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noise: The Thing Between You and a Discovery | Biswajit Jana</title>
+<meta name="description" content="A flagship editorial post on signal, noise, smoothing, false positives, and scientific detection." />
+<meta property="og:title" content="Noise: The Thing Between You and a Discovery | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A flagship editorial post on signal, noise, smoothing, false positives, and scientific detection." />
+<meta property="og:image" content="../../images/blog9_01_noise_signal_hero.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(","\\)"]], displayMath: [["\\[","\\]"]], processEscapes: true },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root{
+  --bg:#03060c;--bg2:#07101c;--surface:rgba(10,17,31,.82);--surface2:rgba(255,255,255,.045);
+  --text:#edf4ff;--muted:#a9b8d2;--dim:#697d9d;--line:rgba(255,255,255,.10);
+  --accent:#4af0c8;--accent2:#83ddff;--accent3:#c493ff;--gold:#ffbc73;--danger:#ff7d90;
+  --display:"Playfair Display",Georgia,serif;--serif:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--nav-h:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;font-family:var(--serif);color:var(--text);line-height:1.78;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),
+    radial-gradient(circle at 48% 42%,rgba(196,147,255,.05),transparent 32%),
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+  radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%),
+  linear-gradient(120deg,rgba(74,240,200,.04),transparent 30%,rgba(131,221,255,.035) 72%,transparent)}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{height:var(--nav-h);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);
+  background:rgba(3,6,12,.84);backdrop-filter:blur(18px) saturate(1.25)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--accent)}
+.hero{padding:58px 0 28px}.hero-grid{display:grid;grid-template-columns:minmax(330px,.76fr) minmax(520px,1.24fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(3rem,6vw,6.4rem);line-height:.94;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.08rem,1.5vw,1.36rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.05rem;line-height:1.7}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{position:relative;min-height:540px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:0 26px 80px rgba(0,0,0,.42)}
+.hero-card img{width:100%;height:100%;min-height:540px;object-fit:cover;opacity:.95}.hero-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.50)),radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%)}
+.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}
+.feature{padding:24px 0 48px}.sim-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.sim-frame canvas{width:100%;height:620px;display:block;background:transparent}
+.sim-panel{position:absolute;right:18px;top:18px;width:min(360px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(8,14,26,.64);backdrop-filter:blur(18px);padding:16px}
+.sim-panel h2{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:8px}.sim-panel p{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.control{margin:10px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:6px}.control strong{color:var(--accent)}input[type=range]{width:100%;accent-color:var(--gold)}
+.data-feed{position:absolute;left:18px;bottom:18px;width:min(430px,calc(100% - 36px));border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(5,10,20,.62);backdrop-filter:blur(16px);padding:14px 16px;font-family:var(--mono)}
+.data-feed h3{font-size:.70rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}.feed-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:6px;margin-bottom:6px;font-size:.70rem;color:var(--muted)}.feed-line:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.feed-line strong{color:var(--text);white-space:nowrap}
+.journal{padding:10px 0 78px}.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(275px,.82fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:0 26px 80px rgba(0,0,0,.32);margin-bottom:16px}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}
+.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}.story-header h2{font-family:var(--display);font-size:clamp(2.5rem,4.8vw,4.45rem);line-height:.98;letter-spacing:-.05em;margin-bottom:12px}.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}
+.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}.chapter h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.chapter h3{font-family:var(--display);font-size:clamp(1.35rem,2vw,1.9rem);margin:28px 0 10px;line-height:1.15}
+.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}
+.equation{margin:24px 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.28);overflow-x:auto}.equation-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.equation p{font-size:.94rem;margin:10px 0 0}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}
+.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer a{color:var(--muted)}.footer a:hover{color:var(--gold)}
+@media(max-width:1180px){.hero-grid{grid-template-columns:1fr}.hero-card,.hero-card img{min-height:460px}.journal-grid{grid-template-columns:220px minmax(0,1fr)}.right-rail{grid-column:1/-1;position:static}.sim-panel{position:relative;right:auto;top:auto;width:auto;margin:16px}.data-feed{position:relative;left:auto;bottom:auto;width:auto;margin:16px}.sim-frame canvas{height:520px}}
+@media(max-width:900px){.nav{height:auto}.nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}.journal-grid{grid-template-columns:1fr}.left-rail,.right-rail{position:static}.fact-grid{grid-template-columns:1fr}.hero{padding-top:34px}}
+@media(max-width:760px){.wide,.nav-inner{width:min(94vw,100%)}.hero-card,.hero-card img{min-height:340px}.sim-frame canvas{height:420px}h1{font-size:clamp(2.4rem,14vw,4.2rem)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner wide">
+  <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li>
+    <li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Scientific computing · data analysis · interactive signal lab</div>
+      <h1>Noise: The Thing Between You and a Discovery</h1>
+      <p class="hero-sub">The signal is rarely missing. It is usually buried under enough nonsense to make a patient scientist question their life choices.</p>
+      <div class="hook">Welcome to data analysis: where the universe whispers, your detector coughs, and your smoothing window quietly decides whether you become famous or wrong.</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08 · Hertford, London, UK</span>
+        <span class="meta-pill">12 min read</span>
+        <span class="meta-pill">Interactive signal/noise lab</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="../../images/blog9_01_noise_signal_hero.png" alt="Noise and signal recovery visual" onerror="this.onerror=null;this.src='../../images/blog9_02_signal_recovery_banner.png';" />
+      <figcaption class="hero-caption">Signal recovery is not magic. It is statistics, assumptions, and occasionally resisting the urge to overfit the universe.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="feature wide">
+
+<div class="sim-frame">
+  <canvas id="noiseCanvas"></canvas>
+  <div class="sim-panel">
+    <h2>Signal Recovery Lab</h2>
+    <p>Change noise, smoothing, and signal frequency. Watch how quickly a real pattern can become either obvious or suspiciously invented.</p>
+    <div class="control"><label><span>Noise strength</span><strong id="noiseLevelOut">0.45</strong></label><input id="noiseLevel" type="range" min="0" max="1.5" step="0.01" value="0.45"></div>
+    <div class="control"><label><span>Smoothing window</span><strong id="smoothOut">9</strong></label><input id="smooth" type="range" min="1" max="45" step="2" value="9"></div>
+    <div class="control"><label><span>Signal frequency</span><strong id="freqOut">2.0</strong></label><input id="freq" type="range" min="0.5" max="8" step="0.1" value="2"></div>
+    <div class="control"><label><span>Signal strength</span><strong id="signalAmpOut">0.65</strong></label><input id="signalAmp" type="range" min="0.05" max="1.2" step="0.01" value="0.65"></div>
+  </div>
+  <div class="data-feed">
+    <h3>Detection Feed</h3>
+    <div class="feed-line"><span>Estimated SNR</span><strong id="snrOut">--</strong></div>
+    <div class="feed-line"><span>Recovered amplitude</span><strong id="ampOut">--</strong></div>
+    <div class="feed-line"><span>Detection mood</span><strong id="detectMood">--</strong></div>
+  </div>
+</div>
+
+</section>
+
+<section class="journal wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li><li><a href="#signal">Signal</a></li><li><a href="#noise">Noise</a></li><li><a href="#smoothing">Smoothing</a></li><li><a href="#false-positive">False positives</a></li><li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>Noisy measurement</strong></div>
+          <div><span>Status</span><strong>Extreme</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>Signal Lab</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      
+<div class="story-header" id="overview"><div class="eyebrow">Data · uncertainty · discovery</div><h2>Noise is not the enemy. Unexamined noise is.</h2><p>Every measurement arrives carrying baggage. Some of it is random. Some of it is instrumental. Some of it is the universe being unhelpful. The scientific task is not to remove everything inconvenient; it is to understand what remains.</p></div>
+<article>
+<section class="chapter" id="signal"><div class="chapter-label">Chapter 01 · Signal</div><h2>The signal is the story you are trying to hear.</h2><p>A signal is any repeatable or physically meaningful structure in the data. In astronomy, it might be a spectral line, a transit dip, a radial-velocity wobble, a pulsar timing pattern, or a faint object in an image.</p><div class="equation"><div class="equation-label">Simple measurement model</div>\[y(t)=s(t)+n(t)\]<p>The measured data \(y(t)\) contain the true signal \(s(t)\) plus noise \(n(t)\). Real life adds systematics, calibration drift, and deadlines.</p></div></section>
+<section class="chapter" id="noise"><div class="chapter-label">Chapter 02 · Noise</div><h2>Noise is everything that makes the plot less obedient.</h2><p>Noise can come from photon statistics, electronics, background light, imperfect calibration, atmospheric effects, detector temperature, or sampling choices. Treating all noise as simple random scatter is how you accidentally write fiction with error bars.</p><div class="fact-grid"><div class="fact"><strong>Random noise</strong><span>Scatter that averages down when independent. Lovely when it behaves.</span></div><div class="fact"><strong>Systematic noise</strong><span>Structured errors. The plot looks meaningful because the instrument is lying consistently.</span></div></div></section>
+<section class="chapter" id="smoothing"><div class="chapter-label">Chapter 03 · Smoothing</div><h2>Smoothing is useful. It is also how people accidentally invent planets.</h2><p>A smoothing window can reveal broad trends by suppressing high-frequency noise. But too much smoothing can erase real features or create the illusion of structure. A beautiful curve is not automatically a truthful curve. Annoying, but important.</p><div class="equation"><div class="equation-label">Signal-to-noise ratio</div>\[\mathrm{SNR}=\frac{\mu_{\mathrm{signal}}}{\sigma_{\mathrm{noise}}}\]<p>In this simplified form, the signal strength is compared to the spread of the noise. Different fields define SNR in more specific ways depending on the measurement.</p></div></section>
+<section class="chapter" id="false-positive"><div class="chapter-label">Chapter 04 · False positives</div><h2>A false positive is a discovery wearing a fake moustache.</h2><p>The danger is not only missing real signals. It is believing in signals that are not there. That is why independent checks, null tests, injection-recovery tests, and physical plausibility matter.</p><p>If the detection disappears when you change a reasonable analysis choice, it was probably not the universe revealing itself. It was your pipeline doing interpretive dance.</p></section>
+<section class="chapter" id="takeaway"><div class="chapter-label">Takeaway</div><h2>Good science is not noise-free. It is noise-aware.</h2><p>Data analysis is the discipline of being excited and suspicious at the same time. That tension is not a weakness. It is the reason discoveries survive contact with reality.</p></section>
+</article>
+
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Signal</strong><span>The thing you hope is real. Very shy. Easily bullied.</span></div><div class="glossary-item"><strong>Noise</strong><span>Randomness, systematics, bad calibration, detector mood swings, and other villains.</span></div><div class="glossary-item"><strong>SNR</strong><span>Signal-to-noise ratio. The closest science gets to asking: ‘Are we sure, though?’</span></div><div class="glossary-item"><strong>Smoothing</strong><span>Helpful when sensible, dangerous when used like a digital paintbrush.</span></div><div class="glossary-item"><strong>False positive</strong><span>A discovery-shaped trap wearing a lab coat.</span></div>
+        </div>
+      </div>
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+          
+<a class="post-card" href="three-body-problem.html"><div class="post-card-kicker">Related exploration</div><h4>The Three-Body Problem</h4><p>Gravity, chaos, and the universe refusing to be neatly solved before lunch.</p><div class="tiny-meta">Dynamics · simulation</div></a>
+<a class="post-card" href="black-hole-extreme-lab.html"><div class="post-card-kicker">Related exploration</div><h4>Black Holes</h4><p>When gravity stops negotiating and starts rewriting causality.</p><div class="tiny-meta">Relativity · visual lab</div></a>
+<a class="post-card" href="tardigrades.html"><div class="post-card-kicker">Related exploration</div><h4>Tardigrades</h4><p>Biology doing its best impression of a space-rated engineering material.</p><div class="tiny-meta">Astrobiology · survival</div></a>
+<a class="post-card" href="control-system.html"><div class="post-card-kicker">Related exploration</div><h4>Control Systems</h4><p>Feedback loops: because pretending errors do not exist is not engineering.</p><div class="tiny-meta">Instrumentation · feedback</div></a>
+
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics & Instrumentation Lab.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters & Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+function trackEvent(name){
+  if(window.plausible) window.plausible(name);
+  if(window.gtag) window.gtag("event",name,{event_category:"engagement",event_label:document.title});
+}
+</script>
+
+
+<script>
+(function(){
+const c=document.getElementById("noiseCanvas"),ctx=c.getContext("2d");let t=0,last=performance.now(),noiseSeed=0;
+function resize(){const d=Math.min(devicePixelRatio||1,2);c.width=c.clientWidth*d;c.height=c.clientHeight*d;ctx.setTransform(d,0,0,d,0,0)}resize();addEventListener("resize",resize,{passive:true});
+["noiseLevel","smooth","freq","signalAmp"].forEach(id=>document.getElementById(id).addEventListener("input",()=>{noiseSeed++;draw()}));
+function rand(i){return Math.sin((i+1+noiseSeed*137)*12.9898)*43758.5453%1}
+function moving(a,w){let out=[];for(let i=0;i<a.length;i++){let s=0,n=0;for(let j=-w;j<=w;j++){let k=i+j;if(k>=0&&k<a.length){s+=a[k];n++}}out.push(s/n)}return out}
+function draw(){
+ const now=performance.now();t+=(now-last)/1000;last=now;const W=c.clientWidth,H=c.clientHeight;
+ const nl=+noiseLevel.value, sw=+smooth.value, f=+freq.value, amp=+signalAmp.value;
+ noiseLevelOut.textContent=nl.toFixed(2);smoothOut.textContent=sw;freqOut.textContent=f.toFixed(1);signalAmpOut.textContent=amp.toFixed(2);
+ ctx.clearRect(0,0,W,H);let g=ctx.createRadialGradient(W*.5,H*.45,20,W*.5,H*.5,Math.max(W,H)*.7);g.addColorStop(0,"#10223b");g.addColorStop(1,"#02040a");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ for(let x=0;x<W;x+=60){ctx.strokeStyle="rgba(255,255,255,.035)";ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=60){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ const N=280, y0=H*.52, scale=H*.25;let clean=[],obs=[];for(let i=0;i<N;i++){let x=i/(N-1);let s=amp*(Math.sin(2*Math.PI*f*x+t*.45)+.30*Math.sin(2*Math.PI*(f*2.2)*x));let n=(rand(i)-.5)*2*nl;clean.push(s);obs.push(s+n)}
+ let sm=moving(obs,Math.floor(sw/2));function plot(arr,color,lw){ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.beginPath();arr.forEach((v,i)=>{let x=60+i/(N-1)*(W-120),y=y0-v*scale;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke()}
+ plot(obs,"rgba(170,190,220,.30)",1);plot(clean,"rgba(255,188,115,.45)",2);plot(sm,"rgba(74,240,200,.95)",3);
+ let snr=amp/(nl+.05);snrOut.textContent=snr.toFixed(2);ampOut.textContent=(Math.max(...sm)-Math.min(...sm)).toFixed(2);detectMood.textContent=snr>3?"probably real, still verify":snr>1.5?"interesting but needy":"noise is currently winning";
+ ctx.fillStyle="rgba(237,244,255,.9)";ctx.font="12px JetBrains Mono";ctx.fillText("grey: observed | amber: hidden truth | teal: recovered trend",60,42);
+ requestAnimationFrame(draw)
+}draw();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What is PID Control? | Biswajit Jana</title>
+<meta name="description" content="A flagship instrumentation post explaining proportional, integral, and derivative control with an interactive PID response lab." />
+<meta property="og:title" content="What is PID Control? | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A flagship instrumentation post explaining proportional, integral, and derivative control with an interactive PID response lab." />
+<meta property="og:image" content="../../images/blog4_01_pid_hero.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(","\\)"]], displayMath: [["\\[","\\]"]], processEscapes: true },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+:root{
+  --bg:#03060c;--bg2:#07101c;--surface:rgba(10,17,31,.82);--surface2:rgba(255,255,255,.045);
+  --text:#edf4ff;--muted:#a9b8d2;--dim:#697d9d;--line:rgba(255,255,255,.10);
+  --accent:#4af0c8;--accent2:#83ddff;--accent3:#c493ff;--gold:#ffbc73;--danger:#ff7d90;
+  --display:"Playfair Display",Georgia,serif;--serif:"Source Serif 4",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--nav-h:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;font-family:var(--serif);color:var(--text);line-height:1.78;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),
+    radial-gradient(circle at 48% 42%,rgba(196,147,255,.05),transparent 32%),
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));
+  background-size:auto,auto,auto,76px 76px,76px 76px,auto;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+  radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%),
+  linear-gradient(120deg,rgba(74,240,200,.04),transparent 30%,rgba(131,221,255,.035) 72%,transparent)}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+.wide{width:min(1560px,94vw);margin:0 auto}
+.nav{height:var(--nav-h);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);
+  background:rgba(3,6,12,.84);backdrop-filter:blur(18px) saturate(1.25)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}.brand span{color:var(--accent)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--accent)}
+.hero{padding:58px 0 28px}.hero-grid{display:grid;grid-template-columns:minmax(330px,.76fr) minmax(520px,1.24fr);gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;display:block}
+h1{font-family:var(--display);font-size:clamp(3rem,6vw,6.4rem);line-height:.94;letter-spacing:-.055em;margin-bottom:18px}
+.hero-sub{color:var(--muted);font-size:clamp(1.08rem,1.5vw,1.36rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}
+.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.05rem;line-height:1.7}
+.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.hero-card{position:relative;min-height:540px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:0 26px 80px rgba(0,0,0,.42)}
+.hero-card img{width:100%;height:100%;min-height:540px;object-fit:cover;opacity:.95}.hero-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 30%,rgba(0,0,0,.50)),radial-gradient(circle at 50% 50%,transparent 0 28%,rgba(0,0,0,.55) 100%)}
+.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}
+.feature{padding:24px 0 48px}.feature-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.feature-frame img{width:100%;height:620px;object-fit:cover;opacity:.92}.feature-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.70),transparent 34%,rgba(0,0,0,.45)),linear-gradient(180deg,rgba(255,255,255,.04),transparent 45%,rgba(0,0,0,.60));pointer-events:none}
+.feature-caption{position:absolute;left:24px;bottom:24px;right:24px;z-index:2;display:grid;gap:8px;max-width:780px}.feature-caption strong{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.feature-caption span{font-size:1.05rem;color:#dce9ff;line-height:1.65}
+.sim-frame{position:relative;min-height:620px;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}
+.sim-frame canvas{width:100%;height:620px;display:block;background:transparent}
+.sim-panel{position:absolute;right:18px;top:18px;width:min(360px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(8,14,26,.64);backdrop-filter:blur(18px);padding:16px}
+.sim-panel h2{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:8px}.sim-panel p{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.control{margin:10px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:6px}.control strong{color:var(--accent)}input[type=range]{width:100%;accent-color:var(--gold)}
+.data-feed{position:absolute;left:18px;bottom:18px;width:min(440px,calc(100% - 36px));border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(5,10,20,.62);backdrop-filter:blur(16px);padding:14px 16px;font-family:var(--mono)}
+.data-feed h3{font-size:.70rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}.feed-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:6px;margin-bottom:6px;font-size:.70rem;color:var(--muted)}.feed-line:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.feed-line strong{color:var(--text);white-space:nowrap;text-align:right}
+.journal{padding:10px 0 78px}.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,800px) minmax(275px,.82fr);gap:34px;align-items:start}
+.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:0 26px 80px rgba(0,0,0,.32);margin-bottom:16px}
+.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-nav{list-style:none;display:grid;gap:10px}.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}
+.telemetry{display:grid;gap:8px}.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}.telemetry strong{color:var(--text);text-align:right}
+.glossary{display:grid;gap:12px}.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}
+.post-list{display:grid;gap:12px}.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}
+.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}.story-header h2{font-family:var(--display);font-size:clamp(2.5rem,4.8vw,4.45rem);line-height:.98;letter-spacing:-.05em;margin-bottom:12px}.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}
+.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}.chapter h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.chapter h3{font-family:var(--display);font-size:clamp(1.35rem,2vw,1.9rem);margin:28px 0 10px;line-height:1.15}
+.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}
+.equation{margin:24px 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.28);overflow-x:auto}.equation-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.equation p{font-size:.94rem;margin:10px 0 0}
+.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}
+.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer a{color:var(--muted)}.footer a:hover{color:var(--gold)}
+@media(max-width:1180px){.hero-grid{grid-template-columns:1fr}.hero-card,.hero-card img{min-height:460px}.journal-grid{grid-template-columns:220px minmax(0,1fr)}.right-rail{grid-column:1/-1;position:static}.sim-panel{position:relative;right:auto;top:auto;width:auto;margin:16px}.data-feed{position:relative;left:auto;bottom:auto;width:auto;margin:16px}.sim-frame canvas,.feature-frame img{height:520px}.feature-frame{min-height:520px}}
+@media(max-width:900px){.nav{height:auto}.nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}.journal-grid{grid-template-columns:1fr}.left-rail,.right-rail{position:static}.fact-grid{grid-template-columns:1fr}.hero{padding-top:34px}}
+@media(max-width:760px){.wide,.nav-inner{width:min(94vw,100%)}.hero-card,.hero-card img{min-height:340px}.sim-frame canvas,.feature-frame img{height:420px}.feature-frame{min-height:420px}h1{font-size:clamp(2.4rem,14vw,4.2rem)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner wide">
+  <a class="brand" href="../../index.html">Biswajit <span>Jana</span></a>
+  <ul class="nav-links">
+    <li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li>
+    <li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero wide">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Instrumentation · PID · control theory</div>
+      <h1>What is PID Control?</h1>
+      <p class="hero-sub">PID is the controller everyone uses because it is simple enough to implement, powerful enough to be useful, and annoying enough to tune properly.</p>
+      <div class="hook">Welcome to PID control: three letters, one feedback loop, and a surprising number of ways to make a system oscillate like it has unresolved emotional issues.</div>
+      <div class="meta-row">
+        <span class="meta-pill">2026-05-08 · Hertford, London, UK</span>
+        <span class="meta-pill">12 min read</span>
+        <span class="meta-pill">Interactive PID response lab</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="../../images/blog4_01_pid_hero.png" alt="PID control hero image" onerror="this.onerror=null;this.src='../../images/blog4_02_pid_banner.png';" />
+      <figcaption class="hero-caption">PID looks innocent in an equation. Then you put it on hardware and discover the difference between theory and consequences.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="feature wide">
+
+<div class="sim-frame">
+  <canvas id="pidCanvas"></canvas>
+  <div class="sim-panel">
+    <h2>PID Response Lab</h2>
+    <p>Adjust \(K_p\), \(K_i\), and \(K_d\). The graph shows setpoint, response, and how tuning affects overshoot, settling, and steady-state error.</p>
+    <div class="control"><label><span>Kp · proportional</span><strong id="kpOut">1.40</strong></label><input id="kp" type="range" min="0" max="5" step="0.01" value="1.40"></div>
+    <div class="control"><label><span>Ki · integral</span><strong id="kiOut">0.35</strong></label><input id="ki" type="range" min="0" max="2" step="0.01" value="0.35"></div>
+    <div class="control"><label><span>Kd · derivative</span><strong id="kdOut">0.42</strong></label><input id="kd" type="range" min="0" max="2" step="0.01" value="0.42"></div>
+    <div class="control"><label><span>Disturbance</span><strong id="pidDistOut">0.20</strong></label><input id="pidDist" type="range" min="0" max="1" step="0.01" value="0.20"></div>
+  </div>
+  <div class="data-feed">
+    <h3>PID Telemetry</h3>
+    <div class="feed-line"><span>Current error</span><strong id="pidErr">--</strong></div>
+    <div class="feed-line"><span>Overshoot estimate</span><strong id="pidOvershoot">--</strong></div>
+    <div class="feed-line"><span>Settling mood</span><strong id="pidMood">--</strong></div>
+  </div>
+</div>
+
+</section>
+
+<section class="journal wide">
+  <div class="journal-grid">
+    <aside class="left-rail">
+      <div class="rail-card">
+        <h3>Navigation Map</h3>
+        <ul class="section-nav">
+          <li><a href="#overview">Overview</a></li><li><a href="#p-term">Proportional</a></li><li><a href="#i-term">Integral</a></li><li><a href="#d-term">Derivative</a></li><li><a href="#tuning">Tuning</a></li><li><a href="#implementation">Implementation</a></li><li><a href="#takeaway">Takeaway</a></li>
+        </ul>
+      </div>
+      <div class="rail-card">
+        <h3>System Telemetry</h3>
+        <div class="telemetry">
+          <div><span>Object</span><strong>PID controller</strong></div>
+          <div><span>Status</span><strong>Extreme</strong></div>
+          <div><span>Observer</span><strong>Biswajit Jana</strong></div>
+          <div><span>Mode</span><strong>PID Lab</strong></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="story">
+      
+<div class="story-header" id="overview"><div class="eyebrow">Control theory · stability · tuning</div><h2>PID turns error into correction using the present, the past, and the trend.</h2><p>A PID controller calculates a control action from three ingredients: proportional response to current error, integral response to accumulated error, and derivative response to the rate of change. It is not magic. It is a practical compromise that became everywhere because it works surprisingly often.</p></div>
+<article>
+<section class="chapter" id="p-term"><div class="chapter-label">Chapter 01 · P</div><h2>Proportional control reacts to what is wrong right now.</h2><p>The proportional term scales with the present error. If the output is far from the setpoint, the correction is large. If the output is close, the correction is small. This is intuitive and often effective, but P-only control usually leaves a steady-state offset.</p><div class="equation"><div class="equation-label">Proportional term</div>\[u_P(t)=K_p e(t)\]<p>Large \(K_p\) gives stronger response but can also create overshoot and oscillation.</p></div></section>
+<section class="chapter" id="i-term"><div class="chapter-label">Chapter 02 · I</div><h2>The integral term remembers old mistakes.</h2><p>The integral term accumulates error over time. If a small offset persists, the integral grows until the controller pushes the system closer to the setpoint. This eliminates steady-state error, but too much integral action can cause slow oscillation and windup.</p><div class="equation"><div class="equation-label">Integral term</div>\[u_I(t)=K_i\int e(t)\,dt\]<p>The integral term is powerful because it refuses to forget persistent error. Unfortunately, it sometimes refuses to forget too much.</p></div></section>
+<section class="chapter" id="d-term"><div class="chapter-label">Chapter 03 · D</div><h2>The derivative term tries to brake before the crash.</h2><p>The derivative term responds to how quickly the error is changing. It can reduce overshoot by damping the response. But because differentiation amplifies high-frequency noise, derivative control must be used carefully.</p><div class="equation"><div class="equation-label">Derivative term</div>\[u_D(t)=K_d\frac{de(t)}{dt}\]<p>Derivative action is useful when the measurement is clean enough not to turn every tiny noise spike into a dramatic correction.</p></div></section>
+<section class="chapter" id="tuning"><div class="chapter-label">Chapter 04 · Tuning</div><h2>Tuning is where polite equations meet rude hardware.</h2><p>The full PID controller combines all three terms. Increasing gains can improve response, but also risks overshoot, oscillation, actuator saturation, and instability. Good tuning balances speed, damping, and robustness.</p><div class="equation"><div class="equation-label">PID control law</div>\[u(t)=K_p e(t)+K_i\int e(t)\,dt+K_d\frac{de(t)}{dt}\]<p>The output \(u(t)\) is the sum of present, accumulated, and predictive corrections.</p></div><div class="quote">A PID controller is easy to write. A good PID controller is the part where humility enters the laboratory.</div></section>
+<section class="chapter" id="implementation"><div class="chapter-label">Chapter 05 · Implementation</div><h2>Real PID is discrete, noisy, and bounded.</h2><p>In real systems the controller runs at discrete time steps. Sensors are noisy. Actuators saturate. Delays exist. Anti-windup, filtering, output clamps, and safe limits matter as much as the ideal equation.</p><div class="equation"><div class="equation-label">Discrete approximation</div>\[u[n]=K_p e[n]+K_iT_s\sum e[k]+\frac{K_d}{T_s}(e[n]-e[n-1])\]<p>\(T_s\) is the sampling interval. In software, this is the version that actually gets to meet reality.</p></div></section>
+<section class="chapter" id="takeaway"><div class="chapter-label">Takeaway</div><h2>PID is simple because it has to be.</h2><p>Its strength is not theoretical perfection. Its strength is practical clarity: respond to the error, remember persistent bias, and damp fast change. That is why PID remains one of the most useful algorithms in engineering.</p></section>
+</article>
+
+    </main>
+
+    <aside class="right-rail">
+      <div class="rail-card">
+        <h3>Glossary, but less boring</h3>
+        <div class="glossary">
+          <div class="glossary-item"><strong>Proportional</strong><span>Correction proportional to current error. Obvious, useful, and occasionally too enthusiastic.</span></div><div class="glossary-item"><strong>Integral</strong><span>Accumulated error memory. Great for offsets, dangerous when it starts hoarding mistakes.</span></div><div class="glossary-item"><strong>Derivative</strong><span>Predictive damping. Helpful until sensor noise turns it into a chaos microphone.</span></div><div class="glossary-item"><strong>Overshoot</strong><span>When the controller reaches the target and keeps going because subtlety was not installed.</span></div><div class="glossary-item"><strong>Windup</strong><span>The integral term getting emotionally attached to old errors.</span></div>
+        </div>
+      </div>
+      <div class="rail-card">
+        <h3>Related Labs</h3>
+        <div class="post-list">
+<a class="post-card" href="control-system.html"><div class="post-card-kicker">Related exploration</div><h4>Control Systems</h4><p>Feedback loops: because pretending errors do not exist is not engineering.</p><div class="tiny-meta">Instrumentation · feedback</div></a>
+<a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Related exploration</div><h4>Radial Velocity</h4><p>Planets hiding by making their stars wobble. Adorable, but detectable.</p><div class="tiny-meta">Exoplanets · spectroscopy</div></a>
+<a class="post-card" href="spectra-confession.html"><div class="post-card-kicker">Related exploration</div><h4>Spectra Confession</h4><p>Light travels across space, then a spectrograph makes it talk.</p><div class="tiny-meta">Spectroscopy · light</div></a>
+<a class="post-card" href="noise-and-discovery.html"><div class="post-card-kicker">Related exploration</div><h4>Noise and Discovery</h4><p>Where the universe whispers and your detector coughs.</p><div class="tiny-meta">Data · uncertainty</div></a>
+</div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner wide">
+    <div>© 2026 Biswajit Jana. All Rights Reserved. // Computational Astrophysics & Instrumentation Lab.</div>
+    <div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Visual Archive / Posters & Seminars</a></div>
+  </div>
+</footer>
+
+<script>
+const sections=[...document.querySelectorAll("main [id]")];
+const links=[...document.querySelectorAll(".section-nav a")];
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
+    }
+  });
+},{rootMargin:"-20% 0px -65% 0px",threshold:.1});
+sections.forEach(s=>obs.observe(s));
+function trackEvent(name){
+  if(window.plausible) window.plausible(name);
+  if(window.gtag) window.gtag("event",name,{event_category:"engagement",event_label:document.title});
+}
+</script>
+
+
+<script>
+(function(){
+const c=document.getElementById("pidCanvas"),ctx=c.getContext("2d");let last=performance.now(),hist=[],y=0,v=0,integral=0,prevE=0,peak=0;
+function resize(){const d=Math.min(devicePixelRatio||1,2);c.width=c.clientWidth*d;c.height=c.clientHeight*d;ctx.setTransform(d,0,0,d,0,0)}resize();addEventListener("resize",resize,{passive:true});
+["kp","ki","kd","pidDist"].forEach(id=>document.getElementById(id).addEventListener("input",()=>{hist=[];y=0;v=0;integral=0;prevE=0;peak=0;}));
+function draw(now){
+ let dt=Math.min(.035,(now-last)/1000);last=now;const W=c.clientWidth,H=c.clientHeight;
+ const Kp=+kp.value,Ki=+ki.value,Kd=+kd.value,dist=+pidDist.value;
+ kpOut.textContent=Kp.toFixed(2);kiOut.textContent=Ki.toFixed(2);kdOut.textContent=Kd.toFixed(2);pidDistOut.textContent=dist.toFixed(2);
+ const set=1;const e=set-y;integral=Math.max(-4,Math.min(4,integral+e*dt));const deriv=(e-prevE)/Math.max(dt,.001);prevE=e;
+ const u=Kp*e+Ki*integral+Kd*deriv;const disturbance=Math.sin(now*.0012)*dist;
+ v+=(u+disturbance-y*.45-v*.72)*dt*1.6;y+=v*dt;peak=Math.max(peak,y);
+ hist.push({y,set,u,e});if(hist.length>430)hist.shift();
+ ctx.clearRect(0,0,W,H);let bg=ctx.createRadialGradient(W*.45,H*.45,20,W*.5,H*.5,Math.max(W,H)*.72);bg.addColorStop(0,"#13243c");bg.addColorStop(1,"#02040a");ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ for(let x=0;x<W;x+=70){ctx.strokeStyle="rgba(255,255,255,.035)";ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let yy=0;yy<H;yy+=70){ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(W,yy);ctx.stroke()}
+ const x0=70,y0=H*.16,ww=W-140,hh=H*.50;ctx.strokeStyle="rgba(255,255,255,.18)";ctx.strokeRect(x0,y0,ww,hh);function py(val){return y0+hh*(1-(val+0.25)/1.9)}
+ ctx.strokeStyle="rgba(255,188,115,.75)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,py(set));ctx.lineTo(x0+ww,py(set));ctx.stroke();
+ ctx.strokeStyle="#4af0c8";ctx.lineWidth=3;ctx.beginPath();hist.forEach((p,i)=>{let x=x0+i/Math.max(1,hist.length-1)*ww,yy=py(p.y);if(i===0)ctx.moveTo(x,yy);else ctx.lineTo(x,yy)});ctx.stroke();
+ ctx.strokeStyle="rgba(196,147,255,.62)";ctx.lineWidth=1.6;ctx.beginPath();hist.forEach((p,i)=>{let x=x0+i/Math.max(1,hist.length-1)*ww,yy=y0+hh*.86-p.u*hh*.05;if(i===0)ctx.moveTo(x,yy);else ctx.lineTo(x,yy)});ctx.stroke();
+ pidErr.textContent=e.toFixed(3);pidOvershoot.textContent=Math.max(0,(peak-1)*100).toFixed(1)+"%";pidMood.textContent=Math.abs(e)<.06&&Math.abs(v)<.05?"settled-ish":Kp>3.5&&Kd<.2?"aggressive chaos":"correcting";
+ ctx.fillStyle="rgba(237,244,255,.9)";ctx.font="12px JetBrains Mono";ctx.fillText("amber: setpoint | teal: response | purple: control effort",x0,46);
+ requestAnimationFrame(draw)
+}
+requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

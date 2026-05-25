@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications | Biswajit Jana</title>
+  <meta name="description" content="Selected publications, proceedings, posters, and technical outputs by Biswajit Jana.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-2: #091525;
+      --panel: rgba(16, 29, 51, 0.82);
+      --panel-solid: #101d33;
+      --text: #eef4ff;
+      --muted: #b9c6dd;
+      --soft: #89a0bf;
+      --accent: #36f4d2;
+      --accent-2: #78a7ff;
+      --border: rgba(255,255,255,0.09);
+      --shadow: 0 25px 80px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+    body.light {
+      --bg: #f5f8ff;
+      --bg-2: #edf3ff;
+      --panel: rgba(255,255,255,0.88);
+      --panel-solid: #ffffff;
+      --text: #13223c;
+      --muted: #52627a;
+      --soft: #667894;
+      --accent: #00a790;
+      --accent-2: #2d6cff;
+      --border: rgba(18,42,76,0.10);
+      --shadow: 0 20px 55px rgba(62,92,145,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(54,244,210,0.08), transparent 22%),
+        radial-gradient(circle at 86% 16%, rgba(120,167,255,0.08), transparent 22%),
+        linear-gradient(180deg, var(--bg), var(--bg-2) 56%, #08111d 100%);
+      overflow-x: hidden;
+    }
+    body.light {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(0,167,144,0.09), transparent 22%),
+        radial-gradient(circle at 86% 16%, rgba(45,108,255,0.08), transparent 22%),
+        linear-gradient(180deg, #f6f9ff, #eef4ff 56%, #f8fbff 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 58px 58px;
+      pointer-events: none;
+    }
+    body.light::before {
+      background-image:
+        linear-gradient(rgba(20,60,110,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,60,110,0.06) 1px, transparent 1px);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), 92%); margin: 0 auto; }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(7,16,29,0.76);
+    }
+    body.light nav { background: rgba(245,248,255,0.88); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+    .brand { font-weight: 900; letter-spacing: -0.03em; font-size: 1.08rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { list-style: none; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-weight: 700; font-size: .96rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .switch { position: relative; width: 58px; height: 30px; display: inline-block; flex: 0 0 auto; }
+    .switch input { display: none; }
+    .slider {
+      position: absolute; inset: 0; border-radius: 999px; border: 1px solid var(--border);
+      background: var(--panel-solid); box-shadow: var(--shadow); cursor: pointer;
+    }
+    .slider::before {
+      content: "🌙"; position: absolute; top: 2px; left: 3px; width: 24px; height: 24px; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(255,255,255,0.07); transition: transform .28s ease; font-size: .82rem;
+    }
+    input:checked + .slider::before { transform: translateX(27px); content: "☀️"; }
+
+    .hero { padding: 84px 0 38px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+    .hero-copy, .hero-side, .section, .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-copy, .hero-side { padding: 34px; }
+    .hero-copy::before, .hero-side::before, .section::before, .panel::before {
+      content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 36%, rgba(54,244,210,0.03)); pointer-events: none;
+    }
+    .eyebrow {
+      color: var(--accent); text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; font-weight: 900; margin-bottom: 14px;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: clamp(3rem, 7vw, 5.2rem);
+      line-height: .96; letter-spacing: -0.045em; margin-bottom: 18px;
+    }
+    .lede { font-size: 1.08rem; color: var(--muted); max-width: 62ch; }
+    .metrics {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 8px;
+    }
+    .metric {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 18px; padding: 16px;
+    }
+    .metric .label {
+      color: var(--accent); font-family: "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .06em; font-size: .78rem; margin-bottom: 8px; font-weight: 800;
+    }
+    .metric .value { font-size: 1.4rem; font-weight: 900; letter-spacing: -.03em; }
+    .metric p { color: var(--muted); font-size: .93rem; margin-top: 6px; }
+
+    .main-grid {
+      display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; padding-bottom: 72px;
+    }
+    .side-stack { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .panel { padding: 22px; }
+    .panel h3, .section h2 { font-weight: 900; letter-spacing: -0.03em; }
+    .panel h3 { font-size: 1rem; margin-bottom: 12px; }
+    .toc a {
+      display: block; color: var(--muted); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: .95rem; font-weight: 600;
+    }
+    .toc a:last-child { border-bottom: 0; }
+    .toc a:hover { color: var(--accent); }
+    .mini-list { list-style: none; display: grid; gap: 10px; }
+    .mini-list li {
+      font-size: .94rem; color: var(--muted); display: flex; justify-content: space-between; gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px;
+    }
+    .mini-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .mini-list strong { color: var(--text); font-weight: 700; }
+
+    .content { display: grid; gap: 20px; }
+    .section { padding: 28px; }
+    .section h2 { font-size: clamp(1.5rem, 2.3vw, 2rem); margin-bottom: 12px; }
+    .section p { color: var(--muted); margin-bottom: 12px; }
+    .section p:last-child { margin-bottom: 0; }
+    .pub-list { display: grid; gap: 16px; margin-top: 14px; }
+    .pub-card {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 20px; padding: 20px;
+    }
+    .pub-type {
+      display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 999px; font-size: .8rem; font-weight: 800;
+      margin-bottom: 12px; border: 1px solid rgba(54,244,210,0.18); background: rgba(54,244,210,0.07); color: var(--accent);
+    }
+    .pub-card h4 { font-size: 1.1rem; line-height: 1.35; margin-bottom: 8px; font-weight: 850; }
+    .pub-meta {
+      color: var(--soft); font-family: "JetBrains Mono", monospace; font-size: .84rem; margin-bottom: 10px;
+    }
+    .pub-card p { margin-bottom: 8px; }
+    .doi { color: var(--accent-2); font-weight: 700; word-break: break-word; }
+
+    .bullet-list { padding-left: 18px; color: var(--muted); }
+    .bullet-list li { margin: 8px 0; }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 14px; }
+    .note-box {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 18px; padding: 18px;
+    }
+    .note-box h4 { margin-bottom: 8px; font-size: 1rem; }
+
+    footer {
+      margin-top: 30px; border-top: 1px solid var(--border); padding: 22px 0 44px; color: var(--soft); font-size: .92rem;
+    }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .main-grid, .two-col, .metrics { grid-template-columns: 1fr; }
+      .side-stack { position: static; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 64px; }
+      .hero-copy, .hero-side, .section, .panel { padding: 22px; }
+      .nav-inner { flex-wrap: wrap; justify-content: center; }
+      .nav-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a class="active" href="publications.html">Publications</a></li>
+        <li><a href="paper-notes.html">Paper Notes</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <label class="switch" aria-label="Toggle theme">
+        <input id="themeToggle" type="checkbox" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Research outputs · Publications · Proceedings</div>
+        <h1>Publications & Selected Outputs</h1>
+        <p class="lede">This page collects journal publications, conference proceedings, and talk or poster topics connected to my background in electronics, communication systems, instrumentation, and astrophysics. It is not intended to look louder than the work itself.</p>
+      </div>
+
+      <aside class="hero-side">
+        <div class="eyebrow">Publication snapshot</div>
+        <div class="metrics">
+          <div class="metric">
+            <div class="label">Journal papers</div>
+            <div class="value">1</div>
+            <p>Peer-reviewed journal publication currently listed on this page.</p>
+          </div>
+          <div class="metric">
+            <div class="label">Conference papers</div>
+            <div class="value">2</div>
+            <p>Conference proceedings across electronics and logical design work.</p>
+          </div>
+          <div class="metric">
+            <div class="label">Talk topics</div>
+            <div class="value">5+</div>
+            <p>Instrumentation and spectroscopy topics prepared for academic presentation.</p>
+          </div>
+          <div class="metric">
+            <div class="label">Main direction</div>
+            <div class="value" style="font-size:1rem;">Instrumentation + astrophysics</div>
+            <p>The publication trajectory is gradually moving toward precision astronomical systems.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <aside class="side-stack">
+      <section class="panel">
+        <h3>Navigation</h3>
+        <div class="toc">
+          <a href="#journals">Journal Publications</a>
+          <a href="#proceedings">Conference Proceedings</a>
+          <a href="#talks">Talks & Posters</a>
+          <a href="#notes">Research direction</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Profile</h3>
+        <ul class="mini-list">
+          <li><span>Author</span><strong>Biswajit Jana</strong></li>
+          <li><span>Current emphasis</span><strong>Instrumentation</strong></li>
+          <li><span>Methods</span><strong>Optics · Spectroscopy</strong></li>
+          <li><span>Linked page</span><strong><a href="cv.html" style="color:var(--accent)">Curriculum Vitae</a></strong></li>
+        </ul>
+      </section>
+    </aside>
+
+    <div class="content">
+      <section class="section" id="journals">
+        <h2>Journal publications</h2>
+        <p>The publication list below reflects the route I took into astrophysics: beginning from electronics and optical communication, then moving toward instrumentation and precision measurement in astronomy.</p>
+        <div class="pub-list">
+          <article class="pub-card">
+            <span class="pub-type">Journal Publication</span>
+            <h4>Implementation of dimming-controlled visible light communication using Raspberry Pi</h4>
+            <div class="pub-meta">Optical and Quantum Electronics · Springer · 2021</div>
+            <p>This work combines optical communication, Raspberry Pi implementation, control of illumination level, and experimental testing. It remains a useful example of how my engineering background developed through practical systems rather than abstract enthusiasm alone.</p>
+            <p><strong>DOI:</strong> <a class="doi" href="https://doi.org/10.1007/s11082-021-03362-4" target="_blank" rel="noopener">10.1007/s11082-021-03362-4</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="proceedings">
+        <h2>Conference proceedings</h2>
+        <div class="pub-list">
+          <article class="pub-card">
+            <span class="pub-type">Conference Proceeding</span>
+            <h4>GSM controlled location-specific garbage collecting smart bin</h4>
+            <div class="pub-meta">IEMECON · Jaipur, India · 2019</div>
+            <p>A systems-oriented project focused on sensing, automation, and communication. The paper reflects an early interest in device behaviour, system logic, and practical implementation.</p>
+            <p><strong>DOI:</strong> <a class="doi" href="https://doi.org/10.1109/IEMECONX.2019.8877007" target="_blank" rel="noopener">10.1109/IEMECONX.2019.8877007</a></p>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-type">Conference Proceeding</span>
+            <h4>Priority encoder using reversible logic gates in QCA</h4>
+            <div class="pub-meta">IEEE IEMCON · Vancouver, Canada · 2017</div>
+            <p>An earlier logic-design contribution, focused on reversible logic and QCA implementation. It sits far from astronomy in subject, but not far from my long-term habit of enjoying technical problems more than is probably healthy.</p>
+            <p><strong>DOI:</strong> <a class="doi" href="https://doi.org/10.1109/IEMCON.2017.8117242" target="_blank" rel="noopener">10.1109/IEMCON.2017.8117242</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="talks">
+        <h2>Talks, posters, and presentation topics</h2>
+        <p>This section records selected topics I have prepared for discussion, presentation, or poster-style communication, especially around high-resolution spectroscopy, interferometric stability, and instrument control.</p>
+        <ul class="bullet-list">
+          <li>State of Art: Radial Velocity Spectrograph</li>
+          <li>Advancement in Precision: Laser Interferometer Control System</li>
+          <li>Optimizing Path Length Stability in Laser Interferometers using Air Refractive Index</li>
+          <li>High Resolution RV Spectrographs: ANDES and PID Loop Implementation in EXOhSPEC</li>
+          <li>Microbolometer Detector Performance for Satellite Laser Ranging</li>
+        </ul>
+      </section>
+
+      <section class="section" id="notes">
+        <h2>Research direction</h2>
+        <div class="two-col">
+          <div class="note-box">
+            <h4>Where this is heading</h4>
+            <p>The older outputs on this page come from electronics and communication engineering, while the more recent direction of my work is increasingly centered on astrophysical instrumentation, exoplanet spectroscopy, optical stability, and feedback-driven measurement systems.</p>
+          </div>
+          <div class="note-box">
+            <h4>Website context</h4>
+            <p>For broader context around my research profile, current technical interests, and project work, the CV page and paper-notes section provide the clearest view of how the publication list connects to the rest of my portfolio.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Biswajit Jana. All rights reserved.</div>
+      <div><a href="cv.html">Curriculum Vitae</a> · <a href="paper-notes.html">Paper Notes</a> · <a href="blog.html">Blog</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const body = document.body;
+    const toggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      body.classList.add('light');
+      toggle.checked = true;
+    }
+    toggle?.addEventListener('change', () => {
+      body.classList.toggle('light', toggle.checked);
+      localStorage.setItem('theme', toggle.checked ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

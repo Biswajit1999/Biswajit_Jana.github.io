@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curriculum Vitae | Biswajit Jana</title>
+  <meta name="description" content="Academic CV and professional profile of Biswajit Jana, astrophysics graduate working across instrumentation, spectroscopy, optics, and scientific computing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-2: #091525;
+      --panel: rgba(16, 29, 51, 0.82);
+      --panel-solid: #101d33;
+      --panel-2: #13233f;
+      --text: #eef4ff;
+      --muted: #b9c6dd;
+      --soft: #89a0bf;
+      --accent: #36f4d2;
+      --accent-2: #78a7ff;
+      --accent-3: #d59bff;
+      --border: rgba(255,255,255,0.09);
+      --shadow: 0 25px 80px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    body.light {
+      --bg: #f5f8ff;
+      --bg-2: #edf3ff;
+      --panel: rgba(255,255,255,0.88);
+      --panel-solid: #ffffff;
+      --panel-2: #edf4ff;
+      --text: #13223c;
+      --muted: #52627a;
+      --soft: #667894;
+      --accent: #00a790;
+      --accent-2: #2d6cff;
+      --accent-3: #7d4dff;
+      --border: rgba(18,42,76,0.10);
+      --shadow: 0 20px 55px rgba(62, 92, 145, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(54,244,210,0.08), transparent 22%),
+        radial-gradient(circle at 86% 16%, rgba(120,167,255,0.08), transparent 22%),
+        linear-gradient(180deg, var(--bg), var(--bg-2) 56%, #08111d 100%);
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
+    }
+    body.light {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(0,167,144,0.09), transparent 22%),
+        radial-gradient(circle at 86% 16%, rgba(45,108,255,0.08), transparent 22%),
+        linear-gradient(180deg, #f6f9ff, #eef4ff 56%, #f8fbff 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 58px 58px;
+      pointer-events: none;
+    }
+    body.light::before {
+      background-image:
+        linear-gradient(rgba(20,60,110,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,60,110,0.06) 1px, transparent 1px);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--max), 92%); margin: 0 auto; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(7,16,29,0.76);
+    }
+    body.light nav { background: rgba(245,248,255,0.88); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+    .brand span { color: var(--accent); }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+    .switch {
+      position: relative;
+      width: 58px;
+      height: 30px;
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-solid);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+    .slider::before {
+      content: "🌙";
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      transition: transform .28s ease;
+      font-size: .82rem;
+    }
+    input:checked + .slider::before {
+      transform: translateX(27px);
+      content: "☀️";
+    }
+
+    .hero {
+      padding: 84px 0 36px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+    .hero-copy,
+    .hero-side {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-copy::before,
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 36%, rgba(54,244,210,0.03));
+      pointer-events: none;
+    }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: .78rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin-bottom: 18px;
+    }
+    .lede {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 24px;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #58e8d1);
+      color: #08211e;
+      box-shadow: 0 16px 34px rgba(54,244,210,0.18);
+    }
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .quick-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .quick-card .label {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent);
+      font-size: .78rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+    .quick-card .value {
+      font-weight: 700;
+      color: var(--text);
+      font-size: .98rem;
+      line-height: 1.5;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      padding: 8px 0 70px;
+    }
+    .side-stack {
+      position: sticky;
+      top: 92px;
+      display: grid;
+      gap: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .panel h3,
+    .section h2 {
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .panel h3 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .toc a {
+      display: block;
+      color: var(--muted);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: .95rem;
+      font-weight: 600;
+    }
+    .toc a:last-child { border-bottom: 0; }
+    .toc a:hover { color: var(--accent); }
+
+    .mini-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .mini-list li {
+      font-size: .94rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 10px;
+    }
+    .mini-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .mini-list strong { color: var(--text); font-weight: 700; }
+
+    .content {
+      display: grid;
+      gap: 20px;
+    }
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 2.3vw, 2rem);
+      margin-bottom: 12px;
+    }
+    .section p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .section p:last-child { margin-bottom: 0; }
+    .timeline,
+    .skills-grid,
+    .project-grid,
+    .publication-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .item-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .item-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+    .item-meta {
+      color: var(--soft);
+      font-family: "JetBrains Mono", monospace;
+      font-size: .84rem;
+      margin-bottom: 10px;
+    }
+    .bullet-list {
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .bullet-list li { margin: 8px 0; }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .skill-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .skill-box h4 {
+      margin-bottom: 10px;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .84rem;
+      font-weight: 700;
+      color: var(--text);
+      border: 1px solid rgba(54,244,210,0.18);
+      background: rgba(54,244,210,0.07);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    footer {
+      margin-top: 30px;
+      border-top: 1px solid var(--border);
+      padding: 22px 0 44px;
+      color: var(--soft);
+      font-size: .92rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .main-grid,
+      .skills-grid,
+      .split-grid { grid-template-columns: 1fr; }
+      .side-stack { position: static; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 64px; }
+      .hero-copy, .hero-side, .section, .panel { padding: 22px; }
+      .nav-inner { flex-wrap: wrap; justify-content: center; }
+      .nav-links { justify-content: center; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .button-row { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Biswajit <span>Jana</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="cv.html">CV</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="paper-notes.html">Paper Notes</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+      </ul>
+      <label class="switch" aria-label="Toggle theme">
+        <input id="themeToggle" type="checkbox" />
+        <span class="slider"></span>
+      </label>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Curriculum Vitae · Academic Profile</div>
+        <h1>Curriculum Vitae</h1>
+        <p class="lede">I am an astrophysics graduate with an instrumentation mindset, working at the boundary between exoplanet spectroscopy, optics, electronics, environmental stability, and scientific computing. This page summarises my background, research direction, selected work, and technical toolkit.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="Biswajit%20Jana.pdf" target="_blank" rel="noopener">Download CV</a>
+          <a class="btn btn-secondary" href="mailto:biswajitjana1999@gmail.com">Email me</a>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="eyebrow">At a glance</div>
+        <div class="quick-grid">
+          <div class="quick-card">
+            <div class="label">Current focus</div>
+            <div class="value">Astrophysical instrumentation, radial-velocity spectroscopy, feedback control, optical stability</div>
+          </div>
+          <div class="quick-card">
+            <div class="label">Research themes</div>
+            <div class="value">EXOhSPEC, interferometry, brown dwarfs, detector performance, precision measurements</div>
+          </div>
+          <div class="quick-card">
+            <div class="label">Core strengths</div>
+            <div class="value">Python, optics, electronics, analysis, experiment design, technical communication</div>
+          </div>
+          <div class="quick-card">
+            <div class="label">Location</div>
+            <div class="value">United Kingdom · Research portfolio hosted online</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <aside class="side-stack">
+      <section class="panel">
+        <h3>Navigation</h3>
+        <div class="toc">
+          <a href="#profile">Profile</a>
+          <a href="#education">Education</a>
+          <a href="#focus">Research Focus</a>
+          <a href="#experience">Selected Experience</a>
+          <a href="#skills">Technical Skills</a>
+          <a href="#outputs">Selected Outputs</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Snapshot</h3>
+        <ul class="mini-list">
+          <li><span>MSc</span><strong>Astrophysics</strong></li>
+          <li><span>BTech</span><strong>ECE</strong></li>
+          <li><span>Primary tools</span><strong>Python · LaTeX · Optics</strong></li>
+          <li><span>Method space</span><strong>Spectroscopy · Interferometry</strong></li>
+        </ul>
+      </section>
+    </aside>
+
+    <div class="content">
+      <section class="section" id="profile">
+        <h2>Professional profile</h2>
+        <p>My training combines astrophysics with electronics and instrumentation, which means I naturally end up asking not only what the universe is doing, but also how well our instruments are measuring it. Much of my work has therefore focused on precision: how optical systems respond to their environment, how detector-plane motion can be stabilised, and how feedback logic can improve the reliability of measurements.</p>
+        <p>My broader interests include exoplanet instrumentation, radial-velocity spectroscopy, optical path stability, brown dwarfs, detector performance, and scientific computing for experimental systems. I enjoy technical work that sits between physics and engineering rather than pretending the two should stay in separate rooms.</p>
+      </section>
+
+      <section class="section" id="education">
+        <h2>Education</h2>
+        <div class="timeline">
+          <article class="item-card">
+            <h4>MSc Astrophysics with Advanced Research</h4>
+            <div class="item-meta">University of Hertfordshire, United Kingdom · 2022–2024</div>
+            <p>Graduate training in astrophysics with a strong research and instrumentation component, including optical systems, spectroscopy, data analysis, and scientific reporting.</p>
+          </article>
+          <article class="item-card">
+            <h4>BTech Electronics and Communication Engineering</h4>
+            <div class="item-meta">University of Engineering and Management, India · 2017–2021</div>
+            <p>Foundational training in electronics, embedded systems, signal processing, programming, and communication systems, which later shaped my approach to astrophysical instrumentation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="focus">
+        <h2>Research focus</h2>
+        <p>My research interests sit around the practical side of astrophysics: what it takes to build, stabilise, and interpret instruments that are supposed to measure very small effects without being distracted by everything else the environment is doing.</p>
+        <div class="tags">
+          <span class="tag">Exoplanet instrumentation</span>
+          <span class="tag">Radial-velocity spectroscopy</span>
+          <span class="tag">Optical systems</span>
+          <span class="tag">Laser interferometry</span>
+          <span class="tag">Feedback control</span>
+          <span class="tag">Detector stability</span>
+          <span class="tag">Brown dwarfs</span>
+          <span class="tag">Scientific computing</span>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <h2>Selected experience</h2>
+        <div class="project-grid">
+          <article class="item-card">
+            <h4>EXOhSPEC closed-loop feedback control project</h4>
+            <p>Worked on stabilisation ideas for a precision spectrograph platform, focusing on environmental response, optical path behaviour, detector-plane stability, and control logic tied to temperature and image motion.</p>
+          </article>
+          <article class="item-card">
+            <h4>SEPnet placement with Lumi Space</h4>
+            <p>Contributed to detector-performance analysis relevant to satellite laser ranging, combining practical measurement work with instrument-oriented interpretation.</p>
+          </article>
+          <article class="item-card">
+            <h4>Halo T dwarf candidate research</h4>
+            <p>Worked with VISTA, DES, and WISE data for the study of candidate T dwarfs, linking survey-based astrophysics with classification and follow-up motivation.</p>
+          </article>
+          <article class="item-card">
+            <h4>Radio interferometry summer school project</h4>
+            <p>Participated in hands-on interferometry training, strengthening my interest in observational methods and data-driven astronomical inference.</p>
+          </article>
+          <article class="item-card">
+            <h4>Visible light communication system using Raspberry Pi</h4>
+            <p>Designed and implemented a VLC system with dimming control, bringing together hardware, software, optical communication, and experimental testing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <h2>Technical skills</h2>
+        <div class="skills-grid">
+          <div class="skill-box">
+            <h4>Programming & analysis</h4>
+            <p>Python, MATLAB, HTML/CSS/JavaScript, LaTeX, scientific plotting, data cleaning, experiment logging, and quantitative analysis.</p>
+          </div>
+          <div class="skill-box">
+            <h4>Instrumentation & optics</h4>
+            <p>Optical instrumentation, spectroscopy, laser interferometry, environmental monitoring, detector behaviour, and practical lab-based measurement systems.</p>
+          </div>
+          <div class="skill-box">
+            <h4>Electronics & embedded systems</h4>
+            <p>Electronics, Arduino, Raspberry Pi, sensor integration, interfacing, and hardware-aware experimentation.</p>
+          </div>
+          <div class="skill-box">
+            <h4>Research communication</h4>
+            <p>Scientific writing, posters, presentations, technical summaries, and web-based academic portfolio development.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="outputs">
+        <h2>Selected outputs</h2>
+        <div class="split-grid">
+          <article class="item-card">
+            <h4>Publications & proceedings</h4>
+            <p>Includes journal and conference outputs across visible light communication, smart systems, and logic design, with a growing emphasis on instrumentation and astrophysics.</p>
+            <div class="button-row" style="margin-top:14px;">
+              <a class="btn btn-secondary" href="publications.html">View publications</a>
+            </div>
+          </article>
+          <article class="item-card">
+            <h4>Paper notes & research reflections</h4>
+            <p>A curated section on the website is dedicated to paper notes and reading summaries, keeping technical ideas readable without draining them of meaning.</p>
+            <div class="button-row" style="margin-top:14px;">
+              <a class="btn btn-secondary" href="paper-notes.html">Open paper notes</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 Biswajit Jana. All rights reserved.</div>
+      <div><a href="index.html">Home</a> · <a href="publications.html">Publications</a> · <a href="paper-notes.html">Paper Notes</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const body = document.body;
+    const toggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      body.classList.add('light');
+      toggle.checked = true;
+    }
+    toggle?.addEventListener('change', () => {
+      body.classList.toggle('light', toggle.checked);
+      localStorage.setItem('theme', toggle.checked ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

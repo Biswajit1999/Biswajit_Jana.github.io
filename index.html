@@ -1,0 +1,3676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Biswajit Jana | Astrophysics, Instrumentation & Scientific Computing</title>
+<meta name="description" content="Research portfolio of Biswajit Jana. Exploring astronomical instrumentation, spectrograph stabilization, and interactive physics simulations.">
+<meta name="keywords" content="Astrophysics, Spectrograph, Optical Systems, Instrumentation Researcher, Physics Blog, Biswajit Jana">
+<meta name="author" content="Biswajit Jana">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/">
+
+<meta property="og:title" content="Biswajit Jana | Astrophysics, Instrumentation & Scientific Computing">
+<meta property="og:description" content="Research portfolio of Biswajit Jana. Exploring astronomical instrumentation, spectrograph stabilization, and interactive physics simulations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/">
+<meta property="og:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/images/homepage_profile_hero.png">
+<meta property="og:image:alt" content="Biswajit Jana astrophysics and instrumentation portfolio visual">
+<meta property="og:site_name" content="Biswajit Jana">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Biswajit Jana | Astrophysics, Instrumentation & Scientific Computing">
+<meta name="twitter:description" content="Research portfolio of Biswajit Jana. Exploring astronomical instrumentation, spectrograph stabilization, and interactive physics simulations.">
+<meta name="twitter:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/images/homepage_profile_hero.png">
+
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg2: #0b1424;
+      --card: #101d33;
+      --card2: #13233f;
+      --text: #eef4ff;
+      --muted: #b9c6dd;
+      --accent: #36f4d2;
+      --accent2: #77a8ff;
+      --accent3: #d393ff;
+      --warning: #fbbf24;
+      --border: rgba(255,255,255,0.09);
+      --shadow: 0 22px 70px rgba(0,0,0,0.35);
+    }
+
+    body.light {
+      --bg: #f5f8ff;
+      --bg2: #eaf1fb;
+      --card: #ffffff;
+      --card2: #edf4ff;
+      --text: #13223c;
+      --muted: #52627a;
+      --accent: #009f8b;
+      --accent2: #2a6bff;
+      --accent3: #7d4dff;
+      --warning: #9a6a00;
+      --border: rgba(10,30,60,0.12);
+      --shadow: 0 18px 45px rgba(40,70,120,0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(54,244,210,0.08), transparent 24%),
+        radial-gradient(circle at 85% 18%, rgba(119,168,255,0.09), transparent 26%),
+        radial-gradient(circle at 55% 85%, rgba(211,147,255,0.06), transparent 30%),
+        linear-gradient(180deg, var(--bg), #050b15 55%, #06101c);
+      color: var(--text);
+      line-height: 1.65;
+      transition: 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    body.light {
+      background:
+        radial-gradient(circle at 10% 12%, rgba(0,168,141,0.08), transparent 26%),
+        radial-gradient(circle at 82% 18%, rgba(42,107,255,0.08), transparent 26%),
+        radial-gradient(circle at 50% 85%, rgba(125,77,255,0.06), transparent 30%),
+        linear-gradient(180deg, #f5f8ff, #eef4ff 55%, #f8fbff);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 58px 58px;
+      pointer-events: none;
+    }
+
+    body.light::before {
+      background-image:
+        linear-gradient(rgba(20,60,110,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,60,110,0.06) 1px, transparent 1px);
+    }
+
+    canvas#stars {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.62;
+      pointer-events: none;
+    }
+
+    body.light canvas#stars {
+      opacity: 0.34;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,16,29,0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    body.light nav {
+      background: rgba(245,248,255,0.88);
+    }
+
+    nav {
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      backdrop-filter: blur(14px) saturate(140%);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .nav-inner.container {
+      width: min(1500px, 94%);
+    }
+
+    .nav-inner {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 850;
+      font-size: 1.1rem;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .switch {
+      position: relative;
+      width: 58px;
+      height: 30px;
+      display: inline-block;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      transition: 0.3s;
+      box-shadow: var(--shadow);
+    }
+
+    .slider::before {
+      content: "🌙";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 3px;
+      top: 2px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      transition: 0.3s;
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(27px);
+      content: "☀️";
+    }
+
+
+    .site-shell {
+      width: min(1640px, 96%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1260px) 188px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .content-column {
+      min-width: 0;
+    }
+
+    .content-column > section > .container {
+      width: min(1180px, 100%);
+    }
+
+    .side-rail {
+      position: sticky;
+      top: 88px;
+      z-index: 20;
+      align-self: start;
+    }
+
+    .left-rail {
+      min-height: calc(100vh - 110px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rail-card {
+      background: rgba(16,29,51,0.62);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    body.light .rail-card,
+    body.light .quick-stats-panel {
+      background: rgba(255,255,255,0.70);
+    }
+
+    .rail-link {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-weight: 850;
+      font-size: 0.86rem;
+      transition: 0.22s ease;
+    }
+
+    .rail-link:hover {
+      color: #04120f;
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .rail-divider {
+      width: 1px;
+      height: 26px;
+      background: var(--border);
+      margin: 2px auto;
+    }
+
+    .quick-stats-panel {
+      background: rgba(16,29,51,0.66);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 18px;
+    }
+
+    .quick-stats-panel h2 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .quick-stat {
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .quick-stat:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .quick-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .quick-stat strong {
+      display: block;
+      color: var(--text);
+      line-height: 1.25;
+      font-size: 0.98rem;
+    }
+
+    .quick-cta {
+      margin-top: 12px;
+      width: 100%;
+      justify-content: center;
+      box-shadow: none;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+    }
+
+    .hero {
+      padding: 70px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 850;
+      font-size: 0.78rem;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 8vw, 5.8rem);
+      line-height: 0.98;
+      margin-bottom: 14px;
+      letter-spacing: -2px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #ffffff, #bfd2ff 55%, var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    body.light .gradient {
+      background: linear-gradient(90deg, #13223c, #2a6bff, var(--accent));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: clamp(1.15rem, 2.2vw, 1.72rem);
+      color: #c3cdeb;
+      font-weight: 750;
+      margin-bottom: 18px;
+      max-width: 880px;
+    }
+
+    body.light .subtitle {
+      color: #385475;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 1.04rem;
+      margin-bottom: 24px;
+    }
+
+    .pill-row, .skills-inline, .mini-links, .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill-row {
+      margin-bottom: 24px;
+    }
+
+    .pill, .skill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 650;
+    }
+
+    .btn-row {
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 17px;
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 800;
+      transition: 0.25s;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #86fff0);
+      color: #04120f;
+      border: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 108px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .image-frame {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .image-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.18));
+      pointer-events: none;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .image-frame:hover img {
+      transform: scale(1.035);
+    }
+
+    .hero-image {
+      height: 265px;
+    }
+
+    .section-banner {
+      height: 320px;
+      margin: 18px 0 22px;
+    }
+
+    .project-img {
+      height: 170px;
+      margin: -2px -2px 18px -2px;
+      border-radius: 18px;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, rgba(54,244,210,0.12), rgba(119,168,255,0.08), rgba(211,147,255,0.08));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-inner {
+      background: rgba(6,12,24,0.58);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    body.light .profile-inner {
+      background: rgba(255,255,255,0.78);
+    }
+
+    .profile-top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+    }
+
+    .available {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(54,244,210,0.09);
+      border: 1px solid rgba(54,244,210,0.25);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    .profile-inner p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .spectral {
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #5642ff, #4e97ff, #32e8d3, #f5ef67, #ff9d48, #ff547c);
+      margin-top: 18px;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-top {
+      max-width: 840px;
+      margin-bottom: 22px;
+    }
+
+    .kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 850;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid, .grid-2, .grid-4, .contact-grid, .clock-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-4, .clock-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(54,244,210,0.35);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin-top: 10px;
+    }
+
+    .credit-card {
+      margin-top: 18px;
+      background:
+        linear-gradient(135deg, rgba(54,244,210,0.10), rgba(119,168,255,0.06)),
+        var(--card);
+      border-color: rgba(54,244,210,0.22);
+    }
+
+    .credit-card strong,
+    .project-credit strong {
+      color: var(--accent);
+      font-weight: 850;
+    }
+
+    .credit-note,
+    .project-credit {
+      margin-top: 12px;
+      font-size: 0.9rem !important;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(54,244,210,0.09);
+      border: 1px solid rgba(54,244,210,0.25);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 850;
+      margin-bottom: 12px;
+    }
+
+    .featured {
+      background: linear-gradient(135deg, rgba(54,244,210,0.10), rgba(119,168,255,0.07), rgba(211,147,255,0.05));
+    }
+
+    .skills-inline {
+      margin-top: 18px;
+    }
+
+    .skill {
+      background: var(--card2);
+      font-size: 0.86rem;
+    }
+
+    .roadmap-box {
+      margin-top: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .roadmap-line {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      position: relative;
+    }
+
+    .milestone {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      position: relative;
+      min-height: 158px;
+    }
+
+    .milestone::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: block;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .milestone strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .milestone p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .mini-links {
+      margin-top: 14px;
+    }
+
+    .mini-link {
+      color: var(--accent);
+      border: 1px solid rgba(54,244,210,0.25);
+      background: rgba(54,244,210,0.06);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 750;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .muted-link {
+      color: var(--muted);
+      border-color: var(--border);
+      background: rgba(255,255,255,0.03);
+      cursor: default;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      border-left: 2px solid rgba(54,244,210,0.35);
+      padding-left: 20px;
+    }
+
+    .timeline-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      left: -27px;
+      top: 24px;
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .clock-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .clock-card strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.4rem;
+      line-height: 1.18;
+      margin: 10px 0 6px;
+      word-break: break-word;
+    }
+
+    .clock-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .orbit-visual {
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(54,244,210,0.28);
+      border-radius: 50%;
+      margin: 10px auto 22px;
+      position: relative;
+    }
+
+    .orbit-visual::before {
+      content: "☉";
+      color: #ffd86a;
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+    }
+
+    .earth-dot {
+      width: 15px;
+      height: 15px;
+      background: var(--accent2);
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: -8px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 18px var(--accent2);
+      transform-origin: 0 83px;
+      animation: orbitSpin 12s linear infinite;
+    }
+
+    @keyframes orbitSpin {
+      from { transform: rotate(0deg) translateX(-50%); }
+      to { transform: rotate(360deg) translateX(-50%); }
+    }
+
+    .scale-track {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scale-track::before {
+      content: "";
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      top: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      opacity: 0.5;
+    }
+
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scale-node {
+      background: rgba(16,29,51,0.86);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 126px;
+    }
+
+    body.light .scale-node {
+      background: rgba(255,255,255,0.92);
+    }
+
+    .scale-node strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 7px;
+    }
+
+    .scale-node span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .archive-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+      min-height: 236px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .archive-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(54,244,210,0.35);
+    }
+
+    .archive-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .archive-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .archive-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 4px;
+    }
+
+    .archive-meta span {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .archive-actions {
+      margin-top: auto;
+      padding-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .archive-trigger {
+      border: 0;
+      font-family: inherit;
+    }
+
+    .blog-carousel {
+      margin-top: 20px;
+      background: rgba(16,29,51,0.34);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    body.light .blog-carousel {
+      background: rgba(255,255,255,0.58);
+    }
+
+    .blog-carousel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .blog-carousel-top h3 {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .blog-carousel-top p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .carousel-actions {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 900;
+      transition: 0.22s ease;
+    }
+
+    .carousel-btn:hover {
+      color: #04120f;
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .blog-carousel-viewport {
+      overflow: hidden;
+      border-radius: 22px;
+    }
+
+    .blog-preview {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .blog-preview::-webkit-scrollbar {
+      display: none;
+    }
+
+    .blog-card {
+      flex: 0 0 calc((100% - 48px) / 4);
+      min-width: 235px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.25s;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 138px;
+      object-fit: cover;
+      background: var(--card2);
+    }
+
+    .blog-card > div {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .blog-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 7px;
+    }
+
+    .blog-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .blog-date {
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .blog-tag-row {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      padding: 0 !important;
+      margin-top: auto;
+      flex: 0 0 auto !important;
+      min-height: 0;
+    }
+
+    .blog-tag-row span {
+      flex: 0 0 auto;
+      width: auto;
+      height: auto;
+      min-width: 0;
+      min-height: 0;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.15;
+      font-weight: 750;
+    }
+
+    .blog-carousel-status {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .image-credit {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(54,244,210,0.06);
+      border: 1px solid rgba(54,244,210,0.18);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: 0.25s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .contact-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .request-box {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(54,244,210,0.22);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(54,244,210,0.12), transparent 35%),
+        radial-gradient(circle at 88% 15%, rgba(119,168,255,0.10), transparent 35%),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .request-box h3 {
+      margin-bottom: 8px;
+    }
+
+    .request-box p {
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      padding: 30px 0 46px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      width: min(1180px, 92%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .footer-copy {
+      text-align: left;
+    }
+
+    .footer-copy strong {
+      color: var(--text);
+      font-weight: 850;
+    }
+
+    .footer-copy span {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .site-telemetry {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(92px, 1fr));
+      gap: 10px;
+      min-width: min(560px, 100%);
+    }
+
+    .telemetry-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    .telemetry-chip small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .telemetry-chip strong {
+      color: var(--accent);
+      font-size: 0.92rem;
+      line-height: 1.1;
+    }
+
+    .telemetry-note {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 0.72rem;
+      opacity: 0.78;
+      text-align: right;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(2,8,23,0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      width: min(1280px, 96vw);
+      height: min(88vh, 860px);
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 35px 100px rgba(0,0,0,0.55);
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) 360px;
+    }
+
+    .viewer-pane {
+      background: #020817;
+      overflow: hidden;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .viewer-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.84rem;
+      margin-bottom: 10px;
+    }
+
+    .viewer-toolbar span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .viewer-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .viewer-actions .mini-link {
+      border: 1px solid rgba(54,244,210,0.25);
+      background: rgba(54,244,210,0.06);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 750;
+      font-size: 0.82rem;
+      font-family: inherit;
+    }
+
+    .archive-frame {
+      width: 100%;
+      flex: 1;
+      border: 0;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .modal-content {
+      padding: 24px;
+      overflow: auto;
+      max-height: 88vh;
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .modal-close {
+      border: 1px solid var(--border);
+      background: var(--card2);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .viewer-note {
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(54,244,210,0.06);
+      border: 1px solid rgba(54,244,210,0.16);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .modal-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-list li {
+      color: var(--muted);
+      margin-left: 18px;
+    }
+    @media (max-width: 1100px) {
+      .site-shell {
+        width: 100%;
+        display: block;
+      }
+
+      .side-rail {
+        display: none;
+      }
+
+      .content-column > section > .container {
+        width: min(1180px, 92%);
+      }
+
+      .hero-grid,
+      .grid-2,
+      .modal-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .grid,
+      .contact-grid,
+      .blog-preview,
+      .archive-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats,
+      .roadmap-line,
+      .clock-grid,
+      .grid-4,
+      .scale-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-banner {
+        height: 260px;
+      }
+
+      .modal-panel {
+        overflow-y: auto;
+      }
+
+      .modal-panel {
+        height: 90vh;
+      }
+
+      .viewer-pane {
+        min-height: 560px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .grid,
+      .contact-grid,
+      .stats,
+      .roadmap-line,
+      .clock-grid,
+      .grid-4,
+      .scale-grid,
+      .blog-preview,
+      .archive-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-image,
+      .section-banner {
+        height: 220px;
+      }
+
+      .modal {
+        padding: 12px;
+      }
+
+      .modal-panel {
+        width: 100%;
+        height: 92vh;
+        border-radius: 20px;
+      }
+
+      .viewer-pane {
+        min-height: 430px;
+        padding: 10px;
+      }
+
+      .modal-content {
+        padding: 18px;
+      }
+    }
+
+
+    /* =========================================================
+       Conservative homepage upgrade layer
+       Keeps original sections, image paths and cosmic content.
+       ========================================================= */
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 5px auto;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: transform 0.28s ease, opacity 0.2s ease;
+    }
+
+    body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -6px 0 20px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: #04120f;
+      background: var(--accent);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    .project-card {
+      transition: opacity 0.28s ease, transform 0.28s ease, max-height 0.34s ease, padding 0.28s ease, margin 0.28s ease, border-color 0.22s ease;
+      overflow: hidden;
+    }
+
+    .project-card.is-hidden {
+      opacity: 0;
+      transform: scale(0.96) translateY(12px);
+      pointer-events: none;
+      max-height: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      border-width: 0 !important;
+    }
+
+    /* ── Open Science Tools section ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tool-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(54,244,210,0.40);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(54,244,210,0.12);
+    }
+    .tool-card.featured-tool {
+      border-color: rgba(54,244,210,0.22);
+      background: linear-gradient(135deg, var(--card2) 0%, var(--card) 100%);
+    }
+    .tool-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .tool-kicker .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: livePulse 2s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%,100%{opacity:1} 50%{opacity:0.25}
+    }
+    .tool-card h3 {
+      font-size: 1.18rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0;
+    }
+    .tool-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.68;
+      margin: 0;
+    }
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tool-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+    }
+    .tool-tag.hi { border-color: rgba(54,244,210,0.30); color: var(--accent); background: rgba(54,244,210,0.07); }
+    .tool-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 14px;
+      margin: 4px 0;
+    }
+    .tool-feat {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tool-feat::before {
+      content: '›';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tool-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .tool-coming {
+      opacity: 0.5;
+      cursor: default;
+      pointer-events: none;
+    }
+    .tool-coming:hover { transform: none; }
+    .tool-coming-badge {
+      font-size: 0.60rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warning);
+      border: 1px solid rgba(251,191,36,0.30);
+      border-radius: 999px;
+      padding: 2px 10px;
+      align-self: flex-start;
+    }
+
+    .github-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .github-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.25s ease;
+    }
+
+    .github-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(54,244,210,0.35);
+    }
+
+    .github-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.06rem;
+      word-break: break-word;
+    }
+
+    .github-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 14px;
+    }
+
+    .github-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .github-meta span {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .parallax-image img { will-change: transform; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.68s ease, transform 0.68s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .stats .stat,
+    .grid .card,
+    .grid-2 .card,
+    .archive-grid .archive-card,
+    .blog-preview .blog-card,
+    .github-grid .github-card,
+    .clock-grid .clock-card,
+    .scale-grid .scale-node,
+    .roadmap-line .milestone,
+    .timeline .timeline-item,
+    .contact-grid .contact-card {
+      transition-delay: var(--stagger-delay, 0ms);
+    }
+
+    .orbit-visual {
+      transform-style: preserve-3d;
+      transform: rotateX(62deg) rotateZ(-18deg);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(251,191,36,0.10), transparent 18%),
+        radial-gradient(circle at 50% 50%, rgba(54,244,210,0.08), transparent 55%);
+      box-shadow: inset 0 0 28px rgba(54,244,210,0.12), 0 0 34px rgba(54,244,210,0.12);
+      animation: orbitPulse 5.5s ease-in-out infinite;
+    }
+
+    .orbit-visual::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(119,168,255,0.22);
+      border-radius: 50%;
+    }
+
+    .orbit-visual::before {
+      transform: rotateX(-62deg) rotateZ(18deg);
+      text-shadow: 0 0 20px rgba(251,191,36,0.8);
+    }
+
+    .earth-dot {
+      animation: orbitSpin3D 12s linear infinite;
+      transform-origin: 0 83px;
+    }
+
+    @keyframes orbitSpin3D {
+      from { transform: rotate(0deg) translateX(-50%) rotateX(-62deg); }
+      to { transform: rotate(360deg) translateX(-50%) rotateX(-62deg); }
+    }
+
+    @keyframes orbitPulse {
+      0%, 100% { box-shadow: inset 0 0 28px rgba(54,244,210,0.12), 0 0 26px rgba(54,244,210,0.10); }
+      50% { box-shadow: inset 0 0 34px rgba(54,244,210,0.20), 0 0 42px rgba(119,168,255,0.16); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner {
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 0;
+      }
+
+      .nav-toggle {
+        display: inline-block;
+        margin-left: auto;
+        z-index: 1002;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 70px 16px auto 16px;
+        max-height: calc(100vh - 92px);
+        overflow: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: rgba(7,16,29,0.96);
+        box-shadow: 0 28px 90px rgba(0,0,0,0.52);
+        backdrop-filter: blur(18px) saturate(150%);
+        -webkit-backdrop-filter: blur(18px) saturate(150%);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px) scale(0.98);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        z-index: 1001;
+      }
+
+      body.light .nav-links { background: rgba(245,248,255,0.97); }
+
+      body.nav-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .nav-links li { width: 100%; }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 10px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links li:last-child { padding: 14px 10px 4px; }
+      .github-grid { grid-template-columns: 1fr; }
+      .project-filters { gap: 8px; }
+      .filter-btn { padding: 8px 11px; font-size: 0.88rem; }
+    }
+
+
+    @media (max-width: 1180px) {
+      .blog-card { flex-basis: calc((100% - 32px) / 3); }
+    }
+
+    @media (max-width: 820px) {
+      .blog-card { flex-basis: calc((100% - 16px) / 2); }
+      .blog-carousel-top { align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .blog-card { flex-basis: 100%; min-width: 100%; }
+      .blog-carousel-top { flex-direction: column; }
+      .carousel-actions { align-self: flex-start; }
+    }
+
+    @media (max-width: 980px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-copy { text-align: center; }
+      .site-telemetry { grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
+      .telemetry-note { text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .site-telemetry { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas id="stars"></canvas>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">Biswajit <span>Jana</span></a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation menu" aria-controls="primaryNav" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="primaryNav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#current-research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#visual-archive">Archive</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="#cosmic-clock">Cosmic</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <label class="switch" title="Toggle day/night mode">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="site-shell">
+    <aside class="side-rail left-rail" aria-label="External profile links">
+      <div class="rail-card">
+        <a class="rail-link" href="https://www.linkedin.com/in/biswajit-jana-27011a151/" target="_blank" rel="noopener" aria-label="LinkedIn profile">in</a>
+        <a class="rail-link" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener" aria-label="GitHub repositories">GH</a>
+        <div class="rail-divider" aria-hidden="true"></div>
+        <a class="rail-link" href="cv.html" aria-label="View CV">CV</a>
+      </div>
+    </aside>
+
+    <div class="content-column">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Astrophysics • Instrumentation • Scientific Computing</div>
+          <h1><span class="gradient">Biswajit Jana</span></h1>
+
+          <div class="subtitle">
+            Astronomical instrumentation researcher working on spectrograph stabilisation, optical systems, detector behaviour, and feedback control.
+          </div>
+
+          <p class="lead">
+            I am an astrophysics graduate with a background in Electronics and Communication Engineering.
+            My work sits between astronomical instrumentation, optical diagnostics, environmental monitoring,
+            feedback-controlled experiments, brown dwarf research, and Python-based scientific analysis.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill">Astrophysics</span>
+            <span class="pill">Optical Instrumentation</span>
+            <span class="pill">Electronics</span>
+            <span class="pill">Feedback Control</span>
+            <span class="pill">Scientific Computing</span>
+            <span class="pill">Science Writing</span>
+            <span class="pill">Interactive Web Simulations</span>
+            <span class="pill">WebGL / JavaScript Visual Labs</span>
+            <span class="pill">ExoLight / ExoIntel-Prime</span>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn primary" href="#current-research">Explore Research</a>
+            <a class="btn" href="blog/index.html">Read Blog</a>
+            <a class="btn" href="cv.html">View CV</a>
+            <a class="btn" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">GitHub Repositories</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>MSc</strong>
+              <span>Astrophysics with Advanced Research</span>
+            </div>
+
+            <div class="stat">
+              <strong>BTech</strong>
+              <span>Electronics & Communication Engineering</span>
+            </div>
+
+            <div class="stat">
+              <strong>15+</strong>
+              <span>Interactive science blogs, simulations and visual tools</span>
+            </div>
+
+            <div class="stat">
+              <strong>EXOhSPEC</strong>
+              <span>Spectrograph stabilisation and feedback control</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="image-frame hero-image">
+            <img src="images/01_hero_space_observatory.png" alt="AI-generated conceptual illustration of an observatory and exoplanet instrumentation scene">
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-inner">
+              <div class="available"><span class="dot"></span> Open to research / instrumentation opportunities</div>
+
+              <div class="profile-top">
+                <img class="avatar" src="https://avatars.githubusercontent.com/Biswajit1999" alt="Biswajit Jana">
+                <div>
+                  <h3>Astrophysics + Instrumentation</h3>
+                  <p>Research experience across optical systems, laboratory instrumentation, sensor-driven experiments, and scientific analysis.</p>
+                </div>
+              </div>
+
+              <p>
+                My profile connects astrophysics with practical engineering: optical path behaviour,
+                environmental data, detector-plane stability, hardware response, and feedback logic.
+              </p>
+
+              <div class="spectral"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">About</div>
+          <h2 class="section-title">Researcher profile</h2>
+          <p class="section-desc">A short overview of my academic path, research interests, and technical working style.</p>
+        </div>
+
+        <div class="grid reveal">
+          <div class="card featured">
+            <span class="badge">Academic background</span>
+            <h3>MSc Astrophysics & BTech ECE</h3>
+            <p>
+              I completed my MSc in Astrophysics with Advanced Research at the University of Hertfordshire,
+              where my dissertation focused on closed-loop feedback control for EXOhSPEC. Before that,
+              I completed a BTech in Electronics and Communication Engineering, which gave me foundations
+              in instrumentation, embedded systems, signal handling, communication systems, and hardware-based experimentation.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="badge">Research direction</span>
+            <h3>Astrophysics with instrumentation focus</h3>
+            <p>
+              My interests include exoplanet spectroscopy, astronomical instrumentation, optical systems,
+              radial-velocity methods, brown dwarfs, satellite laser ranging, and experimental approaches where engineering and physics meet.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="badge">Technical style</span>
+            <h3>Build, test, model, improve</h3>
+            <p>
+              I enjoy projects where theory and hardware interact directly. My approach usually involves
+              designing a setup, testing behaviour experimentally, analysing data, modelling system response,
+              and refining the setup through iterative improvement.
+            </p>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:18px;">
+          <span class="badge">Tools and technical areas</span>
+          <h3>Skills across science, engineering, and software</h3>
+          <div class="skills-inline">
+            <span class="skill">Python</span>
+            <span class="skill">Scientific Data Analysis</span>
+            <span class="skill">Astrophysical Spectroscopy</span>
+            <span class="skill">Optical Instrumentation</span>
+            <span class="skill">Laser Interferometry</span>
+            <span class="skill">Feedback Systems</span>
+            <span class="skill">Adaptive Optics</span>
+            <span class="skill">Electronics</span>
+            <span class="skill">Embedded Systems</span>
+            <span class="skill">Arduino</span>
+            <span class="skill">Raspberry Pi</span>
+            <span class="skill">HTML / CSS / JavaScript</span>
+            <span class="skill">IoT</span>
+            <span class="skill">MaxIm DL</span>
+            <span class="skill">MATLAB</span>
+            <span class="skill">LaTeX</span>
+            <span class="skill">Grafana</span>
+            <span class="skill">InfluxDB</span>
+            <span class="skill">Research Communication</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="current-research">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Current research</div>
+          <h2 class="section-title">EXOhSPEC stabilisation</h2>
+          <p class="section-desc">
+            EXOhSPEC stands for Exoplanet High-Resolution Spectrograph. My current research direction
+            explores how environmental effects, optical behaviour, and feedback strategies influence
+            the stability of this instrument platform.
+          </p>
+        </div>
+
+        <div class="image-frame section-banner reveal">
+          <img src="images/02_exohspec_spectrograph.png" alt="AI-generated conceptual illustration of an optical spectrograph and spectroscopy experiment">
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card featured">
+            <span class="badge">Current focus</span>
+            <h3>Closed-loop control for a precision optical instrument</h3>
+            <p>
+              This work involves thermal control, environmental monitoring, optical path behaviour,
+              adaptive correction ideas, and Python-based analysis. The project is still in progress,
+              so I present it as an evolving research programme rather than a finalised result.
+            </p>
+
+            <ul>
+              <li>Experimental study of environmental response and instrument stability</li>
+              <li>Integration of optics, electronics, and software-driven feedback</li>
+              <li>Use of laboratory data to guide design and interpretation</li>
+              <li>Ongoing development toward a clearer and more stable control strategy</li>
+            </ul>
+
+            <div class="mini-links">
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024" target="_blank" rel="noopener">View research repository</a>
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/main/Master%20Theses" target="_blank" rel="noopener">View thesis material</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="badge">Research outputs</span>
+            <h3>Code, thesis, posters and seminars</h3>
+            <p>
+              I have organised supporting material from my MSc instrumentation work in a dedicated GitHub repository.
+              It includes thesis material, MaxIm DL notebooks, Python code, AO control material, Arduino/BME sensor code,
+              seminar/poster content, and related project resources.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/dfb4defb4b61b1a517b40a5911885f6cd00df58a/Poster%20Presentation%20and%20Seminar" target="_blank" rel="noopener">Poster & seminar material</a>
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/main/Python%20Code" target="_blank" rel="noopener">Python code</a>
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/main/MaxIm%20DL" target="_blank" rel="noopener">MaxIm DL notebooks</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card credit-card reveal">
+          <span class="badge">Acknowledgement</span>
+          <h3>Supervision, guidance and technical support</h3>
+          <p>
+            My EXOhSPEC stabilisation work was carried out under the supervision of
+            <strong>Professor Hugh Jones</strong> and <strong>Professor William Martin</strong>
+            at the University of Hertfordshire. I am grateful to Professor Jones for research direction,
+            regular academic feedback and support in shaping the scientific motivation of the project.
+            I am also grateful to Professor Martin for practical optics guidance, critical discussions,
+            and support during the alignment and experimental development of the system.
+          </p>
+        </div>
+
+        <div class="roadmap-box reveal">
+          <span class="badge">Roadmap</span>
+          <h3 style="margin-bottom:18px;">EXOhSPEC research development roadmap</h3>
+
+          <div class="image-frame section-banner">
+            <img src="images/09_research_roadmap.png" alt="AI-generated conceptual research roadmap timeline">
+          </div>
+
+          <div class="roadmap-line">
+            <div class="milestone">
+              <strong>2023</strong>
+              <p>Started MSc research direction and initial EXOhSPEC engagement, focusing on the instrument problem and early control ideas.</p>
+            </div>
+
+            <div class="milestone">
+              <strong>2024</strong>
+              <p>Developed dissertation work around closed-loop feedback, environmental monitoring, and optical-path-related stability questions.</p>
+            </div>
+
+            <div class="milestone">
+              <strong>2025</strong>
+              <p>Extended analysis into longer experiments, feedback interpretation, adaptive correction ideas, and figure/report preparation.</p>
+            </div>
+
+            <div class="milestone">
+              <strong>Present</strong>
+              <p>Refining the research narrative, portfolio, paper preparation, blog writing, and PhD-aligned presentation of the instrumentation work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="visual-archive">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Visual archive</div>
+          <h2 class="section-title">Posters & seminars</h2>
+          <p class="section-desc">
+            A focused archive for poster presentations, seminar slides, and visual research summaries.
+          </p>
+        </div>
+
+        <div class="archive-grid reveal">
+          <article class="archive-card featured">
+            <span class="badge">Poster</span>
+            <h3>Biswajit Poster</h3>
+            <p>
+              Main poster material from the Master-Thesis-2024 poster and seminar archive.
+            </p>
+            <div class="archive-meta">
+              <span>Poster</span>
+              <span>Research summary</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="biswajit-poster">Open viewer</button>
+            </div>
+          </article>
+
+          <article class="archive-card featured">
+            <span class="badge">Presentation</span>
+            <h3>Master Project Presentation — Closed Loop Feedback Control System for EXOhSPEC Development</h3>
+            <p>
+              Main MSc project presentation on the closed-loop feedback-control system developed for EXOhSPEC.
+            </p>
+            <div class="archive-meta">
+              <span>EXOhSPEC</span>
+              <span>Feedback control</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="master-project-presentation">Open viewer</button>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <span class="badge">Seminar 1</span>
+            <h3>State of Art — Radial Velocity Spectrograph</h3>
+            <p>
+              Seminar introducing the radial-velocity spectrograph landscape and the instrumentation context behind precision RV work.
+            </p>
+            <div class="archive-meta">
+              <span>RV spectrographs</span>
+              <span>Instrumentation</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="seminar-1-rv-spectrograph">Open viewer</button>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <span class="badge">Seminar 2</span>
+            <h3>Advancements in Precision LASER Interferometer Control System</h3>
+            <p>
+              Seminar material on precision laser interferometer control and its connection to path-length stability.
+            </p>
+            <div class="archive-meta">
+              <span>Laser interferometry</span>
+              <span>Control systems</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="seminar-2-laser-control">Open viewer</button>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <span class="badge">Seminar 3</span>
+            <h3>Optimizing Path Length Stability in Laser Interferometers using Air Refractive Index</h3>
+            <p>
+              Seminar focused on path-length stability, refractive-index effects, and interferometric control in air.
+            </p>
+            <div class="archive-meta">
+              <span>OPL stability</span>
+              <span>Refractive index</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="seminar-3-opl-ri">Open viewer</button>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <span class="badge">Seminar 4</span>
+            <h3>High-Resolution RV Spectrographs, ANDES and PID Loop Implementation in EXOhSPEC</h3>
+            <p>
+              Seminar connecting high-resolution radial-velocity spectrographs, ANDES-style instrumentation, and PID-loop implementation.
+            </p>
+            <div class="archive-meta">
+              <span>High-resolution RV</span>
+              <span>PID loop</span>
+              <span>PDF</span>
+            </div>
+            <div class="archive-actions">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="seminar-4-andes-pid">Open viewer</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Projects</div>
+          <h2 class="section-title">Selected technical and research projects</h2>
+          <p class="section-desc">
+            A selection of academic, laboratory, and engineering projects across astrophysics,
+            optics, instrumentation, scientific computing, and electronics.
+          </p>
+        </div>
+
+        <div class="project-filters reveal" aria-label="Project category filters">
+          <button class="filter-btn active" type="button" data-filter="all">All</button>
+          <button class="filter-btn" type="button" data-filter="instrumentation">Instrumentation</button>
+          <button class="filter-btn" type="button" data-filter="astrophysics">Astrophysics</button>
+          <button class="filter-btn" type="button" data-filter="computing">Computing</button>
+          <button class="filter-btn" type="button" data-filter="electronics">Electronics</button>
+        </div>
+
+        <div class="grid reveal project-grid">
+          <div class="card featured project-card" data-category="instrumentation astrophysics computing">
+            <div class="image-frame project-img">
+              <img src="images/02_exohspec_spectrograph.png" alt="EXOhSPEC conceptual spectrograph illustration">
+            </div>
+
+            <span class="badge">Featured</span>
+            <h3>EXOhSPEC feedback control</h3>
+            <p>
+              Work on spectrograph stability, environmental response, optical path behaviour,
+              and feedback strategies for an exoplanet high-resolution spectrograph platform.
+            </p>
+            <p class="project-credit">
+              <strong>Supervision:</strong> Prof. Hugh Jones and William “Bill” Martin, University of Hertfordshire.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024" target="_blank" rel="noopener">Repository</a>
+              <a class="mini-link" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/dfb4defb4b61b1a517b40a5911885f6cd00df58a/Poster%20Presentation%20and%20Seminar" target="_blank" rel="noopener">Poster / seminar</a>
+            </div>
+          </div>
+
+          <div class="card project-card" data-category="astrophysics">
+            <div class="image-frame project-img">
+              <img src="images/03_brown_dwarf_research.png" alt="Brown dwarf research conceptual illustration">
+            </div>
+
+            <h3>Halo T dwarf candidate research</h3>
+            <p>
+              Research involving VISTA, DES, and WISE survey data to investigate candidate halo T dwarfs
+              and substellar populations. This work was also presented in a joint project talk.
+            </p>
+            <p class="project-credit">
+              <strong>Supervision:</strong> Professor David Pinfield, University of Hertfordshire.<br>
+              <strong>Team member:</strong> Berenice Laurent.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="https://youtu.be/oLriYFWLZlQ?si=2os0cGeV1kK4p22a" target="_blank" rel="noopener">Watch talk</a>
+              <a class="mini-link" href="https://drive.google.com/file/d/1FWzpF1yBB4YfkS_kEkA-vXMr1qvvRhge/view?usp=drive_link" target="_blank" rel="noopener">Proposal / material</a>
+            </div>
+          </div>
+
+          <div class="card project-card" data-category="instrumentation astrophysics computing">
+            <div class="image-frame project-img">
+              <img src="images/05_satellite_laser_ranging.png" alt="Satellite laser ranging conceptual illustration">
+            </div>
+
+            <h3>Satellite laser ranging detector study</h3>
+            <p>
+              SEPnet/Lumi Space placement studying detector performance for satellite laser ranging,
+              including microbolometer feasibility, atmospheric transmission, and link-budget analysis.
+            </p>
+
+            <div class="mini-links">
+              <button class="mini-link archive-trigger" type="button" data-archive-id="lumi-slr-poster">Open poster viewer</button>
+            </div>
+          </div>
+
+          <div class="card project-card" data-category="electronics computing">
+            <div class="image-frame project-img">
+              <img src="images/06_visible_light_communication.png" alt="Visible light communication conceptual illustration">
+            </div>
+
+            <h3>Visible light communication system</h3>
+            <p>
+              BTech project on a dimming-controlled visible light communication system using Raspberry Pi,
+              optical/electronic hardware, and communication-system concepts.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="publications.html">Related publications</a>
+            </div>
+          </div>
+
+          <div class="card project-card" data-category="astrophysics instrumentation">
+            <div class="image-frame project-img">
+              <img src="images/04_radio_interferometry.png" alt="Radio interferometry conceptual illustration">
+            </div>
+
+            <h3>Radio interferometry project</h3>
+            <p>
+              Two-element radio interferometer project through a radio astronomy summer school,
+              including hands-on exposure to observational setup work.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="https://www.linkedin.com/posts/radio-astronomy-radioastronomy-share-6930457709808947200-65T4?utm_source=share&utm_medium=member_desktop&rcm=ACoAACSAsfQBCqUBFgCF-cLXm4s1Z__9Veszpdo" target="_blank" rel="noopener">LinkedIn post</a>
+            </div>
+          </div>
+
+          <div class="card project-card" data-category="computing astrophysics instrumentation">
+            <div class="image-frame project-img">
+              <img src="images/08_paper_notes_research.png" alt="Scientific computing and research notes conceptual illustration">
+            </div>
+
+            <h3>Scientific computing and analysis</h3>
+            <p>
+              Python-based analysis of astronomy data, environmental measurements, imaging data,
+              experimental time series, and educational physics/astrophysics tools.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="paper-notes.html">Paper notes</a>
+              <a class="mini-link" href="blog/index.html">Research blog</a>
+              <a class="mini-link" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">GitHub tools</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════
+         OPEN SCIENCE TOOLS
+    ══════════════════════════════════════ -->
+    <section id="tools">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Open Science Tools</div>
+          <h2 class="section-title">Interactive astrophysics platforms</h2>
+          <p class="section-desc">
+            Standalone browser tools that let anyone explore real observatory data and
+            reproduce professional detection pipelines — no installation, no login.
+            Each runs entirely in the browser via GitHub Pages.
+          </p>
+        </div>
+
+        <div class="tools-grid reveal">
+
+          <!-- RV Exoplanet Observatory — LIVE -->
+          <a class="tool-card featured-tool"
+             href="https://biswajit1999.github.io/rv-exoplanet-observatory/"
+             target="_blank" rel="noopener">
+            <div class="tool-kicker">
+              <span class="live-dot"></span>
+              Live · NASA data · WebGL2
+            </div>
+            <h3>RV Exoplanet Observatory</h3>
+            <p>
+              The most complete browser-based radial velocity platform. Live NASA
+              Exoplanet Archive · Keplerian simulation · Statistical atlas ·
+              Instrument comparison — reproduced in pure JavaScript, zero install.
+            </p>
+            <div class="tool-features">
+              <span class="tool-feat">Live NASA TAP fetch</span>
+              <span class="tool-feat">WebGL2 Doppler spectrum</span>
+              <span class="tool-feat">Keplerian orbit engine</span>
+              <span class="tool-feat">Mass–period atlas</span>
+              <span class="tool-feat">Archive → simulator</span>
+              <span class="tool-feat">HARPS / ESPRESSO specs</span>
+            </div>
+            <div class="tool-tags">
+              <span class="tool-tag hi">Exoplanets</span>
+              <span class="tool-tag hi">Radial Velocity</span>
+              <span class="tool-tag">WebGL2</span>
+              <span class="tool-tag">NASA Archive</span>
+              <span class="tool-tag">Spectroscopy</span>
+            </div>
+            <div class="tool-cta">Open Observatory →</div>
+          </a>
+
+          <!-- RV Exoplanet Hunter (blog tool) — LIVE -->
+          <a class="tool-card"
+             href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/tools/rv-exoplanet-hunter.html"
+             target="_blank" rel="noopener">
+            <div class="tool-kicker">
+              <span class="live-dot"></span>
+              Live · Single file
+            </div>
+            <h3>RV Exoplanet Hunter</h3>
+            <p>
+              Self-contained Keplerian simulator with a Lomb–Scargle periodogram
+              and discovery mode. Take observations, accumulate a periodogram, and
+              identify a hidden planet — the same pipeline as HARPS and HIRES.
+            </p>
+            <div class="tool-features">
+              <span class="tool-feat">Lomb–Scargle periodogram</span>
+              <span class="tool-feat">WebGL2 spectrum + CCF</span>
+              <span class="tool-feat">Discovery mode</span>
+              <span class="tool-feat">Multi-planet systems</span>
+            </div>
+            <div class="tool-tags">
+              <span class="tool-tag hi">Exoplanets</span>
+              <span class="tool-tag">Periodogram</span>
+              <span class="tool-tag">WebGL2</span>
+              <span class="tool-tag">Simulation</span>
+            </div>
+            <div class="tool-cta">Launch Simulator →</div>
+          </a>
+
+          <!-- Coming soon placeholder -->
+          <div class="tool-card tool-coming">
+            <span class="tool-coming-badge">Coming soon</span>
+            <h3>Gravitational Lensing Lab</h3>
+            <p>
+              Interactive microlensing and strong-lensing explorer. Trace light curves,
+              Einstein rings, and caustic structures — fully browser-based.
+            </p>
+            <div class="tool-tags">
+              <span class="tool-tag">Lensing</span>
+              <span class="tool-tag">Cosmology</span>
+              <span class="tool-tag">WebGL2</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="code-activity">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Latest code activity</div>
+          <h2 class="section-title">Recent public GitHub repositories</h2>
+          <p class="section-desc">
+            A live snapshot of my recent public repositories. If GitHub temporarily blocks the request,
+            the cards fall back gracefully and the rest of the portfolio remains unchanged.
+          </p>
+        </div>
+
+        <div class="github-grid reveal" id="githubRepos" aria-live="polite">
+          <div class="github-card loading-card">
+            <span class="badge">Loading</span>
+            <h3>Fetching latest repositories…</h3>
+            <p>Connecting to the GitHub public API.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="writing">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Writing</div>
+          <h2 class="section-title">Paper notes, blogs, and scientific reflections</h2>
+          <p class="section-desc">
+            I use this space to write about astrophysics, instrumentation, cosmology, astrobiology,
+            scientific computing, and the questions that make science feel human.
+          </p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card featured">
+            <span class="badge">Paper notes</span>
+            <h3>Reading papers actively, not passively</h3>
+            <p>
+              My paper notes are a structured reading space for papers in radial velocity instrumentation,
+              brown dwarfs, optics, experimental methods, and exoplanet science.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="paper-notes.html">Read paper notes</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="badge">Blog posts</span>
+            <h3>Astrophysicist’s lab notebook</h3>
+            <p>
+              Personal and technical science writing on instrumentation, exoplanets, astrobiology,
+              precision measurement, cosmology, spectra, and research life.
+            </p>
+
+            <div class="mini-links">
+              <a class="mini-link" href="blog/index.html">View all blog posts</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-carousel reveal" aria-label="Latest blog posts carousel">
+          <div class="blog-carousel-top">
+            <div>
+              <span class="badge">Latest posts</span>
+              <h3>Recent science writing</h3>
+              <p>Swipe or use the arrows to move through the newest posts.</p>
+            </div>
+            <div class="carousel-actions" aria-label="Blog carousel controls">
+              <button class="carousel-btn" id="blogPrev" type="button" aria-label="Previous blog posts">←</button>
+              <button class="carousel-btn" id="blogNext" type="button" aria-label="Next blog posts">→</button>
+            </div>
+          </div>
+
+          <div class="blog-carousel-viewport">
+            <div class="blog-preview" id="latestBlogTrack" aria-live="polite">
+              <a class="blog-card" href="blog/posts/gravitational-waves.html">
+                <img src="images/blog13_01_gravitational_waves_hero.png" alt="Gravitational waves blog visual">
+                <div>
+                  <span class="blog-date">2026 · Relativity</span>
+                  <h3>Gravitational Waves: When Spacetime Itself Starts Ringing</h3>
+                  <p>Black holes, neutron stars, chirp signals, LIGO, and spacetime misbehaving politely.</p>
+                  <div class="blog-tag-row"><span>Relativity</span><span>Simulation</span></div>
+                </div>
+              </a>
+
+              <a class="blog-card" href="blog/posts/exoplanet-transit-method.html">
+                <img src="images/blog15_01_transit_method_hero.png" alt="Exoplanet transit method blog visual">
+                <div>
+                  <span class="blog-date">2026 · Exoplanets</span>
+                  <h3>Exoplanet Detection: The Transit Method</h3>
+                  <p>How tiny dips in starlight reveal planets, geometry, and atmospheric clues.</p>
+                  <div class="blog-tag-row"><span>Exoplanets</span><span>Light curves</span></div>
+                </div>
+              </a>
+
+              <a class="blog-card" href="blog/posts/pulsars-cosmic-lighthouses.html">
+                <img src="images/blog14_01_pulsar_hero.png" alt="Pulsars blog visual">
+                <div>
+                  <span class="blog-date">2026 · Astrophysics</span>
+                  <h3>Pulsars: The Cosmic Lighthouses of the Deep</h3>
+                  <p>Rotating neutron stars, magnetic beams, and clocks that make normal clocks nervous.</p>
+                  <div class="blog-tag-row"><span>Pulsars</span><span>Neutron stars</span></div>
+                </div>
+              </a>
+
+              <a class="blog-card" href="blog/posts/black-hole-extreme-lab.html">
+                <img src="images/blog13_01_blackhole_hero.png" alt="Black hole blog visual">
+                <div>
+                  <span class="blog-date">2026 · Relativity</span>
+                  <h3>Black Holes: What Happens When Gravity Wins?</h3>
+                  <p>Event horizons, curved spacetime, and a separate interactive visual lab.</p>
+                  <div class="blog-tag-row"><span>Black holes</span><span>Interactive</span></div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="blog-carousel-status" id="blogCarouselStatus">Latest posts load from <code>blog/blog-data.json</code> when the site is deployed.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Education & experience</div>
+          <h2 class="section-title">Academic and research timeline</h2>
+        </div>
+
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <h3>MSc Astrophysics with Advanced Research (2022–2024)</h3>
+            <p>University of Hertfordshire — dissertation work centred on EXOhSPEC and feedback control.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>BTech Electronics & Communication Engineering (2017–2021)</h3>
+            <p>University of Engineering and Management — engineering foundation in electronics, embedded systems, and communication technologies.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>SEPnet placement — Lumi Space (2024)</h3>
+            <p>Detector and performance-related analysis for satellite laser ranging applications.</p>
+          </div>
+
+          <div class="timeline-item">
+            <h3>Brown dwarf candidate work</h3>
+            <p>Observational analysis related to candidate halo T dwarfs using astronomical survey data, supervised by Professor David Pinfield, with team collaboration including Berenice Laurent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cosmic-clock">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Cosmic clock</div>
+          <h2 class="section-title">An Earthian timestamp</h2>
+          <p class="section-desc">
+            A small personal astronomy-inspired clock based on my birth timestamp:
+            11 August 1999, 7:59 PM. These values are approximate and intended as a fun
+            Sun–Earth–planetary analogy, not precise astrodynamics.
+          </p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card featured">
+            <div class="orbit-visual">
+              <div class="earth-dot"></div>
+            </div>
+
+            <h3>Born on Earth, measured through motion</h3>
+            <p>
+              Time can be described not only in calendar years, but also through rotations,
+              orbits, and planetary rhythms. This section turns a human timestamp into a small cosmic dashboard.
+            </p>
+          </div>
+
+          <div class="clock-grid">
+            <div class="clock-card">
+              <span>Earth age</span>
+              <strong id="earthYears">--</strong>
+              <span>solar years since birth</span>
+            </div>
+
+            <div class="clock-card">
+              <span>Days alive</span>
+              <strong id="earthDays">--</strong>
+              <span>Earth rotations completed</span>
+            </div>
+
+            <div class="clock-card">
+              <span>Mars sols</span>
+              <strong id="marsSols">--</strong>
+              <span>approximate Martian solar days</span>
+            </div>
+
+            <div class="clock-card">
+              <span>Planetary years</span>
+              <strong id="planetYears">--</strong>
+              <span>Mercury / Venus / Mars equivalents</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cosmic-scale">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Cosmic scale</div>
+          <h2 class="section-title">A small ladder from here to almost everywhere</h2>
+          <p class="section-desc">
+            A simple scale ladder to give the site a more astronomy-like feel. The values are approximate and designed for perspective.
+          </p>
+        </div>
+
+        <div class="scale-track reveal">
+          <div class="scale-grid">
+            <div class="scale-node">
+              <strong>Earth</strong>
+              <span>Our reference point: the only confirmed home of life so far.</span>
+            </div>
+
+            <div class="scale-node">
+              <strong>Moon</strong>
+              <span>~384,400 km away. Close in astronomy, still far enough to humble engineering.</span>
+            </div>
+
+            <div class="scale-node">
+              <strong>Sun</strong>
+              <span>~1 AU away. The star whose light powers almost every ordinary day we experience.</span>
+            </div>
+
+            <div class="scale-node">
+              <strong>Proxima Centauri</strong>
+              <span>~4.24 light-years away. Nearest known star to the Sun.</span>
+            </div>
+
+            <div class="scale-node">
+              <strong>Andromeda</strong>
+              <span>~2.54 million light-years away. A nearby galaxy, in cosmic terms. Nearby is doing a lot of work.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galactic-location">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Galactic view</div>
+          <h2 class="section-title">Where am I in the Milky Way?</h2>
+          <p class="section-desc">
+            A simple astronomy-inspired location summary. These are approximate educational values
+            designed to make the page feel more interactive and cosmic.
+          </p>
+        </div>
+
+        <div class="grid-4 reveal">
+          <div class="card featured">
+            <span class="badge">Cosmic address</span>
+            <h3>Your current address</h3>
+            <p>
+              Earth → Solar System → Orion Arm / Local Spur → Milky Way Galaxy → Local Group
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="badge">Within the Milky Way</span>
+            <h3>Distance from Galactic Centre</h3>
+            <p><strong style="color:var(--accent); font-size:1.4rem;">~26,700 ly</strong></p>
+            <p>Approximate Sun–Galactic Centre distance.</p>
+          </div>
+
+          <div class="card">
+            <span class="badge">Nearest stellar system</span>
+            <h3>Alpha Centauri system</h3>
+            <p><strong style="color:var(--accent); font-size:1.4rem;">4.37 ly</strong></p>
+            <p>Nearest stellar system to the Sun. Proxima Centauri is the closest individual star at about 4.24 light-years.</p>
+          </div>
+
+          <div class="card">
+            <span class="badge">Nearest major galaxy</span>
+            <h3>Andromeda Galaxy</h3>
+            <p><strong style="color:var(--accent); font-size:1.4rem;">~2.54 million ly</strong></p>
+            <p>The nearest large spiral galaxy to the Milky Way.</p>
+          </div>
+        </div>
+
+        <div class="grid-2 reveal" style="margin-top:18px;">
+          <div class="card">
+            <span class="badge">Galactic year</span>
+            <h3>How far through one Milky Way orbit?</h3>
+            <p>
+              The Sun takes roughly <strong style="color:var(--accent);">225–250 million Earth years</strong>
+              to complete one orbit around the centre of the Milky Way.
+            </p>
+
+            <p style="margin-top:12px;">
+              My current age corresponds to only a tiny fraction of one Galactic year:
+            </p>
+
+            <p style="margin-top:8px; color:var(--accent); font-weight:800; font-size:1.2rem;" id="galacticFraction">
+              --
+            </p>
+          </div>
+
+          <div class="card featured">
+            <span class="badge">Why include this?</span>
+            <h3>A personal site can still feel scientific</h3>
+            <p>
+              I want this website to feel more than static text. Small interactive scientific details —
+              like a cosmic clock, scale ladder, or galactic location summary — give the page personality while staying aligned with astronomy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="kicker">Contact</div>
+          <h2 class="section-title">Let’s connect</h2>
+          <p class="section-desc">
+            I’m interested in connecting for research opportunities, instrumentation discussions,
+            exoplanet spectroscopy, optics, detector systems, science writing, and academic networking.
+          </p>
+        </div>
+
+        <div class="grid-2 reveal">
+          <div class="card featured">
+            <span class="badge">Research direction</span>
+            <h3>Astrophysics, optics and instrumentation</h3>
+            <p>
+              I am currently most interested in astronomical instrumentation, exoplanet spectroscopy,
+              optical systems, detector-plane stability, feedback control, and experimental research
+              at the interface of physics and engineering.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <a class="contact-card" href="mailto:biswajitj998@gmail.com">
+              <span class="contact-icon">📧</span>
+              <h3>Email</h3>
+              <p>Send me a message</p>
+            </a>
+
+            <a class="contact-card" href="https://www.linkedin.com/in/biswajit-jana-27011a151/" target="_blank" rel="noopener">
+              <span class="contact-icon">💼</span>
+              <h3>LinkedIn</h3>
+              <p>Connect professionally</p>
+            </a>
+
+            <a class="contact-card" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">
+              <span class="contact-icon">💻</span>
+              <h3>GitHub</h3>
+              <p>View repositories</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="request-box reveal">
+          <h3>Have a topic request?</h3>
+          <p>
+            If you like the content here, or if there is a specific astrophysics, instrumentation,
+            physics, coding, or science-writing topic you would like me to explore, feel free to reach out.
+            I am more than happy to discuss ideas, write explainers, or build small interactive tools around them.
+          </p>
+
+          <div class="mini-links">
+            <a class="mini-link" href="mailto:biswajitj998@gmail.com?subject=Topic%20request%20for%20your%20blog">Suggest a topic</a>
+            <a class="mini-link" href="blog/index.html">Browse blog</a>
+          </div>
+        </div>
+
+        <div class="image-credit reveal">
+          Visual note: Selected visuals on this website are original AI-generated conceptual illustrations created for this portfolio.
+          They are used as artistic and explanatory visuals, not as observational data, measured results, or exact instrument diagrams.
+          Research code, thesis material, and seminar resources are linked separately through my GitHub repository.
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <aside class="side-rail right-rail" aria-label="Quick profile statistics">
+      <div class="quick-stats-panel">
+        <h2>Quick stats</h2>
+        <div class="quick-stat">
+          <span>Current Location</span>
+          <strong>London</strong>
+        </div>
+        <div class="quick-stat">
+          <span>Focus</span>
+          <strong>Instrumentation</strong>
+        </div>
+        <div class="quick-stat">
+          <span>Status</span>
+          <strong>Research-Ready</strong>
+        </div>
+        <a class="btn primary quick-cta" href="#contact">Contact</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-copy">
+        <strong>© 2026 Biswajit Jana</strong>
+        <span>Astrophysics, Instrumentation, Scientific Computing &amp; Research Writing.</span>
+      </div>
+      <div class="site-telemetry" aria-label="Website telemetry">
+        <div class="telemetry-chip"><small>Local Views</small><strong id="telemetryViews">—</strong></div>
+        <div class="telemetry-chip"><small>Page Clicks</small><strong id="telemetryClicks">—</strong></div>
+        <div class="telemetry-chip"><small>Session</small><strong id="telemetrySession">00:00</strong></div>
+        <div class="telemetry-chip"><small>London Time</small><strong id="telemetryClock">—</strong></div>
+        <div class="telemetry-note">Privacy-friendly browser-local counters; no visitor tracking database is used.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="archiveModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="archiveModalTitle">
+      <div class="viewer-pane">
+        <div class="viewer-toolbar">
+          <span id="viewerFileLabel">Visual archive viewer</span>
+          <div class="viewer-actions">
+            <button class="mini-link" id="viewerModeToggle" type="button">View file</button>
+            <a class="mini-link" id="viewerDirectLink" href="#" target="_blank" rel="noopener">Open file</a>
+          </div>
+        </div>
+        <iframe class="archive-frame" id="archiveFrame" src="about:blank" title="Embedded poster and seminar viewer" loading="lazy"></iframe>
+      </div>
+
+      <div class="modal-content">
+        <div class="modal-top">
+          <div>
+            <span class="badge" id="archiveModalBadge">Poster / seminar</span>
+            <h2 id="archiveModalTitle">Visual archive item</h2>
+          </div>
+          <button class="modal-close" id="closeArchiveModal" type="button">Close ×</button>
+        </div>
+
+        <p id="archiveModalSummary" style="color:var(--muted); margin-bottom:12px;"></p>
+
+        <ul class="modal-list" id="archiveModalPoints"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const themeSwitch = document.getElementById("themeSwitch");
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+      themeSwitch.checked = true;
+    }
+
+    themeSwitch.addEventListener("change", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+
+    const navToggle = document.getElementById("navToggle");
+    const primaryNav = document.getElementById("primaryNav");
+
+    if (navToggle && primaryNav) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = document.body.classList.toggle("nav-open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+        navToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      });
+
+      primaryNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          document.body.classList.remove("nav-open");
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.setAttribute("aria-label", "Open navigation menu");
+        });
+      });
+    }
+
+    function setupProjectFilters() {
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const projectCards = document.querySelectorAll(".project-card");
+      if (!filterButtons.length || !projectCards.length) return;
+
+      projectCards.forEach(card => {
+        card.style.maxHeight = `${card.scrollHeight + 80}px`;
+      });
+
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          filterButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          projectCards.forEach(card => {
+            const categories = (card.dataset.category || "").split(/\s+/);
+            const shouldShow = filter === "all" || categories.includes(filter);
+            card.style.maxHeight = `${card.scrollHeight + 80}px`;
+
+            if (shouldShow) {
+              card.classList.remove("is-hidden");
+              window.setTimeout(() => {
+                card.style.maxHeight = `${card.scrollHeight + 80}px`;
+              }, 20);
+            } else {
+              card.style.maxHeight = `${card.scrollHeight}px`;
+              window.setTimeout(() => card.classList.add("is-hidden"), 20);
+            }
+          });
+        });
+      });
+    }
+
+    setupProjectFilters();
+
+    async function loadLatestGitHubRepos() {
+      const container = document.getElementById("githubRepos");
+      if (!container) return;
+
+      try {
+        const response = await fetch("https://api.github.com/users/Biswajit1999/repos?sort=updated&per_page=6");
+        if (!response.ok) throw new Error("GitHub API request failed");
+        const repos = await response.json();
+        const usableRepos = repos.filter(repo => !repo.fork).slice(0, 3);
+        if (!usableRepos.length) throw new Error("No repositories returned");
+
+        container.innerHTML = usableRepos.map(repo => {
+          const description = repo.description || "Public repository from my GitHub portfolio.";
+          const updated = new Date(repo.updated_at).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+          const language = repo.language || "Code";
+          return `
+            <a class="github-card" href="${repo.html_url}" target="_blank" rel="noopener">
+              <span class="badge">Recently updated</span>
+              <h3>${repo.name}</h3>
+              <p>${description}</p>
+              <div class="github-meta">
+                <span>${language}</span>
+                <span>★ ${repo.stargazers_count}</span>
+                <span>Updated ${updated}</span>
+              </div>
+            </a>
+          `;
+        }).join("");
+      } catch (error) {
+        container.innerHTML = `
+          <div class="github-card">
+            <span class="badge">GitHub</span>
+            <h3>Latest repositories</h3>
+            <p>The live GitHub feed could not load in this browser session. You can still view all repositories directly on GitHub.</p>
+            <div class="mini-links">
+              <a class="mini-link" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">Open GitHub repositories</a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    loadLatestGitHubRepos();
+
+    function escapeHTML(value) {
+      return String(value || "").replace(/[&<>'"]/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#039;",
+        '"': "&quot;"
+      }[char]));
+    }
+
+    function normaliseBlogImage(path) {
+      if (!path) return "images/07_blog_lab_notebook.png";
+      return path.replace(/^\.\.\//, "").replace(/^\.\//, "");
+    }
+
+    function normaliseBlogUrl(url) {
+      if (!url) return "blog/index.html";
+      if (/^https?:\/\//.test(url)) return url;
+      if (url.startsWith("blog/")) return url;
+      if (url.startsWith("posts/")) return `blog/${url}`;
+      return `blog/${url}`;
+    }
+
+    function formatBlogDate(dateString) {
+      const date = new Date(dateString);
+      if (Number.isNaN(date.getTime())) return "Latest";
+      return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    function renderLatestBlogPosts(posts) {
+      const track = document.getElementById("latestBlogTrack");
+      const status = document.getElementById("blogCarouselStatus");
+      if (!track || !Array.isArray(posts) || !posts.length) return;
+
+      const sorted = posts
+        .filter(post => post && post.title && post.url)
+        .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+        .slice(0, 12);
+
+      if (!sorted.length) return;
+
+      track.innerHTML = sorted.map(post => {
+        const tags = (post.tags || []).slice(0, 2).map(tag => `<span>${escapeHTML(tag)}</span>`).join("");
+        return `
+          <a class="blog-card" href="${escapeHTML(normaliseBlogUrl(post.url))}">
+            <img src="${escapeHTML(normaliseBlogImage(post.image))}" alt="${escapeHTML(post.title)} blog visual" loading="lazy">
+            <div>
+              <span class="blog-date">${escapeHTML(formatBlogDate(post.date))} · ${escapeHTML(post.category || "Blog")}</span>
+              <h3>${escapeHTML(post.title)}</h3>
+              <p>${escapeHTML(post.subtitle || "Read the full post.")}</p>
+              <div class="blog-tag-row">${tags}</div>
+            </div>
+          </a>
+        `;
+      }).join("");
+
+      if (status) {
+        status.textContent = `Showing ${Math.min(sorted.length, 12)} latest posts from the blog archive.`;
+      }
+      applyStaggerDelays();
+    }
+
+    async function loadLatestBlogPosts() {
+      try {
+        const response = await fetch("blog/blog-data.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("Blog data request failed");
+        const posts = await response.json();
+        renderLatestBlogPosts(posts);
+      } catch (error) {
+        const status = document.getElementById("blogCarouselStatus");
+        if (status) status.textContent = "Showing built-in blog cards. The live blog feed will load after deployment.";
+      }
+    }
+
+    function setupBlogCarousel() {
+      const track = document.getElementById("latestBlogTrack");
+      const prev = document.getElementById("blogPrev");
+      const next = document.getElementById("blogNext");
+      if (!track || !prev || !next) return;
+
+      function scrollByCard(direction) {
+        const firstCard = track.querySelector(".blog-card");
+        const gap = 16;
+        const amount = firstCard ? firstCard.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+        track.scrollBy({ left: direction * amount, behavior: "smooth" });
+      }
+
+      prev.addEventListener("click", () => scrollByCard(-1));
+      next.addEventListener("click", () => scrollByCard(1));
+    }
+
+    setupBlogCarousel();
+    loadLatestBlogPosts();
+
+    function setupHeroParallax() {
+      const parallaxFrames = document.querySelectorAll(".hero .image-frame, .section-banner");
+      parallaxFrames.forEach(frame => frame.classList.add("parallax-image"));
+
+      function updateParallax() {
+        parallaxFrames.forEach(frame => {
+          const img = frame.querySelector("img");
+          if (!img) return;
+          const rect = frame.getBoundingClientRect();
+          const offset = (rect.top - window.innerHeight / 2) * -0.018;
+          const limited = Math.max(-14, Math.min(14, offset));
+          img.style.transform = `translateY(${limited}px) scale(1.04)`;
+        });
+      }
+
+      window.addEventListener("scroll", updateParallax, { passive: true });
+      window.addEventListener("resize", updateParallax);
+      updateParallax();
+    }
+
+    setupHeroParallax();
+
+    const revealEls = document.querySelectorAll(".reveal");
+
+    function applyStaggerDelays() {
+      const staggerSelectors = [
+        ".stats", ".grid", ".grid-2", ".archive-grid", ".blog-preview", ".slider-grid",
+        ".github-grid", ".clock-grid", ".scale-grid", ".roadmap-line",
+        ".timeline", ".contact-grid"
+      ];
+
+      staggerSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(group => {
+          Array.from(group.children).forEach((child, index) => {
+            child.style.setProperty("--stagger-delay", `${Math.min(index * 70, 420)}ms`);
+          });
+        });
+      });
+    }
+
+    function setupRevealAnimations() {
+      applyStaggerDelays();
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -70px 0px" });
+
+        revealEls.forEach(el => observer.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add("visible"));
+      }
+    }
+
+    setupRevealAnimations();
+
+    function updateCosmicClock() {
+      const birth = new Date("1999-08-11T19:59:00+05:30");
+      const now = new Date();
+      const diffMs = now - birth;
+
+      const earthDays = diffMs / (1000 * 60 * 60 * 24);
+      const earthYears = earthDays / 365.2425;
+      const marsSolHours = 24.6597;
+      const marsSols = diffMs / (1000 * 60 * 60 * marsSolHours);
+
+      const mercuryYears = earthDays / 87.969;
+      const venusYears = earthDays / 224.701;
+      const marsYears = earthDays / 686.98;
+
+      document.getElementById("earthYears").textContent = earthYears.toFixed(8);
+      document.getElementById("earthDays").textContent = Math.floor(earthDays).toLocaleString();
+      document.getElementById("marsSols").textContent = Math.floor(marsSols).toLocaleString();
+      document.getElementById("planetYears").textContent =
+        `${mercuryYears.toFixed(1)} / ${venusYears.toFixed(1)} / ${marsYears.toFixed(1)}`;
+
+      const galacticYear = 230000000;
+      const galacticFraction = (earthYears / galacticYear) * 100;
+      document.getElementById("galacticFraction").textContent =
+        `${galacticFraction.toExponential(3)} % of one Galactic orbit`;
+    }
+
+    updateCosmicClock();
+    setInterval(updateCosmicClock, 1000);
+
+    const archiveItems = {
+      "biswajit-poster": {
+        badge: "Poster",
+        title: "Biswajit Poster",
+        file: "files/Biswajit Poster.pdf",
+        summary: "Main poster material from my Master-Thesis-2024 poster and seminar archive.",
+        points: [
+          "Provides a compact visual summary of the research material.",
+          "Best quick visual summary for collaborators and portfolio visitors.",
+          "Useful as a quick reference for the poster archive."
+        ]
+      },
+      "master-project-presentation": {
+        badge: "Master project presentation",
+        title: "Closed Loop Feedback Control System for EXOhSPEC Development",
+        file: "files/Master Project Presentation - Closed Loop Feedback Control System for EXOhSPEC Development.pdf",
+        summary: "Main MSc project presentation on the closed-loop feedback-control system developed for EXOhSPEC.",
+        points: [
+          "Summarises the EXOhSPEC stabilisation problem and experimental motivation.",
+          "Connects environmental behaviour, optical path stability, and feedback-control logic.",
+          "Best entry point for visitors who want a slide-based overview of the MSc project."
+        ]
+      },
+      "seminar-1-rv-spectrograph": {
+        badge: "Seminar 1",
+        title: "State of Art — Radial Velocity Spectrograph",
+        file: "files/Seminar1-State of Art_ Radial Velocity Spectrograph.pdf",
+        summary: "Seminar introducing the radial-velocity spectrograph landscape and the instrumentation context behind precision RV work.",
+        points: [
+          "Frames the scientific motivation for high-precision radial velocity instrumentation.",
+          "Places EXOhSPEC-style stability questions in the broader spectrograph context.",
+          "Useful background material for exoplanet instrumentation visitors."
+        ]
+      },
+      "seminar-2-laser-control": {
+        badge: "Seminar 2",
+        title: "Advancements in Precision LASER Interferometer Control System",
+        file: "files/Seminar 2 - Advancements in Precision_LASER Interferometer Control Systempdf.pdf",
+        summary: "Seminar material on precision laser interferometer control and its connection to path-length stability.",
+        points: [
+          "Covers precision interferometric control ideas relevant to laboratory instrumentation.",
+          "Links laser interferometry to optical-path stability and measurement control.",
+          "Supports the technical background behind the EXOhSPEC stabilisation project."
+        ]
+      },
+      "seminar-3-opl-ri": {
+        badge: "Seminar 3",
+        title: "Optimizing Path Length Stability in Laser Interferometers using Air Refractive Index",
+        file: "files/Seminar 3 - Optimizing Path Length Stability in Laser Interferometers using Air Refractive Index.pdf",
+        summary: "Seminar focused on path-length stability, refractive-index effects, and interferometric control in air.",
+        points: [
+          "Connects air refractive-index changes to interferometer path-length stability.",
+          "Supports the environmental interpretation of OPL variation.",
+          "Relevant to the physics behind non-vacuum spectrograph stabilisation."
+        ]
+      },
+      "seminar-4-andes-pid": {
+        badge: "Seminar 4",
+        title: "High-Resolution RV Spectrographs, ANDES and PID Loop Implementation in EXOhSPEC",
+        file: "files/Seminar 4 -High-Resolution RV Spectrographs_ANDES and PID Loop Implementation in EXOhSPEC .pdf",
+        summary: "Seminar connecting high-resolution radial-velocity spectrographs, ANDES-style instrumentation, and PID-loop implementation in EXOhSPEC.",
+        points: [
+          "Bridges high-resolution RV spectrograph concepts with practical feedback implementation.",
+          "Includes PID-loop framing relevant to EXOhSPEC control development.",
+          "Useful for showing the progression from literature context to experimental control design."
+        ]
+      }
+    };
+
+    const archiveModal = document.getElementById("archiveModal");
+    const closeArchiveModal = document.getElementById("closeArchiveModal");
+    const archiveFrame = document.getElementById("archiveFrame");
+    const archiveModalBadge = document.getElementById("archiveModalBadge");
+    const archiveModalTitle = document.getElementById("archiveModalTitle");
+    const archiveModalSummary = document.getElementById("archiveModalSummary");
+    const archiveModalPoints = document.getElementById("archiveModalPoints");
+    const viewerDirectLink = document.getElementById("viewerDirectLink");
+    const viewerFileLabel = document.getElementById("viewerFileLabel");
+    const viewerModeToggle = document.getElementById("viewerModeToggle");
+    let currentArchiveItem = null;
+    let useDirectViewer = false;
+
+    function absoluteArchiveUrl(filePath) {
+      return new URL(filePath, window.location.href).href;
+    }
+
+    function googleDocsViewerUrl(filePath) {
+      const absoluteUrl = absoluteArchiveUrl(filePath);
+      return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(absoluteUrl)}`;
+    }
+
+    function updateArchiveViewerMode() {
+      if (!currentArchiveItem) return;
+      const directUrl = absoluteArchiveUrl(currentArchiveItem.file);
+      archiveFrame.src = useDirectViewer ? directUrl : googleDocsViewerUrl(currentArchiveItem.file);
+      viewerModeToggle.textContent = useDirectViewer ? "Embedded view" : "View file";
+      viewerModeToggle.setAttribute("aria-label", useDirectViewer ? "Switch to Google Docs Viewer" : "Switch to direct browser PDF viewer");
+    }
+
+    function openArchiveModal(itemId) {
+      const item = archiveItems[itemId];
+      if (!item) return;
+
+      const directUrl = absoluteArchiveUrl(item.file);
+      archiveModalBadge.textContent = item.badge;
+      archiveModalTitle.textContent = item.title;
+      archiveModalSummary.textContent = item.summary;
+      viewerDirectLink.href = directUrl;
+      viewerFileLabel.textContent = item.file;
+      currentArchiveItem = item;
+      useDirectViewer = false;
+      updateArchiveViewerMode();
+
+      archiveModalPoints.innerHTML = "";
+      item.points.forEach(point => {
+        const li = document.createElement("li");
+        li.textContent = point;
+        archiveModalPoints.appendChild(li);
+      });
+
+      archiveModal.classList.add("open");
+      archiveModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVisualArchiveModal() {
+      archiveModal.classList.remove("open");
+      archiveModal.setAttribute("aria-hidden", "true");
+      archiveFrame.src = "about:blank";
+      currentArchiveItem = null;
+      useDirectViewer = false;
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".archive-trigger").forEach(button => {
+      button.addEventListener("click", () => openArchiveModal(button.dataset.archiveId));
+    });
+
+    closeArchiveModal.addEventListener("click", closeVisualArchiveModal);
+
+    viewerModeToggle.addEventListener("click", () => {
+      useDirectViewer = !useDirectViewer;
+      updateArchiveViewerMode();
+    });
+
+    archiveModal.addEventListener("click", (event) => {
+      if (event.target === archiveModal) closeVisualArchiveModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && archiveModal.classList.contains("open")) {
+        closeVisualArchiveModal();
+      }
+    });
+
+
+
+    function setupSiteTelemetry() {
+      const viewEl = document.getElementById("telemetryViews");
+      const clickEl = document.getElementById("telemetryClicks");
+      const sessionEl = document.getElementById("telemetrySession");
+      const clockEl = document.getElementById("telemetryClock");
+      if (!viewEl || !clickEl || !sessionEl || !clockEl) return;
+
+      const viewKey = "biswajit_portfolio_local_views";
+      const clickKey = "biswajit_portfolio_local_clicks";
+      const views = Number(localStorage.getItem(viewKey) || "0") + 1;
+      localStorage.setItem(viewKey, String(views));
+
+      let clicks = Number(localStorage.getItem(clickKey) || "0");
+      viewEl.textContent = views.toLocaleString("en-GB");
+      clickEl.textContent = clicks.toLocaleString("en-GB");
+
+      document.addEventListener("click", (event) => {
+        if (event.target.closest("a, button, .archive-trigger, .filter-btn, .carousel-btn")) {
+          clicks += 1;
+          localStorage.setItem(clickKey, String(clicks));
+          clickEl.textContent = clicks.toLocaleString("en-GB");
+        }
+      }, { passive: true });
+
+      const start = Date.now();
+      function updateTelemetryClock() {
+        const elapsed = Math.floor((Date.now() - start) / 1000);
+        const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
+        const ss = String(elapsed % 60).padStart(2, "0");
+        sessionEl.textContent = `${mm}:${ss}`;
+        clockEl.textContent = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Europe/London",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        }).format(new Date());
+      }
+      updateTelemetryClock();
+      setInterval(updateTelemetryClock, 1000);
+    }
+
+    setupSiteTelemetry();
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    let comets = [];
+    let glows = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      comets = [];
+      glows = [];
+
+      const count = Math.min(170, Math.floor(window.innerWidth / 9));
+
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.8 + 0.3,
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: (Math.random() - 0.5) * 0.12,
+          alpha: Math.random() * 0.7 + 0.2
+        });
+      }
+
+      for (let i = 0; i < 4; i++) {
+        comets.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.65,
+          vx: 0.45 + Math.random() * 0.4,
+          vy: 0.16 + Math.random() * 0.14,
+          length: 95 + Math.random() * 80
+        });
+      }
+
+      for (let i = 0; i < 3; i++) {
+        glows.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: 120 + Math.random() * 140,
+          vx: (Math.random() - 0.5) * 0.08,
+          vy: (Math.random() - 0.5) * 0.08
+        });
+      }
+    }
+
+    function drawBackground() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const isLight = document.body.classList.contains("light");
+      const starColor = isLight ? "rgba(30,70,130,0.50)" : "rgba(255,255,255,0.82)";
+      const lineBase = isLight ? "rgba(30,90,150," : "rgba(120,180,255,";
+      const glowColor = isLight ? "rgba(42,107,255,0.06)" : "rgba(54,244,210,0.05)";
+
+      glows.forEach(g => {
+        const grad = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, g.r);
+        grad.addColorStop(0, glowColor);
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.beginPath();
+        ctx.fillStyle = grad;
+        ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        g.x += g.vx;
+        g.y += g.vy;
+
+        if (g.x < -100 || g.x > canvas.width + 100) g.vx *= -1;
+        if (g.y < -100 || g.y > canvas.height + 100) g.vy *= -1;
+      });
+
+      for (let i = 0; i < stars.length; i++) {
+        for (let j = i + 1; j < stars.length; j++) {
+          const dx = stars[i].x - stars[j].x;
+          const dy = stars[i].y - stars[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `${lineBase}${0.11 - d / 1500})`;
+            ctx.lineWidth = 0.7;
+            ctx.moveTo(stars[i].x, stars[i].y);
+            ctx.lineTo(stars[j].x, stars[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.fillStyle = starColor;
+        ctx.globalAlpha = s.alpha;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        s.x += s.vx;
+        s.y += s.vy;
+
+        if (s.x < 0 || s.x > canvas.width) s.vx *= -1;
+        if (s.y < 0 || s.y > canvas.height) s.vy *= -1;
+      });
+
+      comets.forEach(c => {
+        const gradient = ctx.createLinearGradient(c.x, c.y, c.x - c.length, c.y - c.length * 0.35);
+        gradient.addColorStop(0, isLight ? "rgba(0,168,141,0.70)" : "rgba(54,244,210,0.85)");
+        gradient.addColorStop(1, "rgba(54,244,210,0)");
+
+        ctx.beginPath();
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2.3;
+        ctx.moveTo(c.x, c.y);
+        ctx.lineTo(c.x - c.length, c.y - c.length * 0.35);
+        ctx.stroke();
+
+        c.x += c.vx;
+        c.y += c.vy;
+
+        if (c.x > canvas.width + 120 || c.y > canvas.height + 120) {
+          c.x = -100;
+          c.y = Math.random() * canvas.height * 0.45;
+        }
+      });
+
+      requestAnimationFrame(drawBackground);
+    }
+
+    resize();
+    drawBackground();
+    window.addEventListener("resize", resize);
+  </script>
+</body>
+</html>

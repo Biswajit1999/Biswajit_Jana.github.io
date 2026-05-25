@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Radial Velocity Method: Finding Planets by Watching Stars Wobble | Biswajit Jana</title>
+<meta name="description" content="A repaired and expanded blog post on the radial velocity method, stellar wobble, Doppler shifts, exoplanet discovery, line-of-sight geometry, advantages, limitations, and an interactive stellar wobble lab." />
+<meta property="og:title" content="The Radial Velocity Method: Finding Planets by Watching Stars Wobble | Biswajit Jana" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="A repaired and expanded blog post on the radial velocity method, stellar wobble, Doppler shifts, exoplanet discovery, line-of-sight geometry, advantages, limitations, and an interactive stellar wobble lab." />
+<meta property="og:image" content="../../images/blog11_01_radial_velocity_hero.png" />
+<link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/radial-velocity-method.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#03060c;--bg2:#07101c;--surface:rgba(10,17,31,.82);--text:#edf4ff;--muted:#a9b8d2;--dim:#697d9d;--line:rgba(255,255,255,.10);--accent:#4af0c8;--accent2:#83ddff;--gold:#ffbc73;--display:"Playfair Display",Georgia,serif;--serif:"Source Serif 4",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--nav-h:72px}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;font-family:var(--serif);color:var(--text);line-height:1.78;overflow-x:hidden;background:radial-gradient(circle at 12% 0%,rgba(74,240,200,.10),transparent 28%),radial-gradient(circle at 88% 8%,rgba(131,221,255,.08),transparent 27%),linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(180deg,var(--bg),var(--bg2) 52%,var(--bg));background-size:auto,auto,76px 76px,76px 76px,auto}body:before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(circle at 50% 54%,transparent 0 18%,rgba(0,0,0,.18) 32%,rgba(0,0,0,.74) 100%)}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}.wide{width:min(1560px,94vw);margin:0 auto}.nav{height:var(--nav-h);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line);background:rgba(3,6,12,.84);backdrop-filter:blur(18px)}.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-family:var(--display);font-weight:900;font-size:1.16rem;letter-spacing:-.035em}.brand span{color:var(--accent)}.nav-links{list-style:none;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.nav-links a{font-family:var(--mono);font-size:.75rem;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--accent)}.hero{padding:54px 0 30px}.hero-grid{display:grid;grid-template-columns:minmax(330px,.78fr) minmax(520px,1.22fr);gap:34px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;margin-bottom:18px}.eyebrow:before{content:"";width:34px;height:1px;background:currentColor;display:block}h1{font-family:var(--display);font-size:clamp(2.55rem,4.9vw,5.25rem);line-height:.98;letter-spacing:-.045em;margin-bottom:18px}.hero-sub{color:var(--muted);font-size:clamp(1.06rem,1.42vw,1.28rem);font-style:italic;line-height:1.58;margin-bottom:18px;max-width:760px}.hook{margin:18px 0 0;padding:18px 20px;border-radius:20px;border:1px solid rgba(255,188,115,.25);background:rgba(255,188,115,.06);color:#ffe6c8;font-size:1.03rem;line-height:1.7}.meta-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.meta-pill{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);font-family:var(--mono);font-size:.72rem;color:var(--muted)}.hero-card{position:relative;min-height:480px;border-radius:28px;border:1px solid var(--line);overflow:hidden;background:#050a12;box-shadow:0 26px 80px rgba(0,0,0,.42)}.hero-card img{width:100%;height:100%;min-height:480px;object-fit:contain;object-position:center;background:#050a12;opacity:.96}.hero-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 35%,rgba(0,0,0,.38))}.hero-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:3;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.14);background:rgba(5,10,20,.58);backdrop-filter:blur(14px);font-family:var(--mono);font-size:.72rem;color:#d9e8ff;line-height:1.55}.feature{padding:24px 0 52px}.sim-frame{border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(3,6,12,.78);box-shadow:0 28px 100px rgba(0,0,0,.48)}.sim-header{padding:20px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);background:rgba(10,17,31,.78)}.sim-header h2{font-family:var(--mono);font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:7px}.sim-header p{color:var(--muted);font-size:.9rem;max-width:850px;line-height:1.55}.sim-badge{flex-shrink:0;padding:7px 11px;border:1px solid rgba(74,240,200,.22);border-radius:999px;font-family:var(--mono);font-size:.7rem;color:var(--accent);background:rgba(74,240,200,.06)}.sim-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;min-height:640px}.sim-canvas-area{position:relative;min-height:640px;background:radial-gradient(circle at 32% 48%,rgba(131,221,255,.08),transparent 34%),radial-gradient(circle at 64% 38%,rgba(255,188,115,.06),transparent 26%),#050b14}.sim-canvas-area canvas{width:100%;height:640px;display:block;position:relative;z-index:1;background:#050b14}.sim-legend{position:absolute;left:18px;top:18px;display:flex;flex-wrap:wrap;gap:8px;max-width:calc(100% - 36px);pointer-events:none}.legend-pill{padding:6px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(4,8,16,.66);backdrop-filter:blur(10px);font-family:var(--mono);font-size:.66rem;color:var(--muted)}.legend-pill.star{color:var(--gold)}.legend-pill.planet{color:var(--accent2)}.legend-pill.rv{color:var(--accent)}.legend-pill.spec{color:#ffd9a2}.sim-side{border-left:1px solid var(--line);background:rgba(8,14,26,.70);padding:18px;overflow:auto}.control-group{border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.035);padding:14px;margin-bottom:14px}.control-group h3{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}.control{margin:11px 0}.control label{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:7px}.control strong{color:var(--gold);text-align:right}input[type=range]{width:100%;accent-color:var(--gold)}select{width:100%;background:#08101e;color:var(--text);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 12px;font-family:var(--mono);font-size:.75rem;outline:none}.data-feed{border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(5,10,20,.62);padding:14px;font-family:var(--mono)}.data-feed h3{font-size:.70rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}.feed-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px;margin-bottom:7px;font-size:.70rem;color:var(--muted)}.feed-line:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.feed-line strong{color:var(--text);white-space:nowrap;text-align:right}.discovery-card{margin-top:14px;border:1px solid rgba(255,188,115,.20);border-radius:18px;background:rgba(255,188,115,.055);padding:14px}.discovery-card h3{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}.discovery-card p{color:var(--muted);font-size:.82rem;line-height:1.55;margin-bottom:10px}.discovery-card button{appearance:none;border:1px solid rgba(255,188,115,.35);background:rgba(255,188,115,.08);color:#ffe3c1;border-radius:999px;padding:8px 12px;font-family:var(--mono);font-size:.68rem;cursor:pointer}.discovery-result{margin-top:10px;color:#dce9ff;font-family:var(--mono);font-size:.68rem;line-height:1.55;white-space:pre-wrap}.journal{padding:10px 0 78px}.journal-grid{display:grid;grid-template-columns:minmax(155px,.58fr) minmax(0,820px) minmax(275px,.82fr);gap:34px;align-items:start}.left-rail,.right-rail{position:sticky;top:calc(var(--nav-h) + 22px)}.rail-card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);backdrop-filter:blur(12px);box-shadow:0 26px 80px rgba(0,0,0,.32);margin-bottom:16px}.rail-card h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}.section-nav{list-style:none;display:grid;gap:10px}.section-nav a{display:inline-block;color:var(--muted);font-family:var(--mono);font-size:.75rem;line-height:1.45;transition:.2s}.section-nav a:hover,.section-nav a.active{color:var(--accent);transform:translateX(2px)}.telemetry{display:grid;gap:8px}.telemetry div{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.70rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:7px}.telemetry strong{color:var(--text);text-align:right}.glossary{display:grid;gap:12px}.glossary-item{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}.glossary-item strong{display:block;color:var(--accent);font-family:var(--mono);font-size:.72rem;margin-bottom:4px}.glossary-item span{display:block;color:var(--muted);font-size:.88rem;line-height:1.55}.post-list{display:grid;gap:12px}.post-card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:.22s}.post-card:hover{transform:translateY(-2px);border-color:rgba(255,188,115,.28);background:rgba(255,255,255,.06)}.post-card-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}.post-card h4{font-family:var(--display);font-size:1.15rem;line-height:1.14;letter-spacing:-.02em;margin-bottom:7px}.post-card p{color:var(--muted);font-size:.88rem;line-height:1.55}.tiny-meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:8px}.story-header{padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}.story-header h2{font-family:var(--display);font-size:clamp(2.25rem,4.2vw,3.95rem);line-height:1.02;letter-spacing:-.045em;margin-bottom:12px}.story-header p,.chapter p{color:var(--muted);font-size:1.06rem;line-height:1.86;margin-bottom:18px}.chapter{margin:40px 0;padding-top:34px;border-top:1px solid var(--line)}.chapter:first-of-type{margin-top:0;padding-top:0;border-top:0}.chapter-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}.chapter h2{font-family:var(--display);font-size:clamp(1.9rem,3.5vw,3.05rem);line-height:1.06;letter-spacing:-.04em;margin-bottom:16px}.quote{margin:26px 0;padding:14px 0 14px 20px;border-left:3px solid var(--gold);font-size:1.14rem;color:var(--text);font-style:italic;line-height:1.7}.equation{margin:24px 0;padding:20px 22px;border-radius:18px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.28);overflow-x:auto}.equation-label{font-family:var(--mono);font-size:.70rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}.equation p{font-size:.94rem;margin:10px 0 0}.fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.fact{padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 22px 70px rgba(0,0,0,.24)}.fact strong{display:block;color:var(--gold);font-family:var(--mono);font-size:.75rem;margin-bottom:7px}.fact span{display:block;color:var(--muted);font-size:.92rem;line-height:1.55}.note-box{margin:24px 0;padding:18px 20px;border:1px solid rgba(131,221,255,.18);border-radius:20px;background:rgba(131,221,255,.055)}.note-box strong{display:block;color:var(--accent2);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}.note-box p{margin-bottom:0}
+
+.math-display{
+  margin:12px 0 10px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:rgba(3,8,18,.72);
+  border:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);
+  font-size:clamp(.92rem,1.2vw,1.08rem);
+  color:var(--text);
+  overflow-x:auto;
+  white-space:nowrap;
+}
+.math-display .frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;margin:0 .12em}
+.math-display .frac span:first-child{border-bottom:1px solid currentColor;padding:0 .22em}
+.math-display sub{font-size:.72em}
+.figure-note{margin:24px 0;padding:16px;border:1px solid rgba(255,255,255,.10);border-radius:22px;background:rgba(255,255,255,.035)}
+.figure-note img{width:100%;height:auto;max-height:520px;object-fit:contain;object-position:center;border-radius:16px;background:#020817;border:1px solid rgba(255,255,255,.08)}
+.figure-note figcaption{color:var(--dim);font-size:.84rem;font-style:italic;line-height:1.55;margin-top:10px}
+.figure-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.figure-pair 
+.math-display{
+  margin:12px 0 10px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:rgba(3,8,18,.72);
+  border:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);
+  font-size:clamp(.92rem,1.2vw,1.08rem);
+  color:var(--text);
+  overflow-x:auto;
+  white-space:nowrap;
+}
+.math-display .frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;margin:0 .12em}
+.math-display .frac span:first-child{border-bottom:1px solid currentColor;padding:0 .22em}
+.math-display sub{font-size:.72em}
+.figure-note{margin:0}
+@media(max-width:760px){.figure-pair{grid-template-columns:1fr}}
+.comments-section{margin-top:34px;padding:24px;border:1px solid var(--line);border-radius:22px;background:var(--surface)}.comments-section h2{font-family:var(--display);font-size:2rem;line-height:1.1;margin-bottom:8px}.comments-section p{color:var(--muted);font-size:.95rem;margin-bottom:18px}.footer{background:#010308;border-top:1px solid rgba(255,255,255,.10);padding:38px 0;color:var(--dim);font-family:var(--mono);font-size:.72rem}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer a{color:var(--muted)}.footer a:hover{color:var(--gold)}
+.theme-toggle{
+  width:38px;height:24px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:var(--gold);font-family:var(--mono);
+  cursor:pointer;display:grid;place-items:center;
+}
+body.light{
+  --bg:#edf3ff;--bg2:#f7faff;--surface:rgba(255,255,255,.86);--surface-solid:#ffffff;
+  --surface2:rgba(10,30,70,.055);--text:#12213a;--muted:#445a78;--dim:#667b99;
+  --line:rgba(10,30,70,.14);
+  background:
+    radial-gradient(circle at 12% 0%,rgba(0,140,120,.09),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(30,90,180,.08),transparent 27%),
+    linear-gradient(rgba(10,30,70,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(10,30,70,.045) 1px,transparent 1px),
+    linear-gradient(180deg,#f6f9ff,#edf3ff 52%,#f8fbff);
+  background-size:auto,auto,76px 76px,76px 76px,auto;
+}
+body.light::before{background:linear-gradient(120deg,rgba(0,140,120,.035),transparent 42%,rgba(30,90,180,.035));}
+body.light .nav{background:rgba(246,249,255,.86);}
+body.light .sim-canvas-area,body.light .sim-frame,body.light .rail-card,body.light .comments-section{background:rgba(255,255,255,.72);}
+body.light .hero-card{background:#e9f0fb;}
+
+.launch-strip{padding:34px 0;text-align:center;border-bottom:1px solid var(--line)}.launch-strip p{color:var(--muted);font-size:.94rem;max-width:640px;margin:0 auto 18px;line-height:1.65;font-family:var(--serif)}.launch-button{display:inline-flex;align-items:center;gap:10px;border-radius:999px;border:1px solid rgba(74,240,200,.42);background:rgba(74,240,200,.10);color:var(--accent);font-family:var(--mono);font-size:.84rem;padding:13px 28px;transition:background .2s,transform .15s;box-shadow:0 8px 32px rgba(74,240,200,.10)}.launch-button:hover{background:rgba(74,240,200,.20);transform:translateY(-2px)}
+@media(max-width:1180px){.hero-grid{grid-template-columns:1fr}.hero-card,.hero-card img{min-height:430px}.journal-grid{grid-template-columns:220px minmax(0,1fr)}.right-rail{grid-column:1/-1;position:static}.sim-layout{grid-template-columns:1fr}.sim-side{border-left:0;border-top:1px solid var(--line)}.sim-canvas-area,.sim-canvas-area canvas{height:560px;min-height:560px}}@media(max-width:900px){.nav{height:auto}.nav-inner{padding:14px 0;flex-direction:column;align-items:flex-start}.journal-grid{grid-template-columns:1fr}.left-rail,.right-rail{position:static}.fact-grid{grid-template-columns:1fr}.hero{padding-top:34px}}@media(max-width:760px){.wide,.nav-inner{width:min(94vw,100%)}.hero-card,.hero-card img{min-height:320px}.sim-canvas-area,.sim-canvas-area canvas{height:460px;min-height:460px}h1{font-size:clamp(2.25rem,12vw,4rem)}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner wide"><a class="brand" href="../../index.html">Biswajit <span>Jana</span></a><ul class="nav-links"><li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li><li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li><li><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">☾</button></li></ul></div></nav>
+<header class="hero wide"><div class="hero-grid"><div><div class="eyebrow">Exoplanets · Doppler spectroscopy · interactive visual lab</div><h1>The Radial Velocity Method: Finding Planets by Watching Stars Wobble</h1><p class="hero-sub">Planets do not only orbit stars. Stars wobble back. That wobble shifts the star’s spectrum, and hidden planets leave their fingerprints in wavelength.</p><div class="hook">Welcome to radial velocity: where a planet hides in the glare of its star, then accidentally gives itself away by making the star move a few metres per second. Subtle. Not subtle enough.</div><div class="meta-row"><span class="meta-pill">2026-05-09 · Hertford, London, UK</span><span class="meta-pill">16 min read</span><span class="meta-pill">Interactive stellar wobble lab</span></div></div><figure class="hero-card"><img src="../../images/blog11_01_radial_velocity_hero.png" alt="Radial velocity exoplanet method hero image showing a star, orbiting planet, spectrum, and Doppler curve" onerror="this.onerror=null;this.src='../../images/blog11_02_star_planet_wobble.png';" /><figcaption class="hero-caption">A visual feature for stellar wobble: the planet is not directly seen, but the star’s spectral lines quietly confess the motion.</figcaption></figure></div></header>
+<section class="feature wide"><div class="sim-frame"><div class="sim-header"><div><h2>Stellar Wobble Lab</h2><p>Choose a stellar type, change the planet mass and viewing inclination, and watch how the orbit, radial-velocity curve, and spectral-line shift respond. The controls are now separated from the data so the graph is readable rather than buried under sliders.</p></div><div class="sim-badge">browser-based model</div></div><div class="sim-layout"><div class="sim-canvas-area"><canvas id="rvCanvas"></canvas><div class="sim-legend"><span class="legend-pill star">star wobble</span><span class="legend-pill planet">planet orbit</span><span class="legend-pill rv">radial-velocity curve</span><span class="legend-pill spec">spectral-line shift</span></div></div><aside class="sim-side"><div class="control-group"><h3>Star system</h3><label class="control"><span style="display:block;font-family:var(--mono);font-size:.70rem;color:var(--muted);margin-bottom:7px;">Stellar type</span><select id="starType"><option value="O">O type · blue · very hot</option><option value="B">B type · blue-white</option><option value="A">A type · white</option><option value="F">F type · yellow-white</option><option value="G" selected>G type · Sun-like</option><option value="K">K type · orange</option><option value="M">M type · red dwarf</option></select></label><div class="control"><label><span>Stellar mass</span><strong id="starMassOut">1.00 M☉</strong></label><input id="starMass" type="range" min="0.1" max="3.0" step="0.05" value="1.0"></div></div><div class="control-group"><h3>Hidden planet</h3><div class="control"><label><span>Planet mass</span><strong id="rvMassOut">1.0 MJ</strong></label><input id="rvMass" type="range" min="0.1" max="12" step="0.1" value="1"></div><div class="control"><label><span>Orbital period</span><strong id="rvPeriodOut">24 d</strong></label><input id="rvPeriod" type="range" min="4" max="200" step="1" value="24"></div><div class="control"><label><span>Inclination</span><strong id="rvIncOut">80°</strong></label><input id="rvInc" type="range" min="0" max="90" step="1" value="80"></div><div class="control"><label><span>Noise level</span><strong id="rvNoiseOut">0.7 m/s</strong></label><input id="rvNoise" type="range" min="0" max="5" step="0.1" value="0.7"></div></div><div class="data-feed"><h3>Live Doppler Feed</h3><div class="feed-line"><span>Star temperature</span><strong id="starTempOut">--</strong></div><div class="feed-line"><span>RV semi-amplitude</span><strong id="rvK">--</strong></div><div class="feed-line"><span>Current velocity</span><strong id="rvVel">--</strong></div><div class="feed-line"><span>Spectral shift @ 550 nm</span><strong id="rvShift">--</strong></div><div class="feed-line"><span>Detection mood</span><strong id="rvMood">--</strong></div></div><div class="discovery-card"><h3>Discovery Pulse</h3><p>This optional live panel queries the NASA Exoplanet Archive for confirmed planets whose discovery method is listed as radial velocity. If the archive or browser blocks the request, the article still works normally.</p><button id="loadDiscoveries" type="button">Load latest RV archive count</button><div class="discovery-result" id="discoveryResult">Not loaded yet.</div></div></aside></div></div></section>
+<section class="launch-strip wide"><p>The inline lab above covers the core concept. The full simulator adds a real-time Doppler-shifted stellar spectrum rendered in WebGL2, a Lomb–Scargle periodogram that accumulates as you take observations, and a discovery mode where the planet system is hidden and you work it out from the data — the same pipeline used by HARPS, HIRES, and ESPRESSO.</p><a class="launch-button" href="../tools/rv-exoplanet-hunter.html">Launch Full Simulator →</a></section>
+<section class="journal wide"><div class="journal-grid"><aside class="left-rail"><div class="rail-card"><h3>Navigation Map</h3><ul class="section-nav"><li><a href="#overview">Overview</a></li><li><a href="#wobble">Stellar wobble</a></li><li><a href="#doppler">Doppler shift</a></li><li><a href="#geometry">Line of sight</a></li><li><a href="#advantages">Why it is powerful</a></li><li><a href="#limits">Where it struggles</a></li><li><a href="#discovery">Discovery context</a></li><li><a href="#takeaway">Takeaway</a></li><li><a href="#visual-notes">Visual notes</a></li><li><a href="#comments">Comments</a></li></ul></div><div class="rail-card"><h3>System Telemetry</h3><div class="telemetry"><div><span>Object</span><strong>Star–planet system</strong></div><div><span>Status</span><strong>Hidden companion</strong></div><div><span>Observer</span><strong>Biswajit Jana</strong></div><div><span>Mode</span><strong>Doppler Lab</strong></div></div></div></aside><main class="story"><div class="story-header" id="overview"><div class="eyebrow">Method · exoplanets · precision spectroscopy</div><h2>A planet does not need to be seen to be caught.</h2><p>The radial velocity method detects exoplanets by measuring how a star moves along our line of sight. The planet stays hidden in the glare, but the star’s spectrum shifts rhythmically. It is not a photograph of a planet; it is a confession written in wavelength.</p></div><article><section class="chapter" id="wobble"><div class="chapter-label">Chapter 01 · Stellar wobble</div><h2>The star is not the boss. It also orbits.</h2><p>In the simplest classroom version, a planet orbits a star and the star sits still in the middle. That picture is useful for a first sketch, but it is not what gravity actually does. Both the star and planet orbit their common centre of mass, called the barycentre. Because the star is usually much more massive, its orbit is tiny. Tiny, however, is not the same as irrelevant.</p><p>If a massive planet pulls its star slightly towards us and then away from us during each orbit, the star’s light carries that motion as a Doppler shift. We do not need to spatially separate the planet from the star. We only need to measure the star well enough, repeatedly enough, and patiently enough.</p><div class="equation"><div class="equation-label">Radial velocity signal</div>
+          <div class="math-display">v<sub>r</sub>(t) = K cos(2πt / P + φ)</div>
+          <p><strong>K</strong> is the velocity semi-amplitude, <strong>P</strong> is the orbital period, and <strong>φ</strong> is the phase. Real systems add eccentricity, multiple planets, stellar activity, instrumental drift, and the universe being generally inconvenient.</p>
+        </div><div class="quote">The planet whispers through the star. The spectrograph’s job is to avoid coughing over the whisper.</div></section><section class="chapter" id="doppler"><div class="chapter-label">Chapter 02 · Doppler shift</div><h2>The spectrum moves because the star moves.</h2><p>When the star moves towards us, its spectral lines shift slightly towards shorter wavelengths. When it moves away, the same lines shift towards longer wavelengths. The shift is extremely small, but modern spectrographs are designed to compare spectra so precisely that a movement of a few metres per second can become measurable.</p><p>This is why radial velocity is such a beautiful method. It does not require the planet to block the star. It does not require the planet to be directly imaged. It only requires the planet to pull on its star, which planets are very good at doing because gravity has no sense of privacy.</p><div class="equation"><div class="equation-label">Non-relativistic Doppler approximation</div>
+          <div class="math-display"><span class="frac"><span>Δλ</span><span>λ</span></span> ≈ <span class="frac"><span>v<sub>r</sub></span><span>c</span></span></div>
+          <p>For exoplanet radial velocities, <strong>v<sub>r</sub></strong> is much smaller than the speed of light <strong>c</strong>, so this approximation is normally sufficient.</p>
+        </div><div class="fact-grid"><div class="fact"><strong>Hot Jupiter</strong><span>Large signal, often tens to hundreds of metres per second. Nature being generous for once.</span></div><div class="fact"><strong>Earth analogue</strong><span>Around 0.09 m/s for a Sun–Earth system. That is not a signal; that is a scientific insult with decimal places.</span></div></div></section><section class="chapter" id="geometry"><div class="chapter-label">Chapter 03 · Observer geometry</div><h2>The line of sight decides how much wobble we actually see.</h2><p>Radial velocity only measures the component of stellar motion towards or away from the observer. This is why inclination matters. If the system is edge-on, the star moves strongly along our line of sight and the velocity signal is large. If the system is face-on, most of the star’s motion is across the sky rather than towards us, so the radial velocity signal becomes small or even nearly invisible.</p><div class="equation"><div class="equation-label">Inclination dependence</div>
+          <div class="math-display">K<sub>obs</sub> ∝ M<sub>p</sub> sin(i)</div>
+          <p>The method measures <strong>M<sub>p</sub> sin(i)</strong>, not the true mass directly. If <strong>i</strong> is unknown, the planet’s true mass may be larger than the radial-velocity minimum mass.</p>
+        </div><p>This is also why combining methods is powerful. If a planet transits, the orbit is close to edge-on, so radial velocity and transit data together can give both radius and mass. From those, density follows, and suddenly the planet becomes more than a periodic signal.</p></section><section class="chapter" id="advantages"><div class="chapter-label">Chapter 04 · Strengths</div><h2>Why radial velocity is still one of the most important exoplanet methods.</h2><p>The transit method has discovered huge numbers of planets, especially with space missions, but radial velocity gives something transits do not naturally provide: a dynamical mass estimate. That matters because size alone can be misleading. A small planet could be rocky, icy, volatile-rich, or something more complicated. Mass helps tell the physical story.</p><div class="fact-grid"><div class="fact"><strong>Measures mass</strong><span>Radial velocity gives a minimum mass, which is essential for understanding whether a planet is rocky, Neptune-like, or gas-rich.</span></div><div class="fact"><strong>No transit required</strong><span>The planet does not need to cross in front of the star, so radial velocity can detect non-transiting systems.</span></div><div class="fact"><strong>Good for nearby stars</strong><span>Bright, nearby stars are excellent targets because high signal-to-noise spectra can be obtained repeatedly.</span></div><div class="fact"><strong>Confirms candidates</strong><span>It is often used to confirm and characterise planets first found by transits.</span></div></div><p>There is also a practical elegance to it. A star may be unresolved as a point of light, but its spectrum contains a time series of motion. In that sense, radial velocity turns a dot into a dynamical system.</p></section><section class="chapter" id="limits"><div class="chapter-label">Chapter 05 · Limitations</div><h2>Where the method struggles.</h2><p>The radial velocity method is powerful, but it is not magic. It is less sensitive to face-on systems because the motion is not along our line of sight. It also becomes difficult for low-mass planets on wide orbits, because the signal is small and the orbital period may be long. If the planet takes twelve years to complete one orbit, the data politely asks for twelve years of patience.</p><p>Stars themselves are also a problem. Starspots, plages, oscillations, granulation, and magnetic cycles can create velocity-like signals. Sometimes the star is not revealing a planet; it is just being a hot plasma sphere with surface drama.</p><div class="equation"><div class="equation-label">Signal-to-noise idea</div>
+          <div class="math-display">SNR ≈ <span class="frac"><span>K</span><span>σ<sub>RV</sub></span></span></div>
+          <p>The smaller the total radial-velocity uncertainty <strong>σ<sub>RV</sub></strong>, the easier it is to detect a planet with semi-amplitude <strong>K</strong>.</p>
+        </div><div class="note-box"><strong>Why other methods are needed</strong><p>If the geometry is unfavourable, or if stellar activity hides the velocity signal, astronomers may rely on transits, direct imaging, astrometry, microlensing, or combinations of methods. Exoplanet science is not one magic trick; it is a toolbox.</p></div></section><section class="chapter" id="discovery"><div class="chapter-label">Chapter 06 · Discovery context</div><h2>From one wobbling star to an exoplanet population.</h2><p>Radial velocity was central to the early history of exoplanet discovery, including the detection of giant planets close to their host stars. Those early discoveries were surprising because they did not look like the Solar System. Hot Jupiters were not what many people expected, which is a polite way of saying the universe once again refused to follow our local example.</p><p>Today, radial velocity remains crucial because it provides mass measurements and confirms planets found by other techniques. In a good observing programme, the method is not isolated. It works with transit photometry, stellar characterisation, atmospheric follow-up, and careful noise modelling.</p><p>The live discovery panel above is intentionally optional. It queries the NASA Exoplanet Archive when the browser permits it, but the scientific explanation does not depend on a live connection. A blog post should not break just because an archive server is having a dramatic afternoon.</p></section><section class="chapter" id="takeaway"><div class="chapter-label">Takeaway</div><h2>The method is simple. The execution is brutal.</h2><p>The radial velocity method is conceptually elegant: observe a star, measure periodic spectral-line shifts, infer an unseen companion. The reality is a battle against noise, stellar variability, observing cadence, calibration, and instrumental stability. That is what makes it beautiful. The planet is hidden, but gravity still leaves a signature.</p></section>
+<section class="chapter" id="visual-notes"><div class="chapter-label">Visual notes</div><h2>Four views of the same wobble.</h2><p>I have kept the supporting visuals inside the post this time, because the radial-velocity method is much easier to understand when the geometry, spectrum, and comparison with transits are shown side by side. These images are conceptual illustrations, not telescope data, but they help explain what the method is doing physically.</p><figure class="figure-note"><img src="../../images/blog11_02_star_planet_wobble.png" alt="Conceptual star and planet wobble diagram for the radial velocity method" onerror="this.onerror=null;this.src='../../images/blog11_01_radial_velocity_hero.png';"><figcaption>Star–planet wobble visual: both bodies orbit their common barycentre. The planet’s motion is large; the star’s motion is small, but a precise spectrograph can still detect the line-of-sight component.</figcaption></figure><div class="figure-pair"><figure class="figure-note"><img src="../../images/blog11_03_doppler_spectrum.png" alt="Conceptual Doppler spectrum visual for the radial velocity method" onerror="this.onerror=null;this.src='../../images/blog11_02_star_planet_wobble.png';"><figcaption>Doppler-spectrum concept: absorption lines shift blueward and redward as the star moves toward and away from us.</figcaption></figure><figure class="figure-note"><img src="../../images/blog11_04_rv_vs_transit.png" alt="Comparison visual between radial velocity and transit exoplanet methods" onerror="this.onerror=null;this.src='../../images/blog11_03_doppler_spectrum.png';"><figcaption>RV versus transit: radial velocity measures stellar motion and gives a minimum mass; transit photometry measures dimming and gives radius.</figcaption></figure></div></section>
+</article><section id="comments" class="comments-section"><h2>Comments &amp; reactions</h2><p>Leave a question, correction, or thought. Powered by GitHub Discussions via giscus.</p><script src="https://giscus.app/client.js" data-repo="Biswajit1999/Biswajit_Jana.github.io" data-repo-id="R_kgDOST2kXQ" data-category="General" data-category-id="DIC_kwDOST2kXc4C8UVe" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section></main><aside class="right-rail"><div class="rail-card"><h3>Glossary, but less boring</h3><div class="glossary"><div class="glossary-item"><strong>Barycentre</strong><span>The shared balance point. The star does not sit majestically still; it does a tiny guilty dance.</span></div><div class="glossary-item"><strong>Doppler shift</strong><span>Light changing wavelength because the source moves. Basically cosmic speed gossip.</span></div><div class="glossary-item"><strong>Semi-amplitude</strong><span>The size of the velocity wobble. Small number, huge career implications.</span></div><div class="glossary-item"><strong>Inclination</strong><span>The angle that decides whether nature lets you see the signal or laughs quietly.</span></div><div class="glossary-item"><strong>Activity noise</strong><span>Starspots, oscillations, and stellar tantrums pretending to be planets.</span></div></div></div><div class="rail-card"><h3>Related Labs</h3><div class="post-list"><a class="post-card" href="three-body-problem.html"><div class="post-card-kicker">Related exploration</div><h4>The Three-Body Problem</h4><p>Gravity, chaos, and the universe refusing to be neatly solved before lunch.</p><div class="tiny-meta">Dynamics · simulation</div></a><a class="post-card" href="black-hole-extreme-lab.html"><div class="post-card-kicker">Related exploration</div><h4>Black Holes</h4><p>When gravity stops negotiating and starts rewriting causality.</p><div class="tiny-meta">Relativity · visual lab</div></a><a class="post-card" href="habitable-zone.html"><div class="post-card-kicker">Related exploration</div><h4>The Habitable Zone</h4><p>The cosmic comfort zone, with terms and conditions definitely applying.</p><div class="tiny-meta">Astrobiology · exoplanets</div></a><a class="post-card" href="control-system.html"><div class="post-card-kicker">Related exploration</div><h4>Control Systems</h4><p>Feedback loops: because pretending errors do not exist is not engineering.</p><div class="tiny-meta">Instrumentation · feedback</div></a></div></div></aside></div></section><footer class="footer"><div class="footer-inner wide"><div>© 2026 Biswajit Jana. All Rights Reserved. // Astrophysics, Instrumentation & Scientific Computing.</div><div><a href="../../index.html">Home Page</a> · <a href="../../publications.html">Posters / Publications</a> · <a href="../index.html">All Blog Posts</a></div></div></footer>
+<script>const sections=[...document.querySelectorAll("main [id]")];const links=[...document.querySelectorAll(".section-nav a")];const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-20% 0px -65% 0px",threshold:.1});sections.forEach(s=>obs.observe(s));function trackEvent(name){if(window.plausible)window.plausible(name);if(window.gtag)window.gtag("event",name,{event_category:"engagement",event_label:document.title});}</script>
+
+<script>
+const themeButton = document.getElementById("themeToggle");
+if (themeButton) {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+    themeButton.textContent = "☀";
+  }
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+    themeButton.textContent = isLight ? "☀" : "☾";
+  });
+}
+</script>
+
+<script>
+(function(){
+const c = document.getElementById("rvCanvas");
+const ctx = c.getContext("2d");
+let t = 0;
+let last = performance.now();
+const starTypes = {
+  O:{temp:35000,color:"#9bbcff",glow:"rgba(155,188,255,.88)",mass:2.8,label:"O type"},
+  B:{temp:18000,color:"#b7d0ff",glow:"rgba(183,208,255,.88)",mass:2.2,label:"B type"},
+  A:{temp:8500,color:"#e5edff",glow:"rgba(229,237,255,.86)",mass:1.8,label:"A type"},
+  F:{temp:6500,color:"#fff1c8",glow:"rgba(255,241,200,.86)",mass:1.3,label:"F type"},
+  G:{temp:5778,color:"#ffd28b",glow:"rgba(255,210,139,.88)",mass:1.0,label:"G type"},
+  K:{temp:4500,color:"#ff9b5c",glow:"rgba(255,155,92,.86)",mass:.75,label:"K type"},
+  M:{temp:3200,color:"#ff6a4d",glow:"rgba(255,106,77,.86)",mass:.35,label:"M type"}
+};
+function $(id){ return document.getElementById(id); }
+const staticStars = Array.from({length:260},()=>({x:Math.random(),y:Math.random(),s:.4+Math.random()*1.6,a:.2+Math.random()*.55}));
+function resize(){
+  const rect = c.getBoundingClientRect();
+  const d = Math.min(window.devicePixelRatio || 1, 2);
+  c.width = Math.max(600, Math.floor(rect.width * d));
+  c.height = Math.max(420, Math.floor(rect.height * d));
+  ctx.setTransform(d,0,0,d,0,0);
+}
+resize();
+window.addEventListener("resize", resize, {passive:true});
+$("starType").addEventListener("change", () => { $("starMass").value = starTypes[$("starType").value].mass; });
+function vals(){
+  return {
+    type:starTypes[$("starType").value],
+    sm:+$("starMass").value,
+    pm:+$("rvMass").value,
+    p:+$("rvPeriod").value,
+    inc:+$("rvInc").value*Math.PI/180,
+    incDeg:+$("rvInc").value,
+    n:+$("rvNoise").value
+  };
+}
+function textLabel(x,y,label,color="rgba(237,244,255,.82)"){
+  ctx.fillStyle=color; ctx.font="12px JetBrains Mono, monospace"; ctx.fillText(label,x,y);
+}
+function draw(){
+  const now = performance.now();
+  t += (now-last)/1000;
+  last = now;
+  const W = Math.max(600, c.clientWidth);
+  const H = Math.max(420, c.clientHeight);
+  const v = vals();
+
+  $("starMassOut").textContent = v.sm.toFixed(2)+" M☉";
+  $("rvMassOut").textContent = v.pm.toFixed(1)+" MJ";
+  $("rvPeriodOut").textContent = Math.round(v.p)+" d";
+  $("rvIncOut").textContent = Math.round(v.incDeg)+"°";
+  $("rvNoiseOut").textContent = v.n.toFixed(1)+" m/s";
+  $("starTempOut").textContent = v.type.label+" · "+Math.round(v.type.temp)+" K";
+
+  ctx.clearRect(0,0,W,H);
+  const bg=ctx.createRadialGradient(W*.30,H*.42,30,W*.50,H*.55,Math.max(W,H)*.72);
+  bg.addColorStop(0,"#173052"); bg.addColorStop(.42,"#07111f"); bg.addColorStop(1,"#02050c");
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  staticStars.forEach(s=>{ctx.fillStyle=`rgba(255,255,255,${s.a})`;ctx.fillRect(s.x*W,s.y*H,s.s,s.s);});
+
+  const K = 28.4*v.pm*Math.sin(v.inc)*Math.pow(v.p/365,-1/3)*Math.pow(v.sm,-2/3);
+  const phase = t*2*Math.PI/(v.p/13);
+  const rv = K*Math.sin(phase);
+  const shiftNm = 550*(rv/299792458);
+
+  $("rvK").textContent = K.toFixed(2)+" m/s";
+  $("rvVel").textContent = rv.toFixed(2)+" m/s";
+  $("rvShift").textContent = shiftNm.toExponential(2)+" nm";
+  $("rvMood").textContent = K>v.n*5 ? "planet is shouting" : K>v.n*2 ? "detectable with patience" : "signal hiding like a coward";
+
+  const cx=W*.29, cy=H*.47;
+  const orbitA=Math.min(W,H)*.21;
+  const orbitB=orbitA*.55*Math.max(.14,Math.sin(v.inc));
+  const wob=Math.min(46,K*.95);
+  const sx=cx+Math.cos(phase+Math.PI)*wob;
+  const sy=cy+Math.sin(phase+Math.PI)*wob*.42;
+  const px=cx+Math.cos(phase)*orbitA;
+  const py=cy+Math.sin(phase)*orbitB;
+
+  ctx.strokeStyle="rgba(129,223,255,.28)"; ctx.lineWidth=1.2;
+  ctx.beginPath(); ctx.ellipse(cx,cy,orbitA,orbitB,0,0,Math.PI*2); ctx.stroke();
+  ctx.fillStyle="rgba(255,255,255,.70)"; ctx.beginPath(); ctx.arc(cx,cy,3,0,Math.PI*2); ctx.fill();
+
+  const starRadius=34+Math.min(24,Math.sqrt(v.sm)*13);
+  const sg=ctx.createRadialGradient(sx,sy,0,sx,sy,starRadius*3.8);
+  sg.addColorStop(0,v.type.glow); sg.addColorStop(.35,"rgba(255,210,139,.30)"); sg.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle=sg; ctx.beginPath(); ctx.arc(sx,sy,starRadius*3.8,0,Math.PI*2); ctx.fill();
+  ctx.shadowColor=v.type.color; ctx.shadowBlur=24; ctx.fillStyle=v.type.color; ctx.beginPath(); ctx.arc(sx,sy,starRadius,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+
+  const planetRadius=8+Math.min(13,v.pm*.9);
+  const pg=ctx.createRadialGradient(px-planetRadius*.3,py-planetRadius*.3,0,px,py,planetRadius*1.7);
+  pg.addColorStop(0,"rgba(230,250,255,1)"); pg.addColorStop(.48,"rgba(87,190,255,.9)"); pg.addColorStop(1,"rgba(8,25,60,.92)");
+  ctx.fillStyle=pg; ctx.beginPath(); ctx.arc(px,py,planetRadius,0,Math.PI*2); ctx.fill();
+
+  ctx.strokeStyle="rgba(255,255,255,.18)"; ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(px,py); ctx.stroke();
+  textLabel(cx-orbitA,cy+orbitB+34,"star + planet orbit a shared barycentre","rgba(169,184,210,.80)");
+
+  const x0=W*.52,y0=H*.13,ww=W*.42,hh=H*.30;
+  ctx.fillStyle="rgba(255,255,255,.055)"; ctx.fillRect(x0,y0,ww,hh);
+  ctx.strokeStyle="rgba(255,255,255,.20)"; ctx.strokeRect(x0,y0,ww,hh);
+  ctx.strokeStyle="rgba(255,188,115,.45)"; ctx.beginPath(); ctx.moveTo(x0,y0+hh*.5); ctx.lineTo(x0+ww,y0+hh*.5); ctx.stroke();
+  ctx.strokeStyle="#4af0c8"; ctx.lineWidth=2.5; ctx.beginPath();
+  for(let i=0;i<260;i++){
+    const x=x0+i/259*ww;
+    const clean=Math.sin(i/259*Math.PI*4+phase);
+    const noise=Math.sin(i*.71+t*2.1)*v.n*.27+Math.sin(i*1.33)*v.n*.13;
+    const y=y0+hh*.5-clean*hh*.36*Math.min(1,K/65)-noise;
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+  textLabel(x0+12,y0+22,"radial-velocity curve");
+  textLabel(x0+12,y0+42,"towards / away from observer","rgba(169,184,210,.78)");
+
+  const sx0=W*.52,sy0=H*.58,sw=W*.42,sh=H*.20;
+  ctx.fillStyle="rgba(255,255,255,.045)"; ctx.fillRect(sx0,sy0,sw,sh);
+  ctx.strokeStyle="rgba(255,255,255,.16)"; ctx.strokeRect(sx0,sy0,sw,sh);
+  const sp=ctx.createLinearGradient(sx0,0,sx0+sw,0);
+  sp.addColorStop(0,"rgba(55,90,255,.55)"); sp.addColorStop(.18,"rgba(80,180,255,.55)"); sp.addColorStop(.36,"rgba(100,255,190,.50)"); sp.addColorStop(.52,"rgba(255,245,160,.58)"); sp.addColorStop(.70,"rgba(255,150,70,.58)"); sp.addColorStop(1,"rgba(255,65,55,.55)");
+  ctx.fillStyle=sp; ctx.fillRect(sx0+10,sy0+sh*.36,sw-20,sh*.26);
+  [.14,.25,.38,.52,.66,.79,.89].forEach((f,idx)=>{
+    const lx=sx0+10+f*(sw-20)+rv*.0027*sw;
+    ctx.fillStyle="rgba(3,6,12,.78)"; ctx.fillRect(lx-1.5,sy0+sh*.25,3,sh*.48);
+    ctx.strokeStyle=idx===3?"rgba(255,255,255,.65)":"rgba(255,255,255,.24)";
+    ctx.beginPath(); ctx.moveTo(lx,sy0+sh*.16); ctx.lineTo(lx,sy0+sh*.82); ctx.stroke();
+  });
+  textLabel(sx0+12,sy0+22,"spectral absorption lines shift with velocity");
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+$("loadDiscoveries").addEventListener("click", async () => {
+  const box = $("discoveryResult");
+  box.textContent = "Querying NASA Exoplanet Archive...";
+  const base = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync";
+  const countQuery = "select count(*) as n from pscomppars where discoverymethod='Radial Velocity'";
+  const recentQuery = "select top 5 pl_name,hostname,disc_year,disc_pubdate from pscomppars where discoverymethod='Radial Velocity' order by disc_pubdate desc";
+  try {
+    const countUrl = base + "?query=" + encodeURIComponent(countQuery) + "&format=json";
+    const recentUrl = base + "?query=" + encodeURIComponent(recentQuery) + "&format=json";
+    const responses = await Promise.all([fetch(countUrl), fetch(recentUrl)]);
+    if (!responses[0].ok || !responses[1].ok) throw new Error("Archive returned a non-OK response.");
+    const count = await responses[0].json();
+    const recent = await responses[1].json();
+    const n = count && count[0] ? (count[0].n || count[0].N || count[0]["COUNT(*)"] || "unknown") : "unknown";
+    const lines = recent.slice(0, 5).map(p => `• ${p.pl_name || "Unnamed"} · ${p.hostname || "host unknown"} · ${p.disc_year || "year?"}`);
+    box.textContent =
+      "Confirmed planets discovered by radial velocity in NASA Exoplanet Archive: " + n +
+      "\n\nLatest listed entries:\n" + lines.join("\n") +
+      "\n\nSource: NASA Exoplanet Archive TAP service.";
+  } catch (err) {
+    box.textContent =
+      "Live archive query unavailable from this browser or GitHub Pages session. This can happen because of cross-origin/CORS limits or a temporary archive response issue. The Doppler lab still works offline.";
+  }
+});
+})();
+</script>
+</body>
+</html>
