@@ -1,0 +1,57 @@
+name: Website problem
+description: Report a broken page, visual defect, accessibility issue, or failed interactive feature.
+title: "[Website]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve this academic portfolio website. Please do not include private information or security vulnerabilities in a public issue.
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: Which published page has the problem?
+      placeholder: https://biswajit1999.github.io/Biswajit_Jana.github.io/...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Type of problem
+      options:
+        - Broken link or missing file
+        - Layout or mobile display
+        - Accessibility
+        - Interactive tool or script
+        - Search or sharing metadata
+        - Other website problem
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Describe the problem and the steps that show it.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What should the page do or display instead?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Chrome on Windows desktop, Safari on iPhone, etc.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Public issue confirmation
+      options:
+        - label: I have not included passwords, tokens, personal data, or a security vulnerability in this public issue.
+          required: true

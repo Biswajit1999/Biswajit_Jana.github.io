@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability report
+    url: https://github.com/Biswajit1999/Biswajit_Jana.github.io/security/advisories/new
+    about: Report possible security problems privately rather than in a public issue.
+  - name: Visit the published portfolio
+    url: https://biswajit1999.github.io/Biswajit_Jana.github.io/
+    about: Open the live website before reporting a page or content problem.

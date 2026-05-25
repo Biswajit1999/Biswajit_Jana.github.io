@@ -1,0 +1,44 @@
+name: Content correction
+description: Suggest a correction to scientific text, a citation, wording, or an attribution.
+title: "[Content]: "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Careful corrections to scientific communication are welcome. Please provide a source where the proposed change concerns a factual statement.
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      placeholder: https://biswajit1999.github.io/Biswajit_Jana.github.io/...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text or issue
+      description: Quote only the short passage needed to locate the issue, or describe the attribution/citation concern.
+    validations:
+      required: true
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested correction
+      description: Provide corrected wording or the requested adjustment.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Supporting source
+      description: For factual or scientific corrections, provide a DOI or reliable reference URL.
+      placeholder: https://doi.org/... or https://...
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission confirmation
+      options:
+        - label: I am submitting a correction or suggestion and am not requesting unauthorized reuse of site content.
+          required: true
