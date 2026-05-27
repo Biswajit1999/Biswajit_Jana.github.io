@@ -157,7 +157,7 @@
 
   <div class="grp">
     <h3>Ray quality</h3>
-    <div class="ctrl"><label><span>Steps</span><strong id="o_steps">320</strong></label><input id="i_steps" type="range" min="60" max="500" step="20" value="320"/></div>
+    <div class="ctrl"><label><span>Steps</span><strong id="o_steps">220</strong></label><input id="i_steps" type="range" min="60" max="500" step="20" value="220"/></div>
     <div class="ctrl"><label><span>Max revolutions</span><strong id="o_revs">4.5</strong></label><input id="i_revs" type="range" min="1" max="6" step="0.5" value="4.5"/></div>
     <div class="togrow"><span>Temporal AA</span><input id="i_taa" type="checkbox" checked/></div>
     <div class="togrow"><span>Photon sub-rings (n=0–3)</span><input id="i_sec" type="checkbox" checked/></div>
@@ -211,7 +211,7 @@ const P = {
   bfield:false, bfStr:0.6,
   wavelength:0, redshiftViz:false,
   gal:1.0, useTex:true,
-  steps:320, revs:4.5, taa:true, sec:true,
+  steps:220, revs:4.5, taa:true, sec:true,
   jets:false, jpow:0.55,
   star:true, sdist:55, sspd:0.06
 };
@@ -353,7 +353,7 @@ uniform vec3  uCamPos, uCamX, uCamY, uCamZ;
 uniform vec2  uRes;
 uniform float uTime, uSpin, uISCO, uTemp, uDop, uBright, uRout;
 uniform float uGal, uMode, uJets, uJpow, uStarShow, uStarDist;
-uniform float uSteps, uRevs, uSec, uJitter;
+uniform float uSteps, uRevs, uSec;
 uniform float uTde, uEchoR;
 uniform float uCorona, uCoronaStr;
 uniform float uBfield, uBfStr;
@@ -490,19 +490,15 @@ vec3 blRHS(float r, float ct, float a, float b, float eta,
   return vec3(dr,dct,dphi);
 }
 
-/* RK4 step in Mino time h */
+/* RK2 midpoint step in Mino time h — 2× faster than RK4, adequate accuracy */
 void blStep(inout float r, inout float ct, inout float phi,
             float a, float b, float eta,
             float sr, float st_s, float h){
   vec3 s=vec3(r,ct,phi);
   vec3 k1=blRHS(s.x,s.y,a,b,eta,sr,st_s);
-  vec3 s2=s+0.5*h*k1;
-  vec3 k2=blRHS(s2.x,s2.y,a,b,eta,sr,st_s);
-  vec3 s3=s+0.5*h*k2;
-  vec3 k3=blRHS(s3.x,s3.y,a,b,eta,sr,st_s);
-  vec3 s4=s+h*k3;
-  vec3 k4=blRHS(s4.x,s4.y,a,b,eta,sr,st_s);
-  s+=h/6.*(k1+2.*k2+2.*k3+k4);
+  vec3 sm=s+0.5*h*k1;
+  vec3 k2=blRHS(sm.x,sm.y,a,b,eta,sr,st_s);
+  s+=h*k2;
   r=s.x; ct=s.y; phi=s.z;
 }
 
@@ -815,38 +811,26 @@ void main(){
   bool  captured=false;
   vec3  bgDir   = rd;
 
-  float phiTarget = uRevs*6.2832;
-  float dPhiBase  = phiTarget/max(float(uSteps),1.);
-  float phiAcc    = 0.;
+  /* Mino time budget — stable for ALL rays incl. near-radial (b≈0)    */
+  float lamMax   = r0*1.2 + uRevs*6.0;
+  float dLamBase = lamMax / max(float(uSteps), 1.);
+  float lamAcc   = 0.;
 
-  /* ── Integration loop (BL RK4, φ-stepping adaptive) ───────────── */
+  /* ── Integration loop (BL RK2, Mino time budget) ───────────────── */
   for(int i=0;i<500;i++){
-    if(phiAcc>=phiTarget) break;
+    if(lamAcc >= lamMax) break;
 
-    float ct2  = ct*ct, st2=max(1.-ct2,1e-8);
-    float Sig  = r*r+a*a*ct2;
-    float Del  = r*r-2.*r+a*a;
-    float P_   = (r*r+a*a)-a*b;
+    /* Adaptive step — refine near horizon and near disk plane */
+    float proximity = 3.0/max(r-rh+0.5, 0.5);
+    float diskNear  = smoothstep(r*0.30, 0., abs(prevH));
+    float h_lam = clamp(
+      dLamBase/(proximity*0.8 + diskNear*4.0 + 0.4),
+      dLamBase*0.03, dLamBase*2.5);
+    h_lam = min(h_lam, lamMax - lamAcc);
 
-    /* dφ/dλ — used to convert azimuthal step to Mino time */
-    float phiDot = (b/st2-a+a*P_/max(Del,1e-8))/Sig;
-
-    /* Adaptive azimuthal step */
-    float proximity = 3.8/max(r,0.1);
-    float diskNear  = smoothstep(r*0.35,0.,abs(prevH));
-    float dPhi = clamp(
-      dPhiBase/(proximity*proximity+0.35+diskNear*4.0),
-      dPhiBase*0.04, dPhiBase*2.5);
-    dPhi = min(dPhi, phiTarget-phiAcc);
-
-    /* Mino time step from desired azimuthal advance */
-    float h_lam = dPhi/max(abs(phiDot),1e-6);
-
-    /* BL RK4 step */
+    /* BL RK2 step */
     blStep(r,ct,phi,a,b,eta,sr,st_s,h_lam);
-
-    /* Accumulate azimuthal travel */
-    phiAcc += abs(phiDot)*h_lam;
+    lamAcc += h_lam;
 
     /* Sign flip: check potentials, flip sign if negative */
     float R_new=blR(r,ct,a,b,eta);
@@ -869,8 +853,7 @@ void main(){
       if(abs(vertFrac)<3.2){
         float az_v  = atan(pos.z,pos.x);
         vec3 glowE  = diskGlow(r,az_v,uISCO,uTemp,uDop,uBright*uVolStr*0.22,uRout,vertFrac);
-        float arcLen= r*dPhi;
-        volCol     += glowE*arcLen*0.12;
+        volCol     += glowE*h_lam*0.12;
       }
     }
 
@@ -879,7 +862,7 @@ void main(){
       float diskHc=uDiskH*r;
       if(abs(h)>diskHc*0.3&&abs(h)<r*0.35){
         vec3 cE=coronaEmit(r,pos,uISCO,uTime);
-        volCol+=cE*r*dPhi*0.05;
+        volCol+=cE*h_lam*0.05;
       }
     }
 
@@ -888,7 +871,7 @@ void main(){
       float bf=bfieldGlow(pos,uISCO,a);
       if(bf>0.005){
         vec3 bfC=mix(vec3(0.3,0.8,2.2),vec3(0.8,1.8,4.5),bf);
-        bfCol+=bfC*bf*r*dPhi*0.018;
+        bfCol+=bfC*bf*h_lam*0.018;
       }
     }
 
@@ -1436,8 +1419,8 @@ function applyP(obj){
   syncInputs();syncUniforms();updateLabels();updateFeed();
 }
 function setMode(m){
-  if(m===0)applyP({mode:0,spin:0.92,incl:72,temp:1.8,dop:1.0,bright:1.2,gal:1.0,rout:16,diskH:0.06,volStr:0.55,corona:false,bfield:false,jets:false,star:false,steps:320,revs:4.5,sec:true,taa:true});
-  else if(m===1)applyP({mode:1,spin:0.95,incl:78,temp:2.0,dop:0.9,bright:1.1,gal:0.9,rout:18,diskH:0.05,volStr:0.40,corona:false,bfield:false,jets:false,star:false,steps:380,revs:5.0,sec:true,taa:true});
+  if(m===0)applyP({mode:0,spin:0.92,incl:72,temp:1.8,dop:1.0,bright:1.2,gal:1.0,rout:16,diskH:0.06,volStr:0.55,corona:false,bfield:false,jets:false,star:false,steps:220,revs:4.5,sec:true,taa:true});
+  else if(m===1)applyP({mode:1,spin:0.95,incl:78,temp:2.0,dop:0.9,bright:1.1,gal:0.9,rout:18,diskH:0.05,volStr:0.40,corona:false,bfield:false,jets:false,star:false,steps:280,revs:5.0,sec:true,taa:true});
   else applyP({mode:2,spin:0.72,incl:55,temp:1.5,dop:1.0,bright:1.0,gal:1.2,rout:14,diskH:0.07,volStr:0.60,corona:false,bfield:false,jets:false,star:true,sdist:55,sspd:0.06,steps:240,revs:3.0,sec:true,taa:true});
 }
 
@@ -1495,9 +1478,9 @@ document.getElementById("mLab").addEventListener("click",()=>setMode(2));
 document.getElementById("pCalm").addEventListener("click",()=>
   applyP({spin:0.30,incl:62,temp:1.2,dop:0.6,bright:0.9,gal:0.9,diskH:0.05,volStr:0.30,corona:false,bfield:false,steps:200,revs:2.5,rout:12}));
 document.getElementById("pEdge").addEventListener("click",()=>
-  applyP({spin:0.72,incl:84,temp:1.9,dop:1.0,bright:1.2,gal:1.0,diskH:0.06,volStr:0.55,corona:false,bfield:false,steps:320,revs:4.0,rout:18}));
+  applyP({spin:0.72,incl:84,temp:1.9,dop:1.0,bright:1.2,gal:1.0,diskH:0.06,volStr:0.55,corona:false,bfield:false,steps:220,revs:4.0,rout:18}));
 document.getElementById("pXtreme").addEventListener("click",()=>
-  applyP({spin:0.97,incl:76,temp:2.5,dop:1.5,bright:1.5,gal:1.1,diskH:0.08,volStr:0.80,corona:true,bfield:true,steps:400,revs:5.0,rout:20}));
+  applyP({spin:0.97,incl:76,temp:2.5,dop:1.5,bright:1.5,gal:1.1,diskH:0.08,volStr:0.80,corona:true,bfield:true,steps:300,revs:5.0,rout:20}));
 
 /* ── EHT M87* Mode ────────────────────────────────────────────────── */
 document.getElementById("pEHT").addEventListener("click",()=>
