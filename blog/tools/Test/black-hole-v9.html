@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Hole Simulator v9 | Biswajit Jana — Quantum Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#020508;--panel:rgba(5,10,20,0.84);--panel2:rgba(255,255,255,0.045);
+      --text:#dff0ff;--muted:#8aaccc;--dim:#4d6882;--line:rgba(255,255,255,0.11);
+      --accent:#74f2c8;--accent2:#83ddff;--warn:#ffbc73;--danger:#ff7d90;--good:#74f2c8;
+      --mono:"JetBrains Mono",ui-monospace,monospace;
+      --display:"Playfair Display",Georgia,serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{width:100%;height:100%;overflow:hidden}
+    body{font-family:var(--mono);color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}button{cursor:pointer}
+    #simCanvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:1;cursor:grab}
+    #simCanvas.dragging{cursor:grabbing}
+    .topbar{position:fixed;left:18px;right:18px;top:16px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:8px;pointer-events:none}
+    .topbar>*{pointer-events:auto;border:1px solid var(--line);background:rgba(3,7,14,0.78);backdrop-filter:blur(16px);border-radius:999px;padding:7px 14px;font-size:.70rem;color:#c8dfff}
+    .topbar a:hover,.topbar button:hover{color:var(--accent)}
+    .badge{font-size:.62rem;background:rgba(116,242,200,0.14);color:var(--accent);border:1px solid rgba(116,242,200,0.28);padding:3px 9px;border-radius:999px}
+    .loading{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 50% 44%,rgba(116,242,200,0.10),transparent 18%),rgba(2,5,8,0.97);transition:opacity .5s,visibility .5s}
+    .loading.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .lcard{width:min(700px,94vw);border-radius:28px;border:1px solid var(--line);background:rgba(6,12,22,0.90);backdrop-filter:blur(20px);box-shadow:0 28px 90px rgba(0,0,0,0.6);padding:34px;text-align:center}
+    .lkicker{color:var(--accent);letter-spacing:.16em;text-transform:uppercase;font-size:.70rem;margin-bottom:12px}
+    .lcard h1{font-family:var(--display);font-size:clamp(2.4rem,7vw,5rem);letter-spacing:-.055em;line-height:.96;margin-bottom:14px}
+    .lcard p{color:var(--muted);max-width:600px;margin:0 auto 22px;line-height:1.68;font-size:.92rem;font-family:sans-serif}
+    .pwrap{margin:20px auto 10px;height:10px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.08)}
+    .pbar{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),#a6fff0,var(--accent2));box-shadow:0 0 22px rgba(116,242,200,0.4);transition:width .2s}
+    .pmsg{color:#bcd8f0;font-size:.73rem;min-height:22px;margin-top:10px}
+    .sbtn{display:inline-flex;margin-top:20px;align-items:center;border-radius:999px;border:1px solid rgba(116,242,200,0.38);background:rgba(116,242,200,0.10);color:var(--accent);padding:12px 22px;font-size:.78rem;transition:background .2s,transform .2s}
+    .sbtn:hover{background:rgba(116,242,200,0.18);transform:translateY(-1px)}
+    .sbtn:disabled{opacity:.5;cursor:default;transform:none}
+    .panel{position:fixed;top:72px;right:18px;z-index:10;width:min(395px,calc(100vw - 36px));max-height:calc(100vh - 90px);overflow-y:auto;border-radius:22px;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(22px);box-shadow:0 24px 80px rgba(0,0,0,0.45);padding:15px;transition:transform .35s,opacity .35s}
+    body.uih .panel{transform:translateX(calc(100% + 28px));opacity:0;pointer-events:none}
+    body.uih .feed,.uih .spec{transform:translateY(calc(100% + 28px));opacity:0;pointer-events:none}
+    .panel h2{color:var(--accent);letter-spacing:.10em;text-transform:uppercase;font-size:.82rem;margin-bottom:7px}
+    .panel>p{color:var(--muted);font-size:.76rem;line-height:1.5;margin-bottom:11px}
+    .brow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+    .chip{border-radius:999px;border:1px solid rgba(116,242,200,0.24);background:rgba(116,242,200,0.07);color:var(--accent);padding:6px 11px;font-size:.67rem}
+    .chip:hover{background:rgba(116,242,200,0.15)}
+    .chip.on{border-color:rgba(131,221,255,0.5);color:var(--accent2);background:rgba(131,221,255,0.10)}
+    .grp{border-radius:14px;border:1px solid rgba(255,255,255,0.07);background:var(--panel2);padding:11px;margin-bottom:10px}
+    .grp h3{color:var(--accent2);letter-spacing:.14em;text-transform:uppercase;font-size:.64rem;margin-bottom:8px}
+    .ctrl{margin-bottom:9px}.ctrl:last-child{margin-bottom:0}
+    .ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;color:var(--muted);font-size:.67rem;margin-bottom:4px}
+    .ctrl label strong{color:var(--warn);white-space:nowrap}
+    input[type="range"]{width:100%;accent-color:var(--accent)}
+    .togrow{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:.68rem;padding:6px 0}
+    .togrow input{width:16px;height:16px;accent-color:var(--accent)}
+    .feed{position:fixed;left:18px;bottom:18px;z-index:10;width:min(430px,calc(100vw - 36px));border-radius:20px;border:1px solid var(--line);background:rgba(4,8,18,0.74);backdrop-filter:blur(18px);padding:12px 14px;box-shadow:0 22px 72px rgba(0,0,0,0.4);transition:transform .35s,opacity .35s}
+    .feed h2{color:var(--good);font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+    .frow{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:5px;margin-bottom:5px;color:#8eaacc;font-size:.67rem}
+    .frow:last-child{border:0;margin:0;padding:0}
+    .frow strong{color:#dff0ff;white-space:nowrap}
+    .scen{color:var(--muted);font-size:.67rem;line-height:1.5;border-top:1px solid rgba(255,255,255,0.07);padding-top:6px;margin-top:6px}
+    .spec{position:fixed;left:18px;bottom:18px;z-index:11;width:min(500px,calc(100vw - 36px));border-radius:18px;border:1px solid rgba(116,242,200,0.20);background:rgba(3,7,16,0.88);backdrop-filter:blur(16px);padding:10px 12px 12px;box-shadow:0 22px 68px rgba(0,0,0,0.48);transition:transform .35s,opacity .35s;display:none}
+    .spech{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .spect{color:var(--good);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase}
+    .speci{color:var(--dim);font-size:.62rem}
+    #specCanvas{display:block;width:100%;border-radius:7px;background:#020817}
+    .slitbtn{font-size:.65rem;color:var(--good);border:1px solid rgba(116,242,200,0.22);background:rgba(116,242,200,0.06);border-radius:999px;padding:3px 8px}
+    #slitLine{position:fixed;top:0;bottom:0;width:2px;background:rgba(255,255,255,0.55);z-index:5;cursor:ew-resize;display:none;box-shadow:0 0 8px rgba(116,242,200,0.7)}
+    @media(max-width:640px){.topbar,.panel,.feed,.spec{left:10px;right:10px;width:auto}}
+  </style>
+</head>
+<body>
+
+<canvas id="simCanvas"></canvas>
+<div id="slitLine"></div>
+
+<div class="topbar">
+  <a href="../posts/black-hole-extreme-lab.html">← article</a>
+  <span><span class="badge">v9 · DP45 · Vol Disk · Sub-rings</span></span>
+  <button id="btnSpec">Fe K-α</button>
+  <button id="btnUI">Hide UI</button>
+  <span id="statusEl">standby</span>
+</div>
+
+<section class="loading" id="loadingEl">
+  <div class="lcard">
+    <div class="lkicker">Black Hole Lab v9 · Quantum Edition</div>
+    <h1>Four photon rings.<br/>Volumetric plasma.</h1>
+    <p>Dormand-Prince RK4(5) geodesic integration · Novikov-Thorne thermodynamics · Volumetric accretion disk · 4 photon sub-rings · Hot corona · Blandford-Znajek B-field · TDE light echo · ESO Milky Way panorama.</p>
+    <div class="pwrap"><div class="pbar" id="pbar"></div></div>
+    <div class="pmsg" id="pmsg">Ready to initialise.</div>
+    <button class="sbtn" id="startBtn">Launch Simulator</button>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Command Centre</h2>
+  <p>v9 · Drag to orbit · Scroll to zoom</p>
+  <div class="brow">
+    <button class="chip on" id="mCin">Cinematic</button>
+    <button class="chip"    id="mSci">Scientific</button>
+    <button class="chip"    id="mLab">Lab</button>
+  </div>
+  <div class="brow">
+    <button class="chip" id="pCalm">Calm</button>
+    <button class="chip" id="pEdge">Edge-on</button>
+    <button class="chip" id="pXtreme">Extreme</button>
+    <button class="chip" id="pEHT">EHT Mode</button>
+    <button class="chip" id="pAGN">AGN jet</button>
+    <button class="chip" id="pReset">Reset</button>
+  </div>
+
+  <div class="grp">
+    <h3>Black hole</h3>
+    <div class="ctrl"><label><span>Mass</span><strong id="o_mass">10 M☉</strong></label><input id="i_mass" type="range" min="3" max="1000000" step="1" value="10"/></div>
+    <div class="ctrl"><label><span>Spin a/M</span><strong id="o_spin">0.920</strong></label><input id="i_spin" type="range" min="0" max="0.998" step="0.002" value="0.92"/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Accretion disk</h3>
+    <div class="ctrl"><label><span>Inclination</span><strong id="o_incl">72°</strong></label><input id="i_incl" type="range" min="1" max="85" step="1" value="72"/></div>
+    <div class="ctrl"><label><span>Temperature scale</span><strong id="o_temp">1.80</strong></label><input id="i_temp" type="range" min="0.5" max="4.0" step="0.05" value="1.8"/></div>
+    <div class="ctrl"><label><span>Doppler strength</span><strong id="o_dop">1.00</strong></label><input id="i_dop" type="range" min="0" max="2.5" step="0.05" value="1.0"/></div>
+    <div class="ctrl"><label><span>Brightness</span><strong id="o_bright">1.20</strong></label><input id="i_bright" type="range" min="0.1" max="3.0" step="0.05" value="1.2"/></div>
+    <div class="ctrl"><label><span>Disk outer radius (rₛ)</span><strong id="o_rout">16.0</strong></label><input id="i_rout" type="range" min="6" max="50" step="0.5" value="16"/></div>
+    <div class="ctrl"><label><span>Disk scale height</span><strong id="o_diskH">0.06</strong></label><input id="i_diskH" type="range" min="0.02" max="0.20" step="0.01" value="0.06"/></div>
+    <div class="ctrl"><label><span>Volumetric glow</span><strong id="o_volStr">0.55</strong></label><input id="i_volStr" type="range" min="0" max="2.0" step="0.05" value="0.55"/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Physics</h3>
+    <div class="togrow"><span>Hot corona (X-ray)</span><input id="i_corona" type="checkbox"/></div>
+    <div class="ctrl"><label><span>Corona strength</span><strong id="o_coronaStr">0.80</strong></label><input id="i_coronaStr" type="range" min="0" max="2.0" step="0.05" value="0.8"/></div>
+    <div class="togrow"><span>B-field lines (BZ)</span><input id="i_bfield" type="checkbox"/></div>
+    <div class="ctrl"><label><span>B-field strength</span><strong id="o_bfStr">0.60</strong></label><input id="i_bfStr" type="range" min="0" max="2.0" step="0.05" value="0.6"/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Background</h3>
+    <div class="ctrl"><label><span>Galaxy brightness</span><strong id="o_gal">1.00</strong></label><input id="i_gal" type="range" min="0" max="3.0" step="0.05" value="1.0"/></div>
+    <div class="togrow"><span>Use real galaxy texture</span><input id="i_tex" type="checkbox" checked/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Ray quality</h3>
+    <div class="ctrl"><label><span>Steps</span><strong id="o_steps">320</strong></label><input id="i_steps" type="range" min="60" max="500" step="20" value="320"/></div>
+    <div class="ctrl"><label><span>Max revolutions</span><strong id="o_revs">4.5</strong></label><input id="i_revs" type="range" min="1" max="6" step="0.5" value="4.5"/></div>
+    <div class="togrow"><span>Temporal AA</span><input id="i_taa" type="checkbox" checked/></div>
+    <div class="togrow"><span>Photon sub-rings</span><input id="i_sec" type="checkbox" checked/></div>
+  </div>
+
+  <div class="grp">
+    <h3>Extras</h3>
+    <div class="togrow"><span>AGN jets</span><input id="i_jets" type="checkbox"/></div>
+    <div class="ctrl"><label><span>Jet power</span><strong id="o_jpow">0.55</strong></label><input id="i_jpow" type="range" min="0" max="1.8" step="0.05" value="0.55"/></div>
+    <div class="togrow"><span>Incoming star (TDE)</span><input id="i_star" type="checkbox" checked/></div>
+    <div class="ctrl"><label><span>Star distance (rₛ)</span><strong id="o_sdist">55.0</strong></label><input id="i_sdist" type="range" min="4" max="120" step="0.5" value="55"/></div>
+    <div class="ctrl"><label><span>Approach speed</span><strong id="o_sspd">0.06</strong></label><input id="i_sspd" type="range" min="0" max="1.5" step="0.01" value="0.06"/></div>
+    <div class="brow"><button class="chip" id="resetStar">Reset star</button></div>
+    <div class="scen" id="scenarioEl">Scenario: —</div>
+  </div>
+</section>
+
+<section class="feed" id="feedEl">
+  <h2>Live telemetry</h2>
+  <div class="frow"><span>Schwarzschild r_s</span><strong id="f_rs">—</strong></div>
+  <div class="frow"><span>Photon sphere (1.5 rₛ)</span><strong id="f_ph">—</strong></div>
+  <div class="frow"><span>ISCO — Kerr Z₁Z₂</span><strong id="f_isco">—</strong></div>
+  <div class="frow"><span>g_grav at ISCO</span><strong id="f_gg">—</strong></div>
+  <div class="frow"><span>Hawking T</span><strong id="f_hw">—</strong></div>
+  <div class="frow"><span>Star outcome</span><strong id="f_out">—</strong></div>
+  <div class="frow"><span>FPS</span><strong id="f_fps">—</strong></div>
+</section>
+
+<section class="spec" id="specEl">
+  <div class="spech">
+    <span class="spect">Fe K-α relativistic line</span>
+    <button class="slitbtn" id="slitBtn">Show slit</button>
+    <span class="speci" id="specInfo">a=0.92 · i=72°</span>
+  </div>
+  <canvas id="specCanvas" width="475" height="136"></canvas>
+</section>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from "three";
+
+const canvas = document.getElementById("simCanvas");
+const clock  = new THREE.Clock();
+
+const P = {
+  mode:0, mass:10, spin:0.92,
+  incl:72, temp:1.8, dop:1.0, bright:1.4, rout:16,
+  diskH:0.06, volStr:0.55,
+  corona:false, coronaStr:0.8,
+  bfield:false, bfStr:0.6,
+  gal:1.0, useTex:true,
+  steps:320, revs:4.5, taa:true, sec:true,
+  jets:false, jpow:0.55,
+  star:true, sdist:55, sspd:0.06
+};
+const DEF = structuredClone(P);
+
+const St = {
+  started:false, running:false,
+  time:0, fps:60, frames:0, fpsT:0, domT:0,
+  starPhase:0, taaIdx:0, taaHist:false,
+  galaxyReady:false,
+  tdePhase:'approach', tdeFlashT:0
+};
+
+const orbit={drag:false,lx:0,ly:0,yaw:0,pitch:0.22,ty:0,tp:0.22,dist:9};
+const RsKm=2.95325008, HawkK=6.17e-8;
+
+/* ═══════════════════════════════════════════════════════════════════
+   STAR OVERLAY
+   ═══════════════════════════════════════════════════════════════════ */
+function overlayStars(ctx, W, H){
+  let seed=12345;
+  function rng(){seed^=seed<<13;seed^=seed>>17;seed^=seed<<5;return(seed>>>0)/0xFFFFFFFF;}
+  const N=26000;
+  for(let i=0;i<N;i++){
+    const x=rng()*W, y=rng()*H;
+    const dy=(y/H-0.50);
+    const bandP=Math.exp(-dy*dy*32)*0.60+0.40;
+    if(rng()>bandP) continue;
+    const mag=Math.pow(rng(),1.6);
+    const bright=0.10+(1-mag)*0.90;
+    const temp=rng();
+    let sr=255,sg=255,sb=255;
+    if(temp<0.06)      {sr=148;sg=168;sb=255;}
+    else if(temp<0.16) {sr=190;sg=212;sb=255;}
+    else if(temp<0.32) {sr=228;sg=240;sb=255;}
+    else if(temp<0.58) {sr=255;sg=248;sb=218;}
+    else if(temp<0.78) {sr=255;sg=210;sb=130;}
+    else               {sr=255;sg=160;sb=72;}
+    const alpha=Math.min(bright,1.0);
+    if(mag<0.55){
+      ctx.fillStyle=`rgba(${sr},${sg},${sb},${alpha})`;
+      ctx.fillRect(Math.round(x),Math.round(y),1,1);
+    } else {
+      const sz=0.5+(1-mag)*1.4;
+      const g=ctx.createRadialGradient(x,y,0,x,y,sz*2);
+      g.addColorStop(0,`rgba(${sr},${sg},${sb},${alpha})`);
+      g.addColorStop(0.5,`rgba(${sr},${sg},${sb},${alpha*0.4})`);
+      g.addColorStop(1,`rgba(${sr},${sg},${sb},0)`);
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(x,y,sz*2,0,Math.PI*2);ctx.fill();
+    }
+  }
+  const HEROES=[
+    {x:W*0.12,y:H*0.36,r:2.2,c:[195,212,255]},
+    {x:W*0.78,y:H*0.63,r:2.0,c:[255,230,178]},
+    {x:W*0.35,y:H*0.26,r:1.8,c:[175,192,255]},
+    {x:W*0.88,y:H*0.34,r:1.6,c:[255,240,200]},
+    {x:W*0.22,y:H*0.74,r:1.6,c:[195,212,255]},
+    {x:W*0.62,y:H*0.24,r:1.4,c:[255,200,158]},
+  ];
+  HEROES.forEach(h=>{
+    const [r,g,b]=h.c;
+    const gl=ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r*5);
+    gl.addColorStop(0,`rgba(${r},${g},${b},0.88)`);
+    gl.addColorStop(0.25,`rgba(${r},${g},${b},0.22)`);
+    gl.addColorStop(1,`rgba(${r},${g},${b},0)`);
+    ctx.fillStyle=gl;ctx.beginPath();ctx.arc(h.x,h.y,h.r*5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=`rgb(${r},${g},${b})`;
+    ctx.beginPath();ctx.arc(h.x,h.y,h.r*0.38,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle=`rgba(${r},${g},${b},0.28)`;ctx.lineWidth=0.5;
+    [0,Math.PI/2,Math.PI/4,3*Math.PI/4].forEach(ang=>{
+      ctx.beginPath();
+      ctx.moveTo(h.x-Math.cos(ang)*h.r*7,h.y-Math.sin(ang)*h.r*7);
+      ctx.lineTo(h.x+Math.cos(ang)*h.r*7,h.y+Math.sin(ang)*h.r*7);
+      ctx.stroke();
+    });
+  });
+}
+
+function bakeGalaxyTexture(W=2048, H=1024){
+  const c=document.createElement("canvas");
+  c.width=W;c.height=H;
+  const ctx=c.getContext("2d");
+  const bg=ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,"#000205");bg.addColorStop(0.5,"#010408");bg.addColorStop(1,"#000205");
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  const MW_STRIPS=[
+    {cx:W*0.5,cy:H*0.52,rx:W*0.90,ry:H*0.11,r:28,g:38,b:60,a:0.55},
+    {cx:W*0.5,cy:H*0.50,rx:W*0.85,ry:H*0.06,r:18,g:26,b:50,a:0.70},
+    {cx:W*0.5,cy:H*0.48,rx:W*0.75,ry:H*0.035,r:8,g:14,b:34,a:0.55},
+    {cx:W*0.50,cy:H*0.51,rx:W*0.25,ry:H*0.08,r:55,g:48,b:38,a:0.40},
+    {cx:W*0.50,cy:H*0.50,rx:W*0.12,ry:H*0.04,r:90,g:75,b:50,a:0.50},
+    {cx:W*0.48,cy:H*0.47,rx:W*0.30,ry:H*0.018,r:0,g:0,b:0,a:0.55},
+    {cx:W*0.25,cy:H*0.54,rx:W*0.40,ry:H*0.07,r:14,g:22,b:44,a:0.35},
+    {cx:W*0.75,cy:H*0.52,rx:W*0.42,ry:H*0.07,r:14,g:22,b:44,a:0.35},
+  ];
+  MW_STRIPS.forEach(s=>{
+    const grad=ctx.createRadialGradient(s.cx,s.cy,0,s.cx,s.cy,Math.max(s.rx,s.ry));
+    grad.addColorStop(0,`rgba(${s.r},${s.g},${s.b},${s.a})`);
+    grad.addColorStop(1,`rgba(${s.r},${s.g},${s.b},0)`);
+    ctx.save();ctx.translate(s.cx,s.cy);ctx.scale(s.rx/Math.max(s.rx,s.ry),s.ry/Math.max(s.rx,s.ry));
+    ctx.translate(-s.cx,-s.cy);ctx.fillStyle=grad;ctx.globalAlpha=1;ctx.fillRect(0,0,W,H);ctx.restore();
+  });
+  const NEBS=[
+    {x:W*0.32,y:H*0.48,r:W*0.06,col:"rgba(60,30,100,0.18)"},
+    {x:W*0.68,y:H*0.53,r:W*0.07,col:"rgba(40,60,120,0.16)"},
+    {x:W*0.15,y:H*0.55,r:W*0.05,col:"rgba(80,20,60,0.14)"},
+    {x:W*0.85,y:H*0.50,r:W*0.06,col:"rgba(20,70,100,0.15)"},
+    {x:W*0.55,y:H*0.43,r:W*0.04,col:"rgba(120,50,30,0.12)"},
+  ];
+  NEBS.forEach(n=>{
+    const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+    g.addColorStop(0,n.col);g.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  });
+  overlayStars(ctx,W,H);
+  return c;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GLSL SHADERS — v9 QUANTUM EDITION
+   Upgrades over v8:
+   1. Four photon sub-rings (n=0,1,2,3) — each e^{-π} demagnified
+   2. Volumetric disk glow — Gaussian vertical density profile
+   3. Hot corona — X-ray plasma above/below ISCO
+   4. Blandford-Znajek B-field lines — parabolic r=r0/sin²θ topology
+   5. TDE light echo — expanding brightness ring after disruption
+   6. Sharper photon ring with sub-ring structure
+   ═══════════════════════════════════════════════════════════════════ */
+const VERT = `varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
+
+const FRAG_MAIN = `
+precision highp float;
+varying vec2 vUv;
+
+uniform vec3  uCamPos, uCamX, uCamY, uCamZ;
+uniform vec2  uRes;
+uniform float uTime, uSpin, uISCO, uTemp, uDop, uBright, uRout;
+uniform float uGal, uMode, uJets, uJpow, uStarShow, uStarDist;
+uniform float uTde, uEchoR;
+uniform float uCorona, uCoronaStr;
+uniform float uBfield, uBfStr;
+uniform float uDiskH, uVolStr;
+uniform int   uSteps;
+uniform float uRevs, uSec;
+uniform vec2  uJitter;
+uniform sampler2D uGalTex;
+uniform float uUseTex;
+
+/* ══════════════════════════════════════════════════════════════════
+   NOISE PRIMITIVES
+   ══════════════════════════════════════════════════════════════════ */
+float h21(vec2 p){p=fract(p*vec2(127.1,311.7));p+=dot(p,p+19.19);return fract(p.x*p.y);}
+
+float ns2(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  f=f*f*(3.-2.*f);
+  float a=h21(i),b=h21(i+vec2(1,0)),c=h21(i+vec2(0,1)),d=h21(i+vec2(1,1));
+  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);
+}
+
+float fbm5(vec2 p){
+  float v=0.,a=0.52;
+  mat2 rot=mat2(1.62,1.14,-1.14,1.62);
+  for(int i=0;i<5;i++){v+=a*ns2(p);p=rot*p+17.3;a*=0.50;}
+  return v;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   GALAXY BACKGROUND SAMPLER
+   ══════════════════════════════════════════════════════════════════ */
+vec3 sampleGalaxy(vec3 d){
+  float lat=asin(clamp(d.y,-0.9999,0.9999));
+  float lon=atan(d.z,d.x);
+  vec2 uv=vec2(lon/(2.*3.14159)+0.5,lat/3.14159+0.5);
+  return texture2D(uGalTex,uv).rgb*uGal;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLACKBODY COLOUR RAMP — Planckian locus approximation
+   ══════════════════════════════════════════════════════════════════ */
+vec3 blackbodyColor(float t){
+  t=clamp(t,0.,1.);
+  vec3 k0=vec3(0.18,0.022,0.005);
+  vec3 k1=vec3(0.72,0.085,0.010);
+  vec3 k2=vec3(1.45,0.32, 0.022);
+  vec3 k3=vec3(2.10,0.88, 0.14);
+  vec3 k4=vec3(2.40,1.55, 0.58);
+  vec3 k5=vec3(2.20,1.82, 1.35);
+  vec3 k6=vec3(1.55,1.78, 2.60);
+  vec3 k7=vec3(0.85,1.20, 3.20);
+  vec3 col;
+  if(t<0.14)      col=mix(k0,k1,t/0.14);
+  else if(t<0.30) col=mix(k1,k2,(t-0.14)/0.16);
+  else if(t<0.48) col=mix(k2,k3,(t-0.30)/0.18);
+  else if(t<0.62) col=mix(k3,k4,(t-0.48)/0.14);
+  else if(t<0.74) col=mix(k4,k5,(t-0.62)/0.12);
+  else if(t<0.88) col=mix(k5,k6,(t-0.74)/0.14);
+  else            col=mix(k6,k7,(t-0.88)/0.12);
+  return col;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ACCRETION DISK EMISSION — Novikov-Thorne physics
+   Full relativistic Doppler + gravitational redshift + blackbody
+   ══════════════════════════════════════════════════════════════════ */
+vec3 diskEmit(float r, float az, float spin, float isco,
+              float diskT, float dop, float bright, float rout){
+
+  float rM    = max(r*2.,3.);
+  float vOrb  = clamp(sqrt(1./rM),0.,0.7071);
+  float gamma = 1./sqrt(max(1e-6,1.-vOrb*vOrb));
+  float vlos  = vOrb*sin(az);
+  float D     = 1./max(gamma*(1.-vlos),0.04);
+  float gGrav = sqrt(max(0.001,1.-1./r));
+  float g     = D*gGrav;
+  float rawBeam = pow(max(g,0.03),4.);
+  float beam    = mix(1.,rawBeam,clamp(dop,0.,1.));
+  beam          = clamp(beam,0.008,28.);
+  float dopplerTempShift = clamp((g-1.)*0.55,-0.28,0.38);
+
+  /* Novikov-Thorne temperature */
+  float rr      = max(r/isco,1.0002);
+  float NT      = max(1.0-1.0/sqrt(rr),0.);
+  float NT_ramp = smoothstep(0.,0.18,NT);
+  float t_phys  = NT_ramp*pow(max(NT/(rr*rr*rr),0.),0.25);
+  float t_rad   = clamp(t_phys*2.8,0.,1.);
+  float t_obs   = clamp(t_rad*diskT*g*0.52+dopplerTempShift,0.,1.);
+  vec3 col      = blackbodyColor(t_obs);
+
+  /* NT surface density */
+  float sigma   = NT_ramp*NT/pow(rr,0.75);
+  float density = clamp(sigma/0.20,0.,1.25);
+
+  /* Kerr Keplerian shear noise */
+  float OmegaKerr = 1.0/(pow(max(rM,3.0),1.5)+spin);
+  float keplPhase = az+OmegaKerr*uTime*12.0;
+  float logR      = log(max(r/isco,1.001))*2.2;
+  float arcAz     = keplPhase*r*0.10;
+  float gentle    = ns2(vec2(logR,arcAz));
+  density        *= (0.96+0.04*gentle);
+
+  /* Radial masks */
+  float inner = smoothstep(isco,isco*1.08,r);
+  float outer = 1.-smoothstep(rout*0.18,rout*0.62,r);
+
+  /* ── UPGRADED PHOTON RINGS ────────────────────────────────────────
+     n=0 photon ring: sharper, brighter                              */
+  float photonRim = exp(-pow((r-isco*1.04)/0.055,2.))*5.0;
+  col += blackbodyColor(1.0)*photonRim*inner;
+
+  /* Bright inner ring — just outside ISCO */
+  float ring1 = exp(-pow((r-isco*1.18)/0.065,2.))*2.2;
+  col += blackbodyColor(0.95)*ring1*inner;
+
+  /* Secondary ring */
+  float ring2 = exp(-pow((r-isco*1.45)/0.095,2.))*1.1;
+  col += blackbodyColor(0.88)*ring2*inner;
+
+  /* Third ring — subtle */
+  float ring3 = exp(-pow((r-isco*1.85)/0.13,2.))*0.45;
+  col += blackbodyColor(0.75)*ring3*inner;
+
+  /* TDE light echo: expanding brightness ring */
+  if(uEchoR > 0.5){
+    float dr = abs(r-uEchoR);
+    float echo = exp(-dr*dr*0.8)*0.9;
+    col += blackbodyColor(0.65)*echo*outer;
+  }
+
+  return col*beam*bright*density*inner*outer;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   VOLUMETRIC DISK GLOW — cheap, no noise, Gaussian vertical profile
+   Called during loop integration for soft plasma thickness effect.
+   ══════════════════════════════════════════════════════════════════ */
+vec3 diskGlow(float r, float az, float isco, float diskT, float dop,
+              float bright, float rout, float heightFrac){
+  float rM    = max(r*2.,3.);
+  float vOrb  = clamp(sqrt(1./rM),0.,0.7071);
+  float gamma = 1./sqrt(max(1e-6,1.-vOrb*vOrb));
+  float vlos  = vOrb*sin(az);
+  float D     = 1./max(gamma*(1.-vlos),0.04);
+  float gGrav = sqrt(max(0.001,1.-1./r));
+  float g     = D*gGrav;
+  float beam  = mix(1.,clamp(pow(max(g,0.03),4.),0.008,28.),clamp(dop,0.,1.));
+
+  float rr      = max(r/isco,1.0002);
+  float NT      = max(1.0-1.0/sqrt(rr),0.);
+  float NT_ramp = smoothstep(0.,0.22,NT);
+  float t_phys  = NT_ramp*pow(max(NT/(rr*rr*rr),0.),0.25);
+  float t_obs   = clamp(t_phys*2.8*diskT*g*0.45,0.,1.);
+
+  float outer = 1.-smoothstep(rout*0.18,rout*0.62,r);
+  float inner = smoothstep(isco,isco*1.12,r);
+
+  /* Gaussian vertical density profile */
+  float vertGauss = exp(-heightFrac*heightFrac*2.2);
+
+  return blackbodyColor(t_obs)*beam*bright*outer*inner*vertGauss;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOT CORONA — X-ray plasma above/below ISCO
+   Modelled as a lamppost + extended corona in the BZ/MAD picture
+   ══════════════════════════════════════════════════════════════════ */
+vec3 coronaEmit(float r, vec3 pos, float isco, float t){
+  float rM = max(r*2.,3.);
+  /* Corona concentrated at r ≈ 1.5–3× ISCO, vertical extent ~15% r */
+  float rCoronaM = isco*1.8*2.0;
+  float dr = (rM-rCoronaM)/max(isco*1.5,1.0);
+  float radDens = exp(-dr*dr*1.8);
+
+  /* Vertical: above and below disk plane, NOT AT equator */
+  float diskH = uDiskH*r;
+  float hAbs  = abs(pos.y);
+  float vertFrac = hAbs/max(diskH,0.001);
+  /* Donut shape: peaks at ~1.5 scale heights, not at midplane */
+  float vertDens = exp(-pow(max(vertFrac-1.5,0.),2.)*1.2)*(1.-exp(-vertFrac*vertFrac*4.0));
+  vertDens = clamp(vertDens,0.,1.);
+
+  /* X-ray flicker (simulates magnetic reconnection flares) */
+  float flick1 = sin(t*13.7+r*5.3+pos.z*2.1);
+  float flick2 = sin(t*7.1+r*3.2-pos.x*1.8);
+  float flicker = 0.65+0.35*flick1*flick2;
+
+  /* Hot X-ray plasma: UV/blue-white */
+  vec3 cInner = vec3(2.2,1.4,4.8);
+  vec3 cOuter = vec3(1.0,0.6,2.2);
+  vec3 coronaCol = mix(cOuter,cInner,radDens);
+
+  return coronaCol*radDens*vertDens*flicker*uCoronaStr;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLANDFORD-ZNAJEK MAGNETIC FIELD LINES
+   Parabolic topology: r = r0 / sin²(θ)
+   Twisted by frame-dragging near the ISCO
+   ══════════════════════════════════════════════════════════════════ */
+float bfieldGlow(vec3 pos, float isco, float spin){
+  float r = length(pos);
+  if(r < isco*0.7 || r > isco*5.5) return 0.;
+
+  float cosTheta = pos.y/max(r,0.001);
+  float sinTheta = sqrt(max(1.0-cosTheta*cosTheta,0.0005));
+
+  /* r0 = r * sin²(θ) is the "anchor" of this field line */
+  float r0_here = r*sinTheta*sinTheta;
+
+  /* Four nested field lines at different ISCO multiples */
+  float glow = 0.;
+  float r0s[4];
+  r0s[0]=isco;    r0s[1]=isco*1.5;
+  r0s[2]=isco*2.2;r0s[3]=isco*3.0;
+  float wts[4];
+  wts[0]=1.0; wts[1]=0.80; wts[2]=0.55; wts[3]=0.35;
+  for(int k=0;k<4;k++){
+    float drel=(r0_here-r0s[k])/(isco*0.14);
+    glow += wts[k]*exp(-drel*drel);
+  }
+
+  /* Only above/below disk (avoid equatorial confusion) */
+  glow *= smoothstep(0.06,0.30,abs(cosTheta));
+  glow *= smoothstep(isco*5.5,isco*1.2,r); /* fade at large r */
+
+  /* Frame-drag twist: field lines wind in φ direction */
+  float twist = spin*0.45*log(max(r/isco,1.001));
+  float phi = atan(pos.z,pos.x)+twist;
+  float phiMod = 0.55+0.45*sin(phi*2.0+uTime*0.4);
+
+  return glow*phiMod*uBfStr;
+}
+
+/* ── Binet equation RHS ──────────────────────────────────────────── */
+float binetF(float u, float spin){
+  return -u+(1.5+spin*0.10)*u*u;
+}
+
+/* ── Dormand-Prince RK4(5) ───────────────────────────────────────── */
+void dp45Step(inout float u, inout float up, float h, float spin){
+  float k1u=up,             k1f=binetF(u,spin);
+  float u2=u+h*0.2*k1u,    up2=up+h*0.2*k1f;
+  float k2u=up2,            k2f=binetF(u2,spin);
+  float u3=u+h*(0.075*k1u+0.225*k2u),
+        up3=up+h*(0.075*k1f+0.225*k2f);
+  float k3u=up3,            k3f=binetF(u3,spin);
+  float u4=u+h*(44./45.*k1u-56./15.*k2u+32./9.*k3u),
+        up4=up+h*(44./45.*k1f-56./15.*k2f+32./9.*k3f);
+  float k4u=up4,            k4f=binetF(u4,spin);
+  float u5_=u+h*(19372./6561.*k1u-25360./2187.*k2u+64448./6561.*k3u-212./729.*k4u),
+        up5_=up+h*(19372./6561.*k1f-25360./2187.*k2f+64448./6561.*k3f-212./729.*k4f);
+  float k5u=up5_,           k5f=binetF(u5_,spin);
+  float u6=u+h*(9017./3168.*k1u-355./33.*k2u+46732./5247.*k3u+49./176.*k4u-5103./18656.*k5u),
+        up6=up+h*(9017./3168.*k1f-355./33.*k2f+46732./5247.*k3f+49./176.*k4f-5103./18656.*k5f);
+  float k6u=up6,            k6f=binetF(u6,spin);
+  u  += h*(35./384.*k1u+500./1113.*k3u+125./192.*k4u-2187./6784.*k5u+11./84.*k6u);
+  up += h*(35./384.*k1f+500./1113.*k3f+125./192.*k4f-2187./6784.*k5f+11./84.*k6f);
+}
+
+/* ── AGX tonemapper ──────────────────────────────────────────────── */
+vec3 agxC(vec3 x){vec3 x2=x*x,x4=x2*x2;return 15.5*x4*x2-40.14*x4*x+31.96*x4-6.868*x2*x+0.4298*x2+0.1191*x-0.00232;}
+vec3 agx(vec3 v){
+  const mat3 M=mat3(0.842479,0.042328,0.042376,0.078434,0.878469,0.078434,0.079224,0.079166,0.879143);
+  v=M*v;v=clamp(log2(max(v,1e-10)),-12.474,4.026);v=(v+12.474)/16.5;return agxC(v);
+}
+vec3 tonemap(vec3 c){
+  c=agx(c);
+  float lum=dot(c,vec3(0.2126,0.7152,0.0722));
+  c=lum+1.32*(c-lum);
+  return clamp(c,0.,1.);
+}
+
+/* ── AGN jet ─────────────────────────────────────────────────────── */
+vec3 jetEmit(vec3 d,float jp,float t){
+  float y=abs(d.y),r=length(d.xz);
+  float on=smoothstep(0.13+jp*0.04,0.02,atan(r,y));
+  float pulse=0.5+0.5*sin(t*3.1+y*7.);
+  return mix(vec3(0.08,0.45,0.82),vec3(0.18,0.82,1.0),pulse)*on*jp*0.72;
+}
+
+/* ── Star sprite — TDE sequence ──────────────────────────────────── */
+vec3 starSprite(vec3 rd, float dist, float t){
+  if(uTde > 2.5) return vec3(0.);
+  float rSc  = max(dist,0.5)*0.040;
+  float ang  = -0.55+sin(t*0.11)*0.09;
+  vec3  sPos = vec3(cos(ang)*rSc,sin(ang)*rSc*0.45+0.22,-0.28);
+  vec3  sDir = normalize(sPos);
+  float cosA = dot(rd,sDir);
+  float sz   = clamp(0.022+1.8/max(dist,2.),0.014,0.055);
+  float starDot = smoothstep(cos(sz),cos(sz*0.22),cosA);
+  float corona  = smoothstep(cos(sz*6.),cos(sz*1.1),cosA)*0.22;
+  float halo    = smoothstep(cos(sz*18.),cos(sz*1.4),cosA)*0.06;
+  vec3 col = vec3(2.4,2.2,3.1)*starDot+vec3(0.9,0.85,1.4)*corona+vec3(0.3,0.28,0.5)*halo;
+  if(uTde>0.5){
+    float tidalStr=clamp(uTde-1.,0.,1.);
+    float streamCos=dot(rd,normalize(-sDir+vec3(0.,-.05,0.3)));
+    float stream=smoothstep(cos(0.08+tidalStr*0.06),cos(0.005),streamCos)*tidalStr*1.2;
+    col += vec3(1.0,0.6,0.2)*stream;
+  }
+  if(uTde>1.5){
+    float flashPulse=clamp(3.-uTde*1.5,0.,1.);
+    float flashHalo =smoothstep(cos(sz*30.),cos(sz*1.6),cosA);
+    col += vec3(4.0,3.5,5.0)*flashHalo*flashPulse;
+  }
+  return col;
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   MAIN — v9 Quantum Edition
+   ═════════════════════════════════════════════════════════════════ */
+void main(){
+  vec2 uv  = vUv+uJitter/uRes;
+  vec2 ndc = uv*2.-1.;
+  ndc.x   *= uRes.x/max(uRes.y,1.);
+  float fov= 1./tan(0.6981);
+  vec3 rd  = normalize(ndc.x*uCamX+ndc.y*uCamY+fov*uCamZ);
+
+  vec3  eR    = normalize(uCamPos);
+  float r0    = length(uCamPos);
+  vec3  ePhiR = rd-dot(rd,eR)*eR;
+  float eLen  = length(ePhiR);
+
+  if(eLen<1e-4){
+    bool cap=dot(rd,eR)<0.;
+    vec3 col=cap?vec3(0.):sampleGalaxy(rd);
+    gl_FragColor=vec4(tonemap(col*0.85),1.);return;
+  }
+
+  vec3 ePhi=ePhiR/eLen;
+  float kd=uSpin*0.032/(r0*r0);
+  ePhi=normalize(ePhi+kd*cross(eR,ePhi));
+
+  float b  =max(length(cross(uCamPos,rd)),1e-4);
+  float u0 =1./r0;
+  float disc=1./(b*b)-u0*u0*(1.-u0);
+  if(disc<0.){gl_FragColor=vec4(0.,0.,0.,1.);return;}
+
+  float u  =u0;
+  float up =(dot(rd,-eR)>0.?1.:-1.)*sqrt(max(disc,0.));
+  float phiTarget = uRevs*6.2832;
+  float dPhiBase  = phiTarget/float(uSteps);
+  float phiAcc    = 0.;
+  float phi       = 0.;
+  float prevH     = eR.y*r0;
+  vec3 prevPos    = r0*eR;
+
+  /* Accumulation buffers */
+  vec3  diskCol    = vec3(0.);  /* sharp zero-crossing hits        */
+  vec3  volCol     = vec3(0.);  /* volumetric glow accumulation    */
+  vec3  bfCol      = vec3(0.);  /* B-field line glow               */
+
+  /* Sub-ring hit flags (n=0,1,2,3) */
+  bool hitDisk=false, hitSec=false, hitTer=false, hitQua=false;
+  bool captured=false;
+  vec3 bgDir=rd;
+
+  /* ── Integration (adaptive DP45) ───────────────────────────── */
+  for(int i=0;i<500;i++){
+    if(phiAcc>=phiTarget) break;
+
+    float proximity = u*3.8;
+    float r_cur     = 1./max(u,1e-5);
+    float diskNear  = smoothstep(r_cur*0.35,0.,abs(prevH));
+
+    float dPhi = clamp(
+      dPhiBase/(proximity*proximity+abs(up)*0.4+0.35+diskNear*4.0),
+      dPhiBase*0.04, dPhiBase*2.5);
+    dPhi = min(dPhi,phiTarget-phiAcc);
+    dp45Step(u,up,dPhi,uSpin);
+    phiAcc+=dPhi; phi=phiAcc;
+    if(u>0.98){captured=true;break;}
+
+    float r=1./max(u,1e-5);
+    float cp=cos(phi),sp=sin(phi);
+    vec3  pos=r*(cp*eR+sp*ePhi);
+    float h=pos.y;
+
+    /* ── Volumetric disk glow ─────────────────────────────────────
+       Accumulate soft emission while inside ±3 scale heights.
+       Cheap: no noise, just blackbody + Doppler.                  */
+    if(uVolStr>0.01 && r>=uISCO && r<=uRout*0.72){
+      float diskHv  = uDiskH*r;
+      float vertFrac= h/max(diskHv,0.001);
+      if(abs(vertFrac)<3.2){
+        float az_v  = atan(pos.z,pos.x);
+        vec3 glowE  = diskGlow(r,az_v,uISCO,uTemp,uDop,uBright*uVolStr*0.22,uRout,vertFrac);
+        float arcLen= r*dPhi;
+        volCol     += glowE*arcLen*0.12;
+      }
+    }
+
+    /* ── Hot corona ───────────────────────────────────────────────*/
+    if(uCorona>0.5 && r>=uISCO*0.8 && r<=uISCO*4.5){
+      float diskHc = uDiskH*r;
+      if(abs(h)>diskHc*0.3 && abs(h)<r*0.35){
+        vec3 cE = coronaEmit(r,pos,uISCO,uTime);
+        volCol += cE*r*dPhi*0.05;
+      }
+    }
+
+    /* ── B-field lines ───────────────────────────────────────────*/
+    if(uBfield>0.5 && r>=uISCO*0.8 && r<=uISCO*5.5){
+      float bf = bfieldGlow(pos,uISCO,uSpin);
+      if(bf>0.005){
+        vec3 bfC = mix(vec3(0.3,0.8,2.2),vec3(0.8,1.8,4.5),bf);
+        bfCol += bfC*bf*r*dPhi*0.018;
+      }
+    }
+
+    /* ── Zero-crossing disk hits — 4 sub-rings ───────────────────
+       Each successive ring is demagnified by ~e^{-π} ≈ 0.043
+       (theoretical GR prediction). We use larger weights for
+       visual impact while preserving the decreasing sequence.    */
+    if(prevH*h<0. && r>=uISCO && r<=uRout*0.68){
+      float t      = prevH/(prevH-h);
+      vec3 hitPos  = mix(prevPos,pos,t);
+      float r_hit  = length(hitPos);
+      float az_hit = atan(hitPos.z,hitPos.x);
+
+      if(!hitDisk){
+        /* n=0 direct image — full brightness */
+        diskCol  = diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright,uRout);
+        hitDisk  = true;
+      } else if(uSec>0.5&&!hitSec){
+        /* n=1 first orbit — 22% */
+        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.22,uRout);
+        hitSec   = true;
+      } else if(uSec>0.5&&!hitTer){
+        /* n=2 second orbit — ~5% (e^{-2π} × boost for visibility) */
+        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.06,uRout);
+        hitTer   = true;
+      } else if(uSec>0.5&&!hitQua){
+        /* n=3 third orbit — ~1.5% */
+        diskCol += diskEmit(r_hit,az_hit,uSpin,uISCO,uTemp,uDop,uBright*0.018,uRout);
+        hitQua   = true;
+      }
+    }
+
+    if(r>44.&&up<0.){
+      float phi2=phi+0.004;
+      float r2=1./max(u+up*0.004,1e-5);
+      vec3 pos2=r2*(cos(phi2)*eR+sin(phi2)*ePhi);
+      bgDir=normalize(pos2-pos);
+      break;
+    }
+    prevH   = h;
+    prevPos = pos;
+  }
+
+  /* ── Compose ────────────────────────────────────────────────── */
+  vec3 col=vec3(0.);
+  if(captured){
+    col=vec3(0.);
+  } else if(hitDisk){
+    col = diskCol + volCol + bfCol + sampleGalaxy(bgDir)*0.32;
+  } else {
+    col = sampleGalaxy(bgDir) + volCol + bfCol;
+  }
+
+  if(uJets>0.5)      col += jetEmit(rd,uJpow,uTime);
+  if(uStarShow>0.5)  col += starSprite(rd,uStarDist,uTime);
+
+  gl_FragColor=vec4(tonemap(col*0.88),1.);
+}
+`;
+
+/* TAA blend */
+const FRAG_TAA=`
+precision highp float;varying vec2 vUv;
+uniform sampler2D tCur,tHist;
+uniform float histW,histV,clip;
+void main(){
+  vec3 cur=texture2D(tCur,vUv).rgb;
+  vec3 his=texture2D(tHist,vUv).rgb;
+  his=clamp(his,cur-vec3(clip),cur+vec3(clip));
+  float lc=dot(cur,vec3(.299,.587,.114)),lh=dot(his,vec3(.299,.587,.114));
+  float react=clamp(1.-abs(lc-lh)*5.,0.,1.);
+  gl_FragColor=vec4(mix(cur,his,histW*histV*react),1.);
+}`;
+
+const FRAG_COPY=`precision highp float;varying vec2 vUv;uniform sampler2D tSrc;void main(){gl_FragColor=texture2D(tSrc,vUv);}`;
+
+function halton(i,b){let f=1,r=0;while(i>0){f/=b;r+=f*(i%b);i=Math.floor(i/b);}return r;}
+
+function kerrISCO(a){
+  const a2=a*a,cbr=Math.pow(Math.max(1-a2,0),1/3);
+  const Z1=1+cbr*(Math.pow(Math.max(1+a,0),1/3)+Math.pow(Math.max(1-a,0),1/3));
+  const Z2=Math.sqrt(Math.max(3*a2+Z1*Z1,0));
+  return 3+Z2-Math.sqrt(Math.max((3-Z1)*(3+Z1+2*Z2),0));
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   THREE.JS SETUP
+   ═══════════════════════════════════════════════════════════════════ */
+let renderer,camera,scene,rayMat;
+let ppScene,ppCam,taaBlendMesh,taaCopyScene,taaCopyMesh;
+let rtCur,rtHist,rtBlend;
+let galaxyTex;
+
+let camSpeed=0;
+const prevCamPos=new THREE.Vector3();
+
+const UNI={
+  uCamPos:{value:new THREE.Vector3()},
+  uCamX:{value:new THREE.Vector3()},
+  uCamY:{value:new THREE.Vector3()},
+  uCamZ:{value:new THREE.Vector3()},
+  uRes:{value:new THREE.Vector2(window.innerWidth,window.innerHeight)},
+  uTime:{value:0},uSpin:{value:P.spin},uISCO:{value:kerrISCO(P.spin)*0.5},
+  uTemp:{value:P.temp},uDop:{value:P.dop},uBright:{value:P.bright},
+  uRout:{value:P.rout},uGal:{value:P.gal},uMode:{value:0},
+  uJets:{value:0},uJpow:{value:P.jpow},
+  uStarShow:{value:1},uStarDist:{value:P.sdist},uTde:{value:0},uEchoR:{value:0},
+  uCorona:{value:0},uCoronaStr:{value:P.coronaStr},
+  uBfield:{value:0},uBfStr:{value:P.bfStr},
+  uDiskH:{value:P.diskH},uVolStr:{value:P.volStr},
+  uSteps:{value:P.steps},uRevs:{value:P.revs},uSec:{value:1},
+  uJitter:{value:new THREE.Vector2()},
+  uGalTex:{value:null},uUseTex:{value:1}
+};
+
+function makeRT(){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  return new THREE.WebGLRenderTarget(
+    Math.floor(window.innerWidth*dpr),
+    Math.floor(window.innerHeight*dpr),
+    {minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,format:THREE.RGBAFormat}
+  );
+}
+
+function buildPipeline(){
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(80,window.innerWidth/window.innerHeight,0.01,1000);
+  rayMat=new THREE.ShaderMaterial({
+    vertexShader:VERT,fragmentShader:FRAG_MAIN,uniforms:UNI,
+    depthWrite:false,depthTest:false
+  });
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),rayMat));
+  ppScene=new THREE.Scene();
+  ppCam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+  taaBlendMesh=new THREE.Mesh(new THREE.PlaneGeometry(2,2),
+    new THREE.ShaderMaterial({
+      vertexShader:VERT,fragmentShader:FRAG_TAA,
+      uniforms:{tCur:{value:null},tHist:{value:null},histW:{value:0.88},histV:{value:0},clip:{value:0.08}},
+      depthWrite:false,depthTest:false
+    })
+  );
+  ppScene.add(taaBlendMesh);
+  taaCopyScene=new THREE.Scene();
+  taaCopyMesh=new THREE.Mesh(new THREE.PlaneGeometry(2,2),
+    new THREE.ShaderMaterial({
+      vertexShader:VERT,fragmentShader:FRAG_COPY,
+      uniforms:{tSrc:{value:null}},
+      depthWrite:false,depthTest:false
+    })
+  );
+  taaCopyScene.add(taaCopyMesh);
+  rtCur=makeRT();rtHist=makeRT();rtBlend=makeRT();
+}
+
+function renderFrame(){
+  if(P.taa){
+    renderer.setRenderTarget(rtCur);
+    renderer.clear();
+    renderer.render(scene,camera);
+    const bu=taaBlendMesh.material.uniforms;
+    bu.tCur.value=rtCur.texture;bu.tHist.value=rtHist.texture;
+    bu.histV.value=St.taaHist?1:0;
+    const speed01=Math.min(camSpeed/(orbit.dist*0.8),1.0);
+    bu.histW.value=0.88-speed01*0.33;
+    bu.clip.value =0.08+speed01*0.20;
+    renderer.setRenderTarget(rtBlend);
+    renderer.clear();
+    renderer.render(ppScene,ppCam);
+    taaCopyMesh.material.uniforms.tSrc.value=rtBlend.texture;
+    renderer.setRenderTarget(null);
+    renderer.render(taaCopyScene,ppCam);
+    const tmp=rtHist;rtHist=rtBlend;rtBlend=tmp;
+    St.taaHist=true;
+  } else {
+    renderer.setRenderTarget(null);
+    renderer.render(scene,camera);
+  }
+}
+
+function updateCamera(dt){
+  orbit.yaw  =THREE.MathUtils.lerp(orbit.yaw,  orbit.ty,1-Math.exp(-dt*9));
+  orbit.pitch=THREE.MathUtils.lerp(orbit.pitch,orbit.tp,1-Math.exp(-dt*9));
+  const cp=Math.cos(orbit.pitch),sp=Math.sin(orbit.pitch);
+  const cy=Math.cos(orbit.yaw),  sy=Math.sin(orbit.yaw);
+  const pos=new THREE.Vector3(sy*cp,sp,cy*cp).multiplyScalar(orbit.dist);
+  camera.position.copy(pos);camera.lookAt(0,0,0);camera.updateMatrixWorld(true);
+  const fwd=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
+  const rgt=new THREE.Vector3(1,0,0).applyQuaternion(camera.quaternion);
+  const up =new THREE.Vector3(0,1,0).applyQuaternion(camera.quaternion);
+  UNI.uCamPos.value.copy(pos);
+  UNI.uCamX.value.copy(rgt);UNI.uCamY.value.copy(up);UNI.uCamZ.value.copy(fwd);
+}
+
+function syncUniforms(){
+  const a=Math.min(P.spin,0.998);
+  UNI.uSpin.value=a;UNI.uISCO.value=kerrISCO(a)*0.5;
+  UNI.uTemp.value=P.temp;UNI.uDop.value=P.dop;
+  UNI.uBright.value=P.bright;UNI.uRout.value=P.rout;
+  UNI.uDiskH.value=P.diskH;UNI.uVolStr.value=P.volStr;
+  UNI.uCorona.value=P.corona?1:0;UNI.uCoronaStr.value=P.coronaStr;
+  UNI.uBfield.value=P.bfield?1:0;UNI.uBfStr.value=P.bfStr;
+  UNI.uGal.value=P.gal;UNI.uMode.value=P.mode;
+  UNI.uJets.value=P.jets?1:0;UNI.uJpow.value=P.jpow;
+  UNI.uStarShow.value=P.star?1:0;
+  UNI.uStarDist.value=P.sdist;
+  UNI.uTde.value=0;UNI.uEchoR.value=0;
+  UNI.uSteps.value=P.steps;UNI.uRevs.value=P.revs;UNI.uSec.value=P.sec?1:0;
+  UNI.uUseTex.value=P.useTex?1:0;
+  St.taaHist=false;St.taaIdx=0;UNI.uJitter.value.set(0,0);
+  camSpeed=0;
+}
+
+/* ── Init ────────────────────────────────────────────────────────── */
+function init(){
+  if(St.started)return;St.started=true;
+  renderer=new THREE.WebGLRenderer({canvas,antialias:false,powerPreference:"high-performance",alpha:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.toneMapping=THREE.NoToneMapping;
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.autoClear=false;
+  buildPipeline();
+  document.getElementById("pmsg").textContent="90% · Loading ESO galaxy panorama…";
+
+  function applyGalaxyCanvas(){
+    const galCanvas=bakeGalaxyTexture(2048,1024);
+    galaxyTex=new THREE.CanvasTexture(galCanvas);
+    galaxyTex.wrapS=THREE.RepeatWrapping;
+    galaxyTex.wrapT=THREE.ClampToEdgeWrapping;
+    galaxyTex.minFilter=THREE.LinearMipmapLinearFilter;
+    galaxyTex.generateMipmaps=true;
+    UNI.uGalTex.value=galaxyTex;
+  }
+
+  const GALAXY_URLS=["./eso0932a.jpg","./eso0932a.png","./eso0932a.tif"];
+
+  function applyImageToTexture(imgEl){
+    const galCanvas=document.createElement("canvas");
+    galCanvas.width=2048;galCanvas.height=1024;
+    const gCtx=galCanvas.getContext("2d");
+    gCtx.drawImage(imgEl,0,0,2048,1024);
+    gCtx.fillStyle="rgba(0,0,6,0.28)";gCtx.fillRect(0,0,2048,1024);
+    if(galaxyTex)galaxyTex.dispose();
+    galaxyTex=new THREE.CanvasTexture(galCanvas);
+    galaxyTex.wrapS=THREE.RepeatWrapping;
+    galaxyTex.wrapT=THREE.ClampToEdgeWrapping;
+    galaxyTex.minFilter=THREE.LinearMipmapLinearFilter;
+    galaxyTex.generateMipmaps=true;
+    UNI.uGalTex.value=galaxyTex;
+    St.galaxyReady=true;
+  }
+
+  function tryLoadGalaxy(urls){
+    if(urls.length===0){
+      applyGalaxyCanvas();St.galaxyReady=true;return;
+    }
+    const img=new Image();
+    img.onload =()=>applyImageToTexture(img);
+    img.onerror=()=>tryLoadGalaxy(urls.slice(1));
+    img.src=urls[0];
+  }
+
+  applyGalaxyCanvas();
+  tryLoadGalaxy(GALAXY_URLS);
+  syncInputs();syncUniforms();updateCamera(0);updateLabels();updateFeed();
+
+  canvas.addEventListener("pointerdown",e=>{
+    orbit.drag=true;orbit.lx=e.clientX;orbit.ly=e.clientY;
+    canvas.setPointerCapture&&canvas.setPointerCapture(e.pointerId);
+    canvas.classList.add("dragging");
+  });
+  canvas.addEventListener("pointermove",e=>{
+    if(!orbit.drag)return;
+    orbit.ty+=(e.clientX-orbit.lx)*0.0044;
+    orbit.tp=THREE.MathUtils.clamp(orbit.tp+(e.clientY-orbit.ly)*0.0038,-0.85,0.85);
+    orbit.lx=e.clientX;orbit.ly=e.clientY;
+  });
+  canvas.addEventListener("pointerup",()=>{orbit.drag=false;canvas.classList.remove("dragging");});
+  canvas.addEventListener("pointercancel",()=>{orbit.drag=false;canvas.classList.remove("dragging");});
+  canvas.addEventListener("wheel",e=>{
+    e.preventDefault();
+    orbit.dist=THREE.MathUtils.clamp(orbit.dist+Math.sign(e.deltaY)*0.85,3,40);
+  },{passive:false});
+  window.addEventListener("resize",onResize,{passive:true});
+  document.getElementById("statusEl").textContent="renderer: active";
+}
+
+function animate(){
+  if(!St.running)return;
+  requestAnimationFrame(animate);
+  const dt=Math.min(clock.getDelta(),0.05);
+  St.time+=dt;St.frames++;St.fpsT+=dt;St.domT+=dt;
+  if(St.fpsT>=0.45){St.fps=St.frames/St.fpsT;St.frames=0;St.fpsT=0;}
+
+  /* TDE infall sequence */
+  if(P.star&&P.sspd>0.001&&St.tdePhase!=='eaten'){
+    const fallRate=P.sspd*0.12;
+    P.sdist=Math.max(P.sdist-dt*fallRate*P.sdist*0.05,2.0);
+    if(P.sdist<8.0&&St.tdePhase==='approach'){
+      St.tdePhase='disrupting';UNI.uTde.value=1.0;
+    }
+    if(P.sdist<2.8&&St.tdePhase==='disrupting'){
+      St.tdePhase='flash';St.tdeFlashT=0;UNI.uTde.value=2.0;
+      P.jets=true;UNI.uJets.value=1;
+      const jEl=document.getElementById('i_jets');if(jEl)jEl.checked=true;
+    }
+    if(St.tdePhase==='flash'){
+      St.tdeFlashT+=dt;
+      UNI.uTde.value=2.0+St.tdeFlashT*0.6;
+      if(St.tdeFlashT>1.8){
+        St.tdePhase='eaten';UNI.uTde.value=3.0;UNI.uStarShow.value=0;
+      }
+    }
+    if(P.jets&&St.tdePhase!=='approach'){
+      const flare=Math.max(0,1-St.tdeFlashT/25);
+      UNI.uJpow.value=P.jpow+flare*1.4;
+    }
+    /* TDE light echo — expands at 0.25c */
+    if(St.tdePhase==='flash'||St.tdePhase==='eaten'){
+      const echoR=St.tdeFlashT*4.0;
+      UNI.uEchoR.value=Math.min(echoR,P.rout*0.8);
+    }
+    const el=document.getElementById("i_sdist");if(el)el.value=P.sdist;
+    UNI.uStarDist.value=P.sdist;
+  } else if(P.star&&St.tdePhase==='eaten'){
+    St.tdeFlashT+=dt;
+    const flare=Math.max(0,1-St.tdeFlashT/25);
+    if(P.jets)UNI.uJpow.value=P.jpow+flare*1.4;
+    const echoR=St.tdeFlashT*4.0;
+    UNI.uEchoR.value=Math.min(echoR,P.rout*0.8);
+    if(St.tdeFlashT>30)UNI.uEchoR.value=0;
+  }
+
+  if(P.taa){
+    const idx=(St.taaIdx%8)+1;
+    UNI.uJitter.value.set((halton(idx,2)-.5),(halton(idx,3)-.5));
+    St.taaIdx++;
+  } else {
+    UNI.uJitter.value.set(0,0);
+  }
+
+  UNI.uTime.value=St.time;
+  updateCamera(dt);
+  const camDelta=camera.position.distanceTo(prevCamPos);
+  camSpeed=camSpeed+(1-Math.exp(-dt*6))*(camDelta/Math.max(dt,0.001)-camSpeed);
+  prevCamPos.copy(camera.position);
+  renderFrame();
+
+  if(St.domT>=0.15){
+    updateLabels();updateFeed();
+    const sp=document.getElementById("specEl");
+    if(sp&&sp.style.display==="block")updateSpec();
+    St.domT=0;
+  }
+}
+
+function onResize(){
+  if(!renderer)return;
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
+  UNI.uRes.value.set(window.innerWidth,window.innerHeight);
+  [rtCur,rtHist,rtBlend].forEach(r=>r&&r.dispose());
+  rtCur=makeRT();rtHist=makeRT();rtBlend=makeRT();
+  St.taaHist=false;
+}
+
+async function fakeLoad(){
+  const steps=[
+    [8, "Compiling Dormand-Prince RK4(5) geodesic integrator…"],
+    [18,"Loading Kerr frame-drag kernel…"],
+    [28,"Baking galaxy texture (26k point stars)…"],
+    [40,"Building volumetric disk opacity tables…"],
+    [52,"Initialising hot corona (X-ray plasma)…"],
+    [62,"Threading Blandford-Znajek magnetic field lines…"],
+    [72,"Linking 4-ring photon sub-ring system…"],
+    [82,"Computing ISCO Z₁Z₂ (Bardeen 1972)…"],
+    [90,"Calibrating Fe K-α spectrograph…"],
+    [97,"Arming TDE light echo propagation…"],
+    [100,"All systems nominal."]
+  ];
+  return new Promise(res=>{
+    let i=0;
+    const tick=()=>{
+      const [p,m]=steps[i];
+      document.getElementById("pbar").style.width=p+"%";
+      document.getElementById("pmsg").textContent=p+"% · "+m;
+      i++;
+      if(i<steps.length)setTimeout(tick,160+Math.random()*80);
+      else setTimeout(res,220);
+    };tick();
+  });
+}
+
+async function launch(){
+  if(St.running)return;
+  const btn=document.getElementById("startBtn");
+  btn.disabled=true;btn.textContent="Initialising…";
+  try{
+    await fakeLoad();init();
+    document.getElementById("loadingEl").classList.add("hidden");
+    St.running=true;clock.start();requestAnimationFrame(animate);
+  }catch(e){
+    console.error(e);
+    document.getElementById("pmsg").textContent="Init failed — check console.";
+    btn.disabled=false;btn.textContent="Retry";
+  }
+}
+
+/* ── UI helpers ───────────────────────────────────────────────────── */
+function fmtKm(km){
+  if(!isFinite(km))return"—";
+  if(km>=1e9)return(km/1e9).toFixed(2)+"×10⁹ km";
+  if(km>=1e6)return(km/1e6).toFixed(2)+"×10⁶ km";
+  if(km>=1e3)return(km/1e3).toFixed(2)+"×10³ km";
+  return km.toFixed(1)+" km";
+}
+function fmtM(m){
+  if(m>=1e6)return(m/1e6).toFixed(2)+"×10⁶ M☉";
+  if(m>=1e3)return(m/1e3).toFixed(1)+"×10³ M☉";
+  return m.toFixed(m<20?1:0)+" M☉";
+}
+const sel=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+
+function updateLabels(){
+  sel("o_mass",fmtM(P.mass));sel("o_spin",P.spin.toFixed(3));
+  sel("o_incl",Math.round(P.incl)+"°");sel("o_temp",P.temp.toFixed(2));
+  sel("o_dop",P.dop.toFixed(2));sel("o_bright",P.bright.toFixed(2));
+  sel("o_rout",P.rout.toFixed(1));sel("o_gal",P.gal.toFixed(2));
+  sel("o_steps",P.steps);sel("o_revs",P.revs.toFixed(1));
+  sel("o_jpow",P.jpow.toFixed(2));sel("o_sdist",P.sdist.toFixed(1)+" rₛ");
+  sel("o_sspd",P.sspd.toFixed(2));
+  sel("o_diskH",P.diskH.toFixed(2));sel("o_volStr",P.volStr.toFixed(2));
+  sel("o_coronaStr",P.coronaStr.toFixed(2));sel("o_bfStr",P.bfStr.toFixed(2));
+  [["mCin",0],["mSci",1],["mLab",2]].forEach(([id,m])=>{
+    const b=document.getElementById(id);if(b)b.classList.toggle("on",P.mode===m);
+  });
+}
+
+function updateFeed(){
+  const bh=Math.max(P.mass,0.1);
+  const rsKm=RsKm*bh;
+  const a=Math.min(P.spin,0.998);
+  const rIM=kerrISCO(a),iscoKm=rIM*(rsKm/2),rIRs=rIM/2;
+  const gg=Math.sqrt(Math.max(0,1-1/rIRs));
+  const d=P.sdist;
+  let out="safe fly-by";
+  if(d<2.3)out="captured";else if(d<4.5)out="strong tidal shredding";
+  else if(d<8)out="tidal disruption";else if(d<12)out="dangerously close";
+  sel("f_rs",fmtKm(rsKm));sel("f_ph",fmtKm(1.5*rsKm));
+  sel("f_isco",fmtKm(iscoKm)+" (r="+rIM.toFixed(3)+"M)");
+  sel("f_gg",gg.toFixed(4));sel("f_hw",(HawkK/bh).toExponential(2)+" K");
+  sel("f_out",out);sel("f_fps",Math.round(St.fps));
+  const col=out.includes("safe")?"var(--good)":out.includes("cap")?"var(--danger)":"var(--warn)";
+  sel("scenarioEl",`At <strong>${d.toFixed(1)} rₛ</strong>: <strong style="color:${col}">${out}</strong>`);
+}
+
+/* ── Fe K-α Spectrograph ─────────────────────────────────────────── */
+function updateSpec(){
+  const sc=document.getElementById("specCanvas"),ctx=sc?sc.getContext("2d"):null;
+  if(!ctx)return;
+  const a=Math.min(P.spin,0.998),inc=P.incl;
+  const rIM=kerrISCO(a),rIRs=rIM/2;
+  const gg=Math.sqrt(Math.max(0,1-1/rIRs));
+  const sinI=Math.sin(inc*Math.PI/180);
+  const W=sc.width,H=sc.height,PAD={l:46,r:13,t:15,b:30};
+  const pW=W-PAD.l-PAD.r,pH=H-PAD.t-PAD.b;
+  const Emin=2,Emax=9.5,Erest=6.4,Nb=pW;
+  const prof=new Float32Array(Nb);
+  for(let i=0;i<240;i++){
+    const r=rIM*Math.pow(400/rIM,i/239);
+    const v=Math.min(Math.sqrt(1/Math.max(r,3)),0.7071);
+    const gam=1/Math.sqrt(1-v*v);
+    const g2=Math.sqrt(Math.max(0,1-2/r));
+    const em=Math.pow(r,-3);
+    for(let j=0;j<200;j++){
+      const phi=j/200*2*Math.PI;
+      const vlos=v*(-Math.sin(phi)*sinI);
+      const D=1/Math.max(gam*(1-vlos),0.01);
+      const Eobs=Erest*D*g2;
+      const bin=Math.round(((Eobs-Emin)/(Emax-Emin))*(Nb-1));
+      if(bin>=0&&bin<Nb)prof[bin]+=em*Math.pow(D*g2,4)/200;
+    }
+  }
+  const sm=new Float32Array(Nb),sig=2.4;
+  for(let x=0;x<Nb;x++){let s=0,w=0;for(let dx=-9;dx<=9;dx++){const xi=x+dx;if(xi<0||xi>=Nb)continue;const wt=Math.exp(-dx*dx/(2*sig*sig));s+=prof[xi]*wt;w+=wt;}sm[x]=s/Math.max(w,1e-10);}
+  let mx=0;for(let x=0;x<Nb;x++)if(sm[x]>mx)mx=sm[x];
+  if(mx<1e-20)return;for(let x=0;x<Nb;x++)sm[x]/=mx;
+  ctx.fillStyle="#020817";ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="rgba(80,120,160,0.12)";ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const y=PAD.t+pH*i/4;ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(W-PAD.r,y);ctx.stroke();}
+  const rx=PAD.l+((Erest-Emin)/(Emax-Emin))*pW;
+  ctx.strokeStyle="rgba(255,255,255,0.22)";ctx.setLineDash([3,4]);
+  ctx.beginPath();ctx.moveTo(rx,PAD.t);ctx.lineTo(rx,PAD.t+pH);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle="rgba(255,255,255,0.38)";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  ctx.fillText("6.4 keV",rx,PAD.t-3);
+  const g=ctx.createLinearGradient(PAD.l,0,W-PAD.r,0);
+  g.addColorStop(0,"rgba(248,80,80,0.75)");g.addColorStop(0.42,"rgba(116,242,200,0.55)");
+  g.addColorStop(0.70,"rgba(90,150,255,0.72)");g.addColorStop(1,"rgba(180,100,255,0.45)");
+  ctx.beginPath();ctx.moveTo(PAD.l,PAD.t+pH);
+  for(let x=0;x<Nb;x++)ctx.lineTo(PAD.l+x,PAD.t+pH-sm[x]*pH*0.90);
+  ctx.lineTo(W-PAD.r,PAD.t+pH);ctx.closePath();
+  ctx.fillStyle=g;ctx.globalAlpha=0.52;ctx.fill();ctx.globalAlpha=1;
+  const lg=ctx.createLinearGradient(PAD.l,0,W-PAD.r,0);
+  lg.addColorStop(0,"#f85050");lg.addColorStop(0.42,"#74f2c8");lg.addColorStop(0.70,"#6496ff");lg.addColorStop(1,"#b464ff");
+  ctx.beginPath();for(let x=0;x<Nb;x++){const py=PAD.t+pH-sm[x]*pH*0.90;x===0?ctx.moveTo(PAD.l+x,py):ctx.lineTo(PAD.l+x,py);}
+  ctx.strokeStyle=lg;ctx.lineWidth=1.8;ctx.stroke();
+  ctx.strokeStyle="rgba(90,120,160,0.5)";ctx.lineWidth=1.3;
+  ctx.beginPath();ctx.moveTo(PAD.l,PAD.t);ctx.lineTo(PAD.l,PAD.t+pH);ctx.lineTo(W-PAD.r,PAD.t+pH);ctx.stroke();
+  ctx.fillStyle="rgba(100,140,180,0.75)";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  [2,3,4,5,6,7,8,9].forEach(E=>{ctx.fillText(E+" keV",PAD.l+((E-Emin)/(Emax-Emin))*pW,PAD.t+pH+12);});
+  ctx.fillStyle="rgba(116,242,200,0.55)";ctx.font="9px 'JetBrains Mono',monospace";ctx.textAlign="left";
+  ctx.fillText("g_grav(r_isco)="+gg.toFixed(3),PAD.l,H-2);
+  const si=document.getElementById("specInfo");
+  if(si)si.textContent="a="+a.toFixed(2)+" · i="+Math.round(inc)+"° · r_isco="+rIM.toFixed(2)+"M";
+}
+
+/* ── Presets ──────────────────────────────────────────────────────── */
+function applyP(obj){Object.assign(P,obj);syncInputs();syncUniforms();updateLabels();updateFeed();}
+function setMode(m){
+  if(m===0)applyP({mode:0,spin:0.92,incl:72,temp:1.8,dop:1.0,bright:1.2,gal:1.0,rout:16,diskH:0.06,volStr:0.55,corona:false,bfield:false,jets:false,star:false,steps:320,revs:4.5,sec:true,taa:true});
+  else if(m===1)applyP({mode:1,spin:0.95,incl:78,temp:2.0,dop:0.9,bright:1.1,gal:0.9,rout:18,diskH:0.05,volStr:0.40,corona:false,bfield:false,jets:false,star:false,steps:380,revs:5.0,sec:true,taa:true});
+  else applyP({mode:2,spin:0.72,incl:55,temp:1.5,dop:1.0,bright:1.0,gal:1.2,rout:14,diskH:0.07,volStr:0.60,corona:false,bfield:false,jets:false,star:true,sdist:55,sspd:0.06,steps:240,revs:3.0,sec:true,taa:true});
+}
+
+/* ── Wire controls ────────────────────────────────────────────────── */
+function syncInputs(){
+  const sr=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  const sc=(id,v)=>{const e=document.getElementById(id);if(e)e.checked=v;};
+  sr("i_mass",P.mass);sr("i_spin",P.spin);sr("i_incl",P.incl);
+  sr("i_temp",P.temp);sr("i_dop",P.dop);sr("i_bright",P.bright);
+  sr("i_rout",P.rout);sr("i_gal",P.gal);
+  sr("i_diskH",P.diskH);sr("i_volStr",P.volStr);
+  sr("i_coronaStr",P.coronaStr);sr("i_bfStr",P.bfStr);
+  sr("i_steps",P.steps);sr("i_revs",P.revs);
+  sr("i_jpow",P.jpow);sr("i_sdist",P.sdist);sr("i_sspd",P.sspd);
+  sc("i_taa",P.taa);sc("i_sec",P.sec);sc("i_jets",P.jets);sc("i_star",P.star);
+  sc("i_tex",P.useTex);sc("i_corona",P.corona);sc("i_bfield",P.bfield);
+}
+
+[["i_mass","mass",Number],["i_spin","spin",Number],["i_incl","incl",Number],
+ ["i_temp","temp",Number],["i_dop","dop",Number],["i_bright","bright",Number],
+ ["i_rout","rout",Number],["i_gal","gal",Number],
+ ["i_diskH","diskH",Number],["i_volStr","volStr",Number],
+ ["i_coronaStr","coronaStr",Number],["i_bfStr","bfStr",Number],
+ ["i_steps","steps",v=>Math.round(Number(v))],["i_revs","revs",Number],
+ ["i_jpow","jpow",Number],["i_sdist","sdist",Number],["i_sspd","sspd",Number]
+].forEach(([id,key,conv])=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener("input",()=>{P[key]=conv(el.value);syncUniforms();updateLabels();updateFeed();});
+});
+
+[["i_taa","taa"],["i_sec","sec"],["i_jets","jets"],["i_star","star"],
+ ["i_tex","useTex"],["i_corona","corona"],["i_bfield","bfield"]
+].forEach(([id,key])=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener("change",()=>{P[key]=el.checked;syncUniforms();});
+});
+
+document.getElementById("mCin").addEventListener("click",()=>setMode(0));
+document.getElementById("mSci").addEventListener("click",()=>setMode(1));
+document.getElementById("mLab").addEventListener("click",()=>setMode(2));
+
+document.getElementById("pCalm").addEventListener("click",()=>
+  applyP({spin:0.30,incl:62,temp:1.2,dop:0.6,bright:0.9,gal:0.9,diskH:0.05,volStr:0.30,corona:false,bfield:false,steps:200,revs:2.5,rout:12}));
+document.getElementById("pEdge").addEventListener("click",()=>
+  applyP({spin:0.72,incl:84,temp:1.9,dop:1.0,bright:1.2,gal:1.0,diskH:0.06,volStr:0.55,corona:false,bfield:false,steps:320,revs:4.0,rout:18}));
+document.getElementById("pXtreme").addEventListener("click",()=>
+  applyP({spin:0.97,incl:76,temp:2.5,dop:1.5,bright:1.5,gal:1.1,diskH:0.08,volStr:0.80,corona:true,bfield:true,steps:400,revs:5.0,rout:20}));
+document.getElementById("pEHT").addEventListener("click",()=>
+  /* EHT Mode: mimics M87* Event Horizon Telescope image aesthetics
+     High spin, low inclination, bright photon ring, corona on       */
+  applyP({spin:0.94,incl:17,temp:2.2,dop:1.2,bright:1.8,gal:0.7,diskH:0.10,volStr:1.20,
+          corona:true,coronaStr:1.2,bfield:false,jets:true,jpow:0.8,
+          star:false,steps:420,revs:5.5,rout:22,sec:true,taa:true}));
+document.getElementById("pAGN").addEventListener("click",()=>
+  applyP({mode:2,spin:0.92,incl:50,temp:1.8,bright:1.0,gal:1.2,diskH:0.07,volStr:0.60,
+          corona:true,coronaStr:1.0,bfield:true,bfStr:0.8,jets:true,jpow:1.3,star:false,steps:280,rout:16}));
+document.getElementById("pReset").addEventListener("click",()=>{
+  applyP(structuredClone(DEF));orbit.ty=0;orbit.tp=0.22;orbit.dist=9;
+});
+
+document.getElementById("resetStar").addEventListener("click",()=>{
+  St.starPhase=0;St.tdePhase='approach';St.tdeFlashT=0;
+  P.sdist=55;
+  UNI.uTde.value=0;UNI.uEchoR.value=0;
+  UNI.uStarShow.value=P.star?1:0;
+  UNI.uJpow.value=P.jpow;
+  syncInputs();syncUniforms();updateLabels();
+});
+
+document.getElementById("btnUI").addEventListener("click",function(){
+  document.body.classList.toggle("uih");
+  this.textContent=document.body.classList.contains("uih")?"Show UI":"Hide UI";
+});
+
+const specEl=document.getElementById("specEl"),feedEl=document.getElementById("feedEl");
+document.getElementById("btnSpec").addEventListener("click",function(){
+  const show=specEl.style.display!=="block";
+  specEl.style.display=show?"block":"none";
+  feedEl.style.display=show?"none":"block";
+  this.textContent=show?"Telemetry":"Fe K-α";
+  if(show)updateSpec();
+});
+
+const slitEl=document.getElementById("slitLine"),slitS={vis:false,drag:false};
+document.getElementById("slitBtn").addEventListener("click",function(){
+  slitS.vis=!slitS.vis;slitEl.style.display=slitS.vis?"block":"none";
+  this.textContent=slitS.vis?"Hide slit":"Show slit";
+});
+slitEl.addEventListener("pointerdown",e=>{slitS.drag=true;slitEl.setPointerCapture(e.pointerId);e.stopPropagation();});
+slitEl.addEventListener("pointermove",e=>{
+  if(!slitS.drag)return;
+  slitEl.style.left=Math.max(40,Math.min(window.innerWidth-40,e.clientX)-1)+"px";
+  e.stopPropagation();
+});
+slitEl.addEventListener("pointerup",()=>slitS.drag=false);
+
+document.getElementById("startBtn").addEventListener("click",launch);
+syncInputs();updateLabels();updateFeed();
+</script>
+</body>
+</html>
