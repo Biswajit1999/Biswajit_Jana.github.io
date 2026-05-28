@@ -1,5 +1,15 @@
 [
   {
+    "title": "How We Smell an Exoplanet Without Going There",
+    "subtitle": "Transmission spectroscopy explained through filtered starlight, molecular fingerprints, clouds, noise, JWST examples, and an interactive atmosphere-spectrum lab.",
+    "date": "2026-05-28",
+    "category": "Exoplanets",
+    "readTime": "16 min read",
+    "image": "../images/blog15_03_transmission_spectroscopy.png",
+    "url": "posts/exoplanet-spectroscopy.html",
+    "tags": ["Exoplanets", "Transmission Spectroscopy", "Atmospheres", "JWST", "Spectroscopy"]
+  },
+  {
     "title": "Gravitational Waves: When Spacetime Itself Starts Ringing",
     "subtitle": "Black holes, neutron stars, chirp signals, LIGO, and a small interactive lab for hearing spacetime misbehave.",
     "date": "2026-05-20",
