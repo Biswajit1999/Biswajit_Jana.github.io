@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">How We Smell an Exoplanet Without Going There</title>
+  <desc id="desc">Original concept artwork by Biswajit Jana showing starlight filtered through an exoplanet atmosphere and translated into a transmission spectrum.</desc>
+  <defs>
+    <radialGradient id="star" cx="42%" cy="38%" r="44%">
+      <stop offset="0" stop-color="#fff7c8"/>
+      <stop offset=".28" stop-color="#ffd166"/>
+      <stop offset=".62" stop-color="#ff7a3d"/>
+      <stop offset="1" stop-color="#5b1809"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="38%" cy="32%" r="70%">
+      <stop offset="0" stop-color="#1f3158"/>
+      <stop offset=".45" stop-color="#070817"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="spectrum" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#6b78ff"/>
+      <stop offset=".18" stop-color="#29d9ff"/>
+      <stop offset=".34" stop-color="#54e8cf"/>
+      <stop offset=".50" stop-color="#ffd166"/>
+      <stop offset=".66" stop-color="#ff7a90"/>
+      <stop offset=".82" stop-color="#ff6bd6"/>
+      <stop offset="1" stop-color="#9d7dff"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="13" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 1  0 1 0 0 .45  0 0 1 0 .95  0 0 0 .65 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="#08030f"/>
+  <circle cx="260" cy="120" r="420" fill="#ff6bd6" opacity=".08"/>
+  <circle cx="1360" cy="140" r="390" fill="#7cf7ff" opacity=".09"/>
+  <circle cx="820" cy="510" r="620" fill="#17072a" opacity=".95"/>
+  <g opacity=".55">
+    <path d="M0 680 C270 610 480 665 735 598 C1010 525 1260 560 1600 468" fill="none" stroke="#7cf7ff" stroke-opacity=".10" stroke-width="2"/>
+    <path d="M0 715 C300 650 570 710 810 635 C1030 567 1260 610 1600 520" fill="none" stroke="#ff6bd6" stroke-opacity=".11" stroke-width="2"/>
+  </g>
+  <g opacity=".75">
+    <circle cx="103" cy="92" r="1.7" fill="#fff"/>
+    <circle cx="245" cy="203" r="1.2" fill="#fff"/>
+    <circle cx="1320" cy="95" r="1.5" fill="#fff"/>
+    <circle cx="1450" cy="260" r="1.1" fill="#fff"/>
+    <circle cx="1180" cy="190" r="1.3" fill="#fff"/>
+    <circle cx="380" cy="730" r="1.2" fill="#fff"/>
+    <circle cx="1510" cy="790" r="1.4" fill="#fff"/>
+    <circle cx="80" cy="835" r="1.2" fill="#fff"/>
+  </g>
+  <ellipse cx="790" cy="385" rx="585" ry="78" fill="#ffd166" opacity=".18" filter="url(#softGlow)"/>
+  <ellipse cx="790" cy="385" rx="655" ry="18" fill="#ffd166" opacity=".58" filter="url(#glow)"/>
+  <circle cx="790" cy="385" r="235" fill="url(#star)"/>
+  <circle cx="790" cy="385" r="154" fill="url(#planet)"/>
+  <circle cx="790" cy="385" r="176" fill="none" stroke="#7cf7ff" stroke-width="7" opacity=".74" filter="url(#glow)"/>
+  <circle cx="790" cy="385" r="194" fill="none" stroke="#ff6bd6" stroke-width="2" opacity=".45"/>
+  <path d="M966 383 C1105 380 1236 381 1380 378" stroke="#7cf7ff" stroke-width="2" stroke-dasharray="12 16" opacity=".45"/>
+  <text x="1048" y="355" font-family="JetBrains Mono, monospace" font-size="22" fill="#d2c0dc">filtered starlight</text>
+  <g transform="translate(190 660)">
+    <rect width="1220" height="210" rx="34" fill="#0d0a1d" stroke="#ffffff" stroke-opacity=".12"/>
+    <text x="38" y="45" font-family="JetBrains Mono, monospace" font-size="22" fill="#ffd166">transmission spectrum - transit depth vs wavelength</text>
+    <line x1="80" y1="156" x2="1130" y2="156" stroke="#d2c0dc" stroke-opacity=".32"/>
+    <line x1="80" y1="56" x2="80" y2="156" stroke="#d2c0dc" stroke-opacity=".32"/>
+    <path d="M80 128 C132 127 188 127 230 126 C254 124 258 87 278 86 C302 86 307 126 330 127 C408 128 480 127 535 125 C568 123 581 86 612 83 C644 82 660 125 695 126 C770 128 821 126 862 125 C895 123 916 92 945 89 C978 87 991 126 1025 127 C1068 128 1104 127 1130 126" fill="none" stroke="#7cf7ff" stroke-width="5" filter="url(#glow)"/>
+    <path d="M80 128 C132 127 188 127 230 126 C254 124 258 87 278 86 C302 86 307 126 330 127 C408 128 480 127 535 125 C568 123 581 86 612 83 C644 82 660 125 695 126 C770 128 821 126 862 125 C895 123 916 92 945 89 C978 87 991 126 1025 127 C1068 128 1104 127 1130 126" fill="none" stroke="#ff6bd6" stroke-width="2" opacity=".82"/>
+    <g font-family="JetBrains Mono, monospace" font-size="18" fill="#d2c0dc">
+      <text x="72" y="186">0.6 um</text>
+      <text x="302" y="186">1.4 H2O</text>
+      <text x="542" y="186">3.3 CH4</text>
+      <text x="850" y="186">4.3 CO2</text>
+      <text x="1052" y="186">5.3 um</text>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="16" fill="#ffd166">
+      <text x="242" y="74">Na/K</text>
+      <text x="585" y="74">H2O</text>
+      <text x="902" y="80">CO2</text>
+    </g>
+  </g>
+  <text x="60" y="78" font-family="Fraunces, Georgia, serif" font-size="54" font-weight="800" fill="#fff5ff">How We Smell an Exoplanet</text>
+  <text x="62" y="126" font-family="Space Grotesk, sans-serif" font-size="25" fill="#d2c0dc">Transmission spectroscopy: starlight filtered by alien air</text>
+  <text x="1180" y="938" font-family="JetBrains Mono, monospace" font-size="18" fill="#d2c0dc">Concept: Biswajit Jana | Transmission spectroscopy</text>
+</svg>

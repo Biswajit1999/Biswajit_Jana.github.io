@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transmission Spectroscopy Lab | Biswajit Jana</title>
+  <meta name="description" content="A browser-based JWST-style transmission spectroscopy simulator for exoplanet atmospheres." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,650..900,70,1&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07020d;
+      --panel: rgba(17, 8, 31, 0.78);
+      --panel2: rgba(255, 255, 255, 0.055);
+      --line: rgba(255, 230, 255, 0.13);
+      --text: #fff5ff;
+      --muted: #d2c0dc;
+      --dim: #8d7e9c;
+      --magenta: #ff6bd6;
+      --cyan: #7cf7ff;
+      --gold: #ffd166;
+      --violet: #9d7dff;
+      --danger: #ff7a90;
+      --display: "Fraunces", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+      --shadow: 0 26px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255, 107, 214, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 0%, rgba(124, 247, 255, 0.17), transparent 32%),
+        radial-gradient(circle at 50% 70%, rgba(255, 209, 102, 0.09), transparent 38%),
+        linear-gradient(180deg, #07020d, #12081f 54%, #030106);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at 50% 40%, black, transparent 78%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1680px, 94vw); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 2, 13, 0.78);
+    }
+
+    .topbar-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.18rem;
+    }
+
+    .brand span { color: var(--magenta); }
+    .navlinks { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 0.73rem; color: var(--muted); }
+    .navlinks a:hover { color: var(--cyan); }
+
+    .hero {
+      padding: 34px 0 18px;
+      display: grid;
+      grid-template-columns: minmax(320px, 0.62fr) minmax(560px, 1.38fr);
+      gap: 24px;
+      align-items: end;
+    }
+
+    .kicker {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 5.4vw, 6.2rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1.05rem;
+      max-width: 780px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .status span {
+      display: block;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin-bottom: 5px;
+    }
+
+    .status strong { color: var(--text); font-size: 1.08rem; }
+
+    .lab {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 18px;
+      padding: 18px 0 38px;
+    }
+
+    .viewport, .controls, .notes {
+      border: 1px solid var(--line);
+      background: rgba(12, 6, 24, 0.78);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .viewport-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      color: var(--muted);
+    }
+
+    .viewport-head strong { color: var(--cyan); }
+    #labCanvas { display: block; width: 100%; height: 720px; }
+
+    .controls {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 88px;
+    }
+
+    .controls h2 {
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .controls p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .group {
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 18px;
+      padding: 14px;
+      background: var(--panel2);
+      margin-bottom: 12px;
+    }
+
+    .group h3 {
+      font-family: var(--mono);
+      font-size: 0.70rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 9px;
+    }
+
+    select, input[type=range] { width: 100%; }
+    select {
+      background: rgba(0,0,0,.32);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      margin-bottom: 10px;
+    }
+
+    input[type=range] { accent-color: var(--magenta); }
+
+    .control { margin: 10px 0; }
+    .control label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      margin-bottom: 6px;
+    }
+    .control strong { color: var(--gold); text-align: right; }
+
+    .feature-list {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.5;
+    }
+
+    .feature-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding-bottom: 6px;
+    }
+
+    .feature-list strong { color: var(--text); }
+
+    .notes {
+      margin-bottom: 48px;
+      padding: 22px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .notes h2 {
+      font-family: var(--display);
+      color: var(--text);
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 1180px) {
+      .hero, .lab { grid-template-columns: 1fr; }
+      .controls { position: static; }
+      .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #labCanvas { height: 620px; }
+    }
+
+    @media (max-width: 680px) {
+      .status-grid { grid-template-columns: 1fr; }
+      #labCanvas { height: 520px; }
+      h1 { font-size: clamp(2.6rem, 15vw, 4rem); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="../index.html">Biswajit <span>Jana</span></a>
+      <div class="navlinks">
+        <a href="../posts/exoplanet-spectroscopy.html">Back to article</a>
+        <a href="../index.html">Blog</a>
+        <a href="../../index.html">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="shell hero">
+    <div>
+      <div class="kicker">Tighten your seatbelt - JWST-style transmission lab</div>
+      <h1>Alien Air, Measured in Parts Per Million</h1>
+      <p class="lead">
+        Change the planet, star, atmosphere, clouds, spectral resolution, and number of observed transits. The lab turns those choices into a wavelength-dependent transit depth, with labelled molecular bands and noisy synthetic measurements.
+      </p>
+    </div>
+    <div class="status-grid">
+      <div class="status"><span>Scale height</span><strong id="scaleHeightOut">--</strong></div>
+      <div class="status"><span>Baseline depth</span><strong id="baseDepthOut">--</strong></div>
+      <div class="status"><span>Max feature</span><strong id="featureAmpOut">--</strong></div>
+      <div class="status"><span>Detection mood</span><strong id="moodOut">--</strong></div>
+    </div>
+  </header>
+
+  <main class="shell lab">
+    <section class="viewport">
+      <div class="viewport-head">
+        <span><strong id="modeName">NIRSpec PRISM</strong> wavelength window</span>
+        <span id="waveRange">0.6-5.3 um</span>
+      </div>
+      <canvas id="labCanvas" aria-label="JWST-style transmission spectrum simulation"></canvas>
+    </section>
+
+    <aside class="controls">
+      <h2>Mission Controls</h2>
+      <p>These are educational controls, not a retrieval pipeline. The numbers are meant to teach scaling: radius ratio, scale height, clouds, resolution, and repeated transits.</p>
+
+      <div class="group">
+        <h3>Target and instrument</h3>
+        <select id="preset">
+          <option value="wasp39">WASP-39 b style hot Saturn</option>
+          <option value="hotjupiter">Clear hot Jupiter</option>
+          <option value="warmneptune">Warm Neptune around M dwarf</option>
+          <option value="terrestrial">Small terrestrial around red dwarf</option>
+          <option value="cloudy">Cloud-muted spectrum</option>
+        </select>
+        <select id="instrument">
+          <option value="prism">JWST NIRSpec PRISM - 0.6 to 5.3 um</option>
+          <option value="niriss">JWST NIRISS SOSS - 0.6 to 2.8 um</option>
+          <option value="nircam">JWST NIRCam grism - 2.4 to 5.0 um</option>
+          <option value="miri">JWST MIRI LRS - 5.0 to 12.0 um</option>
+        </select>
+      </div>
+
+      <div class="group">
+        <h3>Planet and star</h3>
+        <div class="control"><label><span>Planet radius</span><strong id="rpOut">1.25 Rj</strong></label><input id="rp" type="range" min="0.08" max="1.8" step="0.01" value="1.25"></div>
+        <div class="control"><label><span>Star radius</span><strong id="rsOut">0.93 Rs</strong></label><input id="rs" type="range" min="0.10" max="1.5" step="0.01" value="0.93"></div>
+        <div class="control"><label><span>Temperature</span><strong id="tempOut">1120 K</strong></label><input id="temp" type="range" min="220" max="2400" step="10" value="1120"></div>
+        <div class="control"><label><span>Gravity</span><strong id="gravOut">4.1 m/s^2</strong></label><input id="grav" type="range" min="3" max="35" step="0.1" value="4.1"></div>
+        <div class="control"><label><span>Mean molecular weight</span><strong id="muOut">2.3</strong></label><input id="mu" type="range" min="2.0" max="30" step="0.1" value="2.3"></div>
+      </div>
+
+      <div class="group">
+        <h3>Atmosphere and data</h3>
+        <div class="control"><label><span>Cloud opacity</span><strong id="cloudOut">0.18</strong></label><input id="cloud" type="range" min="0" max="1" step="0.01" value="0.18"></div>
+        <div class="control"><label><span>Resolving power R</span><strong id="resOut">100</strong></label><input id="res" type="range" min="30" max="300" step="5" value="100"></div>
+        <div class="control"><label><span>Noise per transit</span><strong id="noiseOut">55 ppm</strong></label><input id="noise" type="range" min="5" max="180" step="5" value="55"></div>
+        <div class="control"><label><span>Observed transits</span><strong id="nTransitOut">4</strong></label><input id="nTransit" type="range" min="1" max="20" step="1" value="4"></div>
+        <div class="control"><label><span>Stellar contamination</span><strong id="stellarOut">15 ppm</strong></label><input id="stellar" type="range" min="0" max="120" step="5" value="15"></div>
+      </div>
+
+      <div class="group">
+        <h3>Feature guide</h3>
+        <div class="feature-list">
+          <div><span>Na</span><strong>0.589 um</strong></div>
+          <div><span>K</span><strong>0.77 um</strong></div>
+          <div><span>H2O</span><strong>1.4, 1.9, 2.7, 6.3 um</strong></div>
+          <div><span>CH4</span><strong>2.3, 3.3, 7.7 um</strong></div>
+          <div><span>SO2</span><strong>near 4.0 um</strong></div>
+          <div><span>CO2</span><strong>4.3 um</strong></div>
+          <div><span>CO</span><strong>4.6 um</strong></div>
+          <div><span>Silicate cloud</span><strong>8-9 um</strong></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <section class="shell notes">
+    <h2>What this simulator is doing</h2>
+    <p>
+      The model computes a baseline transit depth from \(R_p/R_\star\), estimates scale height with \(H=k_BT/(\mu m_H g)\), then adds Gaussian molecular bands whose amplitudes scale approximately with \(2N_HR_pH/R_\star^2\). Clouds suppress features. Resolution broadens and smooths them. Repeated transits reduce random noise as \(1/\sqrt{N}\), while the stellar contamination control adds a wavelength-dependent systematic shape that does not average away politely.
+    </p>
+  </section>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById("labCanvas");
+      const ctx = canvas.getContext("2d");
+      const $ = id => document.getElementById(id);
+      const Rj = 71492;
+      const Rs = 695700;
+      const kB = 1.380649e-23;
+      const mH = 1.6735575e-27;
+
+      const presets = {
+        wasp39: { rp: 1.25, rs: 0.93, temp: 1120, grav: 4.1, mu: 2.3, cloud: 0.18, res: 100, noise: 55, nTransit: 4, stellar: 15, species: ["Na","K","H2O","CO2","CO","SO2"] },
+        hotjupiter: { rp: 1.20, rs: 1.00, temp: 1450, grav: 10.0, mu: 2.3, cloud: 0.05, res: 140, noise: 45, nTransit: 3, stellar: 10, species: ["Na","K","H2O","CO2","CO"] },
+        warmneptune: { rp: 0.35, rs: 0.45, temp: 700, grav: 11.0, mu: 2.8, cloud: 0.25, res: 90, noise: 65, nTransit: 6, stellar: 30, species: ["H2O","CH4","CO2"] },
+        terrestrial: { rp: 0.09, rs: 0.12, temp: 280, grav: 9.8, mu: 28.0, cloud: 0.35, res: 60, noise: 35, nTransit: 12, stellar: 70, species: ["H2O","CO2","CH4"] },
+        cloudy: { rp: 1.05, rs: 0.82, temp: 900, grav: 8.0, mu: 2.3, cloud: 0.82, res: 80, noise: 60, nTransit: 3, stellar: 20, species: ["H2O","CO2","CH4"] }
+      };
+
+      const modes = {
+        prism: { label: "NIRSpec PRISM", min: 0.6, max: 5.3 },
+        niriss: { label: "NIRISS SOSS", min: 0.6, max: 2.8 },
+        nircam: { label: "NIRCam grism", min: 2.4, max: 5.0 },
+        miri: { label: "MIRI LRS", min: 5.0, max: 12.0 }
+      };
+
+      const allFeatures = [
+        { species: "Na", label: "Na", wl: 0.589, width: 0.020, strength: 0.45, color: "#ffd166" },
+        { species: "K", label: "K", wl: 0.77, width: 0.030, strength: 0.36, color: "#ffd166" },
+        { species: "H2O", label: "H2O", wl: 1.15, width: 0.075, strength: 0.34, color: "#7cf7ff" },
+        { species: "H2O", label: "H2O", wl: 1.40, width: 0.095, strength: 0.78, color: "#7cf7ff" },
+        { species: "H2O", label: "H2O", wl: 1.90, width: 0.120, strength: 0.56, color: "#7cf7ff" },
+        { species: "H2O", label: "H2O", wl: 2.70, width: 0.170, strength: 0.52, color: "#7cf7ff" },
+        { species: "CH4", label: "CH4", wl: 2.30, width: 0.110, strength: 0.38, color: "#54e8cf" },
+        { species: "CH4", label: "CH4", wl: 3.30, width: 0.160, strength: 0.82, color: "#54e8cf" },
+        { species: "SO2", label: "SO2", wl: 4.05, width: 0.110, strength: 0.38, color: "#ff7a90" },
+        { species: "CO2", label: "CO2", wl: 4.30, width: 0.160, strength: 1.00, color: "#ff6bd6" },
+        { species: "CO", label: "CO", wl: 4.60, width: 0.125, strength: 0.56, color: "#9d7dff" },
+        { species: "H2O", label: "H2O", wl: 6.30, width: 0.260, strength: 0.62, color: "#7cf7ff" },
+        { species: "CH4", label: "CH4", wl: 7.70, width: 0.300, strength: 0.72, color: "#54e8cf" },
+        { species: "silicate", label: "SiO2", wl: 8.60, width: 0.420, strength: 0.45, color: "#ffd166" },
+        { species: "O3", label: "O3", wl: 9.60, width: 0.280, strength: 0.34, color: "#ff7a90" }
+      ];
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = Math.max(760, Math.round(rect.width * dpr));
+        canvas.height = Math.max(500, Math.round(rect.height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function applyPreset(name) {
+        const p = presets[name];
+        ["rp","rs","temp","grav","mu","cloud","res","noise","nTransit","stellar"].forEach(id => { $(id).value = p[id]; });
+        updateLabels();
+      }
+
+      function updateLabels() {
+        $("rpOut").textContent = (+$("rp").value).toFixed(2) + " Rj";
+        $("rsOut").textContent = (+$("rs").value).toFixed(2) + " Rs";
+        $("tempOut").textContent = Math.round(+$("temp").value) + " K";
+        $("gravOut").textContent = (+$("grav").value).toFixed(1) + " m/s^2";
+        $("muOut").textContent = (+$("mu").value).toFixed(1);
+        $("cloudOut").textContent = (+$("cloud").value).toFixed(2);
+        $("resOut").textContent = Math.round(+$("res").value);
+        $("noiseOut").textContent = Math.round(+$("noise").value) + " ppm";
+        $("nTransitOut").textContent = $("nTransit").value;
+        $("stellarOut").textContent = Math.round(+$("stellar").value) + " ppm";
+      }
+
+      function gauss(x, mu, sigma) { return Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2)); }
+      function noiseAt(i, amp) { const raw = Math.sin((i + 1) * 12.9898 + 78.233) * 43758.5453; return (raw - Math.floor(raw) - 0.5) * 2 * amp; }
+      function rgba(hex, a) { const v = hex.replace("#", ""); return `rgba(${parseInt(v.slice(0,2),16)},${parseInt(v.slice(2,4),16)},${parseInt(v.slice(4,6),16)},${a})`; }
+
+      function state() {
+        const p = presets[$("preset").value];
+        const mode = modes[$("instrument").value];
+        const rp = +$("rp").value, rs = +$("rs").value, temp = +$("temp").value, grav = +$("grav").value, mu = +$("mu").value;
+        const cloud = +$("cloud").value, res = +$("res").value, noise = +$("noise").value, nTransit = +$("nTransit").value, stellar = +$("stellar").value;
+        const H = kB * temp / (mu * mH * grav) / 1000;
+        const base = Math.pow((rp * Rj) / (rs * Rs), 2) * 1e6;
+        const annulus = 2 * 5 * (rp * Rj) * H / Math.pow(rs * Rs, 2) * 1e6;
+        const clear = Math.max(0.05, 1 - 0.88 * cloud);
+        return { p, mode, rp, rs, temp, grav, mu, cloud, res, noise, nTransit, stellar, H, base, annulus, clear };
+      }
+
+      function spectrum() {
+        const s = state();
+        const pts = [];
+        let maxFeature = 0;
+        for (let i = 0; i < 340; i++) {
+          const wl = s.mode.min + i / 339 * (s.mode.max - s.mode.min);
+          let fsum = 0;
+          for (const f of allFeatures) {
+            if (!s.p.species.includes(f.species) && f.species !== "silicate" && f.species !== "O3") continue;
+            if (f.wl < s.mode.min - 0.8 || f.wl > s.mode.max + 0.8) continue;
+            const width = Math.max(f.width, f.wl / s.res * 2.2);
+            fsum += f.strength * gauss(wl, f.wl, width);
+          }
+          const rayleigh = (s.p.species.includes("Na") && wl < 1.15) ? 0.16 * Math.pow(1.15 / Math.max(wl, 0.58), 4) : 0;
+          const cloudSlope = s.stellar * Math.sin((wl - s.mode.min) / (s.mode.max - s.mode.min) * Math.PI * 1.25);
+          const feature = s.annulus * s.clear * Math.min(1.45, fsum + rayleigh) + cloudSlope;
+          const random = noiseAt(i, s.noise / Math.sqrt(s.nTransit));
+          maxFeature = Math.max(maxFeature, Math.abs(feature));
+          pts.push({ wl, clean: s.base + feature, observed: s.base + feature + random, feature });
+        }
+        return { s, pts, maxFeature };
+      }
+
+      function draw() {
+        updateLabels();
+        const { s, pts, maxFeature } = spectrum();
+        const W = canvas.clientWidth, Hh = canvas.clientHeight;
+        ctx.clearRect(0, 0, W, Hh);
+
+        const bg = ctx.createRadialGradient(W * .38, Hh * .28, 40, W * .5, Hh * .5, Math.max(W,Hh) * .8);
+        bg.addColorStop(0, "#1b1438");
+        bg.addColorStop(.58, "#080614");
+        bg.addColorStop(1, "#020105");
+        ctx.fillStyle = bg; ctx.fillRect(0,0,W,Hh);
+
+        for (let x = 0; x < W; x += 70) { ctx.strokeStyle = "rgba(255,255,255,.035)"; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,Hh); ctx.stroke(); }
+        for (let y = 0; y < Hh; y += 64) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+        const starX = W * .16, starY = Hh * .23, starR = Math.min(W,Hh) * .115;
+        const planetR = starR * .42 * Math.max(.38, s.rp / 1.25);
+        const atmR = planetR + Math.max(8, Math.min(34, s.H / 22));
+        const sg = ctx.createRadialGradient(starX-starR*.25, starY-starR*.25, starR*.12, starX, starY, starR);
+        sg.addColorStop(0,"#fff7c8"); sg.addColorStop(.35,"#ffd166"); sg.addColorStop(.75,"#ff7a3d"); sg.addColorStop(1,"#4d1408");
+        ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(starX, starY, starR, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = "#020105"; ctx.beginPath(); ctx.arc(starX + starR*.46, starY + starR*.08, planetR, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = "rgba(124,247,255,.75)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(starX + starR*.46, starY + starR*.08, atmR, 0, Math.PI*2); ctx.stroke();
+        ctx.fillStyle = "rgba(255,245,255,.9)"; ctx.font = "12px JetBrains Mono"; ctx.fillText("transiting atmosphere", 32, 38);
+
+        const left = W * .08, top = Hh * .38, pw = W * .86, ph = Hh * .44;
+        ctx.strokeStyle = "rgba(255,255,255,.13)"; ctx.strokeRect(left, top, pw, ph);
+        const minY = s.base - Math.max(100, maxFeature * .35 + s.noise);
+        const maxY = s.base + Math.max(220, maxFeature * 1.25 + s.noise * 1.8);
+        const px = wl => left + 58 + (wl - s.mode.min) / (s.mode.max - s.mode.min) * (pw - 82);
+        const py = val => top + ph - 42 - (val - minY) / (maxY - minY) * (ph - 72);
+
+        for (let i = 0; i <= 5; i++) {
+          const y = top + 26 + i * (ph - 72) / 5;
+          ctx.strokeStyle = "rgba(255,255,255,.065)"; ctx.beginPath(); ctx.moveTo(left+58,y); ctx.lineTo(left+pw-24,y); ctx.stroke();
+          const val = maxY - i * (maxY-minY) / 5;
+          ctx.fillStyle = "rgba(210,192,220,.78)"; ctx.font = "10px JetBrains Mono"; ctx.fillText(Math.round(val) + " ppm", left+8, y+4);
+        }
+
+        const visibleFeatures = allFeatures.filter(f => f.wl >= s.mode.min && f.wl <= s.mode.max && (s.p.species.includes(f.species) || f.species === "silicate" || f.species === "O3"));
+        for (const f of visibleFeatures) {
+          const x = px(f.wl);
+          ctx.fillStyle = rgba(f.color, .11); ctx.fillRect(x-10, top+20, 20, ph-58);
+          ctx.fillStyle = f.color; ctx.font = "10px JetBrains Mono"; ctx.fillText(f.label, x-14, top+17);
+        }
+
+        ctx.strokeStyle = "rgba(255,209,102,.7)"; ctx.setLineDash([8,8]); ctx.beginPath(); ctx.moveTo(left+58, py(s.base)); ctx.lineTo(left+pw-24, py(s.base)); ctx.stroke(); ctx.setLineDash([]);
+        ctx.strokeStyle = "#7cf7ff"; ctx.lineWidth = 3; ctx.beginPath();
+        pts.forEach((p,i) => { const x=px(p.wl), y=py(p.clean); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.stroke();
+        ctx.fillStyle = "rgba(255,245,255,.74)";
+        pts.forEach((p,i) => { if(i % 5) return; ctx.beginPath(); ctx.arc(px(p.wl), py(p.observed), 1.7, 0, Math.PI*2); ctx.fill(); });
+
+        ctx.fillStyle = "rgba(210,192,220,.9)"; ctx.font = "11px JetBrains Mono";
+        for (let i = 0; i <= 5; i++) {
+          const wl = s.mode.min + i * (s.mode.max - s.mode.min) / 5;
+          ctx.fillText(wl.toFixed(1) + " um", px(wl)-18, top+ph-17);
+        }
+        ctx.fillStyle = "rgba(255,245,255,.9)"; ctx.font = "12px JetBrains Mono"; ctx.fillText("wavelength", left+pw*.48, top+ph-16);
+
+        $("modeName").textContent = s.mode.label;
+        $("waveRange").textContent = s.mode.min.toFixed(1) + "-" + s.mode.max.toFixed(1) + " um";
+        $("scaleHeightOut").textContent = Math.round(s.H) + " km";
+        $("baseDepthOut").textContent = Math.round(s.base) + " ppm";
+        $("featureAmpOut").textContent = Math.round(maxFeature) + " ppm";
+        const effectiveNoise = s.noise / Math.sqrt(s.nTransit);
+        const confidence = maxFeature / Math.max(1, effectiveNoise);
+        $("moodOut").textContent = confidence > 5 ? "claimable-looking" : confidence > 2.5 ? "promising" : confidence > 1.2 ? "needs repeats" : "buried";
+      }
+
+      resize();
+      window.addEventListener("resize", () => { resize(); draw(); }, { passive: true });
+      document.querySelectorAll("input,select").forEach(el => el.addEventListener("input", draw));
+      $("preset").addEventListener("change", e => { applyPreset(e.target.value); draw(); });
+      applyPreset("wasp39");
+      draw();
+    })();
+  </script>
+</body>
+</html>

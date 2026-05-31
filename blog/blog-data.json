@@ -1,11 +1,11 @@
 [
   {
     "title": "How We Smell an Exoplanet Without Going There",
-    "subtitle": "Transmission spectroscopy explained through filtered starlight, molecular fingerprints, clouds, noise, JWST examples, and an interactive atmosphere-spectrum lab.",
+    "subtitle": "A quantitative transmission-spectroscopy feature on filtered starlight, ppm atmospheric signals, clouds, stellar contamination, JWST examples, papers, equations, and a separate simulator.",
     "date": "2026-05-28",
     "category": "Exoplanets",
-    "readTime": "16 min read",
-    "image": "../images/blog15_03_transmission_spectroscopy.png",
+    "readTime": "22 min read",
+    "image": "../images/blog16_01_exoplanet_smell_hero.svg",
     "url": "posts/exoplanet-spectroscopy.html",
     "tags": ["Exoplanets", "Transmission Spectroscopy", "Atmospheres", "JWST", "Spectroscopy"]
   },

@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How We Smell an Exoplanet Without Going There | Biswajit Jana</title>
-  <meta name="description" content="A long-form interactive blog post on transmission spectroscopy: how exoplanet atmospheres leave molecular fingerprints in wavelength-dependent transit depths." />
+  <meta name="description" content="A quantitative and qualitative guide to transmission spectroscopy: how exoplanet atmospheres leave molecular fingerprints in wavelength-dependent transit depths, with JWST examples, equations, papers, and a dedicated simulator." />
   <meta property="og:title" content="How We Smell an Exoplanet Without Going There | Biswajit Jana" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="Transmission spectroscopy explained through starlight, exoplanet atmospheres, molecular absorption, clouds, noise, JWST examples, and an interactive spectrum lab." />
-  <meta property="og:image" content="../../images/blog15_03_transmission_spectroscopy.png" />
+  <meta property="og:description" content="Transmission spectroscopy explained through starlight, scale heights, opacity, clouds, stellar contamination, JWST spectra, and a dedicated simulator." />
+  <meta property="og:image" content="../../images/blog16_01_exoplanet_smell_hero.svg" />
   <meta name="author" content="Biswajit Jana" />
   <meta name="theme-color" content="#061425" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,70,1&family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <script>
     window.MathJax = {
@@ -31,25 +31,25 @@
 
   <style>
     :root {
-      --bg: #030711;
-      --bg2: #071625;
-      --surface: rgba(9, 20, 38, 0.82);
-      --surface-strong: rgba(12, 28, 52, 0.96);
+      --bg: #08030f;
+      --bg2: #150724;
+      --surface: rgba(24, 10, 38, 0.82);
+      --surface-strong: rgba(30, 13, 48, 0.96);
       --surface-soft: rgba(255, 255, 255, 0.055);
-      --text: #f0f7ff;
-      --muted: #aebfd8;
-      --dim: #788ba6;
-      --line: rgba(220, 238, 255, 0.12);
-      --line2: rgba(220, 238, 255, 0.07);
-      --accent: #54e8cf;
-      --accent2: #80d7ff;
-      --gold: #ffbf75;
-      --violet: #ba9cff;
-      --rose: #ff7d98;
+      --text: #fff5ff;
+      --muted: #d2c0dc;
+      --dim: #9483a5;
+      --line: rgba(255, 225, 255, 0.13);
+      --line2: rgba(255, 225, 255, 0.08);
+      --accent: #ff6bd6;
+      --accent2: #7cf7ff;
+      --gold: #ffd166;
+      --violet: #9d7dff;
+      --rose: #ff7a90;
       --shadow: 0 28px 86px rgba(0, 0, 0, 0.42);
-      --display: "Playfair Display", Georgia, serif;
+      --display: "Fraunces", Georgia, serif;
       --serif: "Source Serif 4", Georgia, serif;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       --nav-h: 74px;
     }
@@ -65,8 +65,8 @@
       --dim: #718096;
       --line: rgba(15, 35, 65, 0.14);
       --line2: rgba(15, 35, 65, 0.08);
-      --accent: #007f75;
-      --accent2: #1369b2;
+      --accent: #b72084;
+      --accent2: #007991;
       --gold: #a86a00;
       --violet: #6846bd;
       --rose: #b93655;
@@ -83,11 +83,11 @@
       line-height: 1.82;
       overflow-x: hidden;
       background:
-        radial-gradient(circle at 11% -4%, rgba(84, 232, 207, 0.14), transparent 27%),
-        radial-gradient(circle at 88% 2%, rgba(128, 215, 255, 0.12), transparent 30%),
-        radial-gradient(circle at 54% 43%, rgba(186, 156, 255, 0.07), transparent 36%),
-        linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        radial-gradient(circle at 8% -4%, rgba(255, 107, 214, 0.16), transparent 28%),
+        radial-gradient(circle at 92% 1%, rgba(124, 247, 255, 0.13), transparent 31%),
+        radial-gradient(circle at 58% 44%, rgba(255, 209, 102, 0.07), transparent 34%),
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
         linear-gradient(180deg, var(--bg), var(--bg2) 52%, var(--bg));
       background-size: auto, auto, auto, 82px 82px, 82px 82px, auto;
     }
@@ -111,7 +111,7 @@
       pointer-events: none;
       background:
         radial-gradient(circle at 50% 52%, transparent 0 18%, rgba(0, 0, 0, 0.19) 48%, rgba(0, 0, 0, 0.66) 100%),
-        linear-gradient(120deg, rgba(84, 232, 207, 0.035), transparent 32%, rgba(128, 215, 255, 0.034) 76%, transparent);
+        linear-gradient(120deg, rgba(255, 107, 214, 0.04), transparent 32%, rgba(124, 247, 255, 0.04) 76%, transparent);
     }
 
     body.light::before {
@@ -130,7 +130,7 @@
       z-index: 100;
       height: var(--nav-h);
       border-bottom: 1px solid var(--line);
-      background: rgba(3, 7, 17, 0.82);
+      background: rgba(8, 3, 15, 0.84);
       backdrop-filter: blur(20px) saturate(1.2);
     }
 
@@ -176,7 +176,7 @@
       background: #04101f;
       right: 4px;
       top: 12px;
-      box-shadow: 0 0 0 1px rgba(84, 232, 207, 0.45);
+      box-shadow: 0 0 0 1px rgba(255, 107, 214, 0.45);
     }
 
     .nav-links {
@@ -402,12 +402,6 @@
       width: 14px;
       height: 2px;
       border-radius: 999px;
-    }
-
-    #atmosphereCanvas {
-      width: 100%;
-      height: 528px;
-      display: block;
     }
 
     .sim-controls {
@@ -715,13 +709,161 @@
     .callout {
       padding: 18px 20px;
       border-radius: 20px;
-      border: 1px solid rgba(84, 232, 207, 0.20);
-      background: rgba(84, 232, 207, 0.07);
+      border: 1px solid rgba(255, 107, 214, 0.22);
+      background: rgba(255, 107, 214, 0.075);
       margin: 18px 0;
       color: #dffdf8;
     }
 
     body.light .callout { color: #17463f; }
+
+    .lab-launch {
+      padding: 22px 0 54px;
+    }
+
+    .lab-launch-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: center;
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid rgba(255, 107, 214, 0.24);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 107, 214, 0.20), transparent 34%),
+        radial-gradient(circle at 84% 18%, rgba(124, 247, 255, 0.16), transparent 33%),
+        linear-gradient(135deg, rgba(33, 10, 54, 0.92), rgba(8, 8, 25, 0.94));
+      box-shadow: var(--shadow);
+    }
+
+    .lab-launch-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -45% 30%;
+      height: 150px;
+      background: radial-gradient(ellipse at center, rgba(255, 209, 102, 0.24), transparent 68%);
+      transform: rotate(-5deg);
+      pointer-events: none;
+    }
+
+    .lab-kicker {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+
+    .lab-launch-card h2 {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4vw, 4.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .lab-launch-card p {
+      color: var(--muted);
+      max-width: 780px;
+      font-size: 1.04rem;
+    }
+
+    .launch-button {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #150312;
+      background: linear-gradient(135deg, var(--gold), #fff2b5);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 16px 36px rgba(255, 209, 102, 0.16);
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .number-card {
+      padding: 17px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+    }
+
+    .number-card strong {
+      display: block;
+      font-family: var(--display);
+      font-size: clamp(1.9rem, 3vw, 2.9rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--accent2);
+      margin-bottom: 7px;
+    }
+
+    .number-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .paper-list {
+      display: grid;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .paper-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .paper-item strong {
+      display: block;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      margin-bottom: 5px;
+    }
+
+    .paper-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .prompt-box {
+      margin: 26px 0;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(124, 247, 255, 0.22);
+      background: rgba(124, 247, 255, 0.055);
+    }
+
+    .prompt-box pre {
+      margin-top: 12px;
+      white-space: pre-wrap;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.65;
+    }
 
     .figure-note {
       margin: 26px 0;
@@ -784,12 +926,12 @@
 
     @media (max-width: 1180px) {
       .hero-grid,
-      .sim-lab { grid-template-columns: 1fr; }
+      .sim-lab,
+      .lab-launch-card { grid-template-columns: 1fr; }
       .hero-card,
       .hero-card img { min-height: 460px; }
       .journal-grid { grid-template-columns: 220px minmax(0, 1fr); }
       .right-rail { grid-column: 1 / -1; position: static; }
-      #atmosphereCanvas { height: 540px; }
       .sim-controls { min-height: auto; }
     }
 
@@ -799,7 +941,8 @@
       .journal-grid { grid-template-columns: 1fr; }
       .left-rail,
       .right-rail { position: static; }
-      .fact-grid { grid-template-columns: 1fr; }
+      .fact-grid,
+      .number-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 34px; }
       .sim-toolbar { align-items: flex-start; flex-direction: column; }
       .legend span { margin-left: 0; margin-right: 10px; }
@@ -810,7 +953,6 @@
       .nav-inner { width: min(94vw, 100%); }
       .hero-card,
       .hero-card img { min-height: 350px; }
-      #atmosphereCanvas { height: 470px; }
       h1 { font-size: clamp(2.45rem, 14vw, 4.2rem); }
     }
   </style>
@@ -826,7 +968,7 @@
         <li><a href="../../index.html#current-research">Research</a></li>
         <li><a href="../../publications.html">Publications</a></li>
         <li><a href="../../cv.html">CV</a></li>
-        <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">day / night</button></li>
+        <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">☾</button></li>
       </ul>
     </div>
   </nav>
@@ -834,13 +976,13 @@
   <header class="hero wide">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">Exoplanets - transmission spectroscopy - atmospheres</div>
+        <div class="eyebrow">Exoplanets - transmission spectroscopy - atmospheric chemistry</div>
         <h1>How We Smell an Exoplanet Without Going There</h1>
         <p class="hero-sub">
-          Transmission spectroscopy is the strange art of letting an alien planet pass in front of its star, catching the filtered starlight, and asking which molecules took bites out of the spectrum.
+          Transmission spectroscopy is the strange art of letting an alien planet pass in front of its star, catching the filtered starlight, and measuring molecule-sized bites in a spectrum.
         </p>
         <p class="hero-text">
-          We are not literally smelling an exoplanet. No telescope is inhaling WASP-39 b through a cosmic straw. But chemically, the analogy works: molecules identify themselves by the wavelengths they absorb. If a planet has an atmosphere and the geometry is kind, the atmosphere can leave a tiny molecular fingerprint in the transit.
+          We are not literally smelling an exoplanet. No telescope is inhaling WASP-39 b through a cosmic straw. But chemically, the analogy works: molecules identify themselves by the wavelengths they absorb. The quantitative game is to measure transit-depth changes of tens to hundreds of parts per million and prove they are not detector behavior, stellar contamination, or wishful thinking with error bars.
         </p>
         <div class="hook">
           A planet blocks light. Its atmosphere edits light. The spectrograph reads the edits.
@@ -854,89 +996,24 @@
       </div>
 
       <figure class="hero-card">
-        <img src="../../images/blog15_03_transmission_spectroscopy.png" alt="Transmission spectroscopy concept showing starlight passing through an exoplanet atmosphere" onerror="this.onerror=null;this.src='../../images/blog15_01_transit_method_hero.png';" />
+        <img src="../../images/blog16_01_exoplanet_smell_hero.svg" alt="Original concept artwork for transmission spectroscopy: starlight filtered through an exoplanet atmosphere with wavelength fingerprints" onerror="this.onerror=null;this.src='../../images/blog15_03_transmission_spectroscopy.png';" />
         <figcaption class="hero-caption">
-          During a transit, a small fraction of starlight passes through the planet's atmospheric limb. The missing wavelengths become clues to composition.
+          Original concept direction: Biswajit Jana. The image shows an exoplanet atmosphere as a thin backlit chemical filter, with molecular absorption features translated into wavelength-dependent transit depth.
         </figcaption>
       </figure>
     </div>
   </header>
 
-  <section class="feature wide" aria-label="Interactive transmission spectroscopy simulation">
-    <div class="sim-lab">
-      <div class="sim-stage">
-        <div class="sim-toolbar">
-          <div>
-            <span class="badge" id="simStateBadge">running atmosphere model</span>
-          </div>
-          <div class="legend" aria-hidden="true">
-            <span><i style="background:#54e8cf"></i>transmission spectrum</span>
-            <span><i style="background:#ffbf75"></i>baseline transit</span>
-            <span><i style="background:#ba9cff"></i>molecular features</span>
-          </div>
-        </div>
-        <canvas id="atmosphereCanvas" aria-label="Canvas simulation of exoplanet transmission spectroscopy"></canvas>
-      </div>
-
-      <aside class="sim-controls">
-        <h2>Atmosphere Spectrum Lab</h2>
+  <section class="lab-launch wide" aria-label="Launch dedicated transmission spectroscopy simulator">
+    <div class="lab-launch-card">
+      <div>
+        <div class="lab-kicker">Interactive lab - separate flight window</div>
+        <h2>Tighten your seatbelt. Open the atmosphere simulator.</h2>
         <p>
-          Choose an atmosphere, then change cloud opacity, scale height, noise, and spectral resolution. The graph shows why exoplanet atmospheres are not smelled directly, but inferred from wavelength-dependent transit depth.
+          The full lab now lives in its own page so the article can breathe. It includes JWST-style wavelength axes from 0.6 to 5.3 um, molecular bands for Na, K, H2O, CH4, CO2, CO, and SO2, instrument modes, noise, repeated transits, scale height, cloud decks, and live ppm-level readouts.
         </p>
-
-        <div class="btn-row" aria-label="Atmosphere presets">
-          <button class="preset-btn active" type="button" data-preset="water">Water rich</button>
-          <button class="preset-btn" type="button" data-preset="co2">CO2 rich</button>
-          <button class="preset-btn" type="button" data-preset="methane">Methane</button>
-          <button class="preset-btn" type="button" data-preset="sodium">Sodium haze</button>
-          <button class="preset-btn" type="button" data-preset="flat">Cloud deck</button>
-        </div>
-
-        <div class="group">
-          <h3>Planet and atmosphere</h3>
-          <div class="control">
-            <label><span>Planet radius</span><strong id="radiusOut">1.20 Rj</strong></label>
-            <input id="planetRadius" type="range" min="0.6" max="1.8" step="0.02" value="1.20" />
-          </div>
-          <div class="control">
-            <label><span>Scale height</span><strong id="heightOut">620 km</strong></label>
-            <input id="scaleHeight" type="range" min="120" max="1200" step="20" value="620" />
-          </div>
-          <div class="control">
-            <label><span>Cloud opacity</span><strong id="cloudOut">0.22</strong></label>
-            <input id="cloudOpacity" type="range" min="0" max="1" step="0.01" value="0.22" />
-          </div>
-        </div>
-
-        <div class="group">
-          <h3>Instrument view</h3>
-          <div class="control">
-            <label><span>Spectral resolution</span><strong id="resolutionOut">0.72</strong></label>
-            <input id="spectralResolution" type="range" min="0.2" max="1.2" step="0.01" value="0.72" />
-          </div>
-          <div class="control">
-            <label><span>Noise level</span><strong id="noiseOut">38 ppm</strong></label>
-            <input id="noiseLevel" type="range" min="0" max="120" step="2" value="38" />
-          </div>
-          <div class="control">
-            <label><span>Observed transits</span><strong id="transitsOut">3</strong></label>
-            <input id="transitCount" type="range" min="1" max="12" step="1" value="3" />
-          </div>
-        </div>
-
-        <div class="group">
-          <h3>Live readout</h3>
-          <div class="telemetry-panel">
-            <div class="feed-line"><span>Baseline depth</span><strong id="depthOut">--</strong></div>
-            <div class="feed-line"><span>Feature size</span><strong id="featureOut">--</strong></div>
-            <div class="feed-line"><span>Best clue</span><strong id="speciesOut">--</strong></div>
-            <div class="feed-line"><span>Detection mood</span><strong id="moodOut">--</strong></div>
-          </div>
-          <div class="mini-note">
-            Educational model only. Real retrievals use instrument models, stellar corrections, correlated noise, chemistry assumptions, and Bayesian parameter estimation.
-          </div>
-        </div>
-      </aside>
+      </div>
+      <a class="launch-button" href="../tools/transmission-spectroscopy-lab.html">Launch Full Simulator</a>
     </div>
   </section>
 
@@ -950,12 +1027,16 @@
             <li><a href="#not-smell">Not literal smell</a></li>
             <li><a href="#transit-window">Transit window</a></li>
             <li><a href="#spectrum">Spectrum shape</a></li>
+            <li><a href="#numbers">Numbers</a></li>
             <li><a href="#molecules">Molecules</a></li>
             <li><a href="#clouds">Clouds and hazes</a></li>
             <li><a href="#tiny-signal">Tiny signal</a></li>
             <li><a href="#jwst">JWST examples</a></li>
+            <li><a href="#retrieval">Retrievals</a></li>
+            <li><a href="#stellar-contamination">Stellar contamination</a></li>
             <li><a href="#life">Life question</a></li>
             <li><a href="#instrumentation">Instrumentation</a></li>
+            <li><a href="#image-direction">Image direction</a></li>
             <li><a href="#takeaway">Takeaway</a></li>
             <li><a href="#comments">Comments</a></li>
           </ul>
@@ -965,8 +1046,8 @@
           <div class="telemetry">
             <div><span>Method</span><strong>Transmission</strong></div>
             <div><span>Observable</span><strong>Depth vs wavelength</strong></div>
-            <div><span>Signal scale</span><strong>ppm to 0.01%</strong></div>
-            <div><span>Mode</span><strong>Spectrum Lab</strong></div>
+            <div><span>Signal scale</span><strong>10-1000 ppm</strong></div>
+            <div><span>Lab</span><strong>Separate page</strong></div>
           </div>
         </div>
       </aside>
@@ -981,6 +1062,12 @@
           <p>
             Transmission spectroscopy uses that vulnerability. When a planet transits, the opaque body blocks starlight at every wavelength. But the thin ring of atmosphere around the planet is selective. Molecules such as water vapor, carbon dioxide, methane, carbon monoxide, sodium, and potassium absorb particular wavelength bands. The atmosphere makes the planet look slightly larger where it is more opaque.
           </p>
+          <div class="number-grid">
+            <div class="number-card"><strong>0.6-5.3 um</strong><span>JWST/NIRSpec PRISM-like coverage used in many public transmission-spectrum diagrams.</span></div>
+            <div class="number-card"><strong>2.32e-4</strong><span>Extra sodium-band absorption reported for HD 209458 b by Charbonneau et al. (2002), about 232 ppm.</span></div>
+            <div class="number-card"><strong>4.3 um</strong><span>A major CO2 band that made WASP-39 b a landmark Webb target.</span></div>
+            <div class="number-card"><strong>sqrt(N)</strong><span>The friendly part of repeat observations: independent random noise averages down roughly as the square root of the number of transits.</span></div>
+          </div>
         </div>
 
         <article>
@@ -1036,22 +1123,54 @@
             <div class="equation">
               <div class="equation-label">Approximate atmospheric scale</div>
               \[
-                H = \frac{k_B T}{\mu g}
+                H = \frac{k_B T}{\mu m_H g}
               \]
               <p>
-                The atmospheric scale height \(H\) grows with temperature and shrinks with stronger gravity or heavier mean molecular weight \(\mu\). Puffy hot atmospheres produce larger transmission features than compact heavy atmospheres.
+                The atmospheric scale height \(H\) grows with temperature and shrinks with stronger gravity or heavier mean molecular weight \(\mu\). Here \(\mu\) is in proton-mass units and \(m_H\) is the hydrogen mass. Puffy hot atmospheres produce larger transmission features than compact heavy atmospheres.
               </p>
             </div>
             <figure class="figure-note">
-              <img src="../../images/blog15_03_transmission_spectroscopy.png" alt="Conceptual transmission spectroscopy visual showing a transiting exoplanet atmosphere and absorption features" onerror="this.onerror=null;this.src='../../images/blog15_01_transit_method_hero.png';" />
+              <img src="../../images/blog16_01_exoplanet_smell_hero.svg" alt="Original transmission spectroscopy concept image with wavelength axis and molecular fingerprints" onerror="this.onerror=null;this.src='../../images/blog15_03_transmission_spectroscopy.png';" />
               <figcaption>
-                Conceptual visual: the atmosphere acts like a wavelength-selective filter around the planet's edge. The hard part is that the atmospheric signal is usually tiny compared with the star.
+                Original visual concept: Biswajit Jana. The atmosphere acts like a wavelength-selective filter around the planet's edge. The hard part is that the atmospheric signal is usually tiny compared with the star.
               </figcaption>
             </figure>
           </section>
 
+          <section class="chapter" id="numbers">
+            <div class="chapter-label">Chapter 04 - Order-of-magnitude physics</div>
+            <h2>How loud is an atmosphere in ppm?</h2>
+            <p>
+              The most useful intuition is that transmission spectroscopy measures an annulus, not a disk. The opaque planet blocks an area roughly \(\pi R_p^2\). The atmosphere adds a thin wavelength-dependent ring. If a strong molecular band samples \(N_H\) scale heights, the extra transit depth is approximately:
+            </p>
+            <div class="equation">
+              <div class="equation-label">Atmospheric annulus signal</div>
+              \[
+                \Delta D_\mathrm{atm} \approx \frac{2N_H R_p H}{R_\star^2}
+              \]
+              <p>
+                This is not a retrieval model. It is a scaling law. It explains why hot Jupiters around small stars are generous, and Earth-like atmospheres around Sun-like stars are brutal.
+              </p>
+            </div>
+            <div class="fact-grid">
+              <div class="fact"><strong>Hot Jupiter around Sun-like star</strong><span>\(T=1200\) K, \(\mu=2.3\), \(g=10\) m/s^2 gives \(H\approx430\) km. Five scale heights around a 1.2 \(R_J\) planet can be roughly 760 ppm.</span></div>
+              <div class="fact"><strong>Warm Neptune around M dwarf</strong><span>\(T=700\) K, \(\mu=2.8\), \(g=11\) m/s^2, \(R_\star=0.45R_\odot\): five scale heights can land near 480 ppm.</span></div>
+              <div class="fact"><strong>Earth-like heavy atmosphere</strong><span>\(T=250\) K, \(\mu=28\), \(g=9.8\) m/s^2 gives \(H\approx8\) km. Around a 0.12 \(R_\odot\) star, five scale heights are still only about 70 ppm.</span></div>
+              <div class="fact"><strong>Hydrogen-rich super-Earth</strong><span>A lower-\(\mu\) atmosphere can produce hundreds of ppm, but that may mean the planet is not Earth-like in the way people emotionally want it to be.</span></div>
+            </div>
+            <div class="equation">
+              <div class="equation-label">Opacity as the hidden variable</div>
+              \[
+                R_p^2(\lambda)=R_0^2+2\int_{R_0}^{\infty}\left[1-e^{-\tau_\lambda(b)}\right]b\,db
+              \]
+              <p>
+                The effective radius comes from integrating over atmospheric chords. The optical depth \(\tau_\lambda\) depends on abundance, pressure, temperature, clouds, and molecular cross-sections.
+              </p>
+            </div>
+          </section>
+
           <section class="chapter" id="molecules">
-            <div class="chapter-label">Chapter 04 - Molecular fingerprints</div>
+            <div class="chapter-label">Chapter 05 - Molecular fingerprints</div>
             <h2>Molecules are picky about wavelength, which is convenient for us.</h2>
             <p>
               Molecules absorb light when photons match allowed transitions in their rotational and vibrational energy structure. The result is not a single neat barcode line, but a pattern of bands. Water vapor has strong near-infrared bands. Carbon dioxide has a prominent feature around 4.3 microns. Methane absorbs in several infrared bands. Sodium and potassium can leave visible and near-infrared atomic signatures.
@@ -1068,7 +1187,7 @@
           </section>
 
           <section class="chapter" id="clouds">
-            <div class="chapter-label">Chapter 05 - Clouds and hazes</div>
+            <div class="chapter-label">Chapter 06 - Clouds and hazes</div>
             <h2>Clouds can erase the confession.</h2>
             <p>
               An atmosphere may contain the molecules we are looking for and still refuse to show them clearly. Clouds and hazes can mute spectral features by blocking the deeper atmospheric layers where stronger absorption would otherwise be visible. In a transmission spectrum, this can flatten the line into something frustratingly quiet.
@@ -1082,7 +1201,7 @@
           </section>
 
           <section class="chapter" id="tiny-signal">
-            <div class="chapter-label">Chapter 06 - Precision problem</div>
+            <div class="chapter-label">Chapter 07 - Precision problem</div>
             <h2>The signal is tiny, which is where instrumentation enters the room.</h2>
             <p>
               Transmission features are often measured in parts per million or small fractions of a percent. The star is bright. The atmospheric annulus is thin. The instrument is imperfect. The star may have spots, faculae, limb darkening, and time-variable behavior. The detector may have ramps, drifts, persistence, flat-field issues, and wavelength calibration quirks.
@@ -1099,10 +1218,19 @@
                 More repeated transits can improve precision when noise behaves nicely. Real systematics are less generous, because they do not always average down like independent random noise.
               </p>
             </div>
+            <div class="equation">
+              <div class="equation-label">Spectral resolving power</div>
+              \[
+                R = \frac{\lambda}{\Delta\lambda}
+              \]
+              <p>
+                Higher \(R\) separates narrower features, but often with fewer photons per bin. In practice, observers trade spectral resolution against signal-to-noise and the width of the molecular band they want to test.
+              </p>
+            </div>
           </section>
 
           <section class="chapter" id="jwst">
-            <div class="chapter-label">Chapter 07 - Real telescope examples</div>
+            <div class="chapter-label">Chapter 08 - Real telescope examples</div>
             <h2>JWST turned this from promising to spectacularly useful.</h2>
             <p>
               The James Webb Space Telescope has made transmission spectroscopy feel less like a distant ambition and more like a working atmospheric laboratory. WASP-39 b is a famous example because Webb observations revealed a rich transmission spectrum with species such as water, carbon dioxide, carbon monoxide, sulfur dioxide, sodium, and potassium discussed in NASA's public release material.
@@ -1111,15 +1239,51 @@
               The same idea appears across other targets. WASP-96 b showed water vapor signatures with evidence that clouds and possible haze affected the shape. WASP-107 b combined Hubble and Webb measurements across a broad wavelength range, showing how multiple instruments can build a wider atmospheric picture. WASP-17 b even brought mineral cloud chemistry into the conversation through mid-infrared spectroscopy.
             </p>
             <div class="fact-grid">
-              <div class="fact"><strong>WASP-39 b</strong><span>A hot gas giant where Webb transmission spectra revealed multiple molecular and atomic features.</span></div>
-              <div class="fact"><strong>WASP-96 b</strong><span>A Webb early target where water vapor features were seen, with clouds and haze affecting the spectrum.</span></div>
-              <div class="fact"><strong>WASP-107 b</strong><span>A warm gas giant studied with Hubble and Webb over several wavelength ranges.</span></div>
-              <div class="fact"><strong>WASP-17 b</strong><span>A hot gas giant where Webb/MIRI observations pointed to silica cloud particles.</span></div>
+              <div class="fact"><strong>WASP-39 b</strong><span>NASA lists Na, K, H2O, CO, CO2, H2S, and SO2 in Webb public material. The 4.3 um CO2 feature became one of the headline results.</span></div>
+              <div class="fact"><strong>WASP-96 b</strong><span>NIRISS covered 0.6-2.8 um in a single observation, showing water vapor plus clouds/haze inferred from muted feature heights.</span></div>
+              <div class="fact"><strong>WASP-107 b</strong><span>Hubble WFC3, Webb NIRCam, and Webb MIRI together produced a broad spectrum with H2O, CO2, CO, CH4, SO2, and NH3 discussed by NASA.</span></div>
+              <div class="fact"><strong>WASP-17 b</strong><span>Webb/MIRI low-resolution spectroscopy from about 5-12 um pointed to quartz/silica cloud particles.</span></div>
+            </div>
+          </section>
+
+          <section class="chapter" id="retrieval">
+            <div class="chapter-label">Chapter 09 - Retrievals</div>
+            <h2>A spectrum is not the atmosphere. It is a puzzle with priors.</h2>
+            <p>
+              Atmospheric retrieval means proposing many possible atmospheres, generating spectra from them, comparing those spectra with the data, and asking which parameter combinations survive. The output is usually not a single atmosphere but a probability distribution over temperature, radius reference pressure, abundances, cloud properties, and sometimes chemistry assumptions.
+            </p>
+            <p>
+              This is where degeneracy enters. A weaker water band could mean less water. It could also mean higher clouds, higher mean molecular weight, lower temperature, smaller scale height, or uncorrected stellar contamination. Retrieval is the art of being honest about those overlapping explanations.
+            </p>
+            <div class="paper-list">
+              <div class="paper-item"><strong>Forward model</strong><span>Choose temperature-pressure structure, chemistry, opacity tables, cloud prescriptions, and instrument response; compute the expected spectrum.</span></div>
+              <div class="paper-item"><strong>Likelihood</strong><span>Compare model and data with uncertainties, including correlated noise when the detector or reduction pipeline demands it.</span></div>
+              <div class="paper-item"><strong>Posterior</strong><span>Use Bayesian sampling or nested sampling to map which atmospheres are plausible rather than pretending one curve is the truth.</span></div>
+            </div>
+          </section>
+
+          <section class="chapter" id="stellar-contamination">
+            <div class="chapter-label">Chapter 10 - Stellar contamination</div>
+            <h2>The star can forge atmospheric features.</h2>
+            <p>
+              Transmission spectroscopy assumes we know the stellar light source. Real stellar disks have spots, faculae, granulation, limb darkening, and wavelength-dependent surface structure. If the planet crosses one stellar region while the out-of-transit disk contains a different mixture of surface temperatures, the inferred transmission spectrum can be biased.
+            </p>
+            <p>
+              This is especially important for small planets around active cool stars. A planet may appear to have a spectral slope or molecular-looking feature because the star is heterogeneous. Rackham, Apai, and Giampapa call this the transit light source effect, and it is one reason biosignature claims will need extreme caution.
+            </p>
+            <div class="equation">
+              <div class="equation-label">Contamination idea</div>
+              \[
+                D_\mathrm{obs}(\lambda) \neq D_\mathrm{planet}(\lambda)
+              \]
+              <p>
+                The measured depth can include the planet plus wavelength-dependent stellar surface effects. The inequality is the whole headache.
+              </p>
             </div>
           </section>
 
           <section class="chapter" id="life">
-            <div class="chapter-label">Chapter 08 - The life question</div>
+            <div class="chapter-label">Chapter 11 - The life question</div>
             <h2>This is also why biosignatures are hard.</h2>
             <p>
               Once we can read atmospheric chemistry, the tempting next question is life. Could oxygen, methane, carbon dioxide, water vapor, ozone, or other combinations reveal biology? Maybe, but the word "maybe" is doing real work. A molecule is not automatically a biosignature just because biology can produce it.
@@ -1133,7 +1297,7 @@
           </section>
 
           <section class="chapter" id="instrumentation">
-            <div class="chapter-label">Chapter 09 - Instrumentation bridge</div>
+            <div class="chapter-label">Chapter 12 - Instrumentation bridge</div>
             <h2>This is where exoplanets meet the lab bench.</h2>
             <p>
               The reason I like this topic is that it sits exactly between astrophysics and instrumentation. The scientific question is cosmic: what are distant worlds made of? The practical question is brutally local: how stable is the spectrograph, how well do we calibrate the detector, how repeatable is the optical path, how much systematic noise is being smuggled into the result?
@@ -1143,6 +1307,18 @@
             </p>
             <div class="callout">
               In other words: to smell an exoplanet, first build an instrument that knows how not to smell itself.
+            </div>
+          </section>
+
+          <section class="chapter" id="image-direction">
+            <div class="chapter-label">Creative direction - original image</div>
+            <h2>Every post deserves its own visual language.</h2>
+            <p>
+              This post now uses a dedicated original concept image instead of borrowing the old transit-method artwork. The visual idea is not "a pretty planet." It is a measurement story: a backlit atmospheric ring, wavelength bins, molecular labels, and the uneasy little truth that the signal is a ppm-level correction to a much larger stellar spectrum.
+            </p>
+            <div class="prompt-box">
+              <div class="equation-label">Hero image generation prompt</div>
+              <pre>Wide cinematic scientific illustration for a personal astrophysics blog by Biswajit Jana. Theme: "How We Smell an Exoplanet Without Going There." A hot exoplanet transits a star, but the focus is the thin glowing atmospheric limb acting as a chemical filter. Starlight passes through the atmosphere and becomes a transmission spectrum below the planet. Include realistic JWST-style wavelength axis from 0.6 to 5.3 microns, small labeled absorption features for Na 0.589 um, K 0.77 um, H2O 1.4 um, CH4 3.3 um, CO2 4.3 um, CO 4.6 um, and SO2 near 4.0 um. Color palette: deep violet-black space, infrared magenta, cyan spectral glow, amber star. Mood: elegant, research-grade, not fantasy. Add tiny credit text in corner: "Concept: Biswajit Jana | Transmission spectroscopy." No NASA logo, no fake telescope branding, no cartoon style, no overdone lens flare.</pre>
             </div>
           </section>
 
@@ -1160,12 +1336,21 @@
           <section class="references">
             <h2>References and source notes</h2>
             <ol>
+              <li>Seager, S. and Sasselov, D. D. (2000). Theoretical transmission spectra during extrasolar giant planet transits.</li>
+              <li>Brown, T. M. (2001). Transmission spectra as diagnostics of extrasolar giant planet atmospheres.</li>
+              <li>Charbonneau, D. et al. (2002). Detection of an extrasolar planet atmosphere through sodium absorption.</li>
+              <li>Lecavelier des Etangs, A. et al. (2008). Rayleigh scattering in the transit spectrum of HD 189733 b.</li>
+              <li>Sing, D. K. et al. (2016). A continuum from clear to cloudy hot-Jupiter exoplanets without primordial water depletion.</li>
+              <li>Madhusudhan, N. (2019). Exoplanetary atmospheres: key insights, challenges, and prospects.</li>
+              <li>Rackham, B. V., Apai, D. and Giampapa, M. S. (2018). The transit light source effect.</li>
+              <li>Kempton, E. M.-R. et al. (2018). A framework for prioritizing the TESS planetary candidates most amenable to atmospheric characterization.</li>
               <li>NASA Science. <a href="https://science.nasa.gov/asset/webb/exoplanet-wasp-39-b-transmission-spectra/">Exoplanet WASP-39 b transmission spectra</a>.</li>
               <li>ESA/Webb. <a href="https://esawebb.org/images/weic2213b/">Hot Gas Giant Exoplanet WASP-39 b NIRSpec transmission spectrum</a>.</li>
               <li>NASA Science. <a href="https://science.nasa.gov/missions/webb/nasas-webb-detects-carbon-dioxide-in-exoplanet-atmosphere/">Webb detects carbon dioxide in an exoplanet atmosphere</a>.</li>
               <li>NASA Science. <a href="https://science.nasa.gov/asset/webb/exoplanet-wasp-96-b-niriss-transmission-spectrum/">Exoplanet WASP-96 b NIRISS transmission spectrum</a>.</li>
-              <li>NASA Science. <a href="https://science.nasa.gov/asset/webb/warm-gas-giant-exoplanet-wasp-107-b-transmission-spectrum-hubble-wfc3-webb-nircam-webb-miri/">WASP-107 b Hubble and Webb transmission spectrum</a>.</li>
+              <li>NASA Science. <a href="https://science.nasa.gov/asset/webb/warm-gas-giant-exoplanet-wasp-107-b-transmission-spectrum-hubble-wfc3-webb-nircam-webb-miri/">WASP-107 b Hubble, NIRCam, and MIRI transmission spectrum</a>.</li>
               <li>NASA Science. <a href="https://science.nasa.gov/asset/webb/exoplanet-wasp-17-b-miri-transmission-spectrum">WASP-17 b MIRI transmission spectrum</a>.</li>
+              <li>JWST Transiting Exoplanet Community Early Release Science Program papers on WASP-39 b, including NIRISS, NIRSpec, NIRCam, and photochemical SO2 analyses.</li>
             </ol>
           </section>
 
@@ -1249,10 +1434,15 @@
     const themeButton = document.getElementById("themeToggle");
     if (themeButton) {
       const savedTheme = localStorage.getItem("bj-exoplanet-spectroscopy-theme");
-      if (savedTheme === "light") document.body.classList.add("light");
+      if (savedTheme === "light") {
+        document.body.classList.add("light");
+        themeButton.textContent = "☀";
+      }
       themeButton.addEventListener("click", () => {
         document.body.classList.toggle("light");
-        localStorage.setItem("bj-exoplanet-spectroscopy-theme", document.body.classList.contains("light") ? "light" : "dark");
+        const isLight = document.body.classList.contains("light");
+        localStorage.setItem("bj-exoplanet-spectroscopy-theme", isLight ? "light" : "dark");
+        themeButton.textContent = isLight ? "☀" : "☾";
       });
     }
 
@@ -1268,451 +1458,5 @@
     sections.forEach(section => observer.observe(section));
   </script>
 
-  <script>
-    (function () {
-      const canvas = document.getElementById("atmosphereCanvas");
-      const ctx = canvas.getContext("2d");
-      const $ = id => document.getElementById(id);
-      const presetButtons = [...document.querySelectorAll(".preset-btn")];
-
-      const controls = {
-        planetRadius: $("planetRadius"),
-        scaleHeight: $("scaleHeight"),
-        cloudOpacity: $("cloudOpacity"),
-        spectralResolution: $("spectralResolution"),
-        noiseLevel: $("noiseLevel"),
-        transitCount: $("transitCount")
-      };
-
-      const labels = {
-        radiusOut: $("radiusOut"),
-        heightOut: $("heightOut"),
-        cloudOut: $("cloudOut"),
-        resolutionOut: $("resolutionOut"),
-        noiseOut: $("noiseOut"),
-        transitsOut: $("transitsOut"),
-        depthOut: $("depthOut"),
-        featureOut: $("featureOut"),
-        speciesOut: $("speciesOut"),
-        moodOut: $("moodOut")
-      };
-
-      const presets = {
-        water: {
-          species: "H2O",
-          planetRadius: 1.20,
-          scaleHeight: 620,
-          cloudOpacity: 0.22,
-          spectralResolution: 0.72,
-          noiseLevel: 38,
-          transitCount: 3,
-          features: [
-            { wl: 1.15, width: 0.055, amp: 0.40, color: "#80d7ff", label: "H2O" },
-            { wl: 1.40, width: 0.070, amp: 0.78, color: "#80d7ff", label: "H2O" },
-            { wl: 1.90, width: 0.090, amp: 0.62, color: "#80d7ff", label: "H2O" },
-            { wl: 2.70, width: 0.140, amp: 0.54, color: "#80d7ff", label: "H2O" }
-          ]
-        },
-        co2: {
-          species: "CO2",
-          planetRadius: 1.25,
-          scaleHeight: 580,
-          cloudOpacity: 0.18,
-          spectralResolution: 0.78,
-          noiseLevel: 34,
-          transitCount: 4,
-          features: [
-            { wl: 2.00, width: 0.080, amp: 0.30, color: "#ba9cff", label: "CO2" },
-            { wl: 2.70, width: 0.110, amp: 0.36, color: "#ba9cff", label: "CO2" },
-            { wl: 4.30, width: 0.160, amp: 1.00, color: "#ba9cff", label: "CO2" }
-          ]
-        },
-        methane: {
-          species: "CH4",
-          planetRadius: 0.92,
-          scaleHeight: 420,
-          cloudOpacity: 0.12,
-          spectralResolution: 0.86,
-          noiseLevel: 46,
-          transitCount: 5,
-          features: [
-            { wl: 1.65, width: 0.080, amp: 0.44, color: "#54e8cf", label: "CH4" },
-            { wl: 2.30, width: 0.110, amp: 0.52, color: "#54e8cf", label: "CH4" },
-            { wl: 3.30, width: 0.150, amp: 0.92, color: "#54e8cf", label: "CH4" }
-          ]
-        },
-        sodium: {
-          species: "Na/K",
-          planetRadius: 1.10,
-          scaleHeight: 500,
-          cloudOpacity: 0.42,
-          spectralResolution: 1.00,
-          noiseLevel: 44,
-          transitCount: 3,
-          features: [
-            { wl: 0.59, width: 0.018, amp: 0.70, color: "#ffbf75", label: "Na" },
-            { wl: 0.77, width: 0.025, amp: 0.42, color: "#ffbf75", label: "K" },
-            { wl: 1.25, width: 0.060, amp: 0.22, color: "#80d7ff", label: "haze" }
-          ]
-        },
-        flat: {
-          species: "clouds",
-          planetRadius: 1.05,
-          scaleHeight: 330,
-          cloudOpacity: 0.86,
-          spectralResolution: 0.50,
-          noiseLevel: 50,
-          transitCount: 2,
-          features: [
-            { wl: 1.40, width: 0.080, amp: 0.26, color: "#80d7ff", label: "muted H2O" },
-            { wl: 4.30, width: 0.160, amp: 0.24, color: "#ba9cff", label: "muted CO2" }
-          ]
-        }
-      };
-
-      let activePreset = presets.water;
-      let currentPresetName = "water";
-      let time = 0;
-      let last = performance.now();
-
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const rect = canvas.getBoundingClientRect();
-        canvas.width = Math.max(720, Math.round(rect.width * dpr));
-        canvas.height = Math.max(420, Math.round(rect.height * dpr));
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      function applyPreset(name) {
-        currentPresetName = name;
-        activePreset = presets[name];
-        presetButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.preset === name));
-        controls.planetRadius.value = activePreset.planetRadius;
-        controls.scaleHeight.value = activePreset.scaleHeight;
-        controls.cloudOpacity.value = activePreset.cloudOpacity;
-        controls.spectralResolution.value = activePreset.spectralResolution;
-        controls.noiseLevel.value = activePreset.noiseLevel;
-        controls.transitCount.value = activePreset.transitCount;
-        syncLabels();
-      }
-
-      function syncLabels() {
-        labels.radiusOut.textContent = (+controls.planetRadius.value).toFixed(2) + " Rj";
-        labels.heightOut.textContent = Math.round(+controls.scaleHeight.value) + " km";
-        labels.cloudOut.textContent = (+controls.cloudOpacity.value).toFixed(2);
-        labels.resolutionOut.textContent = (+controls.spectralResolution.value).toFixed(2);
-        labels.noiseOut.textContent = Math.round(+controls.noiseLevel.value) + " ppm";
-        labels.transitsOut.textContent = controls.transitCount.value;
-      }
-
-      function gauss(x, mu, sigma) {
-        return Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2));
-      }
-
-      function pseudoNoise(i, level) {
-        const raw = Math.sin((i + 1) * 12.9898 + currentPresetName.length * 78.233) * 43758.5453;
-        return (raw - Math.floor(raw) - 0.5) * 2 * level;
-      }
-
-      function wavelengthToColor(wl) {
-        const t = Math.max(0, Math.min(1, (wl - 0.55) / (5.0 - 0.55)));
-        const stops = [
-          [0.00, [100, 150, 255]],
-          [0.18, [74, 240, 200]],
-          [0.35, [255, 191, 117]],
-          [0.58, [255, 125, 152]],
-          [0.78, [186, 156, 255]],
-          [1.00, [128, 215, 255]]
-        ];
-        for (let i = 0; i < stops.length - 1; i++) {
-          const a = stops[i], b = stops[i + 1];
-          if (t >= a[0] && t <= b[0]) {
-            const f = (t - a[0]) / (b[0] - a[0]);
-            const r = Math.round(a[1][0] + (b[1][0] - a[1][0]) * f);
-            const g = Math.round(a[1][1] + (b[1][1] - a[1][1]) * f);
-            const bb = Math.round(a[1][2] + (b[1][2] - a[1][2]) * f);
-            return `rgb(${r},${g},${bb})`;
-          }
-        }
-        return "#80d7ff";
-      }
-
-      function hexToRgba(hex, alpha) {
-        const value = hex.replace("#", "");
-        const r = parseInt(value.slice(0, 2), 16);
-        const g = parseInt(value.slice(2, 4), 16);
-        const b = parseInt(value.slice(4, 6), 16);
-        return `rgba(${r},${g},${b},${alpha})`;
-      }
-
-      function drawRoundedRect(x, y, w, h, r, fill, stroke) {
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + w - r, y);
-        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        ctx.lineTo(x + w, y + h - r);
-        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        ctx.lineTo(x + r, y + h);
-        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        ctx.lineTo(x, y + r);
-        ctx.quadraticCurveTo(x, y, x + r, y);
-        if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-        if (stroke) { ctx.strokeStyle = stroke; ctx.stroke(); }
-      }
-
-      function buildSpectrum() {
-        const rp = +controls.planetRadius.value;
-        const scaleHeight = +controls.scaleHeight.value;
-        const cloud = +controls.cloudOpacity.value;
-        const resolution = +controls.spectralResolution.value;
-        const noise = +controls.noiseLevel.value / Math.sqrt(+controls.transitCount.value);
-        const baseDepth = 10000 * Math.pow((0.10045 * rp) / 1.05, 2);
-        const featureScale = (scaleHeight / 620) * (1 - 0.82 * cloud);
-        const resWidth = 1.35 - resolution * 0.72;
-        const data = [];
-        let maxFeature = 0;
-        let best = activePreset.species;
-
-        for (let i = 0; i < 240; i++) {
-          const wl = 0.55 + (i / 239) * (5.0 - 0.55);
-          let feature = 0;
-          let strongest = { value: 0, label: activePreset.species };
-          for (const f of activePreset.features) {
-            const width = Math.max(0.015, f.width * resWidth);
-            const contribution = f.amp * gauss(wl, f.wl, width);
-            feature += contribution;
-            if (contribution > strongest.value) strongest = { value: contribution, label: f.label };
-          }
-          const hazeSlope = currentPresetName === "sodium" ? 0.24 * Math.pow(Math.max(0.58, 1.15 - wl), 2) : 0;
-          const featurePpm = 115 * featureScale * (feature + hazeSlope);
-          const noisy = baseDepth + featurePpm + pseudoNoise(i, noise);
-          maxFeature = Math.max(maxFeature, featurePpm);
-          if (featurePpm === maxFeature) best = strongest.label;
-          data.push({ wl, featurePpm, depth: baseDepth + featurePpm, noisy });
-        }
-
-        return { data, baseDepth, maxFeature, best, noise };
-      }
-
-      function draw() {
-        const now = performance.now();
-        time += Math.min(0.04, (now - last) / 1000);
-        last = now;
-
-        const W = canvas.clientWidth;
-        const H = canvas.clientHeight;
-        const { data, baseDepth, maxFeature, best, noise } = buildSpectrum();
-        syncLabels();
-
-        ctx.clearRect(0, 0, W, H);
-
-        const bg = ctx.createRadialGradient(W * 0.38, H * 0.26, 20, W * 0.50, H * 0.52, Math.max(W, H) * 0.76);
-        bg.addColorStop(0, "#132a48");
-        bg.addColorStop(0.58, "#071320");
-        bg.addColorStop(1, "#02050b");
-        ctx.fillStyle = bg;
-        ctx.fillRect(0, 0, W, H);
-
-        ctx.save();
-        ctx.strokeStyle = "rgba(255,255,255,.045)";
-        ctx.lineWidth = 1;
-        for (let x = 0; x <= W; x += Math.max(52, W / 13)) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, H);
-          ctx.stroke();
-        }
-        for (let y = 0; y <= H; y += Math.max(46, H / 9)) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(W, y);
-          ctx.stroke();
-        }
-        ctx.restore();
-
-        const starX = W * 0.22;
-        const starY = H * 0.28;
-        const starR = Math.min(W, H) * 0.145;
-        const planetX = starX + Math.sin(time * 0.55) * starR * 0.48;
-        const planetY = starY + starR * 0.12;
-        const planetR = starR * 0.31 * (+controls.planetRadius.value / 1.2);
-        const atmR = planetR + Math.max(8, (+controls.scaleHeight.value / 1200) * 22);
-
-        const starGrad = ctx.createRadialGradient(starX - starR * 0.28, starY - starR * 0.32, starR * 0.12, starX, starY, starR);
-        starGrad.addColorStop(0, "#fff3bd");
-        starGrad.addColorStop(0.34, "#ffbf75");
-        starGrad.addColorStop(0.74, "#df6d24");
-        starGrad.addColorStop(1, "#5b210b");
-        ctx.fillStyle = starGrad;
-        ctx.beginPath();
-        ctx.arc(starX, starY, starR, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(255,191,117,.18)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(starX, starY, starR + 7 + Math.sin(time * 2) * 2, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(4,9,18,.96)";
-        ctx.beginPath();
-        ctx.arc(planetX, planetY, planetR, 0, Math.PI * 2);
-        ctx.fill();
-
-        const atmGrad = ctx.createRadialGradient(planetX, planetY, planetR * 0.75, planetX, planetY, atmR);
-        atmGrad.addColorStop(0, "rgba(84,232,207,0.0)");
-        atmGrad.addColorStop(0.55, "rgba(84,232,207,0.14)");
-        atmGrad.addColorStop(1, "rgba(128,215,255,0.42)");
-        ctx.fillStyle = atmGrad;
-        ctx.beginPath();
-        ctx.arc(planetX, planetY, atmR, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(128,215,255,.68)";
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.arc(planetX, planetY, atmR, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(237,244,255,.88)";
-        ctx.font = "12px JetBrains Mono";
-        ctx.fillText("transit backlight", 28, 34);
-        ctx.fillText("atmospheric limb", planetX + atmR + 10, planetY - 4);
-
-        ctx.strokeStyle = "rgba(84,232,207,.18)";
-        ctx.setLineDash([8, 8]);
-        ctx.beginPath();
-        ctx.moveTo(planetX + atmR, planetY);
-        ctx.lineTo(W * 0.53, H * 0.22);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        const plotX = W * 0.43;
-        const plotY = H * 0.12;
-        const plotW = W * 0.52;
-        const plotH = H * 0.39;
-        drawRoundedRect(plotX, plotY, plotW, plotH, 18, "rgba(255,255,255,.026)", "rgba(255,255,255,.11)");
-
-        const minDepth = baseDepth - Math.max(90, noise * 2.8);
-        const maxDepth = baseDepth + Math.max(210, maxFeature + noise * 3.4);
-        const px = wl => plotX + 46 + ((wl - 0.55) / (5.0 - 0.55)) * (plotW - 66);
-        const py = d => plotY + plotH - 34 - ((d - minDepth) / (maxDepth - minDepth)) * (plotH - 60);
-
-        ctx.strokeStyle = "rgba(255,255,255,.07)";
-        ctx.lineWidth = 1;
-        for (let i = 0; i <= 5; i++) {
-          const y = plotY + 28 + i * ((plotH - 60) / 5);
-          ctx.beginPath();
-          ctx.moveTo(plotX + 46, y);
-          ctx.lineTo(plotX + plotW - 20, y);
-          ctx.stroke();
-        }
-
-        for (const f of activePreset.features) {
-          const x = px(f.wl);
-          const width = Math.max(4, f.width * plotW * 0.16);
-          const g = ctx.createLinearGradient(x - width, 0, x + width, 0);
-          g.addColorStop(0, "rgba(255,255,255,0)");
-          g.addColorStop(0.5, hexToRgba(f.color, 0.12));
-          g.addColorStop(1, "rgba(255,255,255,0)");
-          ctx.fillStyle = g;
-          ctx.fillRect(x - width, plotY + 20, width * 2, plotH - 48);
-          ctx.fillStyle = f.color;
-          ctx.font = "10px JetBrains Mono";
-          ctx.fillText(f.label, x - 12, plotY + 18);
-        }
-
-        ctx.strokeStyle = "rgba(255,191,117,.72)";
-        ctx.lineWidth = 1.6;
-        ctx.setLineDash([7, 8]);
-        ctx.beginPath();
-        ctx.moveTo(plotX + 46, py(baseDepth));
-        ctx.lineTo(plotX + plotW - 20, py(baseDepth));
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        ctx.strokeStyle = "#54e8cf";
-        ctx.lineWidth = 2.7;
-        ctx.beginPath();
-        data.forEach((p, i) => {
-          const x = px(p.wl);
-          const y = py(p.depth);
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        });
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(237,244,255,.75)";
-        data.forEach((p, i) => {
-          if (i % 5 !== 0) return;
-          ctx.beginPath();
-          ctx.arc(px(p.wl), py(p.noisy), 1.6, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        ctx.fillStyle = "rgba(237,244,255,.88)";
-        ctx.font = "12px JetBrains Mono";
-        ctx.fillText("transmission spectrum", plotX + 18, plotY + plotH - 13);
-        ctx.fillStyle = "rgba(174,191,216,.92)";
-        ctx.font = "10px JetBrains Mono";
-        ctx.fillText("0.55 um", plotX + 46, plotY + plotH - 36);
-        ctx.fillText("5.0 um", plotX + plotW - 66, plotY + plotH - 36);
-        ctx.save();
-        ctx.translate(plotX + 18, plotY + plotH * 0.54);
-        ctx.rotate(-Math.PI / 2);
-        ctx.fillText("transit depth (ppm)", 0, 0);
-        ctx.restore();
-
-        const bandX = W * 0.08;
-        const bandY = H * 0.64;
-        const bandW = W * 0.84;
-        const bandH = H * 0.16;
-        drawRoundedRect(bandX, bandY, bandW, bandH, 16, "rgba(255,255,255,.025)", "rgba(255,255,255,.09)");
-
-        const grad = ctx.createLinearGradient(bandX + 18, 0, bandX + bandW - 18, 0);
-        for (let i = 0; i <= 24; i++) {
-          const wl = 0.55 + (i / 24) * (5.0 - 0.55);
-          grad.addColorStop(i / 24, wavelengthToColor(wl));
-        }
-        ctx.fillStyle = grad;
-        ctx.fillRect(bandX + 18, bandY + 34, bandW - 36, bandH * 0.35);
-
-        for (const f of activePreset.features) {
-          const x = bandX + 18 + ((f.wl - 0.55) / (5.0 - 0.55)) * (bandW - 36);
-          const width = Math.max(4, f.width * 60);
-          const g = ctx.createLinearGradient(x - width, 0, x + width, 0);
-          g.addColorStop(0, "rgba(0,0,0,0)");
-          g.addColorStop(0.5, "rgba(0,0,0,.72)");
-          g.addColorStop(1, "rgba(0,0,0,0)");
-          ctx.fillStyle = g;
-          ctx.fillRect(x - width, bandY + 34, width * 2, bandH * 0.35);
-        }
-
-        ctx.fillStyle = "rgba(237,244,255,.86)";
-        ctx.font = "12px JetBrains Mono";
-        ctx.fillText("filtered stellar spectrum", bandX + 18, bandY + 22);
-        ctx.fillStyle = "rgba(174,191,216,.88)";
-        ctx.font = "10px JetBrains Mono";
-        ctx.fillText("visible / near IR", bandX + 18, bandY + bandH - 18);
-        ctx.fillText("mid IR", bandX + bandW - 70, bandY + bandH - 18);
-
-        labels.depthOut.textContent = Math.round(baseDepth) + " ppm";
-        labels.featureOut.textContent = Math.max(1, Math.round(maxFeature)) + " ppm";
-        labels.speciesOut.textContent = best;
-        const effectiveNoise = noise;
-        const confidence = maxFeature / Math.max(1, effectiveNoise);
-        labels.moodOut.textContent = confidence > 3.8 ? "strong clue" : confidence > 1.8 ? "needs repeats" : "cloudy or noisy";
-
-        requestAnimationFrame(draw);
-      }
-
-      resize();
-      window.addEventListener("resize", resize, { passive: true });
-      Object.values(controls).forEach(input => input.addEventListener("input", syncLabels));
-      presetButtons.forEach(button => button.addEventListener("click", () => applyPreset(button.dataset.preset)));
-      applyPreset("water");
-      requestAnimationFrame(draw);
-    })();
-  </script>
 </body>
 </html>
