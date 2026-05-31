@@ -848,6 +848,34 @@
       line-height: 1.6;
     }
 
+    .visual-plate {
+      margin: 28px 0 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 107, 214, 0.08), rgba(124, 247, 255, 0.05)),
+        var(--surface);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .visual-plate img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      background: #020817;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .visual-plate figcaption {
+      margin-top: 11px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.6;
+    }
+
     .references,
     .comments-section {
       margin-top: 42px;
@@ -1090,6 +1118,12 @@
               <div class="fact"><strong>Feature width</strong><span>Real bands are not single needles. Instrument resolution, pressure broadening, temperature structure, and clouds smear molecular opacity across wavelength.</span></div>
               <div class="fact"><strong>Model warning</strong><span>A labelled peak is a hypothesis, not a trophy. Retrievals compare families of atmospheres against the data and the instrument systematics.</span></div>
             </div>
+            <figure class="visual-plate">
+              <img src="../../images/blog16_02_transmission_fingerprint.png" alt="Transmission spectroscopy diagram showing transit geometry, an atmospheric chemical filter, and a JWST-style spectrum with molecular absorption features" />
+              <figcaption>
+                Original visual concept: Biswajit Jana. The image compresses the measurement chain into three steps: transit geometry, atmospheric filtering, and the final wavelength-dependent chemical fingerprint.
+              </figcaption>
+            </figure>
           </section>
 
           <section class="chapter" id="numbers">
