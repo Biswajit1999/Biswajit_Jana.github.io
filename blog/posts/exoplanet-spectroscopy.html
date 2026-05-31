@@ -848,50 +848,6 @@
       line-height: 1.6;
     }
 
-    .prompt-box {
-      margin: 26px 0;
-      padding: 20px;
-      border-radius: 22px;
-      border: 1px solid rgba(124, 247, 255, 0.22);
-      background: rgba(124, 247, 255, 0.055);
-    }
-
-    .prompt-box pre {
-      margin-top: 12px;
-      white-space: pre-wrap;
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      line-height: 1.65;
-    }
-
-    .figure-note {
-      margin: 26px 0;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: var(--surface);
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.25);
-    }
-
-    .figure-note img {
-      width: 100%;
-      height: auto;
-      max-height: 520px;
-      object-fit: contain;
-      border-radius: 16px;
-      background: #020817;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .figure-note figcaption {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--dim);
-      line-height: 1.6;
-      margin-top: 10px;
-    }
-
     .references,
     .comments-section {
       margin-top: 42px;
@@ -1036,7 +992,6 @@
             <li><a href="#stellar-contamination">Stellar contamination</a></li>
             <li><a href="#life">Life question</a></li>
             <li><a href="#instrumentation">Instrumentation</a></li>
-            <li><a href="#image-direction">Image direction</a></li>
             <li><a href="#takeaway">Takeaway</a></li>
             <li><a href="#comments">Comments</a></li>
           </ul>
@@ -1129,12 +1084,12 @@
                 The atmospheric scale height \(H\) grows with temperature and shrinks with stronger gravity or heavier mean molecular weight \(\mu\). Here \(\mu\) is in proton-mass units and \(m_H\) is the hydrogen mass. Puffy hot atmospheres produce larger transmission features than compact heavy atmospheres.
               </p>
             </div>
-            <figure class="figure-note">
-              <img src="../../images/blog16_01_exoplanet_smell_hero.png" alt="Original transmission spectroscopy concept image with wavelength axis and molecular fingerprints" onerror="this.onerror=null;this.src='../../images/blog16_01_exoplanet_smell_hero.svg';" />
-              <figcaption>
-                Original visual concept: Biswajit Jana. The atmosphere acts like a wavelength-selective filter around the planet's edge. The hard part is that the atmospheric signal is usually tiny compared with the star.
-              </figcaption>
-            </figure>
+            <div class="fact-grid">
+              <div class="fact"><strong>Signal direction</strong><span>Absorption appears upward when the graph is transit depth, because the atmosphere makes the planet's apparent radius larger at selected wavelengths.</span></div>
+              <div class="fact"><strong>Useful wavelength span</strong><span>JWST/NIRISS, NIRSpec, NIRCam, and MIRI together turn the trick from optical sodium lines into near- and mid-infrared chemistry.</span></div>
+              <div class="fact"><strong>Feature width</strong><span>Real bands are not single needles. Instrument resolution, pressure broadening, temperature structure, and clouds smear molecular opacity across wavelength.</span></div>
+              <div class="fact"><strong>Model warning</strong><span>A labelled peak is a hypothesis, not a trophy. Retrievals compare families of atmospheres against the data and the instrument systematics.</span></div>
+            </div>
           </section>
 
           <section class="chapter" id="numbers">
@@ -1307,18 +1262,6 @@
             </p>
             <div class="callout">
               In other words: to smell an exoplanet, first build an instrument that knows how not to smell itself.
-            </div>
-          </section>
-
-          <section class="chapter" id="image-direction">
-            <div class="chapter-label">Creative direction - original image</div>
-            <h2>Every post deserves its own visual language.</h2>
-            <p>
-              This post now uses a dedicated original concept image instead of borrowing the old transit-method artwork. The visual idea is not "a pretty planet." It is a measurement story: a backlit atmospheric ring, wavelength bins, molecular labels, and the uneasy little truth that the signal is a ppm-level correction to a much larger stellar spectrum.
-            </p>
-            <div class="prompt-box">
-              <div class="equation-label">Hero image generation prompt</div>
-              <pre>Ultra-wide cinematic scientific poster for a personal astrophysics blog by Biswajit Jana. Title text: "HOW WE SMELL AN EXOPLANET WITHOUT GOING THERE." Scene: a realistic golden host star with a dark transiting exoplanet in front, a thin violet/cyan glowing atmospheric limb, and a dotted transit path across the star. On the right, include an inset scientific diagram titled "Atmosphere as a chemical filter": incoming starlight waves enter the atmospheric limb and emerge as filtered starlight encoding chemistry. Along the bottom, include a realistic JWST-style transmission spectrum from 0.6 to 5.3 microns, y-axis "Transit Depth (%)", with noisy cyan data points, error bars, a glowing fitted curve, and labelled molecular features: Na 0.589 um, K 0.77 um, H2O 1.4 um, CH4 3.3 um, SO2 4.0 um, CO2 4.3 um, CO 4.6 um. Style: premium research-poster, high contrast, black-violet space, magenta nebula dust, amber star, cyan spectral data, precise labels, realistic not cartoonish. Add small credit text bottom-right: "Concept: Biswajit Jana | Transmission spectroscopy." No NASA logo, no fake observatory logo, no childish style.</pre>
             </div>
           </section>
 

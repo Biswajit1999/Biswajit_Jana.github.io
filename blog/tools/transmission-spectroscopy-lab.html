@@ -148,6 +148,7 @@
       grid-template-columns: minmax(0, 1fr) 390px;
       gap: 18px;
       padding: 18px 0 38px;
+      align-items: start;
     }
 
     .viewport, .controls, .notes {
@@ -157,6 +158,8 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
+
+    .viewport { align-self: start; }
 
     .viewport-head {
       display: flex;
@@ -171,7 +174,7 @@
     }
 
     .viewport-head strong { color: var(--cyan); }
-    #labCanvas { display: block; width: 100%; height: 640px; }
+    #labCanvas { display: block; width: 100%; height: 760px; }
 
     .controls {
       padding: 18px;
@@ -258,6 +261,30 @@
 
     .feature-list strong { color: var(--text); }
 
+    .dossier-note {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+      margin-top: 8px;
+    }
+
+    .source-links {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .source-links a {
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 10px;
+      background: rgba(255,255,255,.035);
+      color: var(--cyan);
+    }
+
     .notes {
       margin-bottom: 48px;
       padding: 22px;
@@ -277,13 +304,14 @@
       .hero, .lab { grid-template-columns: 1fr; }
       .controls { position: static; }
       .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      #labCanvas { height: 600px; }
+      #labCanvas { height: 720px; }
     }
 
     @media (max-width: 680px) {
       .status-grid { grid-template-columns: 1fr; }
-      #labCanvas { height: 540px; }
+      #labCanvas { height: 680px; }
       h1 { font-size: clamp(2.6rem, 15vw, 4rem); }
+      .source-links { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -331,11 +359,14 @@
       <div class="group">
         <h3>Target and instrument</h3>
         <select id="preset">
-          <option value="wasp39">WASP-39 b style hot Saturn</option>
-          <option value="hotjupiter">Clear hot Jupiter</option>
-          <option value="warmneptune">Warm Neptune around M dwarf</option>
-          <option value="terrestrial">Small terrestrial around red dwarf</option>
-          <option value="cloudy">Cloud-muted spectrum</option>
+          <option value="wasp39">WASP-39 b - JWST hot Saturn</option>
+          <option value="wasp96">WASP-96 b - NIRISS water spectrum</option>
+          <option value="hd209458">HD 209458 b - first Na atmosphere</option>
+          <option value="hd189733">HD 189733 b - haze and water</option>
+          <option value="wasp107">WASP-107 b - puffy warm Neptune</option>
+          <option value="gj1214">GJ 1214 b - flat cloudy sub-Neptune</option>
+          <option value="k218">K2-18 b - habitable-zone sub-Neptune</option>
+          <option value="trappist1e">TRAPPIST-1 e - rocky challenge</option>
         </select>
         <select id="instrument">
           <option value="prism">JWST NIRSpec PRISM - 0.6 to 5.3 um</option>
@@ -368,6 +399,7 @@
         <div class="feature-list">
           <div><span>Na</span><strong>0.589 um</strong></div>
           <div><span>K</span><strong>0.77 um</strong></div>
+          <div><span>He</span><strong>1.083 um</strong></div>
           <div><span>H2O</span><strong>1.4, 1.9, 2.7, 6.3 um</strong></div>
           <div><span>CH4</span><strong>2.3, 3.3, 7.7 um</strong></div>
           <div><span>SO2</span><strong>near 4.0 um</strong></div>
@@ -375,6 +407,21 @@
           <div><span>CO</span><strong>4.6 um</strong></div>
           <div><span>Silicate cloud</span><strong>8-9 um</strong></div>
         </div>
+      </div>
+
+      <div class="group">
+        <h3>Target dossier</h3>
+        <div class="feature-list">
+          <div><span>World</span><strong id="targetNameOut">--</strong></div>
+          <div><span>Class</span><strong id="classOut">--</strong></div>
+          <div><span>Host</span><strong id="hostOut">--</strong></div>
+          <div><span>Radius</span><strong id="radiusInfoOut">--</strong></div>
+          <div><span>Mass</span><strong id="massOut">--</strong></div>
+          <div><span>Period</span><strong id="periodOut">--</strong></div>
+          <div><span>Orbit</span><strong id="orbitOut">--</strong></div>
+          <div><span>Distance</span><strong id="distanceOut">--</strong></div>
+        </div>
+        <p class="dossier-note" id="researchOut">--</p>
       </div>
     </aside>
   </main>
@@ -384,6 +431,12 @@
     <p>
       The model computes a baseline transit depth from \(R_p/R_\star\), estimates scale height with \(H=k_BT/(\mu m_H g)\), then adds Gaussian molecular bands whose amplitudes scale approximately with \(2N_HR_pH/R_\star^2\). Clouds suppress features. Resolution broadens and smooths them. Repeated transits reduce random noise as \(1/\sqrt{N}\), while the stellar contamination control adds a wavelength-dependent systematic shape that does not average away politely.
     </p>
+    <div class="source-links" aria-label="Research sources for target presets">
+      <a href="https://science.nasa.gov/exoplanet-catalog/wasp-39-b/">NASA catalog: WASP-39 b</a>
+      <a href="https://science.nasa.gov/exoplanet-catalog/gj-1214-b/">NASA catalog: GJ 1214 b</a>
+      <a href="https://science.nasa.gov/asset/webb/warm-gas-giant-exoplanet-wasp-107-b-transmission-spectrum-nirspec/">Webb spectrum: WASP-107 b</a>
+      <a href="https://science.nasa.gov/missions/webb/webb-discovers-methane-carbon-dioxide-in-atmosphere-of-k2-18-b/">Webb spectrum: K2-18 b</a>
+    </div>
   </section>
 
   <script>
@@ -397,11 +450,70 @@
       const mH = 1.6735575e-27;
 
       const presets = {
-        wasp39: { rp: 1.25, rs: 0.93, temp: 1120, grav: 4.1, mu: 2.3, cloud: 0.18, res: 100, noise: 55, nTransit: 4, stellar: 15, species: ["Na","K","H2O","CO2","CO","SO2"] },
-        hotjupiter: { rp: 1.20, rs: 1.00, temp: 1450, grav: 10.0, mu: 2.3, cloud: 0.05, res: 140, noise: 45, nTransit: 3, stellar: 10, species: ["Na","K","H2O","CO2","CO"] },
-        warmneptune: { rp: 0.35, rs: 0.45, temp: 700, grav: 11.0, mu: 2.8, cloud: 0.25, res: 90, noise: 65, nTransit: 6, stellar: 30, species: ["H2O","CH4","CO2"] },
-        terrestrial: { rp: 0.09, rs: 0.12, temp: 280, grav: 9.8, mu: 28.0, cloud: 0.35, res: 60, noise: 35, nTransit: 12, stellar: 70, species: ["H2O","CO2","CH4"] },
-        cloudy: { rp: 1.05, rs: 0.82, temp: 900, grav: 8.0, mu: 2.3, cloud: 0.82, res: 80, noise: 60, nTransit: 3, stellar: 20, species: ["H2O","CO2","CH4"] }
+        wasp39: {
+          name: "WASP-39 b", worldClass: "hot Saturn / gas giant", host: "G-type star", radiusInfo: "1.279 Rj", massInfo: "0.281 Mj", periodInfo: "4.1 d", orbitInfo: "0.048 AU", distanceInfo: "~700 ly",
+          note: "Webb benchmark: H2O, CO2 at 4.3 um, CO, Na, clouds, and photochemical SO2.",
+          canvasLines: ["Saturn-mass, Jupiter-sized atmosphere.", "CO2 and SO2 made it a Webb showpiece."],
+          source: "NASA catalog + JWST ERS", instrument: "prism",
+          rp: 1.28, rs: 0.93, temp: 1120, grav: 4.1, mu: 2.3, cloud: 0.18, res: 100, noise: 55, nTransit: 4, stellar: 15,
+          species: ["Na","K","H2O","CO2","CO","SO2"]
+        },
+        wasp96: {
+          name: "WASP-96 b", worldClass: "hot gas giant", host: "Sun-like star", radiusInfo: "1.20 Rj", massInfo: "0.48 Mj", periodInfo: "3.4 d", orbitInfo: "0.045 AU", distanceInfo: "~1150 ly",
+          note: "Early Webb/NIRISS target with water structure and cloud/haze information in the 0.6-2.8 um band.",
+          canvasLines: ["NIRISS SOSS is the natural view here.", "Water bands become the main teaching signal."],
+          source: "NASA catalog + Webb NIRISS", instrument: "niriss",
+          rp: 1.20, rs: 1.05, temp: 1285, grav: 7.5, mu: 2.3, cloud: 0.35, res: 90, noise: 50, nTransit: 1, stellar: 20,
+          species: ["Na","H2O"]
+        },
+        hd209458: {
+          name: "HD 209458 b", worldClass: "classic hot Jupiter", host: "F/G-type star", radiusInfo: "1.39 Rj", massInfo: "0.73 Mj", periodInfo: "3.5 d", orbitInfo: "0.047 AU", distanceInfo: "159 ly",
+          note: "The first detected exoplanet atmosphere: extra sodium absorption measured with Hubble/STIS.",
+          canvasLines: ["The sodium line is historically famous.", "A clean reminder that ppm signals can be real."],
+          source: "NASA catalog + Charbonneau 2002", instrument: "niriss",
+          rp: 1.39, rs: 1.20, temp: 1450, grav: 9.4, mu: 2.3, cloud: 0.18, res: 160, noise: 30, nTransit: 4, stellar: 10,
+          species: ["Na","H2O","CO"]
+        },
+        hd189733: {
+          name: "HD 189733 b", worldClass: "hazy hot Jupiter", host: "K-type star", radiusInfo: "1.13 Rj", massInfo: "1.13 Mj", periodInfo: "2.2 d", orbitInfo: "0.031 AU", distanceInfo: "64.5 ly",
+          note: "A nearby atmospheric laboratory: haze/Rayleigh slope, sodium, water, and stellar activity all matter.",
+          canvasLines: ["Nearby and bright, but not simple.", "Haze and stellar activity bend the baseline."],
+          source: "NASA catalog + Hubble/Spitzer literature", instrument: "prism",
+          rp: 1.13, rs: 0.76, temp: 1200, grav: 21.5, mu: 2.3, cloud: 0.42, res: 140, noise: 35, nTransit: 5, stellar: 35,
+          species: ["Na","K","H2O"]
+        },
+        wasp107: {
+          name: "WASP-107 b", worldClass: "puffy warm Neptune", host: "K-type star", radiusInfo: "0.94 Rj", massInfo: "30.5 Me", periodInfo: "5.7 d", orbitInfo: "0.055 AU", distanceInfo: "~210 ly",
+          note: "A low-density planet with Webb evidence for H2O, CO2, CO, CH4, SO2 and a hot interior story.",
+          canvasLines: ["Huge radius, low mass, large scale height.", "Webb sees a crowded molecule inventory."],
+          source: "NASA catalog + Webb NIRSpec", instrument: "prism",
+          rp: 0.94, rs: 0.66, temp: 740, grav: 3.3, mu: 2.3, cloud: 0.28, res: 110, noise: 60, nTransit: 6, stellar: 25,
+          species: ["He","H2O","CO2","CO","CH4","SO2","silicate"]
+        },
+        gj1214: {
+          name: "GJ 1214 b", worldClass: "cloudy sub-Neptune", host: "M-type star", radiusInfo: "0.244 Rj / 2.73 Re", massInfo: "8.4 Me", periodInfo: "1.6 d", orbitInfo: "0.015 AU", distanceInfo: "48 ly",
+          note: "A famously flat spectrum: high clouds or hazes mute features that a clear hydrogen atmosphere would show.",
+          canvasLines: ["The lesson is the flatness.", "Clouds can hide a whole molecule list."],
+          source: "NASA catalog + Kreidberg 2014/JWST", instrument: "miri",
+          rp: 0.244, rs: 0.22, temp: 550, grav: 8.0, mu: 2.8, cloud: 0.90, res: 80, noise: 45, nTransit: 8, stellar: 40,
+          species: ["H2O","CH4"]
+        },
+        k218: {
+          name: "K2-18 b", worldClass: "habitable-zone sub-Neptune", host: "M-type star", radiusInfo: "2.37 Re / 0.212 Rj", massInfo: "8.92 Me", periodInfo: "32.9 d", orbitInfo: "0.143 AU", distanceInfo: "124 ly",
+          note: "Webb reports CH4 and CO2; the biosignature interpretation is still debated and should be treated carefully.",
+          canvasLines: ["CH4 plus CO2, not a life announcement.", "Model assumptions matter enormously."],
+          source: "NASA catalog + Webb K2-18 b", instrument: "prism",
+          rp: 0.212, rs: 0.41, temp: 280, grav: 15.6, mu: 2.3, cloud: 0.45, res: 85, noise: 50, nTransit: 8, stellar: 55,
+          species: ["CH4","CO2","H2O"]
+        },
+        trappist1e: {
+          name: "TRAPPIST-1 e", worldClass: "temperate terrestrial", host: "ultracool M dwarf", radiusInfo: "0.92 Re / 0.082 Rj", massInfo: "0.692 Me", periodInfo: "6.1 d", orbitInfo: "0.029 AU", distanceInfo: "40 ly",
+          note: "A rocky habitable-zone target, but transmission spectra are strongly challenged by tiny signals and stellar contamination.",
+          canvasLines: ["Small planet, small star, difficult truth.", "Stellar contamination can mimic atmosphere."],
+          source: "NASA catalog + JWST TRAPPIST-1 work", instrument: "prism",
+          rp: 0.082, rs: 0.119, temp: 250, grav: 8.0, mu: 28.0, cloud: 0.30, res: 60, noise: 30, nTransit: 20, stellar: 90,
+          species: ["CO2","H2O","O3"]
+        }
       };
 
       const modes = {
@@ -414,6 +526,7 @@
       const allFeatures = [
         { species: "Na", label: "Na", wl: 0.589, width: 0.020, strength: 0.45, color: "#ffd166" },
         { species: "K", label: "K", wl: 0.77, width: 0.030, strength: 0.36, color: "#ffd166" },
+        { species: "He", label: "He", wl: 1.083, width: 0.035, strength: 0.24, color: "#ffb36b" },
         { species: "H2O", label: "H2O", wl: 1.15, width: 0.075, strength: 0.34, color: "#7cf7ff" },
         { species: "H2O", label: "H2O", wl: 1.40, width: 0.095, strength: 0.78, color: "#7cf7ff" },
         { species: "H2O", label: "H2O", wl: 1.90, width: 0.120, strength: 0.56, color: "#7cf7ff" },
@@ -440,10 +553,12 @@
       function applyPreset(name) {
         const p = presets[name];
         ["rp","rs","temp","grav","mu","cloud","res","noise","nTransit","stellar"].forEach(id => { $(id).value = p[id]; });
+        if (p.instrument) $("instrument").value = p.instrument;
         updateLabels();
       }
 
       function updateLabels() {
+        const p = presets[$("preset").value];
         $("rpOut").textContent = (+$("rp").value).toFixed(2) + " Rj";
         $("rsOut").textContent = (+$("rs").value).toFixed(2) + " Rs";
         $("tempOut").textContent = Math.round(+$("temp").value) + " K";
@@ -454,6 +569,15 @@
         $("noiseOut").textContent = Math.round(+$("noise").value) + " ppm";
         $("nTransitOut").textContent = $("nTransit").value;
         $("stellarOut").textContent = Math.round(+$("stellar").value) + " ppm";
+        $("targetNameOut").textContent = p.name;
+        $("classOut").textContent = p.worldClass;
+        $("hostOut").textContent = p.host;
+        $("radiusInfoOut").textContent = p.radiusInfo;
+        $("massOut").textContent = p.massInfo;
+        $("periodOut").textContent = p.periodInfo;
+        $("orbitOut").textContent = p.orbitInfo;
+        $("distanceOut").textContent = p.distanceInfo;
+        $("researchOut").textContent = p.note;
       }
 
       function gauss(x, mu, sigma) { return Math.exp(-0.5 * Math.pow((x - mu) / sigma, 2)); }
@@ -480,7 +604,7 @@
           const wl = s.mode.min + i / 339 * (s.mode.max - s.mode.min);
           let fsum = 0;
           for (const f of allFeatures) {
-            if (!s.p.species.includes(f.species) && f.species !== "silicate" && f.species !== "O3") continue;
+            if (!s.p.species.includes(f.species)) continue;
             if (f.wl < s.mode.min - 0.8 || f.wl > s.mode.max + 0.8) continue;
             const width = Math.max(f.width, f.wl / s.res * 2.2);
             fsum += f.strength * gauss(wl, f.wl, width);
@@ -568,7 +692,7 @@
         ctx.fillStyle = limbG; ctx.fillRect(limbX - 18, filterY + 56, 36, filterH - 76);
         ctx.strokeStyle = "rgba(124,247,255,.28)"; ctx.setLineDash([7,7]); ctx.beginPath(); ctx.moveTo(starX + starR + 8, starY); ctx.lineTo(limbX, filterY + filterH * .52); ctx.stroke(); ctx.setLineDash([]);
 
-        const left = W * .065, top = Hh * .315, pw = W * .88, ph = Hh * .48;
+        const left = W * .065, top = Hh * .30, pw = W * .88, ph = Hh * .40;
         roundedRect(left, top, pw, ph, 12, "rgba(0,0,0,.12)", "rgba(255,255,255,.15)");
         const minY = s.base - Math.max(100, maxFeature * .35 + s.noise);
         const maxY = s.base + Math.max(220, maxFeature * 1.25 + s.noise * 1.8);
@@ -582,7 +706,7 @@
           ctx.fillStyle = "rgba(210,192,220,.78)"; ctx.font = "10px JetBrains Mono"; ctx.fillText(Math.round(val) + " ppm", left+8, y+4);
         }
 
-        const visibleFeatures = allFeatures.filter(f => f.wl >= s.mode.min && f.wl <= s.mode.max && (s.p.species.includes(f.species) || f.species === "silicate" || f.species === "O3"));
+        const visibleFeatures = allFeatures.filter(f => f.wl >= s.mode.min && f.wl <= s.mode.max && s.p.species.includes(f.species));
         for (const f of visibleFeatures) {
           const x = px(f.wl);
           ctx.fillStyle = rgba(f.color, .11); ctx.fillRect(x-10, top+20, 20, ph-58);
@@ -602,7 +726,7 @@
         }
         ctx.fillStyle = "rgba(255,245,255,.9)"; ctx.font = "12px JetBrains Mono"; ctx.fillText("wavelength", left+pw*.48, top+ph-16);
 
-        const stripY = Hh * .83, stripH = Hh * .055;
+        const stripY = top + ph + 22, stripH = 34;
         roundedRect(left, stripY, pw, stripH, 10, "rgba(255,255,255,.035)", "rgba(255,255,255,.10)");
         const stripGrad = ctx.createLinearGradient(left + 58, 0, left + pw - 24, 0);
         stripGrad.addColorStop(0, "#6b78ff"); stripGrad.addColorStop(.2, "#29d9ff"); stripGrad.addColorStop(.38, "#54e8cf"); stripGrad.addColorStop(.55, "#ffd166"); stripGrad.addColorStop(.72, "#ff6bd6"); stripGrad.addColorStop(1, "#9d7dff");
@@ -614,25 +738,52 @@
         }
         ctx.fillStyle = "rgba(210,192,220,.86)"; ctx.font = "10px JetBrains Mono"; ctx.fillText("absorbed wavelength barcode", left + 18, stripY + 13);
 
-        const resY = Hh * .905, resH = Hh * .07;
-        roundedRect(left, resY, pw * .48, resH, 10, "rgba(255,255,255,.03)", "rgba(255,255,255,.10)");
-        roundedRect(left + pw * .51, resY, pw * .49, resH, 10, "rgba(255,255,255,.03)", "rgba(255,255,255,.10)");
+        const resY = stripY + stripH + 18, resH = Math.max(96, Hh - resY - 22);
+        const cardGap = 16;
+        const cardW = (pw - cardGap * 2) / 3;
+        roundedRect(left, resY, cardW, resH, 12, "rgba(255,255,255,.03)", "rgba(255,255,255,.10)");
+        roundedRect(left + cardW + cardGap, resY, cardW, resH, 12, "rgba(255,255,255,.03)", "rgba(255,255,255,.10)");
+        roundedRect(left + (cardW + cardGap) * 2, resY, cardW, resH, 12, "rgba(255,255,255,.03)", "rgba(255,255,255,.10)");
         ctx.fillStyle = "rgba(255,245,255,.86)"; ctx.font = "10px JetBrains Mono"; ctx.fillText("residuals: observed - model", left + 16, resY + 18);
-        ctx.fillText("retrieval likelihood sketch", left + pw * .51 + 16, resY + 18);
+        ctx.fillText("target dossier", left + cardW + cardGap + 16, resY + 18);
+        ctx.fillText("signal budget", left + (cardW + cardGap) * 2 + 16, resY + 18);
         ctx.strokeStyle = "rgba(124,247,255,.66)"; ctx.beginPath();
         for (let i = 0; i < 90; i++) {
-          const x = left + 16 + i * ((pw * .48 - 32) / 89);
+          const x = left + 16 + i * ((cardW - 32) / 89);
           const y = resY + resH * .58 + Math.sin(i * .55) * 5 + noiseAt(i, 3);
           if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
         ctx.stroke();
-        const bars = [["H2O", .78, "#7cf7ff"], ["CO2", .86, "#ff6bd6"], ["CH4", .42, "#54e8cf"], ["cloud", s.cloud, "#ffd166"]];
-        bars.forEach((b, i) => {
-          const bx = left + pw * .51 + 82 + i * ((pw * .49 - 128) / 4);
-          const bh = (resH - 30) * b[1];
-          ctx.fillStyle = b[2]; ctx.fillRect(bx, resY + resH - 12 - bh, 18, bh);
-          ctx.fillStyle = "rgba(210,192,220,.82)"; ctx.font = "9px JetBrains Mono"; ctx.fillText(b[0], bx - 7, resY + resH - 2);
+        ctx.fillStyle = "rgba(210,192,220,.84)"; ctx.font = "10px JetBrains Mono";
+        ctx.fillText("scatter after repeats: " + Math.round(s.noise / Math.sqrt(s.nTransit)) + " ppm", left + 16, resY + resH - 18);
+
+        const dossierX = left + cardW + cardGap + 16;
+        ctx.fillStyle = "rgba(210,192,220,.88)"; ctx.font = "10px JetBrains Mono";
+        ctx.fillText(s.p.name + " - " + s.p.worldClass, dossierX, resY + 40);
+        ctx.fillText("radius " + s.p.radiusInfo + " | mass " + s.p.massInfo, dossierX, resY + 58);
+        ctx.fillText("period " + s.p.periodInfo + " | orbit " + s.p.orbitInfo, dossierX, resY + 76);
+        ctx.fillStyle = "rgba(255,209,102,.90)";
+        ctx.fillText(s.p.canvasLines[0], dossierX, resY + 96);
+        ctx.fillStyle = "rgba(124,247,255,.88)";
+        ctx.fillText(s.p.canvasLines[1], dossierX, resY + 114);
+
+        const signalX = left + (cardW + cardGap) * 2 + 16;
+        const noiseNow = s.noise / Math.sqrt(s.nTransit);
+        const budget = [
+          ["H", Math.min(1, s.H / 850), Math.round(s.H) + " km", "#7cf7ff"],
+          ["annulus", Math.min(1, s.annulus / 850), Math.round(s.annulus) + " ppm", "#ff6bd6"],
+          ["feature", Math.min(1, maxFeature / 450), Math.round(maxFeature) + " ppm", "#54e8cf"],
+          ["noise", Math.min(1, noiseNow / 120), Math.round(noiseNow) + " ppm", "#ffd166"]
+        ];
+        budget.forEach((b, i) => {
+          const y = resY + 40 + i * 18;
+          ctx.fillStyle = "rgba(210,192,220,.82)"; ctx.font = "9px JetBrains Mono"; ctx.fillText(b[0], signalX, y + 3);
+          ctx.strokeStyle = "rgba(255,255,255,.12)"; ctx.strokeRect(signalX + 64, y - 7, cardW - 96, 8);
+          ctx.fillStyle = b[3]; ctx.fillRect(signalX + 64, y - 7, (cardW - 96) * b[1], 8);
+          ctx.fillStyle = "rgba(255,245,255,.82)"; ctx.textAlign = "right"; ctx.fillText(b[2], signalX + cardW - 24, y + 3); ctx.textAlign = "left";
         });
+        ctx.fillStyle = "rgba(210,192,220,.82)"; ctx.font = "9px JetBrains Mono";
+        ctx.fillText("source: " + s.p.source, signalX, resY + resH - 18);
 
         $("modeName").textContent = s.mode.label;
         $("waveRange").textContent = s.mode.min.toFixed(1) + "-" + s.mode.max.toFixed(1) + " um";
