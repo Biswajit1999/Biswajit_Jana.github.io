@@ -151,6 +151,12 @@
       align-items: start;
     }
 
+    .lab-left {
+      display: grid;
+      gap: 18px;
+      align-self: start;
+    }
+
     .viewport, .controls, .notes {
       border: 1px solid var(--line);
       background: rgba(12, 6, 24, 0.78);
@@ -286,7 +292,6 @@
     }
 
     .notes {
-      margin-bottom: 48px;
       padding: 22px;
       color: var(--muted);
       line-height: 1.7;
@@ -344,13 +349,28 @@
   </header>
 
   <main class="shell lab">
-    <section class="viewport">
-      <div class="viewport-head">
-        <span><strong id="modeName">NIRSpec PRISM</strong> wavelength window</span>
-        <span id="waveRange">0.6-5.3 um</span>
-      </div>
-      <canvas id="labCanvas" aria-label="JWST-style transmission spectrum simulation"></canvas>
-    </section>
+    <div class="lab-left">
+      <section class="viewport">
+        <div class="viewport-head">
+          <span><strong id="modeName">NIRSpec PRISM</strong> wavelength window</span>
+          <span id="waveRange">0.6-5.3 um</span>
+        </div>
+        <canvas id="labCanvas" aria-label="JWST-style transmission spectrum simulation"></canvas>
+      </section>
+
+      <section class="notes">
+        <h2>What this simulator is doing</h2>
+        <p>
+          The model computes a baseline transit depth from \(R_p/R_\star\), estimates scale height with \(H=k_BT/(\mu m_H g)\), then adds Gaussian molecular bands whose amplitudes scale approximately with \(2N_HR_pH/R_\star^2\). Clouds suppress features. Resolution broadens and smooths them. Repeated transits reduce random noise as \(1/\sqrt{N}\), while the stellar contamination control adds a wavelength-dependent systematic shape that does not average away politely.
+        </p>
+        <div class="source-links" aria-label="Research sources for target presets">
+          <a href="https://science.nasa.gov/exoplanet-catalog/wasp-39-b/">NASA catalog: WASP-39 b</a>
+          <a href="https://science.nasa.gov/exoplanet-catalog/gj-1214-b/">NASA catalog: GJ 1214 b</a>
+          <a href="https://science.nasa.gov/asset/webb/warm-gas-giant-exoplanet-wasp-107-b-transmission-spectrum-nirspec/">Webb spectrum: WASP-107 b</a>
+          <a href="https://science.nasa.gov/missions/webb/webb-discovers-methane-carbon-dioxide-in-atmosphere-of-k2-18-b/">Webb spectrum: K2-18 b</a>
+        </div>
+      </section>
+    </div>
 
     <aside class="controls">
       <h2>Mission Controls</h2>
@@ -425,19 +445,6 @@
       </div>
     </aside>
   </main>
-
-  <section class="shell notes">
-    <h2>What this simulator is doing</h2>
-    <p>
-      The model computes a baseline transit depth from \(R_p/R_\star\), estimates scale height with \(H=k_BT/(\mu m_H g)\), then adds Gaussian molecular bands whose amplitudes scale approximately with \(2N_HR_pH/R_\star^2\). Clouds suppress features. Resolution broadens and smooths them. Repeated transits reduce random noise as \(1/\sqrt{N}\), while the stellar contamination control adds a wavelength-dependent systematic shape that does not average away politely.
-    </p>
-    <div class="source-links" aria-label="Research sources for target presets">
-      <a href="https://science.nasa.gov/exoplanet-catalog/wasp-39-b/">NASA catalog: WASP-39 b</a>
-      <a href="https://science.nasa.gov/exoplanet-catalog/gj-1214-b/">NASA catalog: GJ 1214 b</a>
-      <a href="https://science.nasa.gov/asset/webb/warm-gas-giant-exoplanet-wasp-107-b-transmission-spectrum-nirspec/">Webb spectrum: WASP-107 b</a>
-      <a href="https://science.nasa.gov/missions/webb/webb-discovers-methane-carbon-dioxide-in-atmosphere-of-k2-18-b/">Webb spectrum: K2-18 b</a>
-    </div>
-  </section>
 
   <script>
     (function () {
