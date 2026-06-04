@@ -1,650 +1,1434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Curriculum Vitae | Biswajit Jana</title>
-  <meta name="description" content="Academic CV and professional profile of Biswajit Jana, astrophysics graduate working across instrumentation, spectroscopy, optics, and scientific computing.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Academic CV of Biswajit Jana — astrophysics graduate specialising in astronomical instrumentation, spectrograph stabilisation, and feedback control."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
+    /* ── TOKENS ─────────────────────────────────── */
     :root {
-      --bg: #07101d;
-      --bg-2: #091525;
-      --panel: rgba(16, 29, 51, 0.82);
-      --panel-solid: #101d33;
-      --panel-2: #13233f;
-      --text: #eef4ff;
-      --muted: #b9c6dd;
-      --soft: #89a0bf;
-      --accent: #36f4d2;
-      --accent-2: #78a7ff;
-      --accent-3: #d59bff;
-      --border: rgba(255,255,255,0.09);
-      --shadow: 0 25px 80px rgba(0,0,0,0.35);
-      --radius: 22px;
-      --max: 1180px;
+      --ink:      #0a0f1a;
+      --ink-2:    #0d1424;
+      --ink-3:    #111c30;
+      --text:     #e8effe;
+      --muted:    #8da4c4;
+      --soft:     #546880;
+      --teal:     #2fe8c8;
+      --teal-dim: rgba(47,232,200,0.12);
+      --teal-glow:rgba(47,232,200,0.06);
+      --gold:     #f0c060;
+      --gold-dim: rgba(240,192,96,0.10);
+      --blue:     #6fa3f8;
+      --blue-dim: rgba(111,163,248,0.10);
+      --violet:   #b48ffa;
+      --border:   rgba(255,255,255,0.07);
+      --border-bright: rgba(255,255,255,0.13);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.45);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,0.28);
+      --max: 1200px;
     }
 
-    body.light {
-      --bg: #f5f8ff;
-      --bg-2: #edf3ff;
-      --panel: rgba(255,255,255,0.88);
-      --panel-solid: #ffffff;
-      --panel-2: #edf4ff;
-      --text: #13223c;
-      --muted: #52627a;
-      --soft: #667894;
-      --accent: #00a790;
-      --accent-2: #2d6cff;
-      --accent-3: #7d4dff;
-      --border: rgba(18,42,76,0.10);
-      --shadow: 0 20px 55px rgba(62, 92, 145, 0.12);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* ── RESET ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-weight: 400;
       color: var(--text);
-      line-height: 1.7;
-      background:
-        radial-gradient(circle at 12% 10%, rgba(54,244,210,0.08), transparent 22%),
-        radial-gradient(circle at 86% 16%, rgba(120,167,255,0.08), transparent 22%),
-        linear-gradient(180deg, var(--bg), var(--bg-2) 56%, #08111d 100%);
+      line-height: 1.72;
+      background-color: transparent;
       overflow-x: hidden;
-      transition: background .3s ease, color .3s ease;
-    }
-    body.light {
-      background:
-        radial-gradient(circle at 12% 10%, rgba(0,167,144,0.09), transparent 22%),
-        radial-gradient(circle at 86% 16%, rgba(45,108,255,0.08), transparent 22%),
-        linear-gradient(180deg, #f6f9ff, #eef4ff 56%, #f8fbff 100%);
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-      background-size: 58px 58px;
-      pointer-events: none;
-    }
-    body.light::before {
-      background-image:
-        linear-gradient(rgba(20,60,110,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(20,60,110,0.06) 1px, transparent 1px);
+      transition: color .35s;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
+
+    /* ── CANVAS BG ───────────────────────────────── */
+    #star-canvas {
+      position: fixed; inset: 0; z-index: -1;
+      pointer-events: none;
+      transition: opacity .6s;
+    }
+
     .container { width: min(var(--max), 92%); margin: 0 auto; }
 
+    /* ── NAVIGATION ──────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: sticky; top: 0; z-index: 100;
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      background: rgba(7,16,29,0.76);
+      backdrop-filter: blur(20px) saturate(1.4);
+      background: rgba(10,15,26,0.82);
+      transition: background .35s, border-color .35s;
     }
-    body.light nav { background: rgba(245,248,255,0.88); }
     .nav-inner {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 16px 0;
+      gap: 16px; padding: 15px 0;
     }
     .brand {
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      font-size: 1.08rem;
+      font-family: "Syne", sans-serif;
+      font-weight: 800; font-size: 1.05rem;
+      letter-spacing: -0.01em;
     }
-    .brand span { color: var(--accent); }
+    .brand em { color: var(--teal); font-style: normal; }
     .nav-links {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
+      list-style: none; display: flex;
+      align-items: center; gap: 20px; flex-wrap: wrap;
     }
     .nav-links a {
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.96rem;
+      font-family: "DM Mono", monospace;
+      font-size: .78rem; font-weight: 500;
+      color: var(--muted); letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
     }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--text); }
-    .switch {
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { color: var(--teal); }
+
+    /* theme toggle */
+    .t-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 8px;
+      padding: 6px 10px; font-size: .8rem; cursor: pointer;
+      transition: border-color .2s, color .2s; flex-shrink: 0;
+    }
+    .t-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      padding: 88px 0 0;
       position: relative;
-      width: 58px;
-      height: 30px;
-      display: inline-block;
-      flex: 0 0 auto;
     }
-    .switch input { display: none; }
-    .slider {
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--panel-solid);
-      box-shadow: var(--shadow);
+    .hero-rule {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--blue), transparent);
+      margin-top: 56px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 0;
+      align-items: end;
+    }
+
+    .hero-left { padding-bottom: 40px; }
+
+    .overline {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .overline::before {
+      content: ""; display: block;
+      width: 32px; height: 1px;
+      background: var(--teal);
+    }
+
+    .hero-name {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(3.8rem, 8vw, 7.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-role {
+      font-family: "Syne", sans-serif;
+      font-weight: 600; font-size: 1rem;
+      color: var(--muted); letter-spacing: .04em;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .hero-desc {
+      font-size: 1.07rem; color: var(--muted);
+      max-width: 58ch; line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .pill {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; font-weight: 500;
+      padding: 5px 12px; border-radius: 999px;
+      border: 1px solid var(--border-bright);
+      color: var(--muted); letter-spacing: .03em;
+      background: rgba(255,255,255,0.025);
+    }
+    .pill.hi { border-color: rgba(47,232,200,0.3); color: var(--teal); background: var(--teal-glow); }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 22px; border-radius: 10px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700; font-size: .88rem;
+      letter-spacing: .02em;
+      border: 1px solid transparent;
+      transition: transform .22s, box-shadow .22s, opacity .22s;
       cursor: pointer;
     }
-    .slider::before {
-      content: "🌙";
-      position: absolute;
-      top: 2px;
-      left: 3px;
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-      transition: transform .28s ease;
-      font-size: .82rem;
-    }
-    input:checked + .slider::before {
-      transform: translateX(27px);
-      content: "☀️";
-    }
-
-    .hero {
-      padding: 84px 0 36px;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-    .hero-copy,
-    .hero-side {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      padding: 34px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-copy::before,
-    .hero-side::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 36%, rgba(54,244,210,0.03));
-      pointer-events: none;
-    }
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: .78rem;
-      font-weight: 900;
-      margin-bottom: 14px;
-    }
-    h1 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-weight: 900;
-      font-size: clamp(3rem, 7vw, 5.4rem);
-      line-height: 0.95;
-      letter-spacing: -0.045em;
-      margin-bottom: 18px;
-    }
-    .lede {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 62ch;
-      margin-bottom: 24px;
-    }
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 24px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 18px;
-      border-radius: 14px;
-      font-weight: 800;
-      border: 1px solid transparent;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
     .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #58e8d1);
-      color: #08211e;
-      box-shadow: 0 16px 34px rgba(54,244,210,0.18);
+    .btn-fill {
+      background: var(--teal);
+      color: #051612;
+      box-shadow: 0 0 0 rgba(47,232,200,0);
     }
-    .btn-secondary {
+    .btn-fill:hover { box-shadow: 0 12px 36px rgba(47,232,200,0.28); }
+    .btn-ghost {
       background: transparent;
-      border-color: var(--border);
+      border-color: var(--border-bright);
       color: var(--text);
     }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.28); }
 
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 10px;
+    /* hero stats panel */
+    .hero-right {
+      border-left: 1px solid var(--border);
+      padding: 0 0 40px 40px;
     }
-    .quick-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
+    .stat-block { display: grid; gap: 0; }
+    .stat-item {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
     }
-    .quick-card .label {
-      font-family: "JetBrains Mono", monospace;
-      color: var(--accent);
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-weight: 800;
+    .stat-item:last-child { border-bottom: none; }
+    .stat-label {
+      font-family: "DM Mono", monospace;
+      font-size: .67rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--soft); margin-bottom: 5px;
     }
-    .quick-card .value {
-      font-weight: 700;
-      color: var(--text);
-      font-size: .98rem;
-      line-height: 1.5;
+    .stat-value {
+      font-family: "Syne", sans-serif;
+      font-weight: 700; font-size: .97rem;
+      color: var(--text); line-height: 1.4;
     }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      gap: 24px;
-      align-items: start;
-      padding: 8px 0 70px;
-    }
-    .side-stack {
-      position: sticky;
-      top: 92px;
-      display: grid;
-      gap: 18px;
-    }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-    .panel h3,
-    .section h2 {
-      font-weight: 900;
-      letter-spacing: -0.03em;
-    }
-    .panel h3 {
-      font-size: 1rem;
-      margin-bottom: 12px;
-    }
-    .toc a {
+    .stat-value small {
       display: block;
-      color: var(--muted);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 400; font-size: .82rem;
+      color: var(--muted); margin-top: 2px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 9px; border-radius: 5px;
+      font-family: "DM Mono", monospace;
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .04em;
+    }
+    .badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(47,232,200,0.22); }
+    .badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(240,192,96,0.22); }
+    .badge-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(111,163,248,0.22); }
+    .badge-violet { background: rgba(180,143,250,0.10); color: var(--violet); border: 1px solid rgba(180,143,250,0.22); }
+
+    /* ── PAGE BODY ───────────────────────────────── */
+    .page-body {
+      display: grid;
+      grid-template-columns: 220px minmax(0,1fr);
+      gap: 40px;
+      padding: 48px 0 80px;
+      align-items: start;
+    }
+
+    /* ── STICKY SIDEBAR ──────────────────────────── */
+    .sidebar { position: sticky; top: 72px; display: grid; gap: 32px; }
+
+    .toc-block { display: grid; gap: 2px; }
+    .toc-heading {
+      font-family: "DM Mono", monospace;
+      font-size: .65rem; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--soft); margin-bottom: 10px;
+    }
+    .toc-link {
+      display: flex; align-items: center; gap: 10px;
       padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: .95rem;
-      font-weight: 600;
+      font-size: .88rem; font-weight: 500; color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      transition: color .18s, padding-left .18s;
     }
-    .toc a:last-child { border-bottom: 0; }
-    .toc a:hover { color: var(--accent); }
+    .toc-link:last-child { border-bottom: none; }
+    .toc-link:hover { color: var(--teal); padding-left: 4px; }
+    .toc-link::before {
+      content: ""; display: block; width: 16px; height: 1px;
+      background: currentColor; flex-shrink: 0;
+      transition: width .18s;
+    }
+    .toc-link:hover::before { width: 22px; }
 
-    .mini-list {
-      list-style: none;
-      display: grid;
-      gap: 10px;
+    .contact-block { display: grid; gap: 10px; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: .82rem; color: var(--muted); word-break: break-all;
     }
-    .mini-list li {
-      font-size: .94rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding-bottom: 10px;
+    .contact-icon {
+      font-family: "DM Mono", monospace;
+      font-size: .7rem; color: var(--teal);
+      padding-top: 3px; flex-shrink: 0;
+      font-weight: 500; letter-spacing: .04em;
     }
-    .mini-list li:last-child { border-bottom: 0; padding-bottom: 0; }
-    .mini-list strong { color: var(--text); font-weight: 700; }
+    .contact-item a:hover { color: var(--teal); }
 
-    .content {
+    /* ── MAIN CONTENT ────────────────────────────── */
+    .cv-content { display: grid; gap: 64px; }
+
+    .cv-section {}
+    .section-title-row {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .section-num {
+      font-family: "DM Mono", monospace;
+      font-size: .7rem; font-weight: 500;
+      color: var(--soft); letter-spacing: .06em;
+    }
+    .section-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 800; font-size: 1.15rem;
+      letter-spacing: -.01em;
+      color: var(--text);
+      flex: 1;
+    }
+    .section-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border-bright), transparent);
+    }
+
+    /* ── TIMELINE ENTRIES ────────────────────────── */
+    .entries { display: grid; gap: 0; }
+    .entry {
       display: grid;
-      gap: 20px;
+      grid-template-columns: 120px minmax(0,1fr);
+      gap: 0 28px;
+      position: relative;
     }
-    .section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 28px;
+    .entry + .entry { margin-top: 0; }
+    .entry-year-col {
+      padding-top: 4px;
+      text-align: right;
     }
-    .section h2 {
-      font-size: clamp(1.5rem, 2.3vw, 2rem);
+    .entry-year {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; font-weight: 500;
+      color: var(--soft); letter-spacing: .04em;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .entry-body {
+      border-left: 1px solid var(--border);
+      padding: 0 0 36px 28px;
+      position: relative;
+    }
+    .entry-body::before {
+      content: "";
+      position: absolute; left: -5px; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--ink-3);
+      border: 1.5px solid var(--border-bright);
+      transition: background .2s, border-color .2s;
+    }
+    .entry:hover .entry-body::before {
+      background: var(--teal);
+      border-color: var(--teal);
+      box-shadow: 0 0 10px rgba(47,232,200,0.5);
+    }
+    .entry:last-child .entry-body { border-left-color: transparent; }
+
+    .entry-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 700; font-size: 1rem;
+      color: var(--text); line-height: 1.35;
+      margin-bottom: 5px;
+    }
+    .entry-meta {
+      font-family: "DM Mono", monospace;
+      font-size: .74rem; font-weight: 400;
+      color: var(--soft); margin-bottom: 11px;
+      letter-spacing: .01em; line-height: 1.6;
+    }
+    .entry-meta strong { color: var(--muted); font-weight: 500; }
+    .entry-desc {
+      font-size: .94rem; color: var(--muted);
+      margin-bottom: 10px; line-height: 1.7;
+    }
+    .entry-bullets {
+      list-style: none; display: grid; gap: 5px;
       margin-bottom: 12px;
     }
-    .section p {
-      color: var(--muted);
-      margin-bottom: 12px;
+    .entry-bullets li {
+      font-size: .91rem; color: var(--muted);
+      padding-left: 16px; position: relative;
+      line-height: 1.65;
     }
-    .section p:last-child { margin-bottom: 0; }
-    .timeline,
-    .skills-grid,
-    .project-grid,
-    .publication-grid {
+    .entry-bullets li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--teal); font-size: .78rem;
+      top: 3px;
+    }
+    .entry-bullets li strong { color: var(--text); font-weight: 600; }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .chip {
+      font-family: "DM Mono", monospace;
+      font-size: .69rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 6px;
+      letter-spacing: .03em;
+    }
+    .chip-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(47,232,200,0.18); }
+    .chip-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(111,163,248,0.18); }
+    .chip-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(240,192,96,0.18); }
+    .chip-plain { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+
+    .doi-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; font-weight: 500;
+      color: var(--blue); margin-top: 8px;
+      transition: color .18s;
+    }
+    .doi-link:hover { color: var(--teal); }
+    .doi-link::before { content: "↗"; font-size: .68rem; }
+
+    /* ── SKILLS GRID ─────────────────────────────── */
+    .skills-matrix {
       display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      margin-top: 16px;
     }
-    .item-card {
-      background: rgba(255,255,255,0.03);
+    .skill-card {
+      background: rgba(255,255,255,0.025);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 14px; padding: 20px;
     }
-    .item-card h4 {
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-      font-weight: 800;
+    .skill-card-title {
+      font-family: "Syne", sans-serif;
+      font-weight: 700; font-size: .88rem;
+      color: var(--text); margin-bottom: 13px;
+      display: flex; align-items: center; gap: 8px;
     }
-    .item-meta {
-      color: var(--soft);
-      font-family: "JetBrains Mono", monospace;
-      font-size: .84rem;
-      margin-bottom: 10px;
+    .skill-card-title::after {
+      content: ""; flex: 1; height: 1px;
+      background: var(--border);
     }
-    .bullet-list {
-      padding-left: 18px;
-      color: var(--muted);
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+    .stag {
+      font-family: "DM Mono", monospace;
+      font-size: .69rem; font-weight: 500;
+      padding: 5px 10px; border-radius: 7px;
+      letter-spacing: .02em;
+      transition: opacity .18s;
     }
-    .bullet-list li { margin: 8px 0; }
+    .stag:hover { opacity: .75; }
+    .st-teal { background: var(--teal-dim); color: var(--teal); }
+    .st-blue { background: var(--blue-dim); color: var(--blue); }
+    .st-gold { background: var(--gold-dim); color: var(--gold); }
+    .st-plain { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+    .st-violet { background: rgba(180,143,250,0.1); color: var(--violet); }
 
-    .skills-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .skill-box {
-      background: rgba(255,255,255,0.03);
+    /* ── PUBLICATIONS ────────────────────────────── */
+    .pub-list { display: grid; gap: 14px; }
+    .pub-card {
+      background: rgba(255,255,255,0.02);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 12px; padding: 20px 22px;
+      display: grid; gap: 6px;
+      transition: border-color .2s, background .2s;
     }
-    .skill-box h4 {
-      margin-bottom: 10px;
-      color: var(--text);
-      font-size: 1rem;
+    .pub-card:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.035); }
+    .pub-title {
+      font-family: "DM Serif Display", serif;
+      font-size: 1rem; font-weight: 400;
+      color: var(--text); line-height: 1.4;
+      font-style: italic;
     }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
+    .pub-info {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; color: var(--soft);
     }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: .84rem;
-      font-weight: 700;
-      color: var(--text);
-      border: 1px solid rgba(54,244,210,0.18);
-      background: rgba(54,244,210,0.07);
+    .pub-info strong { color: var(--muted); font-weight: 500; }
+
+    /* ── REFERENCES ──────────────────────────────── */
+    .ref-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .ref-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+    }
+    .ref-name {
+      font-family: "Syne", sans-serif;
+      font-weight: 700; font-size: .95rem;
+      color: var(--text); margin-bottom: 5px;
+    }
+    .ref-inst {
+      font-size: .83rem; color: var(--muted);
+      line-height: 1.5; margin-bottom: 10px;
+    }
+    .ref-role-tag {
+      font-family: "DM Mono", monospace;
+      font-size: .68rem; color: var(--soft);
+      font-style: italic; margin-bottom: 8px;
+    }
+    .ref-email {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; color: var(--blue);
+      word-break: break-all;
     }
 
-    .split-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
-
+    /* ── FOOTER ──────────────────────────────────── */
     footer {
-      margin-top: 30px;
       border-top: 1px solid var(--border);
-      padding: 22px 0 44px;
-      color: var(--soft);
-      font-size: .92rem;
+      padding: 24px 0 48px;
     }
     .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; color: var(--soft);
+      letter-spacing: .04em;
+    }
+    .footer-links {
+      display: flex; gap: 20px;
+      font-family: "DM Mono", monospace;
+      font-size: .72rem; color: var(--soft);
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1000px) {
+      .hero-layout { grid-template-columns: 1fr; }
+      .hero-right { border-left: none; border-top: 1px solid var(--border); padding: 32px 0 0; }
+      .stat-block { grid-template-columns: repeat(2,1fr); }
+      .page-body { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .toc-block { display: none; }
+    }
+    @media (max-width: 720px) {
+      .hero { padding-top: 52px; }
+      .hero-name { font-size: clamp(3rem,14vw,5.5rem); }
+      .entry { grid-template-columns: 1fr; gap: 0; }
+      .entry-year-col { text-align: left; padding: 0 0 6px 28px; }
+      .entry-body { padding-left: 28px; }
+      .skills-matrix { grid-template-columns: 1fr; }
+      .ref-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 500px) {
+      .stat-block { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
     }
 
-    @media (max-width: 980px) {
-      .hero-grid,
-      .main-grid,
-      .skills-grid,
-      .split-grid { grid-template-columns: 1fr; }
-      .side-stack { position: static; }
+    /* ── SCROLL ANIMATION ────────────────────────── */
+    .fade-in {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease;
     }
-    @media (max-width: 640px) {
-      .hero { padding-top: 64px; }
-      .hero-copy, .hero-side, .section, .panel { padding: 22px; }
-      .nav-inner { flex-wrap: wrap; justify-content: center; }
-      .nav-links { justify-content: center; }
-      .quick-grid { grid-template-columns: 1fr; }
-      .button-row { flex-direction: column; align-items: stretch; }
-      .btn { width: 100%; }
-    }
+    .fade-in.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
+
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+
+  <!-- ── NAV ───────────────────────────────────────── -->
   <nav>
     <div class="container nav-inner">
-      <a class="brand" href="index.html">Biswajit <span>Jana</span></a>
+      <a class="brand" href="index.html">Biswajit <em>Jana</em></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a class="active" href="cv.html">CV</a></li>
+        <li><a href="cv.html" class="active">CV</a></li>
         <li><a href="publications.html">Publications</a></li>
         <li><a href="paper-notes.html">Paper Notes</a></li>
         <li><a href="blog/index.html">Blog</a></li>
       </ul>
-      <label class="switch" aria-label="Toggle theme">
-        <input id="themeToggle" type="checkbox" />
-        <span class="slider"></span>
-      </label>
+      <button class="t-btn" id="themeBtn" aria-label="Toggle theme">☽</button>
     </div>
   </nav>
 
+  <!-- ── HERO ──────────────────────────────────────── -->
   <header class="hero container">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <div class="eyebrow">Curriculum Vitae · Academic Profile</div>
-        <h1>Curriculum Vitae</h1>
-        <p class="lede">I am an astrophysics graduate with an instrumentation mindset, working at the boundary between exoplanet spectroscopy, optics, electronics, environmental stability, and scientific computing. This page summarises my background, research direction, selected work, and technical toolkit.</p>
-        <div class="button-row">
-          <a class="btn btn-primary" href="Biswajit%20Jana.pdf" target="_blank" rel="noopener">Download CV</a>
-          <a class="btn btn-secondary" href="mailto:biswajitjana1999@gmail.com">Email me</a>
+    <div class="hero-layout">
+      <div class="hero-left">
+        <div class="overline">Curriculum Vitae · 2026</div>
+        <h1 class="hero-name">Biswajit<br><em>Jana</em></h1>
+        <div class="hero-role">Astrophysics · Instrumentation · Feedback Control</div>
+        <p class="hero-desc">Astrophysics graduate with a background in electronics and instrumentation. My work sits at the intersection of optical systems, precision feedback control, environmental sensing, and spectrograph stabilisation for radial-velocity astronomy.</p>
+        <div class="pill-row">
+          <span class="pill hi">EPRV Instrumentation</span>
+          <span class="pill hi">Spectrograph Stabilisation</span>
+          <span class="pill">Brown Dwarfs</span>
+          <span class="pill">Scientific Computing</span>
+          <span class="pill">Open to PhD positions</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-fill" href="Biswajit%20Jana.pdf" target="_blank" rel="noopener">
+            ↓ &nbsp;Download PDF CV
+          </a>
+          <a class="btn btn-ghost" href="mailto:biswajitj998@gmail.com">
+            ✉ &nbsp;Email me
+          </a>
         </div>
       </div>
 
-      <aside class="hero-side">
-        <div class="eyebrow">At a glance</div>
-        <div class="quick-grid">
-          <div class="quick-card">
-            <div class="label">Current focus</div>
-            <div class="value">Astrophysical instrumentation, radial-velocity spectroscopy, feedback control, optical stability</div>
+      <div class="hero-right">
+        <div class="stat-block">
+          <div class="stat-item">
+            <div class="stat-label">MSc degree</div>
+            <div class="stat-value">
+              Astrophysics with Advanced Research
+              <small>University of Hertfordshire, 2022–2024</small>
+            </div>
+            <div style="margin-top:7px;"><span class="badge badge-gold">Commendation</span></div>
           </div>
-          <div class="quick-card">
-            <div class="label">Research themes</div>
-            <div class="value">EXOhSPEC, interferometry, brown dwarfs, detector performance, precision measurements</div>
+          <div class="stat-item">
+            <div class="stat-label">BTech degree</div>
+            <div class="stat-value">
+              Electronics &amp; Communication Engineering
+              <small>University of Engineering &amp; Management, 2017–2021</small>
+            </div>
+            <div style="margin-top:7px;"><span class="badge badge-blue">First Class with Distinction</span></div>
           </div>
-          <div class="quick-card">
-            <div class="label">Core strengths</div>
-            <div class="value">Python, optics, electronics, analysis, experiment design, technical communication</div>
+          <div class="stat-item">
+            <div class="stat-label">English proficiency</div>
+            <div class="stat-value">IELTS Band 7.0 (Overall)</div>
           </div>
-          <div class="quick-card">
-            <div class="label">Location</div>
-            <div class="value">United Kingdom · Research portfolio hosted online</div>
+          <div class="stat-item">
+            <div class="stat-label">Location &amp; status</div>
+            <div class="stat-value">
+              England, United Kingdom
+              <small>Actively seeking PhD positions in instrumentation / EPRV</small>
+            </div>
+            <div style="margin-top:7px;"><span class="badge badge-teal">Research-ready</span></div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Contact</div>
+            <div class="stat-value" style="font-size:.85rem;">
+              biswajitj998@gmail.com<br>
+              <a href="https://github.com/Biswajit1999" target="_blank" style="color:var(--blue);">GitHub</a>
+              &nbsp;·&nbsp;
+              <a href="https://www.linkedin.com/in/biswajit-jana-27011a151/" target="_blank" style="color:var(--blue);">LinkedIn</a>
+            </div>
           </div>
         </div>
-      </aside>
+      </div>
     </div>
+    <div class="hero-rule"></div>
   </header>
 
-  <main class="container main-grid">
-    <aside class="side-stack">
-      <section class="panel">
-        <h3>Navigation</h3>
-        <div class="toc">
-          <a href="#profile">Profile</a>
-          <a href="#education">Education</a>
-          <a href="#focus">Research Focus</a>
-          <a href="#experience">Selected Experience</a>
-          <a href="#skills">Technical Skills</a>
-          <a href="#outputs">Selected Outputs</a>
-        </div>
-      </section>
+  <!-- ── PAGE BODY ──────────────────────────────────── -->
+  <div class="container page-body">
 
-      <section class="panel">
-        <h3>Snapshot</h3>
-        <ul class="mini-list">
-          <li><span>MSc</span><strong>Astrophysics</strong></li>
-          <li><span>BTech</span><strong>ECE</strong></li>
-          <li><span>Primary tools</span><strong>Python · LaTeX · Optics</strong></li>
-          <li><span>Method space</span><strong>Spectroscopy · Interferometry</strong></li>
-        </ul>
-      </section>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="toc-block" aria-label="Page sections">
+        <div class="toc-heading">Sections</div>
+        <a class="toc-link" href="#education">Education</a>
+        <a class="toc-link" href="#research">Research</a>
+        <a class="toc-link" href="#internships">Internships</a>
+        <a class="toc-link" href="#publications">Publications</a>
+        <a class="toc-link" href="#talks">Talks &amp; Posters</a>
+        <a class="toc-link" href="#skills">Skills</a>
+        <a class="toc-link" href="#references">References</a>
+      </nav>
     </aside>
 
-    <div class="content">
-      <section class="section" id="profile">
-        <h2>Professional profile</h2>
-        <p>My training combines astrophysics with electronics and instrumentation, which means I naturally end up asking not only what the universe is doing, but also how well our instruments are measuring it. Much of my work has therefore focused on precision: how optical systems respond to their environment, how detector-plane motion can be stabilised, and how feedback logic can improve the reliability of measurements.</p>
-        <p>My broader interests include exoplanet instrumentation, radial-velocity spectroscopy, optical path stability, brown dwarfs, detector performance, and scientific computing for experimental systems. I enjoy technical work that sits between physics and engineering rather than pretending the two should stay in separate rooms.</p>
-      </section>
+    <!-- MAIN -->
+    <main class="cv-content">
 
-      <section class="section" id="education">
-        <h2>Education</h2>
-        <div class="timeline">
-          <article class="item-card">
-            <h4>MSc Astrophysics with Advanced Research</h4>
-            <div class="item-meta">University of Hertfordshire, United Kingdom · 2022–2024</div>
-            <p>Graduate training in astrophysics with a strong research and instrumentation component, including optical systems, spectroscopy, data analysis, and scientific reporting.</p>
-          </article>
-          <article class="item-card">
-            <h4>BTech Electronics and Communication Engineering</h4>
-            <div class="item-meta">University of Engineering and Management, India · 2017–2021</div>
-            <p>Foundational training in electronics, embedded systems, signal processing, programming, and communication systems, which later shaped my approach to astrophysical instrumentation.</p>
-          </article>
+      <!-- ── EDUCATION ─────────────────────────── -->
+      <section class="cv-section fade-in" id="education">
+        <div class="section-title-row">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Education</h2>
+          <div class="section-line"></div>
         </div>
-      </section>
-
-      <section class="section" id="focus">
-        <h2>Research focus</h2>
-        <p>My research interests sit around the practical side of astrophysics: what it takes to build, stabilise, and interpret instruments that are supposed to measure very small effects without being distracted by everything else the environment is doing.</p>
-        <div class="tags">
-          <span class="tag">Exoplanet instrumentation</span>
-          <span class="tag">Radial-velocity spectroscopy</span>
-          <span class="tag">Optical systems</span>
-          <span class="tag">Laser interferometry</span>
-          <span class="tag">Feedback control</span>
-          <span class="tag">Detector stability</span>
-          <span class="tag">Brown dwarfs</span>
-          <span class="tag">Scientific computing</span>
-        </div>
-      </section>
-
-      <section class="section" id="experience">
-        <h2>Selected experience</h2>
-        <div class="project-grid">
-          <article class="item-card">
-            <h4>EXOhSPEC closed-loop feedback control project</h4>
-            <p>Worked on stabilisation ideas for a precision spectrograph platform, focusing on environmental response, optical path behaviour, detector-plane stability, and control logic tied to temperature and image motion.</p>
-          </article>
-          <article class="item-card">
-            <h4>SEPnet placement with Lumi Space</h4>
-            <p>Contributed to detector-performance analysis relevant to satellite laser ranging, combining practical measurement work with instrument-oriented interpretation.</p>
-          </article>
-          <article class="item-card">
-            <h4>Halo T dwarf candidate research</h4>
-            <p>Worked with VISTA, DES, and WISE data for the study of candidate T dwarfs, linking survey-based astrophysics with classification and follow-up motivation.</p>
-          </article>
-          <article class="item-card">
-            <h4>Radio interferometry summer school project</h4>
-            <p>Participated in hands-on interferometry training, strengthening my interest in observational methods and data-driven astronomical inference.</p>
-          </article>
-          <article class="item-card">
-            <h4>Visible light communication system using Raspberry Pi</h4>
-            <p>Designed and implemented a VLC system with dimming control, bringing together hardware, software, optical communication, and experimental testing.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="skills">
-        <h2>Technical skills</h2>
-        <div class="skills-grid">
-          <div class="skill-box">
-            <h4>Programming & analysis</h4>
-            <p>Python, MATLAB, HTML/CSS/JavaScript, LaTeX, scientific plotting, data cleaning, experiment logging, and quantitative analysis.</p>
-          </div>
-          <div class="skill-box">
-            <h4>Instrumentation & optics</h4>
-            <p>Optical instrumentation, spectroscopy, laser interferometry, environmental monitoring, detector behaviour, and practical lab-based measurement systems.</p>
-          </div>
-          <div class="skill-box">
-            <h4>Electronics & embedded systems</h4>
-            <p>Electronics, Arduino, Raspberry Pi, sensor integration, interfacing, and hardware-aware experimentation.</p>
-          </div>
-          <div class="skill-box">
-            <h4>Research communication</h4>
-            <p>Scientific writing, posters, presentations, technical summaries, and web-based academic portfolio development.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="outputs">
-        <h2>Selected outputs</h2>
-        <div class="split-grid">
-          <article class="item-card">
-            <h4>Publications & proceedings</h4>
-            <p>Includes journal and conference outputs across visible light communication, smart systems, and logic design, with a growing emphasis on instrumentation and astrophysics.</p>
-            <div class="button-row" style="margin-top:14px;">
-              <a class="btn btn-secondary" href="publications.html">View publications</a>
+        <div class="entries">
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2022–2024</div>
             </div>
-          </article>
-          <article class="item-card">
-            <h4>Paper notes & research reflections</h4>
-            <p>A curated section on the website is dedicated to paper notes and reading summaries, keeping technical ideas readable without draining them of meaning.</p>
-            <div class="button-row" style="margin-top:14px;">
-              <a class="btn btn-secondary" href="paper-notes.html">Open paper notes</a>
+            <div class="entry-body">
+              <div class="entry-title">MSc Astrophysics with Advanced Research</div>
+              <div class="entry-meta">
+                <strong>University of Hertfordshire</strong>, United Kingdom
+                &nbsp;·&nbsp; <span class="badge badge-gold">Commendation</span>
+              </div>
+              <p class="entry-desc">Dissertation: <em>Closed-Loop Feedback Control System for the Exoplanet High-Resolution RV Spectrograph (EXOhSPEC) Development</em></p>
+              <ul class="entry-bullets">
+                <li>Star Formation and Evolution; Physics of Astronomical Spectra; High Energy Astrophysics; Galaxy Structure and Evolution</li>
+                <li>Foundations of Cosmology; Early Universe and Galaxy Formation; Research Techniques in Astrophysics</li>
+                <li>Statistics and Analysis; From Stars to Planets</li>
+              </ul>
             </div>
-          </article>
+          </div>
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2017–2021</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">BTech Electronics and Communication Engineering</div>
+              <div class="entry-meta">
+                <strong>University of Engineering and Management</strong>, India
+                &nbsp;·&nbsp; <span class="badge badge-blue">First Class with Distinction</span>
+              </div>
+              <p class="entry-desc">Dissertation: <em>Dimming Controlled Visible Light Communication System using Raspberry Pi</em> — published in Optical and Quantum Electronics, Springer (2021).</p>
+            </div>
+          </div>
         </div>
       </section>
-    </div>
-  </main>
 
+      <!-- ── RESEARCH ──────────────────────────── -->
+      <section class="cv-section fade-in" id="research">
+        <div class="section-title-row">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Research &amp; Project Experience</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="entries">
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2023–Present</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Closed-Loop Feedback Control System for EXOhSPEC</div>
+              <div class="entry-meta">
+                <strong>MSc research project</strong> · University of Hertfordshire<br>
+                Supervisors: Prof. Hugh Jones &amp; Prof. William Martin
+              </div>
+              <ul class="entry-bullets">
+                <li>Developed a closed-loop stabilisation framework for EXOhSPEC, a high-resolution radial-velocity spectrograph testbed for exoplanet instrumentation research.</li>
+                <li>Integrated <strong>IDS3010 interferometric sensing</strong>, <strong>Meerstetter TEC control</strong>, <strong>BME environmental sensors</strong>, <strong>MaxIm DL centroid tracking</strong>, and adaptive-optics correction into Python-based feedback workflows.</li>
+                <li>Quantified environmental coupling: <strong>1 hPa pressure → ~0.4 µm OPL</strong>; <strong>1°C temperature → ~6 µm OPL variation</strong>.</li>
+                <li>Achieved <strong>~±0.3°C enclosure stability</strong> over multi-week operation, later reaching millikelvin-level TEC control during closed-loop experiments.</li>
+                <li>Built diagnostics stack: <strong>Grafana + InfluxDB</strong>, serial logging, web monitoring, and Python-based OPL and pixel-drift correction models using environmental data and guider centroid errors.</li>
+                <li>AO Stage-1 tests validated <strong>~0.15 px/step</strong> response; reduced mean post-correction residuals from <strong>~0.44 px to ~0.15 px</strong>; hybrid TEC–AO runs reduced dY RMS from <strong>~2.72 px to ~0.69 px</strong>.</li>
+              </ul>
+              <div class="chip-row">
+                <span class="chip chip-teal">dY RMS 0.69 px</span>
+                <span class="chip chip-teal">OPL: 6 µm/°C</span>
+                <span class="chip chip-teal">mK TEC stability</span>
+                <span class="chip chip-blue">IDS3010</span>
+                <span class="chip chip-blue">MaxIm DL</span>
+                <span class="chip chip-blue">Grafana / InfluxDB</span>
+                <span class="chip chip-plain">Python</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2026–Present</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Gaia DR3 H–R Diagram Laboratory</div>
+              <div class="entry-meta"><strong>Independent project</strong> · Browser-based stellar-population visualisation</div>
+              <ul class="entry-bullets">
+                <li>Built a live browser-based Gaia DR3 laboratory for exploring stellar populations on the H–R diagram using real catalogue data.</li>
+                <li>Implemented 10+ interactive components including H–R diagram view, stellar-region overlays, local 3D Galactic projection, telemetry panels, zoom controls, export tools, and progressive browser-side data loading.</li>
+                <li>Solved practical large-CSV handling, browser memory limits, and rendering-performance constraints for client-side science delivery.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2026–Present</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">ExoLight Transit Lab &amp; Exoplanet Visualisation Tools</div>
+              <div class="entry-meta"><strong>Independent project</strong> · Science communication</div>
+              <ul class="entry-bullets">
+                <li>Developed a live exoplanet transit visualisation tool covering transit geometry, normalised light curves, flux dips, limb darkening, and atmospheric transmission.</li>
+                <li>Quantitative outputs: transit-depth visualisation, normalised flux curves, ingress/egress interpretation, and planet–star radius-ratio explanation.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">UoH</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Detection of Pulsars by Image Stacking in Large FITS Datasets</div>
+              <div class="entry-meta"><strong>University of Hertfordshire</strong></div>
+              <ul class="entry-bullets">
+                <li>Applied the <strong>Binapprox algorithm</strong> for efficient median estimation across <strong>9,587 astronomical FITS images</strong>.</li>
+                <li>Developed image-stacking and median-combination workflows to improve faint-source detectability for pulsar-search style datasets.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Sep–Dec 2022</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Case Studies in Astrophysics — MSc Coursework</div>
+              <div class="entry-meta"><strong>University of Hertfordshire</strong></div>
+              <ul class="entry-bullets">
+                <li><strong>Exoplanets:</strong> analysed transit dips and RV variations using DACE, Python, and lightkurve to estimate planetary parameters.</li>
+                <li><strong>Brown dwarfs:</strong> classified a target as a brown dwarf with estimated T ~1100 K and silicate atmospheric features; proposed further PICASO 3.0 analysis.</li>
+                <li><strong>Gaia close encounters:</strong> identified GJ710 as a potential close-passage candidate with perihelion-distance and uncertainty analysis.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2022–2024</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Bayfordbury Observatory — Practical Experience</div>
+              <div class="entry-meta"><strong>University of Hertfordshire</strong></div>
+              <ul class="entry-bullets">
+                <li>CCD calibration, photometry, image acquisition, guiding, and spectroscopic data reduction using Meade telescopes.</li>
+                <li>Participated in planetarium demonstrations and public telescope sessions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2019–2021</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Dimming Controlled Visible Light Communication System</div>
+              <div class="entry-meta"><strong>BTech final-year project</strong> · University of Engineering and Management, India</div>
+              <ul class="entry-bullets">
+                <li>Implemented a Multi-Header Hybrid Pulse Position Modulation VLC system using Raspberry Pi and low-cost hardware.</li>
+                <li>Achieved communication distances of <strong>~3 m at dimming 0.25</strong> and <strong>~3.5 m at dimming 0.5/0.75</strong>; published in Optical and Quantum Electronics.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── INTERNSHIPS ────────────────────────── -->
+      <section class="cv-section fade-in" id="internships">
+        <div class="section-title-row">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Internships &amp; Programmes</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="entries">
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Aug–Sep 2024</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">LUMI SPACE / SEPnet Summer Placement</div>
+              <div class="entry-meta"><strong>Microbolometer Camera Performance for Satellite Laser Ranging</strong> · United Kingdom</div>
+              <ul class="entry-bullets">
+                <li>Evaluated microbolometer-camera performance for satellite laser ranging and orbital-debris tracking; constructed link-budget comparisons for microbolometer, CMOS, CCD, and quad-detector systems.</li>
+                <li>Modelled detector responsivity, beam divergence, atmospheric transmission, refractive-index effects; proposed improvement routes using high-TCR materials and optical-antenna coupling.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Jun–Jul 2023</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Halo T Dwarf Candidate Research</div>
+              <div class="entry-meta">
+                <strong>Summer research project</strong> · University of Hertfordshire<br>
+                Supervisor: Prof. David Pinfield · Collaborator: Berenice Laurent
+              </div>
+              <ul class="entry-bullets">
+                <li>Analysed VISTA, DES, and WISE survey data for potential halo T dwarf candidates.</li>
+                <li>Contributed to candidate assessment, follow-up planning, and a <strong>CNTAC telescope-proposal submission</strong> for Magellan/FIRE spectroscopic follow-up (2025A).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">2023</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Carl Sagan Exoplanet Summer Workshop</div>
+              <div class="entry-meta"><strong>Caltech / NASA Exoplanet Science Institute</strong></div>
+              <p class="entry-desc">Hands-on training in exoplanet atmospheric modelling, brown-dwarf atmosphere interpretation, and retrieval tools including PICASO and petitRADTRANS.</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Feb–May 2022</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Radio Astronomy Summer School</div>
+              <div class="entry-meta"><strong>Gauribidanur Radio Observatory / RRI / Naxxatra</strong> · Supervisor: Dr. Ramesh Balasubramanyam</div>
+              <p class="entry-desc">Demonstrated a two-element radio interferometer and observed solar transits; practical exposure to radio astronomy instrumentation and interferometry.</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Oct–Nov 2020</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">Society for Space Education Research and Development</div>
+              <div class="entry-meta"><strong>Online</strong> · Supervisor: Sundar M. N.</div>
+              <p class="entry-desc">Cross-matched optical and radio catalogues and explored machine-learning-based classification using multi-wavelength astronomical data for elliptical-galaxy classification.</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col">
+              <div class="entry-year">Dec 2019–Jan 2020</div>
+            </div>
+            <div class="entry-body">
+              <div class="entry-title">IIT Kharagpur Winter Internship</div>
+              <div class="entry-meta"><strong>India</strong> · Supervisor: Prof. Sudip Misra</div>
+              <p class="entry-desc">Worked on low-cost high-frequency detecting circuits and calibration/synchronisation of multiple drones.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── PUBLICATIONS ───────────────────────── -->
+      <section class="cv-section fade-in" id="publications">
+        <div class="section-title-row">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Publications</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="pub-list">
+          <div class="pub-card">
+            <div class="pub-title">Implementation of Dimming Controlled Visible Light Communication using Raspberry Pi</div>
+            <div class="pub-info">Jana, B., et al. &nbsp;·&nbsp; <strong>Optical and Quantum Electronics</strong>, 53, 725 &nbsp;·&nbsp; Springer &nbsp;·&nbsp; 2021</div>
+            <a class="doi-link" href="https://doi.org/10.1007/s11082-021-03362-4" target="_blank">DOI: 10.1007/s11082-021-03362-4</a>
+          </div>
+          <div class="pub-card">
+            <div class="pub-title">GSM Controlled Location Specific Garbage Collecting Smart Bin</div>
+            <div class="pub-info">Jana, B., et al. &nbsp;·&nbsp; <strong>IEMECON</strong> &nbsp;·&nbsp; Jaipur, India &nbsp;·&nbsp; 2019</div>
+            <a class="doi-link" href="https://doi.org/10.1109/IEMECONX.2019.8877007" target="_blank">DOI: 10.1109/IEMECONX.2019.8877007</a>
+          </div>
+          <div class="pub-card">
+            <div class="pub-title">Priority Encoder Using Reversible Logic Gates in QCA</div>
+            <div class="pub-info">Jana, B., et al. &nbsp;·&nbsp; <strong>IEEE IEMCON</strong> &nbsp;·&nbsp; Vancouver, Canada &nbsp;·&nbsp; 2017</div>
+            <a class="doi-link" href="https://doi.org/10.1109/IEMCON.2017.8117242" target="_blank">DOI: 10.1109/IEMCON.2017.8117242</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TALKS ──────────────────────────────── -->
+      <section class="cv-section fade-in" id="talks">
+        <div class="section-title-row">
+          <span class="section-num">05</span>
+          <h2 class="section-title">Talks &amp; Poster Presentations</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="entries">
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">Nov 2024</div></div>
+            <div class="entry-body">
+              <div class="entry-title">Testing Performance of Microbolometer Detector for Satellite Laser Ranging Application</div>
+              <div class="entry-meta">Poster &nbsp;·&nbsp; <strong>SEPnet Poster Presentation</strong> &nbsp;·&nbsp; London, United Kingdom</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">Mar 2024</div></div>
+            <div class="entry-body">
+              <div class="entry-title">High Resolution RV Spectrographs: ANDES and PID Loop Implementation in EXOhSPEC</div>
+              <div class="entry-meta">Seminar &nbsp;·&nbsp; <strong>University of Hertfordshire</strong> &nbsp;·&nbsp; 7 March 2024</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">Feb 2024</div></div>
+            <div class="entry-body">
+              <div class="entry-title">Optimising Path Length Stability in Laser Interferometers using Air Refractive Index</div>
+              <div class="entry-meta">Seminar &nbsp;·&nbsp; <strong>University of Hertfordshire</strong> &nbsp;·&nbsp; 8 February 2024</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">Dec 2023</div></div>
+            <div class="entry-body">
+              <div class="entry-title">Advancement in Precision: Laser Interferometer Control System</div>
+              <div class="entry-meta">Seminar &nbsp;·&nbsp; <strong>University of Hertfordshire</strong> &nbsp;·&nbsp; 8 December 2023</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">Nov 2023</div></div>
+            <div class="entry-body">
+              <div class="entry-title">State of the Art: Radial Velocity Spectrograph</div>
+              <div class="entry-meta">Seminar &nbsp;·&nbsp; <strong>University of Hertfordshire</strong> &nbsp;·&nbsp; 9 November 2023</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SKILLS ─────────────────────────────── -->
+      <section class="cv-section fade-in" id="skills">
+        <div class="section-title-row">
+          <span class="section-num">06</span>
+          <h2 class="section-title">Technical Skills</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="skills-matrix">
+          <div class="skill-card">
+            <div class="skill-card-title">Programming &amp; Analysis</div>
+            <div class="tag-cloud">
+              <span class="stag st-teal">Python</span>
+              <span class="stag st-teal">JavaScript</span>
+              <span class="stag st-teal">MATLAB</span>
+              <span class="stag st-plain">HTML / CSS</span>
+              <span class="stag st-plain">C / C++</span>
+              <span class="stag st-plain">LaTeX</span>
+              <span class="stag st-plain">SQL</span>
+              <span class="stag st-plain">Bash</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Astronomy &amp; Data</div>
+            <div class="tag-cloud">
+              <span class="stag st-blue">NumPy / SciPy</span>
+              <span class="stag st-blue">pandas</span>
+              <span class="stag st-blue">Matplotlib</span>
+              <span class="stag st-blue">Astropy</span>
+              <span class="stag st-blue">lightkurve</span>
+              <span class="stag st-blue">DACE</span>
+              <span class="stag st-blue">FITS workflows</span>
+              <span class="stag st-plain">Jupyter</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Instrumentation &amp; Optics</div>
+            <div class="tag-cloud">
+              <span class="stag st-teal">IDS3010</span>
+              <span class="stag st-teal">Laser interferometry</span>
+              <span class="stag st-teal">RV spectrograph stabilisation</span>
+              <span class="stag st-teal">Adaptive optics</span>
+              <span class="stag st-plain">PID control</span>
+              <span class="stag st-plain">Optical alignment</span>
+              <span class="stag st-plain">Environmental control</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Telemetry &amp; Control</div>
+            <div class="tag-cloud">
+              <span class="stag st-gold">Grafana</span>
+              <span class="stag st-gold">InfluxDB</span>
+              <span class="stag st-gold">MaxIm DL</span>
+              <span class="stag st-plain">RS-232 / RS-485</span>
+              <span class="stag st-plain">Serial comms</span>
+              <span class="stag st-plain">Sensor fusion</span>
+              <span class="stag st-plain">Real-time logging</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Hardware &amp; Embedded</div>
+            <div class="tag-cloud">
+              <span class="stag st-blue">Arduino</span>
+              <span class="stag st-blue">Raspberry Pi</span>
+              <span class="stag st-blue">NodeMCU ESP8266</span>
+              <span class="stag st-blue">PSoC 5LP</span>
+              <span class="stag st-plain">IoT systems</span>
+              <span class="stag st-plain">VLC prototypes</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-title">Software &amp; Tools</div>
+            <div class="tag-cloud">
+              <span class="stag st-violet">Git / GitHub</span>
+              <span class="stag st-violet">WebGL / Three.js</span>
+              <span class="stag st-plain">Overleaf</span>
+              <span class="stag st-plain">Simulink</span>
+              <span class="stag st-plain">QCA Designer</span>
+              <span class="stag st-plain">PSpice</span>
+              <span class="stag st-plain">PSoC Creator</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── REFERENCES ─────────────────────────── -->
+      <section class="cv-section fade-in" id="references">
+        <div class="section-title-row">
+          <span class="section-num">07</span>
+          <h2 class="section-title">References</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="ref-grid">
+          <div class="ref-card">
+            <div class="ref-name">Prof. Hugh Jones</div>
+            <div class="ref-inst">University of Hertfordshire<br>Dept. of Physics, Astronomy &amp; Mathematics</div>
+            <div class="ref-role-tag">MSc supervisor — EXOhSPEC research</div>
+            <div class="ref-email">h.r.a.jones@herts.ac.uk</div>
+          </div>
+          <div class="ref-card">
+            <div class="ref-name">Prof. Bill Martin</div>
+            <div class="ref-inst">University of Hertfordshire<br>Dept. of Physics, Astronomy &amp; Mathematics</div>
+            <div class="ref-role-tag">MSc supervisor — optics &amp; laboratory</div>
+            <div class="ref-email">w.e.martin@herts.ac.uk</div>
+          </div>
+          <div class="ref-card">
+            <div class="ref-name">Prof. David Pinfield</div>
+            <div class="ref-inst">University of Hertfordshire<br>Dept. of Physics, Astronomy &amp; Mathematics</div>
+            <div class="ref-role-tag">Brown dwarf candidate research</div>
+            <div class="ref-email">d.j.pinfield@herts.ac.uk</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────── -->
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 Biswajit Jana. All rights reserved.</div>
-      <div><a href="index.html">Home</a> · <a href="publications.html">Publications</a> · <a href="paper-notes.html">Paper Notes</a></div>
+      <div class="footer-copy">© 2026 Biswajit Jana</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <a href="paper-notes.html">Paper Notes</a>
+        <a href="blog/index.html">Blog</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    const body = document.body;
-    const toggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      body.classList.add('light');
-      toggle.checked = true;
+    /* ══════════════════════════════════════════════
+       THEME SYSTEM
+    ══════════════════════════════════════════════ */
+    const DARK = {
+      '--ink':           '#0a0f1a',
+      '--ink-2':         '#0d1424',
+      '--ink-3':         '#111c30',
+      '--text':          '#e8effe',
+      '--muted':         '#8da4c4',
+      '--soft':          '#546880',
+      '--teal':          '#2fe8c8',
+      '--teal-dim':      'rgba(47,232,200,0.12)',
+      '--teal-glow':     'rgba(47,232,200,0.06)',
+      '--gold':          '#f0c060',
+      '--gold-dim':      'rgba(240,192,96,0.10)',
+      '--blue':          '#6fa3f8',
+      '--blue-dim':      'rgba(111,163,248,0.10)',
+      '--violet':        '#b48ffa',
+      '--border':        'rgba(255,255,255,0.07)',
+      '--border-bright': 'rgba(255,255,255,0.13)',
+    };
+    const LIGHT = {
+      '--ink':           '#f0f5ff',
+      '--ink-2':         '#e8f0ff',
+      '--ink-3':         '#dde8ff',
+      '--text':          '#0d1f3c',
+      '--muted':         '#3a5070',
+      '--soft':          '#6a88a8',
+      '--teal':          '#009c86',
+      '--teal-dim':      'rgba(0,156,134,0.10)',
+      '--teal-glow':     'rgba(0,156,134,0.05)',
+      '--gold':          '#b07800',
+      '--gold-dim':      'rgba(176,120,0,0.09)',
+      '--blue':          '#1a5fd4',
+      '--blue-dim':      'rgba(26,95,212,0.09)',
+      '--violet':        '#6b38d4',
+      '--border':        'rgba(13,31,60,0.10)',
+      '--border-bright': 'rgba(13,31,60,0.18)',
+    };
+
+    const root = document.documentElement;
+    const btn  = document.getElementById('themeBtn');
+    let isLight = localStorage.getItem('cv-theme') === 'light';
+
+    function applyTheme() {
+      const t = isLight ? LIGHT : DARK;
+      for (const [k, v] of Object.entries(t)) root.style.setProperty(k, v);
+      document.body.style.backgroundColor = isLight ? '#f0f5ff' : '#0a0f1a';
+      // update nav bg
+      document.querySelector('nav').style.background =
+        isLight ? 'rgba(240,245,255,0.88)' : 'rgba(10,15,26,0.82)';
+      btn.textContent = isLight ? '☽' : '☾';
+      btn.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+      // re-seed canvas with new palette
+      if (window.__starSim) window.__starSim.setTheme(isLight);
     }
-    toggle?.addEventListener('change', () => {
-      body.classList.toggle('light', toggle.checked);
-      localStorage.setItem('theme', toggle.checked ? 'light' : 'dark');
+
+    applyTheme();
+    btn.addEventListener('click', () => {
+      isLight = !isLight;
+      localStorage.setItem('cv-theme', isLight ? 'light' : 'dark');
+      applyTheme();
     });
+
+    /* ══════════════════════════════════════════════
+       STAR CLUSTER CANVAS SIMULATION
+       — scattered clusters, mouse parallax/ripple
+    ══════════════════════════════════════════════ */
+    (function () {
+      const canvas = document.getElementById('star-canvas');
+      const ctx    = canvas.getContext('2d');
+
+      let W, H, dpr;
+      let mouse  = { x: -9999, y: -9999, vx: 0, vy: 0 };
+      let prevMX = -9999, prevMY = -9999;
+      let stars  = [];
+      let ripples = [];
+      let lightMode = isLight;
+      let raf;
+
+      /* ── resize ── */
+      function resize() {
+        dpr    = Math.min(window.devicePixelRatio || 1, 2);
+        W      = window.innerWidth;
+        H      = window.innerHeight;
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+        buildStars();
+      }
+
+      /* ── star clusters ──
+         8 cluster centres scattered across the viewport.
+         Each cluster seeds ~N stars in a Gaussian spread.
+      */
+      function gauss() {
+        // Box-Muller
+        let u = 0, v = 0;
+        while (!u) u = Math.random();
+        while (!v) v = Math.random();
+        return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+      }
+
+      function buildStars() {
+        stars = [];
+        const clusterCount = 9;
+        const starsPerCluster = Math.floor((W * H) / 22000); // density scales with viewport
+        const total = Math.max(60, Math.min(starsPerCluster, 220));
+
+        // fixed cluster seeds (fractional viewport positions)
+        const seeds = [
+          [0.12, 0.18], [0.78, 0.08], [0.45, 0.35],
+          [0.88, 0.55], [0.22, 0.70], [0.60, 0.82],
+          [0.35, 0.92], [0.92, 0.88], [0.55, 0.14],
+        ];
+
+        seeds.forEach(([fx, fy], ci) => {
+          const cx     = fx * W;
+          const cy     = fy * H;
+          const spread = 80 + Math.random() * 120;
+          const n      = Math.floor(total / clusterCount) + (ci < total % clusterCount ? 1 : 0);
+
+          for (let i = 0; i < n; i++) {
+            const r = (0.4 + Math.random() * 1.4);
+            stars.push({
+              bx: cx + gauss() * spread,   // base x
+              by: cy + gauss() * spread,   // base y
+              x:  0, y: 0,                 // current (set in update)
+              r,
+              baseAlpha: 0.15 + Math.random() * 0.55,
+              alpha:     0,
+              twinkleSpeed: 0.008 + Math.random() * 0.018,
+              twinklePhase: Math.random() * Math.PI * 2,
+              parallax:  0.012 + Math.random() * 0.035,  // how much mouse moves it
+              cluster: ci,
+              // colour tint: mostly white, occasional teal/blue/gold
+              hue: Math.random() < 0.12 ? 'teal' : Math.random() < 0.08 ? 'gold' : 'white',
+            });
+          }
+        });
+      }
+
+      /* ── colours per theme ── */
+      function starColour(s, a) {
+        if (lightMode) {
+          if (s.hue === 'teal') return `rgba(0,120,104,${a})`;
+          if (s.hue === 'gold') return `rgba(140,90,0,${a})`;
+          return `rgba(30,60,110,${a})`;
+        } else {
+          if (s.hue === 'teal') return `rgba(47,232,200,${a})`;
+          if (s.hue === 'gold') return `rgba(240,192,96,${a})`;
+          return `rgba(200,220,255,${a})`;
+        }
+      }
+
+      /* ── mouse tracking ── */
+      let mouseRaf = null;
+      window.addEventListener('mousemove', e => {
+        const nx = e.clientX, ny = e.clientY;
+        mouse.vx = nx - prevMX;
+        mouse.vy = ny - prevMY;
+        prevMX = mouse.x = nx;
+        prevMY = mouse.y = ny;
+
+        // spawn ripple on fast movement
+        const speed = Math.sqrt(mouse.vx * mouse.vx + mouse.vy * mouse.vy);
+        if (speed > 8) {
+          ripples.push({ x: nx, y: ny, r: 0, maxR: 40 + speed * 1.2, alpha: 0.35, speed: 1.4 + speed * 0.06 });
+        }
+      }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.x = -9999; mouse.y = -9999;
+      });
+
+      /* ── update + draw ── */
+      let t = 0;
+      function frame() {
+        t += 0.016;
+        ctx.clearRect(0, 0, W, H);
+
+        // background gradient
+        const bg = ctx.createLinearGradient(0, 0, W * 0.4, H);
+        if (lightMode) {
+          bg.addColorStop(0,   '#f0f5ff');
+          bg.addColorStop(0.5, '#e8f0ff');
+          bg.addColorStop(1,   '#f4f8ff');
+        } else {
+          bg.addColorStop(0,   '#0a0f1a');
+          bg.addColorStop(0.5, '#0c1422');
+          bg.addColorStop(1,   '#080d18');
+        }
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // soft nebula glows
+        const glows = lightMode
+          ? [{ x: W*0.5, y: -H*0.05, r: W*0.6, c: 'rgba(0,156,134,0.04)' },
+             { x: W*0.9, y: H*0.85,  r: W*0.5, c: 'rgba(26,95,212,0.04)' }]
+          : [{ x: W*0.5, y: -H*0.05, r: W*0.6, c: 'rgba(47,232,200,0.05)' },
+             { x: W*0.9, y: H*0.85,  r: W*0.5, c: 'rgba(111,163,248,0.05)' }];
+        glows.forEach(g => {
+          const rg = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, g.r);
+          rg.addColorStop(0, g.c);
+          rg.addColorStop(1, 'transparent');
+          ctx.fillStyle = rg;
+          ctx.fillRect(0, 0, W, H);
+        });
+
+        // stars
+        const mx = mouse.x, my = mouse.y;
+        stars.forEach(s => {
+          // parallax offset from mouse
+          const dx = (mx - W / 2) * s.parallax;
+          const dy = (my - H / 2) * s.parallax;
+          s.x = s.bx + dx;
+          s.y = s.by + dy;
+
+          // proximity brightening
+          const dist = Math.hypot(mx - s.x, my - s.y);
+          const proximity = Math.max(0, 1 - dist / 140);
+          const twinkle = 0.5 + 0.5 * Math.sin(t * s.twinkleSpeed * 60 + s.twinklePhase);
+          s.alpha = s.baseAlpha * (0.7 + 0.3 * twinkle) + proximity * 0.5;
+
+          const a = Math.min(1, s.alpha);
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * (1 + proximity * 0.6), 0, Math.PI * 2);
+          ctx.fillStyle = starColour(s, a);
+          ctx.fill();
+
+          // glow halo for bright/close stars
+          if (a > 0.5 || proximity > 0.3) {
+            const gr = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+            gr.addColorStop(0, starColour(s, a * 0.35));
+            gr.addColorStop(1, 'transparent');
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+            ctx.fillStyle = gr;
+            ctx.fill();
+          }
+        });
+
+        // draw cluster convex hints (faint lines connecting nearby cluster stars)
+        // group by cluster, connect 3 nearest neighbours faintly
+        const clusterMap = {};
+        stars.forEach(s => { (clusterMap[s.cluster] = clusterMap[s.cluster] || []).push(s); });
+        Object.values(clusterMap).forEach(cStars => {
+          if (cStars.length < 3) return;
+          // pick 5 random pairs within cluster and draw faint connecting lines
+          for (let i = 0; i < Math.min(5, cStars.length - 1); i++) {
+            const a = cStars[i], b = cStars[i + 1];
+            const dist = Math.hypot(a.x - b.x, a.y - b.y);
+            if (dist > 120) continue;
+            const alpha = lightMode ? 0.04 : 0.06;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = lightMode ? `rgba(30,60,110,${alpha})` : `rgba(180,210,255,${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+
+        // ripples
+        ripples = ripples.filter(rp => rp.alpha > 0.01);
+        ripples.forEach(rp => {
+          ctx.beginPath();
+          ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+          const rc = lightMode ? `rgba(0,120,104,${rp.alpha})` : `rgba(47,232,200,${rp.alpha})`;
+          ctx.strokeStyle = rc;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          rp.r     += rp.speed;
+          rp.alpha *= 0.92;
+        });
+
+        raf = requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); raf = requestAnimationFrame(frame); });
+      resize();
+      raf = requestAnimationFrame(frame);
+
+      // expose theme setter
+      window.__starSim = {
+        setTheme(l) { lightMode = l; }
+      };
+    })();
+
+    /* ══════════════════════════════════════════════
+       SCROLL FADE-IN
+    ══════════════════════════════════════════════ */
+    const scrollObs = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); scrollObs.unobserve(e.target); }
+      }),
+      { threshold: 0.07 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => scrollObs.observe(el));
+
+    /* ══════════════════════════════════════════════
+       ACTIVE TOC HIGHLIGHT
+    ══════════════════════════════════════════════ */
+    const sections = document.querySelectorAll('.cv-section');
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const tocObs   = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            tocLinks.forEach(l => l.style.color = '');
+            const active = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+            if (active) active.style.color = 'var(--teal)';
+          }
+        });
+      },
+      { rootMargin: '-30% 0px -60% 0px' }
+    );
+    sections.forEach(s => tocObs.observe(s));
   </script>
 </body>
 </html>
