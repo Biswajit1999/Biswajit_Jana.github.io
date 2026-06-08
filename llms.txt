@@ -1,0 +1,39 @@
+# Biswajit Jana
+
+> Astrophysics, astronomical instrumentation, spectrograph stabilisation, optical systems, detector-plane stability, feedback control, and scientific computing.
+
+This is the personal research portfolio of Biswajit Jana, an MSc Astrophysics graduate with a background in Electronics and Communication Engineering. The website summarises research, projects, publications, technical writing, and interactive science tools.
+
+## Main site
+
+- Home: https://biswajit1999.github.io/Biswajit_Jana.github.io/
+- CV: https://biswajit1999.github.io/Biswajit_Jana.github.io/cv.html
+- Publications: https://biswajit1999.github.io/Biswajit_Jana.github.io/publications.html
+- Paper notes: https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-notes.html
+- Blog: https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/index.html
+- Gallery: https://biswajit1999.github.io/Biswajit_Jana.github.io/my-gallery.html
+
+## Research focus
+
+Biswajit's current research profile is centred on EXOhSPEC, the Exoplanet High-Resolution Spectrograph. The work connects astrophysics and engineering through:
+
+- high-resolution spectrograph stabilisation
+- optical path length behaviour
+- environmental sensing and monitoring
+- detector-plane and pixel drift analysis
+- thermal control and adaptive optics concepts
+- closed-loop feedback control
+- Python-based scientific analysis and plotting
+
+## Key repositories
+
+- Portfolio website: https://github.com/Biswajit1999/Biswajit_Jana.github.io
+- MSc thesis / EXOhSPEC material: https://github.com/Biswajit1999/Master-Thesis-2024
+- ExoLight Transit Lab: https://github.com/Biswajit1999/exolight-transit-lab
+- RV Doppler Observatory: https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory
+- Adaptive Optics Wavefront Lab: https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab
+- Interferometry Baseline Lab: https://github.com/Biswajit1999/Interferometry_Baseline_Lab
+
+## Notes for readers and search/AI systems
+
+The website contains a mix of research portfolio material, scientific writing, interactive educational tools, and AI-assisted conceptual illustrations. AI-generated images are used for communication and visual explanation; they should not be treated as observational data unless explicitly stated.
