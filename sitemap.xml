@@ -1,116 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <url>
-    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/index.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/cv.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/publications.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-notes.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
-
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/my-gallery.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/index.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.90</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/black-hole-extreme-lab.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/tools/black-hole-simulator.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/three-body-problem.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/radial-velocity-method.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/control-system.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/pid-control.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/big-bang-part-1.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.82</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.82</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
   </url>
-  
   <url>
-  <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone-part-2.html</loc>
-  <lastmod>2026-05-10</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.82</priority>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/are-we-alone-part-2.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
   </url>
-
   <url>
     <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/spectra-confession.html</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.82</priority>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
-
 </urlset>
