@@ -13,14 +13,13 @@
 
 :root{
   --bg:        #00000c;
-  --card:      rgba(4,8,22,0.88);
   --text:      #dde3f5;
   --muted:     #6e7a9e;
   --accent:    #42a5f5;
   --purple:    #ab47bc;
   --cyan:      #26c6da;
-  --gold:      #ffa726;
   --b-dim:     rgba(66,165,245,0.10);
+  --b-mid:     rgba(66,165,245,0.22);
   --glow:      rgba(66,165,245,0.25);
 }
 
@@ -39,270 +38,156 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-ser
 
 #loading{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;transition:opacity 0.8s ease;}
 #loading.done{opacity:0;pointer-events:none;}
-.ld-orb{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#1e88e5,#0a1855);box-shadow:0 0 28px rgba(66,165,245,0.7),0 0 55px rgba(66,165,245,0.2);animation:orbFloat 1.9s ease-in-out infinite;}
+.ld-orb{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#1e88e5,#0a1855);box-shadow:0 0 28px rgba(66,165,245,0.7);animation:orbFloat 1.9s ease-in-out infinite;}
 .ld-txt{font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--accent);}
 @keyframes orbFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-11px);}}
 
-/* ═══════════════════════════════════════
-   PROFESSIONAL NAVBAR (single, integrated)
-═══════════════════════════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 2rem;
-  background:rgba(0,0,10,0.5);backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--b-dim);
-  transition:background 0.3s;
-}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;background:rgba(0,0,10,0.5);backdrop-filter:blur(24px);border-bottom:1px solid var(--b-dim);transition:background 0.3s;}
 .nav.scrolled{background:rgba(0,0,14,0.8);}
-
 .nav-left{display:flex;align-items:center;gap:3rem;}
-.nav-brand{
-  font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;
-  letter-spacing:0.18em;text-decoration:none;
-  background:linear-gradient(90deg,var(--accent),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-
-.nav-menu{
-  display:flex;gap:1.8rem;list-style:none;
-  font-family:'Space Mono',monospace;
-  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-}
-
-.nav-menu a{
-  color:var(--muted);text-decoration:none;
-  transition:color 0.2s,border-color 0.2s;
-  padding:0.3rem 0;border-bottom:1px solid transparent;
-  cursor:pointer;
-}
+.nav-brand{font-family:'Orbitron',monospace;font-size:1rem;font-weight:900;letter-spacing:0.18em;text-decoration:none;background:linear-gradient(90deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-menu{display:flex;gap:1.8rem;list-style:none;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;}
+.nav-menu a{color:var(--muted);text-decoration:none;transition:color 0.2s;padding:0.3rem 0;border-bottom:1px solid transparent;cursor:pointer;}
 .nav-menu a:hover{color:var(--accent);border-color:var(--accent);}
 
-#hero{
-  position:relative;width:100%;height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding-bottom:8vh;overflow:hidden;margin-top:0;
-}
-
+#hero{position:relative;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:8vh;overflow:hidden;}
 #earth-mount{position:absolute;inset:0;z-index:1;cursor:grab;}
 #earth-mount.dragging{cursor:grabbing;}
-
-#hero::after{
-  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 42%,transparent 28%,rgba(0,0,12,0.52) 68%,rgba(0,0,12,0.93) 100%);
-}
+#hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,transparent 28%,rgba(0,0,12,0.52) 68%,rgba(0,0,12,0.93) 100%);}
 
 .hero-text{position:relative;z-index:3;text-align:center;padding:0 2rem;max-width:800px;}
-.hero-eyebrow{
-  font-family:'Space Mono',monospace;font-size:0.64rem;
-  letter-spacing:0.44em;text-transform:uppercase;color:var(--cyan);
-  margin-bottom:0.85rem;opacity:0;animation:riseUp .9s ease .5s forwards;
-}
-.hero-name{
-  font-family:'Orbitron',monospace;
-  font-size:clamp(2.5rem,6.5vw,5.8rem);font-weight:900;
-  letter-spacing:0.06em;line-height:1.04;text-transform:uppercase;
-  background:linear-gradient(140deg,#fff 0%,var(--accent) 38%,var(--purple) 70%,#fff 100%);
-  background-size:280% 280%;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 7s ease infinite, riseUp .9s ease .7s both;
-}
-.hero-role{
-  font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--muted);margin:0.5rem 0 0;
-  opacity:0;animation:riseUp .9s ease .9s forwards;
-}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.64rem;letter-spacing:0.44em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.85rem;opacity:0;animation:riseUp .9s ease .5s forwards;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2.5rem,6.5vw,5.8rem);font-weight:900;letter-spacing:0.06em;line-height:1.04;text-transform:uppercase;background:linear-gradient(140deg,#fff 0%,var(--accent) 38%,var(--purple) 70%,#fff 100%);background-size:280% 280%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 7s ease infinite, riseUp .9s ease .7s both;}
+.hero-role{font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin:0.5rem 0 0;opacity:0;animation:riseUp .9s ease .9s forwards;}
 
 @keyframes shimmer{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 @keyframes riseUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-/* ═══════════════════════════════════════
-   GALLERY SECTION (clean, centered)
-═══════════════════════════════════════ */
-#gallery{
-  position:relative;z-index:10;
-  padding:5rem 2rem;
-  background:linear-gradient(180deg,rgba(0,0,10,0) 0%,rgba(2,5,18,0.97) 5%,rgba(2,5,18,0.97) 95%,rgba(0,0,10,0) 100%);
-  min-height:auto;
-}
+/* MAIN LAYOUT */
+#gallery{position:relative;z-index:10;padding:5rem 2rem;min-height:100vh;background:linear-gradient(180deg,rgba(0,0,10,0) 0%,rgba(2,5,18,0.97) 5%,rgba(2,5,18,0.97) 95%,rgba(0,0,10,0) 100%);}
 
-.gal-container{
-  max-width:1200px;margin:0 auto;
-}
+.gal-wrapper{display:grid;grid-template-columns:280px 1fr;gap:2rem;max-width:1400px;margin:0 auto;}
 
-.gal-head{text-align:center;margin-bottom:3rem;}
-.gal-eye{
-  font-family:'Space Mono',monospace;font-size:0.64rem;
-  letter-spacing:0.42em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.8rem;
-}
-.gal-title{
-  font-family:'Orbitron',monospace;
-  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:0.04em;
-  background:linear-gradient(135deg,var(--text),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:0.8rem;
-}
+/* LEFT SIDEBAR */
+.gal-sidebar{position:sticky;top:100px;height:fit-content;border-radius:14px;border:1px solid var(--b-dim);background:rgba(4,8,22,0.6);backdrop-filter:blur(16px);padding:20px;overflow-y:auto;max-height:calc(100vh - 140px);}
+.gal-sidebar::-webkit-scrollbar{width:3px;}
+.gal-sidebar::-webkit-scrollbar-thumb{background:rgba(66,165,245,0.4);}
+
+.sidebar-title{font-family:'Orbitron',monospace;font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--b-dim);}
+
+.search-box{position:relative;margin-bottom:20px;}
+.search-box input{width:100%;padding:10px 14px 10px 34px;border-radius:10px;border:1px solid var(--b-dim);background:rgba(66,165,245,0.08);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;transition:all 0.25s;}
+.search-box input:focus{outline:none;border-color:var(--accent);background:rgba(66,165,245,0.12);box-shadow:0 0 0 3px rgba(66,165,245,0.15);}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;opacity:0.5;}
+
+.filters{display:flex;flex-direction:column;gap:8px;}
+.filter-btn{padding:9px 12px;border-radius:8px;border:1px solid var(--b-dim);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;cursor:pointer;transition:all 0.25s;text-align:left;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(66,165,245,0.12);}
+
+/* MAIN CONTENT */
+.gal-content{display:flex;flex-direction:column;}
+
+.gal-head{text-align:center;margin-bottom:2.5rem;}
+.gal-eye{font-family:'Space Mono',monospace;font-size:0.64rem;letter-spacing:0.42em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.8rem;}
+.gal-title{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;letter-spacing:0.04em;background:linear-gradient(135deg,var(--text),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.8rem;}
 .gal-sub{font-size:0.9rem;color:var(--muted);max-width:600px;margin:0 auto;}
 
-/* SEARCH & FILTERS */
-.controls-wrap{
-  display:flex;flex-direction:column;gap:2rem;
-  margin-bottom:2.5rem;
-}
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:2rem;}
 
-.search-box{
-  position:relative;max-width:400px;margin:0 auto;width:100%;
-}
-.search-box input{
-  width:100%;padding:11px 14px 11px 38px;
+.card{
+  position:relative;overflow:hidden;
   border-radius:12px;border:1px solid var(--b-dim);
-  background:rgba(66,165,245,0.08);color:var(--text);
-  font-family:'Space Grotesk',sans-serif;font-size:0.95rem;
-  transition:all 0.25s;
-}
-.search-box input:focus{
-  outline:none;border-color:var(--accent);
-  background:rgba(66,165,245,0.12);
-  box-shadow:0 0 0 3px rgba(66,165,245,0.15);
-}
-.search-icon{
-  position:absolute;left:12px;top:50%;transform:translateY(-50%);
-  width:16px;height:16px;opacity:0.5;
-}
-
-.filters{
-  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
-}
-.filter-btn{
-  padding:10px 16px;border-radius:999px;border:1px solid var(--b-dim);
-  background:transparent;color:var(--muted);
-  font-family:'Space Mono',monospace;font-size:0.75rem;
-  text-transform:uppercase;letter-spacing:0.08em;
-  cursor:pointer;transition:all 0.25s;
-}
-.filter-btn:hover,.filter-btn.active{
-  border-color:var(--accent);color:var(--accent);
-  background:rgba(66,165,245,0.12);
-}
-
-/* CAROUSEL */
-.slider-wrap{
-  position:relative;width:100%;max-width:1100px;
-  margin:0 auto 3rem;
-}
-
-.slider-stage{
-  position:relative;width:100%;overflow:hidden;
-  border-radius:16px;border:1px solid var(--b-dim);
-  box-shadow:0 0 80px rgba(0,0,0,0.8),0 0 40px var(--glow);
-  background:#000;
-  min-height:500px;
-  max-height:70vh;
-  display:flex;align-items:center;justify-content:center;
-}
-
-.slide{
-  position:absolute;inset:0;opacity:0;
-  transition:opacity 0.6s ease;
-}
-.slide.active{opacity:1;z-index:2;}
-.slide img{
-  width:100%;height:100%;object-fit:contain;
-  transition:transform 0.3s ease;
-}
-
-.slide-ov{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.3) 40%,rgba(0,0,0,0.9) 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:32px;color:var(--text);
-  opacity:0;transition:opacity 0.5s ease;
-}
-.slide.active .slide-ov{opacity:1;}
-
-.slide-tag{
-  font-family:'Space Mono',monospace;font-size:0.72rem;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:12px;display:inline-block;
-  padding:6px 12px;border-radius:999px;
-  background:rgba(38,198,218,0.15);border:1px solid rgba(38,198,218,0.3);
-}
-.slide-title{
-  font-family:'Orbitron',monospace;font-size:1.6rem;
-  font-weight:700;line-height:1.2;max-width:90%;
-}
-.slide-num{
-  position:absolute;top:18px;right:18px;
-  font-family:'Space Mono',monospace;font-size:0.8rem;
-  color:var(--muted);background:rgba(0,0,0,0.6);
-  padding:8px 12px;border-radius:8px;
-}
-
-.zoom-controls{
-  position:absolute;top:18px;left:18px;z-index:20;
-  display:flex;gap:8px;
-}
-.zoom-btn{
-  width:38px;height:38px;border-radius:50%;
-  border:1px solid var(--accent);background:rgba(66,165,245,0.1);
-  color:var(--accent);font-size:1.1rem;cursor:pointer;
-  transition:all 0.25s;display:flex;align-items:center;justify-content:center;
-}
-.zoom-btn:hover{background:rgba(66,165,245,0.25);transform:scale(1.08);}
-
-.arr{
-  position:absolute;top:50%;z-index:20;transform:translateY(-50%);
-  width:50px;height:50px;border-radius:50%;
-  border:1.5px solid var(--accent);background:rgba(66,165,245,0.1);
-  color:var(--accent);font-size:1.4rem;cursor:pointer;
-  transition:all 0.25s;display:flex;align-items:center;justify-content:center;
-}
-.arr:hover{background:rgba(66,165,245,0.25);transform:translateY(-50%) scale(1.08);}
-.arr-p{left:18px;}
-.arr-n{right:18px;}
-
-.dots{
-  position:absolute;bottom:18px;left:50%;
-  transform:translateX(-50%);z-index:20;
-  display:flex;gap:7px;
-}
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(255,255,255,0.3);cursor:pointer;
+  background:rgba(4,8,22,0.5);
+  aspect-ratio:1;cursor:pointer;
   transition:all 0.3s;
 }
-.dot.on{
-  background:var(--accent);box-shadow:0 0 12px var(--accent);
-  width:24px;border-radius:4px;
+
+.card:hover{
+  border-color:var(--accent);
+  transform:translateY(-8px);
+  box-shadow:0 12px 30px rgba(66,165,245,0.25);
 }
 
-.thumbs{
-  position:absolute;bottom:18px;right:18px;
-  display:flex;gap:7px;z-index:20;
-  overflow-x:auto;padding:0 8px;
-  max-width:200px;
+.card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.3s;
 }
-.thumb{
-  width:50px;height:50px;border-radius:8px;
-  border:1px solid var(--b-dim);overflow:hidden;
-  cursor:pointer;transition:all 0.25s;flex-shrink:0;
+
+.card:hover img{transform:scale(1.08);}
+
+.card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.4) 60%,rgba(0,0,0,0.85) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px;color:var(--text);
+  opacity:0;transition:opacity 0.3s;
 }
-.thumb img{width:100%;height:100%;object-fit:cover;}
-.thumb:hover{border-color:var(--accent);transform:scale(1.05);}
-.thumb.on{border-color:var(--accent);box-shadow:0 0 12px rgba(66,165,245,0.5);}
+
+.card:hover .card-overlay{opacity:1;}
+
+.card-tag{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(38,198,218,0.15);border:1px solid rgba(38,198,218,0.3);width:fit-content;}
+
+.card-title{font-family:'Orbitron',monospace;font-size:0.95rem;font-weight:700;line-height:1.3;}
+
+/* MODAL */
+.modal{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.9);backdrop-filter:blur(4px);
+  overflow-y:auto;
+}
+
+.modal.active{display:flex;align-items:center;justify-content:center;}
+
+.modal-content{
+  position:relative;max-width:90vw;max-height:90vh;
+  border-radius:16px;overflow:hidden;
+  border:1px solid var(--b-dim);
+  box-shadow:0 0 100px rgba(0,0,0,0.9);
+  animation:modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+
+.modal img{width:100%;height:100%;object-fit:contain;background:#000;}
+
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--accent);
+  background:rgba(66,165,245,0.1);color:var(--accent);
+  font-size:1.5rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.25s;
+  z-index:10;
+}
+
+.modal-close:hover{background:rgba(66,165,245,0.25);transform:scale(1.1);}
+
+.modal-info{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,12,0.95));
+  padding:24px;color:var(--text);
+}
+
+.modal-title{font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:700;margin-bottom:8px;}
+.modal-cat{font-family:'Space Mono',monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--cyan);}
 
 /* FOOTER */
-footer{
-  position:relative;z-index:10;
-  padding:40px 20px;text-align:center;
-  border-top:1px solid var(--b-dim);
-  background:linear-gradient(to top,rgba(0,0,14,0.6),transparent);
-}
-.footer-copy{
-  font-family:'Space Mono',monospace;font-size:0.82rem;
-  color:var(--muted);margin-bottom:6px;letter-spacing:0.05em;
-}
+footer{position:relative;z-index:10;padding:40px 20px;text-align:center;border-top:1px solid var(--b-dim);background:linear-gradient(to top,rgba(0,0,14,0.6),transparent);}
+.footer-copy{font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--muted);margin-bottom:6px;letter-spacing:0.05em;}
 .footer-copy strong{color:var(--accent);font-weight:600;}
+
+@media(max-width:1024px){
+  .gal-wrapper{grid-template-columns:1fr;}
+  .gal-sidebar{position:static;max-height:none;margin-bottom:2rem;}
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+}
+
+@media(max-width:640px){
+  .card-grid{grid-template-columns:repeat(2,1fr);}
+  .modal-content{max-width:95vw;max-height:95vh;}
+}
 
   </style>
 </head>
@@ -319,7 +204,6 @@ footer{
   <div class="ld-txt">Loading cosmos...</div>
 </div>
 
-<!-- INTEGRATED NAVBAR -->
 <nav class="nav" id="nav">
   <div class="nav-left">
     <a href="index.html" class="nav-brand">☇ BJ COSMOS</a>
@@ -336,7 +220,6 @@ footer{
   </ul>
 </nav>
 
-<!-- HERO with 3D EARTH -->
 <section id="hero">
   <div id="earth-mount"></div>
   <div class="hero-text">
@@ -346,17 +229,11 @@ footer{
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery">
-  <div class="gal-container">
-    <div class="gal-head">
-      <div class="gal-eye">Visual Archive</div>
-      <h2 class="gal-title">Cosmos Gallery</h2>
-      <p class="gal-sub">AI-generated visualisations verified against peer-reviewed science</p>
-    </div>
-
-    <!-- SEARCH & FILTERS -->
-    <div class="controls-wrap">
+  <div class="gal-wrapper">
+    <!-- LEFT SIDEBAR -->
+    <aside class="gal-sidebar">
+      <div class="sidebar-title">🔍 Search</div>
       <div class="search-box">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"></circle>
@@ -364,25 +241,36 @@ footer{
         </svg>
         <input type="text" id="searchInput" placeholder="Search images..." />
       </div>
-      <div class="filters" id="filters"></div>
-    </div>
 
-    <!-- CAROUSEL -->
-    <div class="slider-wrap">
-      <div class="slider-stage" id="stage">
-        <div class="zoom-controls">
-          <button class="zoom-btn" id="zoom-out" title="Zoom Out">−</button>
-          <button class="zoom-btn" id="zoom-in" title="Zoom In">+</button>
-          <button class="zoom-btn" id="zoom-reset" title="Reset">↺</button>
-        </div>
+      <div class="sidebar-title">📊 Filter</div>
+      <div class="filters" id="filters"></div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="gal-content">
+      <div class="gal-head">
+        <div class="gal-eye">Visual Archive</div>
+        <h2 class="gal-title">Cosmos Gallery</h2>
+        <p class="gal-sub">AI-generated visualisations verified against peer-reviewed science</p>
       </div>
-      <button class="arr arr-p" id="arr-p">❮</button>
-      <button class="arr arr-n" id="arr-n">❯</button>
-      <div class="dots" id="dots"></div>
-      <div class="thumbs" id="thumbs"></div>
+
+      <!-- CARD GRID -->
+      <div class="card-grid" id="card-grid"></div>
     </div>
   </div>
 </section>
+
+<!-- MODAL POPUP -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <img id="modal-img" src="" alt="" />
+    <div class="modal-info">
+      <div class="modal-cat" id="modal-cat"></div>
+      <div class="modal-title" id="modal-title"></div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-copy"><strong>© 2026 Biswajit Jana</strong> — Cosmos Gallery</div>
@@ -392,28 +280,21 @@ footer{
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   IMAGE SETUP INSTRUCTIONS:
+   SETUP INSTRUCTIONS:
    
-   1. Create folder: My%20Gallery (or "My Gallery")
-      Location: /Biswajit_Jana.github.io/My Gallery/
+   1. Run: python3 generate_images_list.py
+      (in your repo root: Biswajit_Jana.github.io/)
    
-   2. Add images to that folder (all formats: .png, .jpg, etc)
+   2. Copy the output into the IMAGES array below
    
-   3. Update IMAGES array below with your filenames
-   
-   The system auto-detects categories from image names:
-   - Contains "supernova", "magnetar", "flare" → STELLAR
-   - Contains "europa", "saturn", "planet" → PLANETARY
-   - Contains "exoplanet", "hot jupiter" → EXOPLANET
-   - Contains "black hole", "cosmic", "pulsar" → COSMOLOGY
-   - Contains "eprv", "spectrograph" → INSTRUMENTATION
+   3. Push to GitHub
 ════════════════════════════════════════════════════════════════ */
 
 const CATEGORY_KEYWORDS = {
   stellar: ['magnetar', 'supernova', 'type ia', 'flare', 'star'],
   planetary: ['europa', 'saturn', 'hexagon', 'protoplanetary', 'planet', 'disk'],
   exoplanet: ['hot jupiter', 'exoplanet', 'atmosphere', 'alien', 'transmission'],
-  cosmology: ['cosmic web', 'dark matter', 'black hole', 'pulsar', 'merger', 'nebula', 'spacetime'],
+  cosmology: ['cosmic web', 'dark matter', 'black hole', 'pulsar', 'merger', 'nebula', 'spacetime', 'cassiopeia', 'gauss', 'magnetar'],
   instrumentation: ['eprv', 'spectrograph', 'optical', 'bench'],
 };
 
@@ -425,18 +306,48 @@ function detectCategory(filename) {
   return 'cosmology';
 }
 
-// UPDATE THIS WITH YOUR ACTUAL IMAGE FILENAMES
+// ALL 40 IMAGES — Automatically categorized from filenames
 const IMAGES = [
-  { file: 'Type Ia supernova infographic explosion.png', title: 'Standard Candle — Type Ia Supernova Detonation' },
-  { file: 'Planet formation in a protoplanetary disk.png', title: 'Planet Birth — Protoplanetary Disk Gap Carving' },
-  { file: 'cosmic web - dark matter.png', title: 'The Cosmic Web — Dark Matter\'s Skeleton' },
-  { file: 'Europa\'s ocean beneath the ice.png', title: 'Europa — Ocean World Beneath the Ice' },
-  { file: 'Spacetime shattered black hole merger poster.png', title: 'Spacetime Shattered — Binary Black Hole Merger' },
-  { file: 'EPRV cutaway details.png', title: 'EPRV Échelle Spectrograph — Optical Bench' },
-  { file: 'Magnetar Giant Flare.png', title: 'Magnetar Giant Flare — SGR 1806-20' },
-  { file: 'Saturn\'s north pole hexagon infographic.png', title: 'Saturn\'s North Polar Hexagon — Standing Atmospheric Wave' },
-  { file: 'Pulsar wind nebula scientific infographic.png', title: 'Pulsar Wind Nebula — Relativistic Particle Accelerator' },
-  { file: 'Exploring alien atmospheres - Hot Jupiter spectroscopy.png', title: 'Reading an Alien Atmosphere — Transmission Spectroscopy' },
+  { file: '01_europa_subsurface_ocean.png', title: 'Europa — Subsurface Ocean Depths' },
+  { file: '01_open_star_clusters_pleiades_2026-06-09.png', title: 'The Pleiades — Open Star Cluster' },
+  { file: '02_enceladus_geysers_south_pole.png', title: 'Enceladus — Geysers at the South Pole' },
+  { file: '02_hii_regions_stellar_nursery_2026-06-09.png', title: 'HII Regions — Stellar Nurseries Ablaze' },
+  { file: '03_hertzsprung_russell_diagram_2026-06-09.png', title: 'Hertzsprung-Russell Diagram — Stellar Evolution' },
+  { file: '03_io_volcanic_hellscape.png', title: 'Io — Volcanic Hellscape of Jupiter' },
+  { file: '04_red_giant_sun_fate_2026-06-09.png', title: 'Red Giant — The Sun\'s Distant Fate' },
+  { file: '04_titan_methane_rain_lakes.png', title: 'Titan — Methane Rain and Alien Lakes' },
+  { file: '05_planetary_nebula_stellar_death_2026-06-09.png', title: 'Planetary Nebula — Stellar Death Revealed' },
+  { file: '05_saturn_rings_razor_thin.png', title: 'Saturn\'s Rings — Razor-Thin Architecture' },
+  { file: '06_comet_nucleus_ion_dust_tails.png', title: 'Comet — Ion Tail and Dust Coma' },
+  { file: '06_core_collapse_supernova_2026-06-09.png', title: 'Core-Collapse Supernova — Massive Star Death' },
+  { file: '07_cassiopeia_a_supernova_remnant_2026-06-09.png', title: 'Cassiopeia A — Supernova Remnant' },
+  { file: '07_perseid_meteor_shower_debris_trail.png', title: 'Perseid Meteor Shower — Cosmic Debris Trail' },
+  { file: '08_asteroid_bennu_osirisrex_sample.png', title: 'Asteroid Bennu — OSIRIS-REx Sample' },
+  { file: '08_millisecond_pulsar_2026-06-09.png', title: 'Millisecond Pulsar — Cosmic Lighthouse' },
+  { file: '09_globular_cluster_ancient_stars_2026-06-09.png', title: 'Globular Cluster — Ancient Star Swarm' },
+  { file: '09_neptune_great_dark_spot_triton.png', title: 'Neptune — Great Dark Spot and Triton' },
+  { file: '10_chelyabinsk_asteroid_airburst.png', title: 'Chelyabinsk — Asteroid Airburst Event' },
+  { file: '10_milky_way_spiral_structure_2026-06-09.png', title: 'Milky Way — Spiral Structure Revealed' },
+  { file: '10_to_15_gauss_the_field_that_bends_atoms.png', title: '10¹⁵ Gauss — Magnetar Field Bending Atoms' },
+  { file: 'a_millisecond_flash_from_halfway_across_the_universe.png', title: 'Fast Radio Burst — Cosmic Millisecond Flash' },
+  { file: 'cosmic web - dark matter.png', title: 'Cosmic Web — Dark Matter\'s Skeleton' },
+  { file: 'EPRV cutaway details.png', title: 'EPRV Spectrograph — Optical Bench Design' },
+  { file: 'Europa\'s ocean beneath the ice.png', title: 'Europa — Hidden Ocean World' },
+  { file: 'Exploring alien atmospheres - Hot Jupiter spectroscopy.png', title: 'Hot Jupiter — Atmospheric Transmission Spectroscopy' },
+  { file: 'ghosts_from_dying_stars.png', title: 'Planetary Nebulae — Ghosts of Dying Stars' },
+  { file: 'Magnetar Giant Flare.png', title: 'Magnetar — Giant Flare Event' },
+  { file: 'mass_bends_light_into_a_perfect_ring.png', title: 'Gravitational Lensing — Einstein Ring' },
+  { file: 'Planet formation in a protoplanetary disk.png', title: 'Planet Formation — Protoplanetary Disk' },
+  { file: 'Pulsar wind nebula scientific infographic.png', title: 'Pulsar Wind Nebula — Particle Accelerator' },
+  { file: 'reading_an_alien_sky.png', title: 'Exoplanet Sky — What Aliens See' },
+  { file: 'Saturn\'s north pole hexagon infographic.png', title: 'Saturn\'s Polar Hexagon — Atmospheric Mystery' },
+  { file: 'Spacetime shattered black hole merger poster.png', title: 'Black Hole Merger — Spacetime Collision' },
+  { file: 'stars_ring_like_bells.png', title: 'Asteroseismology — Stars Ring Like Bells' },
+  { file: 'the_dust_that_hides_earth_like_planets.png', title: 'Circumstellar Dust — Hiding Earthlike Worlds' },
+  { file: 'the_galaxy_is_a_gravitational_wave_detector.png', title: 'Pulsar Array — Gravitational Wave Detector' },
+  { file: 'the_wobble_hunters.png', title: 'Radial Velocity — The Wobble Hunters' },
+  { file: 'Type Ia supernova infographic explosion.png', title: 'Type Ia Supernova — Standard Candle' },
+  { file: 'unblurring_the_universe_with_a_laser.png', title: 'Adaptive Optics — Laser Guide Star' },
 ];
 
 const images = IMAGES.map((img, idx) => ({
@@ -447,8 +358,7 @@ const images = IMAGES.map((img, idx) => ({
 }));
 
 let allCategories = ['all', ...new Set(images.map(i => i.category))];
-let current = 0, filteredIndices = images.map((_, i) => i);
-let currentZoom = 1;
+let filteredIndices = images.map((_, i) => i);
 
 /* STARFIELD */
 const cvs = document.getElementById('star-cvs');
@@ -469,11 +379,7 @@ function initCanvas() {
     });
   }
   for (let i = 0; i < 3; i++) {
-    comets.push({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 5, vy: (Math.random() - 0.5) * 5,
-      trail: 100, life: Math.random() * 15000,
-    });
+    comets.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-0.5)*5, vy:(Math.random()-0.5)*5, trail:100, life:Math.random()*15000});
   }
 }
 initCanvas();
@@ -484,8 +390,7 @@ function drawStarfield(t) {
   ctx.fillRect(0, 0, W, H);
   stars.forEach(s => {
     s.twinklePhase += s.twinkleSpeed;
-    const twinkle = Math.sin(s.twinklePhase) * 0.4 + 0.6;
-    ctx.globalAlpha = s.op * twinkle;
+    ctx.globalAlpha = s.op * (Math.sin(s.twinklePhase) * 0.4 + 0.6);
     ctx.fillStyle = s.color;
     ctx.beginPath();
     ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
@@ -493,26 +398,10 @@ function drawStarfield(t) {
   });
   comets.forEach(comet => {
     comet.life += 1;
-    if (comet.life > 15000) {
-      comet.x = Math.random() * W;
-      comet.y = Math.random() * H;
-      comet.vx = (Math.random() - 0.5) * 5;
-      comet.vy = (Math.random() - 0.5) * 5;
-      comet.life = 0;
-    }
-    ctx.strokeStyle = `rgba(42,165,245,${0.5 * (1 - comet.life / 15000)})`;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(comet.x - comet.vx * comet.trail, comet.y - comet.vy * comet.trail);
-    ctx.lineTo(comet.x, comet.y);
-    ctx.stroke();
-    ctx.globalAlpha = 1 - (comet.life / 15000);
-    ctx.fillStyle = '#42a5f5';
-    ctx.beginPath();
-    ctx.arc(comet.x, comet.y, 3.5, 0, Math.PI * 2);
-    ctx.fill();
-    comet.x += comet.vx;
-    comet.y += comet.vy;
+    if (comet.life > 15000) {comet.x=Math.random()*W;comet.y=Math.random()*H;comet.vx=(Math.random()-0.5)*5;comet.vy=(Math.random()-0.5)*5;comet.life=0;}
+    ctx.strokeStyle = `rgba(42,165,245,${0.5*(1-comet.life/15000)})`;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(comet.x-comet.vx*comet.trail,comet.y-comet.vy*comet.trail);ctx.lineTo(comet.x,comet.y);ctx.stroke();
+    ctx.globalAlpha=1-(comet.life/15000);ctx.fillStyle='#42a5f5';ctx.beginPath();ctx.arc(comet.x,comet.y,3.5,0,Math.PI*2);ctx.fill();
+    comet.x += comet.vx;comet.y += comet.vy;
   });
   ctx.globalAlpha = 1;
 }
@@ -527,11 +416,9 @@ let texDone = 0;
 function initEarth() {
   const mount = document.getElementById('earth-mount');
   const W = mount.clientWidth, H = mount.clientHeight;
-
   scene = new THREE.Scene();
   cam = new THREE.PerspectiveCamera(40, W / H, 0.1, 1000);
   cam.position.set(0, 0.15, 6.2);
-
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -553,49 +440,33 @@ function initEarth() {
   tl.crossOrigin = 'anonymous';
   const onTex = () => { if (++texDone >= 2) finishLoad(); };
 
-  const tDay   = tl.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg', onTex);
+  const tDay = tl.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg', onTex);
   const tNight = tl.load('https://unpkg.com/three-globe/example/img/earth-night.jpg', onTex);
   const tCloud = tl.load('https://unpkg.com/three-globe/example/img/earth-clouds.png');
-  const tBump  = tl.load('https://unpkg.com/three-globe/example/img/earth-topology.png');
+  const tBump = tl.load('https://unpkg.com/three-globe/example/img/earth-topology.png');
 
-  earth = new THREE.Mesh(
-    new THREE.SphereGeometry(2, 72, 72),
-    new THREE.ShaderMaterial({
-      uniforms: {
-        uDay: { value: tDay }, uNight: { value: tNight },
-        uBump: { value: tBump },
-        uSun: { value: new THREE.Vector3(5, 1.5, 3).normalize() },
-      },
-      vertexShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vP;
-        void main(){vUv=uv;vN=normalize(normalMatrix*normal);vP=(modelViewMatrix*vec4(position,1.0)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-      fragmentShader: `uniform sampler2D uDay; uniform sampler2D uNight; uniform vec3 uSun;
-        varying vec2 vUv; varying vec3 vN; varying vec3 vP;
-        void main(){vec3 N=normalize(vN);vec3 S=normalize(uSun);float NdL=dot(N,S);float day=smoothstep(-0.20,0.22,NdL);vec4 dC=texture2D(uDay,vUv);vec4 nC=texture2D(uNight,vUv);nC.rgb*=2.6;vec4 col=mix(nC,dC,day);vec3 V=normalize(-vP);vec3 H=normalize(S+V);float sp=pow(max(dot(N,H),0.0),85.0);col.rgb+=vec3(0.14,0.28,0.5)*sp*day*0.5;float rim=1.0-abs(dot(N,V));float atm=pow(rim,3.3);vec3 aC=mix(vec3(0.05,0.1,0.38),vec3(0.22,0.52,1.0),NdL*0.5+0.5);col.rgb=mix(col.rgb,aC,atm*0.32*day);gl_FragColor=col;}`,
-    })
-  );
+  earth = new THREE.Mesh(new THREE.SphereGeometry(2, 72, 72), new THREE.ShaderMaterial({
+    uniforms: {uDay:{value:tDay},uNight:{value:tNight},uBump:{value:tBump},uSun:{value:new THREE.Vector3(5,1.5,3).normalize()}},
+    vertexShader:`varying vec2 vUv;varying vec3 vN;varying vec3 vP;void main(){vUv=uv;vN=normalize(normalMatrix*normal);vP=(modelViewMatrix*vec4(position,1.0)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`uniform sampler2D uDay;uniform sampler2D uNight;uniform vec3 uSun;varying vec2 vUv;varying vec3 vN;varying vec3 vP;void main(){vec3 N=normalize(vN);vec3 S=normalize(uSun);float NdL=dot(N,S);float day=smoothstep(-0.20,0.22,NdL);vec4 dC=texture2D(uDay,vUv);vec4 nC=texture2D(uNight,vUv);nC.rgb*=2.6;vec4 col=mix(nC,dC,day);vec3 V=normalize(-vP);vec3 H=normalize(S+V);float sp=pow(max(dot(N,H),0.0),85.0);col.rgb+=vec3(0.14,0.28,0.5)*sp*day*0.5;float rim=1.0-abs(dot(N,V));float atm=pow(rim,3.3);vec3 aC=mix(vec3(0.05,0.1,0.38),vec3(0.22,0.52,1.0),NdL*0.5+0.5);col.rgb=mix(col.rgb,aC,atm*0.32*day);gl_FragColor=col;}`,
+  }));
   eGroup.add(earth);
 
-  clouds = new THREE.Mesh(new THREE.SphereGeometry(2.04, 64, 64),
-    new THREE.MeshPhongMaterial({map: tCloud, transparent: true, opacity: 0.70, depthWrite: false, blending: THREE.NormalBlending}));
+  clouds = new THREE.Mesh(new THREE.SphereGeometry(2.04, 64, 64), new THREE.MeshPhongMaterial({map:tCloud,transparent:true,opacity:0.70,depthWrite:false,blending:THREE.NormalBlending}));
   eGroup.add(clouds);
 
-  atmo = new THREE.Mesh(new THREE.SphereGeometry(2.18, 64, 64),
-    new THREE.ShaderMaterial({
-      uniforms: { uSun: { value: new THREE.Vector3(5, 1.5, 3).normalize() } },
-      vertexShader: `varying vec3 vN;varying vec3 vP;void main(){vN=normalize(normalMatrix*normal);vP=(modelViewMatrix*vec4(position,1.0)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-      fragmentShader: `uniform vec3 uSun;varying vec3 vN;varying vec3 vP;void main(){vec3 V=normalize(-vP);float f=1.0-max(dot(vN,V),0.0);f=pow(f,2.3);float NdL=dot(vN,normalize(uSun))*0.5+0.5;vec3 col=mix(vec3(0.0,0.03,0.14),vec3(0.2,0.5,1.0),NdL);gl_FragColor=vec4(col,f*0.62);}`,
-      transparent: true, blending: THREE.AdditiveBlending, side: THREE.FrontSide, depthWrite: false,
-    }));
+  atmo = new THREE.Mesh(new THREE.SphereGeometry(2.18, 64, 64), new THREE.ShaderMaterial({
+    uniforms:{uSun:{value:new THREE.Vector3(5,1.5,3).normalize()}},
+    vertexShader:`varying vec3 vN;varying vec3 vP;void main(){vN=normalize(normalMatrix*normal);vP=(modelViewMatrix*vec4(position,1.0)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`uniform vec3 uSun;varying vec3 vN;varying vec3 vP;void main(){vec3 V=normalize(-vP);float f=1.0-max(dot(vN,V),0.0);f=pow(f,2.3);float NdL=dot(vN,normalize(uSun))*0.5+0.5;vec3 col=mix(vec3(0.0,0.03,0.14),vec3(0.2,0.5,1.0),NdL);gl_FragColor=vec4(col,f*0.62);}`,
+    transparent:true,blending:THREE.AdditiveBlending,side:THREE.FrontSide,depthWrite:false,
+  }));
   eGroup.add(atmo);
 
-  setupEarthDrag(mount);
-}
-
-function setupEarthDrag(mount) {
   mount.addEventListener('mousedown', e => {isDragging=true;prevDX=e.clientX;prevDY=e.clientY;velX=velY=0;mount.classList.add('dragging');});
   window.addEventListener('mousemove', e => {if(!isDragging)return;const dx=e.clientX-prevDX,dy=e.clientY-prevDY;velY=dx*DRAG_SENSITIVITY_X;velX=dy*DRAG_SENSITIVITY_Y;rotY+=velY;rotX+=velX;rotX=Math.max(-ROT_X_MAX,Math.min(ROT_X_MAX,rotX));prevDX=e.clientX;prevDY=e.clientY;});
   window.addEventListener('mouseup',()=>{isDragging=false;mount.classList.remove('dragging');});
-  mount.addEventListener('touchstart', e => {isDragging=true;prevDX=e.touches[0].clientX;prevDY=e.touches[0].clientY;velX=velY=0;}, { passive: true });
+  mount.addEventListener('touchstart', e => {isDragging=true;prevDX=e.touches[0].clientX;prevDY=e.touches[0].clientY;velX=velY=0;}, {passive:true});
   window.addEventListener('touchmove', e => {if(!isDragging)return;const dx=e.touches[0].clientX-prevDX,dy=e.touches[0].clientY-prevDY;velY=dx*DRAG_SENSITIVITY_X;velX=dy*DRAG_SENSITIVITY_Y;rotY+=velY;rotX+=velX;rotX=Math.max(-ROT_X_MAX,Math.min(ROT_X_MAX,rotX));prevDX=e.touches[0].clientX;prevDY=e.touches[0].clientY;});
   window.addEventListener('touchend', () => {isDragging=false;});
 }
@@ -604,70 +475,44 @@ function finishLoad() {document.getElementById('loading').classList.add('done');
 
 function loop(ts) {
   requestAnimationFrame(loop);
-  const t = ts * 0.001;
-  drawStarfield(t);
-  if (earth && eGroup) {
-    if (!isDragging) {rotY+=velY;rotX+=velX;velY*=INERTIA_DAMPING;velX*=INERTIA_DAMPING;if(Math.abs(velY)<0.0001)rotY+=0.0005;}
-    eGroup.rotation.y=rotY;eGroup.rotation.x=rotX;
-    if(clouds)clouds.rotation.y+=0.00008;
-    renderer.render(scene, cam);
-  }
+  drawStarfield(ts*0.001);
+  if(earth&&eGroup){if(!isDragging){rotY+=velY;rotX+=velX;velY*=INERTIA_DAMPING;velX*=INERTIA_DAMPING;if(Math.abs(velY)<0.0001)rotY+=0.0005;}eGroup.rotation.y=rotY;eGroup.rotation.x=rotX;if(clouds)clouds.rotation.y+=0.00008;renderer.render(scene,cam);}
 }
 
-/* ZOOM */
-function updateZoom() {
-  const activeSlide = document.querySelector('.slide.active img');
-  if (activeSlide) activeSlide.style.transform = `scale(${currentZoom})`;
-}
-document.getElementById('zoom-in').addEventListener('click', () => {currentZoom=Math.min(currentZoom+0.2,3);updateZoom();});
-document.getElementById('zoom-out').addEventListener('click', () => {currentZoom=Math.max(currentZoom-0.2,1);updateZoom();});
-document.getElementById('zoom-reset').addEventListener('click', () => {currentZoom=1;updateZoom();});
-document.getElementById('stage').addEventListener('wheel', (e) => {e.preventDefault();currentZoom=e.deltaY<0?Math.min(currentZoom+0.1,3):Math.max(currentZoom-0.1,1);updateZoom();}, { passive: false });
-
-/* CAROUSEL */
-function goTo(n) {
-  if (filteredIndices.length === 0) return;
-  current = n % filteredIndices.length;
-  if (current < 0) current += filteredIndices.length;
-  currentZoom = 1;
-  updateSlide();
+/* MODAL & GALLERY */
+function openModal(img) {
+  const modal = document.getElementById('modal');
+  document.getElementById('modal-img').src = img.src;
+  document.getElementById('modal-title').textContent = img.title;
+  document.getElementById('modal-cat').textContent = img.category.toUpperCase();
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-function updateSlide() {
-  document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === current));
-  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === current));
-  document.querySelectorAll('.thumb').forEach((th, i) => {th.classList.toggle('on', i === current);if(i===current)th.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});});
-  updateZoom();
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = 'auto';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const stage = document.getElementById('stage');
-  const dotsDiv = document.getElementById('dots');
-  const thumbsDiv = document.getElementById('thumbs');
+  const grid = document.getElementById('card-grid');
+  const filtersDiv = document.getElementById('filters');
 
-  images.forEach((img, idx) => {
-    const slide = document.createElement('div');
-    slide.className = 'slide' + (idx === 0 ? ' active' : '');
-    slide.dataset.category = img.category;
-    slide.innerHTML = `<img src="${img.src}" alt="${img.title}" loading="lazy" /><div class="slide-ov"><div class="slide-tag">${img.category.toUpperCase()}</div><div class="slide-title">${img.title}</div></div><div class="slide-num">${String(img.num).padStart(2,'0')} / ${images.length}</div>`;
-    stage.appendChild(slide);
-
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (idx === 0 ? ' on' : '');
-    dot.addEventListener('click', () => {current=idx;updateSlide();});
-    dotsDiv.appendChild(dot);
-
-    const thumb = document.createElement('div');
-    thumb.className = 'thumb' + (idx === 0 ? ' on' : '');
-    const thumbImg = document.createElement('img');
-    thumbImg.src = img.src;
-    thumbImg.alt = img.title;
-    thumb.appendChild(thumbImg);
-    thumb.addEventListener('click', () => {current=idx;updateSlide();});
-    thumbsDiv.appendChild(thumb);
+  images.forEach((img) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.category = img.category;
+    card.innerHTML = `
+      <img src="${img.src}" alt="${img.title}" loading="lazy" />
+      <div class="card-overlay">
+        <div class="card-tag">${img.category.toUpperCase()}</div>
+        <div class="card-title">${img.title}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => openModal(img));
+    grid.appendChild(card);
   });
 
-  const filtersDiv = document.getElementById('filters');
   allCategories.forEach(cat => {
     const btn = document.createElement('button');
     btn.className = 'filter-btn' + (cat === 'all' ? ' active' : '');
@@ -675,11 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      if (cat === 'all') {filteredIndices = images.map((_, i) => i);} 
-      else {filteredIndices = images.map((img, i) => img.category === cat ? i : -1).filter(i => i >= 0);}
-      document.querySelectorAll('.slide').forEach((slide, i) => {slide.style.display = filteredIndices.includes(i) ? 'block' : 'none';});
-      current = 0;
-      updateSlide();
+      filteredIndices = cat === 'all' ? images.map((_,i)=>i) : images.map((img,i)=>img.category===cat?i:-1).filter(i=>i>=0);
+      document.querySelectorAll('.card').forEach((card,i)=>{card.style.display=filteredIndices.includes(i)?'block':'none';});
     });
     filtersDiv.appendChild(btn);
   });
@@ -687,32 +529,23 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('searchInput').addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase();
     const activeCat = document.querySelector('.filter-btn.active').textContent.toLowerCase();
-    const cat = activeCat === 'all' ? 'all' : activeCat;
-    filteredIndices = images.map((img, i) => {
-      const matchCat = cat === 'all' || img.category === cat;
-      const matchSearch = !q || img.title.toLowerCase().includes(q);
-      return matchCat && matchSearch ? i : -1;
-    }).filter(i => i >= 0);
-    document.querySelectorAll('.slide').forEach((slide, i) => {slide.style.display = filteredIndices.includes(i) ? 'block' : 'none';});
-    current = 0;
-    updateSlide();
+    filteredIndices = images.map((img,i)=>{
+      const matchCat = activeCat==='all'||img.category===activeCat;
+      const matchSearch = !q||img.title.toLowerCase().includes(q);
+      return matchCat&&matchSearch?i:-1;
+    }).filter(i=>i>=0);
+    document.querySelectorAll('.card').forEach((card,i)=>{card.style.display=filteredIndices.includes(i)?'block':'none';});
   });
 
-  document.getElementById('arr-n').addEventListener('click', () => goTo(current + 1));
-  document.getElementById('arr-p').addEventListener('click', () => goTo(current - 1));
-
-  document.addEventListener('keydown', e => {if(e.key==='ArrowRight')goTo(current+1);if(e.key==='ArrowLeft')goTo(current-1);});
-
-  let touchX0 = 0;
-  document.getElementById('stage').addEventListener('touchstart', e => {touchX0=e.touches[0].clientX;}, {passive:true});
-  document.getElementById('stage').addEventListener('touchend', e => {const dx=e.changedTouches[0].clientX-touchX0;if(Math.abs(dx)>40){dx<0?goTo(current+1):goTo(current-1);}});
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal').addEventListener('click', (e) => {if(e.target.id==='modal')closeModal();});
 
   initEarth();
   requestAnimationFrame(loop);
 });
 
-window.addEventListener('scroll', () => {document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);}, {passive:true});
-window.addEventListener('load', () => {setTimeout(() => document.getElementById('loading').classList.add('done'), 1000);});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loading').classList.add('done'),1000);});
 
 </script>
 
