@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-03-26",
+  "source": "IAU Minor Planet Center confirmation for Jupiter and Saturn (26 March 2026); curated planetary-satellite snapshot for other systems",
+  "notes": "Loaded on every AstroBis page refresh with cache disabled. Update this file when IAU/MPC or NASA-confirmed satellite announcements change a count.",
+  "counts": {
+    "Mercury": 0,
+    "Venus": 0,
+    "Earth": 1,
+    "Mars": 2,
+    "Ceres": 0,
+    "Jupiter": 101,
+    "Saturn": 285,
+    "Uranus": 29,
+    "Neptune": 16,
+    "Pluto": 5,
+    "Haumea": 2,
+    "Makemake": 1,
+    "Eris": 1
+  }
+}
