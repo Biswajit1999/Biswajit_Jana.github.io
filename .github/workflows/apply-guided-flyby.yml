@@ -1,0 +1,236 @@
+name: Apply guided flyby update
+
+on:
+  push:
+    branches:
+      - fix/manual-guided-flyby
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/manual-guided-flyby
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Make camera navigation manual by default
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('src/components/SolarSystem.jsx')
+          source = path.read_text()
+
+          def replace_once(old, new, label):
+              global source
+              if old not in source:
+                  raise SystemExit(f'Missing expected block: {label}')
+              source = source.replace(old, new, 1)
+
+          camera_pattern = r"function CameraDirector\(\{ presetKey \}\) \{.*?\n\}\n\nfunction Scene"
+          camera_replacement = '''function CameraDirector({ presetKey, commandId, cancelId, onComplete }) {
+  const { camera, controls } = useThree();
+  const activeRef = useRef(false);
+  const lastCommandRef = useRef(commandId);
+  const lastCancelRef = useRef(cancelId);
+  const targetPosition = useMemo(() => new THREE.Vector3(), []);
+  const targetLookAt = useMemo(() => new THREE.Vector3(), []);
+
+  useEffect(() => {
+    if (commandId === lastCommandRef.current) return;
+    lastCommandRef.current = commandId;
+    activeRef.current = true;
+  }, [commandId]);
+
+  useEffect(() => {
+    if (cancelId === lastCancelRef.current) return;
+    lastCancelRef.current = cancelId;
+    activeRef.current = false;
+  }, [cancelId]);
+
+  useFrame(() => {
+    if (!activeRef.current) return;
+    const preset = VIEW_PRESETS.find((item) => item.key === presetKey) || VIEW_PRESETS[0];
+    targetPosition.set(...preset.camera);
+    targetLookAt.set(...preset.target);
+    camera.position.lerp(targetPosition, 0.05);
+    if (controls?.target) controls.target.lerp(targetLookAt, 0.07);
+
+    const cameraSettled = camera.position.distanceTo(targetPosition) < 0.25;
+    const targetSettled = !controls?.target || controls.target.distanceTo(targetLookAt) < 0.12;
+    if (cameraSettled && targetSettled) {
+      activeRef.current = false;
+      onComplete?.();
+    }
+  });
+
+  return null;
+}
+
+function Scene'''
+          source, count = re.subn(camera_pattern, camera_replacement, source, count=1, flags=re.DOTALL)
+          if count != 1:
+              raise SystemExit('Could not replace CameraDirector')
+
+          replace_once(
+              'function Scene({ speed, scaleMode, showLabels, showRegions, showShellGuides, selected, onSelect, realOrbits, sizeBoost, viewPreset }) {',
+              'function Scene({ speed, scaleMode, showLabels, showRegions, showShellGuides, selected, onSelect, realOrbits, sizeBoost, viewPreset, flybyCommand, flybyCancelCommand, onFlybyComplete, onManualNavigation }) {',
+              'Scene signature',
+          )
+
+          replace_once(
+              '      <CameraDirector presetKey={viewPreset} />',
+              '''      <CameraDirector
+        presetKey={viewPreset}
+        commandId={flybyCommand}
+        cancelId={flybyCancelCommand}
+        onComplete={onFlybyComplete}
+      />''',
+              'CameraDirector usage',
+          )
+
+          replace_once(
+              '      <OrbitControls makeDefault enableZoom enablePan enableDamping dampingFactor={0.06} minDistance={10} maxDistance={860} />',
+              '''      <OrbitControls
+        makeDefault
+        enableZoom
+        enablePan
+        enableDamping
+        dampingFactor={0.06}
+        minDistance={10}
+        maxDistance={860}
+        onStart={onManualNavigation}
+      />''',
+              'OrbitControls',
+          )
+
+          replace_once(
+              'function ControlBar({ speed, setSpeed, scaleMode, setScaleMode, showLabels, setShowLabels, showRegions, setShowRegions, showShellGuides, setShowShellGuides, realOrbits, setRealOrbits, sizeBoost, setSizeBoost, showRuler, setShowRuler, viewPreset, setViewPreset }) {',
+              'function ControlBar({ speed, setSpeed, scaleMode, setScaleMode, showLabels, setShowLabels, showRegions, setShowRegions, showShellGuides, setShowShellGuides, realOrbits, setRealOrbits, sizeBoost, setSizeBoost, showRuler, setShowRuler, viewPreset, setViewPreset, onStartFlyby, flybyActive, onStopFlyby }) {',
+              'ControlBar signature',
+          )
+
+          control_start = source.index('function ControlBar(')
+          control_return = source.index('  return (', control_start)
+          source = source[:control_return] + '''  const activePreset = VIEW_PRESETS.find((preset) => preset.key === viewPreset) || VIEW_PRESETS[0];
+
+''' + source[control_return:]
+
+          replace_once(
+              '''      </div>
+      <select className="astro-select" aria-label="Distance scale"''',
+              '''      </div>
+      <button
+        type="button"
+        onClick={() => onStartFlyby(activePreset.key)}
+        style={{ ...controlStyle, color: flybyActive ? palette.cyan : palette.violet }}
+        title="Move the camera to the selected scale view"
+      >
+        {flybyActive ? 'Guided flyby active' : `Fly to ${activePreset.label}`}
+      </button>
+      {flybyActive && (
+        <button
+          type="button"
+          onClick={onStopFlyby}
+          style={{ ...controlStyle, color: '#fecaca' }}
+        >
+          Stop tour
+        </button>
+      )}
+      <select className="astro-select" aria-label="Distance scale"''',
+              'Guided flyby controls',
+          )
+
+          replace_once(
+              "      <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11 }}>Drag to rotate. Scroll to travel outward. Click a world for details.</span>",
+              "      <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 11 }}>Manual navigation is always available. Choose a scale view, then use Fly to view only when you want the camera to move.</span>",
+              'Navigation help text',
+          )
+
+          replace_once(
+              "  const [viewPreset, setViewPreset] = useState(getInitialViewPreset);",
+              '''  const [viewPreset, setViewPreset] = useState(getInitialViewPreset);
+  const [flybyCommand, setFlybyCommand] = useState(0);
+  const [flybyCancelCommand, setFlybyCancelCommand] = useState(0);
+  const [flybyActive, setFlybyActive] = useState(false);
+
+  const startFlyby = (presetKey) => {
+    const preset = VIEW_PRESETS.find((item) => item.key === presetKey);
+    if (!preset) return;
+    setViewPreset(preset.key);
+    setScaleMode(preset.scaleMode);
+    setFlybyActive(true);
+    setFlybyCommand((value) => value + 1);
+  };
+
+  const stopFlyby = () => {
+    if (!flybyActive) return;
+    setFlybyActive(false);
+    setFlybyCancelCommand((value) => value + 1);
+  };''',
+              'Flyby state',
+          )
+
+          replace_once(
+              '          <Scene speed={speed} scaleMode={scaleMode} showLabels={showLabels} showRegions={showRegions} showShellGuides={showShellGuides} selected={selected} onSelect={setSelected} realOrbits={realOrbits} sizeBoost={sizeBoost} viewPreset={viewPreset} />',
+              '''          <Scene
+            speed={speed}
+            scaleMode={scaleMode}
+            showLabels={showLabels}
+            showRegions={showRegions}
+            showShellGuides={showShellGuides}
+            selected={selected}
+            onSelect={setSelected}
+            realOrbits={realOrbits}
+            sizeBoost={sizeBoost}
+            viewPreset={viewPreset}
+            flybyCommand={flybyCommand}
+            flybyCancelCommand={flybyCancelCommand}
+            onFlybyComplete={() => setFlybyActive(false)}
+            onManualNavigation={stopFlyby}
+          />''',
+              'Scene usage',
+          )
+
+          replace_once(
+              '''        viewPreset={viewPreset}
+        setViewPreset={setViewPreset}
+      />''',
+              '''        viewPreset={viewPreset}
+        setViewPreset={setViewPreset}
+        onStartFlyby={startFlyby}
+        flybyActive={flybyActive}
+        onStopFlyby={stopFlyby}
+      />''',
+              'ControlBar usage',
+          )
+
+          path.write_text(source)
+          PY
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate production build
+        run: npm run build
+
+      - name: Commit the focused navigation update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apply-guided-flyby.yml
+          git add src/components/SolarSystem.jsx
+          git diff --cached --quiet && exit 0
+          git commit -m "fix: make camera flybys opt-in"
+          git push origin HEAD:fix/manual-guided-flyby
