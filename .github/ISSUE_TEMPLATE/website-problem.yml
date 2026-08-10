@@ -13,7 +13,7 @@ body:
     attributes:
       label: Page URL
       description: Which published page has the problem?
-      placeholder: https://biswajit1999.github.io/Biswajit_Jana.github.io/...
+      reference scaffold: https://biswajit1999.github.io/Biswajit_Jana.github.io/...
     validations:
       required: true
   - type: dropdown
@@ -47,7 +47,7 @@ body:
     id: environment
     attributes:
       label: Browser and device
-      placeholder: Chrome on Windows desktop, Safari on iPhone, etc.
+      reference scaffold: Chrome on Windows desktop, Safari on iPhone, etc.
   - type: checkboxes
     id: checks
     attributes:

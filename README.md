@@ -161,7 +161,7 @@ Future updates may include links to:
 
 ## Visuals and AI-Assisted Illustrations
 
-Selected visuals on this website are **original AI-assisted conceptual illustrations created for this portfolio**.
+Selected visuals on this website are **original science-informed conceptual illustrations created for this portfolio**.
 
 They are used as artistic, educational, and explanatory visuals only. They should not be interpreted as observational astronomy images, measured scientific data, or exact diagrams of real instruments unless explicitly stated.
 
@@ -260,3 +260,7 @@ Typical structure:
 │       └── black-hole-simulator.html
 ├── images/
 └── files/
+
+## Research Quality Upgrade
+
+See [RESEARCH_QUALITY.md](RESEARCH_QUALITY.md) for the validation layer, reference anchors, equations and research boundaries added to this repository.

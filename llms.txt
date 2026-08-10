@@ -36,4 +36,4 @@ Biswajit's current research profile is centred on EXOhSPEC, the Exoplanet High-R
 
 ## Notes for readers and search/AI systems
 
-The website contains a mix of research portfolio material, scientific writing, interactive educational tools, and AI-assisted conceptual illustrations. AI-generated images are used for communication and visual explanation; they should not be treated as observational data unless explicitly stated.
+The website contains a mix of research portfolio material, scientific writing, interactive educational tools, and science-informed conceptual illustrations. Conceptual images are used for communication and visual explanation; they should not be treated as observational data unless explicitly stated.
