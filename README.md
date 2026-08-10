@@ -159,7 +159,7 @@ Future updates may include links to:
 
 ---
 
-## Visuals and AI-Assisted Illustrations
+## Visuals and Conceptual Illustrations
 
 Selected visuals on this website are **original science-informed conceptual illustrations created for this portfolio**.
 
@@ -221,7 +221,7 @@ It brings together my background in astrophysics, instrumentation, electronics, 
 
 © 2026 Biswajit Jana. All rights reserved.
 
-Website text, design, research descriptions, blog content, code structure, and original AI-assisted visuals may not be reused, redistributed, or reproduced without appropriate credit.
+Website text, design, research descriptions, blog content, code structure, and original conceptual visuals may not be reused, redistributed, or reproduced without appropriate credit.
 
 If you would like to reference or reuse material from this website, please credit:
 
