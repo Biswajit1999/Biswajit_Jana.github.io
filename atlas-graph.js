@@ -105,7 +105,14 @@
       .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
       .onBackgroundClick(function () { clearSelection(); })
       .cooldownTime(reduceMotionMQ.matches ? 0 : 4000)
-      .onEngineStop(function () { fitToGraph(reduceMotionMQ.matches ? 0 : 600); if (!reduceMotionMQ.matches && !orbitTimer) startOrbit(); });
+      .onEngineStop(function () {
+        var fitMs = reduceMotionMQ.matches ? 0 : 600;
+        fitToGraph(fitMs);
+        // fitToGraph's camera move is tweened over fitMs; starting the orbit immediately
+        // would read the camera's pre-tween position for its starting angle and effectively
+        // cut the tween short. Wait for it to actually finish first.
+        if (!reduceMotionMQ.matches && !orbitTimer) setTimeout(startOrbit, fitMs + 30);
+      });
 
     // the graph is constructed as soon as this section nears the viewport (IntersectionObserver,
     // 200px early), which can be before the page's layout has fully settled — web fonts loading,
@@ -134,22 +141,25 @@
     // frames/orbits around THAT instead.
     function fitToGraph(ms) {
       var nodes = graphData.nodes;
-      var minX = Infinity, minY = Infinity, minZ = Infinity, maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
-      nodes.forEach(function (n) {
-        if (typeof n.x !== "number") return;
-        if (n.x < minX) minX = n.x; if (n.x > maxX) maxX = n.x;
-        if (n.y < minY) minY = n.y; if (n.y > maxY) maxY = n.y;
-        if (n.z < minZ) minZ = n.z; if (n.z > maxZ) maxZ = n.z;
+      // centroid (average position), not the bounding-box midpoint -- d3-force's default
+      // forceCenter() pulls the centroid toward the origin each tick, but a handful of
+      // outlier nodes can still stretch the box's min/max bounds asymmetrically, which
+      // drags the BOX's midpoint away from where the graph's actual mass sits. Framing
+      // around the box midpoint left the dense cluster visibly off to one side even
+      // though the true center of mass was correctly near the origin.
+      var center = { x: 0, y: 0, z: 0 }, n = 0;
+      nodes.forEach(function (node) {
+        if (typeof node.x !== "number") return;
+        center.x += node.x; center.y += node.y; center.z += node.z; n++;
       });
-      if (!isFinite(minX)) return; // no positioned nodes yet
-      var center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2, z: (minZ + maxZ) / 2 };
-      // true bounding-sphere radius (farthest node from center) — half the largest axis
-      // span alone under-measures corner-to-center distance on a non-cubic box and can
-      // clip nodes out of frame
+      if (!n) return; // no positioned nodes yet
+      center.x /= n; center.y /= n; center.z /= n;
+      // bounding-sphere radius around that centroid (farthest node from it), so outliers
+      // still get included in the frame without pulling the look-at point off the mass
       var radius = 0;
-      nodes.forEach(function (n) {
-        if (typeof n.x !== "number") return;
-        var d = Math.hypot(n.x - center.x, n.y - center.y, n.z - center.z);
+      nodes.forEach(function (node) {
+        if (typeof node.x !== "number") return;
+        var d = Math.hypot(node.x - center.x, node.y - center.y, node.z - center.z);
         if (d > radius) radius = d;
       });
       radius = Math.max(radius, 20);
