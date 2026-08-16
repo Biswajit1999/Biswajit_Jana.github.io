@@ -85,41 +85,60 @@
     var orbitCenter = { x: 0, y: 0, z: 0 }; // the graph's actual look-at point (rarely the world origin)
     var orbitY = 0;
 
-    Graph = ForceGraph3D()(container)
-      // 3d-force-graph defaults width/height to window.innerWidth/innerHeight, not the
-      // container's actual size, until told otherwise -- without this the camera's aspect
-      // ratio is baked to the browser viewport instead of this ~1100x560 box, which throws
-      // off both the rendered scale and this file's own FOV-based framing math
-      .width(container.clientWidth)
-      .height(container.clientHeight)
-      // cooldownTicks defaults to Infinity, so the only thing that was ending the layout
-      // pass was the cooldownTime wall clock -- meaning convergence quality depended on
-      // how many real-time rAF ticks the browser actually delivered in that window, not
-      // a fixed amount of physics. warmupTicks runs as a synchronous loop instead (not
-      // rAF-driven), guaranteeing the same solid convergence every time regardless of
-      // frame timing, before the very first frame is even painted.
-      .warmupTicks(220)
-      .graphData({ nodes: graphData.nodes, links: graphData.edges })
-      .backgroundColor(pal.bg)
-      .showNavInfo(false)
-      .nodeLabel(function (n) { return n.label; })
-      .nodeVal(function (n) { return NODE_SIZE[n.type] || 3; })
-      .nodeColor(nodeColor)
-      .nodeOpacity(0.92)
-      .linkColor(linkColor)
-      .linkWidth(function (l) { return isLit(l) ? 1.4 : 0.5; })
-      .linkOpacity(0.35)
-      .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
-      .onBackgroundClick(function () { clearSelection(); })
-      .cooldownTime(reduceMotionMQ.matches ? 0 : 1200)
-      .onEngineStop(function () {
-        var fitMs = reduceMotionMQ.matches ? 0 : 600;
-        fitToGraph(fitMs);
-        // fitToGraph's camera move is tweened over fitMs; starting the orbit immediately
-        // would read the camera's pre-tween position for its starting angle and effectively
-        // cut the tween short. Wait for it to actually finish first.
-        if (!reduceMotionMQ.matches && !orbitTimer) setTimeout(startOrbit, fitMs + 30);
-      });
+    try {
+      Graph = ForceGraph3D()(container);
+      // Only set an explicit size when the container actually has one yet. 3d-force-graph's
+      // .width()/.height() setters also write that exact value as an inline style onto the
+      // container element -- if this section is constructed before the page has finished
+      // laying out (it mounts via IntersectionObserver 200px before entering view, which can
+      // beat web fonts and grid resolution) container.clientWidth can read 0 here, and
+      // .width(0) would pin the container at 0px forever via that inline style, since nothing
+      // else would ever touch it again. Skipping it in that case is safe: the ResizeObserver
+      // below only fires on an actual size CHANGE, so a real 0 -> real-size transition still
+      // gets caught and applied there once the container settles.
+      if (container.clientWidth && container.clientHeight) {
+        Graph.width(container.clientWidth).height(container.clientHeight);
+      }
+      Graph
+        // cooldownTicks defaults to Infinity, so the only thing that was ending the layout
+        // pass was the cooldownTime wall clock -- meaning convergence quality depended on
+        // how many real-time rAF ticks the browser actually delivered in that window, not
+        // a fixed amount of physics. warmupTicks runs as a synchronous loop instead (not
+        // rAF-driven), guaranteeing the same solid convergence every time regardless of
+        // frame timing, before the very first frame is even painted.
+        .warmupTicks(220)
+        .graphData({ nodes: graphData.nodes, links: graphData.edges })
+        .backgroundColor(pal.bg)
+        .showNavInfo(false)
+        .nodeLabel(function (n) { return n.label; })
+        .nodeVal(function (n) { return NODE_SIZE[n.type] || 3; })
+        .nodeColor(nodeColor)
+        .nodeOpacity(0.92)
+        .linkColor(linkColor)
+        .linkWidth(function (l) { return isLit(l) ? 1.4 : 0.5; })
+        .linkOpacity(0.35)
+        .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
+        .onBackgroundClick(function () { clearSelection(); })
+        .cooldownTime(reduceMotionMQ.matches ? 0 : 1200)
+        .onEngineStop(function () {
+          var fitMs = reduceMotionMQ.matches ? 0 : 600;
+          fitToGraph(fitMs);
+          // fitToGraph's camera move is tweened over fitMs; starting the orbit immediately
+          // would read the camera's pre-tween position for its starting angle and effectively
+          // cut the tween short. Wait for it to actually finish first.
+          if (!reduceMotionMQ.matches && !orbitTimer) setTimeout(startOrbit, fitMs + 30);
+        });
+    } catch (err) {
+      // never leave a silently-broken empty box -- fall back to the accessible,
+      // server-baked list the same way the fetch-failure and narrow-viewport paths do
+      container.hidden = true;
+      var listWrapEl = document.getElementById("atlas-graph-list-wrap");
+      if (listWrapEl) listWrapEl.hidden = false;
+      var noteEl = document.getElementById("atlas-graph-note");
+      if (noteEl) noteEl.textContent = "The interactive graph could not load. The relationship list below still has the full data.";
+      wireSemanticList();
+      return;
+    }
 
     // the graph is constructed as soon as this section nears the viewport (IntersectionObserver,
     // 200px early), which can be before the page's layout has fully settled — web fonts loading,
@@ -127,17 +146,38 @@
     // window-resize-only listener can leave the renderer's canvas sized to a stale, wrong
     // container size while the bordered box around it settles to its real size. Watch the
     // container itself instead, and re-fit whenever its actual size changes for any reason.
+    var appliedInitialSize = !!(container.clientWidth && container.clientHeight);
+    function applySize(w, h) {
+      if (!w || !h) return false;
+      Graph.width(w).height(h);
+      fitToGraph(0);
+      appliedInitialSize = true;
+      return true;
+    }
     if ("ResizeObserver" in window) {
       var lastW = container.clientWidth, lastH = container.clientHeight;
       var containerObserver = new ResizeObserver(function () {
         var w = container.clientWidth, h = container.clientHeight;
-        if (!w || !h || (w === lastW && h === lastH)) return;
+        if (w === lastW && h === lastH) return;
         lastW = w; lastH = h;
-        Graph.width(w).height(h);
-        fitToGraph(0);
+        applySize(w, h);
       });
       containerObserver.observe(container);
       section.addEventListener("atlas:graph-teardown", function () { containerObserver.disconnect(); }, { once: true });
+    }
+    // backup for the case where the container is 0x0 at construction: don't rely on
+    // ResizeObserver alone to catch that transition (its exact firing behavior can vary),
+    // poll a few times over the first couple of seconds and stop as soon as a real size
+    // shows up or the graph already has one
+    if (!appliedInitialSize) {
+      var sizeRetries = 0;
+      var sizeRetryTimer = setInterval(function () {
+        sizeRetries++;
+        if (appliedInitialSize || applySize(container.clientWidth, container.clientHeight) || sizeRetries >= 10) {
+          clearInterval(sizeRetryTimer);
+        }
+      }, 200);
+      section.addEventListener("atlas:graph-teardown", function () { clearInterval(sizeRetryTimer); }, { once: true });
     }
 
     // 3d-force-graph's own zoomToFit always aims the camera at the world origin (see its
