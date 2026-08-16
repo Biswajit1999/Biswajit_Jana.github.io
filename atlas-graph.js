@@ -92,6 +92,13 @@
       // off both the rendered scale and this file's own FOV-based framing math
       .width(container.clientWidth)
       .height(container.clientHeight)
+      // cooldownTicks defaults to Infinity, so the only thing that was ending the layout
+      // pass was the cooldownTime wall clock -- meaning convergence quality depended on
+      // how many real-time rAF ticks the browser actually delivered in that window, not
+      // a fixed amount of physics. warmupTicks runs as a synchronous loop instead (not
+      // rAF-driven), guaranteeing the same solid convergence every time regardless of
+      // frame timing, before the very first frame is even painted.
+      .warmupTicks(220)
       .graphData({ nodes: graphData.nodes, links: graphData.edges })
       .backgroundColor(pal.bg)
       .showNavInfo(false)
@@ -104,7 +111,7 @@
       .linkOpacity(0.35)
       .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
       .onBackgroundClick(function () { clearSelection(); })
-      .cooldownTime(reduceMotionMQ.matches ? 0 : 4000)
+      .cooldownTime(reduceMotionMQ.matches ? 0 : 1200)
       .onEngineStop(function () {
         var fitMs = reduceMotionMQ.matches ? 0 : 600;
         fitToGraph(fitMs);
