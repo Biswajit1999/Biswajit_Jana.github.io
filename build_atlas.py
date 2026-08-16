@@ -372,7 +372,7 @@ def render_jsonld(projects, stats):
     doc = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Constellation",
+        "name": "GitHub",
         "description": (
             str(stats["total"]) + " public repositories spanning exoplanet research reports, "
             "detection-method implementations, interactive astrophysics labs, and research platforms."
@@ -456,6 +456,10 @@ def render_graph_section(graph):
         '<div class="atlas-graph-canvas" id="atlas-graph-canvas"></div>'
         '<div class="atlas-graph-controls">'
         '<button type="button" class="btn btn-ghost btn-sm" id="atlas-graph-reset">Reset view</button>'
+        '<div class="atlas-graph-zoom" role="group" aria-label="Zoom">'
+        '<button type="button" class="atlas-graph-zoom-btn" id="atlas-graph-zoom-out" aria-label="Zoom out">&#8722;</button>'
+        '<button type="button" class="atlas-graph-zoom-btn" id="atlas-graph-zoom-in" aria-label="Zoom in">+</button>'
+        "</div>"
         "</div>"
         '<p id="atlas-graph-note" class="mono" style="font-size:.72rem;color:var(--muted);margin-top:8px">Drag to pan, scroll to zoom, click a node to see its connections.</p>'
         '<div class="atlas-graph-list-wrap" id="atlas-graph-list-wrap" hidden>' + "".join(list_html) + "</div>"
@@ -520,7 +524,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Constellation | Biswajit Jana</title>
+<title>GitHub | Biswajit Jana</title>
 
 <meta name="author" content="Biswajit Jana" />
 <meta name="description" content="{{TOTAL}} public repositories: exoplanet research reports, detection-method implementations, interactive astrophysics labs, and research platforms, searchable and filterable by type." />
@@ -530,12 +534,12 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Biswajit Jana" />
-<meta property="og:title" content="Constellation | Biswajit Jana" />
+<meta property="og:title" content="GitHub | Biswajit Jana" />
 <meta property="og:description" content="{{TOTAL}} public repositories across exoplanet research, interactive astrophysics labs, and research platforms." />
 <meta property="og:url" content="__SITE_URL__/atlas.html" />
 <meta property="og:image" content="__SITE_URL__/images/github-social-preview.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Constellation | Biswajit Jana" />
+<meta name="twitter:title" content="GitHub | Biswajit Jana" />
 <meta name="twitter:description" content="{{TOTAL}} public repositories across exoplanet research, interactive astrophysics labs, and research platforms." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -559,7 +563,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#skills">Skills</a></li>
         <li><a href="index.html#research">Research</a></li>
-        <li><a href="atlas.html" aria-current="page">Constellation</a></li>
+        <li><a href="atlas.html" aria-current="page">GitHub</a></li>
         <li><a href="index.html#tools">Tools</a></li>
         <li><a href="cv.html">CV</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -581,7 +585,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   <div class="container">
     <div class="atlas-hero-grid">
       <div>
-        <p class="section-head eyebrow" style="margin-bottom:14px">Constellation</p>
+        <p class="section-head eyebrow" style="margin-bottom:14px">GitHub</p>
         <h1>Every <span class="sub">public repository</span>, in one place.</h1>
         <p class="intro">This is my GitHub compiled into something browsable: {{EXO_TOTAL}} exoplanet target reports, a set of detection-method implementations built from scratch, interactive astrophysics labs, larger research platforms, and the academic and side work alongside them. Each repository tells its own story; this page is the map between them.</p>
         <div class="atlas-hero-actions">

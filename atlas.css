@@ -523,7 +523,17 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   .gedge,.gnode circle,.gnode-label{transition:none}
 }
 
-.atlas-graph-controls{display:flex;gap:8px;margin-top:10px}
+.atlas-graph-controls{display:flex;gap:8px;margin-top:10px;align-items:center}
+.atlas-graph-zoom{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.atlas-graph-zoom-btn{
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  background:var(--surface);color:var(--ink);border:none;font-size:1.05rem;line-height:1;
+  cursor:pointer;font-family:inherit;transition:background var(--motion-micro) ease;
+}
+.atlas-graph-zoom-btn+.atlas-graph-zoom-btn{border-left:1px solid var(--line)}
+.atlas-graph-zoom-btn:hover{background:var(--surface-muted)}
+.atlas-graph-zoom-btn:focus-visible{outline:2px solid var(--ring);outline-offset:-2px}
+@media (prefers-reduced-motion: reduce){ .atlas-graph-zoom-btn{transition:none} }
 .atlas-graph-panel{
   border:1px solid var(--line);border-radius:var(--card-radius);background:var(--surface);
   padding:18px 20px;box-shadow:var(--shadow-soft);min-height:120px;

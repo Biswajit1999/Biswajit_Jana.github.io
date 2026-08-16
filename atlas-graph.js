@@ -264,12 +264,33 @@
     }
     window._atlasGraphSelectNode = selectNode; // used by the semantic-list click handler below
 
+    // moves the camera along the line to whatever it's currently looking at, preserving
+    // the viewing angle -- a dolly zoom rather than a jump -- and updates orbitDistance so
+    // the auto-orbit (if running) continues at the new zoom level instead of snapping back
+    function zoomBy(factor) {
+      var pos = Graph.cameraPosition();
+      var dx = pos.x - orbitCenter.x, dy = pos.y - orbitCenter.y, dz = pos.z - orbitCenter.z;
+      var dist = Math.hypot(dx, dy, dz) || orbitDistance || 300;
+      var newDist = Math.min(Math.max(dist * factor, 40), 6000);
+      var scale = newDist / dist;
+      Graph.cameraPosition({
+        x: orbitCenter.x + dx * scale,
+        y: orbitCenter.y + dy * scale,
+        z: orbitCenter.z + dz * scale
+      }, orbitCenter, 200);
+      orbitDistance = newDist;
+    }
+
     function wireControls() {
       var resetBtn = document.getElementById("atlas-graph-reset");
       if (resetBtn) resetBtn.addEventListener("click", function () {
         clearSelection();
         fitToGraph(600);
       });
+      var zoomInBtn = document.getElementById("atlas-graph-zoom-in");
+      if (zoomInBtn) zoomInBtn.addEventListener("click", function () { zoomBy(0.8); });
+      var zoomOutBtn = document.getElementById("atlas-graph-zoom-out");
+      if (zoomOutBtn) zoomOutBtn.addEventListener("click", function () { zoomBy(1.25); });
       var search = document.getElementById("atlas-graph-search");
       if (search) search.addEventListener("input", function () {
         searchTerm = search.value.trim().toLowerCase();
