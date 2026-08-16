@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://biswajit1999.github.io/Biswajit_Jana.github.io/sitemap.xml
-Sitemap: https://biswajit1999.github.io/Biswajit_Jana.github.io/research-sitemap.xml
