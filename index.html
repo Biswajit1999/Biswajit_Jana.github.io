@@ -379,8 +379,14 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
 }
 .atlas-teaser:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow-card);text-decoration:none}
 @media (max-width:760px){ .atlas-teaser{grid-template-columns:1fr} }
-.atlas-teaser-visual{aspect-ratio:16/10;border-radius:var(--card-radius);background:var(--surface-muted);overflow:hidden;transform-style:preserve-3d;will-change:transform}
-.atlas-teaser-svg{width:100%;height:100%;display:block}
+.atlas-teaser-visual{aspect-ratio:16/10;border-radius:var(--card-radius);background:var(--surface-muted);overflow:hidden;position:relative}
+.atlas-teaser-media{
+  position:absolute;top:0;left:0;
+  width:116.6%;max-width:116.6%;height:116.6%;object-fit:cover;object-position:top left;
+  display:block;transition:opacity .5s ease;
+}
+video.atlas-teaser-media{opacity:0}
+video.atlas-teaser-media.is-ready{opacity:1}
 .atlas-teaser-body{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .atlas-teaser-kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2)}
 .atlas-teaser-body h4{font-family:"Syne",sans-serif;font-size:1.3rem;font-weight:800;margin:0}
@@ -857,7 +863,9 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       <p class="section-lead">Exoplanet reports, detection methods, interactive labs, and research platforms — searchable, filterable, and mapped as one connected body of work.</p>
     </div>
     <a class="atlas-teaser reveal" href="atlas.html" aria-label="Explore the Constellation — my full repository map">
-      <div class="atlas-teaser-visual" id="atlasTeaserVisual" aria-hidden="true"></div>
+      <div class="atlas-teaser-visual" id="atlasTeaserVisual" aria-hidden="true">
+        <img src="images/atlas-teaser-network-poster.jpg" alt="" class="atlas-teaser-media" width="1360" height="850" loading="lazy">
+      </div>
       <div class="atlas-teaser-body">
         <span class="atlas-teaser-kicker mono">Constellation</span>
         <h4>Explore the full map</h4>
@@ -962,7 +970,6 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   <div class="container"><p class="foot-note">Conceptual visuals on this site are illustrative artwork for communication, not measured data or experimental evidence. Research code, thesis material and seminar resources are linked through GitHub.</p></div>
 </footer>
 
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js" integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O" crossorigin="anonymous"></script>
 <script>
 /* ---------- Theme: light default, dark optional, persisted ---------- */
 (function(){
@@ -1061,7 +1068,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   set('marsYears', days/686.980, 1);         // Mars orbits
 })();
 
-/* ---------- Constellation teaser: real WebGL (Three.js), links to atlas.html ---------- */
+/* ---------- Constellation teaser: looping video, links to atlas.html ---------- */
 (function(){
   // live repo count, fetched from the same manifest atlas.html uses — never hand-typed
   var countEl=document.getElementById('atlasRepoCount');
@@ -1072,88 +1079,46 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   }
 
   var visual=document.getElementById('atlasTeaserVisual');
-  if(!visual || typeof THREE==='undefined') return;
+  if(!visual) return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // reduced motion (or no video support): the poster <img> already baked into the HTML is enough
+  if(reduce || !document.createElement('video').canPlayType) return;
 
-  var W=visual.clientWidth, H=visual.clientHeight;
-  var renderer=new THREE.WebGLRenderer({antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-  renderer.setSize(W,H);
-  visual.appendChild(renderer.domElement);
+  var video=document.createElement('video');
+  video.className='atlas-teaser-media';
+  video.setAttribute('poster','images/atlas-teaser-network-poster.jpg');
+  video.muted=true; video.loop=true; video.playsInline=true; video.preload='none';
+  video.setAttribute('aria-hidden','true');
+  var source=document.createElement('source');
+  source.src='images/atlas-teaser-network.mp4'; source.type='video/mp4';
+  video.appendChild(source);
+  video.addEventListener('canplay', function(){ video.classList.add('is-ready'); }, {once:true});
+  visual.appendChild(video);
 
-  var scene=new THREE.Scene();
-  var camera=new THREE.PerspectiveCamera(42, W/H, 0.1, 100);
-  camera.position.set(0,0,13);
-
-  scene.add(new THREE.AmbientLight(0xffffff,0.55));
-  var key=new THREE.PointLight(0x9ab8ff,1.4,40); key.position.set(6,5,9); scene.add(key);
-  var rim=new THREE.PointLight(0x2fd0c2,0.9,40); rim.position.set(-7,-3,-6); scene.add(rim);
-
-  var group=new THREE.Group(); scene.add(group);
-
-  var COLORS=[0x2f63e8,0x0c9d92,0xe0ab55,0x9a6cff,0x2f63e8,0x0c9d92,0xe0ab55];
-  var hubGeo=new THREE.SphereGeometry(0.62,24,24);
-  var hubMat=new THREE.MeshStandardMaterial({color:0x2f63e8, emissive:0x1a3aa0, emissiveIntensity:0.4, roughness:0.35, metalness:0.2});
-  var hub=new THREE.Mesh(hubGeo,hubMat); group.add(hub);
-
-  var nodes=[], lineMat=new THREE.LineBasicMaterial({color:0x8aa0c8, transparent:true, opacity:0.35});
-  for(var i=0;i<COLORS.length;i++){
-    var angle=(i/COLORS.length)*Math.PI*2;
-    var radius=3.6+(i%3)*0.6;
-    var y=Math.sin(i*1.7)*1.4;
-    var pos=new THREE.Vector3(Math.cos(angle)*radius, y, Math.sin(angle)*radius*0.7);
-    var geo=new THREE.SphereGeometry(0.24+(i%2)*0.08,16,16);
-    var mat=new THREE.MeshStandardMaterial({color:COLORS[i], roughness:0.4, metalness:0.15});
-    var mesh=new THREE.Mesh(geo,mat); mesh.position.copy(pos); group.add(mesh);
-
-    var lineGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), pos]);
-    var line=new THREE.Line(lineGeo,lineMat); group.add(line);
-
-    nodes.push({mesh:mesh, base:pos.clone(), angle:angle, radius:radius, speed:0.15+Math.random()*0.2});
+  // load and play only once the teaser is actually visible — a decorative loop has no
+  // reason to spend bandwidth/GPU on a card the visitor hasn't scrolled to
+  var started=false;
+  function start(){
+    if(started) return;
+    started=true;
+    video.load();
+    video.play().catch(function(){ /* autoplay blocked — poster stays visible */ });
   }
-
-  function resize(){
-    W=visual.clientWidth; H=visual.clientHeight;
-    if(!W||!H) return;
-    camera.aspect=W/H; camera.updateProjectionMatrix();
-    renderer.setSize(W,H);
-  }
-  window.addEventListener('resize', resize, {passive:true});
-
-  // pause rendering when off-screen or tab hidden — a decorative teaser has no reason
-  // to spend GPU time the visitor can't see
-  var visible=true;
   if('IntersectionObserver' in window){
-    new IntersectionObserver(function(entries){ visible=entries[0].isIntersecting; }, {threshold:0.05}).observe(visual);
-  }
-  document.addEventListener('visibilitychange', function(){ if(!document.hidden) visible=true; });
-
-  var targetRotY=0, currentRotY=0;
-  var fine=window.matchMedia&&window.matchMedia('(pointer: fine)').matches;
-  if(fine && !reduce){
-    visual.addEventListener('mousemove', function(e){
-      var r=visual.getBoundingClientRect();
-      targetRotY=((e.clientX-r.left)/r.width-0.5)*0.6;
-    });
-    visual.addEventListener('mouseleave', function(){ targetRotY=0; });
-  }
-
-  function render(t){
-    requestAnimationFrame(render);
-    if(!visible || document.hidden) return;
-    if(!reduce){
-      nodes.forEach(function(n){
-        var a=n.angle + t*0.00012*n.speed;
-        n.mesh.position.set(Math.cos(a)*n.radius, n.base.y, Math.sin(a)*n.radius*0.7);
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ start(); video.play().catch(function(){}); }
+        else if(started){ video.pause(); }
       });
-      group.rotation.y += 0.0009;
-    }
-    currentRotY += (targetRotY-currentRotY)*0.06;
-    group.rotation.x = currentRotY*0.4;
-    hub.scale.setScalar(1+Math.sin((t||0)*0.002)*0.04);
-    renderer.render(scene,camera);
+    }, {threshold:0.05});
+    io.observe(visual);
+  } else {
+    start();
   }
-  if(reduce){ renderer.render(scene,camera); } else { requestAnimationFrame(render); }
+  document.addEventListener('visibilitychange', function(){
+    if(!started) return;
+    if(document.hidden) video.pause(); else video.play().catch(function(){});
+  });
 })();
 
 /* ---------- Animated space background: drifting + falling stars, shooting stars, scroll parallax ---------- */

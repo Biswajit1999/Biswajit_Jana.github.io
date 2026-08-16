@@ -82,6 +82,8 @@
 
     var orbitTimer = null;
     var orbitDistance = 300; // replaced with the real fitted distance once layout settles
+    var orbitCenter = { x: 0, y: 0, z: 0 }; // the graph's actual look-at point (rarely the world origin)
+    var orbitY = 0;
 
     Graph = ForceGraph3D()(container)
       .graphData({ nodes: graphData.nodes, links: graphData.edges })
@@ -100,24 +102,39 @@
       .onEngineStop(function () {
         // frame the graph to whatever scale the physics actually settled at,
         // instead of guessing a fixed camera distance
-        Graph.zoomToFit(reduceMotionMQ.matches ? 0 : 600, 40);
-        var pos = Graph.cameraPosition();
-        orbitDistance = Math.hypot(pos.x, pos.y, pos.z) || 300;
-        if (!reduceMotionMQ.matches && !orbitTimer) startOrbit();
+        var fitMs = reduceMotionMQ.matches ? 0 : 600;
+        Graph.zoomToFit(fitMs, 40);
+        // zoomToFit tweens the camera over fitMs — read the result only once that
+        // tween has actually finished, not mid-flight
+        setTimeout(function () {
+          var pos = Graph.cameraPosition();
+          var controls = Graph.controls && Graph.controls();
+          var target = controls && controls.target ? controls.target : null;
+          orbitCenter = target ? { x: target.x || 0, y: target.y || 0, z: target.z || 0 } : { x: 0, y: 0, z: 0 };
+          orbitY = pos.y;
+          orbitDistance = Math.hypot(pos.x - orbitCenter.x, pos.y - orbitCenter.y, pos.z - orbitCenter.z) || 300;
+          if (!reduceMotionMQ.matches && !orbitTimer) startOrbit();
+        }, fitMs + 50);
       });
 
     // gentle auto-orbit only while nothing is selected, and only when motion is welcome —
     // this is the one continuous ambient motion in the scene, matching "ambient" motion
-    // tokens elsewhere on the page rather than a constant spinning showpiece
+    // tokens elsewhere on the page rather than a constant spinning showpiece.
+    // Orbits around the graph's actual look-at center (not the world origin) and keeps
+    // facing that same point on every tick, so the cluster never drifts off-canvas.
     function startOrbit() {
-      var angle = Math.atan2(Graph.cameraPosition().x, Graph.cameraPosition().z);
+      var angle = Math.atan2(
+        Graph.cameraPosition().x - orbitCenter.x,
+        Graph.cameraPosition().z - orbitCenter.z
+      );
       orbitTimer = setInterval(function () {
         if (selectedId || document.hidden) return;
         angle += Math.PI / 1400;
         Graph.cameraPosition({
-          x: orbitDistance * Math.sin(angle),
-          z: orbitDistance * Math.cos(angle)
-        });
+          x: orbitCenter.x + orbitDistance * Math.sin(angle),
+          y: orbitY,
+          z: orbitCenter.z + orbitDistance * Math.cos(angle)
+        }, orbitCenter);
       }, 30);
       section.addEventListener("atlas:graph-teardown", function () { clearInterval(orbitTimer); }, { once: true });
     }
