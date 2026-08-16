@@ -99,23 +99,57 @@
       .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
       .onBackgroundClick(function () { clearSelection(); })
       .cooldownTime(reduceMotionMQ.matches ? 0 : 4000)
-      .onEngineStop(function () {
-        // frame the graph to whatever scale the physics actually settled at,
-        // instead of guessing a fixed camera distance
-        var fitMs = reduceMotionMQ.matches ? 0 : 600;
-        Graph.zoomToFit(fitMs, 40);
-        // zoomToFit tweens the camera over fitMs — read the result only once that
-        // tween has actually finished, not mid-flight
-        setTimeout(function () {
-          var pos = Graph.cameraPosition();
-          var controls = Graph.controls && Graph.controls();
-          var target = controls && controls.target ? controls.target : null;
-          orbitCenter = target ? { x: target.x || 0, y: target.y || 0, z: target.z || 0 } : { x: 0, y: 0, z: 0 };
-          orbitY = pos.y;
-          orbitDistance = Math.hypot(pos.x - orbitCenter.x, pos.y - orbitCenter.y, pos.z - orbitCenter.z) || 300;
-          if (!reduceMotionMQ.matches && !orbitTimer) startOrbit();
-        }, fitMs + 50);
+      .onEngineStop(function () { fitToGraph(reduceMotionMQ.matches ? 0 : 600); if (!reduceMotionMQ.matches && !orbitTimer) startOrbit(); });
+
+    // 3d-force-graph's own zoomToFit always aims the camera at the world origin (see its
+    // fitToBbox source — the "center" it fits around is hardcoded, not the graph's actual
+    // bounding box), so with a large graph and a short cooldown the layout can still be
+    // off-origin when framing happens, leaving the cluster shifted to one side of the
+    // canvas. This computes the real bounding box from the settled node positions and
+    // frames/orbits around THAT instead.
+    function fitToGraph(ms) {
+      var nodes = graphData.nodes;
+      var minX = Infinity, minY = Infinity, minZ = Infinity, maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+      nodes.forEach(function (n) {
+        if (typeof n.x !== "number") return;
+        if (n.x < minX) minX = n.x; if (n.x > maxX) maxX = n.x;
+        if (n.y < minY) minY = n.y; if (n.y > maxY) maxY = n.y;
+        if (n.z < minZ) minZ = n.z; if (n.z > maxZ) maxZ = n.z;
       });
+      if (!isFinite(minX)) return; // no positioned nodes yet
+      var center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2, z: (minZ + maxZ) / 2 };
+      // true bounding-sphere radius (farthest node from center) — half the largest axis
+      // span alone under-measures corner-to-center distance on a non-cubic box and can
+      // clip nodes out of frame
+      var radius = 0;
+      nodes.forEach(function (n) {
+        if (typeof n.x !== "number") return;
+        var d = Math.hypot(n.x - center.x, n.y - center.y, n.z - center.z);
+        if (d > radius) radius = d;
+      });
+      radius = Math.max(radius, 20);
+
+      var camera = Graph.camera();
+      var fovRad = (camera.fov || 50) * Math.PI / 180;
+      var distance = (radius * 1.35) / Math.sin(fovRad / 2);
+
+      // keep whatever horizontal viewing angle the camera currently has (or a pleasant
+      // default on first run) rather than always approaching from the same axis
+      var cur = Graph.cameraPosition();
+      var dx = cur.x - center.x, dz = cur.z - center.z;
+      if (!dx && !dz) { dx = 0.6; dz = 1; }
+      var horizLen = Math.hypot(dx, dz) || 1;
+      var camPos = {
+        x: center.x + (dx / horizLen) * distance * 0.86,
+        y: center.y + distance * 0.5,
+        z: center.z + (dz / horizLen) * distance * 0.86
+      };
+      Graph.cameraPosition(camPos, center, ms || 0);
+
+      orbitCenter = center;
+      orbitY = camPos.y;
+      orbitDistance = Math.hypot(camPos.x - center.x, camPos.y - center.y, camPos.z - center.z);
+    }
 
     // gentle auto-orbit only while nothing is selected, and only when motion is welcome —
     // this is the one continuous ambient motion in the scene, matching "ambient" motion
@@ -192,7 +226,7 @@
       var resetBtn = document.getElementById("atlas-graph-reset");
       if (resetBtn) resetBtn.addEventListener("click", function () {
         clearSelection();
-        Graph.zoomToFit(600, 40);
+        fitToGraph(600);
       });
       var search = document.getElementById("atlas-graph-search");
       if (search) search.addEventListener("input", function () {
