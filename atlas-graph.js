@@ -86,6 +86,12 @@
     var orbitY = 0;
 
     Graph = ForceGraph3D()(container)
+      // 3d-force-graph defaults width/height to window.innerWidth/innerHeight, not the
+      // container's actual size, until told otherwise -- without this the camera's aspect
+      // ratio is baked to the browser viewport instead of this ~1100x560 box, which throws
+      // off both the rendered scale and this file's own FOV-based framing math
+      .width(container.clientWidth)
+      .height(container.clientHeight)
       .graphData({ nodes: graphData.nodes, links: graphData.edges })
       .backgroundColor(pal.bg)
       .showNavInfo(false)
@@ -100,6 +106,25 @@
       .onBackgroundClick(function () { clearSelection(); })
       .cooldownTime(reduceMotionMQ.matches ? 0 : 4000)
       .onEngineStop(function () { fitToGraph(reduceMotionMQ.matches ? 0 : 600); if (!reduceMotionMQ.matches && !orbitTimer) startOrbit(); });
+
+    // the graph is constructed as soon as this section nears the viewport (IntersectionObserver,
+    // 200px early), which can be before the page's layout has fully settled — web fonts loading,
+    // the CSS grid resolving its 1fr track, etc. don't fire a window "resize" event, so a
+    // window-resize-only listener can leave the renderer's canvas sized to a stale, wrong
+    // container size while the bordered box around it settles to its real size. Watch the
+    // container itself instead, and re-fit whenever its actual size changes for any reason.
+    if ("ResizeObserver" in window) {
+      var lastW = container.clientWidth, lastH = container.clientHeight;
+      var containerObserver = new ResizeObserver(function () {
+        var w = container.clientWidth, h = container.clientHeight;
+        if (!w || !h || (w === lastW && h === lastH)) return;
+        lastW = w; lastH = h;
+        Graph.width(w).height(h);
+        fitToGraph(0);
+      });
+      containerObserver.observe(container);
+      section.addEventListener("atlas:graph-teardown", function () { containerObserver.disconnect(); }, { once: true });
+    }
 
     // 3d-force-graph's own zoomToFit always aims the camera at the world origin (see its
     // fitToBbox source — the "center" it fits around is hardcoded, not the graph's actual
