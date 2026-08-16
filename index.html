@@ -370,6 +370,24 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
 .tool-slider .slider-track > .card{flex:0 0 300px;scroll-snap-align:start}
 @media (prefers-reduced-motion: reduce){ .slider-track{scroll-behavior:auto} }
 
+/* ---------- Constellation teaser ---------- */
+.atlas-teaser{
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:var(--space-6);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--panel-radius);
+  padding:var(--space-6);box-shadow:var(--shadow-soft);text-decoration:none;color:inherit;
+  transition:transform .2s ease, border-color var(--transition), box-shadow var(--transition);
+}
+.atlas-teaser:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow-card);text-decoration:none}
+@media (max-width:760px){ .atlas-teaser{grid-template-columns:1fr} }
+.atlas-teaser-visual{aspect-ratio:16/10;border-radius:var(--card-radius);background:var(--surface-muted);overflow:hidden;transform-style:preserve-3d;will-change:transform}
+.atlas-teaser-svg{width:100%;height:100%;display:block}
+.atlas-teaser-body{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.atlas-teaser-kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2)}
+.atlas-teaser-body h4{font-family:"Syne",sans-serif;font-size:1.3rem;font-weight:800;margin:0}
+.atlas-teaser-body p{color:var(--ink-soft);margin:0 0 6px}
+.atlas-teaser-cta{pointer-events:none}
+@media (prefers-reduced-motion: reduce){ .atlas-teaser{transition:none} .atlas-teaser-visual{transition:none} }
+
 /* ============================================================
    14. WRITING + GALLERY
    ============================================================ */
@@ -832,14 +850,21 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       </div>
     </div>
 
-    <!-- GitHub repositories -->
+    <!-- Constellation teaser -->
     <div class="section-head" style="margin:var(--space-8) 0 var(--space-5)">
-      <h3 class="section-title" style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Recent public repositories</h3>
-      <p class="section-lead">A live snapshot of technical output. If GitHub rate-limits the request, this falls back to a direct link.</p>
+      <p class="eyebrow">The full picture</p>
+      <h3 class="section-title" style="font-size:clamp(1.3rem,2.4vw,1.7rem)"><span id="atlasRepoCount">85</span> repositories. One Constellation.</h3>
+      <p class="section-lead">Exoplanet reports, detection methods, interactive labs, and research platforms — searchable, filterable, and mapped as one connected body of work.</p>
     </div>
-    <div class="grid grid-3" id="repo-grid">
-      <article class="card"><h3 style="font-size:1.05rem">Loading repositories…</h3><p>Connecting to the GitHub public API.</p><div class="links"><a class="tlink" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">View all on GitHub</a></div></article>
-    </div>
+    <a class="atlas-teaser reveal" href="atlas.html" aria-label="Explore the Constellation — my full repository map">
+      <div class="atlas-teaser-visual" id="atlasTeaserVisual" aria-hidden="true"></div>
+      <div class="atlas-teaser-body">
+        <span class="atlas-teaser-kicker mono">Constellation</span>
+        <h4>Explore the full map</h4>
+        <p>Every project, one connected view.</p>
+        <span class="btn btn-primary btn-sm atlas-teaser-cta">Explore <span aria-hidden="true">→</span></span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -937,6 +962,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   <div class="container"><p class="foot-note">Conceptual visuals on this site are illustrative artwork for communication, not measured data or experimental evidence. Research code, thesis material and seminar resources are linked through GitHub.</p></div>
 </footer>
 
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js" integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O" crossorigin="anonymous"></script>
 <script>
 /* ---------- Theme: light default, dark optional, persisted ---------- */
 (function(){
@@ -1035,27 +1061,99 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   set('marsYears', days/686.980, 1);         // Mars orbits
 })();
 
-/* ---------- GitHub repos (graceful) ---------- */
+/* ---------- Constellation teaser: real WebGL (Three.js), links to atlas.html ---------- */
 (function(){
-  var grid=document.getElementById('repo-grid'); if(!grid) return;
-  fetch('https://api.github.com/users/Biswajit1999/repos?sort=updated&per_page=6')
-    .then(function(r){if(!r.ok)throw new Error('rate');return r.json();})
-    .then(function(repos){
-      if(!Array.isArray(repos)||!repos.length)throw new Error('empty');
-      grid.innerHTML='';
-      repos.slice(0,6).forEach(function(repo){
-        var card=document.createElement('article'); card.className='card';
-        var desc=(repo.description||'No description provided.').replace(/[<>]/g,'');
-        card.innerHTML='<h3 style="font-size:1.05rem">'+repo.name.replace(/[<>]/g,'')+'</h3><p>'+desc+'</p>'+
-          '<div class="links" style="gap:16px;font-family:DM Mono,monospace;font-size:.8rem;color:var(--muted)">'+
-          (repo.language?'<span>● '+repo.language+'</span>':'')+'<span>★ '+(repo.stargazers_count||0)+'</span></div>'+
-          '<div class="links"><a class="tlink" href="'+repo.html_url+'" target="_blank" rel="noopener">Open</a></div>';
-        grid.appendChild(card);
-      });
-    })
-    .catch(function(){
-      grid.innerHTML='<article class="card"><h3 style="font-size:1.05rem">Repositories on GitHub</h3><p>The live feed is unavailable right now (GitHub rate limit). My public repositories are all on GitHub.</p><div class="links"><a class="tlink" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">View all on GitHub</a></div></article>';
+  // live repo count, fetched from the same manifest atlas.html uses — never hand-typed
+  var countEl=document.getElementById('atlasRepoCount');
+  if(countEl){
+    fetch('data/full-portfolio.json').then(function(r){return r.json();}).then(function(data){
+      if(Array.isArray(data)) countEl.textContent=data.length;
+    }).catch(function(){ /* keep the static fallback already in the HTML */ });
+  }
+
+  var visual=document.getElementById('atlasTeaserVisual');
+  if(!visual || typeof THREE==='undefined') return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var W=visual.clientWidth, H=visual.clientHeight;
+  var renderer=new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setSize(W,H);
+  visual.appendChild(renderer.domElement);
+
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(42, W/H, 0.1, 100);
+  camera.position.set(0,0,13);
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.55));
+  var key=new THREE.PointLight(0x9ab8ff,1.4,40); key.position.set(6,5,9); scene.add(key);
+  var rim=new THREE.PointLight(0x2fd0c2,0.9,40); rim.position.set(-7,-3,-6); scene.add(rim);
+
+  var group=new THREE.Group(); scene.add(group);
+
+  var COLORS=[0x2f63e8,0x0c9d92,0xe0ab55,0x9a6cff,0x2f63e8,0x0c9d92,0xe0ab55];
+  var hubGeo=new THREE.SphereGeometry(0.62,24,24);
+  var hubMat=new THREE.MeshStandardMaterial({color:0x2f63e8, emissive:0x1a3aa0, emissiveIntensity:0.4, roughness:0.35, metalness:0.2});
+  var hub=new THREE.Mesh(hubGeo,hubMat); group.add(hub);
+
+  var nodes=[], lineMat=new THREE.LineBasicMaterial({color:0x8aa0c8, transparent:true, opacity:0.35});
+  for(var i=0;i<COLORS.length;i++){
+    var angle=(i/COLORS.length)*Math.PI*2;
+    var radius=3.6+(i%3)*0.6;
+    var y=Math.sin(i*1.7)*1.4;
+    var pos=new THREE.Vector3(Math.cos(angle)*radius, y, Math.sin(angle)*radius*0.7);
+    var geo=new THREE.SphereGeometry(0.24+(i%2)*0.08,16,16);
+    var mat=new THREE.MeshStandardMaterial({color:COLORS[i], roughness:0.4, metalness:0.15});
+    var mesh=new THREE.Mesh(geo,mat); mesh.position.copy(pos); group.add(mesh);
+
+    var lineGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), pos]);
+    var line=new THREE.Line(lineGeo,lineMat); group.add(line);
+
+    nodes.push({mesh:mesh, base:pos.clone(), angle:angle, radius:radius, speed:0.15+Math.random()*0.2});
+  }
+
+  function resize(){
+    W=visual.clientWidth; H=visual.clientHeight;
+    if(!W||!H) return;
+    camera.aspect=W/H; camera.updateProjectionMatrix();
+    renderer.setSize(W,H);
+  }
+  window.addEventListener('resize', resize, {passive:true});
+
+  // pause rendering when off-screen or tab hidden — a decorative teaser has no reason
+  // to spend GPU time the visitor can't see
+  var visible=true;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){ visible=entries[0].isIntersecting; }, {threshold:0.05}).observe(visual);
+  }
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) visible=true; });
+
+  var targetRotY=0, currentRotY=0;
+  var fine=window.matchMedia&&window.matchMedia('(pointer: fine)').matches;
+  if(fine && !reduce){
+    visual.addEventListener('mousemove', function(e){
+      var r=visual.getBoundingClientRect();
+      targetRotY=((e.clientX-r.left)/r.width-0.5)*0.6;
     });
+    visual.addEventListener('mouseleave', function(){ targetRotY=0; });
+  }
+
+  function render(t){
+    requestAnimationFrame(render);
+    if(!visible || document.hidden) return;
+    if(!reduce){
+      nodes.forEach(function(n){
+        var a=n.angle + t*0.00012*n.speed;
+        n.mesh.position.set(Math.cos(a)*n.radius, n.base.y, Math.sin(a)*n.radius*0.7);
+      });
+      group.rotation.y += 0.0009;
+    }
+    currentRotY += (targetRotY-currentRotY)*0.06;
+    group.rotation.x = currentRotY*0.4;
+    hub.scale.setScalar(1+Math.sin((t||0)*0.002)*0.04);
+    renderer.render(scene,camera);
+  }
+  if(reduce){ renderer.render(scene,camera); } else { requestAnimationFrame(render); }
 })();
 
 /* ---------- Animated space background: drifting + falling stars, shooting stars, scroll parallax ---------- */

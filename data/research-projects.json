@@ -1,0 +1,1635 @@
+[
+  {
+    "slug": "wasp-39b-exoplanet-report",
+    "target": "WASP-39 b",
+    "title": "WASP-39 b: Carbon Dioxide in a Puffy Hot Saturn",
+    "research_question": "A low-density hot Saturn whose atmosphere became the first clear JWST exoplanet carbon-dioxide benchmark, paired here with a timing-adjusted TESS transit fit and a public NIRSpec spectrum.",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Hot Saturn",
+    "instruments": [
+      "TESS",
+      "JWST/NIRSpec"
+    ],
+    "datasets": [
+      "TESS Sector 51 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "public JWST NIRSpec PRISM transmission spectrum (Zenodo 10.5281/zenodo.6959427)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness check",
+      "weighted-flat spectrum fit"
+    ],
+    "principal_result": "The repo's own TESS transit fit is strongly supported (ΔBIC = 12394.7, depth 23024.9 ± 219.7 ppm), and its own diagnostic on the public JWST spectrum finds a strong preference for the full ScCHIMERA model over a no-CO2 variant (Δχ² = 774.8) plus significant deviation from a flat spectrum (χ²/dof = 1089.6/93). The specific molecule detections and their sigma-significances (CO2 28.5σ, H2O 21.5σ, SO2 4.8σ) are cited from the peer-reviewed literature retrieval (Alderson et al. 2023), not computed by this repository.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "CO2",
+      "H2O",
+      "SO2"
+    ],
+    "headline_stat": "ΔBIC = 12394.7 (TESS transit); Δχ² = 774.8 (full vs no-CO2 spectrum model, repository diagnostic)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-39b-exoplanet-report/",
+    "tags": [
+      "hot-saturn",
+      "jwst",
+      "carbon-dioxide",
+      "transmission-spectroscopy",
+      "tess",
+      "reproducible-research"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-39b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "the TESS transit and the JWST spectrum flatness/model-comparison tests are the repo's own reanalysis of public data; the molecule-level sigma values are literature citations layered on top.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-17b-exoplanet-report",
+    "target": "WASP-17 b",
+    "title": "WASP-17 b: Water Emission from an Inflated Hot Jupiter",
+    "research_question": "An exceptionally inflated giant planet examined through a corrected TESS transit and three independent reductions of its JWST/NIRISS dayside emission spectrum.",
+    "category": "Emission spectroscopy",
+    "planet_class": "Hot Jupiter (inflated)",
+    "instruments": [
+      "TESS",
+      "JWST/NIRISS"
+    ],
+    "datasets": [
+      "TESS Sectors 12 & 38 SPOC light curves (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "public JWST NIRISS/SOSS dayside emission spectrum, three independent reductions (Zenodo 10.5281/zenodo.14003330)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector ΔBIC and Cochran Q consistency check",
+      "weighted-flat spectrum fit across three reductions"
+    ],
+    "principal_result": "The TESS transit is strongly supported across two sectors (ΔBIC ≥ 10 in both; combined depth 16828.0 ± 89.3 ppm, Cochran Q p = 0.71). All three archived JWST NIRISS/SOSS reductions reject a flat, wavelength-independent dayside spectrum, which the repo treats as evidence of real spectral structure; the specific water-vapor attribution (H2O at 6.4σ) is drawn from the cited retrieval (Gressier et al. 2024), not computed here.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O"
+    ],
+    "headline_stat": "ΔBIC = 30092.5 (TESS transit, Sector 12); H2O reported at 6.4σ (literature)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-17b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-17b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "jwst",
+      "emission-spectroscopy",
+      "water-vapor",
+      "tess",
+      "reproducible-research"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-17b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo performs its own transit fit and flat-spectrum statistical tests on public JWST reductions; the molecule-level significance is a literature citation.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-18b-exoplanet-report",
+    "target": "WASP-18 b",
+    "title": "WASP-18 b: An Ultra-Hot Jupiter in Water Emission",
+    "research_question": "A massive, intensely irradiated giant on a 0.94-day orbit, combining a TESS transit fit with four reductions of a JWST dayside spectrum shaped by water emission.",
+    "category": "Emission spectroscopy",
+    "planet_class": "Ultra-hot Jupiter",
+    "instruments": [
+      "TESS",
+      "JWST/NIRISS"
+    ],
+    "datasets": [
+      "TESS Sector 2 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "public JWST NIRISS/SOSS dayside emission spectrum, four independent reductions (Zenodo 10.5281/zenodo.7907569)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "weighted-flat eclipse-spectrum fit across four reductions"
+    ],
+    "principal_result": "The TESS transit is very strongly supported (ΔBIC = 454334.4, depth 11032.1 ± 18.6 ppm). Four independent archived JWST reductions all show highly significant spectral structure (rejecting flat spectra), consistent with the cited water-emission detection (H2O >6σ, three emission features) and a combined 3.8σ optical-opacity signal attributed to H-/TiO/VO in Coulombe et al. 2023; those molecule-level significances are literature citations, not repo-computed retrievals.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O",
+      "TiO",
+      "VO"
+    ],
+    "headline_stat": "ΔBIC = 454334.4 (TESS transit); H2O reported at >6σ (literature)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-18b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-18b-exoplanet-report/",
+    "tags": [
+      "ultra-hot-jupiter",
+      "jwst",
+      "thermal-inversion",
+      "water-vapor",
+      "tess",
+      "emission-spectroscopy"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-18b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own transit fit and multi-reduction flatness tests on public data; molecule attributions are literature citations.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-43b-exoplanet-report",
+    "target": "WASP-43 b",
+    "title": "WASP-43 b: Mapping a Hot Jupiter from Day to Night",
+    "research_question": "A tidally locked giant used as a weather laboratory: the report joins a corrected TESS transit to a phase-resolved JWST/MIRI spectrum and its day-night thermal contrast.",
+    "category": "Phase curve",
+    "planet_class": "Hot Jupiter",
+    "instruments": [
+      "TESS",
+      "JWST/MIRI"
+    ],
+    "datasets": [
+      "TESS Sector 9 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "public JWST MIRI/LRS phase-resolved emission spectrum, 14 wavelength bins x 4 orbital phases (Zenodo 10.5281/zenodo.10525170)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "weighted-flat and linear-slope fits per orbital phase"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 104325.9, depth 26341.2 ± 110.6 ppm). The repo's own weighted-flat/linear-slope tests on the archived MIRI spectra reproduce strong wavelength structure at all four orbital phases. The published retrieval (Bell et al. 2024) attributes this structure to water vapor at all phases and places a 2σ upper limit on methane (1-6 ppm); those molecule-level statements are literature citations, not repo-computed retrievals.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O",
+      "CH4"
+    ],
+    "headline_stat": "ΔBIC = 104325.9 (TESS transit); CH4 2σ upper limit 1-6 ppm (literature)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-43b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "jwst",
+      "phase-curve",
+      "emission-spectroscopy",
+      "exoplanet-weather",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-43b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own transit fit and phase-resolved flatness/slope tests on public MIRI data; molecule attribution and CH4 limit are literature citations.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-69b-exoplanet-report",
+    "target": "WASP-69 b",
+    "title": "WASP-69 b: A Warm Saturn with an Escaping Atmosphere",
+    "research_question": "A low-density warm giant orbiting an active K star, presented as a transit-timing and correlated-noise case study with the broader context of atmospheric escape.",
+    "category": "Transit photometry",
+    "planet_class": "Warm Saturn",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 55 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector ΔBIC and correlated-noise diagnostics"
+    ],
+    "principal_result": "The TESS transit is very strongly supported (ΔBIC = 134924.8, depth 17223.7 ± 80.6 ppm), with the fitted midpoint essentially matching the archive prediction (-0.002 h). The README frames the planet's known atmospheric escape only as background context; no escape or helium data is analyzed in this repository.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 134924.8 (TESS transit)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-69b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-69b-exoplanet-report/",
+    "tags": [
+      "warm-saturn",
+      "atmospheric-escape",
+      "tess",
+      "transit-photometry",
+      "time-series"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-69b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "the repo's own TESS transit-timing and noise-diagnostic analysis of public MAST data; atmospheric escape is mentioned only as background context, not analyzed.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-127b-exoplanet-report",
+    "target": "WASP-127 b",
+    "title": "WASP-127 b: An Extreme Super-Puff Giant",
+    "research_question": "An extraordinarily low-density giant with an extended atmosphere, used here to test how a timing-aware transit fit behaves for a very puffy planet.",
+    "category": "Transit photometry",
+    "planet_class": "Super-puff (Hot Saturn-class)",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 9 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector robustness and correlated-noise diagnostics"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 60210.1, depth 11644.2 ± 73.1 ppm), consistent between the single-sector fit and the multi-sector robust combination. No atmosphere or spectrum data is analyzed; the planet's extended, super-puff atmosphere is mentioned only as motivating context.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 60210.1 (TESS transit)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-127b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-127b-exoplanet-report/",
+    "tags": [
+      "super-puff",
+      "hot-saturn",
+      "low-density-planet",
+      "tess",
+      "transit-photometry"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-127b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own TESS transit fit and noise diagnostics on public MAST data.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-12b-exoplanet-report",
+    "target": "WASP-12 b",
+    "title": "WASP-12 b: A Doomed Hot Jupiter with a Decaying Orbit",
+    "research_question": "A severely irradiated giant spiralling toward its star, framed as a careful TESS timing analysis where ephemeris drift is itself part of the science.",
+    "category": "Transit photometry",
+    "planet_class": "Hot Jupiter",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 20 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector (3-sector) ΔBIC and Cochran Q timing consistency check"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 17136.0, depth 15714.4 ± 125.2 ppm). Across three fitted sectors (S20, S43, S45) all individually meet the ΔBIC ≥ 10 support threshold; the combined depth is 15429.6 ± 55.8 ppm with a marginal Cochran Q (p = 0.0656) hinting at sector-to-sector timing/depth tension, consistent with the planet's known orbital decay, though no decay rate is itself fitted in this repository.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 17136.0 (TESS transit, Sector 20)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-12b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-12b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "orbital-decay",
+      "transit-timing",
+      "tess",
+      "tidal-interactions"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-12b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own multi-sector TESS transit-timing analysis of public MAST data.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-19b-exoplanet-report",
+    "target": "WASP-19 b",
+    "title": "WASP-19 b: One Day in the Life of a Hot Jupiter",
+    "research_question": "A hot Jupiter completing an orbit in under a day, analyzed with timing freedom and explicit noise inflation in a regime where irradiation and stellar variability matter.",
+    "category": "Transit photometry",
+    "planet_class": "Hot Jupiter (ultra-short-period)",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 9 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector (3-sector) ΔBIC and Cochran Q consistency check",
+      "correlated-noise error inflation"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 44465.2, depth 22844.2 ± 140.2 ppm), confirmed across three fitted sectors (S9, S62, S63), all individually meeting ΔBIC ≥ 10, with a combined depth of 22782.8 ± 265.1 ppm and no significant sector-to-sector tension (Cochran Q p = 0.9433).",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 44465.2 (TESS transit, Sector 9)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-19b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-19b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "ultra-short-period",
+      "stellar-activity",
+      "tess",
+      "transit-photometry"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-19b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own multi-sector TESS transit-timing and noise-diagnostic analysis of public MAST data.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "gj3470b-exoplanet-report",
+    "target": "GJ 3470 b",
+    "title": "GJ 3470 b: Sulfur Photochemistry on a Warm Neptune",
+    "research_question": "A low-mass warm Neptune whose JWST spectrum reveals disequilibrium sulfur chemistry, paired with a reproducible TESS transit fit and a source-graded molecular evidence review.",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Warm Neptune",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 44 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "cited joint JWST+Hubble+Spitzer atmospheric retrieval (literature, Beatty et al. 2024) — not bundled in this repository"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector robustness check",
+      "literature evidence review/citation grading"
+    ],
+    "principal_result": "The repo's own TESS transit fit is strongly supported (ΔBIC = 7853.6, depth 6972.3 ± 81.0 ppm). The molecular evidence table (SO2, H2O, CO2, CH4, all reported >3σ in the cited joint JWST/Hubble/Spitzer retrieval, with SO2 interpreted as disequilibrium photochemistry) is explicitly citation-only: the README states this repository does not contain or reanalyze a reduced planetary spectrum.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "SO2",
+      "H2O",
+      "CO2",
+      "CH4"
+    ],
+    "headline_stat": "ΔBIC = 7853.6 (TESS transit); SO2/H2O/CO2/CH4 reported >3σ (literature, not repo-computed)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/gj3470b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/gj3470b-exoplanet-report/",
+    "tags": [
+      "warm-neptune",
+      "sulfur-dioxide",
+      "photochemistry",
+      "jwst",
+      "tess",
+      "transmission-spectroscopy"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/gj3470b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "public-data-reanalysis for the TESS transit (repo's own fit); the atmosphere/molecule table is literature-context-only — the README explicitly states no spectrum is bundled or reanalyzed.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report",
+    "instruments_cited_context": [
+      "JWST",
+      "Hubble",
+      "Spitzer"
+    ]
+  },
+  {
+    "slug": "toi-270d-exoplanet-report",
+    "target": "TOI-270 d",
+    "title": "TOI-270 d: A Temperate Sub-Neptune in a Compact System",
+    "research_question": "The outer transiting world in a compact M-dwarf system, examined here through its TESS timing, transit support, and the limits of what broadband photometry can say about atmosphere.",
+    "category": "Transit photometry",
+    "planet_class": "Sub-Neptune (temperate)",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sectors 3-5 SPOC light curves (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "saved companion ephemerides for TOI-270 b and c (used to mask the BLS search)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector ΔBIC and Cochran Q consistency check",
+      "companion-masked Box Least Squares (BLS) period/depth cross-check"
+    ],
+    "principal_result": "This is explicitly flagged as a lower-margin supported result: ΔBIC = 301.7, well below the very large values seen elsewhere in this portfolio (depth 2676.0 ± 181.6 ppm). The companion-masked BLS cross-check finds a consistent period (11.37824 d vs archive 11.38194 d, -0.0325%) and a box depth (3002.3 ± 77.1 ppm) agreeing within 1.1σ of the multi-sector combined depth (3164.7 ± 135.2 ppm), but the README explicitly notes this result is more sensitive than the portfolio's high-ΔBIC cases to fixed analysis choices such as the outlier rule and fitting window.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 301.7 (lower-margin within this portfolio); BLS depth S/N = 38.9",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/toi-270d-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/toi-270d-exoplanet-report/",
+    "tags": [
+      "sub-neptune",
+      "m-dwarf",
+      "multiplanet-system",
+      "temperate-exoplanet",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/toi-270d-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own transit fit and independent BLS cross-check; explicitly flagged by the README as a lower-margin/more-fragile support case, not a null result but weaker than most of the portfolio.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "ltt9779b-exoplanet-report",
+    "target": "LTT 9779 b",
+    "title": "LTT 9779 b: A Reflective Survivor in the Hot-Neptune Desert",
+    "research_question": "A rare ultra-hot Neptune surviving where such planets are scarce, analyzed through TESS photometry and placed in the context of its unusually reflective dayside.",
+    "category": "Transit photometry",
+    "planet_class": "Hot Neptune",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "TESS Sector 2 SPOC light curve (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector robustness and correlated-noise diagnostics"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 2110.3, depth 1582.2 ± 36.3 ppm), consistent with the single fitted sector's robust inverse-variance combination (1582.2 ± 37.7 ppm). The planet's unusually reflective, high-albedo dayside and its survival in the Neptune desert are discussed only as background context; no albedo or cloud measurement is made in this repository.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC = 2110.3 (TESS transit)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/ltt9779b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/ltt9779b-exoplanet-report/",
+    "tags": [
+      "hot-neptune",
+      "neptune-desert",
+      "high-albedo",
+      "clouds",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/ltt9779b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "repo's own TESS transit fit on public MAST data; reflectivity/desert-survival framing is background context only.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "hd149026b-exoplanet-report",
+    "target": "HD 149026 b",
+    "title": "HD 149026 b: Carbon Dioxide over a Giant Heavy-Element Core",
+    "research_question": "A compact Saturn-mass planet with an unusually large heavy-element inventory, joining a TESS transit analysis to the published JWST CO2 and H2O interpretation.",
+    "category": "Emission spectroscopy",
+    "planet_class": "Hot Saturn (dense, metal-rich)",
+    "instruments": [
+      "TESS",
+      "JWST/NIRCam"
+    ],
+    "datasets": [
+      "TESS Sectors 24, 25, 52 SPOC light curves (MAST, DOI 10.17909/t9-nmc8-f686)",
+      "NASA Exoplanet Archive pscomppars system parameters",
+      "cited JWST/NIRCam dayside emission spectrum (literature, Bean et al. 2023; Gagnebin et al. 2024)"
+    ],
+    "methods": [
+      "timing-adjusted limb-darkened transit fitting",
+      "multi-sector ΔBIC and Cochran Q consistency check",
+      "source-graded literature evidence review"
+    ],
+    "principal_result": "The TESS transit is strongly supported (ΔBIC = 36870.8, depth 2925.3 ± 18.8 ppm) and consistent across three fitted sectors (combined depth 2915.2 ± 23.4 ppm, Cochran Q p = 0.9069). JWST/NIRCam CO2 (strong 4.3-micron feature) and H2O absorption are reported as detections per the cited literature (Bean et al. 2023; Gagnebin et al. 2024), which the README notes disagree substantially on the inferred atmospheric metallicity; a VO hint is described as a model-dependent, circumstantial signal from later self-consistent atmosphere models. No spectrum is reanalyzed in this repository.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "CO2",
+      "H2O",
+      "VO"
+    ],
+    "headline_stat": "ΔBIC = 36870.8 (TESS transit); CO2 reported via strong 4.3-micron feature (literature)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/hd149026b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hd149026b-exoplanet-report/",
+    "tags": [
+      "hot-saturn",
+      "carbon-dioxide",
+      "jwst",
+      "planet-metallicity",
+      "emission-spectroscopy",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hd149026b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": "public-data-reanalysis for the TESS transit (repo's own fit); the CO2/H2O/VO atmosphere findings are literature-context-only — no spectrum is bundled or reanalyzed here.",
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "kepler-51b-exoplanet-report",
+    "target": "Kepler-51 b",
+    "title": "Kepler-51 b: Stress-Testing a Super-Puff with TESS",
+    "research_question": "Does a single-sector TESS light curve support a transit detection for the ultra-low-density super-puff Kepler-51 b, used here as a transparent null-result stress test?",
+    "category": "Transit photometry",
+    "planet_class": "Super-puff",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 14 SPOC light curve (DOI 10.17909/t9-nmc8-f686)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The best transit-shaped profile is not supported over the local linear null (ΔBIC = -4.82); across the fitted sector no sector meets the ΔBIC ≥ 10 support threshold, so no combined transit depth or sector-consistency claim is reported. The fitted depth and timing are explicitly described as exploratory optimizer outputs, not a transit measurement.",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = -4.82",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/kepler51b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/kepler-51b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/kepler-51b-exoplanet-report/",
+    "tags": [
+      "null-result",
+      "super-puff",
+      "model-selection",
+      "transit-photometry",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/kepler-51b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "hd106315b-exoplanet-report",
+    "target": "HD 106315 b",
+    "title": "HD 106315 b: Mixed TESS Evidence for a Warm Super-Earth",
+    "research_question": "Does timing-adjusted TESS transit fitting give consistent support for HD 106315 b across the available sectors, or does it produce mixed evidence that resists overconfident combination?",
+    "category": "Transit photometry",
+    "planet_class": "Super-Earth",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 46 SPOC light curve (DOI 10.17909/t9-nmc8-f686)",
+      "MAST TESS Sector 91 (multi-sector fit)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The Sector 46 fit strongly prefers a transit (ΔBIC = 117.95, depth 383.2 ± 36.6 ppm), but across the 2 independently fitted sectors (S46, S91) only 1 meets the ΔBIC ≥ 10 support threshold, so this is reported as a mixed-support result across sectors rather than a combined detection.",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = 117.95 in Sector 46; 1 of 2 fitted sectors meet ΔBIC ≥ 10",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/hd106315b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/hd106315b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hd106315b-exoplanet-report/",
+    "tags": [
+      "null-result",
+      "model-selection",
+      "multisector-analysis",
+      "super-earth",
+      "transit-photometry"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hd106315b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "hd97658b-exoplanet-report",
+    "target": "HD 97658 b",
+    "title": "HD 97658 b: A Nearby Warm Super-Earth in Transit",
+    "research_question": "Does a timing-adjusted TESS transit fit compactly and reproducibly measure the transit of HD 97658 b around its bright, nearby K-dwarf host?",
+    "category": "Transit photometry",
+    "planet_class": "Super-Earth",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 22 SPOC light curve (DOI 10.17909/t9-nmc8-f686)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The timing-adjusted transit is strongly preferred over the null (ΔBIC = 1842.35); model mid-transit depth 895.1 ± 41.6 ppm, midpoint offset +0.084 h from the historical prediction.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = 1842.35",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/hd97658b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/hd97658b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hd97658b-exoplanet-report/",
+    "tags": [
+      "super-earth",
+      "k-dwarf",
+      "nearby-star",
+      "transit-photometry",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hd97658b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "toi-836b-exoplanet-report",
+    "target": "TOI-836 b",
+    "title": "TOI-836 b: What a Flat JWST Spectrum Can Rule Out",
+    "research_question": "Does timing-adjusted TESS photometry confirm the TOI-836 b transit, and does the public JWST NIRSpec/G395H spectrum show resolved molecular features or instead statistically constrain what kind of atmosphere the planet cannot have?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Super-Earth",
+    "instruments": [
+      "TESS",
+      "JWST/NIRSpec"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 11 and Sector 38 SPOC light curves (DOI 10.17909/t9-nmc8-f686)",
+      "JWST NIRSpec/G395H published spectrum (DOI 10.5281/zenodo.10658637, Alderson et al. 2024)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis",
+      "flat-spectrum chi-square test",
+      "comparison to published metallicity-grid spectra"
+    ],
+    "principal_result": "TESS transit strongly supported (ΔBIC = 189.23, depth 605.9 ± 57.8 ppm, consistent across 2 supported sectors). The public JWST spectrum is statistically consistent with a flat line (chi-square/dof = 128.4/105, p = 0.0599) with no resolved H2O, CO2, CO, or CH4 feature; under a 0.1-bar opaque-pressure assumption this excludes clear H2-rich atmospheres below 250x solar metallicity and mean molecular weight below about 6 g/mol. Described in the README as 'a high-value null result.'",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [
+      "H2O",
+      "CO2",
+      "CO",
+      "CH4"
+    ],
+    "headline_stat": "ΔBIC (null − transit) = 189.23; spectrum flatness chi-square/dof = 128.4/105 (p = 0.0599)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/toi836b_published_spectrum.png",
+      "figures/toi836b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/toi-836b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/toi-836b-exoplanet-report/",
+    "tags": [
+      "null-result",
+      "flat-spectrum",
+      "transmission-spectroscopy",
+      "jwst",
+      "super-earth"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/toi-836b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "gj9827d-exoplanet-report",
+    "target": "GJ 9827 d",
+    "title": "GJ 9827 d: A Dense Super-Earth at the Atmosphere Boundary",
+    "research_question": "Does a timing-aware TESS transit pipeline detect and characterize the transit of GJ 9827 d, a nearby planet near the boundary between rocky worlds and volatile-rich sub-Neptunes?",
+    "category": "Transit photometry",
+    "planet_class": "Super-Earth",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 42 SPOC light curve (DOI 10.17909/t9-nmc8-f686)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The timing-adjusted transit is supported (ΔBIC = 28.18, depth 491.5 ± 78.7 ppm), but the README explicitly labels this a 'lower-margin' supported result within the portfolio, more sensitive than large-ΔBIC cases to the fixed outlier rule, fitting window, and limb-darkening choices.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = 28.18",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/gj9827d_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/gj9827d-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/gj9827d-exoplanet-report/",
+    "tags": [
+      "super-earth",
+      "radius-valley",
+      "nearby-star",
+      "transit-photometry",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/gj9827d-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "hat-p-26b-exoplanet-report",
+    "target": "HAT-P-26 b",
+    "title": "HAT-P-26 b: Transit Structure of a Warm Neptune",
+    "research_question": "What does reproducible TESS transit fitting and noise diagnostics reveal about the transit geometry of the low-density warm Neptune HAT-P-26 b, kept separate from its published atmosphere literature?",
+    "category": "Transit photometry",
+    "planet_class": "Warm Neptune",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 50 SPOC light curve (DOI 10.17909/t9-nmc8-f686)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The timing-adjusted transit is strongly preferred over the null (ΔBIC = 1575.71); model mid-transit depth 5963.4 ± 154.8 ppm, midpoint offset -0.279 h from the historical prediction. Published atmosphere findings are described as kept as separate literature context rather than part of this repo's own analysis.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = 1575.71",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/hatp26b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/hat-p-26b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hat-p-26b-exoplanet-report/",
+    "tags": [
+      "warm-neptune",
+      "transit-photometry",
+      "transit-timing",
+      "light-curve-analysis",
+      "tess"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hat-p-26b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "wasp-80b-exoplanet-report",
+    "target": "WASP-80 b",
+    "title": "WASP-80 b: Methane across a Cool Giant's Atmosphere",
+    "research_question": "Does a reproducible TESS transit fit for the comparatively cool warm Jupiter WASP-80 b hold up, and what does a source-graded review of the published JWST evidence say about its methane and water content?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Warm Jupiter",
+    "instruments": [
+      "TESS",
+      "JWST"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 54 SPOC light curve (DOI 10.17909/t9-nmc8-f686)",
+      "Bell et al. 2023 (Nature) JWST retrieval results, cited as literature evidence"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis",
+      "source-graded atmospheric evidence review"
+    ],
+    "principal_result": "TESS transit strongly supported (ΔBIC = 133598.41, depth 34333.5 ± 146.3 ppm) — this repo's own reanalysis. Separately, the README audits (rather than reproduces) Bell et al. (2023)'s published retrieval: CH4 reported at 6.1σ (transmission and emission) and H2O at 4.6σ (transmission) / 2.6σ (emission); CO, CO2, NH3, SO2 were included but unconstrained in the narrow band.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "CH4",
+      "H2O",
+      "CO",
+      "CO2",
+      "NH3",
+      "SO2"
+    ],
+    "headline_stat": "ΔBIC (null − transit) = 133598.41; CH4 reported at 6.1σ, H2O at 4.6σ/2.6σ (Bell et al. 2023)",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/molecular_evidence.png",
+      "figures/wasp80b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/wasp-80b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-80b-exoplanet-report/",
+    "tags": [
+      "warm-jupiter",
+      "methane",
+      "jwst",
+      "transmission-spectroscopy",
+      "emission-spectroscopy"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-80b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "hat-p-32b-exoplanet-report",
+    "target": "HAT-P-32 b",
+    "title": "HAT-P-32 b: An Inflated Giant behind a Hazy Limb",
+    "research_question": "Does a timing-adjusted TESS transit fit with conservative correlated-noise scaling cleanly measure the transit of the inflated, haze/cloud-shaped hot Jupiter HAT-P-32 b around its active F-type host?",
+    "category": "Transit photometry",
+    "planet_class": "Hot Jupiter",
+    "instruments": [
+      "TESS"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "MAST TESS Sector 58 SPOC light curve (DOI 10.17909/t9-nmc8-f686)"
+    ],
+    "methods": [
+      "transit fitting",
+      "ΔBIC model comparison",
+      "multi-sector robustness analysis"
+    ],
+    "principal_result": "The timing-adjusted transit is strongly preferred over the null (ΔBIC = 194575.84); model mid-transit depth 25870.4 ± 67.1 ppm, midpoint offset -0.009 h from the historical prediction.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "ΔBIC (null − transit) = 194575.84",
+    "thumbnail_candidates": [
+      "assets/social_preview.jpg",
+      "assets/artist_concept.webp",
+      "figures/hatp32b_tess_transit.png"
+    ],
+    "thumbnail_type": "social-preview",
+    "github_url": "https://github.com/Biswajit1999/hat-p-32b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hat-p-32b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "inflated-planet",
+      "haze",
+      "clouds",
+      "transit-photometry"
+    ],
+    "thumbnail_path": "assets/social_preview.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hat-p-32b-exoplanet-report/master/assets/social_preview.jpg",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "Repository social preview image.",
+    "tier": "recent-target-report"
+  },
+  {
+    "slug": "55cancri-e-exoplanet-report",
+    "target": "55 Cancri e",
+    "title": "55 Cancri e: Converting Season-Split Spitzer Occultation Depths into Dayside Temperatures",
+    "research_question": "Do season-split Spitzer/IRAC occultation-depth measurements of lava world 55 Cancri e, independently inverted into dayside brightness temperatures via the Planck function, reproduce the season-to-season variability significance Demory et al. (2016) report?",
+    "category": "Emission spectroscopy",
+    "planet_class": "Lava world",
+    "instruments": [
+      "Spitzer/IRAC"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "Demory et al. 2016 season-split Spitzer/IRAC 4.5-micron occultation depths (Table 4)"
+    ],
+    "methods": [
+      "Planck-function inversion (root-finding)",
+      "season-to-season significance/consistency check"
+    ],
+    "principal_result": "The two season occultation depths (47 ± 21 ppm in 2012, 176 ± 28 ppm in 2013) differ at 3.7σ — matching the significance Demory et al. (2016) report from fitting all eight individual eclipses. This repo's own blackbody inversion gives 1639 K (2012) and 3330 K (2013), running above the paper's own MCMC-fit values of 1365 K and 2528 K; the gap is attributed to this script's simpler stellar-spectrum and planet-radius treatment, not a missing physical effect. The season-to-season swing itself holds up under both methods.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "3.7σ season-to-season occultation-depth difference (this repo's own inversion, matching Demory et al. 2016's significance)",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/spacecraft.png",
+      "figures/55cnce_dayside_variability.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/55cancri-e-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/55cancri-e-exoplanet-report/",
+    "tags": [
+      "lava-world",
+      "spitzer",
+      "exoplanets",
+      "astrophysics"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/55cancri-e-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "gj1214b-exoplanet-report",
+    "target": "GJ 1214 b",
+    "title": "GJ 1214 b: Inverting JWST MIRI Phase-Curve Photometry into Day/Night Brightness Temperatures",
+    "research_question": "Does inverting real JWST MIRI phase-curve flux ratios of the flat-spectrum mini-Neptune GJ 1214 b into per-bin day and night brightness temperatures quantify genuine evidence for atmospheric heat redistribution, compared with Kempton et al. (2023)'s own published values?",
+    "category": "Phase curve",
+    "planet_class": "Sub-Neptune",
+    "instruments": [
+      "JWST/MIRI"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "Kempton et al. 2023 MIRI phase-curve spectral fit results (Zenodo 10.5281/zenodo.7703086)"
+    ],
+    "methods": [
+      "Planck-function inversion",
+      "inverse-variance weighted mean",
+      "uncertainty propagation"
+    ],
+    "principal_result": "This repo's own per-bin weighted-mean brightness temperature is 575 ± 5 K dayside and 506 ± 9 K nightside, in the same range as (though not the same estimator as) Kempton et al.'s own joint-fit values of 553 ± 9 K and 437 ± 19 K. The day-night contrast is well below an ultra-hot Jupiter like WASP-121 b, broadly consistent with a real atmosphere redistributing heat imperfectly rather than a bare rock. Four of fourteen nightside bins are reported as unconstrained (0 K floor) rather than given a manufactured finite value.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "575 ± 5 K dayside / 506 ± 9 K nightside brightness temperature (this repo); cf. Kempton et al. 2023: 553 ± 9 K / 437 ± 19 K",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png",
+      "figures/gj1214b_day_night_temperature.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/gj1214b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/gj1214b-exoplanet-report/",
+    "tags": [
+      "sub-neptune",
+      "jwst",
+      "phase-curve",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/gj1214b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "hat-p-11b-exoplanet-report",
+    "target": "HAT-P-11 b",
+    "title": "HAT-P-11 b: An Independent In-Transit vs. Out-of-Transit Check on CARMENES Helium 10830 Å Data",
+    "research_question": "Does this repo's own descriptive in-transit vs. out-of-transit flux statistic on Allart et al. (2018) CARMENES helium 10830 Å transit data support the published atmospheric-escape detection for the warm Neptune HAT-P-11 b, without conflating the two as the same measurement?",
+    "category": "Atmospheric escape",
+    "planet_class": "Warm Neptune",
+    "instruments": [
+      "CARMENES"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "Allart et al. 2018 CARMENES helium transit data (Zenodo record 1473463)"
+    ],
+    "methods": [
+      "inverse-variance-weighted in-transit vs. out-of-transit flux comparison"
+    ],
+    "principal_result": "This repo's own simplified estimator finds a 0.827% ± 0.064% flux dip inside the He I 10830 Å line during transit (12.9σ band signal-to-noise), which the README explicitly distinguishes from the paper's calibrated combined value of 1.08% ± 0.05% obtained via a transit-model fit. Both point the same way — excess helium absorption consistent with an escaping upper atmosphere — but only the paper's number is described as the calibrated measurement.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "helium (He I 10830 Å)"
+    ],
+    "headline_stat": "0.827% ± 0.064% in-transit helium flux dip, 12.9σ band S/N (this repo's estimator); paper's combined result 1.08% ± 0.05%",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/instrument.png",
+      "images/3d-render.png",
+      "figures/hatp11b_helium_escape.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hat-p-11b-exoplanet-report/",
+    "tags": [
+      "atmospheric-escape",
+      "spectroscopy",
+      "exoplanets",
+      "astrophysics"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hat-p-11b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "hd189733b-exoplanet-report",
+    "target": "HD 189733 b",
+    "title": "HD 189733 b: A Two-Window Band-Contrast Check on the JWST NIRCam Transmission Spectrum",
+    "research_question": "Does a simple two-window band-contrast statistic run on the real JWST NIRCam transmission spectrum of HD 189733 b show significant structure consistent with, but not a substitute for, Fu et al. (2024)'s full-retrieval molecular detection significances?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Hot Jupiter",
+    "instruments": [
+      "JWST/NIRCam"
+    ],
+    "datasets": [
+      "NASA Exoplanet Archive (pscomppars)",
+      "Fu et al. 2024 JWST NIRCam transmission spectrum, 139 bins, 2.4-5.0 microns (Zenodo 10.5281/zenodo.11459715)"
+    ],
+    "methods": [
+      "weighted-mean transit depth",
+      "two-window band-contrast signal-to-noise comparison"
+    ],
+    "principal_result": "Weighted mean transit depth 24183 ppm. This repo's own two-window comparison gives 239 ppm (22.1σ band S/N) for a CO2-adjacent window and 255 ppm (24.7σ band S/N) for an H2O/H2S-influenced window — high signal-to-noise structure, explicitly not molecule-specific detections. Fu et al. (2024)'s full atmospheric retrieval reports H2O at 13.4σ, CO2 at 11.2σ, CO at 5σ, and H2S at 4.5σ; both approaches agree the spectrum has real structure, but only the retrieval identifies which molecule causes it.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O",
+      "CO2",
+      "CO",
+      "H2S"
+    ],
+    "headline_stat": "22.1σ (CO2 window) / 24.7σ (H2O/H2S window) band S/N (this repo); Fu et al. 2024 retrieval: H2O 13.4σ, CO2 11.2σ, CO 5σ, H2S 4.5σ",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png",
+      "figures/hd189733b_transmission_spectrum.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/hd189733b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hd189733b-exoplanet-report/",
+    "tags": [
+      "hot-jupiter",
+      "jwst",
+      "spectroscopy",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hd189733b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "hd209458b-exoplanet-report",
+    "target": "HD 209458 b",
+    "title": "HD 209458 b: A Four-Pipeline JWST MIRI Test for Magnesium Silicate Clouds",
+    "research_question": "Using a 2026 JWST MIRI transmission spectrum, does the spread between four correlated data-reduction-tree leaves (testing for magnesium silicate clouds) exceed the photon-noise error on any single leaf's spectrum?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Hot Jupiter",
+    "instruments": [
+      "JWST MIRI",
+      "HST STIS"
+    ],
+    "datasets": [
+      "JWST MIRI LRS transmission spectrum (Chubb, Grant et al. 2026, Zenodo 10.5281/zenodo.20089901)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "weighted mean transit depth calculation",
+      "four-reduction-pipeline max-min spread comparison"
+    ],
+    "principal_result": "Mean transit depth 14458 ppm across 28 wavelength bins (5.2-11.9 microns). The mean spread between the four reduction-tree leaves (122 ppm) is larger than the mean photon-noise error on any single leaf's spectrum (92 ppm) — a demonstration that data-reduction choices can matter as much as statistical noise for this kind of observation, matching the source paper's central point. The README explicitly notes this max-min spread is a sensitivity metric, not a formally calibrated systematic-uncertainty variance decomposition.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "sodium",
+      "magnesium silicate"
+    ],
+    "headline_stat": "Mean transit depth 14458 ppm; inter-reduction spread 122 ppm vs. mean photon-noise error 92 ppm",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/hd209458b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/hd209458b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "hot-jupiter",
+      "spectroscopy",
+      "exoplanets",
+      "python"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/hd209458b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "k2-18b-exoplanet-report",
+    "target": "K2-18 b",
+    "title": "K2-18 b: Testing the Contested CO2 Signal in a Combined, Offset-Corrected JWST Spectrum",
+    "research_question": "Using a combined, offset-corrected JWST NIRISS SOSS + NIRSpec G395H + MIRI LRS spectrum, does the CO2 absorption band show a statistically significant excess over the nearby continuum, following up on the 2023 CO2/DMS claims and the ongoing debate over combining data from different JWST instruments?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Sub-Neptune",
+    "instruments": [
+      "JWST NIRISS SOSS",
+      "JWST NIRSpec G395H",
+      "JWST MIRI LRS"
+    ],
+    "datasets": [
+      "Combined, offset-corrected JWST spectrum (2025 reanalysis, Zenodo 10.5281/zenodo.16277833)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "band-vs-continuum comparison",
+      "weighted mean and binning of native-resolution spectrum"
+    ],
+    "principal_result": "The CO2-band mean depth exceeds the nearby continuum by only ~4 ppm, at ~0.2 sigma — statistically indistinguishable from noise, and far from the confident detection the original 2023 NIRISS+NIRSpec-only analysis reported before the MIRI cross-check was available. The README is explicit this two-window comparison is a quick diagnostic, not a molecular retrieval. Independent retrieval-based work (Schmidt et al. 2025) points the same direction: methane confirmed at 4 sigma, with no significant evidence for CO2 or DMS in almost every data combination tested.",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [
+      "CO2",
+      "CH4",
+      "DMS"
+    ],
+    "headline_stat": "CO2-band excess ~4 ppm at ~0.2 sigma (statistically indistinguishable from noise); independent retrieval confirms CH4 at 4 sigma with no significant CO2/DMS evidence in almost every combination tested",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/k2-18b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/k2-18b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "habitable-zone",
+      "sub-neptune",
+      "spectroscopy",
+      "co2"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/k2-18b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "lhs-475b-exoplanet-report",
+    "target": "LHS 475 b",
+    "title": "LHS 475 b: Chi-Squared Testing of a JWST NIRSpec Spectrum Against Candidate Atmosphere Models",
+    "research_question": "Does the published JWST NIRSpec/G395H transmission spectrum of LHS 475 b statistically favor or rule out a flat (featureless) line, or specific candidate atmosphere models (pure methane, 1x-solar hydrogen-rich, clear Venus-like CO2, pure CO2)?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Rocky/Earth-sized",
+    "instruments": [
+      "JWST NIRSpec/G395H"
+    ],
+    "datasets": [
+      "JWST NIRSpec/G395H spectrum (FIREFLy pipeline) and four published forward-model spectra (Lustig-Yaeger & Fu et al. 2023, Zenodo record 7925111)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "flat-line chi-squared fit",
+      "reduced chi-squared and survival-function p-value model comparison (scipy.stats.chi2.sf)"
+    ],
+    "principal_result": "The spectrum is statistically indistinguishable from a flat line (chi-squared 50.70/55 dof, p=0.640). A primordial hydrogen-dominated envelope is decisively rejected (p<10^-300), and a cloudless pure-methane atmosphere is disfavored at high confidence (p=1.2e-7), while denser, higher-mean-molecular-weight options like a CO2-dominated, Venus-like atmosphere remain statistically consistent with the data (p=0.245 and 0.416) — matching the published conclusion that the data cannot yet distinguish a thick CO2 atmosphere, a thin Mars-like one, or bare rock.",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [
+      "CH4",
+      "H2",
+      "CO2"
+    ],
+    "headline_stat": "Flat-line fit: chi-squared 50.70/55 dof, p=0.640; pure CH4 p=1.2e-7 (disfavored); H2-rich p<10^-300 (decisively disfavored); CO2 models p=0.245 and 0.416 (consistent)",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/lhs-475b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/lhs-475b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "rocky-exoplanet",
+      "spectroscopy",
+      "nirspec",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/lhs-475b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "trappist-1e-exoplanet-report",
+    "target": "TRAPPIST-1 e",
+    "title": "TRAPPIST-1 e: A Flatness Test of the Decontaminated JWST NIRSpec/PRISM Spectrum",
+    "research_question": "Is the decontaminated, stellar-contamination-corrected JWST NIRSpec/PRISM transmission spectrum (four combined transits) of TRAPPIST-1 e consistent with a flat, featureless spectrum, and how does that compare with the atmosphere constraints Espinoza et al. (2025) publish from their own retrieval?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Habitable-zone rocky planet",
+    "instruments": [
+      "JWST NIRSpec/PRISM"
+    ],
+    "datasets": [
+      "Decontaminated NIRSpec/PRISM transmission spectrum (Espinoza et al. 2025, arXiv:2509.05414)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "inverse-variance-weighted flat-line fit",
+      "chi-squared/p-value analysis"
+    ],
+    "principal_result": "A chi-squared of 42.85 over 66 degrees of freedom (reduced chi-squared = 0.65, p = 0.988) across 67 wavelength points is consistent with a flat, featureless spectrum, matching the paper's own description. The README stresses flatness alone doesn't rule out an atmosphere. Espinoza et al. (2025), using their own retrieval framework, report ruling out cloud-free, hydrogen-dominated atmospheres (at least 80% H2 by volume) at better than 3 sigma, while denser secondary atmospheres remain possible.",
+    "evidence_status": "null-or-mixed-result",
+    "molecules": [
+      "H2"
+    ],
+    "headline_stat": "Flat-line fit: chi-squared 42.85/66 dof, reduced chi-squared 0.65, p=0.988; H2-dominated atmospheres (>=80% H2) ruled out at >3 sigma by the source paper's own retrieval",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/trappist-1e-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/trappist-1e-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "habitable-zone",
+      "trappist-1",
+      "spectroscopy",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/trappist-1e-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "wasp-96b-exoplanet-report",
+    "target": "WASP-96 b",
+    "title": "WASP-96 b: JWST's First Published Exoplanet Spectrum and a Terminator Asymmetry Check",
+    "research_question": "What do JWST's first published exoplanet transmission spectrum (NIRISS SOSS) and a later NIRSpec G395H morning/evening limb dataset show about WASP-96 b's water-vapor signature and possible terminator asymmetry?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Hot Saturn",
+    "instruments": [
+      "JWST NIRISS SOSS",
+      "JWST NIRSpec G395H"
+    ],
+    "datasets": [
+      "JWST NIRISS SOSS transmission spectrum and NIRSpec G395H morning/evening limb Rp/R* (Zenodo 10.5281/zenodo.17065171)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "weighted mean transit depth calculation",
+      "peak-to-trough amplitude measurement",
+      "evening-minus-morning terminator asymmetry significance test"
+    ],
+    "principal_result": "NIRISS SOSS: 79 wavelength bins, weighted mean depth 14156 ppm, peak-to-trough amplitude 1267 ppm, with a clear water-band rise near 1.4 microns — the same feature announced in 2022. NIRSpec G395H: the evening-minus-morning terminator Rp/R* difference is consistent with zero at the precision achieved, matching the source study's own 'tentative' framing rather than a confident asymmetry detection.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O"
+    ],
+    "headline_stat": "Weighted mean transit depth 14156 ppm; peak-to-trough amplitude 1267 ppm across 79 bins",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/wasp-96b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-96b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "hot-saturn",
+      "water-vapor",
+      "spectroscopy",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-96b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "wasp-107b-exoplanet-report",
+    "target": "WASP-107 b",
+    "title": "WASP-107 b: A JWST NIRISS SOSS Transmission Spectrum of a Puffy Warm Neptune",
+    "research_question": "What does a reduced JWST NIRISS SOSS transmission spectrum of the puffy, low-density warm Neptune WASP-107 b show, and how does it relate to separately reported SO2 and depleted-methane detections from other JWST instruments?",
+    "category": "Transmission spectroscopy",
+    "planet_class": "Warm Neptune",
+    "instruments": [
+      "JWST NIRISS SOSS",
+      "JWST MIRI",
+      "JWST NIRSpec"
+    ],
+    "datasets": [
+      "Reduced JWST NIRISS SOSS transit-depth spectrum, spectral orders 1 and 2 (Krishnamurthy et al., Zenodo 10.5281/zenodo.17085766)",
+      "NASA Exoplanet Archive (pscomppars, queried live via TAP)"
+    ],
+    "methods": [
+      "weighted mean transit depth calculation",
+      "RMS scatter",
+      "peak-to-trough amplitude measurement"
+    ],
+    "principal_result": "143 wavelength bins across 0.6-2.8 microns, weighted mean transit depth 2.062% +/- 0.0004%, with a rise toward the spectrum's blue and red edges consistent with water-vapor absorption. The SO2 and methane results discussed come from separate MIRI and NIRSpec observations not included in this NIRISS dataset, stated explicitly so the repo doesn't overclaim what one instrument's data shows on its own; a later NIRSpec study detected methane directly at 4.2 sigma, depleted roughly three orders of magnitude below equilibrium expectations.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [
+      "H2O",
+      "SO2",
+      "CH4"
+    ],
+    "headline_stat": "Weighted mean transit depth 2.062% +/- 0.0004% across 143 bins; methane detected at 4.2 sigma (external NIRSpec study), depleted ~3 orders of magnitude below equilibrium",
+    "thumbnail_candidates": [
+      "images/thumbnail.png",
+      "images/hero.png",
+      "images/3d-render.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/wasp-107b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-107b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "warm-neptune",
+      "sulfur-dioxide",
+      "spectroscopy",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/thumbnail.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-107b-exoplanet-report/master/images/thumbnail.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "wasp-121b-exoplanet-report",
+    "target": "WASP-121 b",
+    "title": "WASP-121 b: Day-Night Brightness Temperature Contrast from JWST Phase-Resolved Emission Spectroscopy",
+    "research_question": "What is the day-night brightness-temperature contrast of the ultra-hot Jupiter WASP-121 b, extracted from JWST NIRSpec/G395H phase-resolved emission spectroscopy with each point's own posterior uncertainty propagated?",
+    "category": "Phase curve",
+    "planet_class": "Ultra-hot Jupiter",
+    "instruments": [
+      "JWST NIRSpec/G395H",
+      "JWST NIRISS/SOSS"
+    ],
+    "datasets": [
+      "JWST NIRSpec/G395H phase-resolved emission spectrum, 349 wavelength channels x 36 orbital-phase bins (Evans-Soma, Sing et al. 2025, Zenodo 10.5281/zenodo.20651891)",
+      "NASA Exoplanet Archive (pscomppars)"
+    ],
+    "methods": [
+      "inverse-variance weighted mean",
+      "day/night phase-averaging with propagated posterior uncertainty"
+    ],
+    "principal_result": "Wavelength-averaged dayside brightness temperature 2751 +/- 3 K vs. nightside 1252 +/- 2 K — a day-night contrast of about 1493 +/- 4 K (range roughly 1235-1804 K across wavelength), pointing to very inefficient heat redistribution consistent with the extreme irradiation on the planet's 1.27-day orbit. The README notes this is a data comparison, not a model fit, and a separate bolometric analysis (Splinter et al. 2025) derives Tday=2717+/-17 K and Tnight=1562+/-19 K as the physically meaningful energy-budget numbers, which this repo's wavelength average is not intended to replace.",
+    "evidence_status": "public-data-reanalysis",
+    "molecules": [],
+    "headline_stat": "Day-night brightness-temperature contrast ~1493 +/- 4 K (dayside 2751+/-3 K, nightside 1252+/-2 K)",
+    "thumbnail_candidates": [
+      "images/hero.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/wasp-121b-exoplanet-report",
+    "live_report_url": "https://biswajit1999.github.io/wasp-121b-exoplanet-report/",
+    "tags": [
+      "jwst",
+      "phase-curve",
+      "ultra-hot-jupiter",
+      "brightness-temperature",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/hero.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/wasp-121b-exoplanet-report/master/images/hero.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "earlier-target-report"
+  },
+  {
+    "slug": "transit-photometry-detection-method",
+    "target": "Transit Photometry (Box Least Squares)",
+    "title": "Box Least Squares Transit Detection: A From-Scratch Implementation Validated by Injection-Recovery",
+    "research_question": "Can a from-scratch Box Least Squares (BLS) period search — blind over trial period, phase, and duration — recover a known synthetic transit signal injected into a simulated Kepler-noise-level light curve?",
+    "category": "Detection method",
+    "planet_class": null,
+    "instruments": [
+      "Kepler",
+      "TESS"
+    ],
+    "datasets": [
+      "Synthetic light curve with injected transit signal, using Kepler's published ~100 ppm per-30-minute photometric noise level",
+      "NASA Exoplanet Archive (used only for a static geometric sanity-check calculation on HD 209458 b, not as input to the BLS search)"
+    ],
+    "methods": [
+      "Box Least Squares (BLS) period search (Kovacs, Zsom & Mazeh 2002)",
+      "injection-recovery validation"
+    ],
+    "principal_result": "Recovered an injected synthetic transit signal with a blind period/phase/duration search: period 4.35 days recovered as 4.3500 days (0.00% error), duration 2.8 hours recovered as 3.13 hours (11.86% error, searched blind over 6 fractions), depth 850.0 ppm recovered as 833.8 ppm (1.90% error), with an in-transit depth signal-to-noise ratio of 77.8 sigma (uncorrected for search trials).",
+    "evidence_status": "algorithm-validated-on-synthetic-signal",
+    "molecules": [],
+    "headline_stat": "In-transit depth SNR 77.8 sigma; period recovered to 0.00% error, depth to 1.90% error",
+    "thumbnail_candidates": [
+      "images/hero.png",
+      "images/closeup-3d.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/transit-photometry-detection-method",
+    "live_report_url": "https://biswajit1999.github.io/transit-photometry-detection-method/",
+    "tags": [
+      "transit-photometry",
+      "detection-method",
+      "exoplanet-detection",
+      "python",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/hero.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/transit-photometry-detection-method/master/images/hero.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "detection-method"
+  },
+  {
+    "slug": "radial-velocity-detection-method",
+    "target": "Radial Velocity (Keplerian Orbit Fitting)",
+    "title": "Keplerian Radial-Velocity Orbit Fitting: A From-Scratch Implementation Validated by Injection-Recovery",
+    "research_question": "Can a from-scratch Keplerian RV model (with a Newton-Raphson Kepler-equation solver), fitted via a Lomb-Scargle periodogram and nonlinear least squares, recover a known orbit injected into a simulated dataset with HARPS-class noise and realistic irregular sampling?",
+    "category": "Detection method",
+    "planet_class": null,
+    "instruments": [
+      "HARPS",
+      "ESPRESSO",
+      "Keck/HIRES"
+    ],
+    "datasets": [
+      "Synthetic RV dataset (HARPS-class ~1 m/s photon noise plus ~1.5 m/s stellar jitter, irregular nightly cadence with seasonal gaps)",
+      "NASA Exoplanet Archive (sanity check against 51 Pegasi b's published orbital parameters)"
+    ],
+    "methods": [
+      "Keplerian orbit fitting",
+      "Lomb-Scargle periodogram (scipy.signal.lombscargle)",
+      "nonlinear least-squares fit (scipy.optimize.curve_fit)",
+      "Kepler-equation solver (Newton-Raphson)",
+      "injection-recovery validation"
+    ],
+    "principal_result": "Recovered an injected Keplerian orbit from 60 irregularly sampled nights with HARPS-class noise: period 4.23 days recovered as 4.2303 days (0.01% error), semi-amplitude K 92.0 m/s recovered as 92.00 m/s (0.01% error), and minimum mass Mp sin i 235.7 Earth masses recovered as 235.8 Earth masses (0.00% error).",
+    "evidence_status": "algorithm-validated-on-synthetic-signal",
+    "molecules": [],
+    "headline_stat": "Period recovered to 0.01% error, K to 0.01% error, Mp sin i to 0.00% error",
+    "thumbnail_candidates": [
+      "images/hero.png",
+      "images/closeup.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/radial-velocity-detection-method",
+    "live_report_url": "https://biswajit1999.github.io/radial-velocity-detection-method/",
+    "tags": [
+      "radial-velocity",
+      "detection-method",
+      "exoplanet-detection",
+      "python",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/hero.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/radial-velocity-detection-method/master/images/hero.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "detection-method"
+  },
+  {
+    "slug": "gravitational-microlensing-detection-method",
+    "target": "Gravitational Microlensing (Point-Lens Model)",
+    "title": "Point-Lens Microlensing: Blind Detection and Mass-Ratio Recovery of a Simulated Planetary Perturbation",
+    "research_question": "Can a from-scratch point-source point-lens (PSPL) model plus planetary-perturbation scaling relations blindly detect and characterize a simulated planetary microlensing perturbation, without the detection or characterization steps ever referencing the injected signal's true parameters?",
+    "category": "Detection method",
+    "planet_class": null,
+    "instruments": [
+      "OGLE",
+      "MOA",
+      "KMTNet",
+      "Roman Space Telescope"
+    ],
+    "datasets": [
+      "Simulated PSPL light curve sampled at KMTNet-class cadence (every 30 minutes) with ~2% ground-based crowded-field photometric noise",
+      "OGLE-2005-BLG-390Lb published parameters (sanity check, Beaulieu et al. 2006)"
+    ],
+    "methods": [
+      "point-source point-lens (PSPL) model",
+      "planetary-perturbation amplitude/duration scaling relations (Mao & Paczynski 1991; Gould & Loeb 1992)",
+      "blind residual-threshold perturbation-window detection",
+      "Gaussian bump fit for characterization",
+      "injection-recovery validation"
+    ],
+    "principal_result": "The blind detection step found the injected perturbation window from residuals alone, landing within about half a day of the true injected center (recovered [21.48, 22.60] days vs. injected center at 22.0 days). The single-lens fit recovered the Einstein time (20.0 days injected vs. 20.010 days recovered, 0.05% error) and the mass ratio (1.50e-3 injected vs. 1.48e-3 recovered, 1.07% error), all without the search ever referencing the injected time or mass ratio.",
+    "evidence_status": "algorithm-validated-on-synthetic-signal",
+    "molecules": [],
+    "headline_stat": "Mass ratio recovered to 1.07% error; Einstein time recovered to 0.05% error",
+    "thumbnail_candidates": [
+      "images/hero.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/gravitational-microlensing-detection-method",
+    "live_report_url": "https://biswajit1999.github.io/gravitational-microlensing-detection-method/",
+    "tags": [
+      "microlensing",
+      "detection-method",
+      "exoplanet-detection",
+      "python",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/hero.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/gravitational-microlensing-detection-method/master/images/hero.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "detection-method"
+  },
+  {
+    "slug": "direct-imaging-detection-method",
+    "target": "Direct Imaging (Angular Differential Imaging)",
+    "title": "Angular Differential Imaging: A From-Scratch ADI Pipeline Recovering a Companion Buried in Speckle Noise",
+    "research_question": "Can a from-scratch Angular Differential Imaging (ADI) reduction pipeline recover a companion injected into a simulated speckle-limited imaging sequence, and what does a small-sample-corrected contrast curve say about the achievable detection limit?",
+    "category": "Detection method",
+    "planet_class": null,
+    "instruments": [
+      "Keck",
+      "Gemini North"
+    ],
+    "datasets": [
+      "Simulated 30-frame ADI sequence with a quasi-static speckle pattern and an injected companion at young-giant-planet-like contrast",
+      "HR 8799 b published parameters (sanity check, Marois et al. 2008)"
+    ],
+    "methods": [
+      "Angular Differential Imaging (ADI) (Marois et al. 2006)",
+      "median-frame PSF subtraction and de-rotation",
+      "aperture photometry",
+      "5-sigma contrast curve with small-sample-statistics correction (Mawet et al. 2014)",
+      "injection-recovery validation"
+    ],
+    "principal_result": "Recovered an injected companion at contrast 6.0e-4: the raw single-frame signal-to-noise was 0.64 sigma (not detectable), improving to 27.0 sigma after ADI reduction (a 42.2x SNR improvement, clear detection), recovering 88.3% of the injected flux, with a 5-sigma contrast limit of 1.5e-4 at the companion's separation (23 independent apertures).",
+    "evidence_status": "algorithm-validated-on-synthetic-signal",
+    "molecules": [],
+    "headline_stat": "ADI-reduced SNR 27.0 sigma (42.2x improvement over raw 0.64 sigma); 88.3% flux recovery; 5-sigma contrast limit 1.5e-4",
+    "thumbnail_candidates": [
+      "images/hero.png",
+      "images/closeup.png",
+      "images/instrument.png"
+    ],
+    "thumbnail_type": "ai-artist-concept",
+    "github_url": "https://github.com/Biswajit1999/direct-imaging-detection-method",
+    "live_report_url": "https://biswajit1999.github.io/direct-imaging-detection-method/",
+    "tags": [
+      "direct-imaging",
+      "detection-method",
+      "exoplanet-detection",
+      "python",
+      "exoplanets"
+    ],
+    "thumbnail_path": "images/hero.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/Biswajit1999/direct-imaging-detection-method/master/images/hero.png",
+    "evidence_status_note": null,
+    "thumbnail_attribution": "AI-generated artist's interpretation, not a direct image or observation.",
+    "tier": "detection-method"
+  }
+]
