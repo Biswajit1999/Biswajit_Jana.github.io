@@ -32,7 +32,7 @@ OUT_PATH = ROOT / "data" / "research-graph.json"
 
 # Real instrument/mission/survey names worth graphing as their own node,
 # distinguished from generic software tech (Python, JavaScript, React, ...).
-MIN_FREQ_METHOD = 3   # only graph a method/technique if >=3 repos share it
+MIN_FREQ_METHOD = 2   # only graph a method/technique if >=2 repos share it
 MIN_FREQ_MOLECULE = 1
 
 

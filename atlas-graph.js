@@ -23,14 +23,14 @@
   function palette() {
     return isDark()
       ? {
-          Project: "#7fa1f7", Instrument: "#5cc4a8", Method: "#7fa1f7",
-          Molecule: "#a696f0", PlanetClass: "#e0ab55", AnalysisType: "#e0ab55",
-          link: "rgba(140,170,230,0.25)", linkLit: "#7fa1f7", bg: "rgba(0,0,0,0)"
+          Project: "#e0973d", Instrument: "#a3ab5a", Method: "#e0973d",
+          Molecule: "#b08a92", PlanetClass: "#d97a5a", AnalysisType: "#d97a5a",
+          link: "rgba(224,151,61,0.22)", linkLit: "#e0973d", bg: "rgba(0,0,0,0)"
         }
       : {
-          Project: "#2f63e8", Instrument: "#157a67", Method: "#2f63e8",
-          Molecule: "#6a4fc4", PlanetClass: "#a66c14", AnalysisType: "#a66c14",
-          link: "rgba(20,40,80,0.18)", linkLit: "#2f63e8", bg: "rgba(0,0,0,0)"
+          Project: "#a4530a", Instrument: "#5f6b1f", Method: "#a4530a",
+          Molecule: "#6b4a52", PlanetClass: "#9c3b23", AnalysisType: "#9c3b23",
+          link: "rgba(90,55,20,0.16)", linkLit: "#a4530a", bg: "rgba(0,0,0,0)"
         };
   }
   var NODE_SIZE = {

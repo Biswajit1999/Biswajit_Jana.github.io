@@ -18,24 +18,24 @@
   --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-xl:32px;
   --card-radius:18px; --panel-radius:28px;
   --transition: var(--motion-micro) ease;
-  --bg:        #f4f3ef;
-  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, #e6effc 0%, rgba(230,239,252,0) 56%),
-               radial-gradient(820px 560px at -6% 4%, #e3f5f0 0%, rgba(227,245,240,0) 52%);
-  --grid-line: rgba(20,40,80,.045);
+  --bg:        #f6f1e6;
+  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, #fbe6c8 0%, rgba(251,230,200,0) 56%),
+               radial-gradient(820px 560px at -6% 4%, #f5d9c2 0%, rgba(245,217,194,0) 52%);
+  --grid-line: rgba(120,70,20,.045);
   --surface:   #ffffff;
-  --surface-muted:#eef0f5;
-  --ink:       #16233c;
-  --ink-soft:  #3a4a66;
-  --muted:     #66748c;
-  --line:      #e4e6ed;
-  --line-2:    #d6dae6;
-  --accent:    #2f63e8;
-  --accent-2:  #0c9d92;
-  --accent-soft:#e8effe;
-  --ring:      rgba(47,99,232,.45);
-  --shadow-soft: 0 1px 2px rgba(20,35,61,.05), 0 8px 24px -16px rgba(20,35,61,.18);
-  --shadow-card: 0 1px 2px rgba(20,35,61,.05), 0 18px 44px -24px rgba(20,35,61,.30);
-  --shadow-lg:   0 28px 64px -30px rgba(20,35,61,.34);
+  --surface-muted:#f2e9db;
+  --ink:       #291f0f;
+  --ink-soft:  #52402a;
+  --muted:     #7c6a4f;
+  --line:      #ece1cd;
+  --line-2:    #ddccae;
+  --accent:    #a4530a;
+  --accent-2:  #8a3922;
+  --accent-soft:#fbe7cd;
+  --ring:      rgba(164,83,10,.45);
+  --shadow-soft: 0 1px 2px rgba(41,25,10,.05), 0 8px 24px -16px rgba(41,25,10,.18);
+  --shadow-card: 0 1px 2px rgba(41,25,10,.05), 0 18px 44px -24px rgba(41,25,10,.30);
+  --shadow-lg:   0 28px 64px -30px rgba(41,25,10,.34);
   /* motion tokens — durations named by what they drive, not by number, so the
      right one gets reached for on purpose (micro-interaction vs. section entrance) */
   --motion-micro: 150ms;      /* hover/focus feedback: chips, buttons, badges */
@@ -44,55 +44,55 @@
   --motion-ambient: 8s;       /* starfield drift, spectral gradient sheen */
   --ease-natural: cubic-bezier(.22,.61,.36,1);
   /* evidence-status semantic colors — separate from the brand accent */
-  --status-reanalysis: #157a67;
-  --status-reanalysis-soft: #e2f3ee;
-  --status-null: #a66c14;
-  --status-null-soft: #faf0dc;
-  --status-synthetic: #6a4fc4;
-  --status-synthetic-soft: #ece7fb;
+  --status-reanalysis: #5f6b1f;
+  --status-reanalysis-soft: #eef1dc;
+  --status-null: #9c3b23;
+  --status-null-soft: #f7e3da;
+  --status-synthetic: #6b4a52;
+  --status-synthetic-soft: #efe1e3;
   /* type badges — a small, separate semantic set for project kind, distinct from evidence-status */
-  --type-tool: #2f63e8;
-  --type-tool-soft: #e8effe;
-  --type-research: #157a67;
-  --type-research-soft: #e2f3ee;
-  --type-light: #a66c14;
-  --type-light-soft: #faf0dc;
-  --type-archive: #66748c;
-  --type-archive-soft: #eef0f5;
+  --type-tool: #a4530a;
+  --type-tool-soft: #fbe7cd;
+  --type-research: #5f6b1f;
+  --type-research-soft: #eef1dc;
+  --type-light: #8a3922;
+  --type-light-soft: #f3ddd2;
+  --type-archive: #6a5840;
+  --type-archive-soft: #f2e9db;
 }
 [data-theme="dark"]{
-  --bg:        #0a1322;
-  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #16233f 0%, rgba(22,35,63,0) 60%),
-               radial-gradient(900px 600px at 6% 2%, #0f2a2a 0%, rgba(15,42,42,0) 55%);
-  --grid-line: rgba(140,170,230,.055);
-  --surface:   #111c31;
-  --surface-muted:#0e1a2e;
-  --ink:       #eaf1ff;
-  --ink-soft:  #c2cee4;
-  --muted:     #8597b5;
-  --line:      #21304f;
-  --line-2:    #2a3a5c;
-  --accent:    #6f9bff;
-  --accent-2:  #2fd0c2;
-  --accent-soft:#172a4d;
-  --ring:      rgba(111,155,255,.5);
+  --bg:        #120d08;
+  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #2c1c0e 0%, rgba(44,28,14,0) 60%),
+               radial-gradient(900px 600px at 6% 2%, #241408 0%, rgba(36,20,8,0) 55%);
+  --grid-line: rgba(230,175,110,.05);
+  --surface:   #1c150c;
+  --surface-muted:#17110a;
+  --ink:       #f3e8d6;
+  --ink-soft:  #d1bd9d;
+  --muted:     #9c8768;
+  --line:      #33261a;
+  --line-2:    #453120;
+  --accent:    #dd9440;
+  --accent-2:  #cf6640;
+  --accent-soft:#3a2814;
+  --ring:      rgba(221,148,64,.5);
   --shadow-soft: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.6);
   --shadow-card: 0 1px 2px rgba(0,0,0,.3), 0 20px 50px -24px rgba(0,0,0,.7);
   --shadow-lg:   0 28px 70px -28px rgba(0,0,0,.7);
-  --status-reanalysis: #4fbf9e;
-  --status-reanalysis-soft: #113026;
-  --status-null: #e0ab55;
-  --status-null-soft: #332711;
-  --status-synthetic: #a696f0;
-  --status-synthetic-soft: #241c3d;
-  --type-tool: #7fa1f7;
-  --type-tool-soft: #1e2a45;
-  --type-research: #5cc4a8;
-  --type-research-soft: #173029;
-  --type-light: #e0ab55;
-  --type-light-soft: #332711;
-  --type-archive: #8597b5;
-  --type-archive-soft: #1c2334;
+  --status-reanalysis: #a3ab5a;
+  --status-reanalysis-soft: #262712;
+  --status-null: #d97a5a;
+  --status-null-soft: #34160c;
+  --status-synthetic: #b08a92;
+  --status-synthetic-soft: #2e1e22;
+  --type-tool: #dd9440;
+  --type-tool-soft: #3a2814;
+  --type-research: #a3ab5a;
+  --type-research-soft: #262712;
+  --type-light: #cf6640;
+  --type-light-soft: #28140c;
+  --type-archive: #9c8768;
+  --type-archive-soft: #17110a;
 }
 
 /* ============================================================
@@ -371,7 +371,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
    MODAL / DETAIL VIEW
    ============================================================ */
 .atlas-modal-overlay{
-  position:fixed;inset:0;z-index:400;background:rgba(10,15,26,.55);
+  position:fixed;inset:0;z-index:400;background:rgba(15,11,7,.55);
   display:flex;align-items:flex-start;justify-content:center;padding:min(6vh,64px) 16px 40px;
   overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .2s ease;
 }
@@ -389,7 +389,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-modal-media img{width:100%;height:100%;object-fit:cover}
 .atlas-modal-close{
   position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:10px;
-  background:rgba(10,18,33,.55);color:#fff;border:1px solid rgba(255,255,255,.25);cursor:pointer;
+  background:rgba(18,13,8,.55);color:#fff;border:1px solid rgba(255,255,255,.25);cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:1.1rem;
 }
 .atlas-modal-body{padding:28px clamp(20px,4vw,40px) 34px}
@@ -552,7 +552,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 
 /* ---------- hero spectral-gradient sheen, reused from index.html's technique ---------- */
 .atlas-hero h1 .sub{
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),#9a6cff,var(--accent));
+  background:linear-gradient(90deg,var(--accent),var(--accent-2),#e8c34a,var(--accent));
   background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
   animation:atlas-sheen var(--motion-ambient) linear infinite;

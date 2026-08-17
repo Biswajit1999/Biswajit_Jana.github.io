@@ -681,8 +681,8 @@
     function theme() { return docEl.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
     function palette() {
       return theme() === "dark"
-        ? { star: "226,236,255", maxA: 0.9, baseA: 0.35, shoot: "200,222,255", shootA: 0.9, count: 0.00010 }
-        : { star: "40,70,130", maxA: 0.28, baseA: 0.10, shoot: "47,99,232", shootA: 0.35, count: 0.00006 };
+        ? { star: "255,235,205", maxA: 0.9, baseA: 0.35, shoot: "255,216,166", shootA: 0.9, count: 0.00010 }
+        : { star: "110,75,30", maxA: 0.28, baseA: 0.10, shoot: "182,97,28", shootA: 0.35, count: 0.00006 };
     }
     var pal = palette();
 

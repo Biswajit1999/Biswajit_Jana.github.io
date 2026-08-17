@@ -1,7 +1,7 @@
 {
   "generatedFrom": "data/full-portfolio.json",
-  "nodeCount": 171,
-  "edgeCount": 371,
+  "nodeCount": 182,
+  "edgeCount": 393,
   "nodeTypes": [
     "AnalysisType",
     "Instrument",
@@ -28,28 +28,28 @@
       "slug": "55cancri-e-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/55cancri-e-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/55cancri-e-exoplanet-report/",
-      "x": 1164.5,
-      "y": 101.6
+      "x": 1238.3,
+      "y": 0
     },
     {
       "id": "class:Lava world",
       "type": "PlanetClass",
       "label": "Lava world",
-      "x": 1544.6,
+      "x": 1501.3,
       "y": 0
     },
     {
       "id": "category:Emission spectroscopy",
       "type": "AnalysisType",
       "label": "Emission spectroscopy",
-      "x": 629.7,
-      "y": 298.7
+      "x": 770.7,
+      "y": 0
     },
     {
       "id": "instrument:Spitzer",
       "type": "Instrument",
       "label": "Spitzer",
-      "x": 1519.9,
+      "x": 1501.3,
       "y": 0
     },
     {
@@ -61,28 +61,35 @@
       "githubUrl": "https://github.com/Biswajit1999/gj1214b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/gj1214b-exoplanet-report/",
       "x": 0,
-      "y": 239.8
+      "y": 76.8
     },
     {
       "id": "class:Sub-Neptune",
       "type": "PlanetClass",
       "label": "Sub-Neptune",
-      "x": 0,
-      "y": 392.2
+      "x": 22.0,
+      "y": 0
     },
     {
       "id": "category:Phase curve",
       "type": "AnalysisType",
       "label": "Phase curve",
-      "x": 60.8,
-      "y": 282.4
+      "x": 102.2,
+      "y": 0
     },
     {
       "id": "instrument:JWST/MIRI",
       "type": "Instrument",
       "label": "JWST/MIRI",
+      "x": 93.1,
+      "y": 114.9
+    },
+    {
+      "id": "method:inverse-variance weighted mean",
+      "type": "Method",
+      "label": "inverse-variance weighted mean",
       "x": 0,
-      "y": 369.5
+      "y": 149.0
     },
     {
       "id": "project:gj3470b-exoplanet-report",
@@ -92,64 +99,71 @@
       "slug": "gj3470b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/gj3470b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/gj3470b-exoplanet-report/",
-      "x": 115.8,
-      "y": 651.7
+      "x": 435.9,
+      "y": 259.7
     },
     {
       "id": "class:Warm Neptune",
       "type": "PlanetClass",
       "label": "Warm Neptune",
-      "x": 0,
-      "y": 457.1
+      "x": 263.1,
+      "y": 498.2
     },
     {
       "id": "category:Transmission spectroscopy",
       "type": "AnalysisType",
       "label": "Transmission spectroscopy",
-      "x": 30.9,
-      "y": 647.1
+      "x": 254.7,
+      "y": 191.5
     },
     {
       "id": "instrument:TESS",
       "type": "Instrument",
       "label": "TESS",
-      "x": 392.8,
-      "y": 727.7
+      "x": 742.2,
+      "y": 174.8
     },
     {
       "id": "method:timing-adjusted limb-darkened transit fitting",
       "type": "Method",
       "label": "timing-adjusted limb-darkened transit fitting",
-      "x": 309.1,
-      "y": 638.8
+      "x": 658.1,
+      "y": 53.2
+    },
+    {
+      "id": "method:multi-sector robustness check",
+      "type": "Method",
+      "label": "multi-sector robustness check",
+      "x": 338.1,
+      "y": 403.0
     },
     {
       "id": "molecule:SO2",
       "type": "Molecule",
       "label": "SO2",
-      "x": 0,
-      "y": 743.7
+      "x": 367.9,
+      "y": 298.2
     },
     {
       "id": "molecule:H2O",
       "type": "Molecule",
       "label": "H2O",
-      "x": 188.7,
-      "y": 596.8
+      "x": 359.3,
+      "y": 147.6
     },
     {
       "id": "molecule:CO2",
       "type": "Molecule",
       "label": "CO2",
-      "x": 63.8,
-      "y": 709.8
+      "x": 324.7,
+      "y": 158.4
     },
     {
       "id": "molecule:CH4",
       "type": "Molecule",
       "label": "CH4",
-      "x": 9.3,
-      "y": 705.0
+      "x": 308.5,
+      "y": 216.8
     },
     {
       "id": "project:gj9827d-exoplanet-report",
@@ -159,43 +173,43 @@
       "slug": "gj9827d-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/gj9827d-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/gj9827d-exoplanet-report/",
-      "x": 233.2,
-      "y": 958.3
+      "x": 835.7,
+      "y": 0
     },
     {
       "id": "class:Super-Earth",
       "type": "PlanetClass",
       "label": "Super-Earth",
-      "x": 181.4,
-      "y": 1100
+      "x": 718.2,
+      "y": 0
     },
     {
       "id": "category:Transit photometry",
       "type": "AnalysisType",
       "label": "Transit photometry",
-      "x": 295.9,
-      "y": 817.4
+      "x": 805.6,
+      "y": 0
     },
     {
       "id": "method:transit fitting",
       "type": "Method",
       "label": "transit fitting",
-      "x": 145.0,
-      "y": 988.4
+      "x": 691.1,
+      "y": 53.8
     },
     {
       "id": "method:ΔBIC model comparison",
       "type": "Method",
       "label": "ΔBIC model comparison",
-      "x": 136.4,
-      "y": 932.9
+      "x": 645.6,
+      "y": 89.8
     },
     {
       "id": "method:multi-sector robustness analysis",
       "type": "Method",
       "label": "multi-sector robustness analysis",
-      "x": 112.0,
-      "y": 977.9
+      "x": 703.1,
+      "y": 88.1
     },
     {
       "id": "project:hat-p-11b-exoplanet-report",
@@ -205,29 +219,29 @@
       "slug": "hat-p-11b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hat-p-11b-exoplanet-report/",
-      "x": 0,
-      "y": 117.7
+      "x": 32.8,
+      "y": 876.1
     },
     {
       "id": "category:Atmospheric escape",
       "type": "AnalysisType",
       "label": "Atmospheric escape",
       "x": 0,
-      "y": 0
+      "y": 1100
     },
     {
       "id": "instrument:CARMENES",
       "type": "Instrument",
       "label": "CARMENES",
       "x": 0,
-      "y": 0
+      "y": 1079.7
     },
     {
       "id": "molecule:helium (He I 10830 Å)",
       "type": "Molecule",
       "label": "helium (He I 10830 Å)",
       "x": 0,
-      "y": 0
+      "y": 1040.0
     },
     {
       "id": "project:hat-p-26b-exoplanet-report",
@@ -237,8 +251,8 @@
       "slug": "hat-p-26b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hat-p-26b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hat-p-26b-exoplanet-report/",
-      "x": 116.7,
-      "y": 789.7
+      "x": 588.8,
+      "y": 222.5
     },
     {
       "id": "project:hat-p-32b-exoplanet-report",
@@ -248,15 +262,15 @@
       "slug": "hat-p-32b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hat-p-32b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hat-p-32b-exoplanet-report/",
-      "x": 152.7,
-      "y": 809.2
+      "x": 646.0,
+      "y": 0
     },
     {
       "id": "class:Hot Jupiter",
       "type": "PlanetClass",
       "label": "Hot Jupiter",
-      "x": 0,
-      "y": 510.4
+      "x": 385.2,
+      "y": 0
     },
     {
       "id": "project:hd106315b-exoplanet-report",
@@ -266,8 +280,8 @@
       "slug": "hd106315b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hd106315b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hd106315b-exoplanet-report/",
-      "x": 269.2,
-      "y": 976.5
+      "x": 748.3,
+      "y": 0
     },
     {
       "id": "project:hd149026b-exoplanet-report",
@@ -277,36 +291,36 @@
       "slug": "hd149026b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hd149026b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hd149026b-exoplanet-report/",
-      "x": 259.0,
-      "y": 515.1
+      "x": 486.5,
+      "y": 18.3
     },
     {
       "id": "class:Hot Saturn (dense, metal-rich)",
       "type": "PlanetClass",
       "label": "Hot Saturn (dense, metal-rich)",
-      "x": 0,
-      "y": 621.0
+      "x": 229.0,
+      "y": 0
     },
     {
       "id": "instrument:JWST/NIRCam",
       "type": "Instrument",
       "label": "JWST/NIRCam",
-      "x": 0,
-      "y": 558.0
+      "x": 314.9,
+      "y": 0
     },
     {
       "id": "method:multi-sector ΔBIC and Cochran Q consistency check",
       "type": "Method",
       "label": "multi-sector ΔBIC and Cochran Q consistency check",
-      "x": 413.5,
-      "y": 633.2
+      "x": 602.0,
+      "y": 0
     },
     {
       "id": "molecule:VO",
       "type": "Molecule",
       "label": "VO",
-      "x": 186.8,
-      "y": 275.3
+      "x": 351.3,
+      "y": 0
     },
     {
       "id": "project:hd189733b-exoplanet-report",
@@ -316,22 +330,22 @@
       "slug": "hd189733b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hd189733b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hd189733b-exoplanet-report/",
-      "x": 0,
-      "y": 540.8
+      "x": 251.1,
+      "y": 0
     },
     {
       "id": "molecule:CO",
       "type": "Molecule",
       "label": "CO",
-      "x": 0,
-      "y": 797.1
+      "x": 430.7,
+      "y": 0
     },
     {
       "id": "molecule:H2S",
       "type": "Molecule",
       "label": "H2S",
-      "x": 0,
-      "y": 289.8
+      "x": 47.9,
+      "y": 0
     },
     {
       "id": "project:hd209458b-exoplanet-report",
@@ -341,8 +355,8 @@
       "slug": "hd209458b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hd209458b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hd209458b-exoplanet-report/",
-      "x": 0,
-      "y": 225.0
+      "x": 90.4,
+      "y": 51.0
     },
     {
       "id": "instrument:HST/STIS",
@@ -356,7 +370,7 @@
       "type": "Method",
       "label": "weighted mean transit depth calculation",
       "x": 0,
-      "y": 331.3
+      "y": 224.3
     },
     {
       "id": "molecule:sodium",
@@ -369,8 +383,8 @@
       "id": "molecule:magnesium silicate",
       "type": "Molecule",
       "label": "magnesium silicate",
-      "x": 48.3,
-      "y": 0
+      "x": 0,
+      "y": 41.6
     },
     {
       "id": "project:hd97658b-exoplanet-report",
@@ -380,8 +394,8 @@
       "slug": "hd97658b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/hd97658b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/hd97658b-exoplanet-report/",
-      "x": 261.0,
-      "y": 1011.8
+      "x": 819.3,
+      "y": 0
     },
     {
       "id": "project:k2-18b-exoplanet-report",
@@ -391,29 +405,29 @@
       "slug": "k2-18b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/k2-18b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/k2-18b-exoplanet-report/",
-      "x": 110.8,
-      "y": 566.0
+      "x": 149.5,
+      "y": 167.0
     },
     {
       "id": "instrument:JWST/NIRISS",
       "type": "Instrument",
       "label": "JWST/NIRISS",
-      "x": 448.9,
-      "y": 357.8
+      "x": 313.7,
+      "y": 289.7
     },
     {
       "id": "instrument:JWST/NIRSpec",
       "type": "Instrument",
       "label": "JWST/NIRSpec",
-      "x": 289.6,
-      "y": 720.6
+      "x": 292.9,
+      "y": 378.9
     },
     {
       "id": "molecule:DMS",
       "type": "Molecule",
       "label": "DMS",
       "x": 0,
-      "y": 831.9
+      "y": 0
     },
     {
       "id": "project:kepler-51b-exoplanet-report",
@@ -423,15 +437,15 @@
       "slug": "kepler-51b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/kepler-51b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/kepler-51b-exoplanet-report/",
-      "x": 216.7,
-      "y": 999.3
+      "x": 795.0,
+      "y": 0
     },
     {
       "id": "class:Super-puff",
       "type": "PlanetClass",
       "label": "Super-puff",
-      "x": 108.5,
-      "y": 1100
+      "x": 1066.8,
+      "y": 0
     },
     {
       "id": "project:lhs-475b-exoplanet-report",
@@ -441,22 +455,22 @@
       "slug": "lhs-475b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/lhs-475b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/lhs-475b-exoplanet-report/",
-      "x": 0,
-      "y": 875.0
+      "x": 124.5,
+      "y": 340.4
     },
     {
       "id": "class:Rocky/Earth-sized",
       "type": "PlanetClass",
       "label": "Rocky/Earth-sized",
       "x": 0,
-      "y": 1100
+      "y": 533.6
     },
     {
       "id": "molecule:H2",
       "type": "Molecule",
       "label": "H2",
       "x": 0,
-      "y": 1061.3
+      "y": 363.1
     },
     {
       "id": "project:ltt9779b-exoplanet-report",
@@ -466,15 +480,22 @@
       "slug": "ltt9779b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/ltt9779b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/ltt9779b-exoplanet-report/",
-      "x": 314.3,
-      "y": 549.2
+      "x": 992.0,
+      "y": 0
     },
     {
       "id": "class:Hot Neptune",
       "type": "PlanetClass",
       "label": "Hot Neptune",
-      "x": 251.8,
-      "y": 253.5
+      "x": 1318.6,
+      "y": 0
+    },
+    {
+      "id": "method:multi-sector robustness and correlated-noise diagnostics",
+      "type": "Method",
+      "label": "multi-sector robustness and correlated-noise diagnostics",
+      "x": 1157.9,
+      "y": 0
     },
     {
       "id": "project:toi-270d-exoplanet-report",
@@ -484,15 +505,15 @@
       "slug": "toi-270d-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/toi-270d-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/toi-270d-exoplanet-report/",
-      "x": 397.8,
-      "y": 850.7
+      "x": 870.8,
+      "y": 0
     },
     {
       "id": "class:Sub-Neptune (temperate)",
       "type": "PlanetClass",
       "label": "Sub-Neptune (temperate)",
-      "x": 401.7,
-      "y": 1100
+      "x": 1121.4,
+      "y": 0
     },
     {
       "id": "project:toi-836b-exoplanet-report",
@@ -502,8 +523,8 @@
       "slug": "toi-836b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/toi-836b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/toi-836b-exoplanet-report/",
-      "x": 127.5,
-      "y": 836.9
+      "x": 494.5,
+      "y": 143.3
     },
     {
       "id": "project:trappist-1e-exoplanet-report",
@@ -513,15 +534,15 @@
       "slug": "trappist-1e-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/trappist-1e-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/trappist-1e-exoplanet-report/",
-      "x": 0,
-      "y": 920.3
+      "x": 26.8,
+      "y": 253.2
     },
     {
       "id": "class:Habitable-zone rocky planet",
       "type": "PlanetClass",
       "label": "Habitable-zone rocky planet",
       "x": 0,
-      "y": 1100
+      "y": 0
     },
     {
       "id": "project:wasp-107b-exoplanet-report",
@@ -531,8 +552,15 @@
       "slug": "wasp-107b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-107b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-107b-exoplanet-report/",
-      "x": 103.8,
-      "y": 513.5
+      "x": 179.6,
+      "y": 293.7
+    },
+    {
+      "id": "method:peak-to-trough amplitude measurement",
+      "type": "Method",
+      "label": "peak-to-trough amplitude measurement",
+      "x": 0,
+      "y": 410.5
     },
     {
       "id": "project:wasp-121b-exoplanet-report",
@@ -542,15 +570,15 @@
       "slug": "wasp-121b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-121b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-121b-exoplanet-report/",
-      "x": 236.3,
-      "y": 368.2
+      "x": 98.5,
+      "y": 191.5
     },
     {
       "id": "class:Ultra-hot Jupiter",
       "type": "PlanetClass",
       "label": "Ultra-hot Jupiter",
-      "x": 216.3,
-      "y": 154.5
+      "x": 156.9,
+      "y": 0
     },
     {
       "id": "project:wasp-127b-exoplanet-report",
@@ -560,15 +588,15 @@
       "slug": "wasp-127b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-127b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-127b-exoplanet-report/",
-      "x": 475.5,
-      "y": 717.0
+      "x": 925.9,
+      "y": 0
     },
     {
       "id": "class:Super-puff (Hot Saturn-class)",
       "type": "PlanetClass",
       "label": "Super-puff (Hot Saturn-class)",
-      "x": 614.3,
-      "y": 565.8
+      "x": 1265.0,
+      "y": 0
     },
     {
       "id": "project:wasp-12b-exoplanet-report",
@@ -578,8 +606,8 @@
       "slug": "wasp-12b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-12b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-12b-exoplanet-report/",
-      "x": 200.8,
-      "y": 677.2
+      "x": 621.4,
+      "y": 0
     },
     {
       "id": "project:wasp-17b-exoplanet-report",
@@ -589,15 +617,15 @@
       "slug": "wasp-17b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-17b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-17b-exoplanet-report/",
-      "x": 404.1,
-      "y": 461.1
+      "x": 516.9,
+      "y": 79.9
     },
     {
       "id": "class:Hot Jupiter (inflated)",
       "type": "PlanetClass",
       "label": "Hot Jupiter (inflated)",
-      "x": 353.4,
-      "y": 184.8
+      "x": 289.5,
+      "y": 0
     },
     {
       "id": "project:wasp-18b-exoplanet-report",
@@ -607,15 +635,15 @@
       "slug": "wasp-18b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-18b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-18b-exoplanet-report/",
-      "x": 333.5,
-      "y": 370.8
+      "x": 448.2,
+      "y": 57.5
     },
     {
       "id": "molecule:TiO",
       "type": "Molecule",
       "label": "TiO",
-      "x": 264.1,
-      "y": 42.7
+      "x": 194.4,
+      "y": 0
     },
     {
       "id": "project:wasp-19b-exoplanet-report",
@@ -625,15 +653,15 @@
       "slug": "wasp-19b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-19b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-19b-exoplanet-report/",
-      "x": 407.5,
-      "y": 906.9
+      "x": 955.4,
+      "y": 0
     },
     {
       "id": "class:Hot Jupiter (ultra-short-period)",
       "type": "PlanetClass",
       "label": "Hot Jupiter (ultra-short-period)",
-      "x": 489.8,
-      "y": 1100
+      "x": 1208.1,
+      "y": 0
     },
     {
       "id": "project:wasp-39b-exoplanet-report",
@@ -643,15 +671,15 @@
       "slug": "wasp-39b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-39b-exoplanet-report/",
-      "x": 147.3,
-      "y": 725.8
+      "x": 432.9,
+      "y": 226.5
     },
     {
       "id": "class:Hot Saturn",
       "type": "PlanetClass",
       "label": "Hot Saturn",
-      "x": 0,
-      "y": 593.5
+      "x": 161.3,
+      "y": 395.4
     },
     {
       "id": "project:wasp-43b-exoplanet-report",
@@ -661,8 +689,8 @@
       "slug": "wasp-43b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-43b-exoplanet-report/",
-      "x": 136.7,
-      "y": 526.2
+      "x": 377.4,
+      "y": 73.0
     },
     {
       "id": "project:wasp-69b-exoplanet-report",
@@ -672,15 +700,15 @@
       "slug": "wasp-69b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-69b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-69b-exoplanet-report/",
-      "x": 400.3,
-      "y": 569.9
+      "x": 686.7,
+      "y": 0
     },
     {
       "id": "class:Warm Saturn",
       "type": "PlanetClass",
       "label": "Warm Saturn",
-      "x": 431.5,
-      "y": 291.5
+      "x": 507.1,
+      "y": 0
     },
     {
       "id": "project:wasp-80b-exoplanet-report",
@@ -690,29 +718,29 @@
       "slug": "wasp-80b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-80b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-80b-exoplanet-report/",
-      "x": 187.1,
-      "y": 867.7
+      "x": 588.0,
+      "y": 186.6
     },
     {
       "id": "class:Warm Jupiter",
       "type": "PlanetClass",
       "label": "Warm Jupiter",
-      "x": 23.2,
-      "y": 1100
+      "x": 933.0,
+      "y": 0
     },
     {
       "id": "instrument:JWST",
       "type": "Instrument",
       "label": "JWST",
-      "x": 687.1,
-      "y": 968.7
+      "x": 942.7,
+      "y": 496.4
     },
     {
       "id": "molecule:NH3",
       "type": "Molecule",
       "label": "NH3",
-      "x": 54.7,
-      "y": 1100
+      "x": 784.0,
+      "y": 227.0
     },
     {
       "id": "project:wasp-96b-exoplanet-report",
@@ -722,8 +750,8 @@
       "slug": "wasp-96b-exoplanet-report",
       "githubUrl": "https://github.com/Biswajit1999/wasp-96b-exoplanet-report",
       "liveUrl": "https://biswajit1999.github.io/wasp-96b-exoplanet-report/",
-      "x": 163.9,
-      "y": 479.8
+      "x": 131.7,
+      "y": 292.8
     },
     {
       "id": "project:direct-imaging-detection-method",
@@ -733,36 +761,36 @@
       "slug": "direct-imaging-detection-method",
       "githubUrl": "https://github.com/Biswajit1999/direct-imaging-detection-method",
       "liveUrl": "https://biswajit1999.github.io/direct-imaging-detection-method/",
-      "x": 979.9,
-      "y": 293.0
+      "x": 1600,
+      "y": 317.7
     },
     {
       "id": "category:Detection method",
       "type": "AnalysisType",
       "label": "Detection method",
-      "x": 848.6,
-      "y": 120.6
+      "x": 1481.6,
+      "y": 176.4
     },
     {
       "id": "instrument:Keck",
       "type": "Instrument",
       "label": "Keck",
-      "x": 1016.4,
-      "y": 582.3
+      "x": 1600,
+      "y": 466.1
     },
     {
       "id": "instrument:Gemini North",
       "type": "Instrument",
       "label": "Gemini North",
-      "x": 1163.2,
-      "y": 425.8
+      "x": 1600,
+      "y": 512.1
     },
     {
       "id": "method:injection-recovery validation",
       "type": "Method",
       "label": "injection-recovery validation",
-      "x": 833.7,
-      "y": 86.6
+      "x": 1515.7,
+      "y": 197.5
     },
     {
       "id": "project:gravitational-microlensing-detection-method",
@@ -772,35 +800,35 @@
       "slug": "gravitational-microlensing-detection-method",
       "githubUrl": "https://github.com/Biswajit1999/gravitational-microlensing-detection-method",
       "liveUrl": "https://biswajit1999.github.io/gravitational-microlensing-detection-method/",
-      "x": 706.3,
-      "y": 0
+      "x": 1539.7,
+      "y": 115.8
     },
     {
       "id": "instrument:OGLE",
       "type": "Instrument",
       "label": "OGLE",
-      "x": 919.3,
-      "y": 0
+      "x": 1266.5,
+      "y": 350.2
     },
     {
       "id": "instrument:MOA",
       "type": "Instrument",
       "label": "MOA",
-      "x": 519.0,
+      "x": 1600,
       "y": 0
     },
     {
       "id": "instrument:KMTNet",
       "type": "Instrument",
       "label": "KMTNet",
-      "x": 519.0,
+      "x": 1586.0,
       "y": 0
     },
     {
       "id": "instrument:Roman Space Telescope",
       "type": "Instrument",
       "label": "Roman Space Telescope",
-      "x": 597.5,
+      "x": 1600,
       "y": 0
     },
     {
@@ -811,29 +839,29 @@
       "slug": "radial-velocity-detection-method",
       "githubUrl": "https://github.com/Biswajit1999/radial-velocity-detection-method",
       "liveUrl": "https://biswajit1999.github.io/radial-velocity-detection-method/",
-      "x": 996.6,
-      "y": 0
+      "x": 1482.1,
+      "y": 307.9
     },
     {
       "id": "instrument:HARPS",
       "type": "Instrument",
       "label": "HARPS",
-      "x": 1154.2,
-      "y": 0
+      "x": 1297.7,
+      "y": 488.1
     },
     {
       "id": "instrument:ESPRESSO",
       "type": "Instrument",
       "label": "ESPRESSO",
-      "x": 1114.1,
-      "y": 0
+      "x": 1267.5,
+      "y": 453.6
     },
     {
       "id": "instrument:Keck/HIRES",
       "type": "Instrument",
       "label": "Keck/HIRES",
-      "x": 951.6,
-      "y": 0
+      "x": 1600,
+      "y": 147.5
     },
     {
       "id": "project:transit-photometry-detection-method",
@@ -843,15 +871,15 @@
       "slug": "transit-photometry-detection-method",
       "githubUrl": "https://github.com/Biswajit1999/transit-photometry-detection-method",
       "liveUrl": "https://biswajit1999.github.io/transit-photometry-detection-method/",
-      "x": 714.7,
-      "y": 315.1
+      "x": 1194.8,
+      "y": 197.1
     },
     {
       "id": "instrument:Kepler",
       "type": "Instrument",
       "label": "Kepler",
-      "x": 970.6,
-      "y": 92.5
+      "x": 1051.1,
+      "y": 398.5
     },
     {
       "id": "project:cosmic-ray-cleanup",
@@ -861,36 +889,36 @@
       "slug": "cosmic-ray-cleanup",
       "githubUrl": "https://github.com/Biswajit1999/cosmic-ray-cleanup",
       "liveUrl": null,
-      "x": 1397.1,
+      "x": 835.4,
       "y": 1100
     },
     {
       "id": "instrument:HST/ACS-WFC",
       "type": "Instrument",
       "label": "HST/ACS-WFC",
-      "x": 1512.6,
+      "x": 636.8,
       "y": 1100
     },
     {
       "id": "method:Python",
       "type": "Method",
       "label": "Python",
-      "x": 1371.9,
-      "y": 881.2
+      "x": 1092.8,
+      "y": 990.9
     },
     {
       "id": "method:pytest",
       "type": "Method",
       "label": "pytest",
-      "x": 1216.2,
-      "y": 987.6
+      "x": 849.5,
+      "y": 984.4
     },
     {
       "id": "method:React",
       "type": "Method",
       "label": "React",
-      "x": 1207.4,
-      "y": 1010.2
+      "x": 826.3,
+      "y": 994.5
     },
     {
       "id": "project:euclid-spectra-quality",
@@ -900,7 +928,7 @@
       "slug": "euclid-spectra-quality",
       "githubUrl": "https://github.com/Biswajit1999/euclid-spectra-quality",
       "liveUrl": "https://biswajit1999.github.io/euclid-spectra-quality/",
-      "x": 1286.7,
+      "x": 792.2,
       "y": 1100
     },
     {
@@ -911,15 +939,15 @@
       "slug": "euclid-star-shapes",
       "githubUrl": "https://github.com/Biswajit1999/euclid-star-shapes",
       "liveUrl": "https://biswajit1999.github.io/euclid-star-shapes/",
-      "x": 1406.3,
-      "y": 1037.8
+      "x": 968.3,
+      "y": 1100
     },
     {
       "id": "instrument:Gaia",
       "type": "Instrument",
       "label": "Gaia",
-      "x": 1600,
-      "y": 966.3
+      "x": 1158.0,
+      "y": 1100
     },
     {
       "id": "project:exoplanet-atmosphere-signal",
@@ -929,8 +957,8 @@
       "slug": "exoplanet-atmosphere-signal",
       "githubUrl": "https://github.com/Biswajit1999/exoplanet-atmosphere-signal",
       "liveUrl": "https://biswajit1999.github.io/exoplanet-atmosphere-signal/",
-      "x": 1056.3,
-      "y": 1003.9
+      "x": 947.0,
+      "y": 828.6
     },
     {
       "id": "project:gaia-star-pairs",
@@ -940,8 +968,8 @@
       "slug": "gaia-star-pairs",
       "githubUrl": "https://github.com/Biswajit1999/gaia-star-pairs",
       "liveUrl": null,
-      "x": 1390.6,
-      "y": 997.9
+      "x": 993.4,
+      "y": 1100
     },
     {
       "id": "project:gamma-ray-burst-timing",
@@ -951,7 +979,7 @@
       "slug": "gamma-ray-burst-timing",
       "githubUrl": "https://github.com/Biswajit1999/gamma-ray-burst-timing",
       "liveUrl": null,
-      "x": 1254.7,
+      "x": 904.8,
       "y": 1100
     },
     {
@@ -962,7 +990,7 @@
       "slug": "hst-cte-trails",
       "githubUrl": "https://github.com/Biswajit1999/hst-cte-trails",
       "liveUrl": "https://biswajit1999.github.io/hst-cte-trails/",
-      "x": 1347.5,
+      "x": 812.0,
       "y": 1100
     },
     {
@@ -973,14 +1001,14 @@
       "slug": "hst-ir-ramp-check",
       "githubUrl": "https://github.com/Biswajit1999/hst-ir-ramp-check",
       "liveUrl": null,
-      "x": 1369.8,
+      "x": 734.2,
       "y": 1100
     },
     {
       "id": "instrument:HST/WFC3",
       "type": "Instrument",
       "label": "HST/WFC3",
-      "x": 1484.5,
+      "x": 445.8,
       "y": 1100
     },
     {
@@ -991,8 +1019,8 @@
       "slug": "jwst-shutter-light",
       "githubUrl": "https://github.com/Biswajit1999/jwst-shutter-light",
       "liveUrl": null,
-      "x": 905.7,
-      "y": 892.5
+      "x": 677.9,
+      "y": 789.5
     },
     {
       "id": "project:sdss-sky-glow",
@@ -1002,15 +1030,15 @@
       "slug": "sdss-sky-glow",
       "githubUrl": "https://github.com/Biswajit1999/sdss-sky-glow",
       "liveUrl": null,
-      "x": 1343.4,
-      "y": 777.4
+      "x": 937.7,
+      "y": 1100
     },
     {
       "id": "instrument:SDSS",
       "type": "Instrument",
       "label": "SDSS",
-      "x": 1498.4,
-      "y": 462.9
+      "x": 1038.8,
+      "y": 963.0
     },
     {
       "id": "project:tess-stray-light",
@@ -1020,8 +1048,8 @@
       "slug": "tess-stray-light",
       "githubUrl": "https://github.com/Biswajit1999/tess-stray-light",
       "liveUrl": null,
-      "x": 952.4,
-      "y": 886.1
+      "x": 869.4,
+      "y": 700.3
     },
     {
       "id": "project:Adaptive_Optics_Wavefront_Lab",
@@ -1031,29 +1059,36 @@
       "slug": "Adaptive_Optics_Wavefront_Lab",
       "githubUrl": "https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab",
       "liveUrl": "https://biswajit1999.github.io/Adaptive_Optics_Wavefront_Lab/",
-      "x": 1600,
-      "y": 918.1
+      "x": 1366.5,
+      "y": 1100
     },
     {
       "id": "method:JavaScript",
       "type": "Method",
       "label": "JavaScript",
-      "x": 1580.8,
-      "y": 752.1
+      "x": 1238.8,
+      "y": 1100
     },
     {
       "id": "method:WebGL",
       "type": "Method",
       "label": "WebGL",
-      "x": 1549.0,
+      "x": 1490.5,
+      "y": 1100
+    },
+    {
+      "id": "method:GLSL",
+      "type": "Method",
+      "label": "GLSL",
+      "x": 1600,
       "y": 1100
     },
     {
       "id": "method:Web Workers",
       "type": "Method",
       "label": "Web Workers",
-      "x": 1600,
-      "y": 762.0
+      "x": 1540.6,
+      "y": 1100
     },
     {
       "id": "project:Cosmic-Lens-Lab",
@@ -1063,15 +1098,15 @@
       "slug": "Cosmic-Lens-Lab",
       "githubUrl": "https://github.com/Biswajit1999/Cosmic-Lens-Lab",
       "liveUrl": "https://biswajit1999.github.io/Cosmic-Lens-Lab/",
-      "x": 1465.1,
-      "y": 873.8
+      "x": 1378.3,
+      "y": 969.5
     },
     {
       "id": "method:TypeScript",
       "type": "Method",
       "label": "TypeScript",
-      "x": 1273.5,
-      "y": 923.2
+      "x": 1600,
+      "y": 918.3
     },
     {
       "id": "project:Gravitational_Wave_Chirp_Lab",
@@ -1081,22 +1116,22 @@
       "slug": "Gravitational_Wave_Chirp_Lab",
       "githubUrl": "https://github.com/Biswajit1999/Gravitational_Wave_Chirp_Lab",
       "liveUrl": null,
-      "x": 1506.1,
-      "y": 504.3
+      "x": 900.5,
+      "y": 1050.7
     },
     {
       "id": "instrument:GWOSC / LIGO-Virgo",
       "type": "Instrument",
       "label": "GWOSC / LIGO-Virgo",
-      "x": 1600,
-      "y": 294.5
+      "x": 592.6,
+      "y": 1100
     },
     {
       "id": "method:Web Worker",
       "type": "Method",
       "label": "Web Worker",
-      "x": 1385.8,
-      "y": 158.4
+      "x": 769.2,
+      "y": 813.1
     },
     {
       "id": "project:Hydrogen_21cm_Line_Lab",
@@ -1106,8 +1141,15 @@
       "slug": "Hydrogen_21cm_Line_Lab",
       "githubUrl": "https://github.com/Biswajit1999/Hydrogen_21cm_Line_Lab",
       "liveUrl": "https://biswajit1999.github.io/Hydrogen_21cm_Line_Lab/",
-      "x": 1600,
-      "y": 796.2
+      "x": 1379.3,
+      "y": 1100
+    },
+    {
+      "id": "method:Canvas",
+      "type": "Method",
+      "label": "Canvas",
+      "x": 1527.7,
+      "y": 1100
     },
     {
       "id": "project:Interferometry_Baseline_Lab",
@@ -1117,8 +1159,8 @@
       "slug": "Interferometry_Baseline_Lab",
       "githubUrl": "https://github.com/Biswajit1999/Interferometry_Baseline_Lab",
       "liveUrl": "https://biswajit1999.github.io/Interferometry_Baseline_Lab/",
-      "x": 1600,
-      "y": 888.6
+      "x": 1344.7,
+      "y": 1100
     },
     {
       "id": "project:Jana-s-RV-Doppler-Observatory",
@@ -1128,8 +1170,8 @@
       "slug": "Jana-s-RV-Doppler-Observatory",
       "githubUrl": "https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory",
       "liveUrl": "https://biswajit1999.github.io/Jana-s-RV-Doppler-Observatory/",
-      "x": 1454.1,
-      "y": 536.4
+      "x": 995.0,
+      "y": 1002.2
     },
     {
       "id": "project:Pulsar_Timing_Lab",
@@ -1139,8 +1181,8 @@
       "slug": "Pulsar_Timing_Lab",
       "githubUrl": "https://github.com/Biswajit1999/Pulsar_Timing_Lab",
       "liveUrl": null,
-      "x": 1600,
-      "y": 944.6
+      "x": 1411.3,
+      "y": 1100
     },
     {
       "id": "instrument:NANOGrav",
@@ -1157,8 +1199,8 @@
       "slug": "Quantum-tunneling-spacetime",
       "githubUrl": "https://github.com/Biswajit1999/Quantum-tunneling-spacetime",
       "liveUrl": "https://biswajit1999.github.io/Quantum-tunneling-spacetime/",
-      "x": 1600,
-      "y": 679.3
+      "x": 1085.2,
+      "y": 1100
     },
     {
       "id": "project:asteroseismology-mode-lab",
@@ -1168,29 +1210,29 @@
       "slug": "asteroseismology-mode-lab",
       "githubUrl": "https://github.com/Biswajit1999/asteroseismology-mode-lab",
       "liveUrl": "https://biswajit1999.github.io/asteroseismology-mode-lab/",
-      "x": 1246.7,
-      "y": 0
+      "x": 825.7,
+      "y": 628.9
     },
     {
       "id": "method:HTML5 Canvas 2D",
       "type": "Method",
       "label": "HTML5 Canvas 2D",
-      "x": 1331.0,
-      "y": 0
+      "x": 734.3,
+      "y": 755.8
     },
     {
       "id": "method:vanilla JavaScript",
       "type": "Method",
       "label": "vanilla JavaScript",
-      "x": 1367.6,
-      "y": 0
+      "x": 714.5,
+      "y": 724.9
     },
     {
       "id": "method:Node.js (npm validation scripts)",
       "type": "Method",
       "label": "Node.js (npm validation scripts)",
-      "x": 1349.3,
-      "y": 0
+      "x": 709.9,
+      "y": 748.4
     },
     {
       "id": "project:blackbody-radiation-visualiser",
@@ -1200,15 +1242,15 @@
       "slug": "blackbody-radiation-visualiser",
       "githubUrl": "https://github.com/Biswajit1999/blackbody-radiation-visualiser",
       "liveUrl": "https://biswajit1999.github.io/blackbody-radiation-visualiser/",
-      "x": 1600,
-      "y": 841.9
+      "x": 1228.4,
+      "y": 1100
     },
     {
       "id": "method:HTML/CSS",
       "type": "Method",
       "label": "HTML/CSS",
-      "x": 1600,
-      "y": 726.0
+      "x": 1435.0,
+      "y": 1100
     },
     {
       "id": "project:cmb-acoustic-peak-lab",
@@ -1218,8 +1260,8 @@
       "slug": "cmb-acoustic-peak-lab",
       "githubUrl": "https://github.com/Biswajit1999/cmb-acoustic-peak-lab",
       "liveUrl": "https://biswajit1999.github.io/cmb-acoustic-peak-lab/",
-      "x": 1439.2,
-      "y": 0
+      "x": 657.9,
+      "y": 884.4
     },
     {
       "id": "project:cosmic-shear-tomography-lab",
@@ -1229,8 +1271,8 @@
       "slug": "cosmic-shear-tomography-lab",
       "githubUrl": "https://github.com/Biswajit1999/cosmic-shear-tomography-lab",
       "liveUrl": "https://biswajit1999.github.io/cosmic-shear-tomography-lab/",
-      "x": 1501.4,
-      "y": 0
+      "x": 619.8,
+      "y": 839.9
     },
     {
       "id": "project:dark-matter-rotation-curve-lab",
@@ -1240,8 +1282,8 @@
       "slug": "dark-matter-rotation-curve-lab",
       "githubUrl": "https://github.com/Biswajit1999/dark-matter-rotation-curve-lab",
       "liveUrl": "https://biswajit1999.github.io/dark-matter-rotation-curve-lab/",
-      "x": 1461.2,
-      "y": 0
+      "x": 577.3,
+      "y": 830.0
     },
     {
       "id": "project:doppler-shift-visualiser",
@@ -1251,8 +1293,8 @@
       "slug": "doppler-shift-visualiser",
       "githubUrl": "https://github.com/Biswajit1999/doppler-shift-visualiser",
       "liveUrl": "https://biswajit1999.github.io/doppler-shift-visualiser/",
-      "x": 1600,
-      "y": 819.4
+      "x": 1272.6,
+      "y": 1100
     },
     {
       "id": "project:exoplanet-atmosphere-retrieval-lab",
@@ -1262,8 +1304,8 @@
       "slug": "exoplanet-atmosphere-retrieval-lab",
       "githubUrl": "https://github.com/Biswajit1999/exoplanet-atmosphere-retrieval-lab",
       "liveUrl": "https://biswajit1999.github.io/exoplanet-atmosphere-retrieval-lab/",
-      "x": 1059.5,
-      "y": 128.7
+      "x": 559.1,
+      "y": 624.9
     },
     {
       "id": "project:frb-dispersion-measure-lab",
@@ -1273,8 +1315,8 @@
       "slug": "frb-dispersion-measure-lab",
       "githubUrl": "https://github.com/Biswajit1999/frb-dispersion-measure-lab",
       "liveUrl": "https://biswajit1999.github.io/frb-dispersion-measure-lab/",
-      "x": 1481.7,
-      "y": 0
+      "x": 608.7,
+      "y": 881.8
     },
     {
       "id": "project:galaxy-clustering-correlation-lab",
@@ -1284,8 +1326,8 @@
       "slug": "galaxy-clustering-correlation-lab",
       "githubUrl": "https://github.com/Biswajit1999/galaxy-clustering-correlation-lab",
       "liveUrl": "https://biswajit1999.github.io/galaxy-clustering-correlation-lab/",
-      "x": 1482.4,
-      "y": 141.1
+      "x": 805.9,
+      "y": 870.7
     },
     {
       "id": "project:hyperdimensional-atlas",
@@ -1295,14 +1337,21 @@
       "slug": "hyperdimensional-atlas",
       "githubUrl": "https://github.com/Biswajit1999/hyperdimensional-atlas",
       "liveUrl": "https://biswajit1999.github.io/hyperdimensional-atlas/",
-      "x": 1600,
-      "y": 1024.3
+      "x": 1466.3,
+      "y": 1100
     },
     {
       "id": "method:Three.js",
       "type": "Method",
       "label": "Three.js",
-      "x": 1600,
+      "x": 1566.1,
+      "y": 1100
+    },
+    {
+      "id": "method:CSS",
+      "type": "Method",
+      "label": "CSS",
+      "x": 1398.4,
       "y": 1100
     },
     {
@@ -1313,8 +1362,8 @@
       "slug": "interactive-hr-diagram-lab",
       "githubUrl": "https://github.com/Biswajit1999/interactive-hr-diagram-lab",
       "liveUrl": "https://biswajit1999.github.io/interactive-hr-diagram-lab/",
-      "x": 1600,
-      "y": 865.7
+      "x": 1310.5,
+      "y": 1100
     },
     {
       "id": "project:microlensing-event-lab",
@@ -1324,8 +1373,8 @@
       "slug": "microlensing-event-lab",
       "githubUrl": "https://github.com/Biswajit1999/microlensing-event-lab",
       "liveUrl": "https://biswajit1999.github.io/microlensing-event-lab/",
-      "x": 1214.5,
-      "y": 0
+      "x": 912.4,
+      "y": 617.6
     },
     {
       "id": "project:noise-signal-simulator",
@@ -1335,8 +1384,8 @@
       "slug": "noise-signal-simulator",
       "githubUrl": "https://github.com/Biswajit1999/noise-signal-simulator",
       "liveUrl": "https://biswajit1999.github.io/noise-signal-simulator/",
-      "x": 1600,
-      "y": 704.6
+      "x": 1110.6,
+      "y": 1100
     },
     {
       "id": "project:reaction-diffusion-morphogenesis-lab",
@@ -1346,8 +1395,8 @@
       "slug": "reaction-diffusion-morphogenesis-lab",
       "githubUrl": "https://github.com/Biswajit1999/reaction-diffusion-morphogenesis-lab",
       "liveUrl": "https://biswajit1999.github.io/reaction-diffusion-morphogenesis-lab/",
-      "x": 1600,
-      "y": 486.5
+      "x": 1055.1,
+      "y": 1100
     },
     {
       "id": "project:spectrograph-rv-precision-lab",
@@ -1357,8 +1406,8 @@
       "slug": "spectrograph-rv-precision-lab",
       "githubUrl": "https://github.com/Biswajit1999/spectrograph-rv-precision-lab",
       "liveUrl": "https://biswajit1999.github.io/spectrograph-rv-precision-lab/",
-      "x": 1285.5,
-      "y": 0
+      "x": 970.7,
+      "y": 643.9
     },
     {
       "id": "project:supernova-hubble-diagram-lab",
@@ -1368,8 +1417,8 @@
       "slug": "supernova-hubble-diagram-lab",
       "githubUrl": "https://github.com/Biswajit1999/supernova-hubble-diagram-lab",
       "liveUrl": "https://biswajit1999.github.io/supernova-hubble-diagram-lab/",
-      "x": 1414.1,
-      "y": 0
+      "x": 591.8,
+      "y": 781.5
     },
     {
       "id": "project:wormhole-simulator",
@@ -1379,8 +1428,8 @@
       "slug": "wormhole-simulator",
       "githubUrl": "https://github.com/Biswajit1999/wormhole-simulator",
       "liveUrl": "https://biswajit1999.github.io/wormhole-simulator/",
-      "x": 1600,
-      "y": 990.0
+      "x": 1295.2,
+      "y": 1100
     },
     {
       "id": "project:AETHER",
@@ -1390,6 +1439,13 @@
       "slug": "AETHER",
       "githubUrl": "https://github.com/Biswajit1999/AETHER",
       "liveUrl": "https://biswajit1999.github.io/AETHER/",
+      "x": 1600,
+      "y": 1100
+    },
+    {
+      "id": "method:Vite",
+      "type": "Method",
+      "label": "Vite",
       "x": 1600,
       "y": 1100
     },
@@ -1405,6 +1461,13 @@
       "y": 1100
     },
     {
+      "id": "method:GitHub Actions",
+      "type": "Method",
+      "label": "GitHub Actions",
+      "x": 1600,
+      "y": 1100
+    },
+    {
       "id": "project:NASADIYA-LIGHTCONE",
       "type": "Project",
       "label": "NASADIYA LIGHTCONE",
@@ -1412,21 +1475,21 @@
       "slug": "NASADIYA-LIGHTCONE",
       "githubUrl": "https://github.com/Biswajit1999/NASADIYA-LIGHTCONE",
       "liveUrl": "https://biswajit1999.github.io/NASADIYA-LIGHTCONE/",
-      "x": 1323.6,
-      "y": 1100
+      "x": 1469.9,
+      "y": 999.3
     },
     {
       "id": "instrument:2MRS",
       "type": "Instrument",
       "label": "2MRS",
-      "x": 1206.4,
+      "x": 1600,
       "y": 1100
     },
     {
       "id": "instrument:DESI",
       "type": "Instrument",
       "label": "DESI",
-      "x": 1161.0,
+      "x": 1600,
       "y": 1100
     },
     {
@@ -1437,8 +1500,8 @@
       "slug": "Universe",
       "githubUrl": "https://github.com/Biswajit1999/Universe",
       "liveUrl": "https://biswajit1999.github.io/Universe/",
-      "x": 1242.5,
-      "y": 653.7
+      "x": 1600,
+      "y": 722.9
     },
     {
       "id": "project:adjacent-atlas",
@@ -1448,7 +1511,7 @@
       "slug": "adjacent-atlas",
       "githubUrl": "https://github.com/Biswajit1999/adjacent-atlas",
       "liveUrl": "https://biswajit1999.github.io/adjacent-atlas/",
-      "x": 1110.1,
+      "x": 1600,
       "y": 1100
     },
     {
@@ -1459,7 +1522,7 @@
       "slug": "Master-Thesis-2024",
       "githubUrl": "https://github.com/Biswajit1999/Master-Thesis-2024",
       "liveUrl": "https://biswajit1999.github.io/Master-Thesis-2024/",
-      "x": 1600,
+      "x": 1206.8,
       "y": 1100
     },
     {
@@ -1470,7 +1533,7 @@
       "slug": "Reading-Voyager-Data-into-Python-and-Plotting",
       "githubUrl": "https://github.com/Biswajit1999/Reading-Voyager-Data-into-Python-and-Plotting",
       "liveUrl": null,
-      "x": 1600,
+      "x": 877.2,
       "y": 1100
     },
     {
@@ -1481,15 +1544,15 @@
       "slug": "cosmicml-biodetect",
       "githubUrl": "https://github.com/Biswajit1999/cosmicml-biodetect",
       "liveUrl": null,
-      "x": 1019.5,
-      "y": 890.4
+      "x": 1315.0,
+      "y": 638.3
     },
     {
       "id": "instrument:HST",
       "type": "Instrument",
       "label": "HST",
-      "x": 937.7,
-      "y": 1100
+      "x": 1600,
+      "y": 589.3
     },
     {
       "id": "project:daily-astro-notebooks",
@@ -1499,8 +1562,22 @@
       "slug": "daily-astro-notebooks",
       "githubUrl": "https://github.com/Biswajit1999/daily-astro-notebooks",
       "liveUrl": "https://biswajit1999.github.io/daily-astro-notebooks/",
-      "x": 1517.0,
-      "y": 722.3
+      "x": 1294.7,
+      "y": 944.9
+    },
+    {
+      "id": "method:NumPy",
+      "type": "Method",
+      "label": "NumPy",
+      "x": 1300.2,
+      "y": 729.2
+    },
+    {
+      "id": "method:Matplotlib",
+      "type": "Method",
+      "label": "Matplotlib",
+      "x": 1249.1,
+      "y": 747.2
     },
     {
       "id": "project:exolight-transit-lab",
@@ -1510,8 +1587,8 @@
       "slug": "exolight-transit-lab",
       "githubUrl": "https://github.com/Biswajit1999/exolight-transit-lab",
       "liveUrl": "https://biswajit1999.github.io/exolight-transit-lab/",
-      "x": 1600,
-      "y": 586.9
+      "x": 1515.6,
+      "y": 1100
     },
     {
       "id": "project:hd189733b-lightkurve-transit-starter",
@@ -1521,8 +1598,8 @@
       "slug": "hd189733b-lightkurve-transit-starter",
       "githubUrl": "https://github.com/Biswajit1999/hd189733b-lightkurve-transit-starter",
       "liveUrl": null,
-      "x": 877.3,
-      "y": 816.7
+      "x": 1059.7,
+      "y": 594.3
     },
     {
       "id": "project:biswajit-minigames",
@@ -1532,8 +1609,8 @@
       "slug": "biswajit-minigames",
       "githubUrl": "https://github.com/Biswajit1999/biswajit-minigames",
       "liveUrl": "https://biswajit1999.github.io/biswajit-minigames/",
-      "x": 1600,
-      "y": 532.3
+      "x": 1192.8,
+      "y": 1100
     },
     {
       "id": "project:Data-analysis-on-Disease-and-Symptoms",
@@ -1543,8 +1620,8 @@
       "slug": "Data-analysis-on-Disease-and-Symptoms",
       "githubUrl": "https://github.com/Biswajit1999/Data-analysis-on-Disease-and-Symptoms",
       "liveUrl": null,
-      "x": 1600,
-      "y": 648.4
+      "x": 1132.9,
+      "y": 1100
     },
     {
       "id": "project:Team-CDC",
@@ -1555,7 +1632,7 @@
       "githubUrl": "https://github.com/Biswajit1999/Team-CDC",
       "liveUrl": null,
       "x": 1600,
-      "y": 0
+      "y": 649.0
     }
   ],
   "edges": [
@@ -1614,6 +1691,15 @@
       "sourceUrl": "https://github.com/Biswajit1999/gj1214b-exoplanet-report"
     },
     {
+      "source": "project:gj1214b-exoplanet-report",
+      "target": "method:inverse-variance weighted mean",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "gj1214b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/gj1214b-exoplanet-report"
+    },
+    {
       "source": "project:gj3470b-exoplanet-report",
       "target": "class:Warm Neptune",
       "relation": "BELONGS_TO_CLASS",
@@ -1643,6 +1729,15 @@
     {
       "source": "project:gj3470b-exoplanet-report",
       "target": "method:timing-adjusted limb-darkened transit fitting",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "gj3470b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/gj3470b-exoplanet-report"
+    },
+    {
+      "source": "project:gj3470b-exoplanet-report",
+      "target": "method:multi-sector robustness check",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -2435,6 +2530,15 @@
       "sourceUrl": "https://github.com/Biswajit1999/ltt9779b-exoplanet-report"
     },
     {
+      "source": "project:ltt9779b-exoplanet-report",
+      "target": "method:multi-sector robustness and correlated-noise diagnostics",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "ltt9779b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/ltt9779b-exoplanet-report"
+    },
+    {
       "source": "project:toi-270d-exoplanet-report",
       "target": "class:Sub-Neptune (temperate)",
       "relation": "BELONGS_TO_CLASS",
@@ -2675,6 +2779,15 @@
     },
     {
       "source": "project:wasp-107b-exoplanet-report",
+      "target": "method:peak-to-trough amplitude measurement",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "wasp-107b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/wasp-107b-exoplanet-report"
+    },
+    {
+      "source": "project:wasp-107b-exoplanet-report",
       "target": "molecule:H2O",
       "relation": "REPORTS_DETECTION",
       "evidenceLevel": "published",
@@ -2740,6 +2853,15 @@
       "sourceUrl": "https://github.com/Biswajit1999/wasp-121b-exoplanet-report"
     },
     {
+      "source": "project:wasp-121b-exoplanet-report",
+      "target": "method:inverse-variance weighted mean",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "wasp-121b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/wasp-121b-exoplanet-report"
+    },
+    {
       "source": "project:wasp-127b-exoplanet-report",
       "target": "class:Super-puff (Hot Saturn-class)",
       "relation": "BELONGS_TO_CLASS",
@@ -2769,6 +2891,15 @@
     {
       "source": "project:wasp-127b-exoplanet-report",
       "target": "method:timing-adjusted limb-darkened transit fitting",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "wasp-127b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/wasp-127b-exoplanet-report"
+    },
+    {
+      "source": "project:wasp-127b-exoplanet-report",
+      "target": "method:multi-sector robustness and correlated-noise diagnostics",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -3034,6 +3165,15 @@
     {
       "source": "project:wasp-39b-exoplanet-report",
       "target": "method:ΔBIC model comparison",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "wasp-39b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report"
+    },
+    {
+      "source": "project:wasp-39b-exoplanet-report",
+      "target": "method:multi-sector robustness check",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -3333,6 +3473,15 @@
     {
       "source": "project:wasp-96b-exoplanet-report",
       "target": "method:weighted mean transit depth calculation",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "wasp-96b-exoplanet-report",
+      "sourceUrl": "https://github.com/Biswajit1999/wasp-96b-exoplanet-report"
+    },
+    {
+      "source": "project:wasp-96b-exoplanet-report",
+      "target": "method:peak-to-trough amplitude measurement",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -3918,6 +4067,15 @@
     },
     {
       "source": "project:Adaptive_Optics_Wavefront_Lab",
+      "target": "method:GLSL",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "Adaptive_Optics_Wavefront_Lab",
+      "sourceUrl": "https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab"
+    },
+    {
+      "source": "project:Adaptive_Optics_Wavefront_Lab",
       "target": "method:Web Workers",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
@@ -4008,6 +4166,15 @@
     },
     {
       "source": "project:Hydrogen_21cm_Line_Lab",
+      "target": "method:Canvas",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "Hydrogen_21cm_Line_Lab",
+      "sourceUrl": "https://github.com/Biswajit1999/Hydrogen_21cm_Line_Lab"
+    },
+    {
+      "source": "project:Hydrogen_21cm_Line_Lab",
       "target": "method:Web Workers",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
@@ -4036,6 +4203,15 @@
     {
       "source": "project:Interferometry_Baseline_Lab",
       "target": "method:Web Workers",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "Interferometry_Baseline_Lab",
+      "sourceUrl": "https://github.com/Biswajit1999/Interferometry_Baseline_Lab"
+    },
+    {
+      "source": "project:Interferometry_Baseline_Lab",
+      "target": "method:Canvas",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -4484,6 +4660,15 @@
       "sourceUrl": "https://github.com/Biswajit1999/hyperdimensional-atlas"
     },
     {
+      "source": "project:hyperdimensional-atlas",
+      "target": "method:CSS",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "hyperdimensional-atlas",
+      "sourceUrl": "https://github.com/Biswajit1999/hyperdimensional-atlas"
+    },
+    {
       "source": "project:interactive-hr-diagram-lab",
       "target": "instrument:Gaia",
       "relation": "USES_INSTRUMENT",
@@ -4727,8 +4912,35 @@
       "sourceUrl": "https://github.com/Biswajit1999/AETHER"
     },
     {
+      "source": "project:AETHER",
+      "target": "method:GLSL",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "AETHER",
+      "sourceUrl": "https://github.com/Biswajit1999/AETHER"
+    },
+    {
+      "source": "project:AETHER",
+      "target": "method:Vite",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "AETHER",
+      "sourceUrl": "https://github.com/Biswajit1999/AETHER"
+    },
+    {
       "source": "project:AstroBis",
       "target": "method:Three.js",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "AstroBis",
+      "sourceUrl": "https://github.com/Biswajit1999/AstroBis"
+    },
+    {
+      "source": "project:AstroBis",
+      "target": "method:GitHub Actions",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -4889,6 +5101,33 @@
       "sourceUrl": "https://github.com/Biswajit1999/daily-astro-notebooks"
     },
     {
+      "source": "project:daily-astro-notebooks",
+      "target": "method:NumPy",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "daily-astro-notebooks",
+      "sourceUrl": "https://github.com/Biswajit1999/daily-astro-notebooks"
+    },
+    {
+      "source": "project:daily-astro-notebooks",
+      "target": "method:Matplotlib",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "daily-astro-notebooks",
+      "sourceUrl": "https://github.com/Biswajit1999/daily-astro-notebooks"
+    },
+    {
+      "source": "project:daily-astro-notebooks",
+      "target": "method:Vite",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "daily-astro-notebooks",
+      "sourceUrl": "https://github.com/Biswajit1999/daily-astro-notebooks"
+    },
+    {
       "source": "project:exolight-transit-lab",
       "target": "method:Web Workers",
       "relation": "USES_METHOD",
@@ -4900,6 +5139,15 @@
     {
       "source": "project:exolight-transit-lab",
       "target": "method:HTML/CSS",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "exolight-transit-lab",
+      "sourceUrl": "https://github.com/Biswajit1999/exolight-transit-lab"
+    },
+    {
+      "source": "project:exolight-transit-lab",
+      "target": "method:GitHub Actions",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
@@ -4925,8 +5173,35 @@
       "sourceUrl": "https://github.com/Biswajit1999/hd189733b-lightkurve-transit-starter"
     },
     {
+      "source": "project:hd189733b-lightkurve-transit-starter",
+      "target": "method:NumPy",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "hd189733b-lightkurve-transit-starter",
+      "sourceUrl": "https://github.com/Biswajit1999/hd189733b-lightkurve-transit-starter"
+    },
+    {
+      "source": "project:hd189733b-lightkurve-transit-starter",
+      "target": "method:Matplotlib",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "hd189733b-lightkurve-transit-starter",
+      "sourceUrl": "https://github.com/Biswajit1999/hd189733b-lightkurve-transit-starter"
+    },
+    {
       "source": "project:biswajit-minigames",
       "target": "method:JavaScript",
+      "relation": "USES_METHOD",
+      "evidenceLevel": "reproduced",
+      "relationStatus": "curated",
+      "sourceRepo": "biswajit-minigames",
+      "sourceUrl": "https://github.com/Biswajit1999/biswajit-minigames"
+    },
+    {
+      "source": "project:biswajit-minigames",
+      "target": "method:CSS",
       "relation": "USES_METHOD",
       "evidenceLevel": "reproduced",
       "relationStatus": "curated",
