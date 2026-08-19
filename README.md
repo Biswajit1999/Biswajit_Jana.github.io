@@ -1,62 +1,67 @@
 # Biswajit Research Universe
 
-An immersive Three.js research portfolio for **Biswajit Jana**, built around astrophysics, astronomical instrumentation, exoplanets, precision spectroscopy, feedback control and scientific computing.
+An immersive 3D successor to my academic portfolio, built around astrophysics, precision astronomical instrumentation, exoplanet research, control systems, and scientific computing.
 
-> Standalone successor concept to the existing academic portfolio. The original live site remains preserved on `main`; this branch contains the new cinematic 3D experience.
+> Development branch: `research-universe-v2`  
+> Intended standalone repository: `biswajit-research-universe`
 
-## Experience
+## Design principle
 
-The website treats the portfolio as a connected research system instead of a conventional stack of project cards. A persistent WebGL scene evolves as the visitor scrolls through the page:
+This project does not replace research content with visual effects. Semantic HTML remains the readable portfolio layer; Three.js progressively enhances it with a spatial research map, camera choreography, particle morphing, and graph-backed interactions.
 
-- **Identity / Research Core** — a GPU-rendered stellar field, orbital geometry and a central research core.
-- **Research Universe** — interactive project nodes connected by scientific themes.
-- **EXOhSPEC** — camera movement into an instrumentation/control-system region with stability telemetry and optical/control geometry.
-- **Exoplanets** — the camera moves through atmosphere-analysis nodes for targets including WASP-121 b, WASP-107 b, HD 189733 b and K2-18 b.
-- **Scientific Software** — the constellation is presented as a computational research network.
-- **Research Trajectory** — engineering, astrophysics and precision instrumentation are shown as a coherent research path.
-- **Contact** — the scene pulls back to reveal the complete system.
+## Current experience
+
+- GPU particle field with adaptive desktop/mobile density
+- scroll-driven camera choreography across seven research scenes
+- pointer parallax plus click-drag orbital control
+- particle topology morphs: cosmic field → optical path → orbital disk → computational lattice → timeline
+- interactive research nodes with raycast selection and camera fly-to
+- floating screen-space labels anchored to 3D project positions
+- animated information pulses along research connections
+- EXOhSPEC optical-bench scene with input/fibre, steering element, dispersive optics, camera optics, detector, sensor nodes, and animated beam propagation
+- real portfolio graph integration from `data/research-graph.json`
+- project links resolved from graph metadata where available
+- responsive layouts and reduced-motion support
+- static GitHub Pages compatibility; no build step required
+
+## Real research graph
+
+The visualization reads the existing generated portfolio graph at runtime. The source graph currently contains project, instrument, method, molecule, planet-class, and analysis-type nodes connected by curated evidence relationships.
+
+The WebGL layer samples that graph for performance while the underlying data remains the source of truth.
+
+## Scene map
+
+1. **Identity / Hero** — compact research cosmos
+2. **Research Universe** — connected portfolio graph
+3. **EXOhSPEC** — optical/instrumentation architecture
+4. **Exoplanets** — orbital research system
+5. **Scientific Software** — computational lattice
+6. **Research trajectory** — chronological particle topology
+7. **Contact** — resolved wide-field closing state
+
+## Core files
+
+- `index.html` — semantic portfolio narrative and interface layer
+- `universe.css` — base visual system
+- `universe-v2.css` — cinematic/3D interaction presentation layer
+- `research-universe.js` — Three.js scene, morphing, camera choreography, raycasting, project focus, graph integration
+- `data/research-graph.json` — generated portfolio knowledge graph
 
 ## Interaction
 
-The current version includes:
+- **Scroll** — travel between research scenes
+- **Pointer move** — restrained parallax
+- **Click + drag** — orbit the research universe
+- **Click a node/label** — fly the camera to the selected research object
+- **Double-click the 3D background** — return from project focus
+- **Reduce motion** — disable non-essential movement
 
-- scroll-driven camera choreography across seven scene states;
-- pointer parallax and orbit motion;
-- clickable Three.js research nodes with contextual project panels;
-- GPU star field and glow sprites;
-- multiple orbital planes and constellation links;
-- conceptual EXOhSPEC instrument geometry;
-- responsive layouts for desktop/mobile;
-- reduced-motion support and a manual motion control;
-- semantic HTML beneath the WebGL layer so the portfolio remains readable and indexable.
+## Preservation
 
-## Design language
-
-The visual system deliberately retains the warm **spectral-instrument** identity of the existing portfolio instead of using a generic blue sci-fi dashboard. Amber/brass represents the research core and instrumentation, cyan identifies exoplanet science, rust identifies computational work, and restrained green is used for research/output state.
-
-## Stack
-
-- HTML5
-- CSS3
-- JavaScript ES modules
-- Three.js
-- GitHub Pages compatible — no build step required
-
-## Structure
-
-```text
-index.html             semantic portfolio / scroll scenes
-universe.css           visual system, responsive layout and HUD components
-research-universe.js   Three.js scene, nodes, raycasting and camera choreography
-```
-
-## Development branch
-
-This work is currently isolated on `research-universe-v2` so the existing portfolio on `main` remains unchanged. The intended standalone repository name is:
-
-**`biswajit-research-universe`**
+The existing live portfolio on `main` is intentionally preserved. This development branch is isolated and should not be merged into the existing live site unless the successor experience is deliberately chosen to replace it.
 
 ## Author
 
 **Biswajit Jana**  
-Astrophysics · Astronomical Instrumentation · Scientific Computing
+Astrophysics · Astronomical Instrumentation · Exoplanets · Scientific Computing
