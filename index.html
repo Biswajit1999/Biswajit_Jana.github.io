@@ -10,18 +10,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="universe.css" />
+  <link rel="stylesheet" href="universe-v2.css" />
 </head>
-<body>
+<body data-scene="hero">
   <a class="skip-link" href="#content">Skip to content</a>
   <canvas id="universe-canvas" aria-hidden="true"></canvas>
+  <div id="label-layer" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
   <header class="topbar">
     <a class="brand" href="#hero" aria-label="Biswajit Jana home"><span class="brand-dot"></span><span>Biswajit Jana</span></a>
     <nav class="nav" aria-label="Primary navigation">
-      <a href="#universe">Universe</a><a href="#instrumentation">Instrumentation</a><a href="#exoplanets">Exoplanets</a><a href="#software">Software</a><a href="#contact">Contact</a>
+      <a href="#universe">Universe</a><a href="#instrumentation">Instrumentation</a><a href="#exoplanets">Exoplanets</a><a href="#software">Software</a><a href="#research">Research</a><a href="#contact">Contact</a>
     </nav>
     <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button>
   </header>
+
   <main id="content">
     <section id="hero" class="scene scene-hero" data-scene="hero">
       <div class="scene-copy hero-copy">
@@ -31,36 +34,49 @@
         <div class="hero-actions"><a class="btn btn-primary" href="#universe">Enter research universe <span>↘</span></a><a class="btn btn-ghost" href="Biswajit%20Jana.pdf">CV</a></div>
         <div class="hero-meta" aria-label="Research summary"><div><b>EXOhSPEC</b><span>Precision RV instrumentation</span></div><div><b>JWST · HST</b><span>Exoplanet atmospheres</span></div><div><b>Python · Control</b><span>Scientific systems</span></div></div>
       </div>
-      <div class="scene-note"><span>01</span> Drag to orbit · Scroll to travel</div>
+      <div class="scene-note"><span>01</span> Drag to orbit · Scroll to travel · Double-click to reset</div>
     </section>
+
     <section id="universe" class="scene" data-scene="universe">
-      <div class="scene-copy card-copy align-right"><p class="eyebrow">Research Universe</p><h2>One connected research system.</h2><p>Instrumentation, control, exoplanet atmospheres, detection methods and scientific software are presented as connected nodes rather than isolated portfolio cards.</p><div class="legend"><span data-k="instrument">Instrumentation</span><span data-k="planet">Exoplanets</span><span data-k="software">Software</span><span data-k="paper">Research</span></div></div>
-      <div class="scene-note"><span>02</span> Hover a node to reveal its path</div>
+      <div class="scene-copy card-copy align-right">
+        <p class="eyebrow">Research Universe</p><h2>One connected research system.</h2>
+        <p>Instrumentation, control, exoplanet atmospheres, detection methods and scientific software are presented as connected nodes rather than isolated portfolio cards.</p>
+        <div class="legend"><span data-k="instrument">Instrumentation</span><span data-k="planet">Exoplanets</span><span data-k="software">Software</span><span data-k="paper">Research</span></div>
+        <div class="graph-status" id="graph-status" aria-live="polite">Loading portfolio research graph…</div>
+      </div>
+      <div class="scene-note"><span>02</span> Hover a node · Select it to fly into the research graph</div>
     </section>
+
     <section id="instrumentation" class="scene" data-scene="instrumentation">
       <div class="scene-copy card-copy"><p class="eyebrow">EXOhSPEC · Closed-loop control</p><h2>Precision is an active process.</h2><p>Thermal control, adaptive-optics steering, environmental sensing and detector stability become one visual control architecture.</p><div class="metric-grid"><article><strong>0.37 px</strong><span>dY RMS · 44.5 h run</span></article><article><strong>91%</strong><span>within ±0.5 px</span></article><article><strong>84.6 h</strong><span>V17 stability run</span></article><article><strong>R≈70k</strong><span>spectrograph target</span></article></div></div>
       <div class="telemetry" aria-label="EXOhSPEC conceptual telemetry"><div class="telemetry-head"><span>EXOhSPEC CONTROL GRAPH</span><i></i><b>LOCKED</b></div><div class="trace"><span>TEC</span><svg viewBox="0 0 220 32" preserveAspectRatio="none"><path d="M0 18 C20 5 36 24 55 13 S90 10 110 16 145 6 165 15 198 9 220 13"/></svg></div><div class="trace"><span>AO</span><svg viewBox="0 0 220 32" preserveAspectRatio="none"><path d="M0 16 C18 15 29 9 45 17 S77 20 96 14 126 17 143 12 177 18 220 11"/></svg></div><div class="trace"><span>OPL</span><svg viewBox="0 0 220 32" preserveAspectRatio="none"><path d="M0 17 C28 16 37 18 58 14 S90 16 114 12 147 18 175 14 205 13 220 15"/></svg></div></div>
-      <div class="scene-note"><span>03</span> Camera enters the instrument graph</div>
+      <div class="scene-note"><span>03</span> Particle field resolves into an optical path · Camera enters the bench</div>
     </section>
+
     <section id="exoplanets" class="scene" data-scene="exoplanets">
-      <div class="scene-copy card-copy align-right"><p class="eyebrow">Atmospheres · Detection · Retrievals</p><h2>From spectra to planetary worlds.</h2><p>Real archival observations and quantitative analysis become an orbital research map. Select worlds in the 3D scene to inspect the science path behind each result.</p><div class="planet-list"><button data-focus="wasp121"><b>WASP-121 b</b><span>Phase curve · extreme day/night contrast</span></button><button data-focus="wasp107"><b>WASP-107 b</b><span>Warm Neptune · JWST atmosphere</span></button><button data-focus="hd189"><b>HD 189733 b</b><span>Transmission spectrum · haze</span></button><button data-focus="k218"><b>K2-18 b</b><span>Temperate sub-Neptune atmosphere</span></button></div></div>
-      <div class="scene-note"><span>04</span> Research nodes become orbital systems</div>
+      <div class="scene-copy card-copy align-right"><p class="eyebrow">Atmospheres · Detection · Retrievals</p><h2>From spectra to planetary worlds.</h2><p>The live portfolio graph is remapped into an orbital research system. Projects remain connected to their instruments, methods, planet classes and evidence relationships.</p><div class="planet-list"><button data-focus="wasp121"><b>WASP-121 b</b><span>Phase curve · extreme day/night contrast</span></button><button data-focus="wasp107"><b>WASP-107 b</b><span>Warm Neptune · JWST atmosphere</span></button><button data-focus="hd189"><b>HD 189733 b</b><span>Transmission spectrum · haze</span></button><button data-focus="k218"><b>K2-18 b</b><span>Temperate sub-Neptune atmosphere</span></button></div></div>
+      <div class="scene-note"><span>04</span> Research graph → orbital architecture · Click a world to fly to it</div>
     </section>
+
     <section id="software" class="scene" data-scene="software">
-      <div class="scene-copy card-copy"><p class="eyebrow">Scientific software · GitHub</p><h2>Research that can be opened, tested and explored.</h2><p>The software layer turns projects into a connected computational network: controllers, analysis pipelines, research explainers, visual laboratories and reproducible reports.</p><div class="code-card"><div class="code-head"><span>research_network.py</span><span>● live</span></div><pre><code>system = ResearchUniverse()
+      <div class="scene-copy card-copy"><p class="eyebrow">Scientific software · GitHub</p><h2>Research that can be opened, tested and explored.</h2><p>The particle universe changes topology into a computational lattice: controllers, analysis pipelines, research explainers, visual laboratories and reproducible reports.</p><div class="code-card"><div class="code-head"><span>research_network.py</span><span>● live</span></div><pre><code>system = ResearchUniverse()
 system.connect("EXOhSPEC", "control")
 system.connect("JWST", "atmospheres")
 system.connect("AETHER", "visual-computing")
 system.render(evidence=True)</code></pre></div></div>
-      <div class="scene-note"><span>05</span> Constellation → computational graph</div>
+      <div class="scene-note"><span>05</span> Orbital system → computational lattice</div>
     </section>
+
     <section id="research" class="scene" data-scene="research">
       <div class="scene-copy card-copy align-right"><p class="eyebrow">Research trajectory</p><h2>Engineering → astrophysics → precision instrumentation.</h2><div class="timeline"><article><span>2017–21</span><b>Electronics & communication</b><p>Visible-light communication, embedded systems and instrumentation foundations.</p></article><article><span>2023–24</span><b>MSc Astrophysics</b><p>Exoplanets, spectroscopy and advanced research at the University of Hertfordshire.</p></article><article><span>2024–26</span><b>EXOhSPEC development</b><p>Closed-loop thermal/AO stabilisation and long-duration detector-position control.</p></article><article><span>Now</span><b>Research portfolio</b><p>Instrumentation, exoplanet analysis and scientific software built as one coherent programme.</p></article></div></div>
-      <div class="scene-note"><span>06</span> Network resolves into trajectory</div>
+      <div class="scene-note"><span>06</span> Network contracts into a chronological research trajectory</div>
     </section>
+
     <section id="contact" class="scene scene-contact" data-scene="contact"><div class="scene-copy contact-copy"><p class="eyebrow">Research · Collaboration · PhD</p><h2>Build the next precise instrument.<br>Measure the next world.</h2><p>Interested in astronomical instrumentation, precision spectroscopy, exoplanets and computational research.</p><div class="hero-actions"><a class="btn btn-primary" href="mailto:biswajitj998@gmail.com">Get in touch ↗</a><a class="btn btn-ghost" href="https://github.com/Biswajit1999" target="_blank" rel="noopener">GitHub ↗</a></div></div><footer><span>Biswajit Jana</span><span>Research Universe · 2026</span></footer></section>
   </main>
+
   <aside id="node-panel" class="node-panel" aria-live="polite" hidden><button id="node-close" aria-label="Close project detail">×</button><p id="node-kicker"></p><h3 id="node-title"></h3><p id="node-text"></p><a id="node-link" href="#" hidden>Explore project ↗</a></aside>
+  <div class="camera-hud" aria-hidden="true"><strong>3D NAVIGATION</strong><span>drag / orbit</span><div class="hud-line"></div><span>scroll / travel</span><div class="hud-line"></div><span>select / fly-to</span></div>
   <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
   <script type="module" src="research-universe.js"></script>
 </body>
