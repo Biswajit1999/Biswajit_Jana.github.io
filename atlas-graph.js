@@ -23,18 +23,18 @@
   function palette() {
     return isDark()
       ? {
-          Project: "#e0973d", Instrument: "#a3ab5a", Method: "#e0973d",
-          Molecule: "#b08a92", PlanetClass: "#d97a5a", AnalysisType: "#d97a5a",
-          link: "rgba(224,151,61,0.22)", linkLit: "#e0973d", bg: "rgba(0,0,0,0)"
+          Project: "#60a5fa", Instrument: "#5eead4", Method: "#93c5fd",
+          Molecule: "#c4b5fd", PlanetClass: "#fbbf24", AnalysisType: "#2dd4bf",
+          link: "rgba(96,165,250,0.20)", linkLit: "#60a5fa", bg: "rgba(0,0,0,0)"
         }
       : {
-          Project: "#a4530a", Instrument: "#5f6b1f", Method: "#a4530a",
-          Molecule: "#6b4a52", PlanetClass: "#9c3b23", AnalysisType: "#9c3b23",
-          link: "rgba(90,55,20,0.16)", linkLit: "#a4530a", bg: "rgba(0,0,0,0)"
+          Project: "#1e3a5f", Instrument: "#0f766e", Method: "#1d4ed8",
+          Molecule: "#6d28d9", PlanetClass: "#b45309", AnalysisType: "#0f766e",
+          link: "rgba(30,58,95,0.16)", linkLit: "#1e3a5f", bg: "rgba(0,0,0,0)"
         };
   }
   var NODE_SIZE = {
-    Project: 5, Instrument: 3.2, Method: 2.6, Molecule: 3, PlanetClass: 3, AnalysisType: 3.2
+    Project: 8, Instrument: 5.8, Method: 5.2, Molecule: 5.4, PlanetClass: 5.4, AnalysisType: 5.8
   };
 
   var loaded = false, graphData = null, Graph = null, pal = palette();
@@ -42,12 +42,41 @@
   var selectedId = null, litNeighbors = null;
   var searchTerm = "";
 
+  function focusedOverview(data) {
+    var neighbors = {};
+    data.nodes.forEach(function (node) { neighbors[node.id] = []; });
+    data.edges.forEach(function (edge) {
+      if (neighbors[edge.source]) neighbors[edge.source].push(edge.target);
+      if (neighbors[edge.target]) neighbors[edge.target].push(edge.source);
+    });
+    var concepts = data.nodes
+      .filter(function (node) { return node.type !== "Project"; })
+      .sort(function (a, b) { return (neighbors[b.id] || []).length - (neighbors[a.id] || []).length; })
+      .slice(0, 18);
+    var selected = new Set(concepts.map(function (node) { return node.id; }));
+    concepts.forEach(function (concept) {
+      (neighbors[concept.id] || [])
+        .filter(function (id) { return id.indexOf("project:") === 0; })
+        .slice(0, 2)
+        .forEach(function (id) { selected.add(id); });
+    });
+    return {
+      nodes: data.nodes.filter(function (node) { return selected.has(node.id); }),
+      edges: data.edges.filter(function (edge) { return selected.has(edge.source) && selected.has(edge.target); })
+    };
+  }
+
   function loadGraph() {
     if (loaded) return;
     loaded = true;
     fetch("data/research-graph.json")
       .then(function (r) { return r.json(); })
-      .then(function (data) { graphData = data; render(); })
+      .then(function (data) {
+        graphData = focusedOverview(data);
+        var note = document.getElementById("atlas-graph-note");
+        if (note) note.textContent = "Focused overview: the 18 most-connected research concepts and representative repositories. Drag to pan, scroll to zoom, or click a node.";
+        render();
+      })
       .catch(function () {
         var note = document.getElementById("atlas-graph-note");
         if (note) note.textContent = "The interactive graph could not load. The relationship list below still has the full data.";
@@ -115,8 +144,8 @@
         .nodeColor(nodeColor)
         .nodeOpacity(0.92)
         .linkColor(linkColor)
-        .linkWidth(function (l) { return isLit(l) ? 1.4 : 0.5; })
-        .linkOpacity(0.35)
+        .linkWidth(function (l) { return isLit(l) ? 1.6 : 0.7; })
+        .linkOpacity(0.48)
         .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
         .onBackgroundClick(function () { clearSelection(); })
         .cooldownTime(reduceMotionMQ.matches ? 0 : 1200)
@@ -213,7 +242,7 @@
 
       var camera = Graph.camera();
       var fovRad = (camera.fov || 50) * Math.PI / 180;
-      var distance = (radius * 1.35) / Math.sin(fovRad / 2);
+      var distance = (radius * 1.0) / Math.sin(fovRad / 2);
 
       // keep whatever horizontal viewing angle the camera currently has (or a pleasant
       // default on first run) rather than always approaching from the same axis

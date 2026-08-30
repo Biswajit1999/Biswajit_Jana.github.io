@@ -33,7 +33,7 @@ def asset_version():
     rebuild instead of serving something stale from cache."""
     mtimes = [
         (ROOT / f).stat().st_mtime
-        for f in ("atlas.css", "atlas.js", "atlas-graph.js")
+        for f in ("atlas.css", "atlas.js", "atlas-live.js", "atlas-graph.js")
         if (ROOT / f).exists()
     ]
     return str(int(max(mtimes))) if mtimes else str(int(time.time()))
@@ -159,16 +159,17 @@ def compute_stats(projects):
 
 def render_stats(stats):
     tiles = [
-        (stats["total"], "Repositories in this atlas"),
-        (stats["live_demos"], "Live, deployable demos"),
-        (stats["exoplanet_targets"], "Individual exoplanet targets analyzed"),
-        (stats["interactive"], "Interactive labs and platforms"),
-        (stats["real_data_repos"], "Repos built on real public data"),
+        (stats["total"], "Public repositories", "atlas-stat-total"),
+        (stats["live_demos"], "Repositories with live sites", "atlas-stat-live"),
+        (stats["exoplanet_targets"], "Individual exoplanet targets analyzed", None),
+        (stats["interactive"], "Interactive labs and platforms", None),
+        (stats["real_data_repos"], "Repos built on real public data", None),
     ]
     out = ['<div class="atlas-stats reveal">']
-    for v, k in tiles:
+    for v, k, element_id in tiles:
+        id_attr = (' id="' + element_id + '"') if element_id else ""
         out.append(
-            '<div class="atlas-stat"><div class="v">' + str(v) + "</div>"
+            '<div class="atlas-stat"><div class="v"' + id_attr + '>' + str(v) + "</div>"
             '<div class="k">' + esc(k) + "</div></div>"
         )
     out.append("</div>")
@@ -303,7 +304,7 @@ def render_type_donut(type_counts, total):
         '<circle cx="90" cy="90" r="' + str(DONUT_R) + '" stroke="var(--line)" stroke-width="' + str(DONUT_STROKE) + '" fill="none" />'
         + "".join(segments) +
         '<text x="90" y="84" text-anchor="middle" class="donut-total">' + str(total) + "</text>"
-        '<text x="90" y="104" text-anchor="middle" class="donut-caption">repositories</text>'
+        '<text x="90" y="104" text-anchor="middle" class="donut-caption">curated entries</text>'
         "</svg>"
     )
     return '<div class="atlas-donut-wrap">' + svg + "".join(legend) + "</div>"
@@ -443,9 +444,7 @@ def render_graph_section(graph):
         '<div class="section-head">'
         '<p class="eyebrow">How it connects</p>'
         '<h2 class="section-title">Research knowledge graph</h2>'
-        '<p class="section-lead">' + str(graph["nodeCount"]) + " entities and " + str(graph["edgeCount"])
-        + " relationships across targets, instruments, methods, and molecules, built directly from the"
-        " same manifest as the rest of this page. Every edge traces back to the repository it came from.</p>"
+        '<p class="section-lead">A focused overview of the most connected targets, instruments, methods, and molecules in the research catalog. The compact view keeps labels and nodes legible; the accessible relationship list retains the complete manifest.</p>'
         "</div>"
         '<div class="atlas-graph-layout">'
         "<div>"
@@ -520,14 +519,14 @@ def build():
 
 
 PAGE_TEMPLATE = r"""<!DOCTYPE html>
-<html lang="en" data-theme="dark" class="no-js">
+<html lang="en" data-theme="light" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>GitHub | Biswajit Jana</title>
 
 <meta name="author" content="Biswajit Jana" />
-<meta name="description" content="{{TOTAL}} public repositories: exoplanet research reports, detection-method implementations, interactive astrophysics labs, and research platforms, searchable and filterable by type." />
+<meta name="description" content="A live, searchable index of Biswajit Jana's public GitHub repositories, scientific software, astrophysics research, and recent development activity." />
 <meta name="keywords" content="astrophysics portfolio, exoplanet research, interactive physics labs, TESS, JWST, Biswajit Jana" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="__SITE_URL__/atlas.html" />
@@ -535,16 +534,16 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Biswajit Jana" />
 <meta property="og:title" content="GitHub | Biswajit Jana" />
-<meta property="og:description" content="{{TOTAL}} public repositories across exoplanet research, interactive astrophysics labs, and research platforms." />
+<meta property="og:description" content="A live research-software catalog spanning exoplanet analysis, scientific computing, interactive astrophysics labs, and recent development activity." />
 <meta property="og:url" content="__SITE_URL__/atlas.html" />
 <meta property="og:image" content="__SITE_URL__/images/github-social-preview.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="GitHub | Biswajit Jana" />
-<meta name="twitter:description" content="{{TOTAL}} public repositories across exoplanet research, interactive astrophysics labs, and research platforms." />
+<meta name="twitter:description" content="A live research-software catalog spanning exoplanet analysis, scientific computing, and interactive astrophysics labs." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="atlas.css?v={{ASSET_V}}" />
 
 <script type="application/ld+json">
@@ -553,7 +552,6 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<canvas id="atlas-space" aria-hidden="true"></canvas>
 
 <header class="nav" id="nav">
   <div class="container nav-inner">
@@ -587,7 +585,8 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
       <div>
         <p class="section-head eyebrow" style="margin-bottom:14px">GitHub</p>
         <h1>Every <span class="sub">public repository</span>, in one place.</h1>
-        <p class="intro">This is my GitHub compiled into something browsable: {{EXO_TOTAL}} exoplanet target reports, a set of detection-method implementations built from scratch, interactive astrophysics labs, larger research platforms, and the academic and side work alongside them. Each repository tells its own story; this page is the map between them.</p>
+        <p class="intro">A live index of my scientific software and research: {{EXO_TOTAL}} curated exoplanet target reports, detection-method implementations, interactive astrophysics labs, larger platforms, and the academic work around them. Repository names, descriptions, counts, links, and recent activity refresh directly from GitHub whenever this page opens.</p>
+        <p class="atlas-sync-status" id="atlas-sync-status" role="status" aria-live="polite">Loading the latest public GitHub data…</p>
         <div class="atlas-hero-actions">
           <a class="btn btn-primary" href="#atlas-explorer">Browse the repositories</a>
           <a class="btn btn-ghost" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">View GitHub</a>
@@ -595,6 +594,21 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         </div>
       </div>
       {{STATS}}
+    </div>
+  </div>
+</section>
+
+<section class="section section--compact atlas-activity-section" id="recent-activity" aria-labelledby="recent-activity-title">
+  <div class="container">
+    <div class="section-head atlas-activity-head">
+      <div>
+        <p class="eyebrow">Live from GitHub</p>
+        <h2 class="section-title" id="recent-activity-title">Latest commits</h2>
+      </div>
+      <a class="text-link" href="https://github.com/Biswajit1999" target="_blank" rel="noopener">View full activity</a>
+    </div>
+    <div class="atlas-commit-grid" id="atlas-commit-grid" aria-live="polite">
+      <p class="atlas-activity-loading">Fetching recent public commits…</p>
     </div>
   </div>
 </section>
@@ -622,7 +636,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="section-head">
       <p class="eyebrow">Full catalog</p>
       <h2 class="section-title">Every repository, searchable</h2>
-      <p class="section-lead">Filter by type, instrument, or evidence status. All {{TOTAL}} repositories stay reachable here, independent of the carousel above.</p>
+      <p class="section-lead" id="atlas-catalog-lead">Filter by type, instrument, or evidence status. The curated research records are enriched with every current public repository returned by GitHub.</p>
     </div>
 
     <div class="atlas-explorer-toolbar">
@@ -636,7 +650,8 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         <div class="atlas-sort">
           <label for="atlas-sort-select" class="sr-only" style="position:absolute;left:-9999px">Sort by</label>
           <select id="atlas-sort-select">
-            <option value="featured">Sort: Featured</option>
+            <option value="updated">Sort: Recently updated</option>
+            <option value="featured">Sort: Curated order</option>
             <option value="target">Sort: Title</option>
             <option value="category">Sort: Type</option>
           </select>
@@ -662,7 +677,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="section-head">
       <p class="eyebrow">Portfolio-wide view</p>
       <h2 class="section-title">One body of work, several threads</h2>
-      <p class="section-lead">Computed directly from the {{TOTAL}}-repository manifest at build time.</p>
+      <p class="section-lead">A taxonomy of the hand-curated research records. The live catalog above independently includes every current public GitHub repository.</p>
     </div>
     <div class="atlas-donut-section reveal">
       {{TYPE_CHART}}
@@ -684,8 +699,8 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">How this is organized</p>
-      <h2 class="section-title">Seven kinds of repository</h2>
-      <p class="section-lead">Same rules across all {{TOTAL}}.</p>
+      <h2 class="section-title">Repository taxonomy</h2>
+      <p class="section-lead">Consistent categories for both curated research records and repositories added by the live GitHub feed.</p>
     </div>
     {{METHOD_CARDS}}
   </div>
@@ -710,11 +725,12 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         <a href="https://www.linkedin.com/in/biswajit-jana-27011a151/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
-    <p class="foot-note">All {{TOTAL}} repositories on this page link back to their own GitHub repository for full inspection, code, and data provenance.</p>
+    <p class="foot-note">Repository metadata refreshes from GitHub when the page opens. Curated scientific summaries remain available as an accessible fallback if the API is temporarily unavailable.</p>
   </div>
 </footer>
 
 <script src="atlas.js?v={{ASSET_V}}"></script>
+<script src="atlas-live.js?v={{ASSET_V}}" defer></script>
 <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js" integrity="sha384-SIcVySj+Cd1g+cwoLNCdr/osXU15HLXCxfaSzFNkZICYeKS7I2YxhyggCijT8JHA" crossorigin="anonymous"></script>
 <script src="atlas-graph.js?v={{ASSET_V}}" defer></script>
 </body>

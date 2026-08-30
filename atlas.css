@@ -18,24 +18,24 @@
   --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-xl:32px;
   --card-radius:18px; --panel-radius:28px;
   --transition: var(--motion-micro) ease;
-  --bg:        #f6f1e6;
-  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, #fbe6c8 0%, rgba(251,230,200,0) 56%),
-               radial-gradient(820px 560px at -6% 4%, #f5d9c2 0%, rgba(245,217,194,0) 52%);
-  --grid-line: rgba(120,70,20,.045);
+  --bg:        #f8fafc;
+  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, rgba(219,234,254,.72) 0%, rgba(219,234,254,0) 56%),
+               radial-gradient(820px 560px at -6% 4%, rgba(204,251,241,.48) 0%, rgba(204,251,241,0) 52%);
+  --grid-line: rgba(30,58,95,.045);
   --surface:   #ffffff;
-  --surface-muted:#f2e9db;
-  --ink:       #291f0f;
-  --ink-soft:  #52402a;
-  --muted:     #7c6a4f;
-  --line:      #ece1cd;
-  --line-2:    #ddccae;
-  --accent:    #a4530a;
-  --accent-2:  #8a3922;
-  --accent-soft:#fbe7cd;
-  --ring:      rgba(164,83,10,.45);
-  --shadow-soft: 0 1px 2px rgba(41,25,10,.05), 0 8px 24px -16px rgba(41,25,10,.18);
-  --shadow-card: 0 1px 2px rgba(41,25,10,.05), 0 18px 44px -24px rgba(41,25,10,.30);
-  --shadow-lg:   0 28px 64px -30px rgba(41,25,10,.34);
+  --surface-muted:#eef2f7;
+  --ink:       #0f172a;
+  --ink-soft:  #334155;
+  --muted:     #64748b;
+  --line:      #dbe3ed;
+  --line-2:    #c6d2e1;
+  --accent:    #1e3a5f;
+  --accent-2:  #0f766e;
+  --accent-soft:#e7eef6;
+  --ring:      rgba(30,58,95,.38);
+  --shadow-soft: 0 1px 2px rgba(15,23,42,.04), 0 10px 28px -20px rgba(15,23,42,.2);
+  --shadow-card: 0 1px 2px rgba(15,23,42,.05), 0 18px 44px -26px rgba(15,23,42,.28);
+  --shadow-lg:   0 28px 64px -30px rgba(15,23,42,.34);
   /* motion tokens — durations named by what they drive, not by number, so the
      right one gets reached for on purpose (micro-interaction vs. section entrance) */
   --motion-micro: 150ms;      /* hover/focus feedback: chips, buttons, badges */
@@ -44,55 +44,55 @@
   --motion-ambient: 8s;       /* starfield drift, spectral gradient sheen */
   --ease-natural: cubic-bezier(.22,.61,.36,1);
   /* evidence-status semantic colors — separate from the brand accent */
-  --status-reanalysis: #5f6b1f;
-  --status-reanalysis-soft: #eef1dc;
-  --status-null: #9c3b23;
-  --status-null-soft: #f7e3da;
-  --status-synthetic: #6b4a52;
-  --status-synthetic-soft: #efe1e3;
+  --status-reanalysis: #0f766e;
+  --status-reanalysis-soft: #dff7f3;
+  --status-null: #b45309;
+  --status-null-soft: #fff3dc;
+  --status-synthetic: #6d28d9;
+  --status-synthetic-soft: #f0e8ff;
   /* type badges — a small, separate semantic set for project kind, distinct from evidence-status */
-  --type-tool: #a4530a;
-  --type-tool-soft: #fbe7cd;
-  --type-research: #5f6b1f;
-  --type-research-soft: #eef1dc;
-  --type-light: #8a3922;
-  --type-light-soft: #f3ddd2;
-  --type-archive: #6a5840;
-  --type-archive-soft: #f2e9db;
+  --type-tool: #1d4ed8;
+  --type-tool-soft: #e8efff;
+  --type-research: #0f766e;
+  --type-research-soft: #dff7f3;
+  --type-light: #7c3aed;
+  --type-light-soft: #f0e8ff;
+  --type-archive: #64748b;
+  --type-archive-soft: #eef2f7;
 }
 [data-theme="dark"]{
-  --bg:        #120d08;
-  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #2c1c0e 0%, rgba(44,28,14,0) 60%),
-               radial-gradient(900px 600px at 6% 2%, #241408 0%, rgba(36,20,8,0) 55%);
-  --grid-line: rgba(230,175,110,.05);
-  --surface:   #1c150c;
-  --surface-muted:#17110a;
-  --ink:       #f3e8d6;
-  --ink-soft:  #d1bd9d;
-  --muted:     #9c8768;
-  --line:      #33261a;
-  --line-2:    #453120;
-  --accent:    #dd9440;
-  --accent-2:  #cf6640;
-  --accent-soft:#3a2814;
-  --ring:      rgba(221,148,64,.5);
+  --bg:        #0b1220;
+  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #162b49 0%, rgba(22,43,73,0) 60%),
+               radial-gradient(900px 600px at 6% 2%, #0d3535 0%, rgba(13,53,53,0) 55%);
+  --grid-line: rgba(148,183,223,.05);
+  --surface:   #111c2e;
+  --surface-muted:#0e1727;
+  --ink:       #f1f5f9;
+  --ink-soft:  #cbd5e1;
+  --muted:     #94a3b8;
+  --line:      #24334a;
+  --line-2:    #344762;
+  --accent:    #2563eb;
+  --accent-2:  #0f766e;
+  --accent-soft:#172d55;
+  --ring:      rgba(96,165,250,.55);
   --shadow-soft: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.6);
   --shadow-card: 0 1px 2px rgba(0,0,0,.3), 0 20px 50px -24px rgba(0,0,0,.7);
   --shadow-lg:   0 28px 70px -28px rgba(0,0,0,.7);
-  --status-reanalysis: #a3ab5a;
-  --status-reanalysis-soft: #262712;
-  --status-null: #d97a5a;
-  --status-null-soft: #34160c;
-  --status-synthetic: #b08a92;
-  --status-synthetic-soft: #2e1e22;
-  --type-tool: #dd9440;
-  --type-tool-soft: #3a2814;
-  --type-research: #a3ab5a;
-  --type-research-soft: #262712;
-  --type-light: #cf6640;
-  --type-light-soft: #28140c;
-  --type-archive: #9c8768;
-  --type-archive-soft: #17110a;
+  --status-reanalysis: #5eead4;
+  --status-reanalysis-soft: #113a3a;
+  --status-null: #fbbf24;
+  --status-null-soft: #3a2b0f;
+  --status-synthetic: #c4b5fd;
+  --status-synthetic-soft: #2b2250;
+  --type-tool: #93c5fd;
+  --type-tool-soft: #172d55;
+  --type-research: #5eead4;
+  --type-research-soft: #113a3a;
+  --type-light: #c4b5fd;
+  --type-light-soft: #2b2250;
+  --type-archive: #94a3b8;
+  --type-archive-soft: #0e1727;
 }
 
 /* ============================================================
@@ -102,7 +102,7 @@
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 body{
-  margin:0;font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  margin:0;font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   color:var(--ink);background:var(--bg);background-image:var(--bg-grad);background-attachment:fixed;
   line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased;position:relative;
   transition:background-color var(--transition), color var(--transition);
@@ -114,12 +114,12 @@ body::before{
   -webkit-mask-image:radial-gradient(circle at 50% 26%, #000 0%, transparent 82%);
           mask-image:radial-gradient(circle at 50% 26%, #000 0%, transparent 82%);
 }
-h1,h2,h3,h4{font-family:"Syne",sans-serif;line-height:1.14;letter-spacing:-.01em;margin:0;color:var(--ink)}
+h1,h2,h3,h4{font-family:"Source Serif 4",Georgia,serif;line-height:1.14;letter-spacing:-.01em;margin:0;color:var(--ink)}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 img{max-width:100%;display:block}
 p{margin:0 0 var(--space-4)}
-.mono{font-family:"DM Mono",monospace}
+.mono{font-family:"IBM Plex Mono",monospace}
 .container{width:min(100% - 40px, var(--container));margin-inline:auto}
 .container-narrow{width:min(100% - 40px, var(--container-narrow));margin-inline:auto}
 .section{padding-block:var(--section-y);position:relative}
@@ -127,7 +127,7 @@ p{margin:0 0 var(--space-4)}
 .section-band{background:var(--surface-muted);border-block:1px solid var(--line)}
 .section-head{max-width:64ch;margin:0 0 var(--space-7)}
 .section-head .eyebrow{
-  font-family:"DM Mono",monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent-2);margin:0 0 var(--space-3);display:flex;align-items:center;gap:10px;
 }
 .section-head .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent-2);opacity:.7}
@@ -148,7 +148,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid 
 /* nav — identical to index.html so the header reads as one continuous site */
 .nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb, var(--bg) 84%, transparent);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:18px}
-.brand{font-family:"Syne",sans-serif;font-weight:800;font-size:1.06rem;color:var(--ink);letter-spacing:-.01em}
+.brand{font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:1.12rem;color:var(--ink);letter-spacing:-.01em}
 .brand:hover{text-decoration:none}
 .nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
 .nav-links a{color:var(--ink-soft);font-size:.9rem;font-weight:500;padding:8px 11px;border-radius:8px;transition:background var(--transition),color var(--transition)}
@@ -186,19 +186,41 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 @media (max-width:900px){ .atlas-hero-grid{grid-template-columns:1fr} }
 .atlas-hero h1{font-size:clamp(2.1rem,4.6vw,3.2rem);font-weight:800;letter-spacing:-.02em;margin:0 0 var(--space-4);text-wrap:balance}
 .atlas-hero .intro{font-size:1.05rem;color:var(--ink-soft);max-width:62ch;margin:0 0 var(--space-5)}
+.atlas-sync-status{
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 var(--space-5);color:var(--muted);
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;
+}
+.atlas-sync-status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent-2) 14%,transparent)}
+.atlas-sync-status[data-state="error"]::before{background:var(--status-null);box-shadow:none}
 .atlas-hero-actions{display:flex;flex-wrap:wrap;gap:12px}
 
 .atlas-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-soft)}
 @media (max-width:900px){ .atlas-stats{grid-template-columns:repeat(2,1fr)} }
 .atlas-stat{background:var(--surface);padding:18px 16px}
-.atlas-stat .v{font-family:"Syne",sans-serif;font-size:1.7rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1}
-.atlas-stat .k{font-family:"DM Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.atlas-stat:nth-child(5){grid-column:span 2}
+.atlas-stat .v{font-family:"Source Serif 4",Georgia,serif;font-size:1.7rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1}
+.atlas-stat .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* live GitHub activity */
+.atlas-activity-section{border-top:1px solid var(--line)}
+.atlas-activity-head{max-width:none;display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:var(--space-6)}
+.atlas-activity-head .section-title{margin-bottom:0}
+.text-link{font-weight:600;font-size:.9rem;white-space:nowrap}
+.atlas-commit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
+.atlas-commit-card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--card-radius);padding:18px 20px;box-shadow:var(--shadow-soft)}
+.atlas-commit-repo{display:block;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--accent-2);margin-bottom:10px;overflow-wrap:anywhere}
+.atlas-commit-message{font-size:.92rem;color:var(--ink);line-height:1.5;margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.atlas-commit-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.68rem}
+.atlas-commit-meta a{font-weight:600}
+.atlas-activity-loading{grid-column:1/-1;color:var(--muted);margin:0}
+@media (max-width:900px){.atlas-commit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.atlas-activity-head{align-items:start;flex-direction:column}.atlas-commit-grid{grid-template-columns:1fr}}
 
 /* ============================================================
    EVIDENCE BADGES (semantic color, separate from brand accent)
    ============================================================ */
 .ev-badge{
-  display:inline-flex;align-items:center;gap:6px;font-family:"DM Mono",monospace;
+  display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;
   font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
   padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -213,7 +235,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .ev-badge[data-status="algorithm-validated-on-synthetic-signal"]::before{background:var(--status-synthetic)}
 
 .type-badge{
-  display:inline-flex;align-items:center;gap:6px;font-family:"DM Mono",monospace;
+  display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;
   font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
   padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -238,7 +260,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   position:relative;
   perspective:1400px;
   height:clamp(420px, 56vw, 520px);
-  margin:0 -4px;
+  margin:0;
+  overflow:hidden;
 }
 .atlas-carousel-track{
   position:relative;width:100%;height:100%;
@@ -271,10 +294,11 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-carousel-controls button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--transition)}
 .atlas-carousel-controls button:hover{background:var(--surface-muted)}
 .atlas-carousel-controls button:disabled{opacity:.35;cursor:default}
-.atlas-carousel-dots{display:flex;gap:7px;flex-wrap:wrap;max-width:220px;justify-content:center}
-.atlas-carousel-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:var(--line-2);cursor:pointer}
-.atlas-carousel-dots button[aria-current="true"]{background:var(--accent);width:20px;border-radius:5px}
-.atlas-play-toggle{font-family:"DM Mono",monospace;font-size:.72rem;color:var(--muted);display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer}
+.atlas-carousel-dots{display:flex;gap:2px;flex-wrap:wrap;max-width:260px;justify-content:center}
+.atlas-carousel-dots button{width:24px;height:24px;padding:0;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
+.atlas-carousel-dots button::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.atlas-carousel-dots button[aria-current="true"]::after{background:var(--accent);width:18px;border-radius:5px}
+.atlas-play-toggle{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer}
 .atlas-play-toggle:hover{background:var(--surface-muted)}
 
 @media (max-width:640px){
@@ -291,6 +315,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
    EXPLORER (search, filters, grid)
    ============================================================ */
 .atlas-explorer-toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:var(--space-5)}
+.atlas-explorer-toolbar>div:last-child{display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:100%}
 .atlas-search{position:relative;flex:1;min-width:220px;max-width:360px}
 .atlas-search input{
   width:100%;padding:11px 14px 11px 38px;border-radius:12px;border:1px solid var(--line-2);
@@ -298,15 +323,20 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 }
 .atlas-search input::placeholder{color:var(--muted)}
 .atlas-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted);pointer-events:none}
-.atlas-result-count{font-family:"DM Mono",monospace;font-size:.78rem;color:var(--muted);white-space:nowrap}
+.atlas-result-count{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);white-space:nowrap}
 .atlas-sort select{
   padding:10px 14px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);
-  color:var(--ink);font-size:.88rem;font-family:inherit;cursor:pointer;
+  color:var(--ink);font-size:.88rem;font-family:inherit;cursor:pointer;max-width:100%;
+}
+@media (max-width:560px){
+  .atlas-search,.atlas-explorer-toolbar>div:last-child,.atlas-sort{width:100%;max-width:none}
+  .atlas-sort select{width:100%}
+  .atlas-result-count{white-space:normal}
 }
 
 .atlas-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-6);overflow-x:auto;padding-bottom:2px}
 .atlas-chip{
-  font-family:"DM Mono",monospace;font-size:.74rem;padding:7px 13px;border-radius:999px;
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;padding:7px 13px;border-radius:999px;
   border:1px solid var(--line-2);background:var(--surface);color:var(--ink-soft);cursor:pointer;
   white-space:nowrap;transition:background var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -338,7 +368,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   background:linear-gradient(135deg,var(--accent-soft),var(--surface-muted) 70%);
 }
 .atlas-card-placeholder span{
-  font-family:"Syne",sans-serif;font-weight:800;font-size:2.2rem;color:var(--accent);opacity:.55;
+  font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:2.2rem;color:var(--accent);opacity:.55;
   letter-spacing:.02em;
 }
 .atlas-slide-media .atlas-card-placeholder span{font-size:3.2rem}
@@ -348,6 +378,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-card-body h3 a{color:inherit}
 .atlas-card-body h3 a:hover{text-decoration:underline}
 .atlas-card-body p{font-size:.86rem;color:var(--ink-soft);margin:0}
+.atlas-card-body .atlas-card-updated{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--muted);margin-top:2px}
 .atlas-card-links{margin-top:auto;display:flex;gap:14px;padding-top:8px}
 .atlas-card-links a{font-size:.82rem;font-weight:600;display:inline-flex;align-items:center;gap:4px}
 .atlas-card-links a::after{content:"→";transition:transform .15s}
@@ -358,13 +389,13 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-pagination{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin-top:var(--space-6)}
 .atlas-page-btn{
   min-width:38px;height:38px;padding:0 10px;border-radius:10px;border:1px solid var(--line-2);
-  background:var(--surface);color:var(--ink-soft);font-family:"DM Mono",monospace;font-size:.84rem;
+  background:var(--surface);color:var(--ink-soft);font-family:"IBM Plex Mono",monospace;font-size:.84rem;
   cursor:pointer;transition:background var(--transition), color var(--transition), border-color var(--transition);
 }
 .atlas-page-btn:hover:not(:disabled){background:var(--surface-muted);color:var(--ink)}
 .atlas-page-btn[aria-current="page"]{background:var(--accent);color:#fff;border-color:var(--accent)}
 .atlas-page-btn:disabled{opacity:.4;cursor:default}
-.atlas-page-ellipsis{color:var(--muted);padding:0 4px;font-family:"DM Mono",monospace}
+.atlas-page-ellipsis{color:var(--muted);padding:0 4px;font-family:"IBM Plex Mono",monospace}
 .atlas-empty h3{color:var(--ink);margin-bottom:8px;font-size:1.1rem}
 
 /* ============================================================
@@ -398,13 +429,13 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-modal-body .question{color:var(--ink-soft);font-size:1rem;margin-bottom:var(--space-5)}
 .atlas-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-bottom:var(--space-5)}
 @media (max-width:640px){ .atlas-modal-grid{grid-template-columns:1fr} }
-.atlas-modal-field h4{font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px}
+.atlas-modal-field h4{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:6px}
 .atlas-modal-field p,.atlas-modal-field ul{margin:0;font-size:.9rem;color:var(--ink-soft)}
 .atlas-modal-field ul{padding-left:18px}
 .atlas-modal-result{background:var(--surface-muted);border-radius:14px;padding:16px 18px;font-size:.92rem;color:var(--ink);margin-bottom:var(--space-5)}
 .atlas-modal-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:var(--space-6)}
 .atlas-modal-related{border-top:1px solid var(--line);padding-top:var(--space-5)}
-.atlas-modal-related h4{font-family:"DM Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.atlas-modal-related h4{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .atlas-related-list{display:flex;flex-wrap:wrap;gap:10px}
 .atlas-related-list a{font-size:.84rem;padding:7px 13px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-soft)}
 .atlas-related-list a:hover{background:var(--surface-muted);text-decoration:none}
@@ -420,24 +451,24 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-donut{width:min(220px,50vw);height:auto;flex:none}
 .donut-seg{transition:stroke-width var(--motion-micro) ease}
 .atlas-donut-wrap:hover .donut-seg{stroke-width:26}
-.donut-total{font-family:"Syne",sans-serif;font-weight:800;font-size:2rem;fill:var(--ink)}
-.donut-caption{font-family:"DM Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted)}
+.donut-total{font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:2rem;fill:var(--ink)}
+.donut-caption{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted)}
 .atlas-type-legend{display:flex;flex-direction:column;gap:9px;min-width:220px}
 .atlas-type-legend-row{display:grid;grid-template-columns:24px 1fr auto;align-items:center;gap:10px;font-size:.88rem}
 .atlas-type-legend-icon{display:flex;align-items:center;justify-content:center}
 .atlas-type-legend-row .lbl{color:var(--ink-soft)}
-.atlas-type-legend-row .n{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.atlas-type-legend-row .n{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--ink);font-variant-numeric:tabular-nums}
 .atlas-type-legend-row .pct{color:var(--muted)}
 
 .atlas-pill-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-top:var(--space-5)}
 @media (max-width:760px){ .atlas-pill-grid{grid-template-columns:1fr} }
-.atlas-pill-block h4{font-family:"DM Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:500}
+.atlas-pill-block h4{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:500}
 .atlas-pill-chart{display:flex;flex-direction:column;gap:9px}
 .atlas-pill-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;font-size:.84rem}
 .atlas-pill-label{color:var(--ink-soft);white-space:nowrap}
 .atlas-pill-track{height:7px;border-radius:4px;background:var(--surface-muted);overflow:hidden;min-width:60px}
 .atlas-pill-fill{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-.atlas-pill-n{font-family:"DM Mono",monospace;font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.atlas-pill-n{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums}
 
 /* ============================================================
    METHODOLOGY — icon bento, sized by actual repo count
@@ -456,7 +487,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none;
 }
 .atlas-method-count{
-  position:absolute;top:var(--space-5);right:var(--space-5);font-family:"Syne",sans-serif;font-weight:800;
+  position:absolute;top:var(--space-5);right:var(--space-5);font-family:"Source Serif 4",Georgia,serif;font-weight:700;
   font-size:1.3rem;color:var(--line-2);
 }
 .atlas-method-card[data-size="lg"] .atlas-method-count{font-size:1.7rem;color:var(--muted)}
@@ -477,8 +508,12 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 /* ============================================================
    RESEARCH KNOWLEDGE GRAPH
    ============================================================ */
-.atlas-graph-layout{display:grid;grid-template-columns:1fr 280px;gap:var(--space-5);align-items:start}
+.atlas-graph-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,280px);gap:var(--space-5);align-items:start;max-width:100%}
 @media (max-width:900px){ .atlas-graph-layout{grid-template-columns:1fr} }
+@media (max-width:759px){
+  .atlas-graph-toolbar,.atlas-graph-canvas,.atlas-graph-controls{display:none!important}
+  .atlas-graph-list-wrap[hidden]{display:block}
+}
 .atlas-graph-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
 .atlas-graph-toolbar input[type="search"]{
   padding:9px 13px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);
@@ -495,8 +530,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-graph-legend .sw-analysistype{background:var(--type-light)}
 
 .atlas-graph-canvas{
-  height:560px;border:1px solid var(--line);border-radius:var(--panel-radius);background:var(--surface);
-  overflow:hidden;position:relative;box-shadow:var(--shadow-soft);cursor:grab;
+  width:100%;max-width:100%;min-width:0;height:clamp(360px,42vw,480px);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);
+  overflow:hidden;position:relative;box-shadow:var(--shadow-soft);cursor:grab;contain:layout paint;
 }
 .atlas-graph-canvas:active{cursor:grabbing}
 .atlas-graph-canvas svg{width:100%;height:100%;display:block;touch-action:none}
@@ -511,7 +546,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .gnode-molecule circle{stroke:var(--status-synthetic);fill:var(--status-synthetic-soft)}
 .gnode-planetclass circle{stroke:var(--status-null);fill:var(--status-null-soft)}
 .gnode-analysistype circle{stroke:var(--type-light);fill:var(--type-light-soft)}
-.gnode-label{font-family:"DM Mono",monospace;font-size:9px;fill:var(--muted);pointer-events:none;opacity:0;transition:opacity var(--motion-micro) ease}
+.gnode-label{font-family:"IBM Plex Mono",monospace;font-size:9px;fill:var(--muted);pointer-events:none;opacity:0;transition:opacity var(--motion-micro) ease}
 .gnode:hover .gnode-label,.gnode:focus-visible .gnode-label,.gnode-active .gnode-label{opacity:1}
 .gnode:hover circle,.gnode:focus-visible circle,.gnode-active circle{transform:scale(1.6)}
 .gnode-dim{opacity:.15}
@@ -536,7 +571,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 @media (prefers-reduced-motion: reduce){ .atlas-graph-zoom-btn{transition:none} }
 .atlas-graph-panel{
   border:1px solid var(--line);border-radius:var(--card-radius);background:var(--surface);
-  padding:18px 20px;box-shadow:var(--shadow-soft);min-height:120px;
+  padding:18px 20px;box-shadow:var(--shadow-soft);min-height:120px;min-width:0;overflow-wrap:anywhere;
 }
 .atlas-graph-panel h4{font-size:1rem;margin-bottom:4px}
 .atlas-graph-panel[hidden]{display:none}
@@ -551,14 +586,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 #atlas-space{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 
 /* ---------- hero spectral-gradient sheen, reused from index.html's technique ---------- */
-.atlas-hero h1 .sub{
-  background:linear-gradient(90deg,var(--accent),var(--accent-2),#e8c34a,var(--accent));
-  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  animation:atlas-sheen var(--motion-ambient) linear infinite;
-}
-@keyframes atlas-sheen{to{background-position:300% 0}}
-@media (prefers-reduced-motion: reduce){ .atlas-hero h1 .sub{animation:none} }
+.atlas-hero h1 .sub{color:var(--accent-2)}
 
 /* ---------- card spectral-glow hover ring (motion concentrated in the card, not the whole UI) ---------- */
 .atlas-card{position:relative}

@@ -1,11 +1,12 @@
 /* ============================================================
    EXOPLANET RESEARCH ATLAS — behavior layer
    Progressive enhancement over real semantic HTML already baked
-   into exoplanets.html by build_exoplanet_atlas.py. Every project
+   into atlas.html by build_atlas.py. Every curated project
    card already exists in the DOM with real text and a per-card
    JSON blob (script.atlas-detail-data) — this file reads that DOM,
-   it does not fetch anything over the network. If this script
-   fails to load, the page is still a readable article + card grid.
+   remains usable without JavaScript. At runtime, GitHub's public API
+   refreshes repository metadata and appends any repositories created
+   after the last curated build.
    ============================================================ */
 (function () {
   "use strict";
@@ -39,7 +40,7 @@
     };
   });
   var bySlug = {};
-  projects.forEach(function (p) { bySlug[p.slug] = p; });
+  projects.forEach(function (p) { bySlug[p.slug.toLowerCase()] = p; });
 
   // ---------------------------------------------------------
   // 2. Filter / search / sort state, synced to the URL
@@ -48,7 +49,7 @@
   var state = {
     q: "",
     filter: "all",
-    sort: "featured",
+    sort: "updated",
     page: 1
   };
 
@@ -56,14 +57,14 @@
     var params = new URLSearchParams(window.location.search);
     state.q = params.get("q") || "";
     state.filter = params.get("filter") || "all";
-    state.sort = params.get("sort") || "featured";
+    state.sort = params.get("sort") || "updated";
     state.page = Math.max(1, parseInt(params.get("page"), 10) || 1);
   }
   function writeStateToURL(replace) {
     var params = new URLSearchParams(window.location.search);
     state.q ? params.set("q", state.q) : params.delete("q");
     state.filter !== "all" ? params.set("filter", state.filter) : params.delete("filter");
-    state.sort !== "featured" ? params.set("sort", state.sort) : params.delete("sort");
+    state.sort !== "updated" ? params.set("sort", state.sort) : params.delete("sort");
     state.page > 1 ? params.set("page", String(state.page)) : params.delete("page");
     var qs = params.toString();
     var url = window.location.pathname + (qs ? "?" + qs : "") + window.location.hash;
@@ -86,6 +87,7 @@
   };
 
   var SORT_FNS = {
+    updated: function (a, b) { return (b.pushedAt || 0) - (a.pushedAt || 0) || a.detail.title.localeCompare(b.detail.title); },
     featured: function (a, b) { return a.el.dataset.order - b.el.dataset.order; },
     target: function (a, b) { return a.detail.title.localeCompare(b.detail.title); },
     category: function (a, b) { return (a.type || "").localeCompare(b.type || ""); }
@@ -186,7 +188,7 @@
   var clearBtn = document.getElementById("atlas-clear-filters");
   if (clearBtn) {
     clearBtn.addEventListener("click", function () {
-      state.filter = "all"; state.q = ""; state.sort = "featured"; state.page = 1;
+      state.filter = "all"; state.q = ""; state.sort = "updated"; state.page = 1;
       writeStateToURL();
       applyState();
     });
@@ -480,12 +482,13 @@
     "platform": "Platform",
     "research-academic": "Research",
     "game": "Game",
-    "coursework": "Coursework"
+    "coursework": "Coursework",
+    "repository": "Repository"
   };
   var TYPE_GROUP = {
     "research-benchmark": "research", "research-academic": "research",
     "astro-lab": "tool", "platform": "tool",
-    "game": "light", "coursework": "archive"
+    "game": "light", "coursework": "archive", "repository": "tool"
   };
   function typeLabel(type) { return TYPE_LABELS[type] || type; }
   function initials(title) {
@@ -559,7 +562,7 @@
   }
 
   function openDetail(slug, trigger) {
-    var p = bySlug[slug];
+    var p = bySlug[String(slug || "").toLowerCase()];
     if (!p || !modalOverlay) return;
     lastFocused = trigger || document.activeElement;
     renderDetail(p);
@@ -598,9 +601,9 @@
   window.addEventListener("popstate", function () {
     var params = new URLSearchParams(window.location.search);
     var slug = params.get("project");
-    if (slug && bySlug[slug]) {
+    if (slug && bySlug[slug.toLowerCase()]) {
       lastFocused = document.activeElement;
-      renderDetail(bySlug[slug]);
+      renderDetail(bySlug[slug.toLowerCase()]);
       modalOverlay.setAttribute("data-open", "true");
       modalOverlay.removeAttribute("hidden");
     } else if (modalOverlay && modalOverlay.getAttribute("data-open") === "true") {
@@ -617,7 +620,7 @@
   var initialList = applyState();
 
   var deepLinkSlug = new URLSearchParams(window.location.search).get("project");
-  if (deepLinkSlug && bySlug[deepLinkSlug]) openDetail(deepLinkSlug);
+  if (deepLinkSlug && bySlug[deepLinkSlug.toLowerCase()]) openDetail(deepLinkSlug);
 
   // scroll-reveal (mirrors index.html's .reveal pattern)
   if ("IntersectionObserver" in window && !reduceMotionMQ.matches) {
@@ -635,9 +638,12 @@
   // theme toggle + mobile nav toggle (mirrors index.html behavior)
   var themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", docEl.getAttribute("data-theme") === "dark" ? "true" : "false");
     themeToggle.addEventListener("click", function () {
       var current = docEl.getAttribute("data-theme") === "dark" ? "light" : "dark";
       docEl.setAttribute("data-theme", current);
+      themeToggle.setAttribute("aria-pressed", current === "dark" ? "true" : "false");
+      themeToggle.setAttribute("aria-label", current === "dark" ? "Switch to light mode" : "Switch to dark mode");
       try { localStorage.setItem("theme", current); } catch (e) {}
     });
   }
@@ -663,6 +669,14 @@
   window.AtlasBridge = {
     openProject: function (slug) { openDetail(slug); },
     projectSlugs: projects.map(function (p) { return p.slug; })
+  };
+  window.AtlasCatalog = {
+    projects: projects,
+    bySlug: bySlug,
+    applyState: applyState,
+    typeLabel: typeLabel,
+    escapeHTML: escapeHTML,
+    typeGroups: TYPE_GROUP
   };
 
   // ---------------------------------------------------------
