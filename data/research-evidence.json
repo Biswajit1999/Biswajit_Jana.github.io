@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 5,
+    "completed": 6,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -89,6 +89,22 @@
       "repository_url": "https://github.com/Biswajit1999/lattice-radiation-twin",
       "release_url": "https://github.com/Biswajit1999/lattice-radiation-twin/releases/tag/v0.2.0",
       "live_url": "https://biswajit1999.github.io/lattice-radiation-twin/"
+    },
+    {
+      "rank": 8,
+      "slug": "finding-earth-2",
+      "title": "Finding Earth 2.0",
+      "version": "v2.1.1",
+      "source_ref": "e97ace2",
+      "research_question": "When the scientific objective is reducing planet-radius uncertainty, can a larger scalar stellar-radius information score justify an indirect observation without measured covariance?",
+      "principal_result": "Thirteen targets support both actions. Stellar radius has the larger own-parameter score for 10, but the indirect route wins for none at |rho| <= 0.90; Kepler-296 f requires |rho| = 0.995225 to break even.",
+      "evidence": ["13-target objective-conditioned audit", "295 tests and 63% coverage", "67 scientific invariants and 26/26 release gates", "Deterministic 68-file publication bundle", "6,388-page production build and zero npm vulnerabilities"],
+      "before_score": 93,
+      "after_score": 99,
+      "claim_boundary": "The correlation grid is a sensitivity analysis, not a measured joint posterior or an instrument-time recommendation; exposure cost remains unmodelled.",
+      "repository_url": "https://github.com/Biswajit1999/finding-earth-2",
+      "release_url": "https://github.com/Biswajit1999/finding-earth-2/releases/tag/v2.1.1",
+      "live_url": "https://biswajit1999.github.io/finding-earth-2/information-gain/"
     }
   ]
 }
