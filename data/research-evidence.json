@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "verified_date": "2026-09-19",
+  "verified_date": "2026-09-20",
   "programme": {
     "title": "Top-50 research upgrade programme",
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 7,
+    "completed": 8,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.19.3",
-      "source_ref": "v2026.09.19.3",
+      "version": "v2026.09.20",
+      "source_ref": "v2026.09.20",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first seven completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 43 ranked repositories remain unfinished.",
+      "principal_result": "The first eight completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 42 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.19.3",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.20",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -121,6 +121,22 @@
       "repository_url": "https://github.com/Biswajit1999/AstroBis",
       "release_url": "https://github.com/Biswajit1999/AstroBis/releases/tag/v1.3.1",
       "live_url": "https://biswajit1999.github.io/AstroBis/neo/"
+    },
+    {
+      "rank": 10,
+      "slug": "Biswajit1999",
+      "title": "GitHub Profile Evidence Index",
+      "version": "v1.1.0",
+      "source_ref": "96204e3",
+      "research_question": "Can a GitHub profile distinguish reviewer-auditable research evidence from general portfolio discovery while keeping every concise claim traceable to a versioned source?",
+      "principal_result": "Seven upstream records now route each research question and generated result to an exact source revision, versioned release, live evidence surface, and project-specific boundary; discovery-only links are explicitly excluded from that verified set.",
+      "evidence": ["Seven pinned upstream evidence records", "Deterministic JSON-to-Markdown/CSV/SVG build", "Five schema, freshness, traceability, uniqueness, and boundary tests", "Node 24 CI and zero dependency vulnerabilities", "All 21 repository/release/live evidence URLs verified HTTP 200", "Four release assets with GitHub-verified SHA-256 digests"],
+      "before_score": 36,
+      "after_score": 95,
+      "claim_boundary": "The maturity score measures auditable research communication, not scientific merit, peer review, citation impact, applicant ranking, or independent verification of biographical profile statements.",
+      "repository_url": "https://github.com/Biswajit1999/Biswajit1999",
+      "release_url": "https://github.com/Biswajit1999/Biswajit1999/releases/tag/v1.1.0",
+      "live_url": "https://github.com/Biswajit1999"
     }
   ]
 }
