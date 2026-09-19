@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 4,
+    "completed": 5,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -65,7 +65,7 @@
       "version": "v2026.09.19",
       "source_ref": "v2026.09.19",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first four completed upgrades are now represented by one validated schema and a deterministic public registry, while the page states that 46 ranked repositories remain unfinished.",
+      "principal_result": "The first five completed upgrades are now represented by one validated schema and a deterministic public registry, while the page states that 45 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
@@ -73,6 +73,22 @@
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
       "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.19",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
+    },
+    {
+      "rank": 7,
+      "slug": "lattice-radiation-twin",
+      "title": "LATTICE Radiation Twin",
+      "version": "v0.2.0",
+      "source_ref": "a154e65",
+      "research_question": "Can eight historical HST epochs distinguish calendar time from four cumulative radiation proxy components well enough to interpret individual coefficients?",
+      "principal_result": "The component-attribution gate fails: six parameters leave two residual degrees of freedom, the standardized condition number is 175.31, maximum VIF is 4,881.4, and three exposure coefficients change sign under leave-one-epoch-out refits.",
+      "evidence": ["8 independent epochs", "4 identifiability diagnostics", "82 tests", "Scientific and Pages CI"],
+      "before_score": 83,
+      "after_score": 98,
+      "claim_boundary": "A post hoc design diagnostic of predictor separability, not a radiation-damage estimate, causal claim, or authorization to open the sealed temporal holdout.",
+      "repository_url": "https://github.com/Biswajit1999/lattice-radiation-twin",
+      "release_url": "https://github.com/Biswajit1999/lattice-radiation-twin/releases/tag/v0.2.0",
+      "live_url": "https://biswajit1999.github.io/lattice-radiation-twin/"
     }
   ]
 }

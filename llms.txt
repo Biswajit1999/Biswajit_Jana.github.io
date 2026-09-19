@@ -36,7 +36,7 @@ Biswajit's current research profile is centred on EXOhSPEC, the Exoplanet High-R
 
 The evidence registry is the preferred machine-readable entry point for claims,
 generated results, release versions, validation status, and limitations. It
-currently marks 4 of the ranked 50 upgrades complete; unlisted repositories
+currently marks 5 of the ranked 50 upgrades complete; unlisted repositories
 must not be inferred to have completed the same audit.
 
 ## Notes for readers and search/AI systems
