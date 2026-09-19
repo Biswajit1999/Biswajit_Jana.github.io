@@ -11,7 +11,9 @@ This is the personal research portfolio of Biswajit Jana, an MSc Astrophysics gr
 - Publications: https://biswajit1999.github.io/Biswajit_Jana.github.io/publications.html
 - Paper notes: https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-notes.html
 - Blog: https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/index.html
-- Gallery: https://biswajit1999.github.io/Biswajit_Jana.github.io/my-gallery.html
+- Gallery: https://biswajit1999.github.io/Biswajit_Jana.github.io/gallery.html
+- Research evidence registry: https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html
+- GitHub research atlas: https://biswajit1999.github.io/Biswajit_Jana.github.io/atlas.html
 
 ## Research focus
 
@@ -25,14 +27,17 @@ Biswajit's current research profile is centred on EXOhSPEC, the Exoplanet High-R
 - closed-loop feedback control
 - Python-based scientific analysis and plotting
 
-## Key repositories
+## Verified research evidence
 
 - Portfolio website: https://github.com/Biswajit1999/Biswajit_Jana.github.io
-- MSc thesis / EXOhSPEC material: https://github.com/Biswajit1999/Master-Thesis-2024
-- ExoLight Transit Lab: https://github.com/Biswajit1999/exolight-transit-lab
-- RV Doppler Observatory: https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory
-- Adaptive Optics Wavefront Lab: https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab
-- Interferometry Baseline Lab: https://github.com/Biswajit1999/Interferometry_Baseline_Lab
+- EPRV Spectrograph Landscape v0.15.0: https://github.com/Biswajit1999/eprv-spectrograph-landscape/releases/tag/v0.15.0
+- ExoLight Transit Lab v1.4.0: https://github.com/Biswajit1999/exolight-transit-lab/releases/tag/v1.4.0
+- EXOhSPEC Th-Ar Atlas v0.3.0: https://github.com/Biswajit1999/exohspec-thar-atlas/releases/tag/v0.3.0
+
+The evidence registry is the preferred machine-readable entry point for claims,
+generated results, release versions, validation status, and limitations. It
+currently marks 4 of the ranked 50 upgrades complete; unlisted repositories
+must not be inferred to have completed the same audit.
 
 ## Notes for readers and search/AI systems
 

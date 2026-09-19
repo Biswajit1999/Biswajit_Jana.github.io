@@ -27,6 +27,7 @@ The website currently includes:
 
 - **Home** — academic profile, research overview, and selected highlights  
 - **Research** — current research direction and instrumentation work  
+- **Research Evidence** — versioned questions, generated results, validation, releases, and limitations
 - **Projects** — selected astrophysics, optics, electronics, and engineering projects  
 - **Publications** — journal publications, conference proceedings, talks, and posters  
 - **Paper Notes** — structured notes from research papers and technical reading  
@@ -178,6 +179,14 @@ The repository includes technical files to support search engine indexing throug
 - `.nojekyll` — ensures GitHub Pages serves folders and files correctly  
 - OpenGraph and Twitter metadata for selected pages  
 - JSON-LD structured data for improved search visibility  
+
+The evidence registry is generated deterministically from
+`data/research-evidence.json`. Validate it locally with:
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+python build_evidence_registry.py --check
+```
 
 The website is intended to be indexable by Google and shareable on platforms such as LinkedIn.
 

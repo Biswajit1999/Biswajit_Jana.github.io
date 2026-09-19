@@ -1,0 +1,11 @@
+dimension,before,after,evidence
+Evidence architecture,4,10,One validated repository evidence schema and generated public page
+Release traceability,2,10,Each completed upgrade links a versioned release and source ref
+Claims boundaries,6,10,Every result carries an explicit boundary of inference
+Deterministic generation,7,9,HTML is generated from versioned JSON and checked for staleness
+Automated validation,2,9,Schema output sitemap and deterministic-build tests run in CI
+Accessibility and responsiveness,8,9,Semantic headings skip link focus states reduced motion and mobile reflow
+Data provenance,8,10,Questions findings evidence markers scores and URLs are versioned
+Research narrative,8,9,Question-to-result-to-limit structure supports reviewer scanning
+Portfolio discoverability,9,10,Homepage navigation sitemap llms file and canonical metadata updated
+Publication and versioning,6,9,Calendar-versioned release and public live page
