@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "verified_date": "2026-09-19",
+  "programme": {
+    "title": "Top-50 research upgrade programme",
+    "audited_repositories": 121,
+    "eligible_first_party": 115,
+    "ranked_queue": 50,
+    "completed": 4,
+    "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
+  },
+  "repositories": [
+    {
+      "rank": 1,
+      "slug": "eprv-spectrograph-landscape",
+      "title": "EPRV Spectrograph Landscape",
+      "version": "v0.15.0",
+      "source_ref": "67a0f50",
+      "research_question": "How strongly does resolving power improve the local photon-limited Doppler bound as intrinsic stellar line width changes?",
+      "principal_result": "Increasing resolving power from 100,000 to 150,000 improves the controlled bound by 37.1%, 11.1%, and 2.48% for intrinsic Gaussian widths of 1.0, 2.5, and 5.0 km/s. The broad-line null below 10% is not rejected.",
+      "evidence": ["15 controlled scenarios", "4,000 seeded recoveries", "27 tests", "Python 3.10/3.12/3.13 CI"],
+      "before_score": 63,
+      "after_score": 92,
+      "claim_boundary": "A local synthetic photon-information experiment, not an end-to-end instrument performance forecast.",
+      "repository_url": "https://github.com/Biswajit1999/eprv-spectrograph-landscape",
+      "release_url": "https://github.com/Biswajit1999/eprv-spectrograph-landscape/releases/tag/v0.15.0",
+      "live_url": "https://biswajit1999.github.io/eprv-spectrograph-landscape/"
+    },
+    {
+      "rank": 4,
+      "slug": "exolight-transit-lab",
+      "title": "ExoLight Transit Lab",
+      "version": "v1.4.0",
+      "source_ref": "3230f3a",
+      "research_question": "How badly can correlated time-series noise invalidate iid transit-depth uncertainties, and can event-clustered intervals restore coverage?",
+      "principal_result": "With AR(1) correlation ρ=0.8, nominal 95% iid coverage falls to 54.9% and 56.1% for deep and shallow injections; event-clustered intervals reach 93.2% and 92.1%.",
+      "evidence": ["4 controlled scenarios", "4,000 seeded recoveries", "deterministic reports", "Scientific core, frontend, and Pages CI"],
+      "before_score": 58,
+      "after_score": 95,
+      "claim_boundary": "A controlled noise-model experiment, not proof that every observed transit has AR(1) residuals or that clustered errors solve all red-noise structure.",
+      "repository_url": "https://github.com/Biswajit1999/exolight-transit-lab",
+      "release_url": "https://github.com/Biswajit1999/exolight-transit-lab/releases/tag/v1.4.0",
+      "live_url": "https://biswajit1999.github.io/exolight-transit-lab/"
+    },
+    {
+      "rank": 5,
+      "slug": "exohspec-thar-atlas",
+      "title": "EXOhSPEC Th–Ar Atlas",
+      "version": "v0.3.0",
+      "source_ref": "f38488e",
+      "research_question": "Can a multi-exposure ladder preserve strong calibration-feature centroids better than a single long exposure without degrading faint features?",
+      "principal_result": "Across 7,000 strong-feature injections, pixelwise HDR lowers centroid RMSE from 0.012954 to 0.002086 pixel, an 83.9% reduction; faint-feature RMSE remains unchanged.",
+      "evidence": ["24 measured feature strengths", "24,000 seeded recoveries", "6 tests", "Python 3.10/3.12/3.13 CI"],
+      "before_score": 52,
+      "after_score": 93,
+      "claim_boundary": "A detector-domain simulation in pixels, not an atomic identification, wavelength solution, or measured radial-velocity precision.",
+      "repository_url": "https://github.com/Biswajit1999/exohspec-thar-atlas",
+      "release_url": "https://github.com/Biswajit1999/exohspec-thar-atlas/releases/tag/v0.3.0",
+      "live_url": "https://biswajit1999.github.io/exohspec-thar-atlas/"
+    },
+    {
+      "rank": 6,
+      "slug": "Biswajit_Jana.github.io",
+      "title": "Research Portfolio Evidence Registry",
+      "version": "v2026.09.19",
+      "source_ref": "v2026.09.19",
+      "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
+      "principal_result": "The first four completed upgrades are now represented by one validated schema and a deterministic public registry, while the page states that 46 ranked repositories remain unfinished.",
+      "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
+      "before_score": 60,
+      "after_score": 95,
+      "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
+      "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.19",
+      "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
+    }
+  ]
+}
