@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 6,
+    "completed": 7,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.19",
-      "source_ref": "v2026.09.19",
+      "version": "v2026.09.19.3",
+      "source_ref": "v2026.09.19.3",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first five completed upgrades are now represented by one validated schema and a deterministic public registry, while the page states that 45 ranked repositories remain unfinished.",
+      "principal_result": "The first seven completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 43 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.19",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.19.3",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -94,17 +94,33 @@
       "rank": 8,
       "slug": "finding-earth-2",
       "title": "Finding Earth 2.0",
-      "version": "v2.1.1",
-      "source_ref": "e97ace2",
+      "version": "v2.1.2",
+      "source_ref": "46d4fe4",
       "research_question": "When the scientific objective is reducing planet-radius uncertainty, can a larger scalar stellar-radius information score justify an indirect observation without measured covariance?",
       "principal_result": "Thirteen targets support both actions. Stellar radius has the larger own-parameter score for 10, but the indirect route wins for none at |rho| <= 0.90; Kepler-296 f requires |rho| = 0.995225 to break even.",
-      "evidence": ["13-target objective-conditioned audit", "295 tests and 63% coverage", "67 scientific invariants and 26/26 release gates", "Deterministic 68-file publication bundle", "6,388-page production build and zero npm vulnerabilities"],
+      "evidence": ["13-target objective-conditioned audit", "295 tests and 63% coverage", "67 scientific invariants and 26/26 release gates", "Deterministic 68-file publication bundle (SHA-256 1A69ECA68DD600373B80D2177468D663D4FD2CFBF81E434D88F2A9CCA5DFBAE3)", "Gaia-preserving scheduled-refresh evidence contract"],
       "before_score": 93,
       "after_score": 99,
       "claim_boundary": "The correlation grid is a sensitivity analysis, not a measured joint posterior or an instrument-time recommendation; exposure cost remains unmodelled.",
       "repository_url": "https://github.com/Biswajit1999/finding-earth-2",
-      "release_url": "https://github.com/Biswajit1999/finding-earth-2/releases/tag/v2.1.1",
+      "release_url": "https://github.com/Biswajit1999/finding-earth-2/releases/tag/v2.1.2",
       "live_url": "https://biswajit1999.github.io/finding-earth-2/information-gain/"
+    },
+    {
+      "rank": 9,
+      "slug": "AstroBis",
+      "title": "AstroBis Small-Body Evidence",
+      "version": "v1.3.1",
+      "source_ref": "1aa1ef0",
+      "research_question": "How sensitive is a 0.05 AU and 140 m close-approach screen to JPL distance intervals, missing diameters, assumed albedo, and row-limited query coverage?",
+      "principal_result": "The reviewed 7,500-row chronological prefix contains 586 nominal-close approaches, of which 396 remain close at the three-sigma maximum distance; 190 nominal-close rows cross the distance boundary. Only 235 rows have measured diameters, and 61 nominal-close rows are albedo-sensitive around the 140 m screen.",
+      "evidence": ["7,500 of 39,427 matching JPL CAD rows with explicit 19.0% coverage", "235 measured diameters and 7,263 H-derived sensitivity intervals", "Six numerical regression tests and deterministic JSON/CSV/SVG products", "Cross-platform canonical-LF input SHA-256 633cee41d8cbab84f8ed037106b15b36088abce4bcca4c767df6e826d8f679b1", "Node 24 validation, static build, Pages gate, and zero npm vulnerabilities"],
+      "before_score": 39,
+      "after_score": 96,
+      "claim_boundary": "This is a row-limited encounter-screening sensitivity audit. JPL CAD distance is not MOID, albedo cases are not object-level posteriors, and the result is not a PHA designation, impact probability, Torino score, or hazard assessment.",
+      "repository_url": "https://github.com/Biswajit1999/AstroBis",
+      "release_url": "https://github.com/Biswajit1999/AstroBis/releases/tag/v1.3.1",
+      "live_url": "https://biswajit1999.github.io/AstroBis/neo/"
     }
   ]
 }
