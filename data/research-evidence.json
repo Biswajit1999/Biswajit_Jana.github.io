@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 8,
+    "completed": 9,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.20",
-      "source_ref": "v2026.09.20",
+      "version": "v2026.09.20.1",
+      "source_ref": "v2026.09.20.1",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first eight completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 42 ranked repositories remain unfinished.",
+      "principal_result": "The first nine completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 41 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.20",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.20.1",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -137,6 +137,22 @@
       "repository_url": "https://github.com/Biswajit1999/Biswajit1999",
       "release_url": "https://github.com/Biswajit1999/Biswajit1999/releases/tag/v1.1.0",
       "live_url": "https://github.com/Biswajit1999"
+    },
+    {
+      "rank": 11,
+      "slug": "spectral-noise-budget-studio",
+      "title": "Spectral Noise Budget Studio",
+      "version": "v1.1.0",
+      "source_ref": "1791a8c",
+      "research_question": "At four declared molecular feature wavelengths, which committed JWST/NIRCam profiles retain at least half of peak response?",
+      "principal_result": "Across 16 feature/filter comparisons, four are in the half-power core, one is an edge placement, and eleven are outside useful sampled response. CH₄ at 3.30 μm in F277W retains about 0.026% of peak response, a 3,805× source-photon-limited relative-time proxy.",
+      "evidence": ["3,192 committed SVO throughput samples with source SHA-256 receipts", "16-row deterministic JSON and CSV audit", "Linear interpolation, pivot wavelength, and equivalent-width calculations", "13 data-contract, numerical-property, and headline-result tests", "Node 24 CI, Pages deployment, and zero dependency vulnerabilities", "Four release assets with GitHub-verified SHA-256 digests"],
+      "before_score": 44,
+      "after_score": 95,
+      "claim_boundary": "A pre-ETC passband-placement audit. The relative-time ratio is not a JWST exposure-time or molecular-detectability prediction, and broadband imaging does not isolate a monochromatic feature.",
+      "repository_url": "https://github.com/Biswajit1999/spectral-noise-budget-studio",
+      "release_url": "https://github.com/Biswajit1999/spectral-noise-budget-studio/releases/tag/v1.1.0",
+      "live_url": "https://biswajit1999.github.io/spectral-noise-budget-studio/"
     }
   ]
 }
