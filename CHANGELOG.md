@@ -1,5 +1,12 @@
 # Changelog
 
+## v2026.09.20.3
+
+- Advanced the Top-50 research-upgrade registry from 10/50 to 11/50.
+- Registered Adaptive Optics Wavefront Lab v3.0.0 and its full-rate CIAO telemetry-decimation audit.
+- Promoted Jana’s RV Doppler Observatory to v4.1.0 with deterministic interface-quality evidence and a published before/after graph.
+- Kept both entries explicit about their rejected temporal/inference claims and the boundary between visual presentation and scientific validity.
+
 ## v2026.09.19
 
 - Added a deterministic research evidence registry covering the first four

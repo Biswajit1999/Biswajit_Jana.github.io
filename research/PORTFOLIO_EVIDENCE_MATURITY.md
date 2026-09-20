@@ -8,5 +8,5 @@ The upgrade adds a validated data model, deterministic HTML generation,
 release-level traceability, explicit claim boundaries, automated tests, CI,
 homepage discovery, sitemap coverage, and a machine-readable entry point.
 
-The registry is deliberately incomplete: it records eight finished upgrades and
-states that 42 repositories in the ranked Top-50 queue remain unfinished.
+The registry is deliberately incomplete: it records eleven finished upgrades and
+states that 39 repositories in the ranked Top-50 queue remain unfinished.

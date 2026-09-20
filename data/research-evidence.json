@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 10,
+    "completed": 11,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.20.2",
-      "source_ref": "v2026.09.20.2",
+      "version": "v2026.09.20.3",
+      "source_ref": "v2026.09.20.3",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first ten completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 40 ranked repositories remain unfinished.",
+      "principal_result": "The first eleven completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 39 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.20.2",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.20.3",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -158,17 +158,33 @@
       "rank": 12,
       "slug": "Jana-s-RV-Doppler-Observatory",
       "title": "Jana’s RV Doppler Observatory",
-      "version": "v4.0.0",
-      "source_ref": "484b462",
+      "version": "v4.1.0",
+      "source_ref": "4c1ad4d",
       "research_question": "Are the 250 committed RV target files inference-ready under declared numerical, duplication, provenance, offset-separability, and outlier contracts, and can the browser analysis avoid instrument-zero-point confounding?",
       "principal_result": "Only 39 of 250 files pass all six inference-readiness gates. The audit finds 34,153 rows in repeated-epoch groups, 181 files with reference/offset confounding, and 44 files with extreme full-to-robust RV-span ratios; non-ready bundled files are now blocked from automatic scanning and fitting.",
-      "evidence": ["154,150 committed rows and 250 canonical SHA-256 file receipts", "Group-centered weighted candidate-period scan with no false-alarm claim", "Analytic amplitude and per-instrument systemic-offset solution in a bounded fixed-period grid", "8 JavaScript tests, 8 Python tests, and 18 structural integrity checks", "Node 24 and Python 3.12 CI plus verified Pages deployment", "Six release assets with GitHub-verified SHA-256 digests"],
+      "evidence": ["154,150 committed rows and 250 canonical SHA-256 file receipts", "Group-centered weighted candidate-period scan with no false-alarm claim", "Analytic amplitude and per-instrument systemic-offset solution in a bounded fixed-period grid", "11 JavaScript tests, 8 Python tests, 18 structural integrity checks, and 11 interface contracts", "Dark/light WCAG-AA token audit, reduced-motion controls, semantic navigation, and 390 px overflow verification", "Four v4.1 interface-evidence assets with GitHub-verified SHA-256 digests"],
       "before_score": 32,
-      "after_score": 93,
+      "after_score": 96,
       "claim_boundary": "A bundle-quality and first-pass diagnostic study. Passing the gates does not validate source-publication units or identities, and the descriptive scan and bounded fit do not establish a false-alarm probability, planet detection, posterior, or publication-grade orbit.",
       "repository_url": "https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory",
-      "release_url": "https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory/releases/tag/v4.0.0",
+      "release_url": "https://github.com/Biswajit1999/Jana-s-RV-Doppler-Observatory/releases/tag/v4.1.0",
       "live_url": "https://biswajit1999.github.io/Jana-s-RV-Doppler-Observatory/"
+    },
+    {
+      "rank": 13,
+      "slug": "Adaptive_Optics_Wavefront_Lab",
+      "title": "Adaptive Optics Wavefront Lab",
+      "version": "v3.0.0",
+      "source_ref": "9547584",
+      "research_question": "Does the 300-frame browser reduction preserve the values, distributions, and temporal content of all 15,000 released CIAO adaptive-optics telemetry frames?",
+      "principal_result": "Every retained sample matches the released FITS source within the declared six-decimal rounding, and all three distribution gates pass. The temporal-fidelity null is rejected: 20.89%, 9.19%, and 64.46% of full-rate gradient-RMS, command-RMS, and mean-flux power lies above the reduced product's 5 Hz Nyquist frequency.",
+      "evidence": ["15,000 released CIAO1 frames audited against 300 browser samples", "Exact retained-point parity within six-decimal rounding", "Three distribution gates pass and the predeclared temporal-fidelity gate fails", "Released FITS source DOI, programme metadata, and MD5 receipt", "Node 24 and Python 3.12 research verification plus Pages deployment", "Six release assets with GitHub-verified SHA-256 digests"],
+      "before_score": 51,
+      "after_score": 95,
+      "claim_boundary": "The browser asset is a sparse visual and distributional overview. It does not preserve full-rate temporal spectra and cannot support loop-bandwidth, transfer-function, controller-reconstruction, wavefront-phase, or PSF claims.",
+      "repository_url": "https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab",
+      "release_url": "https://github.com/Biswajit1999/Adaptive_Optics_Wavefront_Lab/releases/tag/v3.0.0",
+      "live_url": "https://biswajit1999.github.io/Adaptive_Optics_Wavefront_Lab/"
     }
   ]
 }
