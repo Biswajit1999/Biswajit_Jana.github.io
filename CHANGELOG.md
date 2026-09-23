@@ -1,5 +1,15 @@
 # Changelog
 
+## v2026.09.23.1
+
+- Advanced the Top-50 research-upgrade registry from 11/50 to 12/50.
+- Registered Synthetic Point-Lens Microlensing Recovery Study v0.5.1 with its
+  900-injection blind recovery experiment and 1,000-realization null test.
+- Kept event detection distinct from parameter identifiability and explicitly
+  excluded mission-completeness, yield, readiness, and survey-FPR claims.
+- Recorded the preserved failed binary-lens validation as a runtime-disabled
+  negative result rather than presenting it as planetary evidence.
+
 ## v2026.09.20.3
 
 - Advanced the Top-50 research-upgrade registry from 10/50 to 11/50.
