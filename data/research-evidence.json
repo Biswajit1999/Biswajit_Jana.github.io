@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 15,
+    "completed": 16,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.24.2",
-      "source_ref": "v2026.09.24.2",
+      "version": "v2026.09.24.3",
+      "source_ref": "v2026.09.24.3",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first fifteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 35 ranked repositories remain unfinished.",
+      "principal_result": "The first sixteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 34 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24.2",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24.3",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -249,6 +249,22 @@
       "repository_url": "https://github.com/Biswajit1999/spectrograph-rv-precision-lab",
       "release_url": "https://github.com/Biswajit1999/spectrograph-rv-precision-lab/releases/tag/v2.0.0",
       "live_url": "https://biswajit1999.github.io/spectrograph-rv-precision-lab/"
+    },
+    {
+      "rank": 18,
+      "slug": "wasp-39b-exoplanet-report",
+      "title": "WASP-39 b Supplied-Model Sensitivity Audit",
+      "version": "v2.0.0",
+      "source_ref": "e25b5c5",
+      "research_question": "Does the descriptive preference for the archived full ScCHIMERA curve over its remove-CO2 curve retain its sign under strict common support, model integration, asymmetric-error rules, every rebin origin, covariance stress tests, and contiguous wavelength-block deletion?",
+      "principal_result": "All 60 declared preprocessing designs retain a positive supplied-model contrast, spanning delta chi-square 559.6 to 780.4, and every single-bin deletion remains above 684.8. Yet deleting a 0.5-micrometre block around the 4.3-micrometre feature reduces the contrast to 3.19 and the outside-4.1-to-4.6-micrometre refit gives 6.04, demonstrating preprocessing stability but strong spectral localization.",
+      "evidence": ["93 strict common-support bins from the 94-bin Eureka PRISM spectrum", "60 fully reported sampling/error/bin-factor/origin designs", "20-cell illustrative covariance grid with eigenvalue and condition-number diagnostics", "All declared single-bin and 0.10/0.25/0.50-micrometre contiguous-block deletions", "Cross-platform offline SHA-256 verification against exact Zenodo ZIP entries", "14 tests and Python 3.11/3.12 CI with SHA-pinned Node 24 actions", "Seven release assets with GitHub-verified SHA-256 digests"],
+      "before_score": 55,
+      "after_score": 95,
+      "claim_boundary": "A descriptive sensitivity audit of two fixed archive curves after one fitted offset each. It is not an atmospheric retrieval, nested hypothesis test, molecular detection significance, abundance constraint, detector-level covariance inference, or reproduction of the literature G395H retrieval.",
+      "repository_url": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report",
+      "release_url": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report/releases/tag/v2.0.0",
+      "live_url": "https://biswajit1999.github.io/wasp-39b-exoplanet-report/"
     }
   ]
 }
