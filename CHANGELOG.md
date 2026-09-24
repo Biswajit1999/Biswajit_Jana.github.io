@@ -1,5 +1,14 @@
 # Changelog
 
+## v2026.09.24.1
+
+- Advanced the Top-50 research-upgrade registry from 13/50 to 14/50.
+- Registered WASP-80 b Native-Channel Morphology Audit v1.0.0 with all 113
+  journal source-data channels and 60 fully reported design rows.
+- Preserved the key inference boundary: component-removed posterior curves are
+  a morphology diagnostic, not an independently refitted methane-free model or
+  a new detection significance.
+
 ## v2026.09.24
 
 - Advanced the Top-50 research-upgrade registry from 12/50 to 13/50.

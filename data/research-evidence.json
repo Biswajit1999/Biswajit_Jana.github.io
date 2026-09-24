@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 13,
+    "completed": 14,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.24",
-      "source_ref": "v2026.09.24",
+      "version": "v2026.09.24.1",
+      "source_ref": "v2026.09.24.1",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first thirteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 37 ranked repositories remain unfinished.",
+      "principal_result": "The first fourteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 36 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24.1",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -217,6 +217,22 @@
       "repository_url": "https://github.com/Biswajit1999/k2-18b-exoplanet-report",
       "release_url": "https://github.com/Biswajit1999/k2-18b-exoplanet-report/releases/tag/v1.0.0",
       "live_url": "https://biswajit1999.github.io/k2-18b-exoplanet-report/"
+    },
+    {
+      "rank": 16,
+      "slug": "wasp-80b-exoplanet-report",
+      "title": "WASP-80 b Native-Channel Morphology Audit",
+      "version": "v1.0.0",
+      "source_ref": "af0a8f0",
+      "research_question": "Does the descriptive residual contrast between the published full and component-removed CH4 curves keep the same sign across declared adjacent-channel bin widths and origins in both transmission and emission?",
+      "principal_result": "All 113 native source-data channels were reconstructed. The component-removal residual contrast remains positive across all 30 declared designs per geometry: 63.17 to 85.74 in transmission and 217.65 to 245.99 in emission. The result is posterior morphology sensitivity, not an independent methane detection test.",
+      "evidence": ["113 native JWST/NIRCam source-data channels with source and derivative SHA-256 receipts", "30 declared bin-width/origin designs per geometry and 60 fully reported rows", "Complete leave-one-bin-out diagnostics", "One-sector TESS acquisition boundary stated explicitly", "15 tests and Python 3.10/3.12/3.13 CI", "Portable spectral evidence gates and tolerance-based nonlinear optimizer regression"],
+      "before_score": 50,
+      "after_score": 94,
+      "claim_boundary": "The component-removed curves are posterior spectral post-processing from a retrieval fitted to the same observations, not independently refitted nested null models. The contrast is not a detection significance, abundance retrieval, validation set, or reproduction of the published atmospheric retrieval.",
+      "repository_url": "https://github.com/Biswajit1999/wasp-80b-exoplanet-report",
+      "release_url": "https://github.com/Biswajit1999/wasp-80b-exoplanet-report/releases/tag/v1.0.0",
+      "live_url": "https://biswajit1999.github.io/wasp-80b-exoplanet-report/"
     }
   ]
 }
