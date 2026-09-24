@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "verified_date": "2026-09-24",
+  "verified_date": "2026-09-25",
   "programme": {
     "title": "Top-50 research upgrade programme",
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 16,
+    "completed": 17,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -265,6 +265,22 @@
       "repository_url": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report",
       "release_url": "https://github.com/Biswajit1999/wasp-39b-exoplanet-report/releases/tag/v2.0.0",
       "live_url": "https://biswajit1999.github.io/wasp-39b-exoplanet-report/"
+    },
+    {
+      "rank": 19,
+      "slug": "wasp-43b-exoplanet-report",
+      "title": "WASP-43 b Phase-Curve Identifiability Audit",
+      "version": "v2.0.0",
+      "source_ref": "1844be3",
+      "research_question": "Does a pre-eclipse first-harmonic maximum remain directionally stable across reductions, wavelength windows, aggregation rules, uncertainty conventions, and wavelength deletion, and can four archived phase spectra identify the source paper's two-harmonic model?",
+      "principal_result": "All 180 predeclared first-harmonic designs place the maximum before eclipse, spanning -9.71 to -7.66 degrees with a median of -8.82 degrees; leave-one-trusted-wavelength results span -9.72 to -8.95 degrees. Four phase observations identify the three-parameter first harmonic with one residual degree of freedom, while the five-parameter two-harmonic design has rank four and is underidentified.",
+      "evidence": ["Two HDF5 spectra verified byte-for-byte against exact Zenodo archive members", "11 trusted 5.25-10.25 micrometre bins used for inference and three shadowed-region bins retained only for provenance/display", "180 fully reported reduction/window/aggregation/error-rule designs", "22 leave-one-wavelength-out refits across both reductions", "Explicit one- versus two-harmonic design-matrix rank audit", "13 tests and Python 3.11/3.12 CI with SHA-pinned Node 24 actions", "Seven v2.0.0 release assets with GitHub-verified digests"],
+      "before_score": 48,
+      "after_score": 94,
+      "claim_boundary": "A sensitivity and identifiability audit of four archived phase-binned spectra. It supports a pre-eclipse maximum only under a first-harmonic summary; it does not reproduce the full time-series two-harmonic inference, shared covariance, a hotspot posterior, bolometric energy budget, Bond albedo, heat redistribution, or atmospheric retrieval.",
+      "repository_url": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report",
+      "release_url": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report/releases/tag/v2.0.0",
+      "live_url": "https://biswajit1999.github.io/wasp-43b-exoplanet-report/"
     }
   ]
 }
