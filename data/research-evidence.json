@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 17,
+    "completed": 18,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -281,6 +281,22 @@
       "repository_url": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report",
       "release_url": "https://github.com/Biswajit1999/wasp-43b-exoplanet-report/releases/tag/v2.0.0",
       "live_url": "https://biswajit1999.github.io/wasp-43b-exoplanet-report/"
+    },
+    {
+      "rank": 20,
+      "slug": "hat-p-11b-exoplanet-report",
+      "title": "HAT-P-11 b Helium Estimator Sensitivity Audit",
+      "version": "v2.0.0",
+      "source_ref": "b9967f3",
+      "research_question": "Does the transit-centred helium dip remain positive across declared phase windows, baseline exclusions, baseline sides, weighting rules, and point deletion while preserving exact archive provenance?",
+      "principal_result": "All 74 valid predeclared estimator designs retain a positive helium dip, spanning 0.511% to 1.160% with a median of 0.841%. The 16 default-design leave-one-point-out estimates span 0.747% to 1.003%; formal signal-to-noise values of 3.64 to 14.06 are conditional on independent reported errors and are not an independent detection significance.",
+      "evidence": ["Two renamed inputs matched to exact Zenodo ZIP members by canonical-LF SHA-256", "74 fully reported phase-window, exclusion, weighting, and baseline-side designs", "16 leave-one-point-out estimates for the default in- and out-of-transit samples", "Published 1.08 +/- 0.05% result kept separate from the repository estimator", "Four tests and Python 3.11 CI with SHA-pinned Node 24 actions", "Six v2.0.0 release assets with GitHub-verified SHA-256 digests"],
+      "before_score": 44,
+      "after_score": 94,
+      "claim_boundary": "A descriptive sensitivity audit of a phase-folded literature product. It is not a raw-exposure re-reduction, covariance-aware transit-model reproduction, independent helium detection significance, mass-loss rate, or atmospheric-escape-rate inference.",
+      "repository_url": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report",
+      "release_url": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report/releases/tag/v2.0.0",
+      "live_url": "https://biswajit1999.github.io/hat-p-11b-exoplanet-report/"
     }
   ]
 }
