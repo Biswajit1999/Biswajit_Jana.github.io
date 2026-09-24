@@ -22,6 +22,8 @@ class EvidenceRegistryTests(unittest.TestCase):
         self.assertIn('href="#main">Skip to evidence</a>', generated)
         self.assertIn('aria-label="Programme status"', generated)
         self.assertIn('prefers-reduced-motion:reduce', generated)
+        self.assertIn('.evidence-card{min-width:0', generated)
+        self.assertIn('.evidence-list li,.boundary span{overflow-wrap:anywhere}', generated)
         for repository in load_evidence()["repositories"]:
             self.assertIn(repository["slug"], generated)
 
