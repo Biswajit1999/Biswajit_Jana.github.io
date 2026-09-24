@@ -1,5 +1,16 @@
 # Changelog
 
+## v2026.09.24
+
+- Advanced the Top-50 research-upgrade registry from 12/50 to 13/50.
+- Registered K2-18 b Spectral Robustness Audit v1.0.0 with 30 fully reported
+  band/continuum definitions and 27 leave-one-bin-out MIRI refits.
+- Corrected the original NIRISS+NIRSpec spectrum's mistaken MIRI attribution and
+  registered the actual MIRI product as a separately hashed source asset.
+- Preserved the negative robustness result: no tested band contrast reaches the
+  declared 3-sigma threshold, and the MIRI flatness rejection fails the strict
+  every-one-bin-deletion rule.
+
 ## v2026.09.23.1
 
 - Advanced the Top-50 research-upgrade registry from 11/50 to 12/50.

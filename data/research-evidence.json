@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "verified_date": "2026-09-23",
+  "verified_date": "2026-09-24",
   "programme": {
     "title": "Top-50 research upgrade programme",
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 12,
+    "completed": 13,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.23.1",
-      "source_ref": "v2026.09.23.1",
+      "version": "v2026.09.24",
+      "source_ref": "v2026.09.24",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first twelve completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 38 ranked repositories remain unfinished.",
+      "principal_result": "The first thirteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 37 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.23.1",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -201,6 +201,22 @@
       "repository_url": "https://github.com/Biswajit1999/roman-microlensing-readiness",
       "release_url": "https://github.com/Biswajit1999/roman-microlensing-readiness/releases/tag/v0.5.1",
       "live_url": "https://github.com/Biswajit1999/roman-microlensing-readiness#v05-result"
+    },
+    {
+      "rank": 15,
+      "slug": "k2-18b-exoplanet-report",
+      "title": "K2-18 b Spectral Robustness Audit",
+      "version": "v1.0.0",
+      "source_ref": "652ad23",
+      "research_question": "Do the repository's descriptive 4.3 micrometre contrast and a diagonal-error MIRI flat-spectrum test remain significant under predeclared window and leave-one-bin-out perturbations?",
+      "principal_result": "The historical window reproduces at 4.07 ± 23.16 ppm (0.176 sigma), while 30 predeclared window choices span -0.861 to +2.258 sigma and none reaches |3 sigma|. The 27-bin MIRI flat fit gives p = 0.000968, but deleting the 5.375 micrometre bin raises p to 0.07832, so the result fails the declared every-one-bin-deletion robustness rule.",
+      "evidence": ["4,411-point NIRISS+NIRSpec spectrum and separate 28-bin MIRI source product with canonical SHA-256 receipts", "30 fully reported band/continuum definitions", "27 leave-one-bin-out MIRI refits", "NASA Exoplanet Archive parameter snapshot with exact TAP query", "17 tests, Ruff validation, and Python 3.10/3.12/3.13 CI", "Deterministic numerical JSON/CSV evidence and semantically validated SVG figures"],
+      "before_score": 45,
+      "after_score": 96,
+      "claim_boundary": "A sensitivity audit of two simple descriptive statistics under diagonal uncertainties. It is not an atmospheric retrieval, molecular detection or exclusion, covariance-aware re-reduction, habitability assessment, or biosignature claim.",
+      "repository_url": "https://github.com/Biswajit1999/k2-18b-exoplanet-report",
+      "release_url": "https://github.com/Biswajit1999/k2-18b-exoplanet-report/releases/tag/v1.0.0",
+      "live_url": "https://biswajit1999.github.io/k2-18b-exoplanet-report/"
     }
   ]
 }
