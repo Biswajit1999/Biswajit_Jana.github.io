@@ -1,5 +1,15 @@
 # Changelog
 
+## v2026.09.25.3
+
+- Advanced the Top-50 research-upgrade registry from 19/50 to 20/50.
+- Registered HST WFC3/IR Calibrated Ramp-Stability Audit v1.0.0 with
+  unit-aware accumulated-electron reconstruction, three exact MAST receipts,
+  70 accepted measurements, and 18 fully reported sensitivity designs.
+- Withdrew the earlier nonlinearity headline: every input is already
+  `NLINCORR=COMPLETE`, so the negative pooled drift is published only as a
+  two-exposure post-calibration stability result.
+
 ## v2026.09.25.2
 
 - Advanced the Top-50 research-upgrade registry from 18/50 to 19/50.

@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 19,
+    "completed": 20,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.25.2",
-      "source_ref": "v2026.09.25.2",
+      "version": "v2026.09.25.3",
+      "source_ref": "v2026.09.25.3",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first nineteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 31 ranked repositories remain unfinished.",
+      "principal_result": "The first twenty completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 30 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.25.2",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.25.3",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -313,6 +313,22 @@
       "repository_url": "https://github.com/Biswajit1999/hst-cte-trails",
       "release_url": "https://github.com/Biswajit1999/hst-cte-trails/releases/tag/v1.0.0",
       "live_url": "https://biswajit1999.github.io/hst-cte-trails/"
+    },
+    {
+      "rank": 22,
+      "slug": "hst-ir-ramp-check",
+      "title": "HST WFC3/IR Calibrated Ramp-Stability Audit",
+      "version": "v1.0.0",
+      "source_ref": "97e6631",
+      "research_question": "After reconstructing accumulated electrons from UNITCORR-complete IMA count-rate arrays, is the residual late-versus-early ramp drift stable under declared pixel-selection choices?",
+      "principal_result": "The corrected default design retains 70 pixel measurements across two usable exposures. Across all 18 declared selection designs, the pooled median late-to-early rate change remains negative, spanning -2.762% to -1.074%; however, one exposure's design range crosses zero and only two exposures are usable, so the result is descriptive rather than detector-wide.",
+      "evidence": ["Three exact public MAST IMA byte receipts with hard file-size and SHA-256 verification", "BUNIT-aware SCI and ERR conversion from ELECTRONS/S to accumulated ELECTRONS using TIME.PIXVALUE", "70 accepted single-pixel measurements with zero-time, DQ, fit-conditioning, and physical-slope gates", "18 fully reported designs crossing requested pixel count, separation, and early-window fraction", "Synthetic curvature injection/recovery and null controls", "55 tests, Ruff validation, Python 3.11/3.12 and Node 24 CI, Pages deployment, and zero npm vulnerabilities", "Nine v1.0.0 release assets including measurements, robustness tables, manifest, and before/after maturity graph"],
+      "before_score": 47,
+      "after_score": 94,
+      "claim_boundary": "A descriptive post-calibration ramp-stability audit of two usable exposures. Because NLINCORR is already COMPLETE, it is not a raw-detector nonlinearity measurement, a new calibration reference, an independent NLIN validation, or a population-level uncertainty interval.",
+      "repository_url": "https://github.com/Biswajit1999/hst-ir-ramp-check",
+      "release_url": "https://github.com/Biswajit1999/hst-ir-ramp-check/releases/tag/v1.0.0",
+      "live_url": "https://biswajit1999.github.io/hst-ir-ramp-check/"
     }
   ]
 }
