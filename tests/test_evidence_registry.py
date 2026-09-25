@@ -13,8 +13,8 @@ class EvidenceRegistryTests(unittest.TestCase):
     def test_committed_evidence_is_valid(self) -> None:
         document = load_evidence()
         validate_evidence(document)
-        self.assertEqual(document["programme"]["completed"], 18)
-        self.assertEqual(len(document["repositories"]), 18)
+        self.assertEqual(document["programme"]["completed"], 19)
+        self.assertEqual(len(document["repositories"]), 19)
 
     def test_registry_build_is_current_and_accessible(self) -> None:
         generated = render(load_evidence())

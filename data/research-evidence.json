@@ -6,7 +6,7 @@
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 18,
+    "completed": 19,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -62,16 +62,16 @@
       "rank": 6,
       "slug": "Biswajit_Jana.github.io",
       "title": "Research Portfolio Evidence Registry",
-      "version": "v2026.09.24.3",
-      "source_ref": "v2026.09.24.3",
+      "version": "v2026.09.25.2",
+      "source_ref": "v2026.09.25.2",
       "research_question": "Can a large research portfolio expose questions, generated results, validation, releases, and limitations in one reviewer-auditable layer?",
-      "principal_result": "The first sixteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 34 ranked repositories remain unfinished.",
+      "principal_result": "The first nineteen completed upgrades are represented by one validated schema and a deterministic public registry, while the page states that 31 ranked repositories remain unfinished.",
       "evidence": ["121 repositories audited", "50-repository ranked queue", "schema validation", "deterministic HTML build and CI"],
       "before_score": 60,
       "after_score": 95,
       "claim_boundary": "The registry records verified project evidence and upgrade completeness; it is not a citation index, peer-review decision, or ranking of scientific importance.",
       "repository_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.24.3",
+      "release_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io/releases/tag/v2026.09.25.2",
       "live_url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html"
     },
     {
@@ -297,6 +297,22 @@
       "repository_url": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report",
       "release_url": "https://github.com/Biswajit1999/hat-p-11b-exoplanet-report/releases/tag/v2.0.0",
       "live_url": "https://biswajit1999.github.io/hat-p-11b-exoplanet-report/"
+    },
+    {
+      "rank": 21,
+      "slug": "hst-cte-trails",
+      "title": "HST ACS/WFC Parallel-Trail Estimator Robustness Audit",
+      "version": "v1.0.0",
+      "source_ref": "7ffb853",
+      "research_question": "How stable is a fitted ACS/WFC parallel-trail suppression estimator across mutable archive reprocessing, repeated detector coordinates, individual exposures, and exposure deletion?",
+      "principal_result": "On the current six verified MAST FLT/FLC bytes, the raw median suppression is 0.843 across 38 accepted measurements and the 34-coordinate-cluster median is 0.883 with a 95% cluster-bootstrap interval of 0.495 to 1.094. Single-exposure medians span 0.565 to 1.194 and leave-one-exposure-out medians span 0.612 to 1.025. All six archive hashes changed after reprocessing; the positive direction persists, but the magnitude is not stable enough for a population-level calibration claim.",
+      "evidence": ["Six exact MAST ACS/WFC FLT/FLC byte receipts with hard size and SHA-256 verification", "120 candidates, 38 accepted measurements, and 88 transparent quality-control records", "34 detector-coordinate clusters with 10,000 cluster bootstrap resamples", "Per-exposure and leave-one-exposure-out sensitivity analysis", "CALACS 10.4.1 and PCTETAB provenance captured from current FITS headers", "65 tests, Ruff validation, Python 3.11/3.12 and Node 24 CI, Pages deployment, and zero npm vulnerabilities", "Seven v1.0.0 release assets including machine-readable measurements and robustness designs"],
+      "before_score": 68,
+      "after_score": 95,
+      "claim_boundary": "A one-field, three-exposure robustness audit of an empirical parallel-trail estimator. It is not a population-level calibration-accuracy study, a new PCTETAB, a serial-transfer analysis, or proof that the four-pixel buffer eliminates PSF-wing contamination.",
+      "repository_url": "https://github.com/Biswajit1999/hst-cte-trails",
+      "release_url": "https://github.com/Biswajit1999/hst-cte-trails/releases/tag/v1.0.0",
+      "live_url": "https://biswajit1999.github.io/hst-cte-trails/"
     }
   ]
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## v2026.09.25.2
+
+- Advanced the Top-50 research-upgrade registry from 18/50 to 19/50.
+- Registered HST ACS/WFC Parallel-Trail Estimator Robustness Audit v1.0.0
+  with hard receipts for six current MAST products, 38 published measurements,
+  34 detector-coordinate clusters, and 10,000 cluster bootstrap resamples.
+- Preserved the key negative result: the suppression direction stays positive,
+  but the exposure and archive-refresh sensitivity is too large for a
+  population-level calibration claim.
+
 ## v2026.09.24.1
 
 - Advanced the Top-50 research-upgrade registry from 13/50 to 14/50.
