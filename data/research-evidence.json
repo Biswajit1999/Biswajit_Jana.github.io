@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "verified_date": "2026-09-25",
+  "verified_date": "2026-09-26",
   "programme": {
     "title": "Top-50 research upgrade programme",
     "audited_repositories": 121,
     "eligible_first_party": 115,
     "ranked_queue": 50,
-    "completed": 20,
+    "completed": 21,
     "policy": "A repository is complete only after a scoped research question, generated evidence, explicit limitations, automated validation, a public release, and live-link verification."
   },
   "repositories": [
@@ -322,13 +322,29 @@
       "source_ref": "97e6631",
       "research_question": "After reconstructing accumulated electrons from UNITCORR-complete IMA count-rate arrays, is the residual late-versus-early ramp drift stable under declared pixel-selection choices?",
       "principal_result": "The corrected default design retains 70 pixel measurements across two usable exposures. Across all 18 declared selection designs, the pooled median late-to-early rate change remains negative, spanning -2.762% to -1.074%; however, one exposure's design range crosses zero and only two exposures are usable, so the result is descriptive rather than detector-wide.",
-      "evidence": ["Three exact public MAST IMA byte receipts with hard file-size and SHA-256 verification", "BUNIT-aware SCI and ERR conversion from ELECTRONS/S to accumulated ELECTRONS using TIME.PIXVALUE", "70 accepted single-pixel measurements with zero-time, DQ, fit-conditioning, and physical-slope gates", "18 fully reported designs crossing requested pixel count, separation, and early-window fraction", "Synthetic curvature injection/recovery and null controls", "55 tests, Ruff validation, Python 3.11/3.12 and Node 24 CI, Pages deployment, and zero npm vulnerabilities", "Nine v1.0.0 release assets including measurements, robustness tables, manifest, and before/after maturity graph"],
+      "evidence": ["Three exact public MAST IMA byte receipts with hard file-size and SHA-256 verification", "BUNIT-aware SCI and ERR conversion from ELECTRONS/S to accumulated ELECTRONS using TIME.PIXVALUE", "70 accepted single-pixel measurements with zero-time, DQ, fit-conditioning, and physical-slope gates", "18 fully reported designs crossing requested pixel count, separation, and early-window fraction", "Synthetic curvature injection/recovery and null controls", "55 tests, Ruff validation, Python 3.11/3.12 and Node 24 CI, Pages deployment, and zero npm vulnerabilities", "NASA Hubble GLB with SHA-256 provenance, reduced-motion rendering, and desktop/mobile verification"],
       "before_score": 47,
       "after_score": 94,
       "claim_boundary": "A descriptive post-calibration ramp-stability audit of two usable exposures. Because NLINCORR is already COMPLETE, it is not a raw-detector nonlinearity measurement, a new calibration reference, an independent NLIN validation, or a population-level uncertainty interval.",
       "repository_url": "https://github.com/Biswajit1999/hst-ir-ramp-check",
       "release_url": "https://github.com/Biswajit1999/hst-ir-ramp-check/releases/tag/v1.0.0",
       "live_url": "https://biswajit1999.github.io/hst-ir-ramp-check/"
+    },
+    {
+      "rank": 23,
+      "slug": "jwst-shutter-light",
+      "title": "JWST/NIRSpec Micro-Shutter Throughput Loss Sandbox",
+      "version": "v1.0.0",
+      "source_ref": "c57850f",
+      "research_question": "Conditional on a planned MSA shutter opening, how do target-centering error and wavelength-dependent PSF width alter simplified geometric slit throughput, and what is the separate penalty under a conservative 0–4% random command-failure scenario?",
+      "principal_result": "The corrected 20,000-trial model gives mean geometric throughput 0.9490 conditional on command success, with a Monte Carlo 95% interval of 0.9482 to 0.9499. A separate conservative 4% random non-opening scenario gives mean effective throughput 0.9100. Across 20 declared designs, conditional means span 0.6185 to 0.9568; these are synthetic Gaussian-PSF scenarios, not forecasts for a planned observation.",
+      "evidence": ["Official STScI shutter-operability statement checksum-recorded as a provenance source", "Static target-planning operability separated from conditional photon throughput", "20 fully reported centering-scatter and command-failure sensitivity designs", "Analytic zero-offset cross-check and injected-width recovery", "79 tests, Python 3.11/3.12 and Node 24 CI, Pages deployment, and zero npm vulnerabilities", "Official 1.0 MB NASA/Christopher R. Meaney Draco GLB with SHA-256 provenance", "Eight v1.0.0 release assets including machine-readable summary, sensitivity grid, manifest, and figures"],
+      "before_score": 50,
+      "after_score": 94,
+      "claim_boundary": "A bounded synthetic geometric slit-loss sandbox. It is not a target-specific MPT forecast, real NIRSpec telemetry analysis, spatial shutter-operability model, official path-loss correction, optical-throughput budget, or observing-time calculator.",
+      "repository_url": "https://github.com/Biswajit1999/jwst-shutter-light",
+      "release_url": "https://github.com/Biswajit1999/jwst-shutter-light/releases/tag/v1.0.0",
+      "live_url": "https://biswajit1999.github.io/jwst-shutter-light/"
     }
   ]
 }

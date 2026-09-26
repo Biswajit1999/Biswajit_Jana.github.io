@@ -78,8 +78,6 @@ def _esc(value: object) -> str:
 
 def _repository_card(repository: dict[str, object]) -> str:
     evidence = "".join(f"<li>{_esc(item)}</li>" for item in repository["evidence"])
-    before = int(repository["before_score"])
-    after = int(repository["after_score"])
     return f"""
       <article class="evidence-card" aria-labelledby="repo-{_esc(repository['rank'])}">
         <header class="card-head">
@@ -88,15 +86,7 @@ def _repository_card(repository: dict[str, object]) -> str:
         </header>
         <p class="question"><strong>Research question</strong>{_esc(repository['research_question'])}</p>
         <div class="result"><span>Generated result</span><p>{_esc(repository['principal_result'])}</p></div>
-        <div class="card-grid">
-          <section aria-label="Evidence markers"><h3>Evidence</h3><ul class="evidence-list">{evidence}</ul></section>
-          <section aria-label="Research maturity comparison">
-            <h3>Evidence maturity</h3>
-            <div class="score-row"><span>Before</span><progress value="{before}" max="100">{before}%</progress><b>{before}</b></div>
-            <div class="score-row after"><span>After</span><progress value="{after}" max="100">{after}%</progress><b>{after}</b></div>
-            <p class="delta">+{after - before} rubric points</p>
-          </section>
-        </div>
+        <section class="card-grid" aria-label="Evidence markers"><h3>Evidence</h3><ul class="evidence-list">{evidence}</ul></section>
         <aside class="boundary"><strong>Boundary of inference</strong><span>{_esc(repository['claim_boundary'])}</span></aside>
         <footer class="card-links">
           <a href="{_esc(repository['repository_url'])}">Repository</a>
@@ -134,7 +124,7 @@ def render(document: dict[str, object]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Auditable research evidence registry for Biswajit Jana's Top-50 repository upgrade programme: questions, generated results, releases, validation, maturity, and limitations.">
+  <meta name="description" content="Auditable research evidence registry for Biswajit Jana's Top-50 repository upgrade programme: questions, generated results, releases, validation, and limitations.">
   <link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html">
   <title>Research Evidence Registry · Biswajit Jana</title>
   <script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script>
@@ -153,12 +143,11 @@ def render(document: dict[str, object]) -> str:
     .card-head{{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px}}.card-head>div,.card-grid>*{{min-width:0}}.card-head h2{{font-family:Georgia,serif;font-size:clamp(1.55rem,3vw,2.35rem);line-height:1.12;margin:5px 0 0;overflow-wrap:anywhere}}.rank{{color:var(--teal)}}.release{{background:var(--surface-2);padding:7px 10px;border-radius:999px;white-space:nowrap}}
     .question{{max-width:900px;font-size:1.08rem}}.question strong,.boundary strong{{display:block;color:var(--navy);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}}.evidence-list li,.boundary span{{overflow-wrap:anywhere}}
     .result{{background:var(--navy);color:#fff;padding:20px 22px;margin:24px 0;border-radius:12px}}.result>span{{color:#bfdbfe}}.result p{{margin:5px 0 0;max-width:900px}}
-    .card-grid{{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);margin:28px 0}}.card-grid h3{{font-size:1rem}}.evidence-list{{padding-left:20px;margin:0}}.evidence-list li+li{{margin-top:6px}}
-    .score-row{{display:grid;grid-template-columns:54px 1fr 36px;align-items:center;gap:10px;font-variant-numeric:tabular-nums}}.score-row+ .score-row{{margin-top:12px}}progress{{width:100%;height:12px;accent-color:var(--gold)}}.score-row.after progress{{accent-color:var(--teal)}}.delta{{color:var(--teal);font-weight:750;margin:9px 0 0 64px}}
+    .card-grid{{margin:28px 0}}.card-grid h3{{font-size:1rem}}.evidence-list{{columns:2;column-gap:clamp(28px,5vw,64px);padding-left:20px;margin:0}}.evidence-list li{{break-inside:avoid}}.evidence-list li+li{{margin-top:6px}}
     .boundary{{display:flex;gap:20px;background:var(--surface-2);padding:16px 18px;border-radius:10px}}.boundary strong{{min-width:160px;margin:0}}.boundary span{{color:var(--soft)}}.card-links{{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}}.card-links a{{font-weight:700}}.card-links code{{margin-left:auto;color:var(--soft);overflow-wrap:anywhere}}
     .status-note{{margin-top:42px;padding:24px;border:1px solid var(--line);border-radius:14px}}.status-note h2{{font-family:Georgia,serif}}.status-note p{{color:var(--soft);max-width:800px;margin-bottom:0}}
     footer.site-foot{{border-top:1px solid var(--line);padding:28px 24px;color:var(--soft)}}.foot-inner{{max-width:var(--max);margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}}
-    @media(max-width:760px){{.head-inner,.card-head,.boundary{{align-items:flex-start;flex-direction:column}}nav{{gap:12px}}.summary{{grid-template-columns:1fr 1fr}}.card-grid{{grid-template-columns:1fr}}.card-links code{{width:100%;margin:0}}}}
+    @media(max-width:760px){{.head-inner,.card-head,.boundary{{align-items:flex-start;flex-direction:column}}nav{{gap:12px}}.summary{{grid-template-columns:1fr 1fr}}.evidence-list{{columns:1}}.card-links code{{width:100%;margin:0}}}}
     @media(max-width:420px){{.summary{{grid-template-columns:1fr}}main,.head-inner{{padding-left:18px;padding-right:18px}}}}
     @media(prefers-color-scheme:dark){{:root{{--bg:#0b1220;--surface:#111c2e;--surface-2:#17253a;--ink:#f1f5f9;--soft:#cbd5e1;--line:#31415a;--navy:#93c5fd;--teal:#5eead4;--gold:#fbbf24;--ring:#60a5fa}}.result{{background:#172d55}}}}
     @media(prefers-reduced-motion:reduce){{html{{scroll-behavior:auto}}}}
@@ -180,7 +169,7 @@ def render(document: dict[str, object]) -> str:
     <p class="policy"><strong>Completion rule.</strong> {_esc(programme['policy'])}</p>
     <section class="registry" aria-label="Completed repository upgrades">{cards}
     </section>
-    <section class="status-note"><h2>What this registry does not claim</h2><p>Maturity scores measure the presence of auditable research practices across ten documented dimensions. They are not peer-review scores, citation metrics, or literal multipliers of scientific quality. Repositories not shown here remain in the ranked queue and are not represented as upgraded.</p></section>
+    <section class="status-note"><h2>What this registry does not claim</h2><p>Entries document repository evidence and inference boundaries; they are not peer review, citation metrics, or rankings of scientific merit. Repositories not shown here remain in the working queue and are not represented as complete.</p></section>
   </main>
   <footer class="site-foot"><div class="foot-inner"><span>Biswajit Jana · research evidence registry</span><span>Source: <a href="data/research-evidence.json">versioned JSON</a></span></div></footer>
 </body>
