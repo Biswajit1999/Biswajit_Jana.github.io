@@ -74,7 +74,7 @@
       .then(function (data) {
         graphData = focusedOverview(data);
         var note = document.getElementById("atlas-graph-note");
-        if (note) note.textContent = "Focused overview: the 18 most-connected research concepts and representative repositories. Drag to pan, scroll to zoom, or click a node.";
+        if (note) note.textContent = "Focused view of the most-connected concepts and representative repositories; use the relationship index for the complete curated manifest.";
         render();
       })
       .catch(function () {
@@ -109,7 +109,6 @@
       if (neighborIndex[e.target]) neighborIndex[e.target].add(e.source);
     });
 
-    var orbitTimer = null;
     var orbitDistance = 300; // replaced with the real fitted distance once layout settles
     var orbitCenter = { x: 0, y: 0, z: 0 }; // the graph's actual look-at point (rarely the world origin)
     var orbitY = 0;
@@ -152,10 +151,6 @@
         .onEngineStop(function () {
           var fitMs = reduceMotionMQ.matches ? 0 : 600;
           fitToGraph(fitMs);
-          // fitToGraph's camera move is tweened over fitMs; starting the orbit immediately
-          // would read the camera's pre-tween position for its starting angle and effectively
-          // cut the tween short. Wait for it to actually finish first.
-          if (!reduceMotionMQ.matches && !orbitTimer) setTimeout(startOrbit, fitMs + 30);
         });
     } catch (err) {
       // never leave a silently-broken empty box -- fall back to the accessible,
@@ -262,30 +257,9 @@
       orbitDistance = Math.hypot(camPos.x - center.x, camPos.y - center.y, camPos.z - center.z);
     }
 
-    // gentle auto-orbit only while nothing is selected, and only when motion is welcome —
-    // this is the one continuous ambient motion in the scene, matching "ambient" motion
-    // tokens elsewhere on the page rather than a constant spinning showpiece.
-    // Orbits around the graph's actual look-at center (not the world origin) and keeps
-    // facing that same point on every tick, so the cluster never drifts off-canvas.
-    function startOrbit() {
-      var angle = Math.atan2(
-        Graph.cameraPosition().x - orbitCenter.x,
-        Graph.cameraPosition().z - orbitCenter.z
-      );
-      orbitTimer = setInterval(function () {
-        if (selectedId || document.hidden) return;
-        angle += Math.PI / 1400;
-        Graph.cameraPosition({
-          x: orbitCenter.x + orbitDistance * Math.sin(angle),
-          y: orbitY,
-          z: orbitCenter.z + orbitDistance * Math.cos(angle)
-        }, orbitCenter);
-      }, 30);
-      section.addEventListener("atlas:graph-teardown", function () { clearInterval(orbitTimer); }, { once: true });
-    }
-
     wireControls();
     wireSemanticList();
+    refreshVisibility();
 
     window.addEventListener("atlas:project-selected", function (e) {
       var pid = "project:" + e.detail.slug;
@@ -310,6 +284,32 @@
       return base;
     }
     function linkColor(l) { return isLit(l) ? pal.linkLit : pal.link; }
+
+    function endpointId(endpoint) { return typeof endpoint === "object" ? endpoint.id : endpoint; }
+    function refreshVisibility() {
+      var directMatches = new Set();
+      graphData.nodes.forEach(function (node) {
+        if (!activeTypeFilters.has(node.type)) return;
+        if (!searchTerm || node.label.toLowerCase().indexOf(searchTerm) > -1) directMatches.add(node.id);
+      });
+      function visibleNode(node) {
+        if (!activeTypeFilters.has(node.type)) return false;
+        if (!searchTerm) return true;
+        if (directMatches.has(node.id)) return true;
+        var neighbors = neighborIndex[node.id] || new Set();
+        return Array.from(neighbors).some(function (id) { return directMatches.has(id); });
+      }
+      function visibleLink(link) {
+        var source = graphData.nodes.find(function (node) { return node.id === endpointId(link.source); });
+        var target = graphData.nodes.find(function (node) { return node.id === endpointId(link.target); });
+        return !!(source && target && visibleNode(source) && visibleNode(target));
+      }
+      Graph.nodeVisibility(visibleNode).linkVisibility(visibleLink);
+      var nodeCount = graphData.nodes.filter(visibleNode).length;
+      var edgeCount = graphData.edges.filter(visibleLink).length;
+      var status = document.getElementById("atlas-graph-status");
+      if (status) status.textContent = nodeCount + " visible nodes · " + edgeCount + " visible relationships";
+    }
 
     function focusNode(n) {
       var distRatio = 1 + 80 / Math.hypot(n.x || 1, n.y || 1, n.z || 1);
@@ -354,6 +354,12 @@
       var resetBtn = document.getElementById("atlas-graph-reset");
       if (resetBtn) resetBtn.addEventListener("click", function () {
         clearSelection();
+        searchTerm = "";
+        var searchInput = document.getElementById("atlas-graph-search");
+        if (searchInput) searchInput.value = "";
+        activeTypeFilters = new Set(["Project", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType"]);
+        document.querySelectorAll("[data-graph-type-filter]").forEach(function (checkbox) { checkbox.checked = true; });
+        refreshVisibility();
         fitToGraph(600);
       });
       var zoomInBtn = document.getElementById("atlas-graph-zoom-in");
@@ -364,13 +370,23 @@
       if (search) search.addEventListener("input", function () {
         searchTerm = search.value.trim().toLowerCase();
         Graph.nodeColor(nodeColor);
+        refreshVisibility();
       });
       document.querySelectorAll("[data-graph-type-filter]").forEach(function (cb) {
         cb.addEventListener("change", function () {
           var type = cb.getAttribute("data-graph-type-filter");
           if (cb.checked) activeTypeFilters.add(type); else activeTypeFilters.delete(type);
           Graph.nodeColor(nodeColor);
+          refreshVisibility();
         });
+      });
+      var listToggle = document.getElementById("atlas-graph-list-toggle");
+      var listWrap = document.getElementById("atlas-graph-list-wrap");
+      if (listToggle && listWrap) listToggle.addEventListener("click", function () {
+        var open = listWrap.hidden;
+        listWrap.hidden = !open;
+        listToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        listToggle.textContent = open ? "Hide relationship index" : "Relationship index";
       });
     }
   }
@@ -388,7 +404,8 @@
       .map(function (id) { return graphData.nodes.find(function (n) { return n.id === id; }); })
       .filter(Boolean);
 
-    var html = "<h4>" + escapeHTML(node.label) + "</h4>" +
+    var html = '<button type="button" class="atlas-graph-panel-close" aria-label="Close node details">&times;</button>' +
+      "<h4>" + escapeHTML(node.label) + "</h4>" +
       "<p class=\"mono\" style=\"font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em\">" + escapeHTML(node.type) + "</p>";
 
     if (node.type === "Project") {
@@ -410,6 +427,13 @@
     }
 
     panel.innerHTML = html;
+    var closeBtn = panel.querySelector(".atlas-graph-panel-close");
+    if (closeBtn) closeBtn.addEventListener("click", function () {
+      panel.hidden = true;
+      selectedId = null;
+      litNeighbors = null;
+      if (Graph) Graph.nodeColor(nodeColor).linkColor(linkColor);
+    });
     var openBtn = document.getElementById("atlas-graph-open-project");
     if (openBtn) openBtn.addEventListener("click", function () {
       if (window.AtlasBridge) window.AtlasBridge.openProject(node.slug);

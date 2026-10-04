@@ -115,7 +115,11 @@
 
     var countEl = document.getElementById("atlas-result-count");
     if (countEl) {
-      countEl.textContent = matched.length + (matched.length === 1 ? " repository" : " repositories") +
+      var liveCatalog = docEl.dataset.atlasLive === "true";
+      var noun = liveCatalog
+        ? (matched.length === 1 ? " repository" : " repositories")
+        : (matched.length === 1 ? " curated record" : " curated records");
+      countEl.textContent = matched.length + noun +
         (totalPages > 1 ? " — page " + state.page + " of " + totalPages : "");
     }
 

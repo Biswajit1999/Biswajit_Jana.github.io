@@ -264,7 +264,7 @@
         if (url) curated[url.toLowerCase()] = entry.item;
       });
       data.numberOfItems = repos.length;
-      data.description = repos.length + " current public GitHub repositories spanning scientific software, astrophysics research, interactive labs, and related projects.";
+      data.description = repos.length + " current public GitHub repositories, with curated scientific context for selected research projects.";
       data.itemListElement = repos.map(function (repo, index) {
         var existing = curated[repo.html_url.toLowerCase()];
         return {
@@ -320,11 +320,12 @@
       if (total) total.textContent = String(repos.length);
       if (live) live.textContent = String(repos.filter(function (repo) { return repo.has_pages || repo.homepage; }).length);
       var lead = document.getElementById("atlas-catalog-lead");
-      if (lead) lead.textContent = "Search all " + repos.length + " current public repositories. Curated research entries include additional scientific context; newly created repositories appear automatically from GitHub.";
+      if (lead) lead.textContent = "Search " + repos.length + " current public GitHub repositories. Selected research projects include additional scientific context and relationship metadata.";
       if (status) {
         status.textContent = "Live GitHub data loaded · " + repos.length + " public repositories · refreshed " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         status.dataset.state = "ready";
       }
+      document.documentElement.dataset.atlasLive = "true";
       updateStructuredData(repos);
       renderCommits(commitSearch, repos);
       if (window.AtlasBridge) window.AtlasBridge.projectSlugs = projects.map(function (project) { return project.slug; });

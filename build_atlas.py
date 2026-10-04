@@ -6,7 +6,7 @@ Run after editing the manifest:
 
     python build_atlas.py
 
-Bakes all 85 repos into real semantic HTML (progressive enhancement: the
+Bakes the curated repository records into real semantic HTML (progressive enhancement: the
 page works with JavaScript disabled) and computes every statistic and
 chart value from the manifest itself, so nothing here drifts out of sync
 by hand-editing a number.
@@ -159,8 +159,9 @@ def compute_stats(projects):
 
 def render_stats(stats):
     tiles = [
-        (stats["total"], "Public repositories", "atlas-stat-total"),
-        (stats["live_demos"], "Repositories with live sites", "atlas-stat-live"),
+        (stats["total"], "Curated research records", "atlas-stat-curated"),
+        ("—", "Public repositories (live)", "atlas-stat-total"),
+        (stats["live_demos"], "Curated projects with live sites", "atlas-stat-live"),
         (stats["exoplanet_targets"], "Individual exoplanet targets analyzed", None),
         (stats["interactive"], "Interactive labs and platforms", None),
         (stats["real_data_repos"], "Repos built on real public data", None),
@@ -373,9 +374,9 @@ def render_jsonld(projects, stats):
     doc = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "GitHub",
+        "name": "Research software atlas",
         "description": (
-            str(stats["total"]) + " public repositories spanning exoplanet research reports, "
+            str(stats["total"]) + " curated repository records spanning exoplanet research reports, "
             "detection-method implementations, interactive astrophysics labs, and research platforms."
         ),
         "numberOfItems": stats["total"],
@@ -432,8 +433,8 @@ def render_graph_section(graph):
     list_html.append("</div>")
 
     type_filters = "".join(
-        '<label><input type="checkbox" data-graph-type-filter="' + t + '" checked /> '
-        + '<span class="swatch sw-' + t.lower() + '"></span> ' + esc(GRAPH_TYPE_LABELS.get(t, t)) + "</label>"
+        '<label class="atlas-graph-filter"><input type="checkbox" data-graph-type-filter="' + t + '" checked /> '
+        + '<span class="swatch sw-' + t.lower() + '"></span><span>' + esc(GRAPH_TYPE_LABELS.get(t, t)) + "</span></label>"
         for t in ("Project", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType")
         if by_type.get(t)
     )
@@ -442,34 +443,41 @@ def render_graph_section(graph):
         '<section class="section section-band" id="atlas-graph-section">'
         '<div class="container">'
         '<div class="section-head">'
-        '<p class="eyebrow">How it connects</p>'
-        '<h2 class="section-title">Research knowledge graph</h2>'
-        '<p class="section-lead">A focused overview of the most connected targets, instruments, methods, and molecules in the research catalog. The compact view keeps labels and nodes legible; the accessible relationship list retains the complete manifest.</p>'
+        '<p class="eyebrow">Relationship explorer</p>'
+        '<h2 class="section-title">Research atlas, mapped by connection</h2>'
+        '<p class="section-lead">Explore how selected repositories connect to instruments, methods, molecules, planet classes, and analysis types. Search narrows the scene; selecting a node reveals its immediate research context.</p>'
         "</div>"
-        '<div class="atlas-graph-layout">'
-        "<div>"
+        '<div class="atlas-graph-shell">'
         '<div class="atlas-graph-toolbar">'
-        '<input type="search" id="atlas-graph-search" placeholder="Search the graph..." />'
-        '<div class="atlas-graph-legend">' + type_filters + "</div>"
+        '<div class="atlas-graph-search"><label for="atlas-graph-search">Find a repository or concept</label><input type="search" id="atlas-graph-search" placeholder="e.g. JWST, transit, water" autocomplete="off" /></div>'
+        '<div class="atlas-graph-toolbar-actions">'
+        '<button type="button" class="btn btn-ghost btn-sm" id="atlas-graph-reset">Fit &amp; reset</button>'
+        '<button type="button" class="btn btn-ghost btn-sm" id="atlas-graph-list-toggle" aria-expanded="false" aria-controls="atlas-graph-list-wrap">Relationship index</button>'
         "</div>"
-        '<div class="atlas-graph-canvas" id="atlas-graph-canvas"></div>'
+        "</div>"
+        '<fieldset class="atlas-graph-legend"><legend>Show node types</legend>' + type_filters + "</fieldset>"
+        '<div class="atlas-graph-stage">'
+        '<div class="atlas-graph-canvas" id="atlas-graph-canvas" role="img" aria-label="Interactive research relationship graph"></div>'
+        '<aside class="atlas-graph-panel" id="atlas-graph-panel" hidden aria-live="polite"></aside>'
         '<div class="atlas-graph-controls">'
-        '<button type="button" class="btn btn-ghost btn-sm" id="atlas-graph-reset">Reset view</button>'
         '<div class="atlas-graph-zoom" role="group" aria-label="Zoom">'
         '<button type="button" class="atlas-graph-zoom-btn" id="atlas-graph-zoom-out" aria-label="Zoom out">&#8722;</button>'
         '<button type="button" class="atlas-graph-zoom-btn" id="atlas-graph-zoom-in" aria-label="Zoom in">+</button>'
         "</div>"
         "</div>"
-        '<p id="atlas-graph-note" class="mono" style="font-size:.72rem;color:var(--muted);margin-top:8px">Drag to pan, scroll to zoom, click a node to see its connections.</p>'
-        '<div class="atlas-graph-list-wrap" id="atlas-graph-list-wrap" hidden>' + "".join(list_html) + "</div>"
         "</div>"
-        '<div class="atlas-graph-panel" id="atlas-graph-panel" hidden></div>'
+        '<div class="atlas-graph-meta"><p id="atlas-graph-status" role="status" aria-live="polite">Preparing the curated relationship view…</p><p id="atlas-graph-note">Drag to rotate, scroll to zoom, and select a node to inspect its neighbours.</p></div>'
+        '<div class="atlas-graph-list-wrap" id="atlas-graph-list-wrap" hidden>' + "".join(list_html) + "</div>"
+        '<p class="atlas-graph-provenance"><strong>Scope.</strong> Connections are derived from explicit metadata in the curated repository records. They indicate shared research context—not citation, causation, collaboration, or scientific validation.</p>'
         "</div>"
         "</div>"
         "</section>"
     )
 
-    noscript_list = '<noscript><div class="container">' + "".join(list_html) + "</div></noscript>"
+    noscript_html = "".join(list_html).replace(
+        'id="atlas-graph-semantic-list"', 'id="atlas-graph-semantic-list-noscript"', 1
+    )
+    noscript_list = '<noscript><div class="container">' + noscript_html + "</div></noscript>"
     return section, noscript_list
 
 
@@ -501,7 +509,7 @@ def build():
     html_out = html_out.replace("{{STATS}}", stats_html)
     html_out = html_out.replace("{{FILTER_CHIPS}}", chips_html)
     html_out = html_out.replace("{{CARDS}}", cards_html)
-    html_out = html_out.replace("{{RESULT_COUNT}}", str(stats["total"]) + " repositories")
+    html_out = html_out.replace("{{RESULT_COUNT}}", str(stats["total"]) + " curated records")
     html_out = html_out.replace("{{TYPE_CHART}}", type_chart)
     html_out = html_out.replace("{{METHOD_CARDS}}", method_cards)
     html_out = html_out.replace("{{CATEGORY_CHART}}", category_chart)
@@ -513,7 +521,7 @@ def build():
     html_out = html_out.replace("{{ASSET_V}}", asset_version())
 
     OUT_PATH.write_text(html_out, encoding="utf-8")
-    print("Wrote " + str(OUT_PATH) + " (" + str(stats["total"]) + " repositories)")
+    print("Wrote " + str(OUT_PATH) + " (" + str(stats["total"]) + " curated records)")
     print("Stats: " + json.dumps(stats))
     print("Types: " + json.dumps(dict(type_counts)))
 
@@ -584,8 +592,8 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="atlas-hero-grid">
       <div>
         <p class="section-head eyebrow" style="margin-bottom:14px">GitHub</p>
-        <h1>Every <span class="sub">public repository</span>, in one place.</h1>
-        <p class="intro">A live index of my scientific software and research: {{EXO_TOTAL}} curated exoplanet target reports, detection-method implementations, interactive astrophysics labs, larger platforms, and the academic work around them. Repository names, descriptions, counts, links, and recent activity refresh directly from GitHub whenever this page opens.</p>
+        <h1>A research atlas, <span class="sub">connected to live GitHub.</span></h1>
+        <p class="intro">A curated map of my scientific software and research: {{EXO_TOTAL}} exoplanet target reports, detection-method implementations, interactive astrophysics labs, larger platforms, and the academic work around them. Public repository counts, links, and recent activity refresh directly from GitHub whenever this page opens.</p>
         <p class="atlas-sync-status" id="atlas-sync-status" role="status" aria-live="polite">Loading the latest public GitHub data…</p>
         <div class="atlas-hero-actions">
           <a class="btn btn-primary" href="#atlas-explorer">Browse the repositories</a>
@@ -635,8 +643,8 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Full catalog</p>
-      <h2 class="section-title">Every repository, searchable</h2>
-      <p class="section-lead" id="atlas-catalog-lead">Filter by type, instrument, or evidence status. The curated research records are enriched with every current public repository returned by GitHub.</p>
+      <h2 class="section-title">GitHub work, searchable</h2>
+      <p class="section-lead" id="atlas-catalog-lead">Browse the curated research records below. When GitHub is available, the catalog expands to the current public account and reports that live total separately.</p>
     </div>
 
     <div class="atlas-explorer-toolbar">
@@ -677,7 +685,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="section-head">
       <p class="eyebrow">Portfolio-wide view</p>
       <h2 class="section-title">One body of work, several threads</h2>
-      <p class="section-lead">A taxonomy of the hand-curated research records. The live catalog above independently includes every current public GitHub repository.</p>
+      <p class="section-lead">A taxonomy of the hand-curated research records. The live catalog above independently adds the current public GitHub account.</p>
     </div>
     <div class="atlas-donut-section reveal">
       {{TYPE_CHART}}

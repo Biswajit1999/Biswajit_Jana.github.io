@@ -863,18 +863,18 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 
     <!-- Constellation teaser -->
     <div class="section-head" style="margin:var(--space-8) 0 var(--space-5)">
-      <p class="eyebrow">The full picture</p>
-      <h3 class="section-title" style="font-size:clamp(1.3rem,2.4vw,1.7rem)"><span id="atlasRepoCount">85</span> repositories. One GitHub.</h3>
-      <p class="section-lead">Exoplanet reports, detection methods, interactive labs, and research platforms — searchable, filterable, and mapped as one connected body of work.</p>
+      <p class="eyebrow">Research atlas</p>
+      <h3 class="section-title" style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Selected GitHub work, mapped by connection.</h3>
+      <p class="section-lead">A curated view of exoplanet reports, detection methods, interactive labs, and research platforms—linked by the instruments, methods, and evidence they share.</p>
     </div>
-    <a class="atlas-teaser reveal" href="atlas.html" aria-label="Explore my GitHub — full repository map">
+    <a class="atlas-teaser reveal" href="atlas.html" aria-label="Explore my research software atlas">
       <div class="atlas-teaser-visual" id="atlasTeaserVisual" aria-hidden="true">
         <img src="images/atlas-teaser-network-poster.jpg" alt="" class="atlas-teaser-media" width="1360" height="850" loading="lazy">
       </div>
       <div class="atlas-teaser-body">
-        <span class="atlas-teaser-kicker mono">GitHub</span>
-        <h4>Explore the full map</h4>
-        <p>Every project, one connected view.</p>
+        <span class="atlas-teaser-kicker mono">Research software</span>
+        <h4>Open the research atlas</h4>
+        <p>Search projects, inspect relationships, and browse the live GitHub catalog.</p>
         <span class="btn btn-primary btn-sm atlas-teaser-cta">Explore <span aria-hidden="true">→</span></span>
       </div>
     </a>
@@ -1075,14 +1075,6 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 
 /* ---------- Constellation teaser: looping video, links to atlas.html ---------- */
 (function(){
-  // live repo count, fetched from the same manifest atlas.html uses — never hand-typed
-  var countEl=document.getElementById('atlasRepoCount');
-  if(countEl){
-    fetch('data/full-portfolio.json').then(function(r){return r.json();}).then(function(data){
-      if(Array.isArray(data)) countEl.textContent=data.length;
-    }).catch(function(){ /* keep the static fallback already in the HTML */ });
-  }
-
   var visual=document.getElementById('atlasTeaserVisual');
   if(!visual) return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
