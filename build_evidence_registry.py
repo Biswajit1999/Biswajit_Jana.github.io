@@ -21,8 +21,6 @@ REQUIRED_REPOSITORY_FIELDS = {
     "research_question",
     "principal_result",
     "evidence",
-    "before_score",
-    "after_score",
     "claim_boundary",
     "repository_url",
     "release_url",
@@ -37,14 +35,10 @@ def load_evidence(path: Path = DATA_PATH) -> dict[str, object]:
 def validate_evidence(document: dict[str, object]) -> None:
     if document.get("schema_version") != 1:
         raise ValueError("schema_version must be 1")
-    programme = document.get("programme")
+    registry = document.get("registry")
     repositories = document.get("repositories")
-    if not isinstance(programme, dict) or not isinstance(repositories, list):
-        raise ValueError("programme must be an object and repositories must be a list")
-    if programme.get("completed") != len(repositories):
-        raise ValueError("programme.completed must equal the repository record count")
-    if int(programme.get("ranked_queue", 0)) < len(repositories):
-        raise ValueError("ranked_queue cannot be smaller than completed records")
+    if not isinstance(registry, dict) or not isinstance(repositories, list):
+        raise ValueError("registry must be an object and repositories must be a list")
 
     slugs: set[str] = set()
     ranks: set[int] = set()
@@ -60,10 +54,6 @@ def validate_evidence(document: dict[str, object]) -> None:
             raise ValueError("repository slugs and ranks must be unique")
         slugs.add(slug)
         ranks.add(rank)
-        before = int(repository["before_score"])
-        after = int(repository["after_score"])
-        if not (0 <= before < after <= 100):
-            raise ValueError(f"invalid maturity scores for {slug}")
         evidence = repository["evidence"]
         if not isinstance(evidence, list) or len(evidence) < 3:
             raise ValueError(f"{slug} needs at least three evidence markers")
@@ -79,9 +69,9 @@ def _esc(value: object) -> str:
 def _repository_card(repository: dict[str, object]) -> str:
     evidence = "".join(f"<li>{_esc(item)}</li>" for item in repository["evidence"])
     return f"""
-      <article class="evidence-card" aria-labelledby="repo-{_esc(repository['rank'])}">
+      <article class="evidence-card" aria-labelledby="repo-{_esc(repository['slug'])}">
         <header class="card-head">
-          <div><span class="rank">Queue #{_esc(repository['rank'])}</span><h2 id="repo-{_esc(repository['rank'])}">{_esc(repository['title'])}</h2></div>
+          <div><h2 id="repo-{_esc(repository['slug'])}">{_esc(repository['title'])}</h2></div>
           <span class="release">{_esc(repository['version'])} · verified</span>
         </header>
         <p class="question"><strong>Research question</strong>{_esc(repository['research_question'])}</p>
@@ -99,16 +89,14 @@ def _repository_card(repository: dict[str, object]) -> str:
 
 def render(document: dict[str, object]) -> str:
     validate_evidence(document)
-    programme = document["programme"]
+    registry = document["registry"]
     repositories = document["repositories"]
-    complete = int(programme["completed"])
-    remaining = int(programme["ranked_queue"]) - complete
     cards = "\n".join(_repository_card(repository) for repository in repositories)
     structured = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": programme["title"],
-        "numberOfItems": complete,
+        "name": registry["title"],
+        "numberOfItems": len(repositories),
         "itemListElement": [
             {
                 "@type": "ListItem",
@@ -124,7 +112,7 @@ def render(document: dict[str, object]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Auditable research evidence registry for Biswajit Jana's Top-50 repository upgrade programme: questions, generated results, releases, validation, and limitations.">
+  <meta name="description" content="Auditable research evidence registry for Biswajit Jana: questions, generated results, releases, validation, and limitations.">
   <link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/research-evidence.html">
   <title>Research Evidence Registry · Biswajit Jana</title>
   <script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script>
@@ -157,19 +145,13 @@ def render(document: dict[str, object]) -> str:
   <a class="skip" href="#main">Skip to evidence</a>
   <header class="site-head"><div class="head-inner"><a class="brand" href="index.html">Biswajit Jana</a><nav aria-label="Evidence navigation"><a href="index.html">Portfolio</a><a href="atlas.html">GitHub atlas</a><a href="cv.html">CV</a></nav></div></header>
   <main id="main">
-    <p class="eyebrow">Open research programme · verified {_esc(document['verified_date'])}</p>
+    <p class="eyebrow">Research evidence registry · verified {_esc(document['verified_date'])}</p>
     <h1>Research claims, with their evidence attached.</h1>
-    <p class="lede">A reviewer-facing record of the Top-50 repository upgrade programme. Each completed entry connects a research question to generated results, validation, a versioned release, and an explicit boundary of inference.</p>
-    <section class="summary" aria-label="Programme status">
-      <div><strong>{_esc(programme['audited_repositories'])}</strong><span>repositories audited</span></div>
-      <div><strong>{_esc(programme['eligible_first_party'])}</strong><span>eligible first-party</span></div>
-      <div><strong>{complete} / {_esc(programme['ranked_queue'])}</strong><span>upgrades complete</span></div>
-      <div><strong>{remaining}</strong><span>ranked upgrades remaining</span></div>
+    <p class="lede">A reviewer-facing research evidence registry. Each entry connects a research question to generated results, validation, a versioned release, and an explicit boundary of inference.</p>
+    <p class="policy"><strong>Inclusion rule.</strong> {_esc(registry['policy'])}</p>
+    <section class="registry" aria-label="Research evidence records">{cards}
     </section>
-    <p class="policy"><strong>Completion rule.</strong> {_esc(programme['policy'])}</p>
-    <section class="registry" aria-label="Completed repository upgrades">{cards}
-    </section>
-    <section class="status-note"><h2>What this registry does not claim</h2><p>Entries document repository evidence and inference boundaries; they are not peer review, citation metrics, or rankings of scientific merit. Repositories not shown here remain in the working queue and are not represented as complete.</p></section>
+    <section class="status-note"><h2>What this registry does not claim</h2><p>Entries document repository evidence and inference boundaries; they are not peer review, citation metrics, or rankings of scientific merit. Repositories not shown here are not represented by this registry.</p></section>
   </main>
   <footer class="site-foot"><div class="foot-inner"><span>Biswajit Jana · research evidence registry</span><span>Source: <a href="data/research-evidence.json">versioned JSON</a></span></div></footer>
 </body>

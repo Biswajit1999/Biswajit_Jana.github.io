@@ -2,7 +2,6 @@
 
 ## v2026.09.25.3
 
-- Advanced the Top-50 research-upgrade registry from 19/50 to 20/50.
 - Registered HST WFC3/IR Calibrated Ramp-Stability Audit v1.0.0 with
   unit-aware accumulated-electron reconstruction, three exact MAST receipts,
   70 accepted measurements, and 18 fully reported sensitivity designs.
@@ -12,7 +11,6 @@
 
 ## v2026.09.25.2
 
-- Advanced the Top-50 research-upgrade registry from 18/50 to 19/50.
 - Registered HST ACS/WFC Parallel-Trail Estimator Robustness Audit v1.0.0
   with hard receipts for six current MAST products, 38 published measurements,
   34 detector-coordinate clusters, and 10,000 cluster bootstrap resamples.
@@ -22,7 +20,6 @@
 
 ## v2026.09.24.1
 
-- Advanced the Top-50 research-upgrade registry from 13/50 to 14/50.
 - Registered WASP-80 b Native-Channel Morphology Audit v1.0.0 with all 113
   journal source-data channels and 60 fully reported design rows.
 - Preserved the key inference boundary: component-removed posterior curves are
@@ -31,7 +28,6 @@
 
 ## v2026.09.24
 
-- Advanced the Top-50 research-upgrade registry from 12/50 to 13/50.
 - Registered K2-18 b Spectral Robustness Audit v1.0.0 with 30 fully reported
   band/continuum definitions and 27 leave-one-bin-out MIRI refits.
 - Corrected the original NIRISS+NIRSpec spectrum's mistaken MIRI attribution and
@@ -42,7 +38,6 @@
 
 ## v2026.09.23.1
 
-- Advanced the Top-50 research-upgrade registry from 11/50 to 12/50.
 - Registered Synthetic Point-Lens Microlensing Recovery Study v0.5.1 with its
   900-injection blind recovery experiment and 1,000-realization null test.
 - Kept event detection distinct from parameter identifiability and explicitly
@@ -52,17 +47,15 @@
 
 ## v2026.09.20.3
 
-- Advanced the Top-50 research-upgrade registry from 10/50 to 11/50.
 - Registered Adaptive Optics Wavefront Lab v3.0.0 and its full-rate CIAO telemetry-decimation audit.
-- Promoted Jana’s RV Doppler Observatory to v4.1.0 with deterministic interface-quality evidence and a published before/after graph.
+- Promoted Jana’s RV Doppler Observatory to v4.1.0 with deterministic interface-quality evidence.
 - Kept both entries explicit about their rejected temporal/inference claims and the boundary between visual presentation and scientific validity.
 
 ## v2026.09.19
 
-- Added a deterministic research evidence registry covering the first four
-  completed repositories in the Top-50 upgrade programme.
+- Added a deterministic research evidence registry with four initial records.
 - Connected research questions, generated results, validation, releases,
-  maturity comparisons, and limitations in one reviewer-facing page.
+  and limitations in one reviewer-facing page.
 - Added schema and generated-output validation in GitHub Actions.
 - Added homepage, sitemap, structured-data, and `llms.txt` discovery paths.
 - Corrected two stale sitemap targets found by the new validation suite.

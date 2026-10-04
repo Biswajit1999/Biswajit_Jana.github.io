@@ -13,14 +13,14 @@ class EvidenceRegistryTests(unittest.TestCase):
     def test_committed_evidence_is_valid(self) -> None:
         document = load_evidence()
         validate_evidence(document)
-        self.assertEqual(document["programme"]["completed"], 21)
+        self.assertEqual(document["registry"]["title"], "Research evidence registry")
         self.assertEqual(len(document["repositories"]), 21)
 
     def test_registry_build_is_current_and_accessible(self) -> None:
         generated = render(load_evidence())
         self.assertEqual(OUTPUT_PATH.read_text(encoding="utf-8"), generated)
         self.assertIn('href="#main">Skip to evidence</a>', generated)
-        self.assertIn('aria-label="Programme status"', generated)
+        self.assertIn('aria-label="Research evidence records"', generated)
         self.assertIn('prefers-reduced-motion:reduce', generated)
         self.assertIn('.evidence-card{min-width:0', generated)
         self.assertIn('.evidence-list li,.boundary span{overflow-wrap:anywhere}', generated)
