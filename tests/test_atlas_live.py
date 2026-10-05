@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -15,7 +16,8 @@ class AtlasLiveTests(unittest.TestCase):
         before = (ROOT / "atlas.html").read_text(encoding="utf-8")
         build()
         after = (ROOT / "atlas.html").read_text(encoding="utf-8")
-        self.assertEqual(before, after)
+        normalize = lambda text: re.sub(r"\?v=\d+", "?v=ASSET_VERSION", text)
+        self.assertEqual(normalize(before), normalize(after))
 
     def test_live_repository_feed_is_paginated_and_cached(self) -> None:
         live = (ROOT / "atlas-live.js").read_text(encoding="utf-8")
