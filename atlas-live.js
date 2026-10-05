@@ -92,13 +92,22 @@
     return "Updated " + date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
   }
 
-  function previewURL(repo) {
-    var version = String(repo.pushed_at || repo.updated_at || "current").replace(/[^0-9a-z]/gi, "");
-    return "https://opengraph.githubassets.com/" + version + "/" + repo.full_name;
-  }
-
   function titleFromName(name) {
     return name.replace(/[-_]+/g, " ").replace(/\b\w/g, function (character) { return character.toUpperCase(); });
+  }
+
+  function coverMarkup(repo, type, title) {
+    var group = catalog.typeGroups[type] || "tool";
+    var language = repo.language || "Open research";
+    var seed = Array.prototype.reduce.call(repo.name, function (total, character) {
+      return (total + character.charCodeAt(0)) % 17;
+    }, 0);
+    return '<div class="atlas-card-cover" data-cover-group="' + escapeHTML(group) + '" aria-hidden="true" style="--cover-seed:' + seed + '">' +
+      '<span class="atlas-cover-grid"></span><span class="atlas-cover-orbit atlas-cover-orbit-a"></span>' +
+      '<span class="atlas-cover-orbit atlas-cover-orbit-b"></span><span class="atlas-cover-node atlas-cover-node-a"></span>' +
+      '<span class="atlas-cover-node atlas-cover-node-b"></span><span class="atlas-cover-node atlas-cover-node-c"></span>' +
+      '<span class="atlas-cover-meta">' + escapeHTML(catalog.typeLabel(type)) + ' · ' + escapeHTML(language) + '</span>' +
+      '<strong>' + escapeHTML(title) + '</strong><span class="atlas-cover-caption">Repository cover · source artwork pending</span></div>';
   }
 
   function cardProject(repo, order) {
@@ -119,8 +128,8 @@
       tags: repo.topics || [],
       github_url: repo.html_url,
       live_report_url: repoLiveURL,
-      thumbnail_url: previewURL(repo),
-      thumbnail_attribution: repo.name + " repository preview"
+      thumbnail_url: "",
+      thumbnail_attribution: "Generated repository cover; not a scientific figure"
     };
     var article = document.createElement("article");
     article.className = "atlas-card reveal in";
@@ -133,7 +142,7 @@
     article.dataset.search = [repo.name, title, description, repo.language || "", (repo.topics || []).join(" ")].join(" ").toLowerCase();
     var group = catalog.typeGroups[type] || "tool";
     article.innerHTML =
-      '<div class="atlas-card-media"><img src="' + escapeHTML(detail.thumbnail_url) + '" alt="' + escapeHTML(detail.thumbnail_attribution) + '" loading="lazy" width="640" height="360" /></div>' +
+      '<div class="atlas-card-media">' + coverMarkup(repo, type, title) + '</div>' +
       '<div class="atlas-card-body"><div class="kicker"><span class="type-badge" data-type-group="' + escapeHTML(group) + '">' + escapeHTML(catalog.typeLabel(type)) + '</span>' +
       (repo.language ? '<span class="tag">' + escapeHTML(repo.language) + '</span>' : '') + '</div>' +
       '<h3><a href="#" data-open-detail="' + escapeHTML(repo.name) + '">' + escapeHTML(title) + '</a></h3>' +
@@ -187,52 +196,99 @@
     if (githubLink) githubLink.href = repo.html_url;
   }
 
-  function imageFromReadme(markdown, repo) {
+  function imagesFromReadme(markdown, repo) {
     var candidates = [];
     var htmlPattern = /<img\b[^>]*?src=["']([^"']+)["'][^>]*>/gi;
     var markdownPattern = /!\[[^\]]*\]\((?:<)?([^\s)>]+)(?:>)?(?:\s+["'][^"']*["'])?\)/g;
     var match;
     while ((match = htmlPattern.exec(markdown))) candidates.push(match[1]);
     while ((match = markdownPattern.exec(markdown))) candidates.push(match[1]);
-    var selected = candidates.find(function (url) {
-      return !/(shields\.io|badge|actions\/workflows|codecov|coveralls|visitor|hits\.seeyoufarm)/i.test(url);
-    });
-    if (!selected) return "";
-    selected = selected.replace(/&amp;/g, "&");
-    var githubBlob = selected.match(/^https?:\/\/github\.com\/([^/]+\/[^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/i);
-    if (githubBlob) return "https://raw.githubusercontent.com/" + githubBlob[1] + "/" + githubBlob[2] + "/" + githubBlob[3];
-    if (/^https?:\/\//i.test(selected)) return selected;
-    if (/^(data:|#)/i.test(selected)) return "";
-    return new URL(selected.replace(/^\//, ""), "https://raw.githubusercontent.com/" + repo.full_name + "/" + repo.default_branch + "/").href;
+    function score(url) {
+      var value = url.toLowerCase();
+      if (/(shields\.io|badge|actions\/workflows|codecov|coveralls|visitor|hits\.seeyoufarm|license|doi\.org\/badge)/i.test(value)) return -100;
+      var total = 0;
+      if (/(hero|banner|preview|cover|social)/i.test(value)) total += 24;
+      if (/(result|figure|plot|chart|spectrum|light.?curve|dashboard|screenshot|demo|render|architecture)/i.test(value)) total += 18;
+      if (/(assets|images|figures|docs)/i.test(value)) total += 5;
+      if (/(logo|icon|avatar|favicon|wordmark)/i.test(value)) total -= 16;
+      if (/\.svg(?:\?|$)/i.test(value)) total -= 3;
+      return total;
+    }
+    function resolve(url) {
+      var selected = url.replace(/&amp;/g, "&");
+      var githubBlob = selected.match(/^https?:\/\/github\.com\/([^/]+\/[^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/i);
+      if (githubBlob) return "https://raw.githubusercontent.com/" + githubBlob[1] + "/" + githubBlob[2] + "/" + githubBlob[3];
+      if (/^https?:\/\//i.test(selected)) return selected;
+      if (/^(data:|#)/i.test(selected)) return "";
+      return new URL(selected.replace(/^\//, ""), "https://raw.githubusercontent.com/" + repo.full_name + "/" + repo.default_branch + "/").href;
+    }
+    return candidates.map(function (url, index) {
+      return { url: resolve(url), score: score(url), index: index };
+    }).filter(function (candidate) {
+      return candidate.url && candidate.score > -100;
+    }).sort(function (a, b) {
+      return b.score - a.score || a.index - b.index;
+    }).map(function (candidate) { return candidate.url; });
+  }
+
+  function installReadmeImage(project, candidates) {
+    var media = project.el.querySelector(".atlas-card-media");
+    if (!media || !candidates.length) {
+      project.el.dataset.thumbnailState = "cover-no-source-image";
+      return;
+    }
+    var index = 0;
+    function attempt() {
+      if (index >= candidates.length) {
+        project.el.dataset.thumbnailState = "cover-source-image-unavailable";
+        return;
+      }
+      var imageURL = candidates[index++];
+      var image = new Image();
+      /* The probe is detached until it passes the size check. `loading=lazy` on a detached
+         image can defer the request indefinitely in Chromium, so apply it only after load. */
+      image.decoding = "async";
+      image.width = 640;
+      image.height = 360;
+      image.alt = project.detail.title + " project image from its README";
+      image.onload = function () {
+        if (image.naturalWidth < 320 || image.naturalHeight < 140) { attempt(); return; }
+        image.loading = "lazy";
+        media.replaceChildren(image);
+        media.classList.add("atlas-card-media--project-image");
+        project.el.dataset.thumbnailState = "readme-image";
+        project.detail.thumbnail_url = imageURL;
+        project.detail.thumbnail_attribution = project.detail.title + " README image";
+      };
+      image.onerror = attempt;
+      image.src = imageURL;
+    }
+    attempt();
   }
 
   function hydrateThumbnail(project) {
     var repo = project.githubRepo;
     if (!repo || project.thumbnailAttempted) return;
     project.thumbnailAttempted = true;
+    project.el.dataset.thumbnailState = "loading-readme";
     var readmeURL = "https://raw.githubusercontent.com/" + repo.full_name + "/" + encodeURIComponent(repo.default_branch) + "/README.md";
     fetch(readmeURL, { cache: "force-cache" }).then(function (response) {
       if (!response.ok) throw new Error("README unavailable");
       return response.text();
     }).then(function (markdown) {
-      var imageURL = imageFromReadme(markdown, repo);
-      if (!imageURL) return;
-      var media = project.el.querySelector(".atlas-card-media");
-      if (!media) return;
-      var image = media.querySelector("img") || document.createElement("img");
-      image.loading = "lazy";
-      image.width = 640;
-      image.height = 360;
-      image.alt = project.detail.title + " project banner";
-      image.onerror = function () { image.onerror = null; image.src = previewURL(repo); };
-      image.src = imageURL;
-      if (!image.parentNode) { media.innerHTML = ""; media.appendChild(image); }
-      project.detail.thumbnail_url = imageURL;
-      project.detail.thumbnail_attribution = project.detail.title + " README banner";
-    }).catch(function () { /* keep the curated image, preview, or initials fallback */ });
+      installReadmeImage(project, imagesFromReadme(markdown, repo));
+    }).catch(function () {
+      project.el.dataset.thumbnailState = "cover-readme-unavailable";
+      /* keep the curated image or truthful graphical cover */
+    });
   }
 
   function watchThumbnails() {
+    /* applyState() can reorder the live feed before the observer's first frame. Hydrate the
+       current page immediately, then keep the observer for cards revealed by pagination. */
+    projects.forEach(function (project) {
+      if (project.githubRepo && !project.el.hidden && !project.detail.thumbnail_url) hydrateThumbnail(project);
+    });
     if (!("IntersectionObserver" in window)) return;
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -240,8 +296,7 @@
         var key = (entry.target.dataset.slug || "").toLowerCase();
         var project = bySlug[key];
         if (project && project.githubRepo) {
-          var imageURL = project.detail.thumbnail_url || "";
-          if (!imageURL || imageURL.indexOf("opengraph.githubassets.com") > -1) hydrateThumbnail(project);
+          if (!project.detail.thumbnail_url) hydrateThumbnail(project);
         }
         observer.unobserve(entry.target);
       });

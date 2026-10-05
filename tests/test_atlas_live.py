@@ -44,6 +44,16 @@ class AtlasLiveTests(unittest.TestCase):
         self.assertIn('id="atlas-stat-curated">85</div><div class="k">Scientifically annotated records', html)
         self.assertIn('id="atlas-architecture-repos">Connecting…</strong>', html)
 
+    def test_live_thumbnails_prefer_source_images_and_truthful_covers(self) -> None:
+        live = (ROOT / "atlas-live.js").read_text(encoding="utf-8")
+        css = (ROOT / "atlas.css").read_text(encoding="utf-8")
+        self.assertIn("imagesFromReadme", live)
+        self.assertIn("installReadmeImage", live)
+        self.assertIn("image.naturalWidth < 320", live)
+        self.assertIn("Repository cover · source artwork pending", live)
+        self.assertNotIn("opengraph.githubassets.com", live)
+        self.assertIn("never a simulated observation or scientific result", css)
+
 
 if __name__ == "__main__":
     unittest.main()
