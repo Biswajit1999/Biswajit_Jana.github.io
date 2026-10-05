@@ -25,56 +25,174 @@
       ? {
           Project: "#60a5fa", Instrument: "#5eead4", Method: "#93c5fd",
           Molecule: "#c4b5fd", PlanetClass: "#fbbf24", AnalysisType: "#2dd4bf",
-          link: "rgba(96,165,250,0.20)", linkLit: "#60a5fa", bg: "rgba(0,0,0,0)"
+          Domain: "#f59e0b", Technology: "#22d3ee",
+          link: "rgba(125,167,218,0.34)", domainLink: "rgba(245,158,11,0.72)", repositoryLink: "rgba(96,165,250,0.42)",
+          linkLit: "#fbbf24", bg: "rgba(0,0,0,0)"
         }
       : {
           Project: "#1e3a5f", Instrument: "#0f766e", Method: "#1d4ed8",
           Molecule: "#6d28d9", PlanetClass: "#b45309", AnalysisType: "#0f766e",
-          link: "rgba(30,58,95,0.16)", linkLit: "#1e3a5f", bg: "rgba(0,0,0,0)"
+          Domain: "#c2410c", Technology: "#0e7490",
+          link: "rgba(30,58,95,0.28)", domainLink: "rgba(194,65,12,0.68)", repositoryLink: "rgba(30,58,95,0.38)",
+          linkLit: "#c2410c", bg: "rgba(0,0,0,0)"
         };
   }
   var NODE_SIZE = {
-    Project: 8, Instrument: 5.8, Method: 5.2, Molecule: 5.4, PlanetClass: 5.4, AnalysisType: 5.8
+    Project: 6.8, Domain: 18, Technology: 7.2, Instrument: 7.4,
+    Method: 5.6, Molecule: 6.2, PlanetClass: 6.4, AnalysisType: 7.8
   };
+  var ALL_TYPES = ["Project", "Domain", "Technology", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType"];
 
-  var loaded = false, graphData = null, Graph = null, pal = palette();
-  var activeTypeFilters = new Set(["Project", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType"]);
+  var loaded = false, graphData = null, Graph = null, pal = palette(), refreshGraphTheme = null;
+  var activeTypeFilters = new Set(ALL_TYPES);
   var selectedId = null, litNeighbors = null;
   var searchTerm = "";
 
-  function focusedOverview(data) {
-    var neighbors = {};
-    data.nodes.forEach(function (node) { neighbors[node.id] = []; });
-    data.edges.forEach(function (edge) {
-      if (neighbors[edge.source]) neighbors[edge.source].push(edge.target);
-      if (neighbors[edge.target]) neighbors[edge.target].push(edge.source);
+  var DOMAIN_RULES = [
+    ["Exoplanets & atmospheres", /exoplanet|transit|radial.?velocity|planet|atmospher|brown.?dwarf|microlens|coronagraph/i],
+    ["Astronomical instrumentation", /spectrograph|instrument|calibrat|exohspec|detector|optics|ccd|telescope|doppler/i],
+    ["Survey data & provenance", /archive|catalog|gaia|euclid|sdss|tess|hubble|jwst|provenance|cross.?match/i],
+    ["Cosmology & fundamental physics", /cosmolog|supernova|hubble.?diagram|dark.?matter|gravit|quantum|multiverse|wormhole|relativ/i],
+    ["Time-domain & high-energy astronomy", /gamma.?ray|pulsar|frb|transient|supernova|variab|timing|gravitational.?wave/i],
+    ["Scientific computing & inference", /machine.?learning|bayes|monte.?carlo|simulation|numerical|statistics|signal|benchmark|inference/i],
+    ["Interactive laboratories", /lab|visuali[sz]|simulator|explorer|playground|studio|observatory|dashboard/i],
+    ["Research platforms & documentation", /portfolio|profile|atlas|platform|journal|notes|coursework|github\.io|documentation/i]
+  ];
+
+  function domainFor(node, repo) {
+    var text = [node.label, node.projectType || "", repo && repo.name, repo && repo.description,
+      repo && repo.language, repo && (repo.topics || []).join(" ")].filter(Boolean).join(" ");
+    for (var i = 0; i < DOMAIN_RULES.length; i++) if (DOMAIN_RULES[i][1].test(text)) return DOMAIN_RULES[i][0];
+    return "Research software & experiments";
+  }
+
+  function architectureGraph(data, repos) {
+    var nodes = data.nodes.map(function (node) { return Object.assign({}, node); });
+    var edges = data.edges.map(function (edge) { return Object.assign({}, edge); });
+    var nodeIndex = {};
+    var edgeKeys = new Set();
+    nodes.forEach(function (node) { nodeIndex[node.id] = node; });
+    edges.forEach(function (edge) { edgeKeys.add(String(edge.source) + "→" + String(edge.target) + ":" + edge.relation); });
+
+    function addNode(node) {
+      if (!nodeIndex[node.id]) { nodeIndex[node.id] = node; nodes.push(node); }
+      return nodeIndex[node.id];
+    }
+    function addEdge(source, target, relation, extra) {
+      var key = source + "→" + target + ":" + relation;
+      if (edgeKeys.has(key)) return;
+      edgeKeys.add(key);
+      edges.push(Object.assign({ source: source, target: target, relation: relation, relationStatus: "public-metadata" }, extra || {}));
+    }
+
+    var root = addNode({ id: "domain:portfolio-core", type: "Domain", label: "Biswajit Jana · Research portfolio", isRoot: true });
+    var repoIndex = {};
+    var projectBySlug = {};
+    var projectDomain = {};
+    (repos || []).forEach(function (repo) { repoIndex[String(repo.name).toLowerCase()] = repo; });
+    nodes.filter(function (node) { return node.type === "Project"; }).forEach(function (node) {
+      projectBySlug[String(node.slug || node.id.replace(/^project:/, "")).toLowerCase()] = node;
     });
-    var concepts = data.nodes
-      .filter(function (node) { return node.type !== "Project"; })
-      .sort(function (a, b) { return (neighbors[b.id] || []).length - (neighbors[a.id] || []).length; })
-      .slice(0, 18);
-    var selected = new Set(concepts.map(function (node) { return node.id; }));
-    concepts.forEach(function (concept) {
-      (neighbors[concept.id] || [])
-        .filter(function (id) { return id.indexOf("project:") === 0; })
-        .slice(0, 2)
-        .forEach(function (id) { selected.add(id); });
+
+    function connectProject(project, repo) {
+      var domain = domainFor(project, repo);
+      var domainId = "domain:" + domain.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      addNode({ id: domainId, type: "Domain", label: domain });
+      addEdge(root.id, domainId, "CONTAINS_DOMAIN");
+      addEdge(domainId, project.id, "CONTAINS_REPOSITORY", { sourceRepo: project.slug });
+      projectDomain[project.id] = domainId;
+      if (repo) {
+        project.githubUrl = repo.html_url || project.githubUrl;
+        project.liveUrl = repo.homepage || (repo.has_pages ? "https://biswajit1999.github.io/" + encodeURIComponent(repo.name) + "/" : project.liveUrl);
+        project.description = repo.description || "";
+        project.stars = repo.stargazers_count || 0;
+        project.updatedAt = repo.pushed_at || repo.updated_at;
+        project.language = repo.language || "";
+        if (repo.language) {
+          var techId = "technology:" + repo.language.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+          addNode({ id: techId, type: "Technology", label: repo.language });
+          addEdge(project.id, techId, "USES_TECHNOLOGY", { sourceRepo: project.slug });
+        }
+      }
+    }
+
+    nodes.filter(function (node) { return node.type === "Project"; }).forEach(function (project) {
+      connectProject(project, repoIndex[String(project.slug || "").toLowerCase()]);
     });
-    return {
-      nodes: data.nodes.filter(function (node) { return selected.has(node.id); }),
-      edges: data.edges.filter(function (edge) { return selected.has(edge.source) && selected.has(edge.target); })
-    };
+
+    (repos || []).forEach(function (repo) {
+      if (projectBySlug[String(repo.name).toLowerCase()]) return;
+      var id = "project:" + repo.name;
+      var project = addNode({
+        id: id, type: "Project", label: repo.name.replace(/[-_]+/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); }),
+        slug: repo.name, projectType: "live-repository", githubUrl: repo.html_url, liveOnly: true
+      });
+      connectProject(project, repo);
+    });
+
+    var degree = {};
+    edges.forEach(function (edge) {
+      degree[edge.source] = (degree[edge.source] || 0) + 1;
+      degree[edge.target] = (degree[edge.target] || 0) + 1;
+    });
+    nodes.forEach(function (node) { node.degree = degree[node.id] || 0; });
+
+    /* Give the force simulation an architectural starting point: a fixed domain
+       ring, repository constellations around each domain, and outer semantic
+       layers. The forces may refine the satellites, but the portfolio skeleton
+       remains legible and repeatable rather than collapsing into a generic blob. */
+    root.fx = 0; root.fy = 0; root.fz = 0;
+    var domains = nodes.filter(function (node) { return node.type === "Domain" && !node.isRoot; })
+      .sort(function (a, b) { return a.label.localeCompare(b.label); });
+    var domainById = {};
+    domains.forEach(function (domain, index) {
+      var angle = (index / Math.max(1, domains.length)) * Math.PI * 2;
+      domain.fx = Math.cos(angle) * 235;
+      domain.fy = Math.sin(angle * 2) * 72;
+      domain.fz = Math.sin(angle) * 235;
+      domainById[domain.id] = domain;
+    });
+    var domainSlots = {};
+    nodes.filter(function (node) { return node.type === "Project"; }).forEach(function (project) {
+      var domainId = projectDomain[project.id];
+      var anchor = domainById[domainId] || root;
+      var slot = domainSlots[domainId] || 0;
+      domainSlots[domainId] = slot + 1;
+      var angle = slot * 2.3999632297;
+      var spread = 42 + 10 * Math.sqrt(slot + 1);
+      project.x = anchor.fx + Math.cos(angle) * spread;
+      project.y = anchor.fy + Math.sin(angle) * spread * 0.68;
+      project.z = anchor.fz + Math.sin(angle * 1.7) * spread;
+    });
+    var semanticSlots = {};
+    nodes.filter(function (node) { return node.type !== "Project" && node.type !== "Domain"; }).forEach(function (node) {
+      var slot = semanticSlots[node.type] || 0;
+      semanticSlots[node.type] = slot + 1;
+      var layer = ALL_TYPES.indexOf(node.type);
+      var angle = slot * 2.3999632297 + layer * 0.63;
+      var radius = 330 + layer * 16 + Math.sqrt(slot + 1) * 9;
+      node.x = Math.cos(angle) * radius;
+      node.y = Math.sin(angle * 1.41) * 150;
+      node.z = Math.sin(angle) * radius;
+    });
+    return { nodes: nodes, edges: edges, repositoryCount: nodes.filter(function (n) { return n.type === "Project"; }).length };
   }
 
   function loadGraph() {
     if (loaded) return;
     loaded = true;
-    fetch("data/research-graph.json")
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        graphData = focusedOverview(data);
+    var reposReady = window.AtlasReposReady || Promise.resolve(window.AtlasLiveRepos || []);
+    Promise.all([
+      fetch("data/research-graph.json").then(function (r) { if (!r.ok) throw new Error("Graph unavailable"); return r.json(); }),
+      reposReady.catch(function () { return []; })
+    ]).then(function (results) {
+        graphData = architectureGraph(results[0], results[1]);
         var note = document.getElementById("atlas-graph-note");
-        if (note) note.textContent = "Focused view of the most-connected concepts and representative repositories; use the relationship index for the complete curated manifest.";
+        if (note) note.textContent = "Complete public-repository topology with curated scientific relationships; select any node to trace its immediate context.";
+        var repoMetric = document.getElementById("atlas-architecture-repos");
+        var linkMetric = document.getElementById("atlas-architecture-links");
+        if (repoMetric) repoMetric.textContent = String(graphData.repositoryCount);
+        if (linkMetric) linkMetric.textContent = String(graphData.edges.length);
         render();
       })
       .catch(function () {
@@ -139,12 +257,22 @@
         .backgroundColor(pal.bg)
         .showNavInfo(false)
         .nodeLabel(function (n) { return n.label; })
-        .nodeVal(function (n) { return NODE_SIZE[n.type] || 3; })
+        .nodeVal(function (n) {
+          if (n.isRoot) return 34;
+          return (NODE_SIZE[n.type] || 3) + Math.min(7, Math.sqrt(n.degree || 0));
+        })
+        .nodeResolution(14)
+        .nodeRelSize(4.6)
         .nodeColor(nodeColor)
         .nodeOpacity(0.92)
         .linkColor(linkColor)
-        .linkWidth(function (l) { return isLit(l) ? 1.6 : 0.7; })
-        .linkOpacity(0.48)
+        .linkWidth(function (l) { return isLit(l) ? 2.2 : (l.relation === "CONTAINS_DOMAIN" ? 1.65 : (l.relation === "CONTAINS_REPOSITORY" ? 1.05 : 0.72)); })
+        .linkOpacity(0.64)
+        .linkCurvature(function (l) { return l.relation === "CONTAINS_DOMAIN" ? 0.24 : (l.relation === "CONTAINS_REPOSITORY" ? 0.08 : 0.025); })
+        .linkDirectionalParticles(function (l) { return !reduceMotionMQ.matches && l.relation === "CONTAINS_DOMAIN" ? 2 : 0; })
+        .linkDirectionalParticleWidth(1.8)
+        .linkDirectionalParticleSpeed(0.0035)
+        .linkDirectionalParticleColor(function () { return pal.Domain; })
         .onNodeClick(function (n) { selectNode(n.id); focusNode(n); })
         .onBackgroundClick(function () { clearSelection(); })
         .cooldownTime(reduceMotionMQ.matches ? 0 : 1200)
@@ -283,7 +411,15 @@
       }
       return base;
     }
-    function linkColor(l) { return isLit(l) ? pal.linkLit : pal.link; }
+    function linkColor(l) {
+      if (isLit(l)) return pal.linkLit;
+      if (l.relation === "CONTAINS_DOMAIN") return pal.domainLink;
+      if (l.relation === "CONTAINS_REPOSITORY") return pal.repositoryLink;
+      return pal.link;
+    }
+    refreshGraphTheme = function () {
+      if (Graph) Graph.nodeColor(nodeColor).linkColor(linkColor);
+    };
 
     function endpointId(endpoint) { return typeof endpoint === "object" ? endpoint.id : endpoint; }
     function refreshVisibility() {
@@ -357,7 +493,7 @@
         searchTerm = "";
         var searchInput = document.getElementById("atlas-graph-search");
         if (searchInput) searchInput.value = "";
-        activeTypeFilters = new Set(["Project", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType"]);
+        activeTypeFilters = new Set(ALL_TYPES);
         document.querySelectorAll("[data-graph-type-filter]").forEach(function (checkbox) { checkbox.checked = true; });
         refreshVisibility();
         fitToGraph(600);
@@ -470,6 +606,11 @@
     });
   }
   function escapeAttr(s) { return escapeHTML(s); }
+
+  new MutationObserver(function () {
+    pal = palette();
+    if (refreshGraphTheme) refreshGraphTheme();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
   window.addEventListener("resize", function () {
     if (!graphData) return;

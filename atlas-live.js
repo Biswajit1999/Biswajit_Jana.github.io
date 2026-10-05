@@ -9,9 +9,29 @@
 
   var USER = "Biswajit1999";
   var API = "https://api.github.com";
+  var CACHE_KEY = "biswajit-atlas-repositories-v2";
+  var CACHE_MAX_AGE = 24 * 60 * 60 * 1000;
+  var repoDataSource = "GitHub";
   var projects = catalog.projects;
   var bySlug = catalog.bySlug;
   var escapeHTML = catalog.escapeHTML;
+
+  var resolveReposReady;
+  window.AtlasReposReady = new Promise(function (resolve) { resolveReposReady = resolve; });
+
+  function readRepoCache() {
+    try {
+      var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+      if (!cached || !Array.isArray(cached.repos) || !cached.repos.length) return null;
+      return cached;
+    } catch (error) { return null; }
+  }
+
+  function writeRepoCache(repos) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), repos: repos }));
+    } catch (error) { /* storage is optional; the live catalog still works without it */ }
+  }
 
   function fetchJSON(url) {
     return fetch(url, {
@@ -32,7 +52,16 @@
           return batch.length === 100 ? fetchPage(page + 1) : repos;
         });
     }
-    return fetchPage(1);
+    return fetchPage(1).then(function (freshRepos) {
+      repoDataSource = "GitHub";
+      writeRepoCache(freshRepos);
+      return freshRepos;
+    }).catch(function (error) {
+      var cached = readRepoCache();
+      if (!cached) throw error;
+      repoDataSource = (Date.now() - cached.savedAt <= CACHE_MAX_AGE) ? "recent cache" : "saved snapshot";
+      return cached.repos;
+    });
   }
 
   function repoType(repo) {
@@ -322,16 +351,20 @@
       var lead = document.getElementById("atlas-catalog-lead");
       if (lead) lead.textContent = "Search " + repos.length + " current public GitHub repositories. Selected research projects include additional scientific context and relationship metadata.";
       if (status) {
-        status.textContent = "Live GitHub data loaded · " + repos.length + " public repositories · refreshed " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        status.textContent = (repoDataSource === "GitHub" ? "Live GitHub data loaded" : "GitHub fallback loaded from " + repoDataSource) + " · " + repos.length + " public repositories · refreshed " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         status.dataset.state = "ready";
       }
       document.documentElement.dataset.atlasLive = "true";
+      window.AtlasLiveRepos = repos;
+      resolveReposReady(repos);
+      window.dispatchEvent(new CustomEvent("atlas:repositories-ready", { detail: { repos: repos, source: repoDataSource } }));
       updateStructuredData(repos);
       renderCommits(commitSearch, repos);
       if (window.AtlasBridge) window.AtlasBridge.projectSlugs = projects.map(function (project) { return project.slug; });
       catalog.applyState();
       watchThumbnails();
     }).catch(function () {
+      resolveReposReady([]);
       if (status) {
         status.textContent = "GitHub is temporarily unavailable; showing the curated repository snapshot.";
         status.dataset.state = "error";

@@ -41,6 +41,7 @@ def asset_version():
 GRAPH_TYPE_LABELS = {
     "Project": "Repository", "Instrument": "Instrument", "Method": "Method",
     "Molecule": "Molecule", "PlanetClass": "Planet class", "AnalysisType": "Analysis type",
+    "Domain": "Research domain", "Technology": "Technology",
 }
 
 EV_LABELS = {
@@ -159,9 +160,9 @@ def compute_stats(projects):
 
 def render_stats(stats):
     tiles = [
-        (stats["total"], "Curated research records", "atlas-stat-curated"),
-        ("—", "Public repositories (live)", "atlas-stat-total"),
-        (stats["live_demos"], "Curated projects with live sites", "atlas-stat-live"),
+        ("…", "Public repositories · live GitHub", "atlas-stat-total"),
+        (stats["total"], "Scientifically annotated records", "atlas-stat-curated"),
+        (stats["live_demos"], "Projects with live sites", "atlas-stat-live"),
         (stats["exoplanet_targets"], "Individual exoplanet targets analyzed", None),
         (stats["interactive"], "Interactive labs and platforms", None),
         (stats["real_data_repos"], "Repos built on real public data", None),
@@ -435,19 +436,24 @@ def render_graph_section(graph):
     type_filters = "".join(
         '<label class="atlas-graph-filter"><input type="checkbox" data-graph-type-filter="' + t + '" checked /> '
         + '<span class="swatch sw-' + t.lower() + '"></span><span>' + esc(GRAPH_TYPE_LABELS.get(t, t)) + "</span></label>"
-        for t in ("Project", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType")
-        if by_type.get(t)
+        for t in ("Project", "Domain", "Technology", "Instrument", "Method", "Molecule", "PlanetClass", "AnalysisType")
+        if by_type.get(t) or t in ("Domain", "Technology")
     )
 
     section = (
         '<section class="section section-band" id="atlas-graph-section">'
         '<div class="container">'
         '<div class="section-head">'
-        '<p class="eyebrow">Relationship explorer</p>'
-        '<h2 class="section-title">Research atlas, mapped by connection</h2>'
-        '<p class="section-lead">Explore how selected repositories connect to instruments, methods, molecules, planet classes, and analysis types. Search narrows the scene; selecting a node reveals its immediate research context.</p>'
+        '<p class="eyebrow">Portfolio architecture</p>'
+        '<h2 class="section-title">Every repository, mapped as a living research system</h2>'
+        '<p class="section-lead">The central architecture expands from research domains into repositories, then into the instruments, methods, molecules, technologies, planet classes, and analysis types they share. GitHub adds new public repositories automatically; curated scientific edges remain explicitly traceable.</p>'
         "</div>"
         '<div class="atlas-graph-shell">'
+        '<div class="atlas-architecture-header">'
+        '<div><span class="atlas-architecture-kicker">Live portfolio topology</span><strong id="atlas-architecture-repos">Connecting…</strong><small>repository nodes</small></div>'
+        '<div><span class="atlas-architecture-kicker">Semantic layers</span><strong id="atlas-architecture-layers">8</strong><small>domains, methods &amp; evidence</small></div>'
+        '<div><span class="atlas-architecture-kicker">Traceable links</span><strong id="atlas-architecture-links">—</strong><small>metadata-derived relationships</small></div>'
+        '</div>'
         '<div class="atlas-graph-toolbar">'
         '<div class="atlas-graph-search"><label for="atlas-graph-search">Find a repository or concept</label><input type="search" id="atlas-graph-search" placeholder="e.g. JWST, transit, water" autocomplete="off" /></div>'
         '<div class="atlas-graph-toolbar-actions">'
@@ -466,9 +472,9 @@ def render_graph_section(graph):
         "</div>"
         "</div>"
         "</div>"
-        '<div class="atlas-graph-meta"><p id="atlas-graph-status" role="status" aria-live="polite">Preparing the curated relationship view…</p><p id="atlas-graph-note">Drag to rotate, scroll to zoom, and select a node to inspect its neighbours.</p></div>'
+        '<div class="atlas-graph-meta"><p id="atlas-graph-status" role="status" aria-live="polite">Preparing the portfolio architecture…</p><p id="atlas-graph-note">Drag to orbit, scroll to zoom, and select a node to trace its neighbours.</p></div>'
         '<div class="atlas-graph-list-wrap" id="atlas-graph-list-wrap" hidden>' + "".join(list_html) + "</div>"
-        '<p class="atlas-graph-provenance"><strong>Scope.</strong> Connections are derived from explicit metadata in the curated repository records. They indicate shared research context—not citation, causation, collaboration, or scientific validation.</p>'
+        '<p class="atlas-graph-provenance"><strong>Scope.</strong> Repository, instrument, method, molecule, and analysis links come from the curated research manifest. Domain and technology branches for newly discovered repositories are deterministic classifications of their public GitHub name, description, topics, and language. They indicate shared context—not citation, causation, collaboration, or scientific validation.</p>'
         "</div>"
         "</div>"
         "</section>"

@@ -509,9 +509,20 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
    RESEARCH KNOWLEDGE GRAPH
    ============================================================ */
 .atlas-graph-shell{
-  border:1px solid var(--line);border-radius:calc(var(--radius-lg) + 4px);background:var(--surface);
-  padding:clamp(14px,2vw,24px);box-shadow:var(--shadow-soft);overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--accent) 24%,var(--line));border-radius:calc(var(--radius-lg) + 4px);background:var(--surface);
+  padding:clamp(14px,2vw,24px);box-shadow:var(--shadow-soft),inset 0 1px color-mix(in srgb,#fff 68%,transparent);overflow:hidden;
 }
+.atlas-architecture-header{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:-1px -1px 22px;
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line);
+}
+.atlas-architecture-header>div{
+  min-width:0;padding:15px 18px;background:linear-gradient(145deg,color-mix(in srgb,var(--surface) 94%,var(--accent-soft)),var(--surface));
+  display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:end;
+}
+.atlas-architecture-kicker{grid-column:1/-1;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.atlas-architecture-header strong{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.55rem,3vw,2.2rem);line-height:1;color:var(--ink)}
+.atlas-architecture-header small{font-size:.72rem;line-height:1.25;color:var(--muted);padding-bottom:2px}
 @media (max-width:759px){
   .atlas-graph-toolbar,.atlas-graph-canvas,.atlas-graph-controls{display:none!important}
   .atlas-graph-list-wrap[hidden]{display:block}
@@ -540,6 +551,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-graph-filter input{position:absolute;opacity:0;pointer-events:none}
 .atlas-graph-legend .swatch{width:10px;height:10px;border-radius:50%;display:inline-block;box-shadow:0 0 0 1px color-mix(in srgb,currentColor 28%,transparent)}
 .atlas-graph-legend .sw-project{background:var(--accent)}
+.atlas-graph-legend .sw-domain{background:#d97706;box-shadow:0 0 0 3px color-mix(in srgb,#d97706 18%,transparent)}
+.atlas-graph-legend .sw-technology{background:#0891b2}
 .atlas-graph-legend .sw-instrument{background:var(--status-reanalysis)}
 .atlas-graph-legend .sw-method{background:var(--type-tool)}
 .atlas-graph-legend .sw-molecule{background:var(--status-synthetic)}
@@ -548,10 +561,29 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 
 .atlas-graph-stage{position:relative;isolation:isolate}
 .atlas-graph-canvas{
-  width:100%;max-width:100%;min-width:0;height:clamp(500px,56vw,680px);border:1px solid var(--line);border-radius:var(--radius-lg);
-  background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--accent-soft) 62%,transparent),transparent 54%),var(--bg);
-  overflow:hidden;position:relative;cursor:grab;contain:layout paint;
+  width:100%;max-width:100%;min-width:0;height:clamp(560px,62vw,760px);border:1px solid color-mix(in srgb,var(--accent) 26%,var(--line));border-radius:var(--radius-lg);
+  background:
+    radial-gradient(circle at 50% 46%,color-mix(in srgb,var(--accent-soft) 78%,transparent) 0%,transparent 42%),
+    linear-gradient(color-mix(in srgb,var(--accent) 5%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--accent) 5%,transparent) 1px,transparent 1px),
+    var(--bg);
+  background-size:auto,38px 38px,38px 38px,auto;
+  overflow:hidden;position:relative;cursor:grab;contain:layout paint;box-shadow:inset 0 0 90px color-mix(in srgb,var(--accent) 8%,transparent);
 }
+.atlas-graph-canvas::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;border-radius:inherit;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--accent-2) 35%,transparent),transparent 22%,transparent 78%,color-mix(in srgb,var(--accent) 28%,transparent));
+  opacity:.25;mix-blend-mode:multiply;
+}
+[data-theme="dark"] .atlas-graph-canvas{
+  background:
+    radial-gradient(circle at 50% 46%,rgba(22,78,99,.34) 0%,rgba(11,18,32,.08) 42%,transparent 66%),
+    linear-gradient(rgba(94,234,212,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(96,165,250,.045) 1px,transparent 1px),
+    #07101d;
+  background-size:auto,38px 38px,38px 38px,auto;box-shadow:inset 0 0 130px rgba(0,0,0,.58),0 24px 64px -40px rgba(37,99,235,.7);
+}
+[data-theme="dark"] .atlas-graph-canvas::after{opacity:.38;mix-blend-mode:screen}
 .atlas-graph-canvas:active{cursor:grabbing}
 .atlas-graph-canvas svg{width:100%;height:100%;display:block;touch-action:none}
 .gedge{stroke:var(--line-2);stroke-width:1;transition:opacity var(--motion-micro) ease}
@@ -609,6 +641,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .atlas-graph-list-wrap a{color:var(--accent)}
 @media (max-width:760px){
   .atlas-graph-shell{padding:14px}.atlas-graph-list-wrap{margin-top:0;padding-top:0;border-top:0}
+  .atlas-architecture-header{grid-template-columns:1fr;margin-bottom:16px}
+  .atlas-architecture-header>div{grid-template-columns:88px 1fr}.atlas-architecture-kicker{grid-column:auto}.atlas-architecture-header strong{font-size:1.35rem}
   .atlas-graph-provenance{margin-top:14px}.atlas-graph-meta{display:none}
 }
 @media (max-width:900px){
