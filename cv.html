@@ -883,12 +883,13 @@
                 <li>Developed a closed-loop stabilisation framework for EXOhSPEC, a high-resolution radial-velocity spectrograph testbed for exoplanet instrumentation research.</li>
                 <li>Integrated <strong>IDS3010 interferometric sensing</strong>, <strong>Meerstetter TEC control</strong>, <strong>BME environmental sensors</strong>, <strong>MaxIm DL centroid tracking</strong>, and adaptive-optics correction into Python-based feedback workflows.</li>
                 <li>Quantified environmental coupling: <strong>1 hPa pressure → ~0.4 µm OPL</strong>; <strong>1°C temperature → ~6 µm OPL variation</strong>.</li>
-                <li>Achieved <strong>~±0.3°C enclosure stability</strong> over multi-week operation, later reaching millikelvin-level TEC control during closed-loop experiments.</li>
-                <li>Built diagnostics stack: <strong>Grafana + InfluxDB</strong>, serial logging, web monitoring, and Python-based OPL and pixel-drift correction models using environmental data and guider centroid errors.</li>
-                <li>AO Stage-1 tests validated <strong>~0.15 px/step</strong> response; reduced mean post-correction residuals from <strong>~0.44 px to ~0.15 px</strong>; hybrid TEC–AO runs reduced dY RMS from <strong>~2.72 px to ~0.69 px</strong>.</li>
+                <li>Reached <strong>2.47 mK TEC RMS stability</strong> with 17.4 mK peak-to-peak variation during a 44.5-hour run.</li>
+                <li>Commissioned a replacement active-optics unit at <strong>0.0194–0.0198 µm per step</strong>; the 88.59-hour V17 validation kept all 4,761 settled frames inside ±0.5 px.</li>
+                <li>Extended the detector pipeline to multi-line ThAr phase-correlation tracking, reaching <strong>dX RMS 0.0373 px</strong> and <strong>dY RMS 0.0990 px</strong> over 3.98 hours.</li>
+                <li>Linked a common <strong>~33.4-minute</strong> component across HVAC behaviour, chiller response, camera temperature, and residual detector motion using 301 science frames and 3,612 LK220 measurements.</li>
               </ul>
               <div class="chip-row">
-                <span class="chip chip-teal">dY RMS 0.69 px</span>
+                <span class="chip chip-teal">dY RMS 0.0990 px</span>
                 <span class="chip chip-teal">OPL: 6 µm/°C</span>
                 <span class="chip chip-teal">mK TEC stability</span>
                 <span class="chip chip-blue">IDS3010</span>
@@ -896,6 +897,30 @@
                 <span class="chip chip-blue">Grafana / InfluxDB</span>
                 <span class="chip chip-plain">Python</span>
               </div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">2026–Present</div></div>
+            <div class="entry-body">
+              <div class="entry-title">Finding Earth 2.0 — Exoplanet Population &amp; Evidence Pipeline</div>
+              <div class="entry-meta"><strong>Independent research software</strong> · Public-archive analysis</div>
+              <ul class="entry-bullets">
+                <li>Consolidated <strong>164,209 provenance-tracked records</strong> from 13 archive tables into 6,354 confirmed planets across 4,764 host systems.</li>
+                <li>Retained 174 conservative-habitable-zone worlds and 15 small, temperate candidates; propagated published uncertainties with 4,000 Monte Carlo draws per planet.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-year-col"><div class="entry-year">2026–Present</div></div>
+            <div class="entry-body">
+              <div class="entry-title">NĀSADĪYA LIGHTCONE — DESI/2MRS Cosmology Pipeline</div>
+              <div class="entry-meta"><strong>Independent research software</strong> · Survey-scale data processing</div>
+              <ul class="entry-bullets">
+                <li>Processed <strong>6,093,818 accepted DESI DR1 rows</strong> across 4,205 tiles plus the complete 43,533-row 2MRS local layer.</li>
+                <li>Produced a validated 185.12 MiB Parquet research product and a deterministic 125,000-row level-of-detail layer for interactive exploration.</li>
+              </ul>
             </div>
           </div>
 
@@ -922,8 +947,8 @@
               <div class="entry-title">ExoLight Transit Lab &amp; Exoplanet Visualisation Tools</div>
               <div class="entry-meta"><strong>Independent project</strong> · Science communication</div>
               <ul class="entry-bullets">
-                <li>Developed a live exoplanet transit visualisation tool covering transit geometry, normalised light curves, flux dips, limb darkening, and atmospheric transmission.</li>
-                <li>Quantitative outputs: transit-depth visualisation, normalised flux curves, ingress/egress interpretation, and planet–star radius-ratio explanation.</li>
+                <li>Built a reproducible transit-analysis framework with quadratic limb darkening, numerical stellar-disk integration, finite exposure-time integration, and residual diagnostics.</li>
+                <li>Executed <strong>4,000 seeded injection–recovery trials</strong> across white and AR(1) correlated noise to test uncertainty coverage and recovery claims.</li>
               </ul>
             </div>
           </div>
@@ -1023,7 +1048,8 @@
               </div>
               <ul class="entry-bullets">
                 <li>Analysed VISTA, DES, and WISE survey data for potential halo T dwarf candidates.</li>
-                <li>Contributed to candidate assessment, follow-up planning, and a <strong>CNTAC telescope-proposal submission</strong> for Magellan/FIRE spectroscopic follow-up (2025A).</li>
+                <li>Contributed to candidate assessment and the successful CNTAC Magellan/FIRE follow-up proposal; the collaboration subsequently confirmed ten benchmark T-dwarf/Gaia wide-companion systems, including eight previously unreported systems.</li>
+                <li>The collaboration’s manuscript, <em>10 Benchmark T-Dwarfs: Wide Companions to Gaia Primaries</em>, was submitted to MNRAS in 2026.</li>
               </ul>
             </div>
           </div>
@@ -1083,6 +1109,11 @@
           <div class="section-line"></div>
         </div>
         <div class="pub-list">
+          <div class="pub-card">
+            <div class="pub-title">10 Benchmark T-Dwarfs: Wide Companions to Gaia Primaries</div>
+            <div class="pub-info">Cheng, G., et al., including <strong>Jana, B.</strong> &nbsp;·&nbsp; <strong>Submitted to MNRAS</strong> &nbsp;·&nbsp; 2026</div>
+            <span class="badge badge-gold">Submitted manuscript · not yet peer reviewed</span>
+          </div>
           <div class="pub-card">
             <div class="pub-title">Implementation of Dimming Controlled Visible Light Communication using Raspberry Pi</div>
             <div class="pub-info">Jana, B., et al. &nbsp;·&nbsp; <strong>Optical and Quantum Electronics</strong>, 53, 725 &nbsp;·&nbsp; Springer &nbsp;·&nbsp; 2021</div>
