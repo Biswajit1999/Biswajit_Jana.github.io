@@ -40,7 +40,11 @@ class AtlasLiveTests(unittest.TestCase):
 
     def test_public_count_is_not_presented_as_curated_total(self) -> None:
         html = (ROOT / "atlas.html").read_text(encoding="utf-8")
-        self.assertIn('id="atlas-stat-total">…</div><div class="k">Public repositories · live GitHub', html)
+        public_repos = json.loads((ROOT / "data" / "public-repositories.json").read_text(encoding="utf-8"))
+        self.assertIn(
+            f'id="atlas-stat-total">{len(public_repos)}</div><div class="k">Public repositories · daily GitHub snapshot',
+            html,
+        )
         self.assertIn('id="atlas-stat-curated">85</div><div class="k">Scientifically annotated records', html)
         self.assertIn('id="atlas-architecture-repos">Connecting…</strong>', html)
 

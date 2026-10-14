@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import unittest
 from pathlib import Path
+from urllib.parse import unquote
 
 from build_evidence_registry import DATA_PATH, OUTPUT_PATH, load_evidence, render, validate_evidence
 
@@ -39,7 +40,7 @@ class EvidenceRegistryTests(unittest.TestCase):
             url = line.strip().removeprefix("<loc>").removesuffix("</loc>")
             if url.startswith(prefix):
                 relative = url[len(prefix) :] or "index.html"
-                targets.append(relative)
+                targets.append(unquote(relative))
         missing = [target for target in targets if not (ROOT / target).is_file()]
         self.assertEqual(missing, [])
 
