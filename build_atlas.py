@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 DATA_PATH = ROOT / "data" / "full-portfolio.json"
 GRAPH_PATH = ROOT / "data" / "research-graph.json"
+PUBLIC_REPOS_PATH = ROOT / "data" / "public-repositories.json"
 OUT_PATH = ROOT / "atlas.html"
 SITE_URL = "https://biswajit1999.github.io/Biswajit_Jana.github.io"
 
@@ -159,8 +160,12 @@ def compute_stats(projects):
 
 
 def render_stats(stats):
+    public_total = stats["total"]
+    if PUBLIC_REPOS_PATH.exists():
+        with open(PUBLIC_REPOS_PATH, encoding="utf-8") as f:
+            public_total = len(json.load(f))
     tiles = [
-        ("…", "Public repositories · live GitHub", "atlas-stat-total"),
+        (public_total, "Public repositories · daily GitHub snapshot", "atlas-stat-total"),
         (stats["total"], "Scientifically annotated records", "atlas-stat-curated"),
         (stats["live_demos"], "Projects with live sites", "atlas-stat-live"),
         (stats["exoplanet_targets"], "Individual exoplanet targets analyzed", None),
@@ -603,6 +608,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
         <p class="atlas-sync-status" id="atlas-sync-status" role="status" aria-live="polite">Loading the latest public GitHub data…</p>
         <div class="atlas-hero-actions">
           <a class="btn btn-primary" href="#atlas-explorer">Browse the repositories</a>
+          <a class="btn btn-ghost" href="research-index.html">Complete crawlable index</a>
           <a class="btn btn-ghost" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener">View GitHub</a>
           <a class="btn btn-ghost" href="#atlas-methodology">How this is organized</a>
         </div>
@@ -650,7 +656,7 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
     <div class="section-head">
       <p class="eyebrow">Full catalog</p>
       <h2 class="section-title">GitHub work, searchable</h2>
-      <p class="section-lead" id="atlas-catalog-lead">Browse the curated research records below. When GitHub is available, the catalog expands to the current public account and reports that live total separately.</p>
+      <p class="section-lead" id="atlas-catalog-lead">Browse the deeply annotated research records below. The <a href="research-index.html">complete public-repository index</a> is rendered as crawlable HTML and refreshed daily from GitHub.</p>
     </div>
 
     <div class="atlas-explorer-toolbar">

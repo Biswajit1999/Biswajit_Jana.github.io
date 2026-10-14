@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this research software, please cite it using this metadata."
+title: "Biswajit Jana | MSc Astrophysicist — Instrumentation & Scientific Computing"
+abstract: "Biswajit Jana — MSc Astrophysicist working on precision instrumentation, closed-loop feedback systems, and scientific computing. MSc Astrophysics (University of Hertfordshire), BTech Electronics & Communication Engineeri"
+type: software
+authors:
+  - family-names: Jana
+    given-names: Biswajit
+repository-code: "https://github.com/Biswajit1999/Biswajit_Jana.github.io"
+url: "https://biswajit1999.github.io/Biswajit_Jana.github.io/"
+keywords:
+  - "astronomy"
+  - "astrophysics"
+  - "scientific computing"

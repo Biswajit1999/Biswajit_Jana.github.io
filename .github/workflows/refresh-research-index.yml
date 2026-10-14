@@ -1,0 +1,33 @@
+name: Refresh public research index
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Refresh the crawlable repository snapshot
+        run: python build_search_index.py
+      - name: Rebuild atlas with the current public count
+        run: python build_atlas.py
+      - name: Commit changed discovery files
+        run: |
+          if git diff --quiet; then
+            echo "Repository index is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public-repositories.json research-index.html atlas.html
+          git commit -m "chore: refresh public research index"
+          git push
