@@ -453,7 +453,7 @@
     "name": "Master-Thesis-2024",
     "description": "MSc astrophysics thesis on closed-loop thermal and adaptive-optics stabilization for EXOhSPEC extreme-precision radial-velocity spectroscopy, documenting control design, detector stability experiments, instrument telemetry and reproducible analysis.",
     "html_url": "https://github.com/Biswajit1999/Master-Thesis-2024",
-    "homepage": "https://biswajit1999.github.io/Master-Thesis-2024/",
+    "homepage": null,
     "language": "HTML",
     "topics": [
       "adaptive-optics",
@@ -2223,7 +2223,7 @@
     "name": "Gravitational_Wave_Chirp_Lab",
     "description": "Reproducible gravitational-wave chirp laboratory for simulation, scientific visualization, parameter exploration and quantitative analysis. Uses reproducible numerical experiments, parameter exploration and quantitative scientific visualization.",
     "html_url": "https://github.com/Biswajit1999/Gravitational_Wave_Chirp_Lab",
-    "homepage": "https://biswajit1999.github.io/Gravitational_Wave_Chirp_Lab/",
+    "homepage": null,
     "language": "JavaScript",
     "topics": [
       "astronomy",
@@ -2385,7 +2385,7 @@
     "name": "Universe",
     "description": "Interactive universe visualization project exploring astronomical scales, objects and scientific concepts through browser-based graphics. Designed as a browser-based scientific exploration layer with interactive graphics, simulation and data-driven context.",
     "html_url": "https://github.com/Biswajit1999/Universe",
-    "homepage": "https://biswajit1999.github.io/Universe/",
+    "homepage": null,
     "language": "TypeScript",
     "topics": [
       "astronomy",
@@ -2407,7 +2407,7 @@
     "name": "Pulsar_Timing_Lab",
     "description": "Reproducible pulsar timing laboratory for simulation, scientific visualization, parameter exploration and quantitative analysis. Uses reproducible numerical experiments, parameter exploration and quantitative scientific visualization.",
     "html_url": "https://github.com/Biswajit1999/Pulsar_Timing_Lab",
-    "homepage": "https://biswajit1999.github.io/Pulsar_Timing_Lab/",
+    "homepage": null,
     "language": "JavaScript",
     "topics": [
       "astronomy",

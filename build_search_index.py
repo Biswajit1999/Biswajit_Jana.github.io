@@ -87,7 +87,8 @@ def render(repos: list[dict]) -> str:
         live = live_url(repo)
         live_link = f'<a href="{esc(live)}">Open project <span aria-hidden="true">↗</span></a>' if live else ""
         searchable = " ".join([repo["name"], description, label, *topics]).lower()
-        cards.append(f'''<article class="project" data-category="{esc(label)}" data-search="{esc(searchable)}">
+        anchor = re.sub(r"[^a-z0-9]+", "-", repo["name"].lower()).strip("-")
+        cards.append(f'''<article class="project" id="repo-{esc(anchor)}" data-category="{esc(label)}" data-search="{esc(searchable)}">
   <div class="project-meta"><span>{esc(label)}</span><time datetime="{esc(repo.get('updated_at'))}">Updated {esc((repo.get('updated_at') or '')[:10])}</time></div>
   <h2><a href="{esc(live or repo['html_url'])}">{esc(repo['name'].replace('-', ' ').replace('_', ' '))}</a></h2>
   <p>{esc(description)}</p>
