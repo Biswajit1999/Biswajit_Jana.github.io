@@ -1413,7 +1413,7 @@
     "name": "adjacent-atlas",
     "description": "Research-discovery observatory that ranks methods, instruments and concepts adjacent to a field's frontier from public code and literature signals, visualized as an interactive 3D knowledge atlas and seeded with EPRV instrumentation.",
     "html_url": "https://github.com/Biswajit1999/adjacent-atlas",
-    "homepage": "",
+    "homepage": "https://biswajit1999.github.io/adjacent-atlas/",
     "language": "TypeScript",
     "topics": [
       "astronomy",
