@@ -14,8 +14,34 @@
       "research-software",
       "scientific-computing"
     ],
-    "updated_at": "2026-10-17T08:32:46Z",
+    "updated_at": "2026-10-18T08:50:23Z",
     "created_at": "2026-10-16T18:22:50Z"
+  },
+  {
+    "name": "Biswajit_Jana.github.io",
+    "description": "Research portfolio of Biswajit Jana covering astrophysics, astronomical instrumentation, exoplanets, precision radial-velocity spectroscopy, scientific computing, open research projects and interactive scientific tools.",
+    "html_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
+    "homepage": "https://biswajit1999.github.io/Biswajit_Jana.github.io/",
+    "language": "HTML",
+    "topics": [
+      "astronomical-instrumentation",
+      "astronomical-spectroscopy",
+      "astronomy",
+      "astrophysics",
+      "biswajit-jana",
+      "exoplanet-research",
+      "exoplanets",
+      "github-pages",
+      "open-science",
+      "precision-spectroscopy",
+      "radial-velocity",
+      "research-portfolio",
+      "research-software",
+      "scientific-computing",
+      "spectroscopy"
+    ],
+    "updated_at": "2026-10-17T08:36:25Z",
+    "created_at": "2026-05-25T07:59:05Z"
   },
   {
     "name": "adjacent-atlas",
@@ -184,32 +210,6 @@
     ],
     "updated_at": "2026-10-16T20:59:07Z",
     "created_at": "2026-08-10T17:39:23Z"
-  },
-  {
-    "name": "Biswajit_Jana.github.io",
-    "description": "Research portfolio of Biswajit Jana covering astrophysics, astronomical instrumentation, exoplanets, precision radial-velocity spectroscopy, scientific computing, open research projects and interactive scientific tools.",
-    "html_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-    "homepage": "https://biswajit1999.github.io/Biswajit_Jana.github.io/",
-    "language": "HTML",
-    "topics": [
-      "astronomical-instrumentation",
-      "astronomical-spectroscopy",
-      "astronomy",
-      "astrophysics",
-      "biswajit-jana",
-      "exoplanet-research",
-      "exoplanets",
-      "github-pages",
-      "open-science",
-      "precision-spectroscopy",
-      "radial-velocity",
-      "research-portfolio",
-      "research-software",
-      "scientific-computing",
-      "spectroscopy"
-    ],
-    "updated_at": "2026-10-16T09:03:47Z",
-    "created_at": "2026-05-25T07:59:05Z"
   },
   {
     "name": "AstroBis",
