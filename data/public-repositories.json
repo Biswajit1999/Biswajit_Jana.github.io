@@ -14,8 +14,39 @@
       "research-software",
       "scientific-computing"
     ],
-    "updated_at": "2026-10-19T09:52:20Z",
+    "updated_at": "2026-10-20T09:24:23Z",
     "created_at": "2026-10-16T18:22:50Z"
+  },
+  {
+    "name": "Master-Thesis-2024",
+    "description": "MSc astrophysics thesis on closed-loop thermal and adaptive-optics stabilization for EXOhSPEC extreme-precision radial-velocity spectroscopy, documenting control design, detector stability experiments, instrument telemetry and reproducible analysis.",
+    "html_url": "https://github.com/Biswajit1999/Master-Thesis-2024",
+    "homepage": "https://biswajit1999.github.io/Master-Thesis-2024/",
+    "language": "HTML",
+    "topics": [
+      "adaptive-optics",
+      "astronomical-instrumentation",
+      "astronomical-spectroscopy",
+      "astronomy",
+      "astrophysics",
+      "control-systems",
+      "data-analysis",
+      "echelle-spectrograph",
+      "eprv",
+      "exohspec",
+      "exoplanets",
+      "extreme-precision-radial-velocity",
+      "feedback-control",
+      "precision-spectroscopy",
+      "radial-velocity",
+      "reproducible-research",
+      "research",
+      "research-software",
+      "scientific-computing",
+      "thermal-control"
+    ],
+    "updated_at": "2026-10-19T11:56:03Z",
+    "created_at": "2026-06-23T12:13:57Z"
   },
   {
     "name": "Biswajit_Jana.github.io",
@@ -40,7 +71,7 @@
       "scientific-computing",
       "spectroscopy"
     ],
-    "updated_at": "2026-10-18T08:52:49Z",
+    "updated_at": "2026-10-19T09:57:32Z",
     "created_at": "2026-05-25T07:59:05Z"
   },
   {
@@ -2488,37 +2519,6 @@
     ],
     "updated_at": "2026-10-15T00:07:30Z",
     "created_at": "2026-05-06T08:31:33Z"
-  },
-  {
-    "name": "Master-Thesis-2024",
-    "description": "MSc astrophysics thesis on closed-loop thermal and adaptive-optics stabilization for EXOhSPEC extreme-precision radial-velocity spectroscopy, documenting control design, detector stability experiments, instrument telemetry and reproducible analysis.",
-    "html_url": "https://github.com/Biswajit1999/Master-Thesis-2024",
-    "homepage": "",
-    "language": "HTML",
-    "topics": [
-      "adaptive-optics",
-      "astronomical-instrumentation",
-      "astronomical-spectroscopy",
-      "astronomy",
-      "astrophysics",
-      "control-systems",
-      "data-analysis",
-      "echelle-spectrograph",
-      "eprv",
-      "exohspec",
-      "exoplanets",
-      "extreme-precision-radial-velocity",
-      "feedback-control",
-      "precision-spectroscopy",
-      "radial-velocity",
-      "reproducible-research",
-      "research",
-      "research-software",
-      "scientific-computing",
-      "thermal-control"
-    ],
-    "updated_at": "2026-10-15T00:07:29Z",
-    "created_at": "2026-06-23T12:13:57Z"
   },
   {
     "name": "coronagraph-dark-hole-lab",
