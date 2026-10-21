@@ -58,7 +58,10 @@ class BlogSeriesTests(unittest.TestCase):
                 if href.startswith('#'):
                     self.assertIn(href[1:],dom.ids,href)
                 elif not re.match(r'\w+:',href):
-                    self.assertTrue((page.parent/href.split('#')[0]).exists(),href)
+                    target=page.parent/href.split('#')[0]
+                    self.assertTrue(target.exists(),href)
+                    if '#' in href and target.suffix=='.html':
+                        self.assertIn(href.split('#',1)[1],Document(target.read_text(encoding='utf-8')).ids,href)
 
     def test_metadata_preserves_existing_archive(self):
         data=json.loads((ROOT/'blog/blog-data.json').read_text(encoding='utf-8'))
