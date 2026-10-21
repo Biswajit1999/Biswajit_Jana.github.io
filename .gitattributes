@@ -1,0 +1,3 @@
+# Scientific input and figure hashes describe the original bytes on every platform.
+blog/series-2026/sources/** -text
+paper-journal/papers/**/plots/source/** -text

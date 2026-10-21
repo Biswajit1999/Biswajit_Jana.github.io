@@ -1,0 +1,80 @@
+[
+  {
+    "slug": "zhao-2026-expres-hidden-systematics",
+    "words": 2451,
+    "figures": 7,
+    "estimated_minutes": 19
+  },
+  {
+    "slug": "sercel-2024-thermal-control-delay-lines",
+    "words": 2082,
+    "figures": 5,
+    "estimated_minutes": 15
+  },
+  {
+    "slug": "kreider-2025-fabry-perot-chromatic-drift",
+    "words": 1902,
+    "figures": 4,
+    "estimated_minutes": 14
+  },
+  {
+    "slug": "khandelwal-2024-scmos-detectors",
+    "words": 2253,
+    "figures": 6,
+    "estimated_minutes": 17
+  },
+  {
+    "slug": "luhman-2025-ic348-h-class-brown-dwarfs",
+    "words": 2260,
+    "figures": 7,
+    "estimated_minutes": 18
+  },
+  {
+    "slug": "chen-2025-cosmos-web-brown-dwarf-density",
+    "words": 2298,
+    "figures": 7,
+    "estimated_minutes": 18
+  },
+  {
+    "slug": "schmidt-2026-eom-comb-espresso",
+    "words": 2891,
+    "figures": 6,
+    "estimated_minutes": 21
+  },
+  {
+    "slug": "pepe-2021-espresso-performance",
+    "words": 3068,
+    "figures": 20,
+    "estimated_minutes": 32
+  },
+  {
+    "slug": "schmidt2024-espresso-line-spread-function",
+    "words": 2127,
+    "figures": 7,
+    "estimated_minutes": 17
+  },
+  {
+    "slug": "robertson-2019-neid-environment-control",
+    "words": 1931,
+    "figures": 6,
+    "estimated_minutes": 15
+  },
+  {
+    "slug": "pinfield-2014-wise-halo-t-dwarfs",
+    "words": 1881,
+    "figures": 6,
+    "estimated_minutes": 15
+  },
+  {
+    "slug": "molliere-2019-petitradtrans",
+    "words": 1836,
+    "figures": 5,
+    "estimated_minutes": 14
+  },
+  {
+    "slug": "kreidberg-2015-batman-transit-models",
+    "words": 1825,
+    "figures": 3,
+    "estimated_minutes": 12
+  }
+]

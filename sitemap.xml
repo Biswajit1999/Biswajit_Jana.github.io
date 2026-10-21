@@ -282,4 +282,56 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-journal/papers/schmidt2024-espresso-line-spread-function/index.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-journal/papers/robertson-2019-neid-environment-control/index.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/index.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-journal/papers/molliere-2019-petitradtrans/index.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/paper-journal/papers/kreidberg-2015-batman-transit-models/index.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/spectrograph-stability.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/gaia-stellar-populations.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/neid-quality-cuts.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/detector-memory.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/cosmic-web-surveys.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/earth-shortlist.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/coronagraph-contrast.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/transit-baseline.html</loc>
+    <lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
 </urlset>

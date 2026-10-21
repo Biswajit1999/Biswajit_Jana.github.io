@@ -1,0 +1,98 @@
+{
+  "key": "khandelwal",
+  "version": "2409.16449v2",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S4.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/hama/combined_new.png",
+          "sha256": "0d668c43985d35254a38d4ae31177d898869d0faa1eada7825be5b21a32a704e",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-01-panel-01.preview.webp",
+          "width": 1800,
+          "height": 2025
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 2,
+      "anchor": "S4.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/hama/Hama_RN_new.png",
+          "sha256": "6d9a8e3ec16f42f06d8618e911e0890bb39068e8775bf29d5e7f45c57199c6b0",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1683
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S4.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/hama/hama_dc_new.png",
+          "sha256": "93d7523aa17b7a6dacc871d753fff16339c8d39208eb45f8dcad695988c1cd75",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-03-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1159
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S4.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/hama/QE.png",
+          "sha256": "aa23978550ee39751bcfa0a8441015ab39433fb7524159a19a5d7f86758725e9",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-04-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1350
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 5,
+      "anchor": "S4.F5",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-05-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/hama/combined_lin_new.png",
+          "sha256": "4af55ba123533180eaff9f7b6972dbda37df2d41a9f656d791e4ac50c941553f",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-05-panel-01.preview.webp",
+          "width": 1800,
+          "height": 2700
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 17,
+      "anchor": "A1.F17",
+      "panels": [
+        {
+          "path": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-17-panel-01.png",
+          "url": "https://arxiv.org/html/2409.16449v2/plots/ximea/combined.png",
+          "sha256": "fe29d1f1078d917a998d6fb3a3689a303c1e89c6b5849e599e7c1ad6bd3ef967",
+          "preview": "paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/figure-17-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1350
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

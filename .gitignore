@@ -3,3 +3,22 @@
 .codex-auth/
 __pycache__/
 *.py[cod]
+
+# Local design work, assistant configuration and generation instructions.
+.agents/
+design-concepts/
+skills-lock.json
+paper-journal/README.md
+paper-journal/assets/images/reading-covers-20261021/
+
+# Figure copies without confirmed public redistribution permission stay local.
+# Published notes retain their figure-by-figure commentary and original-source links.
+paper-journal/papers/khandelwal-2024-scmos-detectors/plots/source/
+paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/
+paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/
+paper-journal/papers/molliere-2019-petitradtrans/plots/source/
+paper-journal/papers/pepe-2021-espresso-performance/plots/source/
+paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/
+paper-journal/papers/robertson-2019-neid-environment-control/plots/source/
+paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/
+paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/

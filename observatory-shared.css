@@ -1,0 +1,54 @@
+/* Palette layer only: retain each established page's typography and geometry. */
+html[data-theme="light"]{color-scheme:light;--obs-bg:#f5f7f8;--obs-panel:#fff;--obs-panel2:#edf2f3;--obs-text:#182533;--obs-muted:#536575;--obs-accent:#086f70;--obs-secondary:#426895;--obs-line:#d9e2e6;--obs-line2:#bacbd1;--obs-soft:#dfefec;--obs-on-accent:#fff;--obs-shadow:0 18px 60px #16384a0b}
+html[data-theme="dark"]{color-scheme:dark;--obs-bg:#0b1420;--obs-panel:#142131;--obs-panel2:#101c2a;--obs-text:#edf2f5;--obs-muted:#a5b5c4;--obs-accent:#69c8be;--obs-secondary:#91b1d5;--obs-line:#2a3b4c;--obs-line2:#42596b;--obs-soft:#193b3c;--obs-on-accent:#0b2227;--obs-shadow:0 18px 60px #030a1240}
+html[data-theme] body.observatory-page{
+  --bg:var(--obs-bg);--bg2:var(--obs-panel2);--bg-grad:none;
+  --surface:var(--obs-panel);--surface-muted:var(--obs-panel2);
+  --ink:var(--obs-text);--ink-soft:var(--obs-muted);--text:var(--obs-text);
+  --muted:var(--obs-muted);--dim:var(--obs-muted);--soft:var(--obs-panel2);
+  --accent:var(--obs-accent);--accent-2:var(--obs-secondary);--accent2:var(--obs-secondary);
+  --a:var(--obs-accent);--teal:var(--obs-accent);--teal-dim:var(--obs-soft);
+  --gold:var(--obs-accent);--gold-dim:var(--obs-soft);--blue:var(--obs-secondary);--blue-dim:var(--obs-soft);
+  --violet:var(--obs-secondary);--card:var(--obs-panel);--card2:var(--obs-panel);
+  --panel:var(--obs-panel);--panel2:var(--obs-panel);
+  --border:var(--obs-line);--border-bright:var(--obs-line2);--line:var(--obs-line);--line-2:var(--obs-line2);
+  --ring:var(--obs-accent);--accent-soft:var(--obs-soft);
+  --shadow:var(--obs-shadow);--shadow-sm:var(--obs-shadow);--shadow-lg:var(--obs-shadow);
+  --shadow-card:var(--obs-shadow);--shadow-soft:var(--obs-shadow);
+  background:var(--obs-bg)!important;color:var(--obs-text)
+}
+html[data-theme]{--bg:var(--obs-bg);--surface:var(--obs-panel);--ink:var(--obs-text);--muted:var(--obs-muted);--line:var(--obs-line);--line-2:var(--obs-line2);--accent:var(--obs-accent);--accent-2:var(--obs-secondary)}
+.observatory-page>nav,.observatory-page>header.nav{background:color-mix(in srgb,var(--obs-bg) 94%,transparent)!important;border-color:var(--obs-line)}
+.observatory-page .brand span{color:var(--obs-accent)}
+.observatory-page .button,.observatory-page .featured-link,.observatory-page .btn-primary{background:var(--obs-accent);color:var(--obs-on-accent)}
+.observatory-page .toolbar input,.observatory-page .toolbar select{background:var(--obs-panel)!important;border-color:var(--obs-line2);color:var(--obs-text);min-width:0}
+.observatory-page input::placeholder{color:var(--obs-muted);opacity:1}
+.observatory-page :is(button,a,input,select,summary):focus-visible{outline:3px solid var(--obs-accent);outline-offset:4px}
+.observatory-page footer{color:var(--obs-muted);border-color:var(--obs-line)}
+html[data-theme] body.observatory-publications{--soft:var(--obs-muted);--surface-2:var(--obs-panel2)}
+.observatory-publications .year-block{background:linear-gradient(145deg,#12303c,#176c6d)}
+.journal-completeness{font:700 .72rem/1.7 var(--mono);color:var(--a);padding:12px 0;border-block:1px solid var(--line)}
+.observatory-article .story{min-width:0}
+@media(max-width:700px){.observatory-article .article-card{max-width:100%;overflow-x:auto}}
+/* Avoid the old independent animated canvas behind long reading pages. */
+.observatory-page #simBg,.observatory-page #star-canvas,.observatory-page #atlas-space,.observatory-page #cosmicCanvas{display:none}
+.observatory-page::before{opacity:.3}
+.observatory-page .switch{position:relative}
+.observatory-page .switch input{display:block;opacity:0;position:absolute;inset:0;width:100%;height:100%;z-index:1;cursor:pointer}
+.observatory-page .switch:focus-within{outline:3px solid var(--obs-accent);outline-offset:4px}
+/* CV names its background token --ink. Keep that convention intact. */
+html[data-theme] body.observatory-cv{--ink:var(--obs-bg);--ink-2:var(--obs-panel);--ink-3:var(--obs-panel2);--text:var(--obs-text)}
+.observatory-cv :is(h1,h2,h3,.hero-name){color:var(--obs-text);-webkit-text-fill-color:var(--obs-text);background:none}
+.observatory-cv :is(.section-num,.hero-role){color:var(--obs-accent)}
+/* Evidence categories remain distinguishable; they are not decorative accents. */
+html[data-theme="light"] .observatory-atlas{--status-reanalysis:#53681a;--status-reanalysis-soft:#eaf0df;--status-null:#974b3a;--status-null-soft:#f5e8e3;--status-synthetic:#635b83;--status-synthetic-soft:#eeebf4;--type-tool:var(--obs-accent);--type-tool-soft:var(--obs-soft);--type-research:#53681a;--type-research-soft:#eaf0df;--type-light:#426895;--type-light-soft:#e6edf5;--type-archive:var(--obs-muted);--type-archive-soft:var(--obs-panel2)}
+html[data-theme="dark"] .observatory-atlas{--status-reanalysis:#b6c788;--status-reanalysis-soft:#29331e;--status-null:#e3ae9e;--status-null-soft:#3d2b28;--status-synthetic:#c5bbdf;--status-synthetic-soft:#302b40;--type-tool:var(--obs-accent);--type-tool-soft:var(--obs-soft);--type-research:#b6c788;--type-research-soft:#29331e;--type-light:#91b1d5;--type-light-soft:#24364a;--type-archive:var(--obs-muted);--type-archive-soft:var(--obs-panel2)}
+.observatory-gallery .nav-brand{background:none;color:var(--obs-text);-webkit-text-fill-color:var(--obs-text)}
+.observatory-gallery .hero-name{background:none;color:#edf2f5;-webkit-text-fill-color:#edf2f5}
+.observatory-gallery .hero-eyebrow{color:#69c8be}.observatory-gallery .hero-role{color:#a5b5c4}
+@media(prefers-reduced-motion:reduce){
+ .observatory-page *,.observatory-page *::before,.observatory-page *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .observatory-page .fade-in,.observatory-page .reveal{opacity:1!important;transform:none!important}
+}
+@media(max-width:700px){.observatory-page .links{flex-wrap:wrap}.observatory-page .card{min-width:0}}
+@media print{body.observatory-page{background:#fff!important;color:#182533!important}}

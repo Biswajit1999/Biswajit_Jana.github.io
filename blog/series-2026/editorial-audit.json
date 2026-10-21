@@ -1,0 +1,66 @@
+[
+  {
+    "slug": "spectrograph-stability",
+    "words": 2260,
+    "read_minutes": 11,
+    "reference_count": 3,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "gaia-stellar-populations",
+    "words": 2176,
+    "read_minutes": 11,
+    "reference_count": 4,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "neid-quality-cuts",
+    "words": 2066,
+    "read_minutes": 10,
+    "reference_count": 4,
+    "figure_count": 3,
+    "status": "published"
+  },
+  {
+    "slug": "detector-memory",
+    "words": 2228,
+    "read_minutes": 11,
+    "reference_count": 3,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "cosmic-web-surveys",
+    "words": 1999,
+    "read_minutes": 10,
+    "reference_count": 4,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "earth-shortlist",
+    "words": 2313,
+    "read_minutes": 12,
+    "reference_count": 3,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "coronagraph-contrast",
+    "words": 2255,
+    "read_minutes": 11,
+    "reference_count": 4,
+    "figure_count": 2,
+    "status": "published"
+  },
+  {
+    "slug": "transit-baseline",
+    "words": 2278,
+    "read_minutes": 11,
+    "reference_count": 4,
+    "figure_count": 3,
+    "status": "published"
+  }
+]

@@ -1,0 +1,98 @@
+{
+  "key": "schmidt",
+  "version": "2603.17908v1",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S3.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/2603.17908v1/LFCsetup2.png",
+          "sha256": "f0e5c3f3b367342557c2b01da239649a9083c42f09e9a93cd0403f8cd011645f",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-01-panel-01.preview.webp",
+          "width": 1800,
+          "height": 315
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 7,
+      "anchor": "S5.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-07-panel-01.svg",
+          "url": "https://arxiv.org/html/2603.17908v1/BackgroundFraction.svg",
+          "sha256": "074d36dacd937ac0e93b9b61733afaf12d58f1b5adf564c2fda1482a03ea9609",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-07-panel-01.preview.webp",
+          "width": 864,
+          "height": 403
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 10,
+      "anchor": "S7.F10",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-10-panel-01.svg",
+          "url": "https://arxiv.org/html/2603.17908v1/ESPRESSO_LSFGalleryComp_188.svg",
+          "sha256": "904115ed2b35325b16963db73b6f11b1b9e2477177feddf761c793f94e5bbeb2",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-10-panel-01.preview.webp",
+          "width": 1008,
+          "height": 504
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 12,
+      "anchor": "S8.F12",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-12-panel-01.svg",
+          "url": "https://arxiv.org/html/2603.17908v1/2024-12-08T18_18_58_190_V7C02P21_Accuracy_BLUVES-LFC_18_V.svg",
+          "sha256": "d6a9f26d36c1e374d87d342f30f84e44e76c4947bc61ab4f7d9c526d776fe2c7",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-12-panel-01.preview.webp",
+          "width": 864,
+          "height": 432
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 15,
+      "anchor": "S9.F15",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-15-panel-01.png",
+          "url": "https://arxiv.org/html/2603.17908v1/Sequence_2024-12-09_Drift_SliceComparisonG.png",
+          "sha256": "4bdc071ded30d5696d35059f44f48afbf39a055cf7533198bed4e2802b98371d",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-15-panel-01.preview.webp",
+          "width": 1080,
+          "height": 816
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 16,
+      "anchor": "S9.F16",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-16-panel-01.svg",
+          "url": "https://arxiv.org/html/2603.17908v1/Sequence_2024-12-09_TimeEvoltionlsf_Slices.svg",
+          "sha256": "99ddf7726af4deb66f34b71a4c592826d7f16f0e331209ff2dbea505e32236f5",
+          "preview": "paper-journal/papers/schmidt-2026-eom-comb-espresso/plots/source/figure-16-panel-01.preview.webp",
+          "width": 576,
+          "height": 626
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

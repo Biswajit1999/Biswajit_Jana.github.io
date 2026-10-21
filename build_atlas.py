@@ -564,12 +564,15 @@ PAGE_TEMPLATE = r"""<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="atlas.css?v={{ASSET_V}}" />
+<link rel="stylesheet" href="observatory-shared.css" />
+<script src="observatory-theme.js"></script>
+<script src="observatory-appearance.js" defer></script>
 
 <script type="application/ld+json">
 {{JSONLD}}
 </script>
 </head>
-<body>
+<body class="observatory-page observatory-atlas">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="nav" id="nav">

@@ -1,0 +1,98 @@
+{
+  "key": "pinfield",
+  "version": "1308.0495v1",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S2.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure1.png",
+          "sha256": "fd2c4833ec20b2635d04ff6583509145f4316ac3f1ae1f1d4f851bbc08a41a4e",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-01-panel-01.preview.webp",
+          "width": 850,
+          "height": 1228
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S2.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure3.png",
+          "sha256": "905e7e0ba7be80f93028091dcaf480c4e267264e0a701f62d56fd83049ef3dda",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-03-panel-01.preview.webp",
+          "width": 943,
+          "height": 472
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 7,
+      "anchor": "S6.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-07-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure7.png",
+          "sha256": "5030b74e11de752974c003222244556d796d5e429135429a7dfa0b3018466bb3",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-07-panel-01.preview.webp",
+          "width": 1020,
+          "height": 1320
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 8,
+      "anchor": "S6.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-08-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure8.png",
+          "sha256": "485f94560b240545156978d5d46f55450b4705312bd155378f946e228ea1dd0f",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-08-panel-01.preview.webp",
+          "width": 1020,
+          "height": 1320
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 10,
+      "anchor": "S6.F10",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-10-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure10.png",
+          "sha256": "7d423137219f58c19ed10fd0df526d03f26c9da233ea0e8c057f458a1915c403",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-10-panel-01.preview.webp",
+          "width": 1038,
+          "height": 1038
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 11,
+      "anchor": "S7.F11",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-11-panel-01.png",
+          "url": "https://arxiv.org/html/1308.0495v1/figure11.png",
+          "sha256": "f0250a97653887a727ef0a70d67a233d97e9f863a55a4aa6bdfd27876b655996",
+          "preview": "paper-journal/papers/pinfield-2014-wise-halo-t-dwarfs/plots/source/figure-11-panel-01.preview.webp",
+          "width": 943,
+          "height": 943
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

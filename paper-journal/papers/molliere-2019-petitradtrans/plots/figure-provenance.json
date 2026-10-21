@@ -1,0 +1,83 @@
+{
+  "key": "molliere",
+  "version": "1904.11504v2",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 2,
+      "anchor": "S3.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/1904.11504v2/rt_test_clear_high_res_petitRADTRANS_internal.png",
+          "sha256": "0169bd6bbc316dd6f9915646218861fd4bc3672bebca84fa3ba00e04c8983ad3",
+          "preview": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1405,
+          "height": 1419
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S4.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/1904.11504v2/rt_test_clear.png",
+          "sha256": "17e04c139526a627f338fcc902dae868bdda51e7a5ea51e3b4f6534b11254463",
+          "preview": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-03-panel-01.preview.webp",
+          "width": 1405,
+          "height": 1419
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S4.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/1904.11504v2/rt_test_cloudy.png",
+          "sha256": "7e620e4398c05c469e1b051840801b6a1ba4cc12e87d5b87bb791da09cd3fca2",
+          "preview": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-04-panel-01.preview.webp",
+          "width": 1405,
+          "height": 1419
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 5,
+      "anchor": "S5.F5",
+      "panels": [
+        {
+          "path": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-05-panel-01.png",
+          "url": "https://arxiv.org/html/1904.11504v2/combine_em.png",
+          "sha256": "92118f3a4f677db899eb0aaf0763cf0d9f52f0bab18fe4bfd115b56af7617fa4",
+          "preview": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-05-panel-01.preview.webp",
+          "width": 1461,
+          "height": 2047
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 6,
+      "anchor": "S5.F6",
+      "panels": [
+        {
+          "path": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-06-panel-01.png",
+          "url": "https://arxiv.org/html/1904.11504v2/combine_tr.png",
+          "sha256": "4d8e733e765341213be4c7ba1f4f6442c593d986918581d84353b05420443587",
+          "preview": "paper-journal/papers/molliere-2019-petitradtrans/plots/source/figure-06-panel-01.preview.webp",
+          "width": 1427,
+          "height": 2015
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

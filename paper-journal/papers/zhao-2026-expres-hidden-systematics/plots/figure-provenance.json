@@ -1,0 +1,121 @@
+{
+  "key": "zhao",
+  "version": "2601.02296v1",
+  "license": "License: CC BY 4.0",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S2.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/2601.02296v1/Figures/instrumentTrend.png",
+          "sha256": "f6757a24f9d24167a00829cc71ddd8b7835820eab0f908ba05848e75db7a5fd2",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-01-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1800
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S3.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-04-panel-01.svg",
+          "url": "https://arxiv.org/html/2601.02296v1/lbs.svg",
+          "sha256": "f347e2c679919f1827da29dbc04c00135523c83ff6f6d5c2e98e2c27936d47ba",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-04-panel-01.preview.webp",
+          "width": 288,
+          "height": 216
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 5,
+      "anchor": "S3.F5",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-05-panel-01.png",
+          "url": "https://arxiv.org/html/2601.02296v1/Figures/housekeeping_lrms.png",
+          "sha256": "aae8c5d3cd56ff7f0814ff5c73e3d16800ca7fba924c93fcf231dc4a7737db56",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-05-panel-01.preview.webp",
+          "width": 1800,
+          "height": 2460
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 7,
+      "anchor": "S4.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-07-panel-01.png",
+          "url": "https://arxiv.org/html/2601.02296v1/correction_buildUp.png",
+          "sha256": "d38e779ed2486c43c16f946424b239f684e0c261387f1e14a9342b84c48983b1",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-07-panel-01.preview.webp",
+          "width": 720,
+          "height": 420
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 8,
+      "anchor": "S5.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-08-panel-01.svg",
+          "url": "https://arxiv.org/html/2601.02296v1/correction_RMS.svg",
+          "sha256": "1063c5227b04090849e664490c753de73adeefbfe8817e845cc0cc9a4f0ce54c",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-08-panel-01.preview.webp",
+          "width": 239,
+          "height": 205
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 10,
+      "anchor": "S5.F10",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-10-panel-01.svg",
+          "url": "https://arxiv.org/html/2601.02296v1/IR_percntDetected.svg",
+          "sha256": "7fda4930fdaa8de8ab2701512b6d1a1cb4f1e760e82cbb2402cf1f45ee44a99e",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-10-panel-01.preview.webp",
+          "width": 432,
+          "height": 202
+        },
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-10-panel-02.svg",
+          "url": "https://arxiv.org/html/2601.02296v1/IR_periods.svg",
+          "sha256": "939217803369e31e462ed05ad1917a5932761d3da32b92f6373cb3b2865bc61c",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-10-panel-02.preview.webp",
+          "width": 432,
+          "height": 202
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 11,
+      "anchor": "S5.F11",
+      "panels": [
+        {
+          "path": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-11-panel-01.svg",
+          "url": "https://arxiv.org/html/2601.02296v1/planetFit_rcb.svg",
+          "sha256": "0280064720b973be8209a111e83bd80f08a9995c85645fddfb8eb9a0b0064f4a",
+          "preview": "paper-journal/papers/zhao-2026-expres-hidden-systematics/plots/source/figure-11-panel-01.preview.webp",
+          "width": 576,
+          "height": 432
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

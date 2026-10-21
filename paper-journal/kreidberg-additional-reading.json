@@ -1,0 +1,127 @@
+{
+  "kreidberg": {
+    "slug": "kreidberg-2015-batman-transit-models",
+    "title": "batman: BAsic Transit Model cAlculatioN in Python",
+    "authors": "Kreidberg",
+    "year": "2015",
+    "venue": "PASP 127, 1161",
+    "version": "1507.08285v3",
+    "theme": "Transit Modelling",
+    "subtitle": "How radial symmetry turns a transit calculation into a fast, testable numerical model.",
+    "why": "A natural methodological reference for ExoLight Transit Lab, limb darkening, finite exposures, and injection–recovery validation.",
+    "art_alt": "conceptual exoplanet transiting a limb-darkened stellar disk",
+    "overview": [
+      "A transit curve is a geometric and radiative calculation before it becomes a fitted planet radius. This reading follows the 2015 batman algorithm, its error tests, and the boundary between accurate model evaluation and accurate scientific inference.",
+      "The pinned source is version 3, which adds secondary-eclipse modelling and revises the transit parameterisation. Historical benchmarks are presented as historical benchmarks, not current package or hardware-performance guarantees."
+    ],
+    "findings": [
+      "Kreidberg introduces fast transit calculations for radially symmetric stellar intensity profiles, combining analytic models with an efficient one-dimensional integration scheme for other limb-darkening laws. The paper validates numerical accuracy and reports speed tests on a 1.7 GHz Intel Core i5. It also provides finite-exposure supersampling and a uniform-brightness secondary-eclipse treatment. Numerical truncation control concerns the calculated curve; it does not include stellar variability, contamination, correlated noise, or incorrect physical assumptions."
+    ],
+    "evidence": [
+      [
+        "Annular overlap geometry",
+        "Reduces a radially symmetric surface integral",
+        "It assumes a radial stellar brightness profile."
+      ],
+      [
+        "Reference-model residuals",
+        "Tests numerical truncation in a specified case",
+        "They are not residuals to telescope data."
+      ],
+      [
+        "Accuracy–runtime benchmark",
+        "Quantifies a computational trade-off",
+        "Performance depends on model, sampling, machine, and implementation."
+      ]
+    ],
+    "chain": [
+      "Orbit and projected separation",
+      "Stellar intensity and occulted area",
+      "Instantaneous and exposure-averaged flux",
+      "Noise model and parameter inference"
+    ],
+    "sections": [
+      [
+        "geometry",
+        "The shortcut is a symmetry argument",
+        [
+          "For a radially symmetric stellar intensity, all points at the same radius share the same brightness. The occulted flux can therefore be assembled from the areas where the planet overlaps concentric stellar annuli, weighted by their representative intensities. This reduces a two-dimensional problem to a one-dimensional sum.",
+          "The geometry is a computational simplification with a physical boundary. Starspots, faculae, asymmetric stellar surfaces, and other departures from radial symmetry require additional modelling. An extremely accurate solution to the symmetric problem does not make those effects disappear."
+        ]
+      ],
+      [
+        "errors",
+        "Four error budgets should not be mixed",
+        [
+          "Numerical integration error describes how well the chosen model is evaluated. Finite-exposure error describes the difference between an instantaneous flux and what an exposure averages. Statistical uncertainty depends on noise and sampling. Physical model error arises when the assumed star–planet system is incomplete or wrong.",
+          "Reducing the first error does not automatically reduce the others. A very fine annular grid will not correct an incorrect exposure duration or remove correlated stellar variability. Validation should test each stage separately and then examine the end-to-end recovery."
+        ]
+      ],
+      [
+        "normalisation",
+        "Normalisation and limb darkening are part of the model",
+        [
+          "The stellar intensity is normalised so the unobscured disk has unit integrated flux. Planet radius is then interpreted through the occulted fraction of that brightness distribution, not simply through a dark-circle animation. Near the limb, a fixed occulted area hides less flux than at the bright centre.",
+          "A change in fitted radius can be correlated with a change in impact parameter or limb-darkening coefficients. This is why a precise flux curve and a narrow fit are not enough: the assumed brightness law and its prior need to accompany the inferred geometry."
+        ]
+      ]
+    ],
+    "connection": [
+      "My ExoLight Transit Lab uses physical transit modelling, finite-exposure integration, residual diagnostics, and injection–recovery experiments. This paper is a useful independent methodological reference for checking the relationship between numerical accuracy and recovered parameters. It is not a claim that my implementation reproduces batman’s exact internal algorithm or historical benchmark.",
+      "A visual explanation should show the planet, stellar brightness, overlap geometry, sampled times, and residuals as linked views. The animation helps build intuition, while numerical comparisons and recovery tests determine whether an inference claim is justified."
+    ],
+    "tests": [
+      "Compare the same radius, separation, and intensity profile against a high-accuracy reference across a dense grid, including grazing contact and small planets. Then integrate over the actual exposure windows and verify convergence with supersampling. Record the largest error as well as the typical error.",
+      "Inject signals under white and correlated noise, fit them with declared priors, and test interval coverage rather than only best-fit agreement. Add deliberately mismatched limb darkening and baseline trends to separate numerical self-consistency from robustness. These are proposed extensions to the reading, not new validation runs reported here."
+    ],
+    "deep_sections": [
+      [
+        "Where the annular numerical error comes from",
+        [
+          "The overlap area can be calculated geometrically, while the intensity is approximated within each annular element. Refining the radial grid improves that approximation. Because the brightness gradient grows near the stellar edge for typical limb-darkening laws, uniform radial spacing need not be the most efficient choice.",
+        "The method allocates smaller steps where the intensity changes more rapidly. That is a useful numerical pattern beyond astronomy: use the problem’s structure to spend resolution where the integrand needs it, and verify the error against a stricter calculation rather than assuming the mesh is adequate.",
+        "A useful software test separates geometry from brightness weighting. A uniform disk provides a simple overlap case, while a limb-darkened disk tests the intensity integral. Contact points deserve dedicated tests because formulas can change branch there, and a reassuring average over an entire transit can conceal a local failure. Small planets and grazing events also stress different parts of the calculation. These are recommendations for a validation suite, not additional benchmarks measured in this note."
+        ]
+      ],
+      [
+        "Finite exposures are a separate convolution",
+        [
+          "An exposure measures an average over time, not a snapshot at its timestamp. During ingress or egress, the difference can be significant because the flux changes rapidly. Evaluating the instantaneous model more accurately does not perform this averaging.",
+        "Supersampling approximates the exposure integral with multiple sub-times. A convergence test should change the number of samples until the exposure-averaged curve is stable at the required tolerance. The exposure duration, timestamp convention, and time system should be retained as metadata.",
+        "For example, an exposure comparable to the ingress duration mixes substantially different occultation geometries into one datum. A short cadence outside transit does not remove that effect inside transit. I would therefore compare exposure-integrated models at the actual timestamps, rather than interpret the rounded ingress as a direct change in planetary size.",
+        "Parameter uncertainty requires another layer of testing. If simulated events are generated and fitted with the same assumptions, good recovery verifies internal consistency. It does not establish that a real observing baseline has the same noise process or stellar brightness law. Deliberately changing the injection model is a stronger robustness check. Interval coverage asks whether the quoted uncertainty contains the injected truth at the stated frequency across repeated trials; a small best-fit bias alone does not answer that question. A transparent transit laboratory should therefore present numerical convergence, model mismatch, and statistical calibration as separate diagnostics."
+        ]
+      ],
+      [
+        "Benchmarks and secondary eclipses have scope conditions",
+        [
+          "The speed plot measures a particular test case on specified hardware. It establishes an accuracy–cost relationship, not a universal number of likelihood evaluations per second. Initialisation and repeated evaluation should also be distinguished when timing a modern pipeline.",
+          "For the paper’s secondary eclipse, the planet has a uniform brightness and constant total flux outside eclipse. A realistic atmospheric hotspot or phase variation can violate that simplification. The accepted manuscript also notes that light-travel-time effects are not corrected. These details matter when reusing the model for a different science question."
+        ]
+      ]
+    ],
+    "figures": [
+      [
+        1,
+        "The annular overlap construction",
+        "This is a geometry diagram, not a measured light curve. The large circle represents the star, the smaller circle the planet, and the highlighted overlap strip one integration element.",
+        "Radial symmetry allows brightness weighting to be organised by stellar radius. The diagram makes the computational reduction understandable without presenting a fabricated numerical dataset.",
+        "The illustrated spacing is intentionally coarse for readability. It is not the grid used for a precision calculation and does not describe a spotted star."
+      ],
+      [
+        2,
+        "The model curve and its numerical error",
+        "Time relative to mid-transit runs horizontally. The top panel is a model transit; the lower panel is its truncation error relative to a stricter reference, with a specified tolerance.",
+        "The error varies through the event because the intensity gradient and occulted area change. It is worth inspecting its structure, not only whether one maximum number looks small.",
+        "The lower panel is not observational noise, fit residuals to real data, or uncertainty in the planet’s radius."
+      ],
+      [
+        3,
+        "Accuracy costs computation",
+        "The nonlinear-model curve relates truncation error to execution time. An arrow locates the analytic quadratic calculation for the historical test setup.",
+        "The figure supports a deliberate tolerance choice: making a model far more precise than the error budget requires can spend substantial computing time without improving the scientific answer.",
+        "The benchmark uses specific hardware, sampling, and model parameters. It does not establish the runtime of a current installation, a full sampler, or a browser implementation."
+      ]
+    ]
+  }
+}

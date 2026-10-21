@@ -1,0 +1,136 @@
+[
+  {
+    "file": "control-response.png",
+    "kind": "ILLUSTRATIVE SIMULATION | Not measured EXOhSPEC data",
+    "inputs": [],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "492066ad4b0a2295d62002d76ab61713167289bdd415042c2d737a20b812f857"
+  },
+  {
+    "file": "gaia-cmd.png",
+    "kind": "OBSERVED CATALOGUE | Declared nearby-star selection; no extinction correction",
+    "inputs": [
+      "gaia-dr3.csv"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "616ec12fef56fe9967d4bf192f7bfc1d4455d6eb5ec94f852edc66dc1770929d"
+  },
+  {
+    "file": "neid-selection.png",
+    "kind": "OBSERVED ARCHIVE SUMMARY | Overlapping quality selections, not independent experiments",
+    "inputs": [
+      "rv-activity-disentangler/research/neid-variability-summary.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "649f194b86e26fdd775fbc5df07b540c87c3a0e30e4581076c4badfbf4ef951b"
+  },
+  {
+    "file": "neid-nights.png",
+    "kind": "OBSERVED ARCHIVE SUMMARY | Four nights, not continuous 13-day coverage",
+    "inputs": [
+      "rv-activity-disentangler/research/neid-variability-summary.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "ed6ef90b4f5bf84b4b657d20a07ef298e9d338f5618dde3888642600bfc9a168"
+  },
+  {
+    "file": "2mrs-survey.png",
+    "kind": "OBSERVED CATALOGUE | 43,533 records; no completeness correction; sky projection not equal-area",
+    "inputs": [
+      "2mrs-positions.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "47031d8bf978bb717cf4706befa18f391801288551139640787d444f8929d081"
+  },
+  {
+    "file": "earth-evidence.png",
+    "kind": "PROJECT SNAPSHOT | Source-record and unique-planet counts have different denominators",
+    "inputs": [
+      "finding-earth-2/results/analysis_summary.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "4e1118804642f7710728ddfc2f9c9390525a8e8f955a39837499d86992897bd7"
+  },
+  {
+    "file": "roman-throughput.png",
+    "kind": "INSTRUMENT-TEAM SIMULATION | Roman CGI team / JPL / IPAC; not on-sky data",
+    "inputs": [
+      "coronagraph-dark-hole-lab/public/data/roman-hlc-os11.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "8351afc1ecef8ad57b62a669685cb887c646bda94814aaa5283502d8a51a1372"
+  },
+  {
+    "file": "transit-recovery.png",
+    "kind": "SYNTHETIC BENCHMARK | 95% Wilson intervals; simulation-conditional recovery",
+    "inputs": [
+      "TransitScatter/results/benchmark_results.csv"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "4cb529e6d7140d4054d343c9e5bebe7e7a1d9782dc3f0f82dfbdb317d56f66bc"
+  },
+  {
+    "file": "transit-flares.png",
+    "kind": "SYNTHETIC BENCHMARK | 95% Wilson intervals; simulation-conditional recovery",
+    "inputs": [
+      "TransitScatter/results/flare_robustness_results.csv"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "0b3e57291b63ac5b098abc58185da205b4dbed51f5b19d3262a9bd573cfee680"
+  },
+  {
+    "file": "thermal-expansion.png",
+    "kind": "CALCULATED ILLUSTRATION | Uniform expansion; no conversion to EXOhSPEC RV error",
+    "inputs": [],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "2607461ed6551dcfafc6802fd2effb8e8226ed6d23614e81c1b9df17094c442a"
+  },
+  {
+    "file": "gaia-distance-selection.png",
+    "kind": "OBSERVED SAMPLE SUBSETS | Neither panel is a completeness-corrected volume census",
+    "inputs": [
+      "gaia-dr3.csv"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "93e0db46cd6b265f87f026d3c2261fb94f9cfadd7730cb6e07683ef8309f4424"
+  },
+  {
+    "file": "neid-lag.png",
+    "kind": "OBSERVED ARCHIVE SUMMARY | Shared pairs; shading is not a confidence interval",
+    "inputs": [
+      "rv-activity-disentangler/research/neid-variability-summary.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "f9df21cf59c6d56b54ad3d3349d36a7022c7c393a5ecae8f8426806e4b6870fe"
+  },
+  {
+    "file": "cosmic-distances.png",
+    "kind": "CALCULATED ILLUSTRATION | Flat Omega_m=0.3, Omega_L=0.7, H0=70 km/s/Mpc",
+    "inputs": [],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "83d518f39995ce3929c51d648ceaaeaeb3ae4c27c046e84a34ed2ff3cb9db261"
+  },
+  {
+    "file": "radius-boundary.png",
+    "kind": "WORKED EXAMPLE | Hypothetical Gaussian errors; not a posterior for a catalogued planet",
+    "inputs": [],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "c398a2a374e2db752a51aa5e2897b6fce2179fbc227a4257d3f10a53fdec65f7"
+  },
+  {
+    "file": "roman-throughput-cut.png",
+    "kind": "INSTRUMENT-TEAM SIMULATION | Relative peak response, not absolute photon throughput",
+    "inputs": [
+      "coronagraph-dark-hole-lab/public/data/roman-hlc-os11.json"
+    ],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "8cf7230ca6aaa32f29ebdefa1a2e06badf3a4fe21698c4e6ff452e1d896b49d4"
+  },
+  {
+    "file": "transit-template.png",
+    "kind": "TEACHING ILLUSTRATION | Derivative sketch is not the actual wavelet-scattering output",
+    "inputs": [],
+    "script": "scripts/build-blog-series.py",
+    "sha256": "b6d70b0d101f82db52497099fe6355e344a36480c786a1e426c38edd5a6b96eb"
+  }
+]

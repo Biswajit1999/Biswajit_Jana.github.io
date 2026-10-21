@@ -608,8 +608,11 @@
     }
     .fade-in.visible { opacity: 1; transform: none; }
   </style>
+<link rel="stylesheet" href="observatory-shared.css">
+<script src="observatory-theme.js"></script>
+<script src="observatory-appearance.js" defer></script>
 </head>
-<body>
+<body class="observatory-page observatory-cv">
 
   <canvas id="star-canvas" aria-hidden="true"></canvas>
 
@@ -1379,6 +1382,7 @@
     ══════════════════════════════════════════════ */
     (function () {
       const canvas = document.getElementById('star-canvas');
+      if (document.body.classList.contains('observatory-page')) return;
       const ctx    = canvas.getContext('2d');
 
       let W, H, dpr;

@@ -1,5 +1,58 @@
 [
   {
+    "name": "exolight-transit-lab",
+    "description": "Interactive exoplanet transit-analysis laboratory for real and simulated light curves, transit geometry, residual structure, target comparison, time-series diagnostics and reproducible visual exploration of transit evidence.",
+    "html_url": "https://github.com/Biswajit1999/exolight-transit-lab",
+    "homepage": "https://biswajit1999.github.io/exolight-transit-lab/",
+    "language": "Jupyter Notebook",
+    "topics": [
+      "astronomy",
+      "astrophysics",
+      "data-analysis",
+      "exoplanet-research",
+      "exoplanet-transits",
+      "exoplanets",
+      "interactive-visualization",
+      "light-curves",
+      "planetary-science",
+      "reproducible-research",
+      "research-software",
+      "residual-analysis",
+      "scientific-computing",
+      "scientific-visualization",
+      "time-series-analysis",
+      "transit-photometry"
+    ],
+    "updated_at": "2026-10-21T13:44:41Z",
+    "created_at": "2026-05-15T02:20:46Z"
+  },
+  {
+    "name": "Biswajit_Jana.github.io",
+    "description": "Research portfolio of Biswajit Jana covering astrophysics, astronomical instrumentation, exoplanets, precision radial-velocity spectroscopy, scientific computing, open research projects and interactive scientific tools.",
+    "html_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
+    "homepage": "https://biswajit1999.github.io/Biswajit_Jana.github.io/",
+    "language": "HTML",
+    "topics": [
+      "astronomical-instrumentation",
+      "astronomical-spectroscopy",
+      "astronomy",
+      "astrophysics",
+      "biswajit-jana",
+      "exoplanet-research",
+      "exoplanets",
+      "github-pages",
+      "open-science",
+      "precision-spectroscopy",
+      "radial-velocity",
+      "research-portfolio",
+      "research-software",
+      "scientific-computing",
+      "spectroscopy"
+    ],
+    "updated_at": "2026-10-21T09:23:55Z",
+    "created_at": "2026-05-25T07:59:05Z"
+  },
+  {
     "name": "Biswajit1999.github.io",
     "description": "Automatically refreshed discovery index for Biswajit Jana astronomy research software, live scientific projects, source repositories and project sitemaps.",
     "html_url": "https://github.com/Biswajit1999/Biswajit1999.github.io",
@@ -47,32 +100,6 @@
     ],
     "updated_at": "2026-10-21T07:37:57Z",
     "created_at": "2026-06-23T12:13:57Z"
-  },
-  {
-    "name": "Biswajit_Jana.github.io",
-    "description": "Research portfolio of Biswajit Jana covering astrophysics, astronomical instrumentation, exoplanets, precision radial-velocity spectroscopy, scientific computing, open research projects and interactive scientific tools.",
-    "html_url": "https://github.com/Biswajit1999/Biswajit_Jana.github.io",
-    "homepage": "https://biswajit1999.github.io/Biswajit_Jana.github.io/",
-    "language": "HTML",
-    "topics": [
-      "astronomical-instrumentation",
-      "astronomical-spectroscopy",
-      "astronomy",
-      "astrophysics",
-      "biswajit-jana",
-      "exoplanet-research",
-      "exoplanets",
-      "github-pages",
-      "open-science",
-      "precision-spectroscopy",
-      "radial-velocity",
-      "research-portfolio",
-      "research-software",
-      "scientific-computing",
-      "spectroscopy"
-    ],
-    "updated_at": "2026-10-20T09:28:05Z",
-    "created_at": "2026-05-25T07:59:05Z"
   },
   {
     "name": "adjacent-atlas",
@@ -1906,33 +1933,6 @@
     ],
     "updated_at": "2026-10-15T00:07:56Z",
     "created_at": "2026-09-07T21:11:25Z"
-  },
-  {
-    "name": "exolight-transit-lab",
-    "description": "Interactive exoplanet transit-analysis laboratory for real and simulated light curves, transit geometry, residual structure, target comparison, time-series diagnostics and reproducible visual exploration of transit evidence.",
-    "html_url": "https://github.com/Biswajit1999/exolight-transit-lab",
-    "homepage": "https://biswajit1999.github.io/exolight-transit-lab/",
-    "language": "Jupyter Notebook",
-    "topics": [
-      "astronomy",
-      "astrophysics",
-      "data-analysis",
-      "exoplanet-research",
-      "exoplanet-transits",
-      "exoplanets",
-      "interactive-visualization",
-      "light-curves",
-      "planetary-science",
-      "reproducible-research",
-      "research-software",
-      "residual-analysis",
-      "scientific-computing",
-      "scientific-visualization",
-      "time-series-analysis",
-      "transit-photometry"
-    ],
-    "updated_at": "2026-10-15T00:07:55Z",
-    "created_at": "2026-05-15T02:20:46Z"
   },
   {
     "name": "gaia-star-pairs",

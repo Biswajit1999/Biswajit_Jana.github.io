@@ -1,5 +1,130 @@
 [
   {
+    "title": "Keeping a Spectrograph Still While the Laboratory Refuses to Cooperate",
+    "subtitle": "From feedback loops to optical evidence: what it actually means to stabilise an astronomical instrument.",
+    "category": "Instrumentation",
+    "tags": [
+      "EXOhSPEC",
+      "Feedback Control",
+      "Spectrographs"
+    ],
+    "date": "2026-10-21",
+    "readTime": "11 min read",
+    "image": "series-2026/covers/spectrograph-stability-card.webp",
+    "url": "posts/spectrograph-stability.html",
+    "status": "published"
+  },
+  {
+    "title": "What a Cloud of Gaia Stars Can Tell Us",
+    "subtitle": "Real stars, a colour-magnitude diagram, and the selection effects hidden behind a beautiful point cloud.",
+    "category": "Astrophysics",
+    "tags": [
+      "Gaia",
+      "Stellar Evolution",
+      "Catalogue Data"
+    ],
+    "date": "2026-10-21",
+    "readTime": "11 min read",
+    "image": "series-2026/covers/gaia-stellar-populations-card.webp",
+    "url": "posts/gaia-stellar-populations.html",
+    "status": "published"
+  },
+  {
+    "title": "A Quieter RV Plot Is Not Automatically a Better Measurement",
+    "subtitle": "A solar-archive audit of scatter, quality cuts and the observations we leave behind.",
+    "category": "Scientific Computing",
+    "tags": [
+      "NEID",
+      "Radial Velocity",
+      "Selection Effects"
+    ],
+    "date": "2026-10-21",
+    "readTime": "10 min read",
+    "image": "series-2026/covers/neid-quality-cuts-card.webp",
+    "url": "posts/neid-quality-cuts.html",
+    "status": "published"
+  },
+  {
+    "title": "When the Detector Remembers and the Model Cannot Explain Why",
+    "subtitle": "A replicated HST detector signal, failed radiation attribution, and why both belong in the same research story.",
+    "category": "Instrumentation",
+    "tags": [
+      "LATTICE",
+      "HST",
+      "Detectors",
+      "Negative Results"
+    ],
+    "date": "2026-10-21",
+    "readTime": "11 min read",
+    "image": "series-2026/covers/detector-memory-card.webp",
+    "url": "posts/detector-memory.html",
+    "status": "published"
+  },
+  {
+    "title": "The Cosmic Web Is Not a Screensaver",
+    "subtitle": "Galaxy maps are also maps of survey choices. Reading the footprints, redshifts and gaps in NĀSADĪYA LIGHTCONE.",
+    "category": "Cosmology",
+    "tags": [
+      "DESI",
+      "2MRS",
+      "Cosmic Web",
+      "Survey Selection"
+    ],
+    "date": "2026-10-21",
+    "readTime": "10 min read",
+    "image": "series-2026/covers/cosmic-web-surveys-card.webp",
+    "url": "posts/cosmic-web-surveys.html",
+    "status": "published"
+  },
+  {
+    "title": "Finding Earth 2.0: Why a Shortlist Is Not a Second Earth",
+    "subtitle": "Following an archive search from exciting candidates to measured properties, uncertain boundaries and missing evidence.",
+    "category": "Exoplanets",
+    "tags": [
+      "Earth Analogues",
+      "Habitability",
+      "Evidence",
+      "Uncertainty"
+    ],
+    "date": "2026-10-21",
+    "readTime": "12 min read",
+    "image": "series-2026/covers/earth-shortlist-card.webp",
+    "url": "posts/earth-shortlist.html",
+    "status": "published"
+  },
+  {
+    "title": "Hiding a Star Without Losing Its Planet",
+    "subtitle": "Why starlight suppression, off-axis throughput and a confident planet detection are three different things.",
+    "category": "Instrumentation",
+    "tags": [
+      "Direct Imaging",
+      "Coronagraphs",
+      "Roman",
+      "Wavefront Control"
+    ],
+    "date": "2026-10-21",
+    "readTime": "11 min read",
+    "image": "series-2026/covers/coronagraph-contrast-card.webp",
+    "url": "posts/coronagraph-contrast.html",
+    "status": "published"
+  },
+  {
+    "title": "I Tried a Clever Transit Detector. The Baseline Won.",
+    "subtitle": "A synthetic injection-recovery experiment, an unhelpful scattering proxy, and a useful negative result.",
+    "category": "Scientific Computing",
+    "tags": [
+      "TransitScatter",
+      "BLS",
+      "Benchmarks",
+      "Negative Results"
+    ],
+    "date": "2026-10-21",
+    "readTime": "11 min read",
+    "image": "series-2026/covers/transit-baseline-card.webp",
+    "url": "posts/transit-baseline.html",
+    "status": "published"
+  },
+  {
     "title": "How We Smell an Exoplanet Without Going There",
     "subtitle": "A quantitative transmission-spectroscopy feature on filtered starlight, ppm atmospheric signals, clouds, stellar contamination, JWST examples, papers, equations, and a separate simulator.",
     "date": "2026-05-28",
@@ -7,7 +132,13 @@
     "readTime": "22 min read",
     "image": "../images/blog16_01_exoplanet_smell_hero.png",
     "url": "posts/exoplanet-spectroscopy.html",
-    "tags": ["Exoplanets", "Transmission Spectroscopy", "Atmospheres", "JWST", "Spectroscopy"]
+    "tags": [
+      "Exoplanets",
+      "Transmission Spectroscopy",
+      "Atmospheres",
+      "JWST",
+      "Spectroscopy"
+    ]
   },
   {
     "title": "Gravitational Waves: When Spacetime Itself Starts Ringing",
@@ -17,7 +148,13 @@
     "readTime": "13 min read",
     "image": "../images/blog13_01_gravitational_waves_hero.png",
     "url": "posts/gravitational-waves.html",
-    "tags": ["Gravitational Waves", "LIGO", "Black Holes", "Neutron Stars", "Relativity"]
+    "tags": [
+      "Gravitational Waves",
+      "LIGO",
+      "Black Holes",
+      "Neutron Stars",
+      "Relativity"
+    ]
   },
   {
     "title": "Exoplanet Detection: The Transit Method",
@@ -27,7 +164,14 @@
     "readTime": "15 min read",
     "image": "../images/blog15_01_transit_method_hero.png",
     "url": "posts/exoplanet-transit-method.html",
-    "tags": ["Exoplanets", "Transit Method", "Photometry", "Light Curves", "TESS", "Kepler"]
+    "tags": [
+      "Exoplanets",
+      "Transit Method",
+      "Photometry",
+      "Light Curves",
+      "TESS",
+      "Kepler"
+    ]
   },
   {
     "title": "Are We Alone? Part II — The Numbers, the Searches, and the Silence",
@@ -37,7 +181,13 @@
     "readTime": "22 min read",
     "image": "../images/blog2_04_seti_telescope.png",
     "url": "posts/are-we-alone-part-2.html",
-    "tags": ["Astrobiology", "SETI", "Biosignatures", "Technosignatures", "Future Missions"]
+    "tags": [
+      "Astrobiology",
+      "SETI",
+      "Biosignatures",
+      "Technosignatures",
+      "Future Missions"
+    ]
   },
   {
     "title": "Pulsars: The Cosmic Lighthouses of the Deep",
@@ -47,7 +197,12 @@
     "readTime": "15 min read",
     "image": "../images/blog14_01_pulsar_hero.png",
     "url": "posts/pulsars-cosmic-lighthouses.html",
-    "tags": ["Pulsars", "Neutron Stars", "Radio Astronomy", "Gravitational Waves"]
+    "tags": [
+      "Pulsars",
+      "Neutron Stars",
+      "Radio Astronomy",
+      "Gravitational Waves"
+    ]
   },
   {
     "title": "Black Holes: What Happens When Gravity Wins?",
@@ -57,7 +212,13 @@
     "readTime": "16 min read",
     "image": "../images/blog13_01_blackhole_hero.png",
     "url": "posts/black-hole-extreme-lab.html",
-    "tags": ["Black Holes", "General Relativity", "Hawking Radiation", "EHT", "Interactive"]
+    "tags": [
+      "Black Holes",
+      "General Relativity",
+      "Hawking Radiation",
+      "EHT",
+      "Interactive"
+    ]
   },
   {
     "title": "The Big Bang, Before the Big Bang, and Why It Still Scares Me",
@@ -67,7 +228,13 @@
     "readTime": "14 min read",
     "image": "../images/blog12_01_bigbang_hero.png",
     "url": "posts/big-bang-part-1.html",
-    "tags": ["Big Bang", "Cosmology", "Observable Universe", "Multiverse", "Philosophy"]
+    "tags": [
+      "Big Bang",
+      "Cosmology",
+      "Observable Universe",
+      "Multiverse",
+      "Philosophy"
+    ]
   },
   {
     "title": "The Three-Body Problem: When Gravity Refuses to Behave Politely",
@@ -77,7 +244,12 @@
     "readTime": "12 min read",
     "image": "../images/blog6_01_three_body_hero.png",
     "url": "posts/three-body-problem.html",
-    "tags": ["Gravity", "Chaos", "Orbital Dynamics", "Simulation"]
+    "tags": [
+      "Gravity",
+      "Chaos",
+      "Orbital Dynamics",
+      "Simulation"
+    ]
   },
   {
     "title": "The Radial Velocity Method: Finding Planets by Watching Stars Panic Slightly",
@@ -87,7 +259,12 @@
     "readTime": "11 min read",
     "image": "../images/blog11_01_radial_velocity_hero.png",
     "url": "posts/radial-velocity-method.html",
-    "tags": ["Exoplanets", "Radial Velocity", "Doppler Shift", "Spectroscopy"]
+    "tags": [
+      "Exoplanets",
+      "Radial Velocity",
+      "Doppler Shift",
+      "Spectroscopy"
+    ]
   },
   {
     "title": "Spectra: How Light Accidentally Becomes a Confession",
@@ -97,7 +274,12 @@
     "readTime": "10 min read",
     "image": "../images/blog10_01_spectra_hero.png",
     "url": "posts/spectra-confession.html",
-    "tags": ["Spectroscopy", "Light", "Absorption Lines", "Astrophysics"]
+    "tags": [
+      "Spectroscopy",
+      "Light",
+      "Absorption Lines",
+      "Astrophysics"
+    ]
   },
   {
     "title": "Noise: The Thing Between You and a Discovery",
@@ -107,7 +289,12 @@
     "readTime": "18 min read",
     "image": "../images/blog9_01_noise_signal_hero.png",
     "url": "posts/noise-and-discovery.html",
-    "tags": ["Noise", "Signal Processing", "SNR", "Scientific Data"]
+    "tags": [
+      "Noise",
+      "Signal Processing",
+      "SNR",
+      "Scientific Data"
+    ]
   },
   {
     "title": "The Habitable Zone: Astronomy’s Most Misunderstood Comfort Zone",
@@ -117,7 +304,12 @@
     "readTime": "9 min read",
     "image": "../images/blog8_01_habitable_zone_hero.png",
     "url": "posts/habitable-zone.html",
-    "tags": ["Exoplanets", "Habitable Zone", "Astrobiology", "Planetary Science"]
+    "tags": [
+      "Exoplanets",
+      "Habitable Zone",
+      "Astrobiology",
+      "Planetary Science"
+    ]
   },
   {
     "title": "Space Is Not Empty — It Is Just Very Bad at Keeping You Alive",
@@ -127,7 +319,14 @@
     "readTime": "14 min read",
     "image": "../images/blog7_01_space_hostile_hero.png",
     "url": "posts/space-is-hostile.html",
-    "tags": ["Space", "Astrobiology", "Extreme Environments", "Habitability", "Radiation", "Microgravity"]
+    "tags": [
+      "Space",
+      "Astrobiology",
+      "Extreme Environments",
+      "Habitability",
+      "Radiation",
+      "Microgravity"
+    ]
   },
   {
     "title": "Tardigrades: The Tiny Survivors of Extreme Worlds",
@@ -137,7 +336,14 @@
     "readTime": "13 min read",
     "image": "../images/blog5_01_tardigrade_hero.png",
     "url": "posts/tardigrades.html",
-    "tags": ["Tardigrades", "Cryptobiosis", "Astrobiology", "Extreme Life", "Radiation", "Space Biology"]
+    "tags": [
+      "Tardigrades",
+      "Cryptobiosis",
+      "Astrobiology",
+      "Extreme Life",
+      "Radiation",
+      "Space Biology"
+    ]
   },
   {
     "title": "What is PID Control?",
@@ -147,7 +353,10 @@
     "readTime": "12 min read",
     "image": "../images/blog4_01_pid_hero.png",
     "url": "posts/pid-control.html",
-    "tags": ["PID", "Control Theory"]
+    "tags": [
+      "PID",
+      "Control Theory"
+    ]
   },
   {
     "title": "What is a Control System?",
@@ -157,7 +366,11 @@
     "readTime": "10 min read",
     "image": "../images/blog3_01_control_hero.png",
     "url": "posts/control-system.html",
-    "tags": ["Feedback", "Control Theory", "Instrumentation"]
+    "tags": [
+      "Feedback",
+      "Control Theory",
+      "Instrumentation"
+    ]
   },
   {
     "title": "Are We Alone? Part I — The Scale of the Question",
@@ -167,7 +380,12 @@
     "readTime": "12 min read",
     "image": "../images/blog2_01_milkyway_hero.png",
     "url": "posts/are-we-alone.html",
-    "tags": ["Astrobiology", "Fermi Paradox", "SETI", "JWST"]
+    "tags": [
+      "Astrobiology",
+      "Fermi Paradox",
+      "SETI",
+      "JWST"
+    ]
   },
   {
     "title": "To bridge the gap, I found instrumentation",
@@ -177,6 +395,11 @@
     "readTime": "8 min read",
     "image": "../images/10_blog_bridge_instrumentation.png",
     "url": "posts/instrumentation-bridge.html",
-    "tags": ["Instrumentation", "Optics", "Electronics", "Astrophysics"]
+    "tags": [
+      "Instrumentation",
+      "Optics",
+      "Electronics",
+      "Astrophysics"
+    ]
   }
 ]

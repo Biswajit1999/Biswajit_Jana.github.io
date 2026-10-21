@@ -1,0 +1,107 @@
+{
+  "key": "sercel",
+  "version": "2403.10019v2",
+  "license": "License: CC BY 4.0",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 2,
+      "anchor": "S2.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/2403.10019v2/MaskLayout.png",
+          "sha256": "7f3473e9feb75b9c19a6a165e2fa31bac9ae8a41611a37bbbe31627baad2b556",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1438,
+          "height": 775
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S2.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/2403.10019v2/Schematic.png",
+          "sha256": "5f372ecd6b89a72d169aec2db13c125b3d0df60666256522b4695c4e09a67556",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-04-panel-01.preview.webp",
+          "width": 1538,
+          "height": 741
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 6,
+      "anchor": "S2.F6",
+      "panels": [
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-06-panel-01.png",
+          "url": "https://arxiv.org/html/2403.10019v2/AmpOpt.png",
+          "sha256": "231240423b1d211cb86b38a51b358c91adf3d014ef2cc7389492a0df8246fc8b",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-06-panel-01.preview.webp",
+          "width": 640,
+          "height": 480
+        },
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-06-panel-02.png",
+          "url": "https://arxiv.org/html/2403.10019v2/FluxVsVoltage.png",
+          "sha256": "f67ac6bd44cc1f12dfdd84232cb0279825ec53ac44349385cb11847980c31432",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-06-panel-02.preview.webp",
+          "width": 1319,
+          "height": 676
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 7,
+      "anchor": "S3.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-07-panel-01.png",
+          "url": "https://arxiv.org/html/2403.10019v2/PIDSettlingTest.png",
+          "sha256": "083d670ab7f07faf87c88e702e4c282edf79835c08f2f035ea22d215515198e0",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-07-panel-01.preview.webp",
+          "width": 1000,
+          "height": 500
+        },
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-07-panel-02.png",
+          "url": "https://arxiv.org/html/2403.10019v2/HistTemp.png",
+          "sha256": "81e63ce0d82b7b0fe3fd15c3cc6a9f5add1e124dedd34953bc5b9e74323917ec",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-07-panel-02.preview.webp",
+          "width": 500,
+          "height": 500
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 8,
+      "anchor": "S3.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-08-panel-01.png",
+          "url": "https://arxiv.org/html/2403.10019v2/FluxNoThermalCtrl.png",
+          "sha256": "6cb972318c81392f05ad94484db02bc36788ae3fccbc97f2a81eb732a361ee35",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-08-panel-01.preview.webp",
+          "width": 1000,
+          "height": 500
+        },
+        {
+          "path": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-08-panel-02.png",
+          "url": "https://arxiv.org/html/2403.10019v2/FluxWithThermalCtrl.png",
+          "sha256": "e47598761a75a3350bf96cedaa76d1222348bb8cc10e6d15368141d69a185d48",
+          "preview": "paper-journal/papers/sercel-2024-thermal-control-delay-lines/plots/source/figure-08-panel-02.preview.webp",
+          "width": 1000,
+          "height": 500
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

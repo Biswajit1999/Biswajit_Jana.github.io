@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   refresh:
@@ -20,14 +20,14 @@ jobs:
         run: python build_search_index.py
       - name: Rebuild atlas with the current public count
         run: python build_atlas.py
-      - name: Commit changed discovery files
-        run: |
-          if git diff --quiet; then
-            echo "Repository index is already current."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/public-repositories.json research-index.html atlas.html
-          git commit -m "chore: refresh public research index"
-          git push
+      # Keep the scheduled refresh useful without authoring commits as a bot.
+      # Public pages also refresh their repository catalogue in the browser.
+      - name: Save refreshed discovery files for author review
+        uses: actions/upload-artifact@v4
+        with:
+          name: refreshed-research-index
+          path: |
+            data/public-repositories.json
+            research-index.html
+            atlas.html
+          retention-days: 7

@@ -692,6 +692,7 @@
   (function () {
     var canvas = document.getElementById("atlas-space");
     if (!canvas) return;
+    if (document.body.classList.contains('observatory-page')) return;
     var reduce = reduceMotionMQ.matches;
     var ctx = canvas.getContext("2d"), W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
     var stars = [], shooting = [], scrollY = window.scrollY || 0, running = true;

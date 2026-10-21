@@ -1,0 +1,98 @@
+{
+  "key": "robertson",
+  "version": "1902.07729v1",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 6,
+      "anchor": "S3.F6",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-06-panel-01.png",
+          "url": "https://arxiv.org/html/1902.07729v1/gradients.png",
+          "sha256": "a49531a5aaed58c793a338e117c1e5276e139694ea490e9cacf6198cff653e8e",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-06-panel-01.preview.webp",
+          "width": 1700,
+          "height": 612
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 7,
+      "anchor": "S4.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-07-panel-01.png",
+          "url": "https://arxiv.org/html/1902.07729v1/tmc_electronics_block_diagram_v3.png",
+          "sha256": "dfa7f99b6ed29bc4767f2c5aa874e52072d48fa499230341d7965b4ca553973b",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-07-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1620
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 8,
+      "anchor": "S6.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-08-panel-01.svg",
+          "url": "https://arxiv.org/html/1902.07729v1/neid_pressure.svg",
+          "sha256": "1cd3e71f32f95fd437eda85321ccdb24ec98a87a8227011f12a3fefa265b0481",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-08-panel-01.preview.webp",
+          "width": 864,
+          "height": 504
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 9,
+      "anchor": "S6.F9",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-09-panel-01.svg",
+          "url": "https://arxiv.org/html/1902.07729v1/bench_decay.svg",
+          "sha256": "d4f86f4dc42cd3f866e5a529910a0a36d014ea5f604ab06834955311cc562fed",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-09-panel-01.preview.webp",
+          "width": 792,
+          "height": 612
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 10,
+      "anchor": "S6.F10",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-10-panel-01.svg",
+          "url": "https://arxiv.org/html/1902.07729v1/bench_stability.svg",
+          "sha256": "123e1d792950c4e4d74fc7b0564db2e864ece162d2aa841998a34ba275e5e900",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-10-panel-01.preview.webp",
+          "width": 792,
+          "height": 612
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 11,
+      "anchor": "S6.F11",
+      "panels": [
+        {
+          "path": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-11-panel-01.png",
+          "url": "https://arxiv.org/html/1902.07729v1/room_bench.png",
+          "sha256": "bfcfa162aceac7c06cba68368dc84d96680a24958a33fd25e7e79c1d72dacf89",
+          "preview": "paper-journal/papers/robertson-2019-neid-environment-control/plots/source/figure-11-panel-01.preview.webp",
+          "width": 1800,
+          "height": 655
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

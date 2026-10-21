@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Quieter RV Plot Is Not Automatically a Better Measurement | Biswajit Jana</title><meta name="description" content="A solar-archive audit of scatter, quality cuts and the observations we leave behind.">
+<meta name="robots" content="index, follow"><meta property="og:title" content="A Quieter RV Plot Is Not Automatically a Better Measurement">
+<link rel="canonical" href="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/neid-quality-cuts.html">
+<meta property="og:description" content="A solar-archive audit of scatter, quality cuts and the observations we leave behind."><meta property="og:type" content="article">
+<meta property="og:image" content="https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/series-2026/covers/neid-quality-cuts.webp">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,70,1&family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../series-2026/article.css"><link rel="stylesheet" href="../../observatory-shared.css">
+<script src="../../observatory-theme.js"></script><script src="../../observatory-appearance.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "A Quieter RV Plot Is Not Automatically a Better Measurement", "description": "A solar-archive audit of scatter, quality cuts and the observations we leave behind.", "author": {"@type": "Person", "name": "Biswajit Jana"}, "dateCreated": "2026-10-21", "creativeWorkStatus": "Published", "wordCount": 2066, "image": "https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/series-2026/covers/neid-quality-cuts.webp", "datePublished": "2026-10-21", "url": "https://biswajit1999.github.io/Biswajit_Jana.github.io/blog/posts/neid-quality-cuts.html"}</script></head>
+<body class="observatory-page observatory-article"><a class="skip-link" href="#article">Skip to article</a>
+<nav class="nav" aria-label="Main navigation"><div class="nav-inner wide"><a class="brand" href="../../index.html"><span class="brand-orb" aria-hidden="true"></span>Biswajit <span>Jana</span></a>
+<ul class="nav-links"><li><a href="../../index.html">Home</a></li><li><a href="../index.html">Blog</a></li><li><a href="../../index.html#current-research">Research</a></li><li><a href="../../publications.html">Publications</a></li><li><a href="../../cv.html">CV</a></li><li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">☾</button></li></ul></div></nav>
+<header class="hero wide"><div class="hero-grid"><div><div class="eyebrow">Scientific Computing</div><h1>A Quieter RV Plot Is Not Automatically a Better Measurement</h1><p class="hero-sub">A solar-archive audit of scatter, quality cuts and the observations we leave behind.</p>
+<div class="hook">The instrument did not become six times quieter when I changed a threshold. I changed the observations being compared.</div><div class="meta-row"><span class="meta-pill">Biswajit Jana</span><span class="meta-pill">Published 21 October 2026</span><span class="meta-pill">10 min read</span></div></div>
+<figure class="hero-card"><img src="../series-2026/covers/neid-quality-cuts.webp" alt="Conceptual solar spectroscopy artwork. The RV figures use public NEID Level-2 metadata, not synthetic solar velocities." width="1440" height="810" fetchpriority="high"><figcaption class="hero-caption">Conceptual solar spectroscopy artwork. The RV figures use public NEID Level-2 metadata, not synthetic solar velocities.</figcaption></figure></div></header>
+<section class="lab-launch wide"><div class="lab-launch-card"><div><div class="lab-kicker">Research project</div><h2>Explore the work behind this article.</h2><p>Read the methods, inspect the project and follow the underlying evidence.</p></div><a class="launch-button" href="https://github.com/Biswajit1999/rv-activity-disentangler">Open Project</a></div></section>
+<section class="journal wide"><div class="journal-grid"><aside class="left-rail"><div class="rail-card"><h3>Navigation Map</h3><ul class="section-nav"><li><a href="#the-line-got-quieter-what-did-we-actually-improve">The line got quieter. What did we actually improve?</a></li><li><a href="#start-with-the-archive-not-the-preferred-answer">Start with the archive, not the preferred answer</a></li><li><a href="#more-photons-help-but-they-do-not-explain-everything">More photons help, but they do not explain everything</a></li><li><a href="#look-at-the-nights-before-averaging-them-away">Look at the nights before averaging them away</a></li><li><a href="#a-time-lag-is-not-a-rotation-period">A time lag is not a rotation period</a></li><li><a href="#the-acceptance-rule-is-part-of-the-experiment">The acceptance rule is part of the experiment</a></li><li><a href="#even-rms-needs-a-definition">Even “RMS” needs a definition</a></li><li><a href="#tiny-formal-errors-can-coexist-with-large-observed-variability">Tiny formal errors can coexist with large observed variability</a></li><li><a href="#correlation-changes-the-uncertainty-of-an-average">Correlation changes the uncertainty of an average</a></li><li><a href="#read-the-time-lag-curve-as-a-description-not-a-period-detection">Read the time-lag curve as a description, not a period detection</a></li><li><a href="#what-would-make-the-next-analysis-stronger">What would make the next analysis stronger?</a></li><li><a href="#references">References</a></li></ul></div><div class="rail-card"><h3>At a glance</h3><div class="telemetry"><div><span>Archive</span><strong>NEID solar Level 2</strong></div><div><span>Accepted</span><strong>635 exposures</strong></div><div><span>Coverage</span><strong>4 observed nights</strong></div><div><span>Result</span><strong>Quality-cut sensitivity</strong></div></div></div></aside>
+<main class="story" id="article"><article class="article-body"><section class="story-header" id="the-line-got-quieter-what-did-we-actually-improve"><h2>The line got quieter. What did we actually improve?</h2>
+<p>There is a very satisfying thing a data-analysis script can do: remove some points and produce a much calmer plot. The scatter falls. The result looks more precise. For about three seconds, it feels as though the instrument has become better because I changed a threshold in Python.</p>
+<p>Of course, the instrument did not change. The sample did.</p>
+<p>That distinction became the central question in my NEID solar RV audit. I wanted to know how the measured scatter behaved across nights and under declared signal-to-noise cuts. The useful outcome was not a recovered planet or a model that removed solar activity. It was a demonstration that the apparent stability of this particular archive sample depends strongly on the observations I keep (<a class="citation" href="#ref-jana">Jana, 2026</a>).</p>
+</section><section class="chapter" id="start-with-the-archive-not-the-preferred-answer"><h2>Start with the archive, not the preferred answer</h2>
+<p>The saved query covers BJD 2459700-2459713 and returns 2,000 public NEID Level-2 solar metadata records. The project's existing acceptance rule retains 635 exposures across four observed nights. Thirteen days in the query window is therefore not thirteen days of continuous accepted coverage. That missing distinction would make a time-series story sound much stronger than the actual sampling allows.</p>
+<p>The official archive describes the returned RV, uncertainty, extracted signal-to-noise and quality flags. It also warns that flagged products may not be suitable for precision RV work (<a class="citation" href="#ref-nexsci">NExScI, n.d.</a>). I retain that provenance rather than treating a downloaded number as automatically analysis-ready.</p>
+<p>Even an accepted Level-2 value is not a promise that all uncertainty has been captured. The formal RV error and the observed variability answer different questions. The first comes from a measurement procedure; the second can include solar signals, imperfect corrections, environmental effects and shared systematics. This audit does not isolate those contributions.</p>
+</section><section class="chapter" id="more-photons-help-but-they-do-not-explain-everything"><h2>More photons help, but they do not explain everything</h2>
+<p>The photon-noise limit depends on both photon statistics and the Doppler information in the spectrum, not on a signal-to-noise number alone (Bouchy, Pepe and Queloz, 2001). It is reasonable to expect low-quality exposures to be less precise. It is not reasonable to assume that every change in scatter under an S/N cut measures photon noise and nothing else.</p>
+<p>S/N can be related to observing conditions and solar altitude. A stronger threshold may therefore change when we observed, which night contributes most, and which parts of the Sun-as-a-star time series remain. The comparison is not automatically like-for-like. It is a changed dataset with an unchanged label unless we make that change visible.</p>
+<figure><img src="../series-2026/figures/neid-selection.png" alt="NEID radial velocity RMS and retained exposure count across four signal to noise cuts" loading="lazy" width="1400" height="820"><figcaption>Observed archive-derived project summary. The left panel shows relative-RV RMS under four fixed S/N thresholds; the right shows the retained sample size. Both panels use the pinned NEID audit JSON. These are selection diagnostics, not an activity-correction result or a causal experiment.</figcaption></figure>
+
+<p>At the loose S/N threshold of 10, the reported RMS is about 6.96 m/s. At 400, it is about 1.16 m/s. But the retained sample also falls from 635 to 314 exposures. The plot deliberately shows those facts side by side. A factor-of-six change in scatter is interesting; losing roughly half the observations is part of its interpretation, not a footnote.</p>
+<p>I would not attach invented error bars to these four points. They summarise overlapping selections, not four independent experiments. Uncertainty in a sensitivity analysis needs a resampling or generative scheme that respects the time structure and dependence. Simply drawing a familiar-looking uncertainty band would not supply one.</p>
+</section><section class="chapter" id="look-at-the-nights-before-averaging-them-away"><h2>Look at the nights before averaging them away</h2>
+<p>The fourth observed night dominates the loose-cut variability. The project's nightly RMS values range from roughly 0.75 to 12.91 m/s. The nightly reduced chi-squared values are also far above one under the quoted formal errors (<a class="citation" href="#ref-jana">Jana, 2026</a>). That is a reason to investigate the uncertainty model and the data, not permission to name the cause.</p>
+<figure><img src="../series-2026/figures/neid-nights.png" alt="Observed nightly NEID RV scatter and accepted exposure counts for four BJD days" loading="lazy" width="1400" height="820"><figcaption>Nightly observed RMS from the same accepted sample. Labels show exposure counts. The conspicuous fourth-night scatter motivates inspection of observations and quality variables; this figure does not establish whether the cause is solar, atmospheric, instrumental or a combination.</figcaption></figure>
+
+<p>An aggregate statistic mixes within-night variation, differences between nights and the weighting implied by the number of exposures. If I show only the final RMS, I hide the structure that explains why a quality cut has such leverage. A nightly panel is less dramatic than an impressive single precision figure, but it is much more useful.</p>
+</section><section class="chapter" id="a-time-lag-is-not-a-rotation-period"><h2>A time lag is not a rotation period</h2>
+<p>The project also compares velocity differences at different time separations. That can describe how the series varies over short and longer lags. However, many pairs reuse the same exposures. A large pair count does not create the same number of independent observations.</p>
+<p>With only four accepted nights in a discontinuous window, I cannot infer the solar rotation period from the rise of a descriptive structure function. Nor can I translate a correlation with solar altitude into a causal correction. The sampling and the unmodelled variables remain in the room even when the plot looks smooth.</p>
+<p>The red-noise lesson is familiar from transit work too: correlated measurements do not reward averaging in the same way as independent errors (<a class="citation" href="#ref-pont">Pont, Zucker and Queloz, 2006</a>). That paper is about transit detection, not a validation of this NEID model. I am borrowing the statistical warning, not importing its results as solar-RV evidence.</p>
+</section><section class="chapter" id="the-acceptance-rule-is-part-of-the-experiment"><h2>The acceptance rule is part of the experiment</h2>
+<p>The saved query asks for the first 2,000 rows in time order within the declared BJD interval. It is a capped archive extraction, not a claim to have downloaded every exposure available in that interval. The local acceptance rule is archiveFlag = 0, formal RV uncertainty below 10 m/s, and extracted S/N at least 10. Stronger S/N thresholds are applied after that archive-quality screen.</p>
+<p>The saved metadata records 1,363 archive-flagged exposures. Of the remaining 637 rows, 635 pass the complete local rule. Those counts are useful because they separate an archive decision from my own analysis selection. An archive flag is not a physical diagnosis, and a passed local rule does not certify that an observation is suitable for every scientific purpose.</p>
+<p>The four threshold results are worth showing numerically as well as graphically:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Minimum S/N</th>
+<th style="text-align: right;">Retained exposures</th>
+<th style="text-align: right;">Centred RV RMS (m/s)</th>
+<th style="text-align: right;">Fraction of initial accepted sample</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">635</td>
+<td style="text-align: right;">6.963</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">556</td>
+<td style="text-align: right;">2.219</td>
+<td style="text-align: right;">87.6%</td>
+</tr>
+<tr>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">513</td>
+<td style="text-align: right;">1.377</td>
+<td style="text-align: right;">80.8%</td>
+</tr>
+<tr>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">1.159</td>
+<td style="text-align: right;">49.4%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The rows are nested selections. The fraction column describes retention relative to 635 accepted exposures, not completeness relative to all solar observations or all possible observing conditions. The final sample is more selective, but that word should not be translated automatically into less biased.</p>
+</section><section class="chapter" id="even-rms-needs-a-definition"><h2>Even “RMS” needs a definition</h2>
+<p>The threshold analysis computes the square root of the mean squared deviation from each selected sample's arithmetic mean. It uses a denominator of n, not n - 1. This is a descriptive population-style scatter for the saved sample, not an unbiased estimate of a universal solar variance.</p>
+<div class="equation"><div class="equation-label">The statistic actually plotted</div><div class="formula">v̄ = (1/n) Σvᵢ<br>RMS<sub>centred</sub> = √[(1/n) Σ(vᵢ - v̄)²]</div><p>The mean is recomputed for each quality selection. A relative-velocity zero point cancels from this centred statistic but not from √mean(vᵢ²).</p></div>
+
+<p>This resolves a small but important trap in the saved products. The compact input bundle's older diagnostic reports about 8.12 m/s for an uncentred RMS of the relative velocities. The later threshold analysis reports about 6.96 m/s after centring on the selected sample mean. Those need not agree. Adding a constant velocity offset changes the first statistic but not the second. The numerical identity is mean(v²) = mean[(v - v̄)²] + v̄².</p>
+<p>That is not a reason to choose whichever number looks better. It is a reason to identify the implementation behind the number and use one definition consistently. In this article, the threshold plot and table use the centred definition from the analysis code.</p>
+</section><section class="chapter" id="tiny-formal-errors-can-coexist-with-large-observed-variability"><h2>Tiny formal errors can coexist with large observed variability</h2>
+<p>For each observed BJD day, the project calculates an inverse-variance weighted mean. With wᵢ = 1/σᵢ², the mean is Σwᵢvᵢ/Σwᵢ and its formal error is 1/√Σwᵢ, assuming independent measurements with correctly specified uncertainties. That is a conditional precision, not a guarantee about the underlying Sun-as-a-star signal.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">BJD day</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">Weighted mean relative RV (m/s)</th>
+<th style="text-align: right;">Formal mean error (m/s)</th>
+<th style="text-align: right;">Observed RMS (m/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">2459700</td>
+<td style="text-align: right;">142</td>
+<td style="text-align: right;">-2.515</td>
+<td style="text-align: right;">0.0181</td>
+<td style="text-align: right;">1.241</td>
+</tr>
+<tr>
+<td style="text-align: right;">2459701</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">-1.874</td>
+<td style="text-align: right;">0.0155</td>
+<td style="text-align: right;">0.811</td>
+</tr>
+<tr>
+<td style="text-align: right;">2459702</td>
+<td style="text-align: right;">157</td>
+<td style="text-align: right;">-3.788</td>
+<td style="text-align: right;">0.0168</td>
+<td style="text-align: right;">0.749</td>
+</tr>
+<tr>
+<td style="text-align: right;">2459703</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">-4.907</td>
+<td style="text-align: right;">0.0318</td>
+<td style="text-align: right;">12.910</td>
+</tr>
+</tbody>
+</table></div>
+<p>The nightly RMS column is calculated around the weighted mean, whereas the quality-cut RMS is centred on an arithmetic mean. That distinction is small enough to overlook and important enough to document. Also, these groups are defined by floor(BJD). They are convenient observing-day groups in this extraction, not a general algorithm for identifying a night's boundaries at every observatory.</p>
+<p>Reduced chi-squared compares residuals with the quoted σᵢ. Values from 13.36 to 180.35 indicate that a constant nightly value plus those independent formal errors is not an adequate description. Multiplying every error bar by a fitted factor might make chi-squared look conventional, but it would not identify why the data vary.</p>
+</section><section class="chapter" id="correlation-changes-the-uncertainty-of-an-average"><h2>Correlation changes the uncertainty of an average</h2>
+<p>If the covariance matrix is C, an arithmetic average has variance (1/n²) 1ᵀC1. Only when off-diagonal terms vanish does that reduce to a sum of independent variances divided by n². A slowly varying calibration term or solar signal can make neighbouring exposures share errors. Taking many such exposures does not create the same information as the same number of independent measurements.</p>
+<p>The photon-information calculation in <a class="citation" href="#ref-bouchy">Bouchy, Pepe and Queloz (2001)</a> is a useful lower-level component, but it is not a complete covariance model for a night of observations. Likewise, thermal stability of the spectrograph does not remove the Sun's own changes. The practical job is to identify which process each diagnostic can constrain rather than make one uncertainty column carry all of them.</p>
+</section><section class="chapter" id="read-the-time-lag-curve-as-a-description-not-a-period-detection"><h2>Read the time-lag curve as a description, not a period detection</h2>
+<p>The project's lag statistic is the median of |vᵢ - vⱼ|/√2 in bins of pair separation. The shaded range below shows the 16th to 84th percentiles of the pair differences. It is a distribution of differences, not a confidence interval on an independently estimated population parameter.</p>
+<figure><img src="../series-2026/figures/neid-lag.png" alt="Observed NEID pairwise radial velocity differences by time lag with a percentile spread" loading="lazy"><figcaption>Observed pair-difference summary from the saved NEID analysis. Horizontal coordinates are geometric bin midpoints. Shading shows the within-bin 16th-84th percentile range, not uncertainty on the median. Pairs share exposures, and gaps in coverage remain relevant.</figcaption></figure>
+
+<p>Larger differences at longer lags mean that widely separated values in this sample tend to differ more. They do not establish a unique periodicity. Even for independent Gaussian measurements with standard deviation σ, the median absolute difference divided by √2 is about 0.6745σ, not σ itself. Treating the curve as a directly calibrated RMS would introduce another avoidable definition error.</p>
+<p>A proper activity-correction study would need explanatory measurements and a validation design. Holding out individual exposures while keeping adjacent observations from the same night in training would be a weak test for slowly correlated behaviour. Holding out complete nights, with enough nights to repeat the exercise, is more relevant to the claim that a model generalises across observing conditions. This four-night audit is not yet that experiment.</p>
+</section><section class="chapter" id="what-would-make-the-next-analysis-stronger"><h2>What would make the next analysis stronger?</h2>
+<p>I would inspect the full Level-2 products and relevant activity indicators, compare quality variables without conditioning on the RV outcome, and extend the temporal baseline. I would test whether a proposed correction predicts unseen nights rather than merely reducing the scatter of the nights used to fit it.</p>
+<p>I would also report the observations rejected by every rule. If the cleanest result depends on removing one inconvenient interval, a reader should be able to see that interval and understand the reason. Predeclared cuts are helpful, but they do not make selection bias impossible.</p>
+<p>The honest conclusion is quite specific: this sample's measured solar RV scatter is sensitive to quality selection and night-to-night composition. That is not a failed version of a planet discovery. It is a useful audit of the steps that would have to be understood before trusting a more ambitious claim.</p>
+<p>The quieter plot is allowed to be satisfying. It is just not allowed to do all the explaining.</p>
+</section><section class="references chapter" id="references"><h2>References</h2>
+<p id="ref-bouchy">Bouchy, F., Pepe, F. and Queloz, D. (2001) ‘Fundamental photon noise limit to radial velocity measurements’, <em>Astronomy &amp; Astrophysics</em>, 374, pp. 733-739. Available at: <a href="https://doi.org/10.1051/0004-6361:20010730">https://doi.org/10.1051/0004-6361:20010730</a>.</p>
+
+<p id="ref-jana">Jana, B. (2026) <em>NEID Solar RV Variability and Quality-Cut Audit</em> [Software and analysis outputs]. Available at: <a href="https://github.com/Biswajit1999/rv-activity-disentangler">rv-activity-disentangler</a> (Accessed: 21 October 2026).</p>
+
+<p id="ref-nexsci">NASA Exoplanet Science Institute (NExScI) (n.d.) <em>Solar Radial Velocity Archive: help and column descriptions</em>. Available at: <a href="https://neid.ipac.caltech.edu/help_solar.php">NEID Solar RV Archive documentation</a> (Accessed: 21 October 2026).</p>
+
+<p id="ref-pont">Pont, F., Zucker, S. and Queloz, D. (2006) ‘The effect of red noise on planetary transit detection’, <em>Monthly Notices of the Royal Astronomical Society</em>, 373, pp. 231-242. Available at: <a href="https://doi.org/10.1111/j.1365-2966.2006.11012.x">https://doi.org/10.1111/j.1365-2966.2006.11012.x</a>.</p></section></article></main>
+<aside class="right-rail"><div class="rail-card"><h3>Glossary, but less boring</h3><div class="glossary"><div class="glossary-item"><strong>Weighted mean</strong><span>An average in which formal uncertainties determine relative influence.</span></div><div class="glossary-item"><strong>RMS</strong><span>A scatter statistic whose centring and weighting must be specified.</span></div><div class="glossary-item"><strong>Reduced chi-squared</strong><span>Residual size relative to the stated uncertainty model and degrees of freedom.</span></div><div class="glossary-item"><strong>Structure function</strong><span>A description of differences between measurements at different time separations.</span></div></div></div><div class="rail-card"><h3>Related Reading</h3><div class="post-list"><a class="post-card" href="radial-velocity-method.html"><div class="post-card-kicker">Background</div><h4>Read the original explainer</h4><p>The foundations behind this project.</p></a><a class="post-card" href="detector-memory.html"><div class="post-card-kicker">Continue reading</div><h4>When the Detector Remembers and the Model Cannot Explain Why</h4><p>A replicated HST detector signal, failed radiation attribution, and why both belong in the same research story.</p></a></div></div></aside></div></section>
+<footer class="footer"><div class="footer-inner wide"><div>Copyright 2026 Biswajit Jana. All Rights Reserved. // Astrophysics, Instrumentation and Scientific Computing.</div><div><a href="../../index.html">Home Page</a> - <a href="../../publications.html">Visual Archive / Posters and Seminars</a> - <a href="../index.html">All Blog Posts</a></div></div></footer>
+<script src="../series-2026/reader.js" defer></script></body></html>

@@ -1,0 +1,68 @@
+{
+  "key": "kreider",
+  "version": "2210.10988v2",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S1.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/2210.10988v2/fig1-4-11.png",
+          "sha256": "d3ef4d941d03075c7c3fa14e3b4e9cf4a749e66d128882df57c23450445491c6",
+          "preview": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-01-panel-01.preview.webp",
+          "width": 927,
+          "height": 830
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 2,
+      "anchor": "S3.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/2210.10988v2/fig2-2-1.png",
+          "sha256": "8cef8b00f5dc830d893091b0e79cf114136c1c51e0030f3b15dbd85016335997",
+          "preview": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1011
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S5.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/2210.10988v2/fig3-4-11.png",
+          "sha256": "ea0463eabef3a6e6ab3d47e68148f4a3d262af5d40281c8d5f0a3483b0de0975",
+          "preview": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-03-panel-01.preview.webp",
+          "width": 1250,
+          "height": 1239
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S5.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/2210.10988v2/fig4-8-2.png",
+          "sha256": "492d815c0fb1ba754ac6a51c2d0a83dd41d1b097de9cd9e76f062d5576eb3191",
+          "preview": "paper-journal/papers/kreider-2025-fabry-perot-chromatic-drift/plots/source/figure-04-panel-01.preview.webp",
+          "width": 569,
+          "height": 1014
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

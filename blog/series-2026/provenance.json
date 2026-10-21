@@ -1,0 +1,137 @@
+{
+  "retrieved": "2026-10-21",
+  "repositories": {
+    "Master-Thesis-2024": {
+      "commit": "0ef91ed24c3e648c32d991c85ad260c0f991c67e",
+      "url": "https://github.com/Biswajit1999/Master-Thesis-2024/tree/0ef91ed24c3e648c32d991c85ad260c0f991c67e"
+    },
+    "interactive-hr-diagram-lab": {
+      "commit": "d1aed62360b8e642f96f5c1a3067953bed68569b",
+      "url": "https://github.com/Biswajit1999/interactive-hr-diagram-lab/tree/d1aed62360b8e642f96f5c1a3067953bed68569b"
+    },
+    "NASADIYA-LIGHTCONE": {
+      "commit": "c79d1ddfd09cfee869da37a4cd9f763f3dd19631",
+      "url": "https://github.com/Biswajit1999/NASADIYA-LIGHTCONE/tree/c79d1ddfd09cfee869da37a4cd9f763f3dd19631"
+    },
+    "finding-earth-2": {
+      "commit": "3d31c3f7c98c154cf647f3549f139b8aea99387d",
+      "url": "https://github.com/Biswajit1999/finding-earth-2/tree/3d31c3f7c98c154cf647f3549f139b8aea99387d"
+    },
+    "rv-activity-disentangler": {
+      "commit": "cf96bb1adaa75e9918f9ccb06645b31acdf2c48c",
+      "url": "https://github.com/Biswajit1999/rv-activity-disentangler/tree/cf96bb1adaa75e9918f9ccb06645b31acdf2c48c"
+    },
+    "lattice-radiation-twin": {
+      "commit": "ff90143baedb6885847cbd0333f3b38db23217e7",
+      "url": "https://github.com/Biswajit1999/lattice-radiation-twin/tree/ff90143baedb6885847cbd0333f3b38db23217e7"
+    },
+    "coronagraph-dark-hole-lab": {
+      "commit": "cb03b25dee4515e3465cfd87fd96eb5a1b9ca209",
+      "url": "https://github.com/Biswajit1999/coronagraph-dark-hole-lab/tree/cb03b25dee4515e3465cfd87fd96eb5a1b9ca209"
+    },
+    "TransitScatter": {
+      "commit": "91961eeca73774cf08d91149f017ced6498d7bc8",
+      "url": "https://github.com/Biswajit1999/TransitScatter/tree/91961eeca73774cf08d91149f017ced6498d7bc8"
+    }
+  },
+  "files": [
+    {
+      "file": "blog/series-2026/sources/Master-Thesis-2024/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/Master-Thesis-2024/0ef91ed24c3e648c32d991c85ad260c0f991c67e/README.md",
+      "sha256": "9f1694a39970a27ec62e07dee5a0e411705f353ab0d7a146b5fda3780ee0ea61"
+    },
+    {
+      "file": "blog/series-2026/sources/interactive-hr-diagram-lab/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/interactive-hr-diagram-lab/d1aed62360b8e642f96f5c1a3067953bed68569b/README.md",
+      "sha256": "9fb52556cc1966d770e281bb833c624281f854239800ad6fdc28b276448925d1"
+    },
+    {
+      "file": "blog/series-2026/sources/NASADIYA-LIGHTCONE/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/NASADIYA-LIGHTCONE/c79d1ddfd09cfee869da37a4cd9f763f3dd19631/README.md",
+      "sha256": "0229e4ff8f570a80cbbed1a0a6ad679cfcd960f5ff724f7b2497a3a8ab66f490"
+    },
+    {
+      "file": "blog/series-2026/sources/finding-earth-2/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/finding-earth-2/3d31c3f7c98c154cf647f3549f139b8aea99387d/README.md",
+      "sha256": "1cd1bd1fd2abce5f6922290818c5b32d4418efb55c010bd4ffcf32e72ee18d1b"
+    },
+    {
+      "file": "blog/series-2026/sources/finding-earth-2/results/analysis_summary.json",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/finding-earth-2/3d31c3f7c98c154cf647f3549f139b8aea99387d/results/analysis_summary.json",
+      "sha256": "c49952e1ee62d9a2dfa398f4b54d5289584c212cd330ee9c04fcd78357c362fb"
+    },
+    {
+      "file": "blog/series-2026/sources/finding-earth-2/results/atmosphere/earth_analogue_spectrum_screen.json",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/finding-earth-2/3d31c3f7c98c154cf647f3549f139b8aea99387d/results/atmosphere/earth_analogue_spectrum_screen.json",
+      "sha256": "052a337d0402319c05a5917c42d828ae76d08edc717dd8bdb1d769ee3f23a4c7"
+    },
+    {
+      "file": "blog/series-2026/sources/rv-activity-disentangler/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/rv-activity-disentangler/cf96bb1adaa75e9918f9ccb06645b31acdf2c48c/README.md",
+      "sha256": "f3ecc66d65ad1fbd2e76ee0df89fcf58eef844fa20c2dc45e54d63cd4e5bcb84"
+    },
+    {
+      "file": "blog/series-2026/sources/rv-activity-disentangler/public/data/neid-solar-2459700-2459713.json",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/rv-activity-disentangler/cf96bb1adaa75e9918f9ccb06645b31acdf2c48c/public/data/neid-solar-2459700-2459713.json",
+      "sha256": "82715ce2f696e682e68172f85bc12f6a969e64b839c05a074673eb965a69a26f"
+    },
+    {
+      "file": "blog/series-2026/sources/rv-activity-disentangler/research/neid-variability-summary.json",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/rv-activity-disentangler/cf96bb1adaa75e9918f9ccb06645b31acdf2c48c/research/neid-variability-summary.json",
+      "sha256": "0f318bef99db021dfda801856ac77f216e063d1140b984fc91f534cd89c2600e"
+    },
+    {
+      "file": "blog/series-2026/sources/lattice-radiation-twin/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/lattice-radiation-twin/ff90143baedb6885847cbd0333f3b38db23217e7/README.md",
+      "sha256": "83656063c2ab8798acf22c25eb034ee29cc82a9c304cd7b7cb0a4b8b39ea74bc"
+    },
+    {
+      "file": "blog/series-2026/sources/lattice-radiation-twin/results/hst_replication/hst_replication_longitudinal.png",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/lattice-radiation-twin/ff90143baedb6885847cbd0333f3b38db23217e7/results/hst_replication/hst_replication_longitudinal.png",
+      "sha256": "afebeee9aa9dc6b464fd31edf7c7e83dd6f2ffea84ffe73be9c679aed468c6fd"
+    },
+    {
+      "file": "blog/series-2026/sources/lattice-radiation-twin/paper/figures/identifiability_audit.png",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/lattice-radiation-twin/ff90143baedb6885847cbd0333f3b38db23217e7/paper/figures/identifiability_audit.png",
+      "sha256": "ee24b37cb7718ef99999315ac0f5f4e85b38342b484129c6a961299594f2a460"
+    },
+    {
+      "file": "blog/series-2026/sources/coronagraph-dark-hole-lab/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/coronagraph-dark-hole-lab/cb03b25dee4515e3465cfd87fd96eb5a1b9ca209/README.md",
+      "sha256": "f959af2bac8d49d9188ea8d846e2ae42dda2d3106cca61c0331cabab5d117900"
+    },
+    {
+      "file": "blog/series-2026/sources/coronagraph-dark-hole-lab/public/data/roman-hlc-os11.json",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/coronagraph-dark-hole-lab/cb03b25dee4515e3465cfd87fd96eb5a1b9ca209/public/data/roman-hlc-os11.json",
+      "sha256": "da93d1fb7f4168975f21e6b758b605edcf8b2e1545bcf117c1fe01efe51ac7f5"
+    },
+    {
+      "file": "blog/series-2026/sources/TransitScatter/README.md",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/TransitScatter/91961eeca73774cf08d91149f017ced6498d7bc8/README.md",
+      "sha256": "745f7878935871f23a73995da70adfbe5dd49c3a0f8e4462c9a36ac31aaee19b"
+    },
+    {
+      "file": "blog/series-2026/sources/TransitScatter/results/benchmark_results.csv",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/TransitScatter/91961eeca73774cf08d91149f017ced6498d7bc8/results/benchmark_results.csv",
+      "sha256": "36918f69d5c1b1380d8e720e92ee841c48c17af992e7eddd90435dc1adf4f373"
+    },
+    {
+      "file": "blog/series-2026/sources/TransitScatter/results/flare_robustness_results.csv",
+      "source": "https://raw.githubusercontent.com/Biswajit1999/TransitScatter/91961eeca73774cf08d91149f017ced6498d7bc8/results/flare_robustness_results.csv",
+      "sha256": "59d68b8798ba97ca33329eed29136208c1fe6cafcb9660fb5c41007d3d473317"
+    },
+    {
+      "file": "blog/series-2026/sources/gaia-dr3.csv",
+      "source": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+6000+source_id%2Cra%2Cdec%2Cparallax%2Cparallax_over_error%2Cbp_rp%2Cphot_g_mean_mag+FROM+gaiadr3.gaia_source+WHERE+parallax+%3E+2+AND+parallax_over_error+%3E+20+AND+bp_rp+IS+NOT+NULL+AND+phot_g_mean_mag+IS+NOT+NULL+ORDER+BY+random_index",
+      "query": "SELECT TOP 6000 source_id,ra,dec,parallax,parallax_over_error,bp_rp,phot_g_mean_mag FROM gaiadr3.gaia_source WHERE parallax > 2 AND parallax_over_error > 20 AND bp_rp IS NOT NULL AND phot_g_mean_mag IS NOT NULL ORDER BY random_index",
+      "sha256": "f7bdbf9265c87773c43713815c01f54f13024c04bbe2301881e02bc098a75aa1",
+      "selection": "First 6000 rows by Gaia random_index after declared quality cuts; not a completeness-corrected census."
+    },
+    {
+      "file": "blog/series-2026/sources/2mrs-positions.json",
+      "source": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJS/199/26/table3",
+      "input_file_sha256": "48e2223a4a1729653307d7f211a1741e01d2f2a85839e3c4f9ece45005c2422d",
+      "transformation": "Retain object identifier, sky position and recession/redshift columns from existing local project derivative. No distance reconstruction."
+    }
+  ]
+}

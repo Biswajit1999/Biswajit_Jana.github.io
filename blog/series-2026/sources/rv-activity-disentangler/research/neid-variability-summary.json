@@ -1,0 +1,190 @@
+{
+  "data_kind": "real public NEID Level-2 solar RV metadata",
+  "accepted_exposures": 635,
+  "observed_nights": 4,
+  "nightly_reduced_chi2_range": [
+    13.358601024131032,
+    180.34624547129337
+  ],
+  "analyses": {
+    "nightly_weighted_variability": [
+      {
+        "bjd_day": 2459700,
+        "count": 142,
+        "weighted_mean_rv_mps": -2.515118397085611,
+        "formal_mean_error_mps": 0.018107149208503707,
+        "observed_rms_mps": 1.2414848817232165,
+        "reduced_chi2": 24.852128341378624
+      },
+      {
+        "bjd_day": 2459701,
+        "count": 166,
+        "weighted_mean_rv_mps": -1.8737743451981197,
+        "formal_mean_error_mps": 0.015549051482800327,
+        "observed_rms_mps": 0.8106552340309291,
+        "reduced_chi2": 16.52219508720516
+      },
+      {
+        "bjd_day": 2459702,
+        "count": 157,
+        "weighted_mean_rv_mps": -3.787879968823071,
+        "formal_mean_error_mps": 0.01675089136889071,
+        "observed_rms_mps": 0.749322983757929,
+        "reduced_chi2": 13.358601024131032
+      },
+      {
+        "bjd_day": 2459703,
+        "count": 170,
+        "weighted_mean_rv_mps": -4.906645930869724,
+        "formal_mean_error_mps": 0.03175444996628703,
+        "observed_rms_mps": 12.910198277113757,
+        "reduced_chi2": 180.34624547129337
+      }
+    ],
+    "irregular_cadence_structure_function": [
+      {
+        "lag_low_days": 0.0006944444444444445,
+        "lag_high_days": 0.001232834520765838,
+        "pair_count": 389,
+        "median_abs_difference_over_sqrt2_mps": 0.6363961030678926,
+        "p16_mps": 0.1470782104868024,
+        "p84_mps": 2.4041630560342613
+      },
+      {
+        "lag_low_days": 0.001232834520765838,
+        "lag_high_days": 0.0021886285760523826,
+        "pair_count": 384,
+        "median_abs_difference_over_sqrt2_mps": 0.8838834764831844,
+        "p16_mps": 0.23193102422918768,
+        "p84_mps": 3.8296903269063343
+      },
+      {
+        "lag_low_days": 0.0021886285760523826,
+        "lag_high_days": 0.00388543228083642,
+        "pair_count": 724,
+        "median_abs_difference_over_sqrt2_mps": 0.565685424949238,
+        "p16_mps": 0.14142135623730961,
+        "p84_mps": 2.1439477605576074
+      },
+      {
+        "lag_low_days": 0.00388543228083642,
+        "lag_high_days": 0.0068977368632348445,
+        "pair_count": 1173,
+        "median_abs_difference_over_sqrt2_mps": 0.7071067811865477,
+        "p16_mps": 0.21213203435596437,
+        "p84_mps": 2.969848480983499
+      },
+      {
+        "lag_low_days": 0.0068977368632348445,
+        "lag_high_days": 0.012245426093023168,
+        "pair_count": 1901,
+        "median_abs_difference_over_sqrt2_mps": 0.7071067811865475,
+        "p16_mps": 0.21213203435596412,
+        "p84_mps": 4.17193000900063
+      },
+      {
+        "lag_low_days": 0.012245426093023168,
+        "lag_high_days": 0.02173908097291062,
+        "pair_count": 3672,
+        "median_abs_difference_over_sqrt2_mps": 0.7071067811865475,
+        "p16_mps": 0.21213203435596412,
+        "p84_mps": 4.31335136523794
+      },
+      {
+        "lag_low_days": 0.02173908097291062,
+        "lag_high_days": 0.03859299284130433,
+        "pair_count": 6209,
+        "median_abs_difference_over_sqrt2_mps": 0.7778174593052023,
+        "p16_mps": 0.21213203435596428,
+        "p84_mps": 4.666904755831213
+      },
+      {
+        "lag_low_days": 0.03859299284130433,
+        "lag_high_days": 0.06851343432157753,
+        "pair_count": 9569,
+        "median_abs_difference_over_sqrt2_mps": 0.7778174593052023,
+        "p16_mps": 0.21213203435596428,
+        "p84_mps": 4.949747468305832
+      },
+      {
+        "lag_low_days": 0.06851343432157753,
+        "lag_high_days": 0.12163064683372382,
+        "pair_count": 13626,
+        "median_abs_difference_over_sqrt2_mps": 0.8485281374238569,
+        "p16_mps": 0.21213203435596442,
+        "p84_mps": 4.242640687119285
+      },
+      {
+        "lag_low_days": 0.12163064683372382,
+        "lag_high_days": 0.21592866268755748,
+        "pair_count": 11882,
+        "median_abs_difference_over_sqrt2_mps": 0.9192388155425119,
+        "p16_mps": 0.2828427124746186,
+        "p84_mps": 6.646803743153547
+      },
+      {
+        "lag_low_days": 0.21592866268755748,
+        "lag_high_days": 0.3833342055129935,
+        "pair_count": 788,
+        "median_abs_difference_over_sqrt2_mps": 0.9899494936611666,
+        "p16_mps": 0.28284271247461895,
+        "p84_mps": 10.411440246190711
+      },
+      {
+        "lag_low_days": 0.6805262038273413,
+        "lag_high_days": 1.2081257227642674,
+        "pair_count": 75329,
+        "median_abs_difference_over_sqrt2_mps": 1.34350288425444,
+        "p16_mps": 0.42426406871192857,
+        "p84_mps": 3.5355339059327373
+      },
+      {
+        "lag_low_days": 1.2081257227642674,
+        "lag_high_days": 2.1447634988865136,
+        "pair_count": 47064,
+        "median_abs_difference_over_sqrt2_mps": 1.626345596729059,
+        "p16_mps": 0.4949747468305832,
+        "p84_mps": 6.788225099390855
+      },
+      {
+        "lag_low_days": 2.1447634988865136,
+        "lag_high_days": 3.8075594116403737,
+        "pair_count": 28585,
+        "median_abs_difference_over_sqrt2_mps": 2.9698484809834995,
+        "p16_mps": 0.9192388155425117,
+        "p84_mps": 10.677312395916866
+      }
+    ],
+    "quality_selection_sensitivity": [
+      {
+        "snr_minimum": 10,
+        "count": 635,
+        "rv_rms_mps": 6.962546748576591,
+        "rv_snr_pearson": 0.4553017786300521,
+        "rv_altitude_pearson": 0.044050013412029625
+      },
+      {
+        "snr_minimum": 200,
+        "count": 556,
+        "rv_rms_mps": 2.218537624668737,
+        "rv_snr_pearson": 0.26631659633508403,
+        "rv_altitude_pearson": -0.04450773943151188
+      },
+      {
+        "snr_minimum": 300,
+        "count": 513,
+        "rv_rms_mps": 1.3770729417422933,
+        "rv_snr_pearson": 0.42727835308204515,
+        "rv_altitude_pearson": 0.004873037455937281
+      },
+      {
+        "snr_minimum": 400,
+        "count": 314,
+        "rv_rms_mps": 1.1593963369445022,
+        "rv_snr_pearson": 0.06697937771330006,
+        "rv_altitude_pearson": -0.19264336668622745
+      }
+    ]
+  },
+  "limitations": "The 13-day archive window is too short for a solar-rotation inference. Formal Level-2 uncertainties omit stellar variability and shared systematics; correlations with S/N or altitude are diagnostic, not causal."
+}

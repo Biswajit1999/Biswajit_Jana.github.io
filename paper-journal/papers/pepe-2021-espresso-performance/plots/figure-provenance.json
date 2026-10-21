@@ -1,0 +1,159 @@
+{
+  "key": "pepe",
+  "version": "2010.00316",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 7,
+      "anchor": "S3.F7",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-07-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/raw_spectrum.png",
+          "sha256": "e4df20afadb27d2128fbf348fbc4c5fab5951faabf6590fc4c5273cf4c811ba1",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-07-panel-01.preview.webp",
+          "width": 1280,
+          "height": 960
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 10,
+      "anchor": "S4.F10",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/spectrum_full.png",
+          "sha256": "6fe4b7fb36a33ba3ae886e9611106f3a99f8807a49b50b2ce7a02e71d1cabfd6",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-01.preview.webp",
+          "width": 1031,
+          "height": 341
+        },
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-02.png",
+          "url": "https://arxiv.org/html/2010.00316v1/spectrum_blue.png",
+          "sha256": "790a9e3d9471cbbba3cb78b0ca78b1d2809bcb28a52cf5b678f2f4574276f885",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-02.preview.webp",
+          "width": 1031,
+          "height": 341
+        },
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-03.png",
+          "url": "https://arxiv.org/html/2010.00316v1/spectrum_red.png",
+          "sha256": "cb974f9434deb7c4ad173a9d91ab97e5cefda46eabc19c9a7a328376b546096b",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-10-panel-03.preview.webp",
+          "width": 1031,
+          "height": 343
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 12,
+      "anchor": "S4.F12",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-12-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/HR_Eff_vs_IA_before-after.png",
+          "sha256": "ce00d4897f51521ca2978426be8c3760ac4bfaf8c7786dd98d3cc27fd16ebd83",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-12-panel-01.preview.webp",
+          "width": 1404,
+          "height": 993
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 16,
+      "anchor": "S4.F16",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-16-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/SNR_vs_MV.png",
+          "sha256": "52eb303f30b2b24d625e9fc72435104a2c359482b23aa62d1d7aa00d03881da7",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-16-panel-01.preview.webp",
+          "width": 1404,
+          "height": 993
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 19,
+      "anchor": "S4.F19",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-19-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/qso_spectrum.png",
+          "sha256": "8911e0bab2db734425ccbc664e8d886bf820d9a44120912060c0a5b20688cd82",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-19-panel-01.preview.webp",
+          "width": 769,
+          "height": 410
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 25,
+      "anchor": "S5.F25",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-25-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/HD40307_RV_phasefolded.png",
+          "sha256": "21bb01604b7a04070cf0f2fdd651982e67bc350091d8bdbc9fc1ab842c2d9dab",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-25-panel-01.preview.webp",
+          "width": 1515,
+          "height": 569
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 26,
+      "anchor": "S5.F26",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-26-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/HD40307_RMS_bin.png",
+          "sha256": "0a0586953b6030869197d96e4b4eb9476df903c0c309296b1f7347188ba051b1",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-26-panel-01.preview.webp",
+          "width": 1124,
+          "height": 842
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 27,
+      "anchor": "S5.F27",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-27-panel-01.png",
+          "url": "https://arxiv.org/html/2010.00316v1/HD40307_zoom.png",
+          "sha256": "f9a2c8592273559d81e938a6cb55d9ee2bcaa34822d9debf861f7611410f8c17",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-27-panel-01.preview.webp",
+          "width": 1594,
+          "height": 615
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 28,
+      "anchor": "S5.F28",
+      "panels": [
+        {
+          "path": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-28-panel-01.svg",
+          "url": "https://arxiv.org/html/2010.00316v1/qso-lens.svg",
+          "sha256": "5c516959def7f1ef3a2a40bdc3ca35d737d4de6dfb0d6f967d53252eaa0c4f78",
+          "preview": "paper-journal/papers/pepe-2021-espresso-performance/plots/source/figure-28-panel-01.preview.webp",
+          "width": 576,
+          "height": 432
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+[
+  {
+    "slug": "zhao-2026-expres-hidden-systematics",
+    "title": "Uncovering hidden systematics in extreme-precision radial velocity measurements",
+    "short": "Zhao et al. (2026)",
+    "venue": "arXiv:2601.02296v1 · accepted for ApJS",
+    "source": "2601.02296v1",
+    "theme": "EPRV systematics",
+    "ext": "jpg",
+    "subtitle": "A reading of EXPRES as a coupled optical, environmental and statistical system—not a spectrograph described by one drift number.",
+    "focus": "Telemetry → spectral geometry → RV validation",
+    "overview": "The useful question here is how an apparently stable instrument can retain a coherent error after standard calibration. This note follows the evidence from common-mode trends to diagnostics, correction, and signal preservation. It separates the authors’ measured results from the follow-up tests proposed below.",
+    "reported": "Zhao et al. analyse seven years of EXPRES measurements. They find a 2.8 m/s trough-to-peak instrumental trend, strongest around January 2022. Their tracers combine temperature telemetry, two-dimensional échellogram transformations and laser-comb line bisector spans. A multidimensional regression reduces the solar-traced instrumental RMS from 1.32 to 0.43 m/s; twelve quiet stars show a 26% aggregate scatter reduction. The corrected ρ CrB data no longer support the previously reported planet d signal. These are distinct diagnostics, not a universal 0.43 m/s precision specification.",
+    "rows": [
+      [
+        "Diagnostic",
+        "What it can establish",
+        "What it cannot establish alone"
+      ],
+      [
+        "Common stellar trend",
+        "A shared component worth investigating.",
+        "Which physical component moved."
+      ],
+      [
+        "Solar comparison",
+        "An independent route to isolating instrumental behaviour.",
+        "That every residual is instrumental."
+      ],
+      [
+        "Regression residual",
+        "Whether selected tracers explain variance.",
+        "That an arbitrary planetary signal survives."
+      ]
+    ],
+    "sections": [
+      [
+        "diagnostics",
+        "Why geometry and line shape need separate diagnostics",
+        [
+          "An order shift, a change in scale and an asymmetric profile need not move an extracted stellar spectrum in the same way. A single zero-point correction compresses those possibilities into one scalar. My interpretation is that diagnostic diversity matters more than collecting many strongly correlated temperature channels.",
+          "Line bisectors and detector geometry should therefore be treated as complementary observables. If both track the RV residual, that motivates a physical investigation; it does not uniquely identify the cause. A correlated thermometer can be a proxy for an unmeasured mechanical response."
+        ]
+      ],
+      [
+        "model",
+        "Regression is a diagnostic model, not a mechanical explanation",
+        [
+          "For a conceptual linear model, write y = Xβ + ε, where y is an RV series and columns of X are instrument tracers. In a new implementation I would centre and scale the columns, inspect their covariance, and solve by QR or SVD rather than explicitly forming a matrix inverse. Nearly redundant tracers can otherwise make the fitted coefficients unstable.",
+          "Interpolation is also part of the model. A fitted relation cannot recover disturbances faster than the diagnostic cadence. I would plot the sampling windows beside the residuals, flag extrapolations, and keep instrument interventions visible rather than silently smoothing across them."
+        ]
+      ],
+      [
+        "limits",
+        "The boundary: improved scatter is not sufficient validation",
+        [
+          "A flexible correction may remove a real signal whenever its time dependence overlaps the regressors. A smaller RMS therefore needs a second question: what astrophysical information was lost? The answer depends on observing windows, phase, period and amplitude—not just on the number of fitted parameters.",
+          "A planet claim also concerns a particular data set and model. Removing support for one reported signal should not be rewritten as proof that no planet can exist at any nearby period. The appropriate wording keeps the inference attached to the corrected observations."
+        ]
+      ],
+      [
+        "tests",
+        "How I would stress-test the correction",
+        [
+          "<strong>Blocked validation:</strong> fit on separated time blocks and predict withheld seasons, including an interval around an intervention. Compare with an intercept-only baseline and report both residual scatter and long-timescale structure.",
+          "<strong>Signal preservation:</strong> inject a grid of periods, phases and amplitudes into the uncorrected observations, then repeat the entire fitting procedure. Compare recovered amplitudes as well as period identifications; a correct period can still have an attenuated amplitude.",
+          "<strong>Diagnostic ablation:</strong> remove telemetry, geometry and line-shape groups in turn. If improvement survives only through one unstable channel, that channel needs a physical explanation before operational use."
+        ]
+      ],
+      [
+        "connection",
+        "Connection to EXOhSPEC and feedback work",
+        [
+          "The practical link is a monitoring architecture: actuator command, independent temperature measurement, optical-format observable, and final science residual should be recorded on a common time axis. A tight control-loop readout is not an independent verification of optical stability.",
+          "I would start with a small, interpretable diagnostic set and a reproducible intervention log. That makes a later failure scientifically useful: it becomes possible to ask where the disturbance entered and which observable first detected it."
+        ]
+      ]
+    ],
+    "flow": [
+      "Environmental disturbance",
+      "Geometry / profile response",
+      "Extraction and RV residual",
+      "Held-out validation"
+    ],
+    "figures": [
+      [
+        "Figure 1",
+        "Common trends",
+        "Ask whether the observing window or a subset of targets dominates the apparent trend."
+      ],
+      [
+        "Figure 10",
+        "Injection–recovery",
+        "Check the recovery criterion before translating the plot into a detection claim."
+      ],
+      [
+        "Figure 11",
+        "ρ CrB comparison",
+        "Read the correction beside the periodogram rather than judging the residual RMS alone."
+      ]
+    ],
+    "image": {
+      "src": "../../../images/zhao2026_fig10_injection_recovery_grid.png",
+      "caption": "Zhao et al. (2026), Figure 10. Reproduced from the authors’ CC BY 4.0 paper. Read the detection rule in the original caption before interpreting the recovery fractions."
+    },
+    "related": [
+      "pepe-2021-espresso-performance",
+      "schmidt-2026-eom-comb-espresso"
+    ]
+  },
+  {
+    "slug": "sercel-2024-thermal-control-delay-lines",
+    "title": "Thermal control of long delay lines in a high-resolution astrophotonic spectrograph",
+    "short": "Sercel et al. (2024)",
+    "venue": "SPIE · arXiv:2403.10019v2",
+    "source": "2403.10019v2",
+    "theme": "Thermal control",
+    "ext": "jpg",
+    "subtitle": "Following the tolerance chain from chip temperature to optical path difference, fringe phase and a defensible stability measurement.",
+    "focus": "Temperature → optical path → fringe phase",
+    "overview": "This is a focused control-engineering reading, not a claim that photonic and bulk-optical spectrographs share the same temperature budget. The connection to precision instrumentation is the method: derive the tolerance from an optical observable, then verify the result independently of the controller.",
+    "reported": "Sercel et al. stabilise a packaged SiN Fourier-transform spectrograph with selectable 0–1.5 cm delays. A thermistor, PID controller and thermoelectric cooler regulate the mount at 18 °C. They report settling in under 60 s, a 0.028 °C temperature standard deviation over two hours, and a largest reported phase-error estimate of ±0.025 rad across the tested configurations. Table 1 lists ±0.015, ±0.025, ±0.015 and ±0.015 rad for 0, 0.5, 1 and 1.5 cm. These are laboratory phase-stability results, not an on-sky radial-velocity demonstration.",
+    "rows": [
+      [
+        "Quantity",
+        "Role in the experiment",
+        "Reading boundary"
+      ],
+      [
+        "Temperature readout",
+        "The feedback observable.",
+        "It samples a location, not the full waveguide temperature field."
+      ],
+      [
+        "Fringe phase",
+        "An optical check of path stability.",
+        "It depends on the measurement and fringe calibration."
+      ],
+      [
+        "Settling time",
+        "Response after activation or switching.",
+        "It is not a long-term drift specification."
+      ]
+    ],
+    "sections": [
+      [
+        "physics",
+        "Why a longer delay makes temperature matter",
+        [
+          "For a simple uniform waveguide, optical path length is nL. Its temperature derivative is approximately L(dn/dT + nα), with α the linear expansion coefficient. The corresponding phase response scales as (2π/λ) times the change in differential optical path. This is a local linear approximation, not a substitute for measuring the packaged device.",
+          "The engineering consequence is that a mechanical length alone does not set a thermal tolerance. Effective index, expansion, packaging, the reference arm and operating wavelength all enter. A temperature specification should identify the optical quantity it protects and the timescale over which it is required."
+        ]
+      ],
+      [
+        "control",
+        "The controller and the optical plant are not the same object",
+        [
+          "A sensor mounted near a chip measures a thermally filtered version of the waveguide environment. The controller can reduce its own error while gradients remain elsewhere. I would draw the sensor, heater, heat sink and optical path on the same thermal diagram before interpreting any PID trace.",
+          "Controller gains are also implementation-dependent. Their numerical values depend on sampling interval, actuator scaling, units and library conventions. Copying gains into a different assembly is not a reproducible control strategy; identifying the plant response is a better starting point."
+        ]
+      ],
+      [
+        "limits",
+        "What the stability numbers do and do not mean",
+        [
+          "A standard deviation and a maximum excursion describe different features of a time series. Neither identifies the frequency content of the residual. Slow drift may damage a long observation even when a short-window RMS appears satisfactory.",
+          "Optical-phase stability also should not be converted directly into an RV number. An FTS reconstruction and an échelle wavelength solution have different sensitivity chains. A valid transfer requires a model of how phase errors propagate through the relevant spectral estimator."
+        ]
+      ],
+      [
+        "tests",
+        "A follow-up experiment I would run",
+        [
+          "<strong>Plant identification:</strong> apply small, safe actuator steps around the working point and record sensor temperature and an optical observable together. Fit a simple thermal response and inspect the residual before selecting the controller bandwidth.",
+          "<strong>Disturbance rejection:</strong> repeat controlled ambient and on-chip power changes. Measure overshoot, recovery, phase excursions and any actuator saturation, not only the final thermometer error.",
+          "<strong>Independent verification:</strong> add a second temperature sensor or an out-of-loop optical monitor. Repeat after remounting the device to test whether a packaging change invalidates the calibration."
+        ]
+      ],
+      [
+        "connection",
+        "What transfers to EXOhSPEC",
+        [
+          "The transferable idea is a tolerance chain, not the paper’s temperature target. For a bulk-optical instrument I would replace the chip phase model with the measured sensitivity of centroid, focus, spectral format or wavelength solution to temperature.",
+          "That approach makes a TEC result easier to defend: state the environmental disturbance, show the actuator response, then show the residual optical error. The controller becomes one tested layer in a larger stability architecture."
+        ]
+      ]
+    ],
+    "flow": [
+      "Ambient / electrical heat",
+      "Packaged chip temperature",
+      "Differential optical path",
+      "Measured fringe phase"
+    ],
+    "figures": [
+      [
+        "Figure 4",
+        "Control electronics",
+        "Trace the feedback measurement and actuator limits."
+      ],
+      [
+        "Figure 7",
+        "Settling and temperature distribution",
+        "Keep the settling measurement separate from the two-hour distribution."
+      ],
+      [
+        "Figure 8 and Table 1",
+        "Optical stability",
+        "Ask whether an independent optical diagnostic supports the thermal claim."
+      ]
+    ],
+    "related": [
+      "pepe-2021-espresso-performance",
+      "zhao-2026-expres-hidden-systematics"
+    ]
+  },
+  {
+    "slug": "kreider-2025-fabry-perot-chromatic-drift",
+    "title": "Broadband chromatic drift in Fabry–Pérot resonators",
+    "short": "Kreider et al. (2025)",
+    "venue": "Nature Astronomy 9, 589–597 · preprint v2 (2024)",
+    "source": "2210.10988v2",
+    "theme": "Calibration physics",
+    "ext": "jpg",
+    "subtitle": "Why a dense calibration grid cannot always be treated as one rigid wavelength ruler.",
+    "focus": "Cavity geometry + coating phase → chromatic drift",
+    "overview": "The published article is titled “Quantification of broadband chromatic drifts in Fabry–Pérot resonators for exoplanet science.” The accessible preprint uses “Quantifying.” This note uses the preprint for the technical reading and the publisher record for the 2025 bibliographic details; the two versions are not silently conflated.",
+    "reported": "Kreider et al. compare Fabry–Pérot modes with laser frequency combs in HPF and NEID, tracking up to about 13,000 modes. Wavelength-dependent drift is modelled through changes in dielectric mirror layers in addition to a bulk cavity term. The preprint reports frequency-drift precision approaching 10⁻¹¹ per day, equivalent to about 3 mm/s per day. That is a precision on drift behaviour—not a demonstrated 3 mm/s on-sky stellar RV floor.",
+    "rows": [
+      [
+        "Model component",
+        "Conceptual signature",
+        "Diagnostic risk"
+      ],
+      [
+        "Bulk optical length",
+        "A shared fractional-frequency component.",
+        "Can hide wavelength-dependent residuals if used alone."
+      ],
+      [
+        "Mirror reflection phase",
+        "A wavelength-dependent contribution.",
+        "A narrow reference cannot determine its full shape."
+      ],
+      [
+        "Instrument and extraction",
+        "A detector-dependent contribution.",
+        "May be confused with calibrator drift without independent comparison."
+      ]
+    ],
+    "sections": [
+      [
+        "physics",
+        "The resonance includes the mirrors",
+        [
+          "A useful schematic resonance condition is 2knL + φ₁ + φ₂ = 2πm, where k is vacuum wavenumber and φ₁, φ₂ are reflection phases. If the reflection phases vary with wavelength and change with time, the mode grid need not drift as a rigid scale. This simplified expression explains why a cavity-length-only model can be incomplete.",
+          "The distinction is between stabilising a physical assembly and stabilising every optical resonance it produces. A sensor or reference that strongly constrains one degree of freedom may leave another unobserved. A lock at one wavelength therefore needs broadband validation before its correction is extrapolated."
+        ]
+      ],
+      [
+        "measurement",
+        "Separating the ruler from the instrument",
+        [
+          "A calibrator is measured through the same instrument whose drift it is meant to diagnose. That creates an identifiability problem: detector motion, illumination changes and a moving reference can produce superficially similar residuals. An independent frequency reference helps break that ambiguity, but only over the region and cadence actually sampled.",
+          "I would retain wavelength-resolved residual maps throughout the analysis. A weighted mean is useful for operational monitoring, yet opposite-sign errors in different spectral regions may cancel in that mean while still biasing a star with different line weights."
+        ]
+      ],
+      [
+        "limits",
+        "Why a physical fit still needs validation",
+        [
+          "A plausible coating model need not uniquely identify which microscopic material process occurred. Thickness and refractive-index perturbations can have correlated signatures. I would report the model’s explanatory power separately from any claim of a uniquely recovered physical mechanism.",
+          "Extrapolation is another boundary. A fit over one time interval is not automatically a forecast through maintenance, a temperature cycle or a change in illumination. The reference cadence should be justified by prediction error, not simply by an attractive average drift rate."
+        ]
+      ],
+      [
+        "tests",
+        "How I would test an FP calibration strategy",
+        [
+          "<strong>Wavelength holdout:</strong> fit on separated wavelength regions and predict modes not used in the fit. Compare a bulk-only model with a modest chromatic model under the same validation scheme.",
+          "<strong>Time holdout:</strong> forecast the next reference interval and record the full residual distribution. Refit only after evaluating that forecast; otherwise model flexibility can disguise poor predictive performance.",
+          "<strong>Science weighting:</strong> propagate the residual map through representative stellar line weights. A broadband mean and a cool-star RV estimator need not have the same sensitivity to chromatic error."
+        ]
+      ],
+      [
+        "connection",
+        "A practical calibration lesson",
+        [
+          "For an EXOhSPEC-style stability budget, I would keep calibrator ageing separate from the spectrograph’s thermal response. The two can share timescales while requiring different interventions.",
+          "The operational product should include an evolving wavelength-dependent calibration residual and its uncertainty. That is more informative than a single reassuring offset, and gives a concrete criterion for when an independent absolute reference is needed."
+        ]
+      ]
+    ],
+    "flow": [
+      "Cavity and coating changes",
+      "Wavelength-dependent modes",
+      "Independent reference comparison",
+      "Validated calibration residual"
+    ],
+    "figures": [
+      [
+        "Figure 1",
+        "Differential measurement",
+        "Identify which comparison separates etalon drift from instrument drift."
+      ],
+      [
+        "Figure 2",
+        "Mirror-layer sensitivity",
+        "Look for degeneracy before assigning a unique physical cause."
+      ],
+      [
+        "Figure 3",
+        "Fits and residuals",
+        "Compare residual structure, not just the reduction in overall scatter."
+      ]
+    ],
+    "extraSource": {
+      "url": "https://www.nature.com/articles/s41550-025-02486-x",
+      "label": "Publisher record: Nature Astronomy (2025), DOI 10.1038/s41550-025-02486-x"
+    },
+    "related": [
+      "pepe-2021-espresso-performance",
+      "schmidt-2026-eom-comb-espresso"
+    ]
+  },
+  {
+    "slug": "khandelwal-2024-scmos-detectors",
+    "title": "Beyond CCDs: characterising sCMOS detectors for optical astronomy",
+    "short": "Khandelwal et al. (2024)",
+    "venue": "SPIE · arXiv:2409.16449v2",
+    "source": "2409.16449v2",
+    "theme": "Detectors",
+    "ext": "jpg",
+    "subtitle": "An imaging-detector characterisation read through the additional requirements of precision spectroscopy.",
+    "focus": "Pixel response → calibrated image → scientific estimator",
+    "overview": "The aim is not to choose a camera from one headline number. This reading asks what must be measured at pixel level, how camera settings change the result, and what additional evidence a precision-spectroscopy application would need.",
+    "reported": "The paper compares Prime 95B, Sona-11, Sona-6, Ximea xiJ and Orca-Quest cameras. For the Orca-Quest at −20 °C with air cooling, Table 2 gives standard-mode read noise of 0.37 ± 0.09 e⁻ and dark current of 0.0067 ± 0.0003 e⁻/s; ultra-quiet mode gives 0.22 ± 0.07 e⁻ and 0.0198 ± 0.0008 e⁻/s. The photon-number-resolving mode has a different calibrated output and no conventional read-noise value in that table. Sampling was not uniform across every camera, and Sona-11 lacked the same pixel-wise analysis. This is imaging characterisation, not EPRV qualification.",
+    "rows": [
+      [
+        "Observable",
+        "What I would retain",
+        "Why a single average is insufficient"
+      ],
+      [
+        "Conversion gain",
+        "Per-pixel map and repeat measurements.",
+        "A gain error changes the electron-scale noise estimate."
+      ],
+      [
+        "Read noise",
+        "Distribution, tails and spatial correlations.",
+        "A small noisy population can affect extraction."
+      ],
+      [
+        "Dark response",
+        "Exposure and temperature dependence.",
+        "Long exposures weight unstable pixels differently."
+      ],
+      [
+        "Linearity",
+        "Residual versus signal in the intended mode.",
+        "A global score can conceal local response structure."
+      ]
+    ],
+    "sections": [
+      [
+        "noise",
+        "A detector noise budget needs an estimator",
+        [
+          "For independent noise terms in a simple aperture, a schematic variance is S + B + nₚ(Dt + σᵣ²), with source and sky electron counts S and B, nₚ pixels, dark rate D, exposure t and read noise σᵣ. This is a bookkeeping model, not a complete camera specification. Correlated noise and calibration uncertainty require additional terms.",
+          "Changing pixel size also changes sampling and the number of pixels used by an estimator. A lower per-pixel read noise may not give a lower extracted-spectrum variance if the same optical profile spans many more pixels. Comparisons should hold the intended measurement and sampling requirement fixed."
+        ]
+      ],
+      [
+        "pixels",
+        "Why maps matter more than a brochure value",
+        [
+          "A wavelength centroid is a weighted combination of pixel signals. If pixel response errors vary across the line profile, their effect depends on where the profile lands. A detector can perform well for total flux while introducing a small position-dependent centroid bias.",
+          "I would preserve raw frames, acquisition settings, calibration maps and masking decisions together. Reprocessing then becomes possible when a noisy tail, unstable pixel population or amplifier pattern is found later. A single corrected image without that provenance is difficult to audit."
+        ]
+      ],
+      [
+        "limits",
+        "The boundary between low noise and accurate spectroscopy",
+        [
+          "Sub-electron read noise is valuable, but it does not establish intra-pixel uniformity, stable pixel geometry, timing accuracy or a negligible flux-dependent centroid shift. Those are separate observables with separate tests.",
+          "Nor should a proprietary integer-valued output be treated as an ordinary analogue frame without checking its transfer function. Quantisation, calibration and saturation can change the interpretation of variance. The data model must follow the actual output mode."
+        ]
+      ],
+      [
+        "tests",
+        "A spectroscopy-specific validation plan",
+        [
+          "<strong>Flux sweep:</strong> move an unresolved, stable line through a range of brightnesses while holding illumination geometry fixed. Inspect centroid and width residuals as well as integrated flux linearity.",
+          "<strong>Sub-pixel scan:</strong> translate the line slowly across pixel phase and repeat at several detector locations. Separate optical motion from detector response using an independent position reference.",
+          "<strong>Repeatability:</strong> repeat after power cycling, mode changes and temperature cycles. Use a fixed reference reduction first, then quantify how much recalibration is required.",
+          "<strong>Covariance:</strong> examine row, column and temporal residual correlations. A per-pixel standard deviation does not capture noise shared by many pixels."
+        ]
+      ],
+      [
+        "connection",
+        "Connection to instrumentation work",
+        [
+          "For a precision spectrograph I would write a detector acceptance test around the final scientific estimator, not around camera specifications alone. The useful deliverable is a reproducible link from pixel behaviour to extraction and wavelength error.",
+          "This also fits the wider control-system theme: stabilise the hardware, record its state, and verify the result out of loop. A quiet electronic readout does not remove the need to test the optical measurement."
+        ]
+      ]
+    ],
+    "flow": [
+      "Photons and readout mode",
+      "Pixel-dependent response",
+      "Calibrated extraction",
+      "Flux / centroid validation"
+    ],
+    "figures": [
+      [
+        "Figure 1",
+        "Gain distributions",
+        "Check whether repeat data sets support one stable calibration map."
+      ],
+      [
+        "Figures 2–3",
+        "Read noise and dark current",
+        "Look beyond the centre of each distribution to the tails."
+      ],
+      [
+        "Figure 5 and Table 2",
+        "Linearity and mode comparison",
+        "Keep tested modes and units attached to every comparison."
+      ]
+    ],
+    "related": [
+      "pepe-2021-espresso-performance",
+      "zhao-2026-expres-hidden-systematics"
+    ]
+  },
+  {
+    "slug": "luhman-2025-ic348-h-class-brown-dwarfs",
+    "title": "A new spectral class of brown dwarfs at the bottom of the IMF in IC 348",
+    "short": "Luhman & Alves de Oliveira (2025)",
+    "venue": "ApJ Letters · arXiv:2506.08969v1",
+    "source": "2506.08969v1",
+    "theme": "Brown dwarfs",
+    "ext": "png",
+    "subtitle": "Separating the observed hydrocarbon band, a proposed classification, and model-dependent mass estimates in a young cluster.",
+    "focus": "Candidate selection → spectra → membership → inferred mass",
+    "overview": "This reading follows the hierarchy of evidence rather than treating every conclusion as equally direct. The feature is a spectral measurement; assigning a class is a classification proposal; estimating a mass additionally requires evolutionary assumptions.",
+    "reported": "From 39 NIRCam candidates, the authors obtain NIRSpec spectra for 15 and identify nine new substellar IC 348 members. The faintest have model-based masses near 2 M_Jup. Eight of the nine, plus a newly observed known member, show hydrocarbon absorption; with previous detections the cluster total is eleven. The authors propose an H class defined by the 3.4 μm band of an unidentified aliphatic hydrocarbon. Two new members show disk excesses. The molecular carrier is not securely identified, and the H label is a proposal—not an already established universal sequence.",
+    "rows": [
+      [
+        "Evidence layer",
+        "What is being inferred",
+        "Important boundary"
+      ],
+      [
+        "Photometry",
+        "Which sources merit spectra.",
+        "Selection is not confirmation."
+      ],
+      [
+        "Spectral shape and youth",
+        "Whether a source is a plausible young substellar member.",
+        "Reddening and contamination must be considered."
+      ],
+      [
+        "Hydrocarbon band",
+        "A feature-based classification proposal.",
+        "A band need not identify a unique molecule."
+      ],
+      [
+        "Luminosity and age model",
+        "An estimated mass.",
+        "Mass is not measured directly from the band."
+      ]
+    ],
+    "sections": [
+      [
+        "classification",
+        "A spectral class is not just a temperature label",
+        [
+          "An empirical classification can organise reproducible spectral morphology before all underlying chemistry is understood. That is useful, but the classification should not be treated as a direct thermometer until gravity, clouds, extinction and composition have been considered.",
+          "I would therefore keep the feature measurement separate from the atmospheric explanation. A robust band can motivate a new category even while its carrier remains uncertain. Conversely, a compelling chemical story cannot rescue a feature that depends strongly on background subtraction or continuum choice."
+        ]
+      ],
+      [
+        "mass",
+        "Why a low inferred mass is not a formation history",
+        [
+          "A young substellar object’s luminosity depends on its mass and age, and an evolutionary model supplies the mapping. Uncertainty in cluster age and extinction can therefore matter alongside photometric uncertainty. A precise flux measurement does not imply a comparably precise mass.",
+          "The deuterium-burning boundary is also not a direct observation of formation. A free-floating object with a low inferred mass should not automatically be described as an ejected planet, nor should a disk alone select a unique formation route. Those questions require population and dynamical evidence."
+        ]
+      ],
+      [
+        "selection",
+        "Reading a cluster census without over-counting it",
+        [
+          "Follow-up targets are usually not a random draw from the imaging catalogue. Visibility, brightness and scientific priorities can all affect selection. The fraction of confirmed members among observed candidates should therefore not be applied blindly to every unobserved source.",
+          "For the low-mass initial mass function, the relevant sample needs a defined footprint, extinction range, detection completeness and membership treatment. A newly found faint object can move the observed lower bound without proving that the underlying distribution ends there."
+        ]
+      ],
+      [
+        "tests",
+        "Follow-up checks I would prioritise",
+        [
+          "<strong>Band robustness:</strong> measure the feature with several justified continuum windows and independent background choices. Carry covariance from the spectral extraction into the band uncertainty.",
+          "<strong>Membership:</strong> combine spectra with independent kinematic or astrometric evidence where feasible. Keep sources with missing evidence explicitly distinct from secure members.",
+          "<strong>Mass sensitivity:</strong> repeat the luminosity-to-mass inference across plausible age and evolutionary-model choices. Show the change in the low-mass tail rather than reporting one apparently exact threshold.",
+          "<strong>Selection recovery:</strong> inject artificial point sources into representative images and rerun the candidate pipeline. That tests what the census could have missed."
+        ]
+      ],
+      [
+        "connection",
+        "Connection to brown-dwarf discovery and instrumentation",
+        [
+          "This is a useful complement to precision-instrument reading because the scientific limit is not only sensitivity. Reliable discovery needs calibration, selection accounting and a clear separation between measured spectra and model interpretation.",
+          "For a small follow-up project I would begin with a reproducible band measurement and a documented membership table. That is narrower and more defensible than attempting to settle the complete chemistry or formation history at once."
+        ]
+      ]
+    ],
+    "flow": [
+      "NIRCam selection",
+      "NIRSpec and membership evidence",
+      "Band classification",
+      "Model-dependent population inference"
+    ],
+    "figures": [
+      [
+        "Imaging and selection figures",
+        "Candidate boundaries",
+        "Inspect the footprint and the population excluded by each cut."
+      ],
+      [
+        "Spectral sequence figures",
+        "Hydrocarbon morphology",
+        "Compare continuum treatment and feature strength before assigning physical meaning."
+      ],
+      [
+        "Population figures",
+        "Low-mass census",
+        "Check which objects enter the statistical sample and which remain candidates."
+      ]
+    ],
+    "related": [
+      "chen-2025-cosmos-web-brown-dwarf-density",
+      "khandelwal-2024-scmos-detectors"
+    ]
+  },
+  {
+    "slug": "chen-2025-cosmos-web-brown-dwarf-density",
+    "title": "Brown dwarf number density in the JWST COSMOS-Web field",
+    "short": "Chen et al. (2025)",
+    "venue": "PASA · arXiv:2503.18510v2",
+    "source": "2503.18510v2",
+    "theme": "Brown dwarfs",
+    "ext": "jpg",
+    "subtitle": "Reading a deep photometric candidate sample as a selection-and-inference problem, not a spectroscopically confirmed Galactic census.",
+    "focus": "Colours → morphology → SED models → number counts",
+    "overview": "The attraction of this paper is its connection between deep imaging and Galactic structure. The difficult step is not drawing a colour cut; it is understanding how selection, contamination and atmosphere-dependent distances propagate into a density comparison.",
+    "reported": "Chen et al. select 27 photometric candidates in the 0.243 deg² COSMOS-Web area studied: 25 T-type and two Y-type candidates. Selection uses NIRCam colours, morphology, visual checks and SED fitting. In AB magnitudes the cuts are F115W − F277W + 1 < F277W − F444W and F277W − F444W > 0.9. Sonora-Bobcat, ATMO2020++ and LOWZ fits yield model-dependent distances of roughly 0.3–4 kpc. The cumulative counts are consistent with the adopted double-exponential Galactic model. These remain candidates requiring spectroscopic follow-up, not 27 confirmed new brown dwarfs.",
+    "rows": [
+      [
+        "Stage",
+        "What it contributes",
+        "Possible sensitivity"
+      ],
+      [
+        "Colour selection",
+        "A tractable candidate set.",
+        "Photometric scatter and model coverage."
+      ],
+      [
+        "Morphology",
+        "Rejection of resolved contaminants.",
+        "PSF variation and faint-source ambiguity."
+      ],
+      [
+        "Atmosphere fitting",
+        "Physical hypotheses and distance estimates.",
+        "Model family, degeneracies and radius assumptions."
+      ],
+      [
+        "Number-count comparison",
+        "A population consistency test.",
+        "Selection, contamination and accessible volume."
+      ]
+    ],
+    "sections": [
+      [
+        "photometry",
+        "Colour cuts must be propagated with their errors",
+        [
+          "A source close to a selection boundary can move in or out under plausible photometric perturbations. The same band appears in more than one colour, so the errors of those colours are correlated. Treating them as independent can misrepresent the selection probability.",
+          "I would perturb the underlying flux measurements, preserve any available covariance, and rerun the complete selection. Non-detections should enter through an appropriate likelihood or limit treatment rather than being converted into exact magnitudes."
+        ]
+      ],
+      [
+        "distance",
+        "A narrow posterior is not a model-independent distance",
+        [
+          "A schematic flux scaling is F_obs = (R/d)² F_surface. If radius is assumed rather than measured, the inferred distance inherits that assumption. Atmosphere parameters can also trade off against one another when only a few broad bands constrain the spectral shape.",
+          "More MCMC samples improve exploration of the chosen model; they do not remove a model degeneracy or make an incomplete atmosphere grid correct. I would compare posterior structure across model families and keep differences between families separate from within-model statistical uncertainty."
+        ]
+      ],
+      [
+        "density",
+        "Number counts require a selection function",
+        [
+          "A useful forward model is N_exp = ∫ρ(r,Ω) S(r,θ,Ω) r² dr dΩ dθ, where S includes detection and selection probability and θ represents source properties. This makes explicit why a catalogue count alone is not a space density.",
+          "The survey’s ability to detect a source may vary across the footprint and with spectral shape. Contaminants alter the numerator; incompleteness alters the effective sampled population. Both should be carried into any comparison with Galactic structure, rather than hidden in one nominal volume."
+        ]
+      ],
+      [
+        "tests",
+        "How I would strengthen the inference",
+        [
+          "<strong>Recovery map:</strong> inject synthetic point sources across backgrounds and magnitudes, then rerun detection, photometry, morphology and colour selection together.",
+          "<strong>Contaminant comparison:</strong> evaluate brown-dwarf and galaxy hypotheses with a common likelihood and consistent upper-limit treatment. A lower best-fit χ² is not by itself a calibrated membership probability.",
+          "<strong>Model sensitivity:</strong> repeat the count comparison under plausible atmosphere, radius and Galactic-population choices. Inspect whether the scientific conclusion changes more than the formal counting error.",
+          "<strong>Targeted spectroscopy:</strong> prioritise candidates that distinguish competing models or occupy the uncertain tails of the inferred distance and temperature distributions, not simply the brightest objects."
+        ]
+      ],
+      [
+        "connection",
+        "Connection to the IC 348 note",
+        [
+          "The two papers probe different regimes. A cluster study benefits from shared distance and approximate age, whereas a deep field sample has a broader distance and population mixture. Their classifications and completeness boundaries should not be merged uncritically.",
+          "For a follow-up project, a transparent candidate table with alternate model fits, flags and recovery probabilities would be a useful first product. It would support later spectroscopy without presenting provisional photometric inference as settled discovery."
+        ]
+      ]
+    ],
+    "flow": [
+      "Measured fluxes and errors",
+      "Selection and contamination model",
+      "Atmosphere-dependent distances",
+      "Forward-modelled counts"
+    ],
+    "figures": [
+      [
+        "Figure 2",
+        "Colour selection",
+        "Ask how photometric covariance moves sources across the boundary."
+      ],
+      [
+        "Figures 3–5",
+        "Morphological diagnostics",
+        "Check where the classifiers lose discriminating power."
+      ],
+      [
+        "Figures 6–8",
+        "SED fits and population comparison",
+        "Keep model disagreement visible when interpreting distance and counts."
+      ]
+    ],
+    "related": [
+      "luhman-2025-ic348-h-class-brown-dwarfs",
+      "khandelwal-2024-scmos-detectors"
+    ]
+  }
+]

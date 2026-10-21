@@ -1,0 +1,121 @@
+{
+  "key": "chen",
+  "version": "2503.18510v2",
+  "license": "License: CC BY 4.0",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S2.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/filter_absorption.png",
+          "sha256": "91b3d88e87a0469c574efbdfc7c98ae663148cbe1461a698489dd42ba3f69b2b",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-01-panel-01.preview.webp",
+          "width": 1318,
+          "height": 759
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 2,
+      "anchor": "S3.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/ccplot.png",
+          "sha256": "0f596ecb97763129f8affbe0cd296bc5db03824bf039d15427a75ad3e3a6b1b3",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1611,
+          "height": 813
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S3.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/class_star.png",
+          "sha256": "b016ca9634d84df932b5ea96ff0b31f1a1f897ed013d67f8a7f9177bd49a8d87",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-03-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1503
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S3.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/flux_radius.png",
+          "sha256": "8de2eaf4c7dad887f038782dd2a47b4247bc8b8edf96de55d53949cc575b0ca0",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-04-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1503
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 5,
+      "anchor": "S3.F5",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-05-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/BD_spreadmodel.png",
+          "sha256": "2c9cdb681c02be2d5320bfd77cfb7b9ed041dae36381e88db5a21528adbef24f",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-05-panel-01.preview.webp",
+          "width": 947,
+          "height": 790
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 6,
+      "anchor": "S4.F6",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-06-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/Id000000001s.png",
+          "sha256": "d272fb6b38c0202ddd39b754ac3dfbc608755280ce452b024347fc520dd2dcd1",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-06-panel-01.preview.webp",
+          "width": 1800,
+          "height": 1091
+        },
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-06-panel-02.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/BD_01.png",
+          "sha256": "f65d60159fe7140af6152dff69d23dd2f578840804082f54f22b29991644499c",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-06-panel-02.preview.webp",
+          "width": 1725,
+          "height": 861
+        }
+      ],
+      "partial": true
+    },
+    {
+      "number": 8,
+      "anchor": "S5.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-08-panel-01.png",
+          "url": "https://arxiv.org/html/2503.18510v2/figure/BDdensity.png",
+          "sha256": "af695c423cbb44a9a3b40505bd8dba99cc0a91aa94c06a8d03552b9b50028d0a",
+          "preview": "paper-journal/papers/chen-2025-cosmos-web-brown-dwarf-density/plots/source/figure-08-panel-01.preview.webp",
+          "width": 711,
+          "height": 1011
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "molliere": {
+    "slug": "molliere-2019-petitradtrans",
+    "title": "petitRADTRANS: A Python Radiative Transfer Package for Exoplanet Characterization and Retrieval",
+    "authors": "Mollière et al.",
+    "year": "2019",
+    "venue": "A&A 627, A67",
+    "version": "1904.11504v2",
+    "theme": "Atmospheres",
+    "subtitle": "Following the forward model from opacity and atmospheric structure to a spectrum—and asking what a retrieval can really constrain.",
+    "why": "Connects my Sagan workshop training and brown-dwarf atmosphere interests with explicit model verification and inference limits.",
+    "art_alt": "conceptual grazing light ray through a layered exoplanet atmosphere",
+    "overview": [
+      "This is a reading of the original 2019 code paper, not a tutorial for the latest petitRADTRANS release. The useful question is how numerical choices and atmospheric assumptions become claims about a spectrum, and eventually about an atmosphere.",
+      "The paper contains synthetic retrieval demonstrations. Its mock JWST observations are simulations, not measured JWST data; preserving that distinction is essential when presenting the attractive posterior and contribution-function plots."
+    ],
+    "findings": [
+      "The 2019 petitRADTRANS framework computes emission and transmission spectra with correlated-k and line-by-line treatments, includes several cloud descriptions, and verifies spectra against alternate calculations. The paper demonstrates retrievals of synthetic TrES-4b-like spectra. In this version, scattering is omitted from emission calculations but included as extinction for transmission. Recovery of an input model supports the numerical workflow under its assumptions; it is not a discovery of the atmospheric composition of an observed planet."
+    ],
+    "evidence": [
+      [
+        "Comparison between resolution modes",
+        "Internal radiative-transfer consistency after rebinning",
+        "Agreement at different spectral sampling is not an observational test."
+      ],
+      [
+        "Comparison with petitCODE",
+        "A cross-code benchmark with matched assumptions",
+        "Differences in physics must be separated from numerical errors."
+      ],
+      [
+        "Synthetic retrieval and contribution functions",
+        "Which injected parameters are recoverable in that scenario",
+        "A same-family simulation can understate model mismatch."
+      ]
+    ],
+    "chain": [
+      "Temperature, abundance, and cloud assumptions",
+      "Opacity and radiative transfer",
+      "Binned emission or transmission spectrum",
+      "Likelihood and conditional parameter inference"
+    ],
+    "sections": [
+      [
+        "forward",
+        "Forward modelling and retrieval answer different questions",
+        [
+          "A forward model predicts a spectrum from a chosen atmospheric state. A retrieval combines that model with data, a likelihood, and priors to infer a distribution of possible states. A flexible spectrum generator is therefore necessary but not sufficient for reliable inference.",
+          "The distinction is practical. A visually convincing best-fit curve can coexist with weak or degenerate physical constraints. A credible atmosphere result should show the posterior, parameter conventions, spectral coverage, and sensitivity to model choices—not only the line overlay."
+        ]
+      ],
+      [
+        "geometry",
+        "Emission and transmission probe different paths",
+        [
+          "Emission weights layers according to their source function and ability to transmit radiation to the observer. Transmission probes grazing stellar rays and measures an effective occulting area. The longer slant path can make a layer important in transit even when it is less conspicuous in thermal emission.",
+          "Pressure, radius, temperature, gravity, and composition are linked. The reference radius at a specified pressure is part of the model, not a directly observed universal surface. An uncertainty in that mapping can correlate with abundance or atmospheric scale height."
+        ]
+      ],
+      [
+        "verification",
+        "A benchmark is only meaningful when the assumptions match",
+        [
+          "For correlated-k versus line-by-line comparisons, the high-resolution calculation must be rebinned appropriately before residuals are interpreted. Sampling the fine grid at one wavelength per bin would answer a different question and can alias sharp molecular structure.",
+          "For cross-code tests, geometry, gravity treatment, opacity sources, scattering, and the atmospheric state all need alignment. Otherwise a disagreement can be physically expected rather than a software defect. The paper’s comparisons are useful because they examine those sources of mismatch rather than hiding every discrepancy in one accuracy number."
+        ]
+      ]
+    ],
+    "connection": [
+      "My Sagan workshop experience included PICASO and petitRADTRANS training, and my substellar work motivates careful spectral interpretation. This paper provides a useful foundation for distinguishing atmospheric modelling tools from an observational claim. It does not imply that I implemented the package or carried out the authors’ retrievals.",
+      "For a browser-based atmosphere explainer, each control should say which physical assumption it changes. An opacity feature, an atmospheric species label, and a statistically justified detection are three different statements. The interface should help readers see that difference rather than turning every model toggle into a discovery."
+    ],
+    "tests": [
+      "Generate a synthetic spectrum with a different atmosphere family or cloud prescription from the one used for fitting. Compare posterior recovery and residual structure against a same-model injection. This tests robustness to model mismatch rather than only numerical self-consistency.",
+      "Repeat fits with changed wavelength coverage, uncertainty assumptions, reference-pressure priors, and cloud models. Track whether a molecular constraint remains stable or becomes an upper limit. These are proposed investigations, not retrievals performed for this reading note."
+    ],
+    "deep_sections": [
+      [
+        "What correlated-k preserves and approximates",
+        [
+          "A low-resolution bin can contain a highly structured opacity field. A correlated-k treatment works with an ordered opacity distribution and quadrature rather than representing the whole bin with one opacity value. Its purpose is efficient transmission averaging, not merely smoothing a plotted spectrum.",
+          "The assumptions about opacity correlation matter when combining species and layers. A successful comparison to rebinned line-by-line calculations is therefore informative, but remains tied to the tested states and opacity database. It should not be promoted to an unconditional guarantee for every atmosphere."
+        ]
+      ],
+      [
+        "A contribution function is a sensitivity map",
+        [
+          "Contribution plots identify which layers affect the outgoing spectrum under a particular fitted model. They explain why a smooth-looking retrieved temperature profile can extend into regions that the spectrum barely probes.",
+          "The interpretation is conditional: it depends on wavelength coverage, opacity, geometry, and the fitted state. It is not a universal pressure map of the planet. A narrow posterior in an unprobed region may arise from the analytic temperature parameterisation rather than from new information in the data."
+        ]
+      ],
+      [
+        "Version-specific physics is part of reproducibility",
+        [
+          "The 2019 emission calculation omits scattering, while later software may have different capabilities. A reading of the original benchmark should retain its original scope and not silently substitute current documentation. The model version, opacity release, wavelength grid, and abundance convention belong with any reproduced result.",
+          "For the same reason, software and article licences are distinct. A permissive code licence does not automatically relicense every paper figure. The original figures are linked at the paper alongside this commentary, and the generated cover is explicitly separate from scientific evidence."
+        ]
+      ]
+    ],
+    "figures": [
+      [
+        2,
+        "Internal agreement between two numerical modes",
+        "The emission and transmission spectra are shown against wavelength, followed by residual panels. Compare low resolution with the rebinned—not raw—high-resolution spectrum.",
+        "The plot tests whether two ways of doing the radiative-transfer calculation produce compatible band-integrated results. Residuals are more informative than the nearly overlapping main curves.",
+        "This is code verification for the chosen atmosphere, not agreement with measured observations or a proof that the physical model is complete."
+      ],
+      [
+        3,
+        "A clear-atmosphere benchmark with deliberate physics differences",
+        "The upper panels compare emission calculations and residuals; the lower panels compare transmission calculations, including constant- and variable-gravity cases.",
+        "Where assumptions match, agreement is the relevant numerical check. Where scattering or gravity differs, a spectral difference has a physical interpretation rather than automatically being a numerical bug.",
+        "The comparison must not erase the 2019 emission-scattering limitation, nor treat all curves as independent observations."
+      ],
+      [
+        4,
+        "Clouds change both the spectrum and the validity question",
+        "Read the same arrangement as Figure 3, now with the cloudy atmosphere. Inspect the short-wavelength disagreement and compare emission with transmission.",
+        "Cloud treatment can matter very differently for grazing extinction and emergent emission. This figure shows why cloud opacity cannot be treated as a cosmetic grey dimming of every spectrum.",
+        "Agreement in this selected cloud scenario does not validate every particle distribution, cloud composition, or multiple-scattering regime."
+      ],
+      [
+        5,
+        "An emission retrieval of simulated observations",
+        "Panel a gives synthetic data, fitted spectrum, and normalised residuals; b maps layer contributions; c shows temperature-profile envelopes; d shows abundance posteriors and injected values.",
+        "Reading all panels together separates a good spectral fit from actual vertical information. A well-constrained-looking deep temperature can be imposed by the profile form outside the probed layers.",
+        "These are mock data. Successful input recovery does not establish real-planet abundances or protect against a wrong model family."
+      ],
+      [
+        6,
+        "A transmission retrieval asks a different atmospheric question",
+        "The panel layout parallels Figure 5, but the spectrum is in transmission and the contribution map follows grazing-ray sensitivity. Inspect the reference-pressure and abundance posteriors together.",
+        "The changed sensitivity and parameter correlations illustrate why emission and transit retrievals should not be read as the same measurement at different wavelengths.",
+        "A species with an upper-limit posterior is not a detection; an apparently tight synthetic constraint may weaken with clouds, uncertain line wings, or real instrumental systematics."
+      ]
+    ]
+  }
+}

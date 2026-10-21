@@ -1,0 +1,438 @@
+{
+  "schmidt2024": {
+    "slug": "schmidt2024-espresso-line-spread-function",
+    "title": "Characterization of the ESPRESSO Line-Spread Function and Improvement of the Wavelength Calibration Accuracy",
+    "authors": "Schmidt & Bouchy",
+    "year": "2024",
+    "venue": "A&A · arXiv:2404.05283v1",
+    "version": "2404.05283v1",
+    "theme": "Calibration",
+    "subtitle": "Why measuring the shape of a spectral line matters as much as measuring its centre.",
+    "why": "A direct bridge from EXOhSPEC-style detector tracking to the distinction between image stability and wavelength accuracy.",
+    "art_alt": "spectrograph grating and dispersed light with an abstract line-shape motif",
+    "overview": [
+      "The question is not simply whether ESPRESSO keeps a line still. It is whether different calibration sources assign the same wavelength to the same detector location. This reading follows the authors’ calibration comparison, the non-parametric instrumental line-spread function (LSF), and the residual disagreement that survives a better model.",
+      "The connection to my instrumentation work is methodological: centroid motion, line shape, extraction, and wavelength assignment should be checked separately. This note does not claim that a calibration discrepancy is an equivalent stellar radial-velocity error."
+    ],
+    "findings": [
+      "Using January 2023 calibration exposures, Schmidt and Bouchy infer spatially varying, asymmetric ESPRESSO LSFs from unresolved laser-frequency-comb lines. Re-fitting calibration spectra with those profiles reduces the discrepancy between ThAr/Fabry–Pérot and comb wavelength solutions from roughly 50 m/s to about 10 m/s peak-to-valley over most of the covered range, excluding the problematic reddest orders. Fibres and slices become much more consistent. A global offset, red-end structure, and fast line-to-line “beat” residuals remain. This is an accuracy study, not a demonstration of 10 cm/s time-series stability."
+    ],
+    "evidence": [
+      [
+        "Independent wavelength solutions",
+        "A consistency test between ThAr/FP and comb calibration",
+        "Shared extraction or other common errors may survive both."
+      ],
+      [
+        "Non-parametric LSF profiles",
+        "Instrument response beyond a Gaussian width",
+        "Smoothness assumptions and finite sampling remain."
+      ],
+      [
+        "Residuals after re-fitting",
+        "Effects not absorbed by the improved line model",
+        "A visually better fit does not identify the remaining cause."
+      ]
+    ],
+    "chain": [
+      "Comb and lamp exposures",
+      "Background and line-profile inference",
+      "Re-fit calibration line positions",
+      "Compare independent wavelength scales"
+    ],
+    "sections": [
+      [
+        "accuracy",
+        "Precision, accuracy, and stability are different questions",
+        [
+          "A narrow distribution can be precisely wrong. Repeatability measures scatter; accuracy concerns bias against a reference; stability asks how a calibration changes with time. Those distinctions prevent an impressive short-run detector RMS from being advertised as absolute wavelength accuracy.",
+          "For a control experiment, it is useful to record both the variable being stabilised and the later scientific estimator. A line can retain its centre while its wings change, or its fitted centre can move solely because the assumed profile is wrong. Mechanical and analysis error budgets therefore meet at the image model."
+        ]
+      ],
+      [
+        "profile",
+        "Why a Gaussian can move the answer",
+        [
+          "An LSF describes how an intrinsically narrow input is spread across the extracted spectrum. An asymmetric response need not have its peak, first moment, and best-fitting Gaussian centre at the same position. The important error is not a visibly dramatic deformation; it is a small centroid bias relative to the precision being sought.",
+          "Calibration sources are not interchangeable probes. Comb lines are effectively unresolved, while the Fabry–Pérot lines have appreciable intrinsic width. Convolving those different inputs with the same asymmetric response can produce different Gaussian-fit biases. A correct instrumental model is useful precisely because it connects the source to the observed pixels."
+        ]
+      ],
+      [
+        "inference",
+        "Non-parametric does not mean assumption-free",
+        [
+          "The authors split orders into blocks and infer a finely sampled LSF with a Gaussian-process smoothness prior. The data alone do not constrain every fine-grid value independently. This is a regularised inverse problem, not a direct photograph of the optical response.",
+          "A sensible reading asks which properties are supported by repeated line samples, which are enforced by smoothness, and which are sensitive to background subtraction. Making the model more flexible is not automatically an improvement: it can fit noise or hide errors in the assumed intrinsic spectrum."
+        ]
+      ]
+    ],
+    "connection": [
+      "EXOhSPEC control work provides a reason to care about detector motion, environmental coupling, and residual structure. This paper suggests retaining line widths, asymmetries, per-line positions, and extraction diagnostics alongside a common displacement estimate. A single “stable image” number is a useful engineering result, but does not close a spectroscopic calibration budget.",
+      "The transferable lesson is to test a pipeline with independent information. A second source, another fibre, or a different line subset is more revealing than tuning the same residual repeatedly. These are proposed applications, not a claim that I reproduced the ESPRESSO analysis."
+    ],
+    "tests": [
+      "Hold out selected comb lines when constructing the LSF and predict them afterward. Compare performance at different detector positions and signal levels rather than reporting only an all-order average. This would test interpolation and sensitivity to local calibration coverage.",
+      "For a laboratory spectrograph, inject controlled sub-pixel shifts and compare centroid estimators with profile-aware fits. Keep raw frames, extraction settings, background models, and uncertainty definitions. A repeatability test should include changes in illumination and line intensity, not only additional frames at one setting."
+    ],
+    "deep_sections": [
+      [
+        "Following the background-to-LSF inference",
+        [
+          "A diffuse continuum and broad overlapping line wings can both raise the inter-line flux. Estimating the background first simplifies the fit, but the resulting LSF inherits that decision. This is especially important where neighbouring lines are close in units of the instrumental resolution.",
+          "The practical diagnostic is to examine the far wings and the residual spectrum together. A small core residual can coexist with a biased background. Conversely, a better global residual can conceal an unphysical profile. Physical plausibility and predictive performance should both be checked."
+        ]
+      ],
+      [
+        "Pixel sampling is information, not just resolution",
+        [
+          "A finely sampled computational grid cannot create new detector information. Several unresolved lines can improve the LSF estimate when their centres fall at different pixel phases, but repeated lines at redundant phases contribute less independent structure than their number suggests.",
+          "A tunable comb would help separate optical response from sampling effects by moving known lines across pixel boundaries. This explains why the paper’s instrumental recommendations accompany its statistical model: software flexibility alone cannot repair an uninformative calibration experiment."
+        ]
+      ],
+      [
+        "What the remaining disagreement teaches",
+        [
+          "The before-and-after comparison is persuasive because several fibre and slice patterns disappear together. It is not a complete solution: the remaining wavelength dependence and the fast residual modulation show that a single average profile per block is not the whole measurement chain.",
+          "For downstream science, keeping order, fibre, and slice identity preserves the relation to the local LSF. Prematurely co-adding everything can discard information needed for forward modelling. That is a general data-management lesson as well as a specialist calibration issue."
+        ]
+      ]
+    ],
+    "figures": [
+      [
+        2,
+        "The calibration disagreement before the new LSF",
+        "Read wavelength along the horizontal axis and the difference between the two wavelength solutions in velocity units vertically. Colours separate fibres and slices; this is not a stellar RV curve.",
+        "The structured separation of traces is the problem to explain. A shared mean offset and a slice-dependent intra-order pattern are different failure modes, so reducing everything to one RMS would hide useful clues.",
+        "These are calibration-solution differences from the selected exposure. They do not directly quantify time-variable stellar RV precision."
+      ],
+      [
+        3,
+        "The forward-model idea",
+        "The left panel compares comb flux, estimated diffuse background, and narrow intrinsic line positions. The right panel represents the LSF that broadens that input.",
+        "The observed spectrum is the combination of the input source and instrument response. Background, line positions, and response shape must be made mutually consistent rather than fitting a decorative smooth curve.",
+        "This schematic explains the inference; it is not a separate validation dataset or proof that every decomposition is unique."
+      ],
+      [
+        4,
+        "An asymmetric response rather than one Gaussian",
+        "Follow the inferred LSF versus velocity offset and compare it with the prior profile and its shaded uncertainty bands.",
+        "Unequal flanks demonstrate why a Gaussian centre can be estimator-dependent. The change is small compared with a whole line width but can matter enormously for sub-resolution measurements.",
+        "A local example is not a universal profile. Its origin on the detector and the regularisation assumptions matter."
+      ],
+      [
+        6,
+        "Residual structure beneath a good-looking fit",
+        "The top panel shows observed and model flux; the lower panel divides their difference by the quoted pixel uncertainty.",
+        "The flux curves look close, yet the normalised residuals show coherent structure and alternating behaviour. This is why residual panels should be read before accepting the headline fit.",
+        "Significant residuals establish inadequacy, not a unique physical cause. The paper does not definitively identify the beat-pattern mechanism."
+      ],
+      [
+        8,
+        "Resolution is a map, not a single specification",
+        "Detector-position maps show LSF FWHM expressed as resolving power, separated by arm, fibre, and slice. Blank regions are outside useful coverage.",
+        "Spatial variation means one quoted resolving power cannot describe every extracted trace. Comparing corresponding regions across the panels reveals differences hidden by a global average.",
+        "A width map does not encode the full asymmetry or wing structure, and missing calibration coverage is not evidence of zero response."
+      ],
+      [
+        14,
+        "The wavelength fit and the beat-pattern residual",
+        "The upper panel removes a polynomial trend to reveal the remaining wavelength-solution structure. The lower panel and histogram show residual line positions with formal uncertainties.",
+        "Rapid alternating residuals persist beneath a smooth calibration. The model captures the large-scale relation without explaining every individual measurement.",
+        "The plotted fine structure should not be assigned a detector or optical cause solely from its appearance."
+      ],
+      [
+        15,
+        "What improves—and what is still left",
+        "Compare these wavelength-dependent solution differences with Figure 2, using the same distinction between fibres and slices.",
+        "Much of the inter-trace disagreement disappears after profile-aware fitting. The remaining offset and red-end behaviour make the improvement credible without pretending that the calibration is now exact.",
+        "Agreement over most of this wavelength range is not an all-mode, all-time guarantee, and the reddest orders remain a stated exception."
+      ]
+    ]
+  },
+  "robertson": {
+    "slug": "robertson-2019-neid-environment-control",
+    "title": "Ultra-Stable Environment Control for the NEID Spectrometer: Design and Performance Demonstration",
+    "authors": "Robertson et al.",
+    "year": "2019",
+    "venue": "JATIS 5, 015003",
+    "version": "1902.07729v1",
+    "theme": "Thermal Control",
+    "subtitle": "Reading sub-millikelvin stability as a system result, not just a quiet thermometer trace.",
+    "why": "Thermal isolation, independent thermometry, and long-timescale disturbances connect directly to spectrograph feedback-control work.",
+    "art_alt": "conceptual cutaway vacuum chamber with nested thermal shielding",
+    "overview": [
+      "This reading asks what the reported environmental stability actually verifies. The central distinction is between controlling a radiation shield, measuring an optical bench, and demonstrating the final instrument’s on-sky radial-velocity performance.",
+      "The manuscript is a 2019 design and laboratory-performance paper. Its statements about anticipated commissioning and future performance belong to that historical context; they are not current operational claims."
+    ],
+    "findings": [
+      "Robertson et al. report a 30-day NEID environment-control demonstration with optical-bench temperature RMS of 0.38 mK and vacuum better than 10⁻⁶ Torr. Passive insulation, an actively controlled radiation shield, cryogenic getters, and dedicated monitoring electronics work together. The experiment used the optical bench without the final optics and mounts. Its result establishes environmental performance in the laboratory, not a measured 10 cm/s on-sky RV precision or a fully mapped NEID optical-temperature field."
+    ],
+    "evidence": [
+      [
+        "Bench-temperature time series",
+        "Residual temperature at the monitoring locations",
+        "Not the complete optical system or every spatial gradient."
+      ],
+      [
+        "Independent monitoring thermometers",
+        "A check separate from shield feedback readout",
+        "Absolute calibration and temporal precision are different."
+      ],
+      [
+        "Ambient-to-bench comparison",
+        "Disturbance attenuation and delayed thermal coupling",
+        "Attenuation depends on disturbance timescale."
+      ]
+    ],
+    "chain": [
+      "Room and enclosure disturbances",
+      "Shield sensing and heater control",
+      "Radiative coupling to the bench",
+      "Independent bench-temperature verification"
+    ],
+    "sections": [
+      [
+        "architecture",
+        "Control the thermal pathways before the PID gains",
+        [
+          "The architecture reduces unwanted heat paths before asking feedback to remove residual error. A vacuum suppresses gas-related transfer; thermal breaks restrict conduction; insulation and the shield shape the radiative environment. Each layer changes the plant seen by the controller.",
+          "This is a useful corrective to gain-tuning alone. A high-gain loop cannot make a badly placed sensor represent the whole instrument, remove a persistent gradient it does not observe, or compensate indefinitely for an actuator with insufficient authority."
+        ]
+      ],
+      [
+        "metrology",
+        "A precise reading is not an accurate temperature map",
+        [
+          "A temperature sensor can be highly repeatable while retaining a fixed calibration offset. For differential stability, a stable offset may be tolerable; for comparing spatial locations, it can be decisive. The paper explicitly distinguishes those questions rather than treating every small number as the same specification.",
+          "Independent monitoring is valuable because the in-loop sensor is part of the control mechanism. A small feedback error can reflect successful regulation at that location without proving that the protected object is equally stable. Sensor placement, wiring, reference-voltage drift, and readout cadence are part of the measurement."
+        ]
+      ],
+      [
+        "timescales",
+        "Thermal inertia is both protection and delay",
+        [
+          "A large, isolated bench filters fast ambient changes, but also approaches equilibrium slowly. A system that rejects HVAC cycling can still drift when the mean room temperature changes over days. There is no contradiction: thermal transfer depends on frequency.",
+          "A useful stability statement therefore includes the run duration, settling selection, sampling, and environmental history. Reporting a short quiet interval and a month-long RMS as interchangeable would remove exactly the information needed to judge long observations."
+        ]
+      ]
+    ],
+    "connection": [
+      "My EXOhSPEC work involves TEC control, environmental sensing, optical-path changes, detector tracking, and long-duration logging. The useful comparison is the verification pattern: measure disturbances, record control action, and validate a separate protected observable. NEID’s vacuum architecture and tolerance budget should not be copied as though they describe the EXOhSPEC testbed.",
+      "A practical presentation of my own results should preserve the distinction between temperature stability and detector or spectral stability. Similar thermal RMS values do not imply similar radial-velocity performance across different instruments."
+    ],
+    "tests": [
+      "Place independent sensors near multiple optically relevant locations and measure their differences as well as their individual traces. Check whether wiring or reference electronics introduce common drift. Use a controlled ambient perturbation to estimate delay and attenuation rather than comparing two unqualified RMS values.",
+      "Repeat stability measurements before and after representative operating events, such as detector readout, cooling-system changes, or maintenance. Log the timing and define exclusions before calculating the final statistic. These are proposed tests, not additional experiments performed for this note."
+    ],
+    "deep_sections": [
+      [
+        "The radiation shield is not the bench",
+        [
+          "The feedback loops act on shield zones, while the bench equilibrates inside that controlled environment. This arrangement avoids directly forcing large local heater loads into the science structure, but leaves the final equilibrium dependent on the surrounding heat balance.",
+          "That distinction explains why a stable setpoint does not make the facility irrelevant. Persistent changes in the external thermal bath can propagate slowly through the hierarchy. The room, enclosure, shield, bench, and optics should be treated as coupled states, not five names for one temperature."
+        ]
+      ],
+      [
+        "What long runs reveal that short tests miss",
+        [
+          "A long record can expose operational cycles, delayed responses, and small secular trends that disappear in a brief acceptance test. An RMS must be interpreted alongside the chronological record: a daily refill pattern and uncorrelated noise can have similar scatter but different consequences for an exposure sequence.",
+          "Window selection deserves scrutiny. A settled interval is appropriate for steady-state performance, provided the commissioning transient is shown separately and the selection is declared. Detrending without explanation would change the question from stability to residual scatter around a fitted model."
+        ]
+      ],
+      [
+        "Turning environmental performance into a science budget",
+        [
+          "A temperature budget becomes a scientific error budget only after coupling coefficients are established. Thermal expansion, grating behaviour, focus, line shape, and extraction can contribute differently. An independent optical check closes a later part of that chain.",
+          "The absence of final optics in this laboratory demonstration is therefore a scope condition, not a reason to dismiss the result. It identifies what has been successfully tested and what commissioning must still verify. Good engineering evidence can be strong without being the final astronomical measurement."
+        ]
+      ]
+    ],
+    "figures": [
+      [
+        6,
+        "Simulation, measurement, and instrument identity",
+        "Panel a maps predicted NEID radiation-shield temperatures; panel b measures a temperature difference across the HPF bench. They are different instruments and different types of evidence.",
+        "The panel pairing illustrates the thermal-design rationale and an inherited demonstration of gradient stability. It is important to keep a computed spatial gradient separate from a measured time-varying difference.",
+        "The HPF trace is not a direct measurement of the NEID bench gradient, and the predicted shield map is not a measured NEID temperature image."
+      ],
+      [
+        7,
+        "The sensing and actuator chain",
+        "This is an electronics block diagram rather than a data plot. Follow the temperature-monitoring, reference, control, and heater paths.",
+        "The signal reference and readout electronics belong in the stability argument. Feedback quality depends on the entire measurement chain, not only on the nominal sensor resolution.",
+        "A schematic establishes implementation intent; it does not independently certify drift, calibration, or electromagnetic robustness."
+      ],
+      [
+        8,
+        "Vacuum history includes a deliberate intervention",
+        "Time runs horizontally and chamber pressure vertically. Read the pressure scale carefully and locate the temporary rise during the getter experiment.",
+        "The pressure excursion has a documented operational cause. Its recovery demonstrates why intervention logs should accompany scientific telemetry rather than automatically classifying every spike as a failure.",
+        "Vacuum performance by itself is not a spectral or temperature measurement, and a single illustrated gauge is not a complete spatial pressure map."
+      ],
+      [
+        9,
+        "The approach to thermal equilibrium",
+        "Bench temperature is plotted against time alongside an exponential settling description. This is the warm-up/settling stage, not the final quiet interval.",
+        "The multi-day response makes commissioning and recovery overhead tangible. Slow dynamics help reject fast disturbances while making a new equilibrium take a long time to establish.",
+        "A fitted time constant in this operating condition is not a universal transfer function for every perturbation or a direct controller-bandwidth measurement."
+      ],
+      [
+        10,
+        "The reported 30-day bench stability",
+        "Read the full temperature record first, then the shorter inset. The inset makes low-level operational structure visible on a different time window.",
+        "The figure supports the reported long-run RMS while showing why a short subset can look quieter. The trace is evidence at the bench thermometer, not merely the shield-control error.",
+        "The monitored locations do not establish every optical component’s temperature, and temperature RMS cannot be relabelled as RV RMS."
+      ],
+      [
+        11,
+        "Fast filtering does not remove slow coupling",
+        "Compare room, enclosure, and bench deviations, noting the different vertical scales. The inset follows an ambient-temperature event and the delayed bench response.",
+        "The hierarchy attenuates disturbances strongly, yet long-timescale environmental coupling survives. Both success and limitation are visible in the same experiment.",
+        "Comparing apparent line heights without their scales would be misleading. The shown response is not a complete measured frequency-domain transfer function."
+      ]
+    ]
+  },
+  "pinfield": {
+    "slug": "pinfield-2014-wise-halo-t-dwarfs",
+    "title": "A Deep WISE Search for Very Late Type Objects and the Discovery of Two Halo/Thick-Disk T Dwarfs",
+    "authors": "Pinfield et al.",
+    "year": "2014",
+    "venue": "MNRAS 437, 1009–1026 · preprint 2013",
+    "version": "1308.0495v1",
+    "theme": "Brown Dwarfs",
+    "subtitle": "From faint W2-only candidates to spectra, motion, and a carefully qualified population assignment.",
+    "why": "A methodological precursor to my halo T-dwarf candidate work with VISTA, DES, and WISE—not a paper I co-authored.",
+    "art_alt": "conceptual cool brown dwarfs with subtle astrometric motion trails",
+    "overview": [
+      "This paper connects three problems that are easy to blur together: finding a credible faint source, classifying its spectrum, and inferring its Galactic population. A source can pass the first stage without resolving the other two.",
+      "The journal year is 2014; the pinned manuscript is the 2013 arXiv version. This historical reading does not update the individual objects with later parallaxes or follow-up results."
+    ],
+    "findings": [
+      "Pinfield et al. develop a WISE W2-only search using a control sample and statistical quality tests, producing 158 candidates down to W2 signal-to-noise 8. Follow-up identifies WISE 0013+0634 and WISE 0833+0052 as late T dwarfs with large proper motions. Their colours and suppressed K-band flux suggest unusual atmospheric properties, while distance-dependent space-motion constraints support halo or thick-disc interpretations. The paper calls for parallax and radial velocity rather than treating population membership as settled."
+    ],
+    "evidence": [
+      [
+        "WISE detection statistics",
+        "Reject artefacts and unreliable photometry",
+        "Selection changes completeness as well as contamination."
+      ],
+      [
+        "Near-infrared spectra",
+        "Late-T classification and spectral differences",
+        "Metallicity and gravity can be degenerate."
+      ],
+      [
+        "Proper motion with estimated distance",
+        "Kinematic population constraints",
+        "A proper motion alone is not a space velocity."
+      ]
+    ],
+    "chain": [
+      "W2-only source selection",
+      "Image checks and near-IR counterparts",
+      "Spectral classification and proper motion",
+      "Distance-dependent population interpretation"
+    ],
+    "sections": [
+      [
+        "selection",
+        "A candidate list is an experimental selection function",
+        [
+          "The control sample provides a reference for how ordinary isolated point sources behave in detection statistics. It makes the rejection criteria more interpretable than a collection of catalogue cuts chosen only because they yield a manageable sample.",
+          "The scientific cost of a cut should be kept visible. Blending, proximity to bright sources, and non-detection requirements can remove real objects as well as false positives. A clean candidate list is not automatically a complete or volume-limited sample."
+        ]
+      ],
+      [
+        "matching",
+        "Cross-matching moving objects requires time information",
+        [
+          "A fixed angular match radius is a compromise between losing high-proper-motion counterparts and admitting chance associations. The relevant position depends on epoch. For very faint candidates, images at another epoch can be more decisive than another catalogue match at the same epoch.",
+          "Colour limits also need their direction preserved. A non-detection gives an upper flux bound and therefore a one-sided magnitude or colour statement. Replacing that limit with a measured point would manufacture spectral information that the survey did not obtain."
+        ]
+      ],
+      [
+        "populations",
+        "Large motion is evidence, not a membership label",
+        [
+          "Tangential speed follows v_t = 4.74 μ d when proper motion is in arcseconds per year and distance is in parsecs. Distance uncertainty therefore scales the inferred speed directly. A photometric distance derived from normal objects can be biased for a chemically or spectrally unusual dwarf.",
+          "A reduced-proper-motion diagram combines luminosity and motion. It is useful for prioritising unusual sources, but does not provide an independent distance or the missing radial velocity. Old-population classifications should carry those caveats through to the final prose."
+        ]
+      ]
+    ],
+    "connection": [
+      "The direct portfolio connection is my 2023 halo T-dwarf candidate assessment using VISTA, DES, and WISE with Prof. David Pinfield. The relevant habits are epoch-aware association, careful non-detection handling, and separating candidate selection from spectroscopic confirmation. My later collaboration record is separate from the discoveries in this paper.",
+      "This reading also explains why a follow-up proposal matters scientifically: a spectrum, parallax, or radial velocity is not simply “more data”; each addresses a different ambiguity in classification and population assignment."
+    ],
+    "tests": [
+      "For an updated candidate pipeline, preserve observation epochs, match alternatives, image-quality flags, and the probability of a chance counterpart. Inject artificial sources or use an appropriate recovery sample to quantify which real-object configurations the quality cuts reject.",
+      "Propagate distance and proper-motion uncertainty through the kinematic calculation and explicitly explore unresolved binarity and spectral peculiarity. Prioritise parallax and radial velocity where population conclusions depend on them. These are proposed checks, not a new census or reclassification of the paper’s objects."
+    ],
+    "deep_sections": [
+      [
+        "Why the W2 selection changes the accessible population",
+        [
+          "Very cool sources can remain detectable in the mid-infrared while disappearing from shallower near-infrared catalogues. Requiring a bright near-infrared counterpart too early would therefore select against some of the very objects the search targets.",
+          "The converse is that a W2-only detection is not uniquely a cool dwarf. Reliability has to come from image morphology, repeated measurements, environmental checks, and follow-up. The search is a sequence of conditional tests, not a one-colour identification rule."
+        ]
+      ],
+      [
+        "Atmospheric interpretation needs more than a spectral label",
+        [
+          "Suppressed K-band flux can be associated with pressure-sensitive collision-induced absorption, while unusual mid-infrared-to-near-infrared colours can flag gravity or metallicity differences. These are physical clues, but they do not by themselves select a unique atmosphere.",
+          "A useful comparison keeps the normalisation wavelength, spectral resolution, calibration quality, and uncertainty in view. Agreement at one peak may coexist with disagreement elsewhere. Classification against a standard and retrieval of physical parameters are related but distinct operations."
+        ]
+      ],
+      [
+        "From unusual objects to population statistics",
+        [
+          "An excess of high reduced proper motion among late-type objects is an interesting hypothesis about old populations. It must still be tested against survey depth, colour selection, uncertain luminosities, and the fact that different discovery surveys select different parts of parameter space.",
+          "A robust population comparison would model the chance of entering each sample. The number of unusual objects in a heterogeneous discovery compilation is not, without that model, an unbiased Galactic fraction. This is a transferable caution for any catalogue-based astronomy project."
+        ]
+      ]
+    ],
+    "figures": [
+      [
+        1,
+        "The quality cuts against a control population",
+        "Rows compare profile-fit quality, photometric scatter, and individual-frame detection fractions against W2 signal-to-noise. The left panels show reference behaviour; the right panels show the candidate-selection problem.",
+        "The cuts are empirical reliability tests tied to repeated measurements, not only colour boundaries. Comparing left and right reveals how contaminants depart from the point-source locus.",
+        "Rejected sources are not all proven false. The selection can lose blends or unusual real sources, so reliability must not be called completeness."
+      ],
+      [
+        3,
+        "Colour–magnitude limits are not measurements",
+        "W2 magnitude is compared with W1−W2 and W2−W3. Directional symbols represent one-sided limits; dotted lines indicate detection thresholds.",
+        "The apparent candidate region depends partly on survey sensitivity. The arrows carry scientific information and should not be read as precise colours.",
+        "The diagram alone neither classifies each candidate spectroscopically nor establishes a distance or an intrinsic luminosity."
+      ],
+      [
+        7,
+        "Spectral typing in the J-band window",
+        "Compare the candidate spectra with late-T standards over wavelength in the J band, respecting the plotted normalisation.",
+        "The shapes of the peaks and absorption boundaries support late-T classification. This uses information fundamentally different from selecting a red or W2-only photometric source.",
+        "Matching a spectral type is not a unique measurement of temperature, gravity, metallicity, or age."
+      ],
+      [
+        8,
+        "The broader spectrum adds physical clues",
+        "The wider near-infrared spectra compare the targets with T8/T9 reference objects. Read relative flux across the J, H, and K windows rather than focusing on one matched peak.",
+        "K-band suppression and broader shape differences make the atmospheric interpretation more interesting than a label alone. They motivate tests of pressure, gravity, and metallicity.",
+        "Flux calibration, noise, normalisation, and parameter degeneracy limit a literal abundance interpretation; these curves are not a complete retrieval."
+      ],
+      [
+        10,
+        "Kinematics depend on the distance assumption",
+        "U–V space-motion regions are shown separately for the two targets and for near-infrared versus mid-infrared distance estimates. Allowed radial velocities broaden the regions.",
+        "Changing the distance assumption changes which Galactic population is plausible. The extended allowed regions are a visual explanation for the paper’s qualified membership language.",
+        "These regions are not direct full-space-velocity measurements. Parallax and radial velocity remain important missing constraints."
+      ],
+      [
+        11,
+        "Reduced proper motion as a prioritisation tool",
+        "Read reduced W2 proper motion against colour or spectral type. Colours also identify different discovery samples, and indicative velocity tracks provide context.",
+        "The extreme positions of the two targets motivate old-population follow-up. The survey-coloured panels also remind the reader that the comparison sample is heterogeneous.",
+        "A reduced-proper-motion outlier is not independently proven to be a halo member, and the plot does not directly measure an unbiased halo fraction."
+      ]
+    ]
+  }
+}

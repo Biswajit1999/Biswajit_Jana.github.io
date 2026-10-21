@@ -15,6 +15,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 
+<script src="observatory-theme.js"></script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,45 +51,42 @@
   --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-xl:32px;
   --card-radius:18px; --panel-radius:28px;
   --transition: .22s ease;
-  /* color — "spectral instrument": warm parchment/brass in light mode, deep
-     espresso-black with brass/rust accents in dark — evokes a spectrograph's
-     calibration-lamp glow and analog optical instrumentation, not a blue
-     SaaS-dashboard gradient */
-  --bg:        #f6f1e6;
-  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, #fbe6c8 0%, rgba(251,230,200,0) 56%),
-               radial-gradient(820px 560px at -6% 4%, #f5d9c2 0%, rgba(245,217,194,0) 52%);
-  --grid-line: rgba(120,70,20,.045);
+  /* Observatory Ink: cool paper and teal by day; deep navy by night. */
+  --bg:        #f5f7f8;
+  --bg-grad:   radial-gradient(1150px 660px at 84% -12%, #e3f0ee 0%, rgba(227,240,238,0) 56%),
+               radial-gradient(820px 560px at -6% 4%, #e7edf3 0%, rgba(231,237,243,0) 52%);
+  --grid-line: rgba(24,62,78,.045);
   --surface:   #ffffff;
-  --surface-muted:#f2e9db;
-  --ink:       #291f0f;
-  --ink-soft:  #52402a;
-  --muted:     #7c6a4f;
-  --line:      #ece1cd;
-  --line-2:    #ddccae;
-  --accent:    #a4530a;
-  --accent-2:  #8a3922;
-  --accent-soft:#fbe7cd;
-  --ring:      rgba(164,83,10,.45);
-  --shadow-soft: 0 1px 2px rgba(41,25,10,.05), 0 8px 24px -16px rgba(41,25,10,.18);
-  --shadow-card: 0 1px 2px rgba(41,25,10,.05), 0 18px 44px -24px rgba(41,25,10,.30);
-  --shadow-lg:   0 28px 64px -30px rgba(41,25,10,.34);
+  --surface-muted:#edf2f3;
+  --ink:       #182533;
+  --ink-soft:  #435665;
+  --muted:     #536575;
+  --line:      #d9e2e6;
+  --line-2:    #bacbd1;
+  --accent:    #086f70;
+  --accent-2:  #426895;
+  --accent-soft:#dfefec;
+  --ring:      rgba(8,111,112,.45);
+  --shadow-soft: 0 1px 2px rgba(24,49,64,.05), 0 8px 24px -16px rgba(24,49,64,.18);
+  --shadow-card: 0 1px 2px rgba(24,49,64,.05), 0 18px 44px -24px rgba(24,49,64,.30);
+  --shadow-lg:   0 28px 64px -30px rgba(24,49,64,.34);
 }
 [data-theme="dark"]{
-  --bg:        #120d08;
-  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #2c1c0e 0%, rgba(44,28,14,0) 60%),
-               radial-gradient(900px 600px at 6% 2%, #241408 0%, rgba(36,20,8,0) 55%);
-  --grid-line: rgba(230,175,110,.05);
-  --surface:   #1c150c;
-  --surface-muted:#17110a;
-  --ink:       #f3e8d6;
-  --ink-soft:  #d1bd9d;
-  --muted:     #9c8768;
-  --line:      #33261a;
-  --line-2:    #453120;
-  --accent:    #dd9440;
-  --accent-2:  #cf6640;
-  --accent-soft:#3a2814;
-  --ring:      rgba(221,148,64,.5);
+  --bg:        #0b1420;
+  --bg-grad:   radial-gradient(1200px 700px at 80% -10%, #142b35 0%, rgba(20,43,53,0) 60%),
+               radial-gradient(900px 600px at 6% 2%, #142131 0%, rgba(20,33,49,0) 55%);
+  --grid-line: rgba(130,181,198,.05);
+  --surface:   #142131;
+  --surface-muted:#101c2a;
+  --ink:       #edf2f5;
+  --ink-soft:  #bfccd5;
+  --muted:     #a5b5c4;
+  --line:      #2a3b4c;
+  --line-2:    #42596b;
+  --accent:    #69c8be;
+  --accent-2:  #91b1d5;
+  --accent-soft:#193b3c;
+  --ring:      rgba(105,200,190,.5);
   --shadow-soft: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.6);
   --shadow-card: 0 1px 2px rgba(0,0,0,.3), 0 20px 50px -24px rgba(0,0,0,.7);
   --shadow-lg:   0 28px 70px -28px rgba(0,0,0,.7);
@@ -126,25 +126,25 @@ p{margin:0 0 var(--space-4)}
 [data-theme="dark"] .sky .stars,[data-theme="dark"] .sky .stars2{position:absolute;inset:-60%;background-repeat:repeat}
 [data-theme="dark"] .sky .stars{
   background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%, #fff2de, transparent),
-    radial-gradient(1.4px 1.4px at 28% 62%, #ffe9c9, transparent),
-    radial-gradient(1.2px 1.2px at 46% 32%, #ffdfb0, transparent),
-    radial-gradient(1.6px 1.6px at 64% 74%, #fff6e8, transparent),
-    radial-gradient(1.2px 1.2px at 78% 22%, #ffe4bd, transparent),
-    radial-gradient(1.4px 1.4px at 88% 56%, #fff0da, transparent),
-    radial-gradient(1.1px 1.1px at 36% 86%, #ffdfb0, transparent);
+    radial-gradient(1.5px 1.5px at 12% 18%, #e4f5f3, transparent),
+    radial-gradient(1.4px 1.4px at 28% 62%, #d3e8f0, transparent),
+    radial-gradient(1.2px 1.2px at 46% 32%, #c4e8e3, transparent),
+    radial-gradient(1.6px 1.6px at 64% 74%, #f0f6fa, transparent),
+    radial-gradient(1.2px 1.2px at 78% 22%, #d7e9f5, transparent),
+    radial-gradient(1.4px 1.4px at 88% 56%, #e2f0f5, transparent),
+    radial-gradient(1.1px 1.1px at 36% 86%, #c4e8e3, transparent);
   background-size:540px 540px;opacity:.5;animation:twinkle 6s ease-in-out infinite, drift 150s linear infinite;
 }
 [data-theme="dark"] .sky .stars2{
   background-image:
-    radial-gradient(1px 1px at 20% 40%, #e8c48f, transparent),
-    radial-gradient(1px 1px at 55% 18%, #f0d4a0, transparent),
-    radial-gradient(1px 1px at 72% 64%, #e8c48f, transparent),
-    radial-gradient(1px 1px at 90% 36%, #e8c48f, transparent);
+    radial-gradient(1px 1px at 20% 40%, #9ab9cc, transparent),
+    radial-gradient(1px 1px at 55% 18%, #afcfda, transparent),
+    radial-gradient(1px 1px at 72% 64%, #9ab9cc, transparent),
+    radial-gradient(1px 1px at 90% 36%, #9ab9cc, transparent);
   background-size:360px 360px;opacity:.4;animation:drift 100s linear infinite reverse;
 }
 [data-theme="dark"] .sky .comet{
-  position:absolute;top:16%;left:-12%;width:150px;height:1.3px;background:linear-gradient(90deg,transparent,#ffd9a0,transparent);
+  position:absolute;top:16%;left:-12%;width:150px;height:1.3px;background:linear-gradient(90deg,transparent,#a5dbd4,transparent);
   transform:rotate(16deg);opacity:0;border-radius:2px;animation:comet 13s ease-in infinite;
 }
 @keyframes twinkle{0%,100%{opacity:.5}50%{opacity:.3}}
@@ -286,7 +286,7 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
 .card-media{aspect-ratio:16/9;border-radius:12px;margin:0 0 var(--space-4);overflow:hidden;position:relative;border:1px solid var(--line);background:var(--surface-muted)}
 .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .card:hover .card-media img{transform:scale(1.05)}
-.card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(18,13,8,.22));pointer-events:none}
+.card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(11,20,32,.22));pointer-events:none}
 @media (prefers-reduced-motion: reduce){ .card:hover .card-media img{transform:none} }
 
 /* ============================================================
@@ -424,7 +424,7 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
 .solar svg{width:100%;height:100%;overflow:visible}
 .solar .ring{fill:none;stroke:var(--line-2);stroke-width:1}
 .solar .sun{fill:var(--accent);filter:drop-shadow(0 0 10px color-mix(in srgb,var(--accent) 60%, transparent))}
-.solar .p1{fill:var(--accent-2)}.solar .p2{fill:#e8a13a}.solar .p3{fill:#7d6b34}
+.solar .p1{fill:var(--accent-2)}.solar .p2{fill:#69c8be}.solar .p3{fill:#426895}
 .solar .g{transform-origin:180px 180px}
 .solar .o1{animation:orbitMove 10s linear infinite}.solar .o2{animation:orbitMove 17s linear infinite}.solar .o3{animation:orbitMove 27s linear infinite}
 @media (prefers-reduced-motion: reduce){ .solar .o1,.solar .o2,.solar .o3{animation:none} }
@@ -463,12 +463,12 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 .hero .aurora span{position:absolute;border-radius:50%;animation:floatA 20s ease-in-out infinite}
 .hero .aurora .a1{width:440px;height:440px;left:46%;top:-12%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 60%,transparent),transparent 70%)}
 .hero .aurora .a2{width:380px;height:380px;left:64%;top:28%;background:radial-gradient(circle,color-mix(in srgb,var(--accent-2) 55%,transparent),transparent 70%);animation-duration:25s}
-.hero .aurora .a3{width:320px;height:320px;left:38%;top:42%;background:radial-gradient(circle,rgba(217,122,90,.4),transparent 70%);animation-duration:30s}
+.hero .aurora .a3{width:320px;height:320px;left:38%;top:42%;background:radial-gradient(circle,rgba(105,200,190,.4),transparent 70%);animation-duration:30s}
 @keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-26px,18px) scale(1.12)}}
 @media (prefers-reduced-motion: reduce){ .hero .aurora span{animation:none} }
 
 /* kinetic gradient on the subtitle */
-.hero h1 .sub{background:linear-gradient(90deg,var(--accent),var(--accent-2),#e8c34a,var(--accent));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:sheen 9s linear infinite}
+.hero h1 .sub{background:linear-gradient(90deg,var(--accent),var(--accent-2),#91b1d5,var(--accent));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:sheen 9s linear infinite}
 @keyframes sheen{to{background-position:300% 0}}
 @media (prefers-reduced-motion: reduce){ .hero h1 .sub{animation:none} }
 
@@ -515,6 +515,30 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   .nav.open .nav-links{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 16px;gap:2px;box-shadow:var(--shadow-lg)}
   .nav.open .nav-links a{padding:12px}
 }
+
+/* Depth remains confined to the optional playground. */
+section[id]{scroll-margin-top:86px}
+.pg-grid{grid-template-columns:minmax(260px,340px) minmax(0,1fr)}
+.orbit-lab{max-width:360px;width:100%;margin:auto;border:1px solid var(--line);border-radius:20px;background:radial-gradient(ellipse at 50% 50%,var(--accent-soft),var(--surface));padding:12px}
+.orbit-lab canvas{display:block;width:100%;height:auto;aspect-ratio:1.05;touch-action:pan-y;cursor:grab}
+.orbit-lab canvas:active{cursor:grabbing}
+.orbit-controls{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.orbit-controls button{border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:.7rem "DM Mono",monospace;min-height:44px;padding:8px;border-radius:6px;cursor:pointer}
+.orbit-lab>p{font:.6rem/1.7 "DM Mono",monospace;color:var(--muted);text-align:center;margin:12px 0 0}
+.atlas-teaser-body .repo-status{font:.72rem/1.7 "DM Mono",monospace;color:var(--muted);margin-bottom:10px}
+@media(max-width:900px){.pg-grid{grid-template-columns:minmax(0,1fr)}}
+/* Palette-only polish: preserve the original scale, portrait and section layout. */
+body{overflow-x:clip}
+.hero-grid>div,.pg-grid>div{min-width:0}
+@media(max-width:560px){.wtiles{grid-template-columns:repeat(2,minmax(0,1fr))}.wtile{min-width:0}.wtile .v{overflow-wrap:anywhere}}
+@media(max-width:640px){.hero h1{font-size:clamp(1.5rem,7.5vw,2.3rem)}}
+@media(max-width:560px){.widget .v{min-width:0;overflow-wrap:anywhere;white-space:normal}.widget{flex-wrap:wrap}}
+[data-theme="dark"] .btn-primary,[data-theme="dark"] .nav-cta{color:#0b2227}
+a,button{touch-action:manipulation}
+.btn:active{transform:translateY(1px)}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
   <!-- Search discovery metadata: maintained by the portfolio indexing workflow. -->
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -558,6 +582,10 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   "image": "https://biswajit1999.github.io/Biswajit_Jana.github.io/images/github-social-preview.png"
 }
   </script>
+<script src="orbit-playground.js" defer></script>
+<script src="portfolio-live-count.js" defer></script>
+<link rel="stylesheet" href="portfolio-panels.css">
+<script src="portfolio-panels.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -718,11 +746,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
           to make scientific workflows more visual and inspectable.
         </p>
       </div>
-      <ul class="timeline">
-        <li><span class="yr">2022–24</span><div><strong>MSc Astrophysics with Advanced Research</strong><span>University of Hertfordshire — supervised instrumentation and feedback-control research.</span></div></li>
-        <li><span class="yr">2024</span><div><strong>SEPnet placement — Lumi Space</strong><span>Detector performance analysis for satellite laser ranging.</span></div></li>
-        <li><span class="yr">2017–21</span><div><strong>BTech Electronics &amp; Communication Engineering</strong><span>University of Engineering and Management — electronics, embedded systems, communications.</span></div></li>
-      </ul>
+      <p class="about-record"><a class="tlink" href="cv.html">Explore my full CV</a><span>Education, research history, placements, and training are recorded together in the CV.</span></p>
     </div>
   </div>
 </section>
@@ -732,49 +756,22 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Capabilities</p>
-      <h2 class="section-title">Technical skills matrix</h2>
-      <p class="section-lead">A capability map drawn from my MSc research, placements, and engineering background — grouped as on my CV.</p>
+      <h2 class="section-title">From the instrument to the insight</h2>
+      <p class="section-lead">Explore the tools behind my laboratory work, astronomical analysis, and research software. Open a panel for tools, methods, and the projects where I use them.</p>
     </div>
-    <div class="grid grid-3">
-      <article class="card skill-card reveal">
-        <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/></svg></span>Instrumentation &amp; control</h3>
-        <ul class="skill-list">
-          <li>Laser optics &amp; interferometry</li>
-          <li>IDS3010 displacement sensing</li>
-          <li>RV spectrograph stabilisation</li>
-          <li>Environmental control (TEC)</li>
-          <li>Optical alignment</li>
-          <li>Adaptive optics correction</li>
-          <li>PID / closed-loop control</li>
-          <li>Grafana / InfluxDB dashboards</li>
-        </ul>
-      </article>
-      <article class="card skill-card reveal">
-        <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>Programming &amp; data analysis</h3>
-        <ul class="skill-list">
-          <li>Python · JavaScript · MATLAB</li>
-          <li>C/C++ · SQL · Bash</li>
-          <li>NumPy · SciPy · pandas</li>
-          <li>Matplotlib · Astropy</li>
-          <li>lightkurve · DACE</li>
-          <li>FITS workflows · Jupyter</li>
-          <li>Time-series analysis</li>
-          <li>Git · LaTeX · Overleaf</li>
-        </ul>
-      </article>
-      <article class="card skill-card reveal">
-        <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>Hardware &amp; domains</h3>
-        <ul class="skill-list">
-          <li>Arduino · Raspberry Pi · NodeMCU</li>
-          <li>PSoC · embedded boards</li>
-          <li>Serial · RS-232 / RS-485</li>
-          <li>MaxIm DL · Simulink</li>
-          <li>Exoplanet &amp; RV analysis</li>
-          <li>Brown-dwarf / substellar work</li>
-          <li>Satellite laser ranging</li>
-          <li>Observational-data workflows</li>
-        </ul>
-      </article>
+    <ol class="capability-flow" aria-label="Explore the measurement workflow">
+      <li><a href="#skill-optics"><span>01</span><strong>Sense</strong><small>Optics &amp; detectors</small></a></li>
+      <li><a href="#skill-control"><span>02</span><strong>Stabilise</strong><small>Feedback &amp; telemetry</small></a></li>
+      <li><a href="#skill-analysis"><span>03</span><strong>Interpret</strong><small>Models &amp; uncertainty</small></a></li>
+      <li><a href="#skill-software"><span>04</span><strong>Share</strong><small>Code &amp; visual tools</small></a></li>
+    </ol>
+    <div class="capability-panels">
+      <details class="capability" id="skill-optics" open><summary><span class="cap-number">01 / LAB</span><h3>Instrumentation &amp; optics</h3><span class="cap-hint">From light to measurement</span></summary><div class="cap-content"><p>Applied in EXOhSPEC, detector studies, and observatory practical work.</p><ul class="skill-chips"><li>Laser interferometry</li><li>IDS3010 displacement sensing</li><li>RV spectrograph stabilisation</li><li>Optical alignment</li><li>Adaptive-optics correction</li><li>CCD calibration &amp; photometry</li><li>Image acquisition &amp; guiding</li><li>Spectroscopic reduction</li><li>Microbolometer performance</li><li>Detector link budgets</li></ul></div></details>
+      <details class="capability" id="skill-control" open><summary><span class="cap-number">02 / FEEDBACK</span><h3>Control &amp; telemetry</h3><span class="cap-hint">Keep the experiment inspectable</span></summary><div class="cap-content"><p>Sensor integration, environmental monitoring, and closed-loop workflows.</p><ul class="skill-chips"><li>PID / closed-loop control</li><li>Meerstetter TEC control</li><li>BME environmental sensors</li><li>MaxIm DL centroid tracking</li><li>Serial · RS-232 / RS-485</li><li>Sensor fusion</li><li>Real-time logging</li><li>Grafana</li><li>InfluxDB</li><li>Simulink</li></ul></div></details>
+      <details class="capability" id="skill-analysis"><summary><span class="cap-number">03 / DATA</span><h3>Astronomy &amp; numerical analysis</h3><span class="cap-hint">Survey data, signals, and inference</span></summary><div class="cap-content"><p>Experience spans coursework, supervised projects, and independent research software.</p><ul class="skill-chips"><li>NumPy · SciPy · pandas</li><li>Matplotlib · Astropy</li><li>lightkurve · DACE</li><li>FITS workflows</li><li>Time-series &amp; RV analysis</li><li>Transit modelling</li><li>Injection–recovery tests</li><li>Monte Carlo uncertainty propagation</li><li>Image stacking · Binapprox</li><li>VISTA · DES · WISE</li><li>Gaia catalogue analysis</li><li>PICASO / petitRADTRANS workshop training</li></ul></div></details>
+      <details class="capability" id="skill-software"><summary><span class="cap-number">04 / CODE</span><h3>Programming &amp; research software</h3><span class="cap-hint">Reproducible tools and visual interfaces</span></summary><div class="cap-content"><p>From Python acquisition pipelines to browser-based astronomy laboratories.</p><ul class="skill-chips"><li>Python</li><li>JavaScript</li><li>MATLAB</li><li>C / C++</li><li>SQL · Bash</li><li>HTML / CSS</li><li>WebGL / Three.js</li><li>Jupyter</li><li>Git / GitHub</li><li>LaTeX / Overleaf</li><li>Large-CSV handling</li><li>Parquet research products</li><li>Browser rendering &amp; data export</li></ul></div></details>
+      <details class="capability" id="skill-hardware"><summary><span class="cap-number">05 / BUILD</span><h3>Electronics &amp; embedded systems</h3><span class="cap-hint">Prototypes grounded in hardware</span></summary><div class="cap-content"><p>Electronics engineering, internship projects, and published undergraduate work.</p><ul class="skill-chips"><li>Arduino</li><li>Raspberry Pi</li><li>NodeMCU ESP8266</li><li>PSoC 5LP</li><li>IoT systems</li><li>Visible-light communication</li><li>High-frequency detection circuits</li><li>Drone calibration / synchronisation</li><li>PSpice</li><li>PSoC Creator</li><li>QCA Designer</li></ul></div></details>
+      <details class="capability" id="skill-domains"><summary><span class="cap-number">06 / CONTEXT</span><h3>Scientific domains &amp; practice</h3><span class="cap-hint">Where the tools are applied</span></summary><div class="cap-content"><p>Research experience and training—not a claim of equal expertise in every domain.</p><ul class="skill-chips"><li>Exoplanets &amp; precision RV</li><li>Brown dwarfs / substellar populations</li><li>Satellite laser ranging</li><li>Atmospheric transmission</li><li>Optical / radio catalogue cross-matching</li><li>Two-element radio interferometry</li><li>Survey-scale cosmology software</li><li>Science communication</li></ul><a class="tlink" href="cv.html#skills">Full CV and experience context →</a></div></details>
     </div>
   </div>
 </section>
@@ -784,14 +781,15 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Selected research highlights</p>
-      <h2 class="section-title">Supervised research &amp; analysis</h2>
-      <p class="section-lead">Specific, academically honest summaries — each links out to repositories, theses, talks, or publications for inspection.</p>
+      <h2 class="section-title">Research, placements &amp; hands-on training</h2>
+      <p class="section-lead">From spectrograph control to survey astronomy and electronics. Browse left or right; each panel distinguishes research, internships, coursework, and training.</p>
     </div>
-    <div class="grid grid-2">
+    <div class="research-navigation"><p id="researchPosition" aria-live="polite">11 experiences · swipe or scroll to explore</p><div><button type="button" class="research-arrow" id="researchPrevious" aria-label="Previous research experience" aria-controls="researchTrack">←</button><button type="button" class="research-arrow" id="researchNext" aria-label="Next research experience" aria-controls="researchTrack">→</button></div></div>
+    <div class="research-track" id="researchTrack" tabindex="0" role="region" aria-label="Research and training experiences; use left and right arrow keys to browse">
       <article class="card research-card reveal">
         <div class="card-media"><img src="images/02_exohspec_spectrograph.png" alt="Conceptual illustration of a high-resolution spectrograph" loading="lazy" /></div>
         <p class="kicker">MSc research · Supervised</p>
-        <h3>MSc research contribution to supervised spectrograph feedback-control work</h3>
+        <h3>EXOhSPEC closed-loop stabilisation</h3>
         <p>As part of my MSc research at the University of Hertfordshire, I contributed to supervised work on closed-loop feedback control for the EXOhSPEC high-resolution spectrograph project, with emphasis on instrumentation, sensing, experimental logging, and control-system analysis.</p>
         <p style="font-size:.85rem;color:var(--muted)">Supervised by Prof. Hugh Jones and Prof. Bill Martin.</p>
         <ul class="tags"><li class="tag">Instrumentation</li><li class="tag">Feedback control</li><li class="tag">Astrophysics</li><li class="tag">Scientific computing</li></ul>
@@ -799,19 +797,19 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       </article>
       <article class="card research-card reveal">
         <div class="card-media"><img src="images/03_brown_dwarf_research.png" alt="Conceptual illustration of brown dwarf and substellar research" loading="lazy" /></div>
-        <p class="kicker">Survey data · Team project</p>
+        <p class="kicker">Jun–Jul 2023 · UoH summer research</p>
         <h3>Halo T-dwarf candidate research</h3>
-        <p>Investigated candidate halo T dwarfs and substellar populations using VISTA, DES and WISE survey data. Supervised by Prof. David Pinfield; presented as a joint project talk.</p>
+        <p>Analysed VISTA, DES and WISE data for halo T-dwarf candidates with Prof. David Pinfield and Berenice Laurent. Contributed to candidate assessment and a successful Magellan/FIRE follow-up proposal. The collaboration’s benchmark T-dwarf manuscript was submitted to MNRAS in 2026; it is not yet peer reviewed.</p>
         <ul class="tags"><li class="tag">Substellar</li><li class="tag">Survey data</li><li class="tag">Astrophysics</li></ul>
         <div class="links"><a class="tlink" href="https://youtu.be/oLriYFWLZlQ?si=2os0cGeV1kK4p22a" target="_blank" rel="noopener">Watch talk</a><a class="tlink" href="https://drive.google.com/file/d/1FWzpF1yBB4YfkS_kEkA-vXMr1qvvRhge/view?usp=drive_link" target="_blank" rel="noopener">Proposal</a></div>
       </article>
       <article class="card research-card reveal">
         <div class="card-media"><img src="images/05_satellite_laser_ranging.png" alt="Conceptual illustration of satellite laser ranging" loading="lazy" /></div>
-        <p class="kicker">SEPnet placement · Lumi Space</p>
+        <p class="kicker">Aug–Sep 2024 · LUMI SPACE / SEPnet</p>
         <h3>Satellite laser ranging detector study</h3>
         <p>Studied detector performance for satellite laser ranging, including microbolometer feasibility, atmospheric transmission and link-budget analysis.</p>
         <ul class="tags"><li class="tag">Detectors</li><li class="tag">Optics</li><li class="tag">Link budget</li></ul>
-        <div class="links"><a class="tlink" href="publications.html">Related material</a></div>
+        <div class="links"><a class="tlink" href="cv.html#internships">Placement details</a><a class="tlink" href="mailto:biswajitj998@gmail.com?subject=SEPnet%20poster%20request">Request poster</a></div>
       </article>
       <article class="card research-card reveal">
         <div class="card-media"><img src="images/06_visible_light_communication.png" alt="Conceptual illustration of a visible light communication system" loading="lazy" /></div>
@@ -821,7 +819,15 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
         <ul class="tags"><li class="tag">Electronics</li><li class="tag">Communications</li><li class="tag">Hardware</li></ul>
         <div class="links"><a class="tlink" href="publications.html">Publication</a></div>
       </article>
+      <article class="card research-card"><div class="experience-art" aria-hidden="true"><span>ATMOSPHERES</span><i class="art-orbit"></i><b>Model → spectrum</b></div><p class="kicker">2023 · Caltech / NASA Exoplanet Science Institute</p><h3>Carl Sagan Exoplanet Summer Workshop</h3><p>Hands-on workshop training in exoplanet atmospheric modelling and brown-dwarf atmosphere interpretation, including PICASO and petitRADTRANS. A training programme, distinct from a research appointment.</p><ul class="tags"><li class="tag">Atmospheres</li><li class="tag">Radiative transfer</li><li class="tag">Workshop</li></ul><div class="links"><a class="tlink" href="cv.html#internships">Programme in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art art-radio" aria-hidden="true"><span>INTERFEROMETRY</span><i class="art-wave"></i><b>Two antennas · one sky</b></div><p class="kicker">Feb–May 2022 · Gauribidanur / RRI / Naxxatra</p><h3>Radio astronomy summer school</h3><p>Demonstrated a two-element radio interferometer and observed solar transits, with practical exposure to instrumentation and interferometry. Supervised by Dr. Ramesh Balasubramanyam.</p><ul class="tags"><li class="tag">Radio astronomy</li><li class="tag">Interferometry</li><li class="tag">Summer school</li></ul><div class="links"><a class="tlink" href="cv.html#internships">Programme in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art art-catalogue" aria-hidden="true"><span>MULTI-WAVELENGTH</span><i class="art-crossmatch"></i><b>Optical × radio</b></div><p class="kicker">Oct–Nov 2020 · SSERD · Online</p><h3>Galaxy catalogue cross-matching</h3><p>Cross-matched optical and radio catalogues and explored machine-learning-based elliptical-galaxy classification using multi-wavelength astronomical data. Supervised by Sundar M. N.</p><ul class="tags"><li class="tag">Catalogue analysis</li><li class="tag">Classification</li><li class="tag">Research programme</li></ul><div class="links"><a class="tlink" href="cv.html#internships">Experience in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art art-circuit" aria-hidden="true"><span>ELECTRONICS</span><i class="art-wave"></i><b>Detect · calibrate · synchronise</b></div><p class="kicker">Dec 2019–Jan 2020 · IIT Kharagpur</p><h3>High-frequency circuits &amp; drone systems</h3><p>Winter internship with Prof. Sudip Misra, working on low-cost high-frequency detecting circuits and the calibration and synchronisation of multiple drones.</p><ul class="tags"><li class="tag">Circuits</li><li class="tag">Calibration</li><li class="tag">Internship</li></ul><div class="links"><a class="tlink" href="cv.html#internships">Internship in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art" aria-hidden="true"><span>OBSERVATORY</span><i class="art-crossmatch"></i><b>Acquire → calibrate → interpret</b></div><p class="kicker">2022–2024 · University of Hertfordshire</p><h3>Bayfordbury observing practicals</h3><p>CCD calibration, photometry, image acquisition, guiding, and spectroscopic data reduction using Meade telescopes. Also participated in planetarium demonstrations and public telescope sessions.</p><ul class="tags"><li class="tag">Observing</li><li class="tag">CCD workflows</li><li class="tag">Practical experience</li></ul><div class="links"><a class="tlink" href="cv.html#research">Practical work in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art art-catalogue" aria-hidden="true"><span>ASTROPHYSICAL ANALYSIS</span><i class="art-orbit"></i><b>Transit · RV · substellar</b></div><p class="kicker">Sep–Dec 2022 · MSc coursework · UoH</p><h3>Case studies in astrophysics</h3><p>Used DACE, Python and lightkurve for transit and radial-velocity analysis; interpreted brown-dwarf spectra and investigated Gaia close-encounter candidates. Coursework analysis, not an independent discovery claim.</p><ul class="tags"><li class="tag">Exoplanets</li><li class="tag">Gaia</li><li class="tag">Coursework</li></ul><div class="links"><a class="tlink" href="cv.html#research">Case studies in CV</a></div></article>
+      <article class="card research-card"><div class="experience-art art-radio" aria-hidden="true"><span>FAINT-SOURCE METHODS</span><i class="art-wave"></i><b>9,587 FITS images</b></div><p class="kicker">University of Hertfordshire · Analysis project</p><h3>Pulsar-search image stacking</h3><p>Applied the Binapprox algorithm for efficient median estimation across 9,587 astronomical FITS images. Developed stacking and median-combination workflows to improve faint-source detectability in pulsar-search-style datasets.</p><ul class="tags"><li class="tag">FITS</li><li class="tag">Image stacking</li><li class="tag">Numerical methods</li></ul><div class="links"><a class="tlink" href="cv.html#research">Project in CV</a></div></article>
     </div>
+    <p class="experience-caption">Illustrations and animated motifs are conceptual—not photographs or measured results. Full dates, supervisors, and project context are in my <a href="cv.html">CV</a>.</p>
   </div>
 </section>
 
@@ -836,8 +842,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
     <div class="outputs">
       <a class="output-card" href="cv.html"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span>CV<small>PDF &amp; page</small></span></a>
       <a class="output-card" href="publications.html"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Publications<small>peer-reviewed</small></span></a>
-      <a class="output-card" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/main/Master%20Theses" target="_blank" rel="noopener"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span>Thesis materials<small>MSc</small></span></a>
-      <a class="output-card" href="https://github.com/Biswajit1999/Master-Thesis-2024/tree/dfb4defb4b61b1a517b40a5911885f6cd00df58a/Poster%20Presentation%20and%20Seminar" target="_blank" rel="noopener"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span>Seminars &amp; posters<small>presentations</small></span></a>
+      <a class="output-card" href="mailto:biswajitj998@gmail.com?subject=Thesis%20materials%20request"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span>Thesis materials<small>Available upon request</small></span></a>
+      <a class="output-card" href="mailto:biswajitj998@gmail.com?subject=Seminar%20and%20poster%20materials%20request"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span>Seminars &amp; posters<small>Available upon request</small></span></a>
       <a class="output-card" href="https://github.com/Biswajit1999?tab=repositories" target="_blank" rel="noopener"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span><span>GitHub<small>repositories</small></span></a>
       <a class="output-card" href="blog/index.html"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg></span><span>Research blog<small>science writing</small></span></a>
       <a class="output-card" href="paper-notes.html"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span>Paper notes<small>reading log</small></span></a>
@@ -885,7 +891,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       </div>
       <div class="atlas-teaser-body">
         <span class="atlas-teaser-kicker mono">Research software</span>
-        <h4>Open the research atlas</h4>
+        <h4>Open the research atlas</h4><p class="repo-status" id="repositorySummary" aria-live="polite">Browse the current catalogue and GitHub profile.</p>
         <p>Search projects, inspect relationships, and browse the live GitHub catalog.</p>
         <span class="btn btn-primary btn-sm atlas-teaser-cta">Explore <span aria-hidden="true">→</span></span>
       </div>
@@ -933,15 +939,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       <p class="section-lead">A compact astronomical clock—approximate, educational, and separate from the research record above.</p>
     </div>
     <div class="pg-grid">
-      <div class="solar" aria-hidden="true">
-        <svg viewBox="0 0 360 360">
-          <circle class="ring" cx="180" cy="180" r="60"/><circle class="ring" cx="180" cy="180" r="105"/><circle class="ring" cx="180" cy="180" r="150"/>
-          <circle class="sun" cx="180" cy="180" r="16"/>
-          <g class="g o1"><circle class="p1" cx="240" cy="180" r="6"/></g>
-          <g class="g o2"><circle class="p2" cx="285" cy="180" r="8"/></g>
-          <g class="g o3"><circle class="p3" cx="330" cy="180" r="5"/></g>
-        </svg>
-      </div>
+      <div class="orbit-lab"><canvas aria-label="Illustrative three-dimensional solar orbits. Mercury, Earth and Mars; sizes and orbital motion are not to scale."></canvas><div class="orbit-controls"><button type="button" data-orbit-toggle aria-pressed="false">Pause orbits</button><button type="button" data-orbit-view>Change angle</button><button type="button" data-orbit-reset>Reset view</button></div><p>Drag to rotate · illustrative, not an ephemeris</p></div>
       <div class="widgets">
         <div class="wtiles">
           <div class="wtile"><div class="k">Age on Earth</div><div class="v" id="ageYears">—</div><div class="u">solar years</div></div>
@@ -981,7 +979,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
       <a href="#top">Top</a><a href="atlas.html">GitHub</a><a href="cv.html">CV</a><a href="publications.html">Publications</a><a href="blog/index.html">Blog</a><a href="mailto:biswajitj998@gmail.com">Email</a>
     </div>
   </div>
-  <div class="container"><p class="foot-note">Conceptual visuals on this site are illustrative artwork for communication, not measured data or experimental evidence. Research code, thesis material and seminar resources are linked through GitHub.</p></div>
+  <div class="container"><p class="foot-note">Conceptual visuals are illustrative artwork, not measured data or experimental evidence. Public research code is linked through GitHub. Thesis materials, seminars, and posters can be shared upon request.</p></div>
 </footer>
 
 <script>
@@ -989,7 +987,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
 (function(){
   var root=document.documentElement, btn=document.getElementById('themeToggle'), stored=null;
   try{stored=localStorage.getItem('theme');}catch(e){}
-  if(stored==='dark'||stored==='light') root.setAttribute('data-theme',stored);
+  // The early theme bootstrap already applies the saved preference or preview URL.
   function sync(){btn.setAttribute('aria-pressed', root.getAttribute('data-theme')==='dark'?'true':'false');}
   sync();
   btn.addEventListener('click',function(){
@@ -1103,8 +1101,8 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   function theme(){ return document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'; }
   function palette(){
     return theme()==='dark'
-      ? {star:'255,235,205', maxA:0.9, baseA:0.35, shoot:'255,216,166', shootA:0.9, count:0.00010}
-      : {star:'110,75,30',  maxA:0.28, baseA:0.10, shoot:'182,97,28',  shootA:0.35, count:0.00006};
+      ? {star:'221,239,245', maxA:0.9, baseA:0.35, shoot:'145,209,208', shootA:0.9, count:0.00010}
+      : {star:'51,91,104',  maxA:0.28, baseA:0.10, shoot:'8,111,112',  shootA:0.35, count:0.00006};
   }
   var pal=palette();
 
@@ -1186,20 +1184,7 @@ footer{border-top:1px solid var(--line);padding:var(--space-7) 0;color:var(--mut
   }
 })();
 
-/* ---------- Subtle 3D tilt on the hero portrait (desktop, fine pointer) ---------- */
-(function(){
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine=window.matchMedia&&window.matchMedia('(pointer: fine)').matches;
-  var fig=document.querySelector('.hero-figure'); var frame=fig&&fig.querySelector('.photo-frame');
-  if(reduce||!fine||!frame) return;
-  frame.style.transition='transform .2s ease';
-  fig.addEventListener('mousemove', function(e){
-    var r=fig.getBoundingClientRect();
-    var dx=(e.clientX-(r.left+r.width/2))/r.width, dy=(e.clientY-(r.top+r.height/2))/r.height;
-    frame.style.transform='perspective(800px) rotateY('+(dx*5).toFixed(2)+'deg) rotateX('+(-dy*5).toFixed(2)+'deg)';
-  });
-  fig.addEventListener('mouseleave', function(){ frame.style.transform='perspective(800px) rotateX(0) rotateY(0)'; });
-})();
+/* The original portrait remains flat: no pointer tilt or 3D replacement. */
 </script>
 </body>
 </html>

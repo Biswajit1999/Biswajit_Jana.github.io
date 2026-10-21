@@ -1,0 +1,53 @@
+{
+  "key": "kreidberg",
+  "version": "1507.08285v3",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 1,
+      "anchor": "S2.F1",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-01-panel-01.png",
+          "url": "https://arxiv.org/html/1507.08285v3/f1.png",
+          "sha256": "6bf9bc1daee34cbcfd02ab96b87b923d1b6e471576d399858aa837c63188d7c0",
+          "preview": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-01-panel-01.preview.webp",
+          "width": 720,
+          "height": 720
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 2,
+      "anchor": "S3.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-02-panel-01.png",
+          "url": "https://arxiv.org/html/1507.08285v3/f2.png",
+          "sha256": "347426296639352c66c3d6907df2a459747c6b992c0d02911f1b7170cf6553e1",
+          "preview": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-02-panel-01.preview.webp",
+          "width": 960,
+          "height": 720
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S3.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-03-panel-01.png",
+          "url": "https://arxiv.org/html/1507.08285v3/f3.png",
+          "sha256": "7a46774e70080f23118b98306543981a14cb9c1da73d28d0351f26554c08fc67",
+          "preview": "paper-journal/papers/kreidberg-2015-batman-transit-models/plots/source/figure-03-panel-01.preview.webp",
+          "width": 480,
+          "height": 480
+        }
+      ],
+      "partial": false
+    }
+  ]
+}

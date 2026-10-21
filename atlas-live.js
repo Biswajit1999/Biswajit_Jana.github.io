@@ -402,6 +402,7 @@
       var total = document.getElementById("atlas-stat-total");
       var live = document.getElementById("atlas-stat-live");
       if (total) total.textContent = String(repos.length);
+      if (total && total.nextElementSibling) total.nextElementSibling.textContent = repoDataSource === "GitHub" ? "Public repositories · live GitHub account" : "Public repositories · saved GitHub cache";
       if (live) live.textContent = String(repos.filter(function (repo) { return repo.has_pages || repo.homepage; }).length);
       var lead = document.getElementById("atlas-catalog-lead");
       if (lead) lead.textContent = "Search " + repos.length + " current public GitHub repositories. Selected research projects include additional scientific context and relationship metadata.";

@@ -1,0 +1,113 @@
+{
+  "key": "schmidt2024",
+  "version": "2404.05283v1",
+  "license": "License: arXiv.org perpetual non-exclusive license",
+  "review_date": "2026-10-21",
+  "figures": [
+    {
+      "number": 2,
+      "anchor": "S4.F2",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-02-panel-01.svg",
+          "url": "https://arxiv.org/html/2404.05283v1/Espresso_Comparison_ThArFP-LFC_G.svg",
+          "sha256": "f376d774666fb04a4f5c3b292637ee9855ab69694b3ba524e460bb400383387f",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-02-panel-01.preview.webp",
+          "width": 1008,
+          "height": 418
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 3,
+      "anchor": "S4.F3",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-03-panel-01.svg",
+          "url": "https://arxiv.org/html/2404.05283v1/Visualization_Deconvolution_4.svg",
+          "sha256": "db919746f10fea008eb24168a9698295fa890647d7aeb2c88b62af097191b340",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-03-panel-01.preview.webp",
+          "width": 864,
+          "height": 302
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 4,
+      "anchor": "S4.F4",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-04-panel-01.png",
+          "url": "https://arxiv.org/html/2404.05283v1/x1.png",
+          "sha256": "bc31c3d6ee3027a84ebf9f509e59e36b7089d5c369d94b2f3e1301bd5dda123b",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-04-panel-01.preview.webp",
+          "width": 960,
+          "height": 540
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 6,
+      "anchor": "S4.F6",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-06-panel-01.png",
+          "url": "https://arxiv.org/html/2404.05283v1/x2.png",
+          "sha256": "d87c60329e8802b73e2f02624d70896b82101a617505bd956c1aba5f4f704d10",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-06-panel-01.preview.webp",
+          "width": 1440,
+          "height": 744
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 8,
+      "anchor": "S4.F8",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-08-panel-01.png",
+          "url": "https://arxiv.org/html/2404.05283v1/Espresso_Resolvingpower2D_LSFGP_FWHM.png",
+          "sha256": "197df8db4569ed05305397ebe6f78dd5a71d953a92946da4c220b23fa6ca89ff",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-08-panel-01.preview.webp",
+          "width": 1680,
+          "height": 744
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 14,
+      "anchor": "S4.F14",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-14-panel-01.svg",
+          "url": "https://arxiv.org/html/2404.05283v1/ESPRESSO_EvalWave_LClsf_320.svg",
+          "sha256": "6511fa98a4d7f1733716666081964321b39f282c71a52b7fb29fc9d2766f80a8",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-14-panel-01.preview.webp",
+          "width": 864,
+          "height": 403
+        }
+      ],
+      "partial": false
+    },
+    {
+      "number": 15,
+      "anchor": "S4.F15",
+      "panels": [
+        {
+          "path": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-15-panel-01.svg",
+          "url": "https://arxiv.org/html/2404.05283v1/Espresso_Comparison_ThArFP-LFC_lsf.svg",
+          "sha256": "04e3800d994528156dfad5c8f31a8c0ca7fbb7066ca4d25d2211a752ddf2d401",
+          "preview": "paper-journal/papers/schmidt2024-espresso-line-spread-function/plots/source/figure-15-panel-01.preview.webp",
+          "width": 1008,
+          "height": 418
+        }
+      ],
+      "partial": false
+    }
+  ]
+}
